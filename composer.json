@@ -13,8 +13,13 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+<<<<<<< HEAD
         "realrashid/sweet-alert": "^4.0",
         "yajra/laravel-datatables-oracle": "~9.0"
+=======
+        "obiefy/api-response": "^0.9.7",
+        "realrashid/sweet-alert": "^4.0"
+>>>>>>> 7e0f6e6a96920ebeda31b172d8b29ff158fcdd2d
     },
     "require-dev": {
         "facade/ignition": "^2.5",
