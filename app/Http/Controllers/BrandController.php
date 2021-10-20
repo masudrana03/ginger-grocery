@@ -89,7 +89,7 @@ class BrandController extends Controller
         $brand->name = $request->name;
         $brand->save();
 
-        Alert::toast('Brand successfully updated', 'success');
+        //Alert::toast('Brand successfully updated', 'success');
         
         return redirect()->route('brands.index');
     }
@@ -104,7 +104,7 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        Alert::toast('Brand successfully deleted', 'success');
+        //Alert::toast('Brand successfully deleted', 'success');
 
         return redirect()->back();
     }

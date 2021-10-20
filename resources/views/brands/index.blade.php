@@ -67,7 +67,7 @@
                                                         <td>
                                                             <a href="{{ route('brands.edit', $brand->id) }}" class=""><i
                                                             class="far fa-edit"></i></a> 
-                                                            <a href="#" class="" onclick="deleteBrand({{ $brand->id }})"><i
+                                                            <a href="#" class="" onclick="deleteBrand({{ $brand->id }}) "><i
                                                             class="fas fa-trash"></i></a>
                                                             <form id="delete-form-{{ $brand->id }}" action="{{ route('brands.destroy', $brand->id) }}" method="POST" style="display: none;">
                                                                 @csrf
