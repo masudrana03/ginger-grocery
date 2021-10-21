@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('styles')
 <style>
-    #brands_previous {
+    #units_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -11,7 +11,7 @@
 </style>
 @endpush
 @section('content')
-    <div class="main_content_iner">
+    <div class="main_content_iner ">
         <div class="container-fluid p-0">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -19,17 +19,17 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Brands</h3>
+                                    <h3 class="m-0">Units</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('brands.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('units.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="brands">
+                                <table class="table" id="units">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -51,7 +51,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteBrand(id) {
+    function deleteUnit(id) {
         Swal.fire({
             "title": "Are you sure?",
             "text": "You won't be able to revert this!",
@@ -83,11 +83,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#brands').DataTable({
+        $('#units').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allbrands') }}",
+                     "url": "{{ url('allunits') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
