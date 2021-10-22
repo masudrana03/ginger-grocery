@@ -116,11 +116,9 @@ class CategoryController extends Controller {
             'image' => 'required|image',
         ] );
 
-        $currentDate = Carbon::now()->toDateString();
-
         if ( $request->hasFile( 'image' ) ) {
             $image             = $request->file( 'image' );
-            $filename          = $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
             $location          = public_path( 'assets/img/categories/' . $filename );
             $thumbnailLocation = public_path( 'assets/img/categories/thumbnail/' . $filename );
 
@@ -170,14 +168,12 @@ class CategoryController extends Controller {
             'image' => 'image',
         ] );
 
-        $currentDate = Carbon::now()->toDateString();
-
         if ( $request->hasFile( 'image' ) ) {
 
             deleteCategoryImage( $category->image );
 
             $image             = $request->file( 'image' );
-            $filename          = $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
             $location          = public_path( 'assets/img/categories/' . $filename );
             $thumbnailLocation = public_path( 'assets/img/categories/thumbnail/' . $filename );
 

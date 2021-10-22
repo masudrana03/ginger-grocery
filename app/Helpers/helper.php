@@ -8,8 +8,17 @@ use Intervention\Image\Facades\Image;
  * @param string $image
  */
 function deleteCategoryImage( $image ) {
-    File::exists( 'assets/img/categories/' . $image ) && File::delete( 'assets/img/categories/' . $image );
-    File::exists( 'assets/img/categories/thumbnail/' . $image ) && File::delete( 'assets/img/categories/thumbnail/' . $image );
+    $categoryImageDirectory = 'assets/img/categories/';
+    deleteFile( $categoryImageDirectory . $image );
+    deleteFile( $categoryImageDirectory . 'thumbnail/' . $image );
+}
+
+/**
+ * Deletes a file if it exsist
+ * @param string $location
+ */
+function deleteFile( $location ) {
+    File::exists( $location ) && File::delete( $location );
 }
 
 /**
@@ -21,4 +30,13 @@ function deleteCategoryImage( $image ) {
 function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false ) {
     Image::make( $image )->save( $location );
     $thumbnailLocation && Image::make( $image )->resize( 200, 200 )->save( $thumbnailLocation );
+}
+
+/**
+ * Generates a unique filename with extension
+ * @param  string $extension
+ * @return string unique file name
+ */
+function generateUniqueFileName( $extension ) {
+    return now()->toDateString() . '-' . uniqid() . '.' . $extension;
 }
