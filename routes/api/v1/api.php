@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\V1\LoginController;
-use App\Http\Controllers\Api\V1\RegisterController;
-use App\Http\Controllers\Api\V1\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\TestController;
+use App\Http\Controllers\Api\V1\LoginController;
+use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\Api\V1\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('test-auth', [TestController::class, 'testAuth']);
 
     Route::get('logout', [LoginController::class, 'logout']);
+    Route::get('profile', [ProfileController::class, 'getProfile']);
+    Route::post('profile', [ProfileController::class, 'updateProfile']);
 });
 
