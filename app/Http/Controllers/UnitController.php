@@ -115,7 +115,7 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|unique:units,name'
         ]);
 
         $unit = new Unit();
@@ -159,7 +159,7 @@ class UnitController extends Controller
     public function update(Request $request, Unit $unit)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|unique:units,name,'. $unit->id,
         ]);
 
         $unit->name = $request->name;

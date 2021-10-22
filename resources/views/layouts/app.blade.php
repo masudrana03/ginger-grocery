@@ -110,6 +110,39 @@
                         </div>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{ route('currencies.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>
+                                Currencies</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ route('nutrition.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>
+                                Nutrition</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ route('categories.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>
+                                Categories</span>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </nav>
     <!--/ sidebar  -->
