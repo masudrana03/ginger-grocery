@@ -115,7 +115,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|unique:brands,name'
         ]);
 
         $brand = new Brand();
@@ -159,7 +159,7 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|unique:units,name,'. $brand->id,
         ]);
 
         $brand->name = $request->name;

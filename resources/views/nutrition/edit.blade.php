@@ -9,17 +9,17 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Edit Type</h3>
+                                    <h3 class="m-0">Edit Nutrition</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('types.update', $type->id) }}" method="POST">
+                            <form action="{{ route('nutrition.update', $nutrition->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ $type->name }}">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ $nutrition->name }}">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
