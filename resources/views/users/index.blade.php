@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @push('styles')
 <style>
-    #types_previous {
+    #users_previous {
         padding-right: 57px!important;
     }
-
     table tbody tr td {
         font-size: 14px!important;
         color: #212527!important;
     }
+    
     table tbody tr td a {
         color: #884FFB;
         font-size: 18px;
@@ -16,7 +16,7 @@
 </style>
 @endpush
 @section('content')
-    <div class="main_content_iner ">
+    <div class="main_content_iner">
         <div class="container-fluid p-0">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -24,21 +24,23 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Types</h3>
+                                    <h3 class="m-0">Users</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('types.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('users.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="types">
+                                <table class="table" id="users">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -48,6 +50,7 @@
                         </div>
                     </div>
                   </div>
+               
             </div>
         </div>
     </div>
@@ -55,7 +58,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteType(id) {
+    function deleteUser(id) {
         Swal.fire({
             "title": "Are you sure?",
             "text": "You won't be able to revert this!",
@@ -87,11 +90,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#types').DataTable({
+        $('#users').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('alltypes') }}",
+                     "url": "{{ url('allusers') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
@@ -99,9 +102,12 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
+                { "data": "email" },
+                { "data": "phone" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 
+
         });
     });
 </script>

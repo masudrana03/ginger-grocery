@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -125,7 +124,7 @@ class CategoryController extends Controller {
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $category        = new Categories();
+        $category        = new Category();
         $category->name  = $request->name;
         $category->image = $filename;
         $category->save();
@@ -138,7 +137,7 @@ class CategoryController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category        $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show( Category $category ) {
@@ -148,7 +147,7 @@ class CategoryController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category        $category
+     * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit( Category $category ) {
@@ -169,8 +168,9 @@ class CategoryController extends Controller {
         ] );
 
         if ( $request->hasFile( 'image' ) ) {
+            $imageDirectory = 'assets/img/categories/';
 
-            deleteCategoryImage( $category->image );
+            deleteImage( $category->image, $imageDirectory );
 
             $image             = $request->file( 'image' );
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
@@ -197,8 +197,9 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Category $category ) {
+        $imageDirectory = 'assets/img/categories/';
 
-        deleteCategoryImage( $category->image );
+        deleteImage( $category->image, $imageDirectory );
 
         $category->delete();
 

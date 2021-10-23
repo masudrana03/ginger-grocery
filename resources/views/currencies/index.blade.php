@@ -8,6 +8,10 @@
         font-size: 14px!important;
         color: #212527!important;
     }
+    table tbody tr td a {
+        color: #884FFB;
+        font-size: 18px;
+    }
 </style>
 @endpush
 @section('content')
