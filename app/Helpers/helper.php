@@ -5,13 +5,13 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Deletes Image and Thumbnail of category
+ * Deletes Image and Thumbnail
  * @param string $image
+ * @param string $imageDirectory
  */
-function deleteCategoryImage( $image ) {
-    $categoryImageDirectory = 'assets/img/categories/';
-    deleteFile( $categoryImageDirectory . $image );
-    deleteFile( $categoryImageDirectory . 'thumbnail/' . $image );
+function deleteImage( $image, $imageDirectory ) {
+    deleteFile( $imageDirectory . $image );
+    deleteFile( $imageDirectory . 'thumbnail/' . $image );
 }
 
 /**

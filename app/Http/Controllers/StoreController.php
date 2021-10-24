@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRequest;
 use App\Models\Store;
 use Illuminate\Http\Request;
 
@@ -30,12 +31,28 @@ class StoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        if ( $request->hasFile( 'image' ) ) {
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/stores/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/stores/thumbnail/' . $filename );
+
+            saveImageWithThumbnail( $image, $location, $thumbnailLocation );
+        }
+
+        $request['image'] = $filename;
+
+        Store::create($request);
+
+        toast('Store successfully created', 'success');
+
+        return redirect()->route('stores.index');
+
     }
 
     /**
