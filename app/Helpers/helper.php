@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Deletes Image and Thumbnail of category
@@ -39,4 +40,12 @@ function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false )
  */
 function generateUniqueFileName( $extension ) {
     return now()->toDateString() . '-' . uniqid() . '.' . $extension;
+}
+
+/**
+ * Validate with validator Make
+ * @param array $rules
+ */
+function validateData( $rules ) {
+    return Validator::make( request()->all(), $rules );
 }

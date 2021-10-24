@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Laravel\Sanctum\HasApiTokens;
-use App\Http\Requests\UpdateProfile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,10 +41,10 @@ class User extends Authenticatable {
     ];
 
     /**
-     * @param UpdateProfile $request
-     * @return User $user
+     * @param  Request $request
+     * @return User    $user
      */
-    public function updateProfile( UpdateProfile $request ) {
+    public function updateProfile( $request ) {
         $this->name  = $request->name;
         $this->phone = $request->phone ?: $this->phone;
         $this->save();

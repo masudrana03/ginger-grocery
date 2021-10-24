@@ -3,9 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TestController;
+use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\RegisterController;
+use App\Http\Controllers\Api\V1\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +35,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('test-auth', [TestController::class, 'testAuth']);
 
     Route::get('logout', [LoginController::class, 'logout']);
+    
+    Route::post('send-otp', [ResetPasswordController::class, 'sendOtp']);
+    Route::post('reset-password', [ResetPasswordController::class, 'resetPassword']);
+    
     Route::get('profile', [ProfileController::class, 'getProfile']);
     Route::post('profile', [ProfileController::class, 'updateProfile']);
+    Route::post('change-password', [LoginController::class, 'changePassword']);
+
+    
 });
+Route::get('category', [CategoryController::class, 'getCategories']);
+Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
+
+Route::get('brand', [BrandController::class, 'getBrands']);
+Route::get('brand/{id}', [BrandController::class, 'brandDetails']);
 

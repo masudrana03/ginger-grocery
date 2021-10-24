@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller {
@@ -14,10 +15,15 @@ class LoginController extends Controller {
      * @param Request $request
      */
     public function login( Request $request ) {
-        $request->validate( [
+
+        $validation = validateData( [
             'email'    => 'required|email',
             'password' => 'required',
         ] );
+
+        if ( $validation->fails() ) {
+            return api()->validation( null, $validation->errors() );
+        }
 
         $user = User::where( 'email', $request->email )->first();
 
@@ -41,10 +47,49 @@ class LoginController extends Controller {
         return ok( 'User auth token generated successfully', $data );
     }
 
-    public function logout()
-    {
+    /**
+     * Logout a user via API
+     */
+    public function logout() {
         auth()->user()->tokens()->delete();
 
-        return ok('Logout successfull');
+        return ok( 'Logout successfull' );
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function changePassword( Request $request ) {
+
+        $validation = validateData( [
+            'old_password' => 'required',
+            'new_password' => [
+                'required',
+                'confirmed',
+                Password::min( 8 )
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+            ],
+        ] );
+
+        if ( $validation->fails() ) {
+            return api()->validation( null, $validation->errors() );
+        }
+
+        $user = auth()->user();
+
+        if ( !Hash::check( $request->old_password, $user->password ) ) {
+            throw ValidationException::withMessages( [
+                'old_password' => ['The provided credentials are incorrect.'],
+            ] );
+        }
+
+        $user->password = Hash::make( $request->new_password );
+        $user->save();
+
+        return ok( 'Password changed successfully' );
+
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateProfile;
 
 class ProfileController extends Controller {
 
@@ -19,7 +18,15 @@ class ProfileController extends Controller {
     /**
      * @param Request $request
      */
-    public function updateProfile( UpdateProfile $request ) {
+    public function updateProfile( Request $request ) {
+
+        $validation = validateData( [
+            'name' => 'required',
+        ] );
+
+        if ( $validation->fails() ) {
+            return api()->validation( null, $validation->errors() );
+        }
 
         $user = auth()->user()->updateProfile( $request );
 

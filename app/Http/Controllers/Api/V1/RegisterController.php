@@ -13,21 +13,34 @@ class RegisterController extends Controller {
      * @param Request $request
      */
     public function register( Request $request ) {
-        $request->validate( [
+
+        $validation = validateData( [
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min( 8 )
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+            ],
         ] );
+
+        if ( $validation->fails() ) {
+            return api()->validation( null, $validation->errors() );
+        }
 
         $user           = new User();
         $user->email    = $request->email;
         $user->password = Hash::make( $request->password );
         $user->save();
 
-        $token = $user->createToken('Bearer');
+        $token = $user->createToken( 'Bearer' );
 
         $data = [
             'token_type' => 'Bearer',
-            'token' => $token->plainTextToken,
+            'token'      => $token->plainTextToken,
         ];
 
         return ok( 'User auth token generated successfully', $data );
