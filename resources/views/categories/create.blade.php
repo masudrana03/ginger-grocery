@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Create New Category')
 
 @section('content')
     <div class="main_content_iner ">

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Edit Currency')
 
 @section('content')
     <div class="main_content_iner ">

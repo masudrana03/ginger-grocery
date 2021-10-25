@@ -5,7 +5,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -154,6 +154,17 @@
                         </div>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{ route('stores.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>
+                                Stores</span>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </nav>
     <!--/ sidebar  -->
@@ -292,17 +303,15 @@
                                     <img src="{{ asset('assets/img/client_img.png') }}" alt="#">
                                     <div class="profile_info_iner">
                                         <div class="profile_author_name">
-                                            <p>Neurologist </p>
-                                            <h5>Dr. Robar Smith</h5>
+                                            <h5>{{ auth()->user()->name }}</h5>
                                         </div>
                                         <div class="profile_info_details">
-                                            <a href="#">My Profile </a>
-                                            <a href="#">Settings</a>
-                                            {{-- <a href="#">Log Out </a> --}}
+                                            <a href="{{ route('user.profile') }}">My Profile </a>
+                                            <a href="{{ route('user.change_password') }}">Change Password</a>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Log Out') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

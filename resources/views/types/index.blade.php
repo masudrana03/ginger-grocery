@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Types')
+
 @push('styles')
 <style>
     #types_previous {

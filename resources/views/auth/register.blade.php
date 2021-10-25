@@ -50,6 +50,14 @@
                                         <div class="form-group">
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                                         </div>
+                                        <div class="form-group">
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                         {{-- <div class="form-group cs_check_box">
                                             <input type="checkbox" id="check_box" class="common_checkbox">
                                             <label for="check_box">

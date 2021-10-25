@@ -36,7 +36,7 @@ class CategoryController extends Controller {
         $order = $columns[$request->input( 'order.0.column' )];
         $dir   = $request->input( 'order.0.dir' );
 
-        if ( empty( $request->input( 'search.value' ) ) ) {
+        if ( empty( $request->input( 'search.value' )) ) {
             $categories = Category::offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
@@ -57,30 +57,27 @@ class CategoryController extends Controller {
         }
 
         $data = [];
+
         if ( !empty( $categories ) ) {
             foreach ( $categories as $category ) {
                 $edit   = route( 'categories.edit', $category->id );
                 $delete = route( 'categories.destroy', $category->id );
                 $token  = csrf_token();
-                $img    = asset( 'assets/img/categories/thumbnail/' . $category->image );
+                $img    = asset( 'assets/img/uploads/categories/thumbnail/' . $category->image );
 
-                $nestedData['id']    = $category->id;
-                $nestedData['name']  = $category->name;
-                $nestedData['image'] = "<img src='{$img}' width='60'>";
-                // $nestedData['body'] = substr(strip_tags($category->body),0,50)."...";
-                $nestedData['created_at'] = date( 'j M Y h:i a', strtotime( $category->created_at ) );
+                $nestedData['id']         = $category->id;
+                $nestedData['name']       = $category->name;
+                $nestedData['image']      = "<img src='{$img}' width='60'>";
+                $nestedData['created_at'] = $category->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
-                &emsp;
-                <a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                &emsp;
-                <a href='#' onclick='deleteCategory({$category->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
-                <form id='delete-form-{$category->id}' action='{$delete}' method='POST' style='display: none;'>
-                <input type='hidden' name='_token' value='{$token}'>
-                <input type='hidden' name='_method' value='DELETE'>
-                </form>
-                ";
+                    &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
+                    &emsp;<a href='#' onclick='deleteCategory({$category->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    <form id='delete-form-{$category->id}' action='{$delete}' method='POST' style='display: none;'>
+                    <input type='hidden' name='_token' value='{$token}'>
+                    <input type='hidden' name='_method' value='DELETE'>
+                    </form>
+                    ";
                 $data[] = $nestedData;
-
             }
         }
 
@@ -118,8 +115,8 @@ class CategoryController extends Controller {
         if ( $request->hasFile( 'image' ) ) {
             $image             = $request->file( 'image' );
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-            $location          = public_path( 'assets/img/categories/' . $filename );
-            $thumbnailLocation = public_path( 'assets/img/categories/thumbnail/' . $filename );
+            $location          = public_path( 'assets/img/uploads/categories/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/categories/thumbnail/' . $filename );
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
@@ -168,14 +165,14 @@ class CategoryController extends Controller {
         ] );
 
         if ( $request->hasFile( 'image' ) ) {
-            $imageDirectory = 'assets/img/categories/';
+            $imageDirectory = 'assets/img/uploads/categories/';
 
             deleteImage( $category->image, $imageDirectory );
 
             $image             = $request->file( 'image' );
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-            $location          = public_path( 'assets/img/categories/' . $filename );
-            $thumbnailLocation = public_path( 'assets/img/categories/thumbnail/' . $filename );
+            $location          = public_path( 'assets/img/uploads/categories/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/categories/thumbnail/' . $filename );
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
 
@@ -197,7 +194,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Category $category ) {
-        $imageDirectory = 'assets/img/categories/';
+        $imageDirectory = 'assets/img/uploads/categories/';
 
         deleteImage( $category->image, $imageDirectory );
 

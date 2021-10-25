@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Currencies')
+
 @push('styles')
 <style>
     #currencies_previous {

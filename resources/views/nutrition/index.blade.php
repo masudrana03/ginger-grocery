@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Nutrition')
+
 @push('styles')
 <style>
     #nutritions_previous {

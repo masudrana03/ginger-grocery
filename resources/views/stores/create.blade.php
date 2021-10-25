@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Create New Unit')
-
 @section('content')
     <div class="main_content_iner ">
         <div class="container-fluid p-0 sm_padding_15px">
@@ -11,17 +9,35 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Create New Unit</h3>
+                                    <h3 class="m-0">Create New Store</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('units.store') }}" method="POST">
+                            <form action="{{ route('stores.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <input type="text" name="type" class="form-control @error('type') is-invalid @enderror" id="type" aria-describedby="emailHelp" placeholder="Type" value="{{ old('type') }}">
+                                    @error('type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Image</label><br>
+                                    <input type="file" name="image" id="image">
+                                    @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

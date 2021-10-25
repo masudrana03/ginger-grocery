@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Users')
+
 @push('styles')
 <style>
     #users_previous {

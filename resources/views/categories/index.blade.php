@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Categories')
+
 @push('styles')
 <style>
     #categories_previous {

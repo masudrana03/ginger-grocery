@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\PasswordUpdateRequest;
+ 
 class UserController extends Controller
 {
     /**
@@ -22,12 +24,12 @@ class UserController extends Controller
     public function allUsers(Request $request)
     {
         $columns = [
-            0 =>'id', 
-            1 =>'name',
-            2 =>'email',
-            3 =>'phone',
-            4=> 'created_at',
-            5=> 'id',
+            0 => 'id', 
+            1 => 'name',
+            2 => 'email',
+            3 => 'phone',
+            4 => 'created_at',
+            5 => 'id',
         ];
     
         $totalData = User::count();
@@ -71,10 +73,10 @@ class UserController extends Controller
                 $nestedData['name']       = $user->name;
                 $nestedData['email']      = $user->email;
                 $nestedData['phone']      = $user->phone;
-                $nestedData['created_at'] = $user->created_at;
+                $nestedData['created_at'] = $user->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                    &emsp;<a href='#' onclick='deleteuser({$user->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    &emsp;<a href='#' onclick='deleteUser({$user->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$user->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>
                     <input type='hidden' name='_method' value='DELETE'>
@@ -107,10 +109,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\UserRequest $request
+     * @param  \App\Http\Requests\UserStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(UserStoreRequest $request)
     {
         $request['password'] = Hash::make($request->password);
 
@@ -140,19 +142,23 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserUpdateRequest $request
      * @param  \App\Models\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        $user->update($request->all());
+
+        toast('User successfully updated', 'success');
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -163,6 +169,55 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        toast('User successfully deleted', 'success');
+
+        return redirect()->back();
+    }
+
+    /**
+     * User profile
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        $user = auth()->user();
+
+        return view('users.profile', compact('user'));
+    }
+
+    /**
+     * Change user password
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword()
+    {
+        return view('users.change-password');
+    }
+
+    /**
+     * Update user password
+     *
+     * @param PasswordUpdateRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function passwordUpdate(PasswordUpdateRequest $request)
+    {
+        $user = Auth()->user();
+        
+        if (!Hash::check($request->old_password, $user->password)) {
+            toast('Your Current password did not match', 'error');
+            return back(); 
+        } 
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        toast('Password Successfully Changed', 'success');
+
+        return back();
     }
 }

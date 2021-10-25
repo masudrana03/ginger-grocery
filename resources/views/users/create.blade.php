@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Create New User')
 
 @section('content')
     <div class="main_content_iner ">

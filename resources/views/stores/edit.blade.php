@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'Edit Unit')
 
 @section('content')
     <div class="main_content_iner ">
@@ -10,18 +9,27 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Edit Unit</h3>
+                                    <h3 class="m-0">Edit Category</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('units.update', $unit->id) }}" method="POST">
+                            <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') ?? $unit->name }}">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') ?? $category->name }}">
                                     @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Image</label><br>
+                                    <input type="file" name="image" id="image" aria-describedby="emailHelp">
+                                    @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

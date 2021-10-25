@@ -6,6 +6,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
@@ -29,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/allcategories', [CategoryController::class, 'allCategories'])->name('allcategories');
     Route::get('/allstores', [StoreController::class, 'allStores'])->name('allstores');
     Route::get('/allusers', [UserController::class, 'allUsers'])->name('allusers');
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/user/change-password', [UserController::class, 'changePassword'])->name('user.change_password');
+    Route::post('/user/update-password', [UserController::class, 'passwordUpdate'])->name('user.update_password');
     
     // Resource routes
     Route::resource('brands', BrandController::class);

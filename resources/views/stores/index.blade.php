@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Brands')
-
+@section('title', 'Stores')
+    
 @push('styles')
 <style>
-    #brands_previous {
+    #stores_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -25,21 +25,23 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Brands</h3>
+                                    <h3 class="m-0">Stores</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('brands.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('stores.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="brands">
+                                <table class="table" id="stores">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Image</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -57,7 +59,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteBrand(id) {
+    function deleteStore(id) {
         Swal.fire({
             "title": "Are you sure?",
             "text": "You won't be able to revert this!",
@@ -89,11 +91,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#brands').DataTable({
+        $('#stores').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allbrands') }}",
+                     "url": "{{ url('allstores') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
@@ -101,6 +103,8 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
+                { "data": "type" },
+                { "data": "image" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 

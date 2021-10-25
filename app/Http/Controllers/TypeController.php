@@ -20,79 +20,73 @@ class TypeController extends Controller
 
     public function allTypes(Request $request)
     {
-        $columns = array( 
-                            0 =>'id', 
-                            1 =>'name',
-                            3=> 'created_at',
-                            4=> 'id',
-                        );
+        $columns = [
+            0 => 'id',
+            1 => 'name',
+            3 => 'created_at',
+            4 => 'id',
+        ];
     
         $totalData = Type::count();
             
-        $totalFiltered = $totalData; 
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
-        $dir = $request->input('order.0.dir');
+        $dir   = $request->input('order.0.dir');
             
-        if(empty($request->input('search.value')))
-        {            
+        if (empty($request->input('search.value'))) {
             $types = Type::offset($start)
                             ->limit($limit)
-                            ->orderBy($order,$dir)
+                            ->orderBy($order, $dir)
                             ->get();
-        }
-        else {
-            $search = $request->input('search.value'); 
+        } else {
+            $search = $request->input('search.value');
 
-            $types =  Type::where('id','LIKE',"%{$search}%")
-                            ->orWhere('name', 'LIKE',"%{$search}%")
+            $types =  Type::where('id', 'LIKE', "%{$search}%")
+                            ->orWhere('name', 'LIKE', "%{$search}%")
                             ->offset($start)
                             ->limit($limit)
-                            ->orderBy($order,$dir)
+                            ->orderBy($order, $dir)
                             ->get();
 
-            $totalFiltered = Type::where('id','LIKE',"%{$search}%")
-                                ->orWhere('name', 'LIKE',"%{$search}%")
+            $totalFiltered = Type::where('id', 'LIKE', "%{$search}%")
+                                ->orWhere('name', 'LIKE', "%{$search}%")
                                 ->count();
         }
 
-        $data = array();
-        if(!empty($types))
-        {
-            foreach ($types as $type)
-            {
-                $edit =  route('types.edit',$type->id);
-                $delete =  route('types.destroy', $type->id);
-                $token = csrf_token();
+        $data = [];
 
-                $nestedData['id'] = $type->id;
-                $nestedData['name'] = $type->name;
-                // $nestedData['body'] = substr(strip_tags($type->body),0,50)."...";
-                $nestedData['created_at'] = date('j M Y h:i a',strtotime($type->created_at));
-                $nestedData['actions'] = "
-                &emsp;
-                <a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                &emsp;
-                <a href='#' onclick='deleteType({$type->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
-                <form id='delete-form-{$type->id}' action='{$delete}' method='POST' style='display: none;'>
-                <input type='hidden' name='_token' value='{$token}'>
-                <input type='hidden' name='_method' value='DELETE'>
-                </form>
-                ";
+        if (!empty($types)) {
+            foreach ($types as $type) {
+                $edit   =  route('types.edit', $type->id);
+                $delete =  route('types.destroy', $type->id);
+                $token  = csrf_token();
+
+                $nestedData['id']         = $type->id;
+                $nestedData['name']       = $type->name;
+                $nestedData['created_at'] = date('j M Y h:i a', strtotime($type->created_at));
+                $nestedData['actions']    = "
+                    &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
+                    &emsp;<a href='#' onclick='deleteType({$type->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    <form id='delete-form-{$type->id}' action='{$delete}' method='POST' style='display: none;'>
+                    <input type='hidden' name='_token' value='{$token}'>
+                    <input type='hidden' name='_method' value='DELETE'>
+                    </form>
+                    ";
                 $data[] = $nestedData;
             }
         }
             
-        $json_data = array(
-                    "draw"            => intval($request->input('draw')),  
-                    "recordsTotal"    => intval($totalData),  
-                    "recordsFiltered" => intval($totalFiltered), 
-                    "data"            => $data   
-                    );
+        $json_data = [
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        ];
             
-        echo json_encode($json_data); 
+        echo json_encode($json_data);
     }
 
     /**
