@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/colors/default.css') }}" id="colorSkinCSS">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @stack('styles')
 </head>
 
@@ -162,6 +163,17 @@
                         <div class="nav_title">
                             <span>
                                 Stores</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{ route('products.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>
+                                Products</span>
                         </div>
                     </a>
                 </li>
@@ -549,6 +561,7 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @stack('script')
 </body>
 
