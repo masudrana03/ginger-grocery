@@ -11,7 +11,6 @@
                             <div class="box_header m-0">
                                 <div class="main-title">
                                     <h3 class="m-0">Create New Product</h3>
-                                    <p>{{ session('errors') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +44,7 @@
                                     <textarea rows="5" name="description"
                                         class="form-control @error('description') is-invalid @enderror" id="description"
                                         aria-describedby="emailHelp" placeholder="Description"
-                                        value="{{ old('description') }}"></textarea>
+                                        >{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -57,7 +56,7 @@
                                     <textarea rows="3" name="attributes"
                                         class="form-control @error('attributes') is-invalid @enderror" id="attributes"
                                         aria-describedby="emailHelp" placeholder="Attributes"
-                                        value="{{ old('attributes') }}"></textarea>
+                                        >{{ old('attributes') }}</textarea>
                                     @error('attributes')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -127,6 +126,19 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label >Type</label>
+                                    <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror" multiple="multiple">
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('types')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label>Unit</label>
                                     <select name="unit_id" class="single2 form-control @error('unit_id') is-invalid @enderror">
                                         @foreach ($units as $unit)
@@ -134,6 +146,19 @@
                                         @endforeach
                                     </select>
                                     @error('unit_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label>Nutrition</label>
+                                    <select name="nutritions[]" class="single2 form-control @error('nutritions') is-invalid @enderror" multiple="multiple">
+                                        @foreach ($nutritions as $nutrition)
+                                            <option value="{{ $nutrition->id }}">{{ $nutrition->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('nutritions')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

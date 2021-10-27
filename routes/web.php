@@ -7,6 +7,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
@@ -35,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/change-password', [UserController::class, 'changePassword'])->name('user.change_password');
     Route::post('/user/update-password', [UserController::class, 'passwordUpdate'])->name('user.update_password');
     Route::get('/allproducts', [ProductController::class, 'allProducts'])->name('allproducts');
-
+    Route::get('/allbanners', [BannerController::class, 'allBanners'])->name('allbanners');
     
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -47,4 +48,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('stores', StoreController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('banners', BannerController::class);
 });

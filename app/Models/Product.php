@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -84,6 +85,26 @@ class Product extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * Get the types associated with the product.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function types()
+    {
+        return $this->belongsToMany(Type::class);
+    }
+
+    /**
+     * Get the nutritions associated with the product.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function nutritions()
+    {
+        return $this->belongsToMany(Nutrition::class);
     }
 
     /**

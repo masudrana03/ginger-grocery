@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductStoreRequest;
+use App\Models\Type;
+use App\Models\Unit;
 use App\Models\Brand;
+use App\Models\Store;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Currency;
-use App\Models\Product;
-use App\Models\Store;
-use App\Models\Unit;
+use App\Models\Nutrition;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -50,21 +53,21 @@ class ProductController extends Controller
         $dir   = $request->input( 'order.0.dir' );
 
         if ( empty( $request->input( 'search.value' )) ) {
-            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency')->offset( $start )
+            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
                 ->get();
         } else {
             $search = $request->input( 'search.value' );
 
-            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency')->where( 'id', 'LIKE', "%{$search}%" )
+            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
                 ->orWhere( 'name', 'LIKE', "%{$search}%" )
                 ->offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
                 ->get();
 
-            $totalFiltered = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency')->where( 'id', 'LIKE', "%{$search}%" )
+            $totalFiltered = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
                 ->orWhere( 'name', 'LIKE', "%{$search}%" )
                 ->count();
         }
@@ -73,13 +76,13 @@ class ProductController extends Controller
 
         if ( !empty( $products ) ) {
             foreach ( $products as $product ) {
-                $edit   = route( 'categories.edit', $product->id );
-                $delete = route( 'categories.destroy', $product->id );
+                $edit   = route( 'products.edit', $product->id );
+                $delete = route( 'products.destroy', $product->id );
                 $token  = csrf_token();
-                // $img    = asset( 'assets/img/uploads/categories/thumbnail/' . $product->image );
+                // $img    = asset( 'assets/img/uploads/products/thumbnail/' . $product->image );
 
                 $nestedData['id']         = $product->id;
-                $nestedData['title']      = $product->title;
+                $nestedData['title']      = $product->name;
                 $nestedData['brand']      = $product->brand->name;
                 $nestedData['category']   = $product->category->name;
                 $nestedData['unit']       = $product->unit->name;
@@ -88,7 +91,7 @@ class ProductController extends Controller
                 $nestedData['created_at'] = $product->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                    &emsp;<a href='#' onclick='deleteCategory({$product->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    &emsp;<a href='#' onclick='deleteProduct({$product->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$product->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>
                     <input type='hidden' name='_method' value='DELETE'>
@@ -120,8 +123,10 @@ class ProductController extends Controller
         $units      = Unit::all();
         $stores     = Store::all();
         $currencies = Currency::all();
+        $types      = Type::all();
+        $nutritions = Nutrition::all();
 
-        return view('products.create', compact('brands', 'categories', 'units', 'stores', 'currencies'));
+        return view('products.create', compact('brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
     /**
@@ -132,31 +137,21 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $product = $request->except('image');
+        $product            = $request->except('image', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
 
         $product = Product::create($product);
 
         if ($request->hasFile('image')) {
-            $images = $request->file('image');
-            $filenames = [];
-
-            foreach ($images as $image) {
-                $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-                $location          = public_path('assets/img/uploads/products/' . $filename);
-                $thumbnailLocation = public_path('assets/img/uploads/products/thumbnail/' . $filename);
-
-                $filenames['image'] = $filename;
-
-                saveImageWithThumbnail($image, $location, $thumbnailLocation);
-            }
-
-            $product->images()->create($filenames);
-
-            toast( 'Product successfully created', 'success' );
-
-            return redirect()->route( 'products.index' );
+            $this->uploadProductImage($product, $request->file('image'));
         }
+
+        $product->types()->attach($request->types);
+        $product->nutritions()->attach($request->nutritions);
+
+        toast( 'Product successfully created', 'success' );
+
+        return redirect()->route( 'products.index' );
     }
 
     /**
@@ -178,19 +173,42 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $brands     = Brand::all();
+        $categories = Category::all();
+        $units      = Unit::all();
+        $stores     = Store::all();
+        $currencies = Currency::all();
+        $types      = Type::all();
+        $nutritions = Nutrition::all();
+        $product    = $product->with('types', 'nutritions');
+
+        return view('products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Http\Requests\ProductUpdateRequest  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        $productData        = $request->except('image', 'types', 'nutritions');
+        $product['user_id'] = auth()->id();
+
+        $product->update($productData);
+
+        if ($request->hasFile('image')) {
+            $this->uploadProductImage($product, $request->file('image'));
+        }
+
+        $product->types()->sync($request->types);
+        $product->nutritions()->sync($request->nutritions);
+
+        toast('Product successfully updated', 'success');
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -201,6 +219,49 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        foreach ($product->images as $image) {
+            $imageDirectory = 'assets/img/uploads/products/';
+
+            deleteImage( $image->image, $imageDirectory );
+        }
+
+        $product->images()->delete();
+        $product->types()->detach();
+        $product->nutritions()->detach();
+        $product->delete();
+
+        toast( 'Product successfully deleted', 'success' );
+
+        return redirect()->back();
+    }
+
+    /**
+     * Upload product image
+     *
+     * @param Product $product
+     * @param array $images
+     * @return void
+     */
+    public function uploadProductImage($product, $images)
+    {
+        foreach ($product->images as $image) {
+            $imageDirectory = 'assets/img/uploads/products/';
+
+            deleteImage( $image->image, $imageDirectory );
+        }
+
+        $filenames = [];
+
+        foreach ($images as $image) {
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/products/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/products/thumbnail/' . $filename);
+
+            $filenames['image'] = $filename;
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+
+            $product->images()->create($filenames);
+        }
     }
 }

@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Products')
+@section('title', 'Banners')
 
 @push('styles')
 <style>
-    #products_previous {
+    #banners_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -25,26 +25,23 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">products</h3>
+                                    <h3 class="m-0">Banners</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('products.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('banners.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="products">
+                                <table class="table" id="banners">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Brand</th>
-                                            <th>Category</th>
-                                            <th>Unit</th>
-                                            <th>Price</th>
-                                            <th>Store</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -62,7 +59,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteProduct(id) {
+    function deleteBanner(id) {
         Swal.fire({
             "title": "Are you sure?",
             "text": "You won't be able to revert this!",
@@ -94,23 +91,20 @@
 
 <script>
     $(document).ready(function () {
-        $('#products').DataTable({
+        $('#banners').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allproducts') }}",
+                     "url": "{{ url('allbanners') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "title" },
-                { "data": "brand" },
-                { "data": "category" },
-                { "data": "unit" },
-                { "data": "price" },
-                { "data": "store" },
+                { "data": "name" },
+                { "data": "body" },
+                { "data": "image" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 

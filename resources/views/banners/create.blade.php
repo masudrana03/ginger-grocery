@@ -10,17 +10,26 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Create New Category</h3>
+                                    <h3 class="m-0">Create New Banner</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('banners.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                    @error('name')
+                                    <label for="title">Title</label>
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" placeholder="Title" value="{{ old('title') }}">
+                                    @error('title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="body">Description</label>
+                                    <textarea rows="3" name="body" class="form-control @error('body') is-invalid @enderror" id="body" aria-describedby="emailHelp" placeholder="Description">{{ old('body') }}</textarea>
+                                    @error('body')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

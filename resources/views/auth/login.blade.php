@@ -1,4 +1,5 @@
 @extends('layouts.app2')
+@section('title', 'Sign In')
 
 @section('content')
     <div class="main_content_iner" style="margin-top: 50px;">
@@ -12,7 +13,7 @@
                                 <!-- sign_in  -->
                                 <div class="modal-content cs_modal">
                                     <div class="modal-header justify-content-center theme_bg_1">
-                                        <h5 class="modal-title text_white">Log in</h5>
+                                        <h5 class="modal-title text_white">Sign In</h5>
                                     </div>
                                     <div class="modal-body">
                                         <form method="POST" action="{{ route('login') }}">
