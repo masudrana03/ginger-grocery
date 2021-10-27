@@ -35,6 +35,12 @@
                                         </span>
                                     @enderror
                                 </div>
+                                {{-- <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                    </div>
+                                </div> --}}
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>

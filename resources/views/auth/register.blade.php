@@ -1,4 +1,5 @@
 @extends('layouts.app2')
+@section('title', 'Sign Up')
 
 @section('content')
 
@@ -12,7 +13,7 @@
                             <!-- sign_in  -->
                             <div class="modal-content cs_modal">
                                 <div class="modal-header theme_bg_1 justify-content-center">
-                                    <h5 class="modal-title text_white">Resister</h5>
+                                    <h5 class="modal-title text_white">Sign Up</h5>
                                 </div>
                                 <div class="modal-body">
                                     <form method="POST" action="{{ route('register') }}">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRequest;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreRequest;
+use App\Http\Requests\StoreUpdateRequest;
 
 class StoreController extends Controller
 {
@@ -123,6 +124,7 @@ class StoreController extends Controller
             saveImageWithThumbnail( $image, $location, $thumbnailLocation );
         }
 
+        $request = $request->all();
         $request['image'] = $filename;
 
         Store::create($request);
@@ -130,7 +132,6 @@ class StoreController extends Controller
         toast('Store successfully created', 'success');
 
         return redirect()->route('stores.index');
-
     }
 
     /**
@@ -152,19 +153,40 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        //
+        return view('stores.edit', compact('store'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Store  $store
+     * @param  \App\Http\Requests\StoreUpdateRequest  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Store $store)
+    public function update(StoreUpdateRequest $request, Store $store)
     {
-        //
+        $filename = '';
+
+        if ( $request->hasFile( 'image' ) ) {
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/uploads/stores/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/stores/thumbnail/' . $filename );
+
+            saveImageWithThumbnail( $image, $location, $thumbnailLocation );
+        }
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $store->update($request);
+
+        toast('Store successfully updated', 'success');
+
+        return redirect()->route('stores.index');
     }
 
     /**
@@ -175,6 +197,14 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        //
+        $imageDirectory = 'assets/img/uploads/stores/';
+
+        deleteImage( $store->image, $imageDirectory );
+
+        $store->delete();
+
+        toast( 'Store successfully deleted', 'success' );
+
+        return redirect()->back();
     }
 }

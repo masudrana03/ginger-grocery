@@ -1,4 +1,5 @@
 @extends('layouts.app2')
+@section('title', 'Forget Password')
 
 @section('content')
 <div class="main_content_iner" style="margin-top: 50px;">
