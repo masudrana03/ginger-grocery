@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\LoginController;
+use App\Http\Controllers\Api\V1\StoreController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\RegisterController;
@@ -50,4 +51,7 @@ Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
 
 Route::get('brand', [BrandController::class, 'getBrands']);
 Route::get('brand/{id}', [BrandController::class, 'brandDetails']);
+
+Route::get('store', [StoreController::class, 'getStores']);
+Route::get('store/{id}', [StoreController::class, 'storeDetails']);
 
