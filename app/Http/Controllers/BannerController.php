@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BannerStoreRequest;
+use App\Http\Requests\BannerUpdateRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 
@@ -24,10 +26,11 @@ class BannerController extends Controller
         $columns = [
             0 => 'id',
             1 => 'title',
-            1 => 'body',
-            1 => 'image',
-            3 => 'created_at',
-            4 => 'id',
+            2 => 'body',
+            3 => 'image',
+            4 => 'status',
+            5 => 'created_at',
+            6 => 'id',
         ];
 
         $totalData = Banner::count();
@@ -48,14 +51,14 @@ class BannerController extends Controller
             $search = $request->input( 'search.value' );
 
             $banners = Banner::where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
+                ->orWhere( 'title', 'LIKE', "%{$search}%" )
                 ->offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
                 ->get();
 
             $totalFiltered = Banner::where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
+                ->orWhere( 'title', 'LIKE', "%{$search}%" )
                 ->count();
         }
 
@@ -63,14 +66,18 @@ class BannerController extends Controller
 
         if ( !empty( $banners ) ) {
             foreach ( $banners as $banner ) {
+                $status = route( 'banners.update_status', $banner->id );
                 $edit   = route( 'banners.edit', $banner->id );
                 $delete = route( 'banners.destroy', $banner->id );
                 $token  = csrf_token();
                 $img    = asset( 'assets/img/uploads/banners/thumbnail/' . $banner->image );
+                $class  = $banner->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
                 $nestedData['id']         = $banner->id;
-                $nestedData['name']       = $banner->name;
+                $nestedData['title']      = $banner->title;
+                $nestedData['body']       = $banner->body;
                 $nestedData['image']      = "<img src='{$img}' width='60'>";
+                $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$status}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeBannerStatus({$banner->id})' id='bannerStatus-{$banner->id}'>$banner->status</a>";
                 $nestedData['created_at'] = $banner->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
@@ -107,12 +114,27 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\BannerStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BannerStoreRequest $request)
     {
-        //
+        if ( $request->hasFile( 'image' ) ) {
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/uploads/banners/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/banners/thumbnail/' . $filename );
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation); 
+        }
+
+        $request = $request->all();
+        $request['image'] = $filename;
+        Banner::create($request);
+
+        toast( 'Banner successfully created', 'success' );
+
+        return redirect()->route( 'banners.index' );
     }
 
     /**
@@ -134,19 +156,44 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('banners.create', compact('banner'));
+        return view('banners.edit', compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\BannerUpdateRequest  $request
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banner $banner)
+    public function update(BannerUpdateRequest $request, Banner $banner)
     {
-        //
+        $filename = '';
+
+        if ( $request->hasFile( 'image' ) ) {
+            $imageDirectory = 'assets/img/uploads/banners/';
+
+            deleteImage( $banner->image, $imageDirectory );
+
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/uploads/banners/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/banners/thumbnail/' . $filename );
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation); 
+        }
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $banner->update($request);
+
+        toast( 'Banner successfully updated', 'success' );
+
+        return redirect()->route( 'banners.index' );
     }
 
     /**
@@ -157,6 +204,31 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        $imageDirectory = 'assets/img/uploads/banners/';
+
+        deleteImage( $banner->image, $imageDirectory );
+
+        $banner->delete();
+
+        toast( 'Banner successfully deleted', 'success' );
+
+        return redirect()->back();
+    }
+
+    /**
+     * Update banner status
+     *
+     * @param Banner $banner
+     * @return void
+     */
+    public function updateStatus(Banner $banner)  
+    {
+        $banner->update([
+            'status' => $banner->status == 'Active' ? 'Inactive' : 'Active'
+        ]);
+
+        toast( 'Status successfully updated', 'success' );
+
+        return redirect()->back();
     }
 }

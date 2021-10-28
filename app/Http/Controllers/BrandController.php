@@ -18,6 +18,10 @@ class BrandController extends Controller
         return view('brands.index');
     }
 
+    /**
+     * @param Request $request
+     * @return void
+     */
     public function allBrands(Request $request)
     {
         $columns = [

@@ -151,7 +151,23 @@
                             <a href="{{ route('nutrition.index') }}">Nutritions</a>
                         </li>
                     </ul>
-                  </li>
+                </li>
+                <li class="">
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Orders</span>
+                    </div>
+                    </a>
+                    <ul class="mm-collapse" style="height: 5px;">
+                        <li class="">
+                            <a href="{{ route('order_statuses.index') }}">Order Status</a>
+                            <a href="{{ route('orders.index') }}">Orders</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     <!--/ sidebar  -->

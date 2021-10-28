@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Currencies')
+@section('title', 'Orders')
 
 @push('styles')
 <style>
-    #currencies_previous {
+    #orders_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -25,22 +25,27 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Currencies</h3>
+                                    <h3 class="m-0">Orders</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('currencies.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('orders.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="currencies">
+                                <table class="table" id="orders">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Symbol</th>
+                                            <th>User</th>
+                                            <th>Store</th>
+                                            <th>Subtotal</th>
+                                            <th>Discount</th>
+                                            <th>Adjust</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -58,7 +63,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteCurrency(id) {
+    function deleteBrand(id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -78,19 +83,24 @@
 
 <script>
     $(document).ready(function () {
-        $('#currencies').DataTable({
+        $('#orders').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allcurrencies') }}",
+                     "url": "{{ url('all_orders') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "name" },
-                { "data": "symbol" },
+                { "data": "user_id" },
+                { "data": "store_id" },
+                { "data": "subtotal" },
+                { "data": "discount" },
+                { "data": "adjust" },
+                { "data": "total" },
+                { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 

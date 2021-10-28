@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Category')
+@section('title', 'Edit Banner')
 
 @section('content')
     <div class="main_content_iner ">
@@ -10,22 +10,44 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Edit Category</h3>
+                                    <h3 class="m-0">Edit Banner</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('banners.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') ?? $category->name }}">
-                                    @error('name')
+                                    <label for="name">Title</label>
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" placeholder="title" value="{{ old('title') ?? $banner->title }}">
+                                    @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="body">Description</label>
+                                    <textarea rows="3" name="body" class="form-control @error('body') is-invalid @enderror"
+                                        id="body" aria-describedby="emailHelp"
+                                        placeholder="Description">{{ old('body') ?? $banner->body }}</textarea>
+                                    @error('body')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="body">Status</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input {{ $banner->status == 'Active' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio1" value="Active">
+                                        <label class="form-check-label" for="inlineRadio1">Active</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input {{ $banner->status == 'Inactive' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio2" value="Inactive">
+                                        <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label><br>

@@ -6,6 +6,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
+use App\Http\Controllers\OrderStatusController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -37,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/update-password', [UserController::class, 'passwordUpdate'])->name('user.update_password');
     Route::get('/allproducts', [ProductController::class, 'allProducts'])->name('allproducts');
     Route::get('/allbanners', [BannerController::class, 'allBanners'])->name('allbanners');
+    Route::get('/banners/{banner}/update-status', [BannerController::class, 'updateStatus'])->name('banners.update_status');
+    Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
+    Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
     
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -49,4 +54,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('banners', BannerController::class);
+    Route::resource('order_statuses', OrderStatusController::class);
+    Route::resource('orders', OrderController::class);
 });

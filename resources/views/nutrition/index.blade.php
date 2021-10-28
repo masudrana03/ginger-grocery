@@ -58,25 +58,13 @@
 <script type="text/javascript">
     function deleteNutrition(id) {
         Swal.fire({
-            "title": "Are you sure?",
-            "text": "You won't be able to revert this!",
-            "type": 'warning',
-            "showCancelButton": true,
-            "confirmButtonColor": '#3085d6',
-            "cancelButtonColor": '#d33',
-            "confirmButtonText": 'Yes, delete it!',
-            "cancelButtonText": 'No, cancel!',
-            "confirmButtonClass": 'btn btn-success',
-            "cancelButtonClass": 'btn btn-danger',
-            "buttonsStyling": false,
-            "reverseButtons": true,
-            "timer":5000,
-            "width":"32rem",
-            "heightAuto":true,
-            "padding":"1.25rem",
-            "showConfirmButton":true,
-            "showCloseButton":false,
-            "icon":"warning"
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
               if (result.value) {
                   event.preventDefault();
