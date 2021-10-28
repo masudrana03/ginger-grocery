@@ -3,9 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TestController;
+use App\Http\Controllers\Api\V1\TypeController;
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\StoreController;
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\RegisterController;
@@ -55,3 +57,7 @@ Route::get('brand/{id}', [BrandController::class, 'brandDetails']);
 Route::get('store', [StoreController::class, 'getStores']);
 Route::get('store/{id}', [StoreController::class, 'storeDetails']);
 
+Route::get('type', [TypeController::class, 'getTypes']);
+
+Route::get('product', [ProductController::class, 'getProducts']);
+Route::get('product/{id}', [ProductController::class, 'productDetails']);
