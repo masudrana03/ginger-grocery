@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Currencies')
+@section('title', 'Order Statuses')
 
 @push('styles')
 <style>
-    #currencies_previous {
+    #order_statuses_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -25,22 +25,21 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Currencies</h3>
+                                    <h3 class="m-0">Order Statuses</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('currencies.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('order_statuses.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="currencies">
+                                <table class="table" id="order_statuses">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Symbol</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -58,7 +57,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteCurrency(id) {
+    function deleteOrderStatus(id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -78,11 +77,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#currencies').DataTable({
+        $('#order_statuses').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allcurrencies') }}",
+                     "url": "{{ url('all_order_statuses') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
@@ -90,7 +89,6 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
-                { "data": "symbol" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 

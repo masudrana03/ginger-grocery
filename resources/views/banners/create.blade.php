@@ -19,7 +19,9 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" placeholder="Title" value="{{ old('title') }}">
+                                    <input type="text" name="title"
+                                        class="form-control @error('title') is-invalid @enderror" id="title"
+                                        aria-describedby="emailHelp" placeholder="Title" value="{{ old('title') }}">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -28,12 +30,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="body">Description</label>
-                                    <textarea rows="3" name="body" class="form-control @error('body') is-invalid @enderror" id="body" aria-describedby="emailHelp" placeholder="Description">{{ old('body') }}</textarea>
+                                    <textarea rows="3" name="body" class="form-control @error('body') is-invalid @enderror"
+                                        id="body" aria-describedby="emailHelp"
+                                        placeholder="Description">{{ old('body') }}</textarea>
                                     @error('body')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="body">Status</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input checked name="status" class="form-check-input" type="radio" id="inlineRadio1" value="Active">
+                                        <label class="form-check-label" for="inlineRadio1">Active</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input name="status" class="form-check-input" type="radio" id="inlineRadio2" value="Inactive">
+                                        <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label><br>

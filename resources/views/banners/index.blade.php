@@ -42,6 +42,7 @@
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Image</th>
+                                            <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -61,25 +62,13 @@
 <script type="text/javascript">
     function deleteBanner(id) {
         Swal.fire({
-            "title": "Are you sure?",
-            "text": "You won't be able to revert this!",
-            "type": 'warning',
-            "showCancelButton": true,
-            "confirmButtonColor": '#3085d6',
-            "cancelButtonColor": '#d33',
-            "confirmButtonText": 'Yes, delete it!',
-            "cancelButtonText": 'No, cancel!',
-            "confirmButtonClass": 'btn btn-success',
-            "cancelButtonClass": 'btn btn-danger',
-            "buttonsStyling": false,
-            "reverseButtons": true,
-            "timer":5000,
-            "width":"32rem",
-            "heightAuto":true,
-            "padding":"1.25rem",
-            "showConfirmButton":true,
-            "showCloseButton":false,
-            "icon":"warning"
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
               if (result.value) {
                   event.preventDefault();
@@ -87,6 +76,24 @@
               }
             })
     }
+</script>
+
+<script>
+    // Banner Status Change
+    function ChangeBannerStatus(id) {
+            Swal.fire({
+                title: 'Are you sure to change?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = $('#bannerStatus-' + id).data('href');
+                }
+            });
+        }
 </script>
 
 <script>
@@ -102,9 +109,10 @@
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "name" },
+                { "data": "title" },
                 { "data": "body" },
                 { "data": "image" },
+                { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 
