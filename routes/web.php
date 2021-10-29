@@ -39,10 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/update-password', [UserController::class, 'passwordUpdate'])->name('user.update_password');
     Route::get('/allproducts', [ProductController::class, 'allProducts'])->name('allproducts');
     Route::get('/allbanners', [BannerController::class, 'allBanners'])->name('allbanners');
-    Route::get('/banners/{banner}/update-status', [BannerController::class, 'updateStatus'])->name('banners.update_status');
+    Route::get('/banners/{banner}/update_status', [BannerController::class, 'updateStatus'])->name('banners.update_status');
     Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
     Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
-    
+    Route::get('/orders/{order}/update_status/{orderStatus}', [OrderController::class, 'updateStatus'])->name('orders.update_status');
+
     // Resource routes
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);

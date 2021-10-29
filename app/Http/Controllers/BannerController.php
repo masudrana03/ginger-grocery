@@ -66,18 +66,18 @@ class BannerController extends Controller
 
         if ( !empty( $banners ) ) {
             foreach ( $banners as $banner ) {
-                $status = route( 'banners.update_status', $banner->id );
-                $edit   = route( 'banners.edit', $banner->id );
-                $delete = route( 'banners.destroy', $banner->id );
-                $token  = csrf_token();
-                $img    = asset( 'assets/img/uploads/banners/thumbnail/' . $banner->image );
-                $class  = $banner->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $updateStatus = route( 'banners.update_status', $banner->id );
+                $edit         = route( 'banners.edit', $banner->id );
+                $delete       = route( 'banners.destroy', $banner->id );
+                $token        = csrf_token();
+                $img          = asset( 'assets/img/uploads/banners/thumbnail/' . $banner->image );
+                $class        = $banner->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
                 $nestedData['id']         = $banner->id;
                 $nestedData['title']      = $banner->title;
                 $nestedData['body']       = $banner->body;
                 $nestedData['image']      = "<img src='{$img}' width='60'>";
-                $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$status}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeBannerStatus({$banner->id})' id='bannerStatus-{$banner->id}'>$banner->status</a>";
+                $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeBannerStatus({$banner->id})' id='bannerStatus-{$banner->id}'>$banner->status</a>";
                 $nestedData['created_at'] = $banner->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>

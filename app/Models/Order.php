@@ -10,6 +10,15 @@ class Order extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'order_status_id',
+    ];
+
+    /**
      * Get the order status associated with the product.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

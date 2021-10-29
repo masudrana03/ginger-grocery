@@ -82,12 +82,30 @@
 </script>
 
 <script>
+    // Banner Status Change
+    function ChangeOrderStatus(id) {
+            Swal.fire({
+                title: 'Are you sure to change?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = $('#orderStatus-' + id).data('href');
+                }
+            });
+        }
+</script>
+
+<script>
     $(document).ready(function () {
         $('#orders').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('all_orders') }}",
+                     "url": "{{ $url }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

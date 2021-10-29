@@ -164,7 +164,10 @@
                     <ul class="mm-collapse" style="height: 5px;">
                         <li class="">
                             <a href="{{ route('order_statuses.index') }}">Order Status</a>
-                            <a href="{{ route('orders.index') }}">Orders</a>
+                            <a href="{{ route('orders.index') }}">All Orders</a>
+                            @foreach (\App\Models\OrderStatus::all() as $orderStatus)
+                            <a href="{{ url('orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }} Orders</a>
+                            @endforeach
                         </li>
                     </ul>
                 </li>
