@@ -170,6 +170,23 @@
                             @endforeach
                         </li>
                     </ul>
+                </li><li class="">
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Settings</span>
+                    </div>
+                    </a>
+                    <ul class="mm-collapse" style="height: 5px;">
+                        <li class="">
+                            <a href="{{ route('settings.general') }}">General Settings</a>
+                            <a href="{{ route('settings.email') }}">Email Settings</a>
+                            <a href="{{ route('settings.sms') }}">SMS Settings</a>
+                            <a href="{{ route('settings.payment_gateway') }}">Payment Gateway Settings</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

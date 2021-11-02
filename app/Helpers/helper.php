@@ -49,3 +49,20 @@ function generateUniqueFileName( $extension ) {
 function validateData( $rules ) {
     return Validator::make( request()->all(), $rules );
 }
+
+/**
+ * @param $key
+ * @return mixed
+ */
+function settings($key)
+{
+    static $settings;
+
+    if (is_null($settings)) {
+        $settings = \Illuminate\Support\Facades\Cache::remember('settings', 24 * 60, function () {
+            return \App\Models\Setting::pluck('value', 'key')->toArray();
+        });
+    }
+
+    return (is_array($key)) ? \Illuminate\Support\Arr::only($settings, $key) : $settings[$key];
+}

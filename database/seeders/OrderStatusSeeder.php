@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BannerSeeder extends Seeder
+class OrderStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,12 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('banners')->insert([
-            'title' => 'Banner title',
-            'body' => 'This is banner body',
-            'image' => 'default.png',
+        DB::table('order_statuses')->insert([
+            'name' => 'Pending',
+        ]);
+
+        DB::table('order_statuses')->insert([
+            'name' => 'In progress',
         ]);
     }
 }

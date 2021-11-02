@@ -122,14 +122,7 @@
                                         {{ $item->product->name }}
                                     </td>
                                     <td class="px-0">
-                                        <span class="entry-meta"><b>Red</b> :
-                                            ₹370
-
-                                        </span>
-                                        <span class="entry-meta"><b>M</b> :
-                                            ₹370
-
-                                        </span>
+                                        {{ $item->product->attributes }}
                                     </td>
                                     <td class="px-0">
                                         {{ $item->quantity }}
@@ -150,7 +143,7 @@
                                     </td>
                                     <td class="px-0 text-right border-top border-top-2" colspan="5">
                                         <span>
-                                            ₹1.3483
+                                            $1.3483
                                         </span>
                                     </td>
                                 </tr>
@@ -160,7 +153,7 @@
                                     </td>
                                     <td class="px-0 text-right border-top border-top-2" colspan="5">
                                         <span>
-                                            ₹0
+                                            $0
 
                                         </span>
                                     </td>
