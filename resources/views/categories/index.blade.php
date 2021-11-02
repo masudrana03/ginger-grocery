@@ -14,6 +14,7 @@
         color: #884FFB;
         font-size: 18px;
     }
+
 </style>
 @endpush
 @section('content')
@@ -31,7 +32,7 @@
                                     <a href="{{ route('categories.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
@@ -50,7 +51,7 @@
                         </div>
                     </div>
                   </div>
-               
+
             </div>
         </div>
     </div>
@@ -93,10 +94,38 @@
                 { "data": "image" },
                 { "data": "created_at" },
                 { "data": "actions" }
-            ]	 
+            ]
 
         });
     });
 </script>
+
+<script>
+    var btnUpload = $("#upload_file"),
+		btnOuter = $(".button_outer");
+	btnUpload.on("change", function(e){
+		var ext = btnUpload.val().split('.').pop().toLowerCase();
+		if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+			$(".error_msg").text("Not an Image...");
+		} else {
+			$(".error_msg").text("");
+			btnOuter.addClass("file_uploading");
+			setTimeout(function(){
+				btnOuter.addClass("file_uploaded");
+			},3000);
+			var uploadedFile = URL.createObjectURL(e.target.files[0]);
+			setTimeout(function(){
+				$("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
+			},3500);
+		}
+	});
+	$(".file_remove").on("click", function(e){
+		$("#uploaded_view").removeClass("show");
+		$("#uploaded_view").find("img").remove();
+		btnOuter.removeClass("file_uploading");
+		btnOuter.removeClass("file_uploaded");
+	});
+</script>
+
 @endpush
 

@@ -3,11 +3,11 @@
 
 @section('content')
 
-<div class="main_content_iner" style="margin-top: 50px;">
+<div class="main_content_iner" style="margin-top: 3%; padding: 30px; padding-top: 4%; padding-bottom: 100px;">
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="white_box mb_30">
+                <div class="white_box mb_30" style="background-color: #FBF6F0;">
                     <div class="row justify-content-center">
                         <div class="col-lg-4">
                             <!-- sign_in  -->
@@ -65,7 +65,7 @@
                                                 Keep me up to date
                                             </label>
                                         </div> --}}
-                    
+
                                         <button type="submit" class="btn_1 full_width text-center"> Sign Up</button>
 
                                         <p>Need an account? <a href="{{ route('login') }}">Log in</a></p>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

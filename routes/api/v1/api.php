@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\TypeController;
 use App\Http\Controllers\Api\V1\BrandController;
+use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\StoreController;
 use App\Http\Controllers\Api\V1\ProductController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\Api\V1\ResetPasswordController;
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
-| 
+|
 |
 | if you want to add api v2, add a v2 folder with api.php
 | and update app/Providers/RouteServiceProvider.php with new code block
@@ -38,18 +39,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('test-auth', [TestController::class, 'testAuth']);
 
     Route::get('logout', [LoginController::class, 'logout']);
-    
+
     Route::post('send-otp', [ResetPasswordController::class, 'sendOtp']);
     Route::post('reset-password', [ResetPasswordController::class, 'resetPassword']);
-    
+
     Route::get('profile', [ProfileController::class, 'getProfile']);
     Route::post('profile', [ProfileController::class, 'updateProfile']);
     Route::post('change-password', [LoginController::class, 'changePassword']);
 
-    
+
 });
 Route::get('category', [CategoryController::class, 'getCategories']);
 Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
+
+Route::get('banner',[BannerController::class, 'getBanners']);
+Route::get('banner/{id}',[BannerController::class,'bannerDetails']);
 
 Route::get('brand', [BrandController::class, 'getBrands']);
 Route::get('brand/{id}', [BrandController::class, 'brandDetails']);

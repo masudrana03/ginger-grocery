@@ -2,11 +2,11 @@
 @section('title', 'Sign In')
 
 @section('content')
-    <div class="main_content_iner" style="margin-top: 50px;">
+    <div class="main_content_iner" style="margin-top: 3%; padding: 30px; padding-top: 150px; padding-bottom: 150px;">
         <div class="container-fluid p-0">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="white_box mb_30">
+                    <div class="white_box mb_30" style="background-color: #FBF6F0;">
                         <div class="row justify-content-center">
 
                             <div class="col-lg-4">
