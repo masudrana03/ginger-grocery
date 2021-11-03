@@ -193,7 +193,21 @@
                                 <label>Product Image</label>
                                 <div id="inputFormRow">
                                     <div class="form-group row">
-                                        <div class="col-sm-3">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
+                                                    <div class="image-upload-wrap" style="display: none;">
+                                                      <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image[]" />
+                                                    </div>
+                                                    <div class="file-upload-content">
+                                                      <img class="file-upload-image" src="#" alt="your image" />
+                                                      <div class="image-title-wrap">
+                                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                        {{-- <div class="col-sm-3">
                                             <input type="file" name="image[]"
                                                 class="@error('image') is-invalid @enderror">
                                             @error('image')
@@ -201,7 +215,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                        </div>
+                                        </div> --}}
                                         <div class="col-sm-2">
                                             <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
                                                 class="fas fa-plus-circle addRow"></i>
@@ -221,9 +235,24 @@
 
     <div id="action-button-row" style="display: none;">
         <div class="form-group row">
-            <div class="col-sm-3">
-                <input type="file" name="image[]">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
+                    <div class="image-upload-wrap" style="display: none;">
+                      <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image[]" />
+                    </div>
+                    <div class="file-upload-content">
+                      <img class="file-upload-image" src="#" alt="your image" />
+                      <div class="image-title-wrap">
+                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                      </div>
+                    </div>
+                  </div>
             </div>
+            {{-- <div class="col-sm-3">
+                <input type="file" name="image[]">
+            </div> --}}
             <div class="col-sm-2">
                 <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
                     class="fas fa-plus-circle addRow"></i>

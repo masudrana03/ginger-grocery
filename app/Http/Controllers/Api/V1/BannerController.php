@@ -9,7 +9,7 @@ use App\Models\Banner;
 class BannerController extends Controller
 {
     /**
-     * Display a listing of the banners.
+     * Display a listing of the banner.
      *
      */
     public function getBanners(){
@@ -21,7 +21,7 @@ class BannerController extends Controller
      *
      */
     public function bannerDetails($id){
-        return ok('Banner details retrive sueccessfully', Banner::find($id) );
+        return ok('Banner details retrive successfully', Banner::find($id) );
     }
 
 

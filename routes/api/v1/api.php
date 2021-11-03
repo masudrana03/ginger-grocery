@@ -9,10 +9,14 @@ use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\StoreController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
+use App\Models\Nutrition;
+use App\Models\OrderDetails;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +69,9 @@ Route::get('type', [TypeController::class, 'getTypes']);
 
 Route::get('product', [ProductController::class, 'getProducts']);
 Route::get('product/{id}', [ProductController::class, 'productDetails']);
+
+Route::get('order-list/{userId}',[OrderController::class, 'orderList']);
+Route::get('order-details/{orderId}',[OrderController::class, 'OrderDetails']);
+
+Route::get('nutrition',[NutritionController::class, 'getNutritions']);
+Route::get('nutrition/{id}',[NutritionController::class, 'nutritionDetails']);

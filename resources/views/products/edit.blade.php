@@ -133,7 +133,7 @@
                                     <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($types as $type)
-                                            <option 
+                                            <option
                                             @foreach($product->types as $productType)
                                             {{ $productType->id == $type->id ? 'selected' : '' }}
                                             @endforeach
@@ -166,7 +166,7 @@
                                         class="single2 form-control @error('nutritions') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($nutritions as $nutrition)
-                                            <option 
+                                            <option
                                             @foreach($product->nutritions as $productNutrition)
                                             {{ $productNutrition->id == $nutrition->id ? 'selected' : '' }}
                                             @endforeach
