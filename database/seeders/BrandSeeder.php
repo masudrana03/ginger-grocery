@@ -16,6 +16,7 @@ class BrandSeeder extends Seeder
     {
         DB::table('brands')->insert([
             'name' => 'My Brand',
+            'created_at' => now(),
         ]);
     }
 }

@@ -47,8 +47,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/general-settings', [SettingController::class, 'generalSetting'])->name('settings.general');
     Route::get('/email-settings', [SettingController::class, 'emailSetting'])->name('settings.email');
     Route::get('/sms-settings', [SettingController::class, 'smsSetting'])->name('settings.sms');
-    Route::get('/payment-gateway-settings', [SettingController::class, 'paymentGatewaySetting'])->name('settings.payment_gateway');
-    Route::post('/payment-gateway-settings', [SettingController::class, 'generalSettingsStore'])->name('settings.general.store');
+    Route::get('/payment-settings', [SettingController::class, 'paymentGatewaySetting'])->name('settings.payment_gateway');
+    Route::post('/general-settings', [SettingController::class, 'generalSettingsUpdate'])->name('settings.general.update');
+    Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
+    Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
 
     // Resource routes
     Route::resource('brands', BrandController::class);

@@ -18,6 +18,7 @@ class BannerSeeder extends Seeder
             'title' => 'Banner title',
             'body' => 'This is banner body',
             'image' => 'default.png',
+            'created_at' => now(),
         ]);
     }
 }

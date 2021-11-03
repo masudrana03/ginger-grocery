@@ -16,6 +16,7 @@ class NutritionSeeder extends Seeder
     {
         DB::table('nutrition')->insert([
             'name' => 'Someting about nutrition',
+            'created_at' => now(),
         ]);
     }
 }

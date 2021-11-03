@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('settings.general.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('settings.general.update') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="company_name">Company Name</label>

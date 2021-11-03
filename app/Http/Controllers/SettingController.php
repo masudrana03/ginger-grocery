@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -39,7 +40,7 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generalSettingsStore(Request $request)
+    public function generalSettingsUpdate(Request $request)
     {
         $this->validate($request, [
             'company_name' => 'required|string|max:255',
@@ -88,7 +89,7 @@ class SettingController extends Controller
             Setting::where('key', $key)->update(['value' => $value]);
         }
 
-        toast( 'Settings successfully updated', 'success' );
+        toast( 'General settings successfully updated', 'success' );
 
         Artisan::call('cache:clear');
 
@@ -97,6 +98,53 @@ class SettingController extends Controller
 
     public function emailSetting()
     {
-        return view('settings.general');
+        return view('settings.email');
+    }
+    
+    public function emailSettingsUpdate(Request $request)
+    {
+        $request = $request->except('_token');
+
+        foreach ($request as $key => $value) {
+            Setting::where('key', $key)->update(['value' => $value]);
+        }
+
+        toast( 'Email settings successfully updated', 'success' );
+
+        Artisan::call('cache:clear');
+
+        return back();
+    }
+
+    public function paymentGatewaySetting()
+    {
+        $strripe = PaymentMethod::whereProvider('stripe')->first();
+        $paypal  = PaymentMethod::whereProvider('paypal')->first();
+        $cash    = PaymentMethod::whereProvider('cash')->first();
+
+        return view('settings.payment', compact('strripe', 'paypal', 'cash'));
+    }
+
+    public function paymentSettingsUpdate(Request $request)
+    {
+        if ($request->provider != 'cash') {
+            $this->validate($request, [
+                'client_key' => 'required',
+                'client_secret' => 'required'
+            ]);
+        }
+
+        $paymentMethod = PaymentMethod::whereProvider($request->provider)->firstOrFail();
+
+        $paymentMethod->update($request->all());
+
+        toast( 'Payment method successfully updated', 'success' );
+
+        return back();
+    }
+
+    public function smsSetting()
+    {
+        return view('settings.sms');
     }
 }

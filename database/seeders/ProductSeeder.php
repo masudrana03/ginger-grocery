@@ -30,7 +30,8 @@ class ProductSeeder extends Seeder
             'brand_id' => Brand::first()->id,
             'store_id' => Store::first()->id,
             'currency_id' => Currency::first()->id,
-            'user_id' => User::first()->id
+            'user_id' => User::first()->id,
+            'created_at' => now(),
         ]);
     }
 }

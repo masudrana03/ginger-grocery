@@ -18,6 +18,7 @@ class StoreSeeder extends Seeder
             'name' => 'My Store',
             'type' => 'Store type',
             'image' => 'default.png',
+            'created_at' => now(),
         ]);
     }
 }

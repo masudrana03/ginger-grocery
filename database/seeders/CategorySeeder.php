@@ -17,6 +17,7 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'Category Name',
             'image' => 'default.png',
+            'created_at' => now(),
         ]);
     }
 }

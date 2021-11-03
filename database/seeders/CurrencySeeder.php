@@ -17,6 +17,7 @@ class CurrencySeeder extends Seeder
         DB::table('currencies')->insert([
             'name' => 'USD',
             'symbol' => '$',
+            'created_at' => now(),
         ]);
     }
 }

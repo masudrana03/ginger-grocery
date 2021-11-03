@@ -21,5 +21,13 @@ class SettingSeeder extends Seeder
         Setting::create(['key' => 'phone', 'value' => '01820937110']);
         Setting::create(['key' => 'logo', 'value' => '']);
         Setting::create(['key' => 'favicon', 'value' => '']);
+        Setting::create(['key' => 'mail_driver', 'value' => '']);
+        Setting::create(['key' => 'mail_host', 'value' => '']);
+        Setting::create(['key' => 'mail_port', 'value' => '']);
+        Setting::create(['key' => 'mail_user_name', 'value' => '']);
+        Setting::create(['key' => 'mail_password', 'value' => '']);
+        Setting::create(['key' => 'mail_from', 'value' => '']);
+        Setting::create(['key' => 'mail_from_name', 'value' => '']);
+        Setting::create(['key' => 'encryption', 'value' => '']);
     }
 }

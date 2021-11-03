@@ -16,6 +16,7 @@ class UnitSeeder extends Seeder
     {
         DB::table('units')->insert([
             'name' => 'Kg',
+            'created_at' => now(),
         ]);
     }
 }
