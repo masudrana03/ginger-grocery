@@ -57,7 +57,7 @@
     <!-- Sweetalert -->
     @include('sweetalert::alert')
     <!-- /.Sweetalert -->
- 
+
     <!-- main content part here -->
     <!-- sidebar  -->
         <nav class="sidebar">
@@ -171,13 +171,23 @@
                         </li>
                     </ul>
                 </li>
+                <li class="">
+                    <a href="{{ route('carts.index') }}" aria-expanded="false">
+                        <div class="nav_icon_small">
+                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                        </div>
+                        <div class="nav_title">
+                            <span>Carts</span>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </nav>
     <!--/ sidebar  -->
 
     <section class="main_content dashboard_part large_header_bg">
         <!-- menu  -->
-        
+
             <div class="container-fluid no-gutters">
                 <div class="row">
                     <div class="col-lg-12 p-0 ">
@@ -331,12 +341,12 @@
                     </div>
                 </div>
             </div>
-       
+
         <!--/ menu  -->
         @yield('content')
 
         <!-- footer part -->
-        
+
         <div class="footer_part">
             <div class="container-fluid">
                 <div class="row">
@@ -349,7 +359,7 @@
                 </div>
             </div>
         </div>
-       
+
     </section>
     <!-- main content part end -->
 

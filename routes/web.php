@@ -9,6 +9,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
     Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
     Route::get('/orders/{order}/update_status/{orderStatus}', [OrderController::class, 'updateStatus'])->name('orders.update_status');
+    Route::get('/allcarts', [CartController::class, 'allCarts'])->name('allcarts');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -57,4 +59,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('banners', BannerController::class);
     Route::resource('order_statuses', OrderStatusController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('carts', CartController::class);
 });
