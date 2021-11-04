@@ -13,7 +13,8 @@
                                     <h3 class="m-0">Email Settings</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Send Test Mail</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenter">Send Test Mail</button>
                                 </div>
                             </div>
                         </div>
@@ -26,8 +27,7 @@
                                         class="form-control @error('mail_driver') is-invalid @enderror" id="mail_driver"
                                         aria-describedby="emailHelp"
                                         value="{{ old('mail_driver') ?? settings('mail_driver') }}">
-                                        <option value="SMTP">SMTP</option>
-                                        <option value="SendMail">SendMail</option>
+                                        <option value="smtp">SMTP</option>
                                     </select>
                                     @error('mail_driver')
                                         <span class="invalid-feedback" role="alert">
@@ -63,7 +63,7 @@
                                     <label for="mail_user_name">Username</label>
                                     <input type="text" name="mail_user_name"
                                         class="form-control @error('mail_user_name') is-invalid @enderror"
-                                         aria-describedby="emailHelp" placeholder="Username"
+                                        aria-describedby="emailHelp" placeholder="Username"
                                         value="{{ old('mail_user_name') ?? settings('mail_user_name') }}">
                                     @error('mail_user_name')
                                         <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                                 <div class="form-group" id="mail_from">
                                     <label for="mail_from">Email From</label>
                                     <input type="text" name="mail_from"
-                                        class="form-control @error('mail_from') is-invalid @enderror" 
+                                        class="form-control @error('mail_from') is-invalid @enderror"
                                         aria-describedby="emailHelp" placeholder="Email From"
                                         value="{{ old('mail_from') ?? settings('mail_from') }}">
                                     @error('mail_from')
@@ -99,7 +99,7 @@
                                     <label for="mail_from_name">From Name</label>
                                     <input type="text" name="mail_from_name"
                                         class="form-control @error('mail_from_name') is-invalid @enderror"
-                                         aria-describedby="emailHelp" placeholder="From Name"
+                                        aria-describedby="emailHelp" placeholder="From Name"
                                         value="{{ old('mail_from_name') ?? settings('mail_from_name') }}">
                                     @error('mail_from_name')
                                         <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
                                 <div class="form-group" id="encryption">
                                     <label for="encryption">Encryption</label>
                                     <select name="encryption" class="form-control @error('encryption') is-invalid @enderror"
-                                         aria-describedby="emailHelp" placeholder="Encryption"
+                                        aria-describedby="emailHelp" placeholder="Encryption"
                                         value="{{ old('encryption') ?? settings('encryption') }}">
                                         <option value="SSL">SSL</option>
                                         <option value="TLS">TLS</option>
@@ -131,51 +131,53 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Sending Test Mail
-            </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <form action="{{ route('send_test_email') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Sending Test Mail
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('send_test_email') }}" method="POST">
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Test email">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-              <form action="" method="POST">
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Test email">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 @endsection
 
 @push('script')
     <script>
-        function mailDriverChange() {
-            
-            let mailDriver = $("#mail_driver").val();
+        // function mailDriverChange() {
 
-            if (mailDriver == 'SendMail') {
-                $("#mail_host").hide();
-                $("#mail_port").hide();
-                $("#mail_user_name").hide();
-                $("#mail_password").hide();
-                $("#encryption").hide();
-            } else {
-                $("#mail_host").show();
-                $("#mail_port").show();
-                $("#mail_user_name").show();
-                $("#mail_password").show();
-                $("#encryption").show();
-            }
-        }
+        //     let mailDriver = $("#mail_driver").val();
+
+        //     if (mailDriver == 'SendMail') {
+        //         $("#mail_host").hide();
+        //         $("#mail_port").hide();
+        //         $("#mail_user_name").hide();
+        //         $("#mail_password").hide();
+        //         $("#encryption").hide();
+        //     } else {
+        //         $("#mail_host").show();
+        //         $("#mail_port").show();
+        //         $("#mail_user_name").show();
+        //         $("#mail_password").show();
+        //         $("#encryption").show();
+        //     }
+        // }
     </script>
 @endpush

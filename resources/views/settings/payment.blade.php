@@ -75,10 +75,10 @@
                                                     aria-controls="v-pills-home" aria-selected="true">
                                                     <span class="font-weight-bold">Stripe</span></a>
 
-                                                <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab"
+                                                {{-- <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab"
                                                     data-toggle="pill" href="#v-pills-profile" role="tab"
                                                     aria-controls="v-pills-profile" aria-selected="false">
-                                                    <span class="font-weight-bold">Paypal</span></a>
+                                                    <span class="font-weight-bold">Paypal</span></a> --}}
 
                                                 <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab"
                                                     data-toggle="pill" href="#v-pills-messages" role="tab"
@@ -149,7 +149,7 @@
                                                     </form>
                                                 </div>  
 
-                                                <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile"
+                                                {{-- <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile"
                                                     role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                                     <h4 class="mb-4">paypal</h4>
                                                     <hr>
@@ -206,7 +206,7 @@
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Update</button>
                                                     </form>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages"
                                                     role="tabpanel" aria-labelledby="v-pills-messages-tab">

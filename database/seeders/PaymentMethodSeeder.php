@@ -15,7 +15,6 @@ class PaymentMethodSeeder extends Seeder
     public function run()
     {
         PaymentMethod::create(['provider' => 'stripe', 'created_at' => now()]);
-        PaymentMethod::create(['provider' => 'paypal', 'created_at' => now()]);
         PaymentMethod::create(['provider' => 'cash', 'created_at' => now()]);
     }
 }
