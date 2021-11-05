@@ -15,9 +15,9 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
-use App\Http\Controllers\CartDetailsController;
-use App\Models\Nutrition;
-use App\Models\OrderDetails;
+use App\Http\Controllers\Api\V1\CartDetailsController;
+use App\Http\Controllers\Api\V1\AddressController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -77,5 +77,8 @@ Route::get('order-details/{orderId}',[OrderController::class, 'OrderDetails']);
 Route::get('nutrition',[NutritionController::class, 'getNutritions']);
 Route::get('nutrition/{id}',[NutritionController::class, 'nutritionDetails']);
 
-Route::get('card-details',[CartDetailsController::class, 'getCardDetails']);
-Route::get('card-details/{id}',[CartDetailsController::class, 'CartDetails']);
+Route::get('card-details/{cartId}',[CartDetailsController::class, 'getCardDetails']);
+
+Route::post('address',[AddressController::class, 'store']);
+Route::get('address/{userId}',[AddressController::class, 'show']);
+
