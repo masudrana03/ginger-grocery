@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="body">Email Body</label>
                                     <textarea name="body" class="form-control @error('body') is-invalid @enderror"
-                                        id='summernote'
+                                        id="summernote"
                                         aria-describedby="emailHelp">{{ old('body') ?? $emailTemplate->body }}</textarea>
                                     @error('body')
                                         <span class="invalid-feedback" role="alert">
@@ -96,7 +96,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -106,33 +105,5 @@
 @endsection
 
 @push('script')
-    {{-- <script>
-        $('#summernote').summernote('editor.pasteHTML', '{{ $emailTemplate->body }}');
-    </script> --}}
-
-    <script>
-        // $('#summernote').summernote({
-        //     toolbar: [
-        //         ['fontsize', ['fontsize']],
-        //     ]
-        // });
-
-        $('#summernote').summernote({
-            placeholder: "Let's write",
-            height: 400,
-            fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
-            toolbar: [
-                ['fontname', ['fontname']],
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-                ['insert', ['picture', 'myvideo', 'link', 'table', 'hr']],
-                ['misc', ['fullscreen', 'undo', 'redo']]
-            ],
-            disableDragAndDrop: true,
-            shortcut: false
-        });
-    </script>
+   
 @endpush

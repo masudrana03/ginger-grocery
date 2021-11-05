@@ -1,5 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Create New Brand')
+@section('title', 'Create New Product')
+
+@push('styles')
+    <style>
+        .note-insert {
+            display: none !important;
+        }
+        .note-editable {
+            height: 250px!important;
+        }
+
+    </style>
+@endpush
 
 @section('content')
     <div class="main_content_iner ">
@@ -30,9 +42,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="excerpt">Excerpt</label>
-                                    <input type="text" name="excerpt"
+                                    <textarea name="excerpt"
                                         class="form-control @error('excerpt') is-invalid @enderror" id="excerpt"
-                                        aria-describedby="emailHelp" placeholder="Excerpt" value="{{ old('excerpt') }}">
+                                        aria-describedby="emailHelp" placeholder="Excerpt" value="{{ old('excerpt') }}"></textarea>
                                     @error('excerpt')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -42,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea rows="5" name="description"
-                                        class="form-control @error('description') is-invalid @enderror" id="description"
+                                        class="form-control @error('description') is-invalid @enderror" id="summernote"
                                         aria-describedby="emailHelp" placeholder="Description"
                                         >{{ old('description') }}</textarea>
                                     @error('description')

@@ -49,7 +49,7 @@
                                         </tr>
                                         @empty
                                         <p class="text-center">No email template found!</p>
-                                        @endforeach
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

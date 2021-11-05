@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
@@ -15,9 +15,9 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
+use App\Http\Controllers\EmailTemplateController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -53,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
+    Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
+    Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -68,4 +70,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('order_statuses', OrderStatusController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('email_templates', EmailTemplateController::class);
+    Route::resource('promos', PromoController::class);
 });

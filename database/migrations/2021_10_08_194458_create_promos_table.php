@@ -15,6 +15,13 @@ class CreatePromosTable extends Migration
     {
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('type')->nullable();
+            $table->string('code')->unique();
+            $table->integer('limit')->default(0);
+            $table->integer('used')->default(0);
+            $table->double('discount')->default(0);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
