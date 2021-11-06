@@ -30,9 +30,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="type">Type</label>
-                                    <input type="text" name="type"
-                                        class="form-control @error('type') is-invalid @enderror" id="type"
-                                        aria-describedby="emailHelp" placeholder="Type" value="{{ old('type') }}">
+                                    <select name="type"
+                                    class="form-control @error('type') is-invalid @enderror">
+                                        <option value="amount">Fixed Amount</option>
+                                        <option value="percentage">Percentage</option>
+                                    </select>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

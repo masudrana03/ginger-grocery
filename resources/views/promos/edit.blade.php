@@ -28,8 +28,12 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Type</label>
-                                    <input type="text" name="type" class="form-control @error('type') is-invalid @enderror" id="type" aria-describedby="emailHelp" placeholder="Type" value="{{ old('type') ?? $promo->type }}">
+                                    <label for="type">Type</label>
+                                    <select name="type"
+                                    class="form-control @error('type') is-invalid @enderror">
+                                        <option value="amount" {{ $promo->type == 'amount' ? 'selected' : '' }}>Fixed Amount</option>
+                                        <option value="percentage" {{ $promo->type == 'percentage' ? 'selected' : '' }}>Percentage</option>
+                                    </select>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -33,5 +33,19 @@ class ProductSeeder extends Seeder
             'user_id' => User::first()->id,
             'created_at' => now(),
         ]);
+        
+        DB::table('products')->insert([
+            'name' => 'Product Name 2',
+            'description' => 'This is product description.',
+            'excerpt' => 'This is product excerpt',
+            'price' => 200,
+            'category_id' => Category::first()->id,
+            'unit_id' => Unit::first()->id,
+            'brand_id' => Brand::first()->id,
+            'store_id' => Store::first()->id,
+            'currency_id' => Currency::first()->id,
+            'user_id' => User::first()->id,
+            'created_at' => now(),
+        ]);
     }
 }

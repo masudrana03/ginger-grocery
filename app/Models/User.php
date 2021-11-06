@@ -53,4 +53,13 @@ class User extends Authenticatable {
 
         return $this;
     }
+
+    /**
+     * Get the cart associated with the uesr.
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

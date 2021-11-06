@@ -109,3 +109,19 @@ function sendSmtpMail($email, $subject, $message)
         throw new Exception($th);
     }
 }
+
+/**
+ * Give me discount of given promo
+ * 
+ * @param \App\Models\Cart $cart
+ * @param string $type discount type
+ * @param integer $discount
+ */
+function promoDiscount($total, $type, $discount)
+{
+    if ($type == 'amount') {
+        return $total -= $discount;
+    } 
+
+    return ($discount / 100) * $total;
+}

@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\StoreController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\PromoController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
 
@@ -50,8 +51,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('get-cart', [CartController::class, 'getCart']);
     Route::post('add-to-cart', [CartController::class, 'addToCart']);
     Route::post('add-to-cart-multiple-product', [CartController::class, 'addToCartMultipleProduct']);
-    
+
+    Route::post('apply-promo', [CartController::class, 'applyPromo']);
 });
+
 Route::get('category', [CategoryController::class, 'getCategories']);
 Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
 
@@ -65,3 +68,6 @@ Route::get('type', [TypeController::class, 'getTypes']);
 
 Route::get('product', [ProductController::class, 'getProducts']);
 Route::get('product/{id}', [ProductController::class, 'productDetails']);
+
+Route::get('promo', [PromoController::class, 'getPromos']);
+Route::get('promo/{id}', [PromoController::class, 'promoDetails']);
