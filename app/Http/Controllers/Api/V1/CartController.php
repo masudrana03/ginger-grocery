@@ -83,4 +83,14 @@ class CartController extends Controller {
         ] );
 
     }
+
+    /**
+     * Display a listing of the  Cart Details.
+     * @param  $id
+     */
+    public function getCartProduct($id){
+        $cartsProduct = Cart::with('products')->find($id);
+
+        return ok('Cart Product list retrive successfully', $cartsProduct);
+    }
 }

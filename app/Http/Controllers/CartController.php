@@ -40,7 +40,6 @@ class CartController extends Controller
         $columns = [
             0 => 'id',
             2 => 'user_id',
-            3 => 'promo',
             4 => 'created_at',
             5 => 'id',
         ];
@@ -83,9 +82,6 @@ class CartController extends Controller
                 $edit         =  route('carts.edit', $cart->id);
                 $delete       =  route('carts.destroy', $cart->id);
                 $token        =  csrf_token();
-
-
-
 
                 $nestedData['id']         = $cart->id;
                 $nestedData['user_id']    = $cart->user->name;

@@ -24,5 +24,4 @@ class BannerController extends Controller
         return ok('Banner details retrive successfully', Banner::find($id) );
     }
 
-
 }

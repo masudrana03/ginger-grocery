@@ -173,6 +173,16 @@
                 </ul>
             </li>
             <li class="">
+                <a href="{{ route('carts.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Cart</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">

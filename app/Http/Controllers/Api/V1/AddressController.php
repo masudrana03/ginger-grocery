@@ -16,7 +16,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return ok( 'Api v1 is working' );
+        // return ok( 'Api v1 is working' );
     }
 
     /**
@@ -37,29 +37,37 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
+
         $validation = validateData( [
             'name'     => 'required',
-            'email'    => 'required|email|unique:users,email',
+            'email'    => 'required',
             'phone'    => 'required',
+            'address'  => 'required',
             'country'  => 'required',
+            'city'     => 'required',
+            'zip'      => 'required',
+            'type'     => 'required',
         ] );
 
-        Address::create($request->all());
+        $request = $request->except('_token');
 
-        return ok( 'Address retrive successfully');
+        $request['user_id'] = auth()->id();
+
+        Address::create($request);
+
+        return ok( 'Address save successfully');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Address  $address
+     * @param  $userId
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $userId)
+    public function show($userId)
     {
-        $address = Address::where('user_id', $userId->user_id)->get();
+        $address = Address::where('user_id', $userId)->get();
         return ok( 'Address details retrived successfully', $address);
     }
 

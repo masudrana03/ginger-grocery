@@ -16,7 +16,6 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
-use App\Http\Controllers\Api\V1\CartDetailsController;
 use App\Http\Controllers\Api\V1\AddressController;
 
 
@@ -56,7 +55,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('get-cart', [CartController::class, 'getCart']);
     Route::post('add-to-cart', [CartController::class, 'addToCart']);
     Route::post('add-to-cart-multiple-product', [CartController::class, 'addToCartMultipleProduct']);
+    Route::get('cart-product/{id}', [CartController::class, 'getCartProduct']);
 
+    Route::post('address', [AddressController::class, 'store']);
+    Route::get('address-details/{id}', [AddressController::class, 'show']);
 });
 
 Route::get('category', [CategoryController::class, 'getCategories']);
@@ -76,14 +78,10 @@ Route::get('type', [TypeController::class, 'getTypes']);
 Route::get('product', [ProductController::class, 'getProducts']);
 Route::get('product/{id}', [ProductController::class, 'productDetails']);
 
-Route::get('order-list/{userId}',[OrderController::class, 'orderList']);
-Route::get('order-details/{orderId}',[OrderController::class, 'OrderDetails']);
+Route::get('order-list/{id}', [OrderController::class, 'orderList']);
+Route::get('order-details/{id}', [OrderController::class, 'OrderDetails']);
 
-Route::get('nutrition',[NutritionController::class, 'getNutritions']);
-Route::get('nutrition/{id}',[NutritionController::class, 'nutritionDetails']);
+Route::get('nutrition', [NutritionController::class, 'getNutritions']);
+Route::get('nutrition/{id}', [NutritionController::class, 'nutritionDetails']);
 
-Route::get('card-details/{cartId}',[CartDetailsController::class, 'getCardDetails']);
-
-Route::post('address',[AddressController::class, 'store']);
-Route::get('address/{userId}',[AddressController::class, 'show']);
 

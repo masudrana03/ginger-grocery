@@ -13,12 +13,13 @@ use App\Models\OrderDetails;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the order by user.
-     * @param  App\Models\User $user
+     * Display a listing of the order by user id.
+     * @param  integer $userId
      *
      */
-    public function orderList(User $user){
-        $userOrders = Order::where('user_id', $user->id)->get();
+    public function orderList($userId){
+        $userOrders = Order::where('user_id', $userId)->get();
+
         return ok('User order list retrive successfully', $userOrders);
     }
 
@@ -29,8 +30,8 @@ class OrderController extends Controller
      */
     public function orderDetails($orderId){
         $orderDetails = OrderDetails::where('order_id', $orderId)->get();
+
         return ok('Order details retrive successfully', $orderDetails);
 
     }
-
 }

@@ -15,8 +15,7 @@ class Cart extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
-        'promo',
+        'user_id'
     ];
 
     /**
@@ -37,13 +36,11 @@ class Cart extends Model
         return $this->hasMany(CartDetails::class);
     }
 
-
-
     protected $hidden = ['pivot'];
 
     public function products()
     {
         return $this->belongsToMany(Product::class)
-        ->select('products.*', 'cart_product.quantity as quantity', 'cart_product.options as options');
+                    ->select('products.*', 'cart_product.quantity as quantity', 'cart_product.options as options');
     }
 }
