@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePromosTable extends Migration
+class CreatePaymentMethodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreatePromosTable extends Migration
      */
     public function up()
     {
-        Schema::create('promos', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('type')->nullable();
-            $table->string('code')->unique();
-            $table->integer('limit')->default(0);
-            $table->integer('used')->default(0);
-            $table->double('discount')->default(0);
+            $table->string('provider')->unique();
+            $table->string('client_key')->nullable();
+            $table->string('client_secret')->nullable();
             $table->boolean('status')->default(false);
+            $table->boolean('platform')->default(false);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreatePromosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promos');
+        Schema::dropIfExists('payment_methods');
     }
 }

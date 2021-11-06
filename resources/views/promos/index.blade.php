@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Orders')
+@section('title', 'Promos')
 
 @push('styles')
 <style>
-    #orders_previous {
+    #promos_previous {
         padding-right: 57px!important;
     }
     table tbody tr td {
@@ -25,26 +25,25 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Orders</h3>
+                                    <h3 class="m-0">promos</h3>
                                 </div>
-                                {{-- <div class="add_button ml-10">
-                                    <a href="{{ route('orders.create') }}" class="btn_1">Add New</a>
-                                </div> --}}
+                                <div class="add_button ml-10">
+                                    <a href="{{ route('promos.create') }}" class="btn_1">Add New</a>
+                                </div>
                             </div>
                             
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="orders">
+                                <table class="table" id="promos">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>User</th>
-                                            <th>Store</th>
-                                            <th>Subtotal</th>
-                                            <th>Discount</th>
-                                            <th>Adjust</th>
-                                            <th>Total</th>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Code</th>
+                                            <th>Used</th>
+                                            <th>Limit</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -63,7 +62,7 @@
 
 @push('script')
 <script type="text/javascript">
-    function deleteBrand(id) {
+    function deletePromo(id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -83,7 +82,7 @@
 
 <script>
     // Banner Status Change
-    function ChangeOrderStatus(id) {
+    function ChangePromoStatus(id) {
             Swal.fire({
                 title: 'Are you sure to change?',
                 icon: 'warning',
@@ -93,7 +92,7 @@
                 confirmButtonText: 'Yes, update it!'
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = $('#orderStatus-' + id).data('href');
+                    window.location.href = $('#promoStatus-' + id).data('href');
                 }
             });
         }
@@ -101,28 +100,26 @@
 
 <script>
     $(document).ready(function () {
-        $('#orders').DataTable({
+        $('#promos').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ $url }}",
+                     "url": "{{ url('allpromos') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "user_id" },
-                { "data": "store_id" },
-                { "data": "subtotal" },
-                { "data": "discount" },
-                { "data": "adjust" },
-                { "data": "total" },
+                { "data": "title" },
+                { "data": "type" },
+                { "data": "code" },
+                { "data": "used" },
+                { "data": "limit" },
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]	 
-
         });
     });
 </script>

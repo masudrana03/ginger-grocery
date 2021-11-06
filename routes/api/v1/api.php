@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\TypeController;
 use App\Http\Controllers\Api\V1\BrandController;
@@ -52,8 +53,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('profile', [ProfileController::class, 'updateProfile']);
     Route::post('change-password', [LoginController::class, 'changePassword']);
 
+    Route::get('get-cart', [CartController::class, 'getCart']);
+    Route::post('add-to-cart', [CartController::class, 'addToCart']);
+    Route::post('add-to-cart-multiple-product', [CartController::class, 'addToCartMultipleProduct']);
 
 });
+
 Route::get('category', [CategoryController::class, 'getCategories']);
 Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
 

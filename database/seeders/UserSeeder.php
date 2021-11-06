@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class BannerSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +15,11 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('banners')->insert([
-            'title' => 'Banner title',
-            'body' => 'This is banner body',
-            'image' => 'default.png',
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '01718000000',
             'created_at' => now(),
         ]);
     }

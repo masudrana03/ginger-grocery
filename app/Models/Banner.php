@@ -31,5 +31,4 @@ class Banner extends Model
     {
         return $query->whereStatus(true);
     }
-
 }

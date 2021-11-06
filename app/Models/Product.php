@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $hidden = ['pivot'];
+
     /**
      * The attributes that are mass assignable.
      *

@@ -16,30 +16,30 @@
     <!-- themefy CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/themefy_icon/themify-icons.css') }}" />
     <!-- select2 CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" />
     <!-- owl carousel CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" />
     <!-- gijgo css -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" />
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/font_awesome/css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/tagsinput/tagsinput.css') }}" />
 
     <!-- date picker -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/datepicker/date-picker.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/datepicker/date-picker.css') }}" />
 
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.css') }}" />
 
     <!-- scrollabe  -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/scroll/scrollable.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/scroll/scrollable.css') }}" />
     <!-- datatable CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/jquery.dataTables.min.css') }}" /> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/responsive.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/buttons.dataTables.min.css') }}" /> --}}
+     <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/jquery.dataTables.min.css') }}" />
+     <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/responsive.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/buttons.dataTables.min.css') }}" />
     <!-- text editor css -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/text_editor/summernote-bs4.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/text_editor/summernote-bs4.css') }}" />
     <!-- morris css -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/morris/morris.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/morris/morris.css') }}">
     <!-- metarial icon css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/material_icon/material-icons.css') }}" />
 
@@ -48,7 +48,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/colors/default.css') }}" id="colorSkinCSS">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @stack('styles')
 </head>
@@ -60,280 +60,316 @@
 
     <!-- main content part here -->
     <!-- sidebar  -->
-        <nav class="sidebar">
-            <div class="logo d-flex justify-content-between">
-                <a class="large_logo" href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
-                <a class="small_logo" href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
-                <div class="sidebar_close_icon d-lg-none">
-                    <i class="ti-close"></i>
-                </div>
+    <nav class="sidebar">
+        <div class="logo d-flex justify-content-between">
+            <a class="large_logo" href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/logo.png') }}"
+                    alt=""></a>
+            <a class="small_logo" href="{{ route('dashboard') }}"><img
+                    src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
+            <div class="sidebar_close_icon d-lg-none">
+                <i class="ti-close"></i>
             </div>
-            <ul id="sidebar_menu">
-                <li>
-                    <a href="{{ route('dashboard') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/dashboard.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>Dashboard</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('brands.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>Brands</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('currencies.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>
-                                Currencies</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('users.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>
-                                Users</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('stores.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>
-                                Stores</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{ route('banners.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>
-                                Banners</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="">
-                    <a class="has-arrow" href="#" aria-expanded="false">
+        </div>
+        <ul id="sidebar_menu">
+            <li>
+                <a href="{{ route('dashboard') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/dashboard.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('brands.index') }}" aria-expanded="false" class="active">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Brands</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('promos.index') }}" aria-expanded="false" class="active">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Promos</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('currencies.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>
+                            Currencies</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('users.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>
+                            Users</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('stores.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>
+                            Stores</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('banners.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>
+                            Banners</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
                     </div>
                     <div class="nav_title">
                         <span>Products</span>
                     </div>
-                    </a>
-                    <ul class="mm-collapse" style="height: 5px;">
-                        <li class="">
-                            <a href="{{ route('products.index') }}">Products</a>
-                            <a href="{{ route('categories.index') }}">Categories</a>
-                            <a href="{{ route('types.index') }}">Types</a>
-                            <a href="{{ route('units.index') }}">Units</a>
-                            <a href="{{ route('nutrition.index') }}">Nutritions</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a class="has-arrow" href="#" aria-expanded="false">
+                </a>
+                <ul class="mm-collapse mm-show" style="height: 5px;">
+                    <li>
+                        <a href="{{ route('products.index') }}">Products</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories.index') }}">Categories</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('types.index') }}">Types</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('units.index') }}">Units</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('nutrition.index') }}">Nutritions</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
                     </div>
                     <div class="nav_title">
                         <span>Orders</span>
                     </div>
-                    </a>
-                    <ul class="mm-collapse" style="height: 5px;">
-                        <li class="">
-                            <a href="{{ route('order_statuses.index') }}">Order Status</a>
-                            <a href="{{ route('orders.index') }}">All Orders</a>
-                            @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-                            <a href="{{ url('orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }} Orders</a>
-                            @endforeach
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="{{ route('carts.index') }}" aria-expanded="false">
-                        <div class="nav_icon_small">
-                            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-                        </div>
-                        <div class="nav_title">
-                            <span>Carts</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                </a>
+                <ul class="mm-collapse" style="height: 5px;">
+                    <li class="">
+                        <a href="{{ route('order_statuses.index') }}">Order Status</a>
+                        <a href="{{ route('orders.index') }}">All Orders</a>
+                        @foreach (\App\Models\OrderStatus::all() as $orderStatus)
+                            <a href="{{ url('orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+                                Orders</a>
+                        @endforeach
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Settings</span>
+                    </div>
+                </a>
+                <ul class="mm-collapse" style="height: 5px;">
+                    <li class="">
+                        <a href="{{ route('settings.general') }}">General Settings</a>
+                        <a href="{{ route('settings.email') }}">Email Settings</a>
+                        <a href="{{ route('email_templates.index') }}">Email Templates</a>
+                        <a href="{{ route('settings.payment_gateway') }}">Payment Gateway Settings</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
     <!--/ sidebar  -->
 
     <section class="main_content dashboard_part large_header_bg">
         <!-- menu  -->
 
-            <div class="container-fluid no-gutters">
-                <div class="row">
-                    <div class="col-lg-12 p-0 ">
-                        <div class="header_iner d-flex justify-content-between align-items-center">
-                            <div class="sidebar_icon d-lg-none">
-                                <i class="ti-menu"></i>
-                            </div>
-                            <label class="switch_toggle d-none d-lg-block" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="slider round open_miniSide"></div>
-                            </label>
+        <div class="container-fluid no-gutters">
+            <div class="row">
+                <div class="col-lg-12 p-0 ">
+                    <div class="header_iner d-flex justify-content-between align-items-center">
+                        <div class="sidebar_icon d-lg-none">
+                            <i class="ti-menu"></i>
+                        </div>
+                        <label class="switch_toggle d-none d-lg-block" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="slider round open_miniSide"></div>
+                        </label>
 
-                            <div class="header_right d-flex justify-content-between align-items-center">
-                                <div class="header_notification_warp d-flex align-items-center">
-                                    <li>
-                                        <div class="serach_button">
-                                            <i class="ti-search"></i>
-                                            <div class="serach_field-area d-flex align-items-center">
-                                                <div class="search_inner">
-                                                    <form action="#">
-                                                        <div class="search_field">
-                                                            <input type="text" placeholder="Search here...">
-                                                        </div>
-                                                        <button class="close_search"> <i class="ti-search"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
+                        <div class="header_right d-flex justify-content-between align-items-center">
+                            <div class="header_notification_warp d-flex align-items-center">
+                                <li>
+                                    <div class="serach_button">
+                                        <i class="ti-search"></i>
+                                        <div class="serach_field-area d-flex align-items-center">
+                                            <div class="search_inner">
+                                                <form action="#">
+                                                    <div class="search_field">
+                                                        <input type="text" placeholder="Search here...">
+                                                    </div>
+                                                    <button class="close_search"> <i class="ti-search"></i>
+                                                    </button>
+                                                </form>
                                             </div>
+                                            <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <a class="bell_notification_clicker" href="#"> <img src="{{ asset('assets/img/icon/bell.svg') }}" alt="">
-                                            <span>2</span>
-                                        </a>
-                                        <!-- Menu_NOtification_Wrap  -->
-                                        <div class="Menu_NOtification_Wrap">
-                                            <div class="notification_Header">
-                                                <h4>Notifications</h4>
-                                            </div>
-                                            <div class="Notification_body">
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/2.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>Cool Marketing </h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/4.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>Awesome packages</h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/3.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>what a packages</h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/2.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>Cool Marketing </h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/4.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>Awesome packages</h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                                <!-- single_notify  -->
-                                                <div class="single_notify d-flex align-items-center">
-                                                    <div class="notify_thumb">
-                                                        <a href="#"><img src="{{ asset('assets/img/staf/3.png') }}" alt=""></a>
-                                                    </div>
-                                                    <div class="notify_content">
-                                                        <a href="#">
-                                                            <h5>what a packages</h5>
-                                                        </a>
-                                                        <p>Lorem ipsum dolor sit amet</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="nofity_footer">
-                                                <div class="submit_button text-center pt_20">
-                                                    <a href="#" class="btn_1">See More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--/ Menu_NOtification_Wrap  -->
-                                    </li>
-                                    <li>
-                                        <a class="CHATBOX_open" href="#"> <img src="{{ asset('assets/img/icon/msg.svg') }}" alt="">
-                                            <span>2</span> </a>
-                                    </li>
-                                </div>
-                                <div class="profile_info">
-                                    <img src="{{ asset('assets/img/client_img.png') }}" alt="#">
-                                    <div class="profile_info_iner">
-                                        <div class="profile_author_name">
-                                            <h5>{{ auth()->user()->name }}</h5>
-                                        </div>
-                                        <div class="profile_info_details">
-                                            <a href="{{ route('user.profile') }}">My Profile </a>
-                                            <a href="{{ route('user.change_password') }}">Change Password</a>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Log Out') }}
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="bell_notification_clicker" href="#"> <img
+                                            src="{{ asset('assets/img/icon/bell.svg') }}" alt="">
+                                        <span>2</span>
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                    <!-- Menu_NOtification_Wrap  -->
+                                    <div class="Menu_NOtification_Wrap">
+                                        <div class="notification_Header">
+                                            <h4>Notifications</h4>
                                         </div>
+                                        <div class="Notification_body">
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/2.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Cool Marketing </h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/4.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Awesome packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/3.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>what a packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/2.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Cool Marketing </h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/4.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Awesome packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="{{ asset('assets/img/staf/3.png') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>what a packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nofity_footer">
+                                            <div class="submit_button text-center pt_20">
+                                                <a href="#" class="btn_1">See More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Menu_NOtification_Wrap  -->
+                                </li>
+                                <li>
+                                    <a class="CHATBOX_open" href="#"> <img
+                                            src="{{ asset('assets/img/icon/msg.svg') }}" alt="">
+                                        <span>2</span> </a>
+                                </li>
+                            </div>
+                            <div class="profile_info">
+                                <img src="{{ asset('assets/img/client_img.png') }}" alt="#">
+                                <div class="profile_info_iner">
+                                    <div class="profile_author_name">
+                                        <h5>{{ auth()->user()->name }}</h5>
+                                    </div>
+                                    <div class="profile_info_details">
+                                        <a href="{{ route('user.profile') }}">My Profile </a>
+                                        <a href="{{ route('user.change_password') }}">Change Password</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Log Out') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -341,6 +377,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         <!--/ menu  -->
         @yield('content')
@@ -502,19 +539,19 @@
     <!-- sidebar menu  -->
     <script src="{{ asset('assets/js/metisMenu.js') }}"></script>
     <!-- waypoints js -->
-    {{-- <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script>
     <!-- waypoints js -->
-    {{-- <script src="{{ asset('assets/vendors/chartlist/Chart.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/chartlist/Chart.min.js') }}"></script>
     <!-- counterup js -->
-    {{-- <script src="{{ asset('assets/vendors/count_up/jquery.counterup.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/count_up/jquery.counterup.min.js') }}"></script>
 
     <!-- nice select -->
-    {{-- <script src="{{ asset('assets/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script>
     <!-- owl carousel -->
-    {{-- <script src="{{ asset('assets/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script>
 
     <!-- responsive table -->
-    {{-- <script src="{{ asset('assets/vendors/datatable/js/jquery.dataTables.min.js') }}"></script>
+     <script src="{{ asset('assets/vendors/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/buttons.flash.min.js') }}"></script>
@@ -522,44 +559,44 @@
     <script src="{{ asset('assets/vendors/datatable/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/datatable/js/buttons.print.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/vendors/datatable/js/buttons.print.min.js') }}"></script>
 
     <!-- datepicker  -->
-    {{-- <script src="{{ asset('assets/vendors/datepicker/datepicker.js') }}"></script>
+     <script src="{{ asset('assets/vendors/datepicker/datepicker.js') }}"></script>
     <script src="{{ asset('assets/vendors/datepicker/datepicker.en.js') }}"></script>
-    <script src="{{ asset('assets/vendors/datepicker/datepicker.custom.js') }}"></script> --}}
+    <script src="{{ asset('assets/vendors/datepicker/datepicker.custom.js') }}"></script>
 
-    {{-- <script src="{{ asset('assets/js/chart.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/chartjs/roundedBar.min.js') }}"></script> --}}
+     <script src="{{ asset('assets/js/chart.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/chartjs/roundedBar.min.js') }}"></script>
 
     <!-- progressbar js -->
-    {{-- <script src="{{ asset('assets/vendors/progressbar/jquery.barfiller.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/progressbar/jquery.barfiller.js') }}"></script>
     <!-- tag input -->
-    {{-- <script src="{{ asset('assets/vendors/tagsinput/tagsinput.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/tagsinput/tagsinput.js') }}"></script>
     <!-- text editor js -->
-    {{-- <script src="{{ asset('assets/vendors/text_editor/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('assets/vendors/am_chart/amcharts.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/text_editor/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('assets/vendors/am_chart/amcharts.js') }}"></script>
 
     <!-- scrollabe  -->
-    {{-- <script src="{{ asset('assets/vendors/scroll/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/scroll/scrollable-custom.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/scroll/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/scroll/scrollable-custom.js') }}"></script>
 
     <!-- vector map  -->
-    {{-- <script src="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/vectormap-home/vectormap-world-mill-en.js') }}"></script> --}}
+     <script src="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/vectormap-home/vectormap-world-mill-en.js') }}"></script>
 
     <!-- apex chrat  -->
-    {{-- <script src="{{ asset('assets/vendors/apex_chart/apex-chart2.js') }}"></script>
+     <script src="{{ asset('assets/vendors/apex_chart/apex-chart2.js') }}"></script>
     <script src="{{ asset('assets/vendors/apex_chart/apex_dashboard.js') }}"></script>
 
-    <script src="{{ asset('assets/vendors/echart/echarts.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/vendors/echart/echarts.min.js') }}"></script>
 
 
-    {{-- <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
+     <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/charts.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/animated.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/kelly.js') }}"></script>
-    <script src="{{ asset('assets/vendors/chart_am/chart-custom.js') }}"></script> --}}
+    <script src="{{ asset('assets/vendors/chart_am/chart-custom.js') }}"></script>
     <!-- custom js -->
     <script src="{{ asset('assets/js/dashboard_init.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
