@@ -34,7 +34,25 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
+                                            <div class="image-upload-wrap" style="display: none;">
+                                              <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image" id="image" />
+                                            </div>
+                                            <div class="file-upload-content">
+                                              <img class="file-upload-image" src="#" alt="your image" />
+                                              <div class="image-title-wrap">
+                                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="form-group">
                                     <label for="image">Image</label><br>
                                     <input type="file" name="image" id="image">
                                     @error('image')
@@ -42,7 +60,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>

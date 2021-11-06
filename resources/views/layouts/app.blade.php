@@ -16,11 +16,11 @@
     <!-- themefy CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/themefy_icon/themify-icons.css') }}" />
     <!-- select2 CSS -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" /> 
+     <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" />
     <!-- owl carousel CSS -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" /> 
+     <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" />
     <!-- gijgo css -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" /> 
+     <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" />
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/font_awesome/css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/tagsinput/tagsinput.css') }}" />
@@ -171,6 +171,16 @@
                         <a href="{{ route('nutrition.index') }}">Nutritions</a>
                     </li>
                 </ul>
+            </li>
+            <li class="">
+                <a href="{{ route('carts.index') }}" aria-expanded="false">
+                    <div class="nav_icon_small">
+                        <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+                    </div>
+                    <div class="nav_title">
+                        <span>Cart</span>
+                    </div>
+                </a>
             </li>
             <li class="">
                 <a class="has-arrow" href="#" aria-expanded="false">

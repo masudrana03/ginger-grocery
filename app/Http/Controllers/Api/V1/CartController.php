@@ -129,4 +129,14 @@ class CartController extends Controller {
     {
         $promo->update(['limit' => $promo->limit - 1, 'used' => $promo->limit + 1]);
     }
+
+    /**
+     * Display a listing of the  Cart Details.
+     * @param integer $id
+     */
+    public function getCartProducts($id){
+        $cartsProducts = Cart::with('products')->find($id);
+
+        return ok('Cart Product list retrive successfully', $cartsProducts);
+    }
 }

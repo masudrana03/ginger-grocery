@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Create New Category')
 
+
 @section('content')
+
     <div class="main_content_iner ">
         <div class="container-fluid p-0 sm_padding_15px">
             <div class="row justify-content-center">
@@ -26,22 +28,31 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="image">Image</label><br>
-                                    <input type="file" name="image" id="image">
-                                    @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
+                                            <div class="image-upload-wrap" style="display: none;">
+                                              <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image" id="image" />
+                                            </div>
+                                            <div class="file-upload-content">
+                                              <img class="file-upload-image" src="#" alt="your image" />
+                                              <div class="image-title-wrap">
+                                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
                                 </div>
+
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 {{-- <div class="form-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                                     </div>
                                 </div> --}}
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -50,3 +61,6 @@
         </div>
     </div>
 @endsection
+
+
+

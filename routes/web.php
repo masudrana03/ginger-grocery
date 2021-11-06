@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
@@ -46,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
     Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
     Route::get('/orders/{order}/update_status/{orderStatus}', [OrderController::class, 'updateStatus'])->name('orders.update_status');
+
+    Route::get('/allcarts', [CartController::class, 'allCarts'])->name('allcarts');
+
     Route::get('/general-settings', [SettingController::class, 'generalSetting'])->name('settings.general');
     Route::get('/email-settings', [SettingController::class, 'emailSetting'])->name('settings.email');
     Route::get('/payment-settings', [SettingController::class, 'paymentGatewaySetting'])->name('settings.payment_gateway');
@@ -69,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('banners', BannerController::class);
     Route::resource('order_statuses', OrderStatusController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('carts', CartController::class);
     Route::resource('email_templates', EmailTemplateController::class);
     Route::resource('promos', PromoController::class);
 });
