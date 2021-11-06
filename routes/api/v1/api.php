@@ -5,18 +5,19 @@ use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\TypeController;
 use App\Http\Controllers\Api\V1\BrandController;
-use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\LoginController;
-use App\Http\Controllers\Api\V1\StoreController;
-use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\PromoController;
+use App\Http\Controllers\Api\V1\StoreController;
+use App\Http\Controllers\Api\V1\BannerController;
+use App\Http\Controllers\Api\V1\AddressController;
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
-use App\Http\Controllers\Api\V1\PromoController;
-use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\RegisterController;
+use App\Http\Controllers\Api\V1\NutritionController;
+use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
-use App\Http\Controllers\Api\V1\AddressController;
 
 
 /*
@@ -61,6 +62,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('address', [AddressController::class, 'store']);
     Route::get('address-details/{id}', [AddressController::class, 'show']);
+
+    Route::get('get-saved-products', [SavedProductController::class, 'getSavedProducts']);
+    Route::post('add-saved-product', [SavedProductController::class, 'addSavedProduct']);
+    Route::post('remove-saved-product', [SavedProductController::class, 'removeSavedProduct']);
 });
 
 Route::get('category', [CategoryController::class, 'getCategories']);
