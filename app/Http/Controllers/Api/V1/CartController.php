@@ -94,7 +94,7 @@ class CartController extends Controller {
         $request->validate([
             'code' => 'required'
         ]);
-        
+
         $cart = auth()->user()->cart;
 
         if (!$cart) {
@@ -106,7 +106,7 @@ class CartController extends Controller {
         if (!$promo) {
             return api()->notFound('Promo not found');
         }
-        
+
         $cart->update(['promo_id' => $promo->id]);
 
         $total = $cart->products->sum('price');
@@ -138,5 +138,20 @@ class CartController extends Controller {
         $cartsProducts = Cart::with('products')->find($id);
 
         return ok('Cart Product list retrive successfully', $cartsProducts);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param integer $productId
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($productId)
+    {
+        $cart = Cart::whereUserId(auth()->id())->first();
+
+        $cart->products()->detach($productId);
+
+        return ok('Product delete successfully');
     }
 }
