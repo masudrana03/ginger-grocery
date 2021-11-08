@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPromoIdToPromosTable extends Migration
+class AddPaymentStatusToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPromoIdToPromosTable extends Migration
      */
     public function up()
     {
-        Schema::table('promos', function (Blueprint $table) {
-            $table->foreignId('promo_id')->nullable()->constrained()->onDelete('restrict')->after('status');
+        Schema::table('orders', function (Blueprint $table) {
+            //
         });
     }
 
@@ -25,8 +25,8 @@ class AddPromoIdToPromosTable extends Migration
      */
     public function down()
     {
-        Schema::table('promos', function (Blueprint $table) {
-            $table->dropColumn('promo_id');
+        Schema::table('orders', function (Blueprint $table) {
+            //
         });
     }
 }

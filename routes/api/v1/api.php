@@ -59,6 +59,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('cart-product/{id}', [CartController::class, 'getCartProducts']);
 
     Route::post('apply-promo', [CartController::class, 'applyPromo']);
+    Route::post('place-order', [CheckoutController::class, 'placeOrder']);
 
     Route::post('address', [AddressController::class, 'store']);
     Route::get('address-details/{id}', [AddressController::class, 'show']);
