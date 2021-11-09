@@ -87,6 +87,7 @@ class CartController extends Controller {
 
     /**
      * Apply promo
+     *
      * @param Request $request
      */
     public function applyPromo(Request $request)
@@ -113,21 +114,9 @@ class CartController extends Controller {
 
         $discount = promoDiscount($total, $promo->type, $promo->discount);
 
-        // this code is will execute after order is placed
-        // $this->updatePromo($promo);
-
         return api()->success( 'Promo applied', [
             'discount' => $discount,
         ] );
-    }
-
-    /**
-     * Update promo
-     * @param \App\Models\Promo $promo
-     */
-    public function updatePromo($promo)
-    {
-        $promo->update(['limit' => $promo->limit - 1, 'used' => $promo->limit + 1]);
     }
 
     /**

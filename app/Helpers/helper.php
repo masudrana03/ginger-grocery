@@ -1,6 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
@@ -73,42 +72,42 @@ function settings($key)
     return (is_array($key)) ? \Illuminate\Support\Arr::only($settings, $key) : $settings[$key];
 }
 
-function sendGeneralEmail($email, $subject, $message)
-{
-    if (settings('mail_driver') == 'smtp') {
-        sendSmtpMail($email, $subject, $message);
-    }
-}
+// function sendGeneralEmail($email, $subject, $message)
+// {
+//     if (settings('mail_driver') == 'smtp') {
+//         sendSmtpMail($email, $subject, $message);
+//     }
+// }
 
-function sendSmtpMail($email, $subject, $message)
-{
-    $mail = new PHPMailer(true);
+// function sendSmtpMail($email, $subject, $message)
+// {
+//     $mail = new PHPMailer(true);
 
-    try {
-        $mail->isSMTP();
-        $mail->Host     = settings('mail_host');
-        $mail->SMTPAuth = true;
-        $mail->Username = settings('mail_user_name');
-        $mail->Password = settings('mail_password');
-        
-        if (settings('encryption') == 'ssl') {
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        } else {
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        }
+//     try {
+//         $mail->isSMTP();
+//         $mail->Host     = settings('mail_host');
+//         $mail->SMTPAuth = true;
+//         $mail->Username = settings('mail_user_name');
+//         $mail->Password = settings('mail_password');
 
-        $mail->Port     = settings('mail_port');
-        $mail->CharSet  = 'UTF-8';
-        $mail->setFrom(settings('mail_from'), settings('mail_from_name'));
-        $mail->addAddress($email);
-        $mail->isHTML(true);
-        $mail->Subject  = $subject;
-        $mail->Body     = $message;
-        $mail->send();
-    } catch (Throwable $th) {
-        throw new Exception($th);
-    }
-}
+//         if (settings('encryption') == 'ssl') {
+//             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+//         } else {
+//             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//         }
+
+//         $mail->Port     = settings('mail_port');
+//         $mail->CharSet  = 'UTF-8';
+//         $mail->setFrom(settings('mail_from'), settings('mail_from_name'));
+//         $mail->addAddress($email);
+//         $mail->isHTML(true);
+//         $mail->Subject  = $subject;
+//         $mail->Body     = $message;
+//         $mail->send();
+//     } catch (Throwable $th) {
+//         throw new Exception($th);
+//     }
+// }
 
 /**
  * Give me discount of given promo
@@ -121,7 +120,18 @@ function promoDiscount($total, $type, $discount)
 {
     if ($type == 'amount') {
         return $total -= $discount;
-    } 
+    }
 
     return ($discount / 100) * $total;
+}
+
+/**
+ * Give me tax amount
+ * 
+ * @param \App\Models\Cart $cart
+ * @param integer $percentage
+ */
+function taxCalculator($total, $percentage)
+{
+    return ($percentage / 100) * $total;
 }
