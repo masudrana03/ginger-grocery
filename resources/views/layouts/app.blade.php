@@ -217,6 +217,8 @@
                         <a href="{{ route('settings.email') }}">Email Settings</a>
                         <a href="{{ route('email_templates.index') }}">Email Templates</a>
                         <a href="{{ route('settings.payment_gateway') }}">Payment Gateway</a>
+                        <a href="{{ route('shipping_services.index') }}">Shipping Service</a>
+                        <a href="{{ route('taxes.index') }}">Tax</a>
                     </li>
                 </ul>
             </li>

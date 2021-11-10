@@ -19,6 +19,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\ShippingServiceController;
+use App\Http\Controllers\TaxController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -59,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
     Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
     Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
+    Route::get('/allShippingServices', [ShippingServiceController::class, 'allShippingServices'])->name('allShippingServices');
+    Route::get('/shipping_services/{shipping_service}/update_status', [ShippingServiceController::class, 'updateStatus'])->name('shipping_services.update_status');
+    Route::get('/allTaxes', [TaxController::class, 'allTaxes'])->name('allTaxes');
+    Route::get('/taxes/{tax}/update_status', [TaxController::class, 'updateStatus'])->name('taxes.update_status');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -76,4 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('carts', CartController::class);
     Route::resource('email_templates', EmailTemplateController::class);
     Route::resource('promos', PromoController::class);
+    Route::resource('shipping_services', ShippingServiceController::class);
+    Route::resource('taxes', TaxController::class);
 });
