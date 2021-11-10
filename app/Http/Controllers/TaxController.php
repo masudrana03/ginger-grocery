@@ -197,14 +197,9 @@ class TaxController extends Controller
         if ($tax->status == 'Active') {
             $taxes = Tax::all();
 
-            // $filteredTaxes = $taxes->filter(function ($value, $key) use ($tax) {
-            //     return $value['id']!= $tax->id;
-            // });
-
             foreach ($taxes as $item) {
 
-                if ($item->id == $tax->id) {
-                    continue;
+                if ($item->id != $tax->id) {
 
                     $item->update([
                         'status' => 'Inactive'

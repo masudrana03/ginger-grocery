@@ -199,14 +199,9 @@ class ShippingServiceController extends Controller
         if ($shippingService->status == 'Active') {
             $shippingServices = ShippingService::all();
 
-            // $filteredTaxes = $shippingServices->filter(function ($value, $key) use ($tax) {
-            //     return $value['id']!= $tax->id;
-            // });
-
             foreach ($shippingServices as $item) {
 
-                if ($item->id == $shippingService->id) {
-                    continue;
+                if ($item->id != $shippingService->id) {
 
                     $item->update([
                         'status' => 'Inactive'
