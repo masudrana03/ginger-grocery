@@ -2,43 +2,29 @@
 
 namespace App\Components\Payment;
 
+use App\Models\PaymentMethod;
 use App\Components\Payment\Single\CashPayment;
 use App\Components\Payment\Single\StripePayment;
-use App\Models\PaymentMethod;
 
-/**
- * Undocumented class
- */
-abstract class Payment
+class Payment
 {
-    /**
-     * Handle payment process
-     *
-     * @param integer $paymentMethod
-     */
-    public function __construct($paymentMethod)
+    public function handle($request)
     {
-        $paymentMethod = PaymentMethod::find($paymentMethod);
+        $provider = PaymentMethod::find($request->payment_method)->provider;
 
-        switch ($paymentMethod->provider) {
+        switch ($provider) {
             case 'stripe':
-                $this->begin(new StripePayment());
+                return $this->begin(new StripePayment(), $request);
             break;
 
             case 'cash':
-                $this->begin(new CashPayment());
+                return $this->begin(new CashPayment());
             break;
         }
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param PaymentMethodInterface $payment
-     * @return void
-     */
-    public function begin(PaymentMethodInterface $payment)
+    public function begin(PaymentMethodInterface $payment, $request = null)
     {
-        return $payment->acceptPayment();
+        return $payment->acceptPayment($request);
     }
 }

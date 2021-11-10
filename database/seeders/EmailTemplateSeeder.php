@@ -17,7 +17,7 @@ class EmailTemplateSeeder extends Seeder
         EmailTemplate::create([
             'type' => 'Order',
             'subject' => 'Order placed',
-            'body' => 'Your Have Successfully Placed The Order, <p>Hello {user_name},</p><p>Your Order Has Been Placed Successfilly.<br>Your Order Number is {transaction_number}.<br></p>',
+            'body' => 'Your Have Successfully Placed The Order, <p>Hello {user_name},</p><p>Your Order Has Been Placed Successfilly.<br>Your Invoice Number is {invoice_number}.<br></p>',
             'created_at' => now()
         ]);
     }

@@ -12,12 +12,6 @@ use App\Components\Email\EmailInterface;
  */
 class Smtp implements EmailInterface
 {
-    /**
-     * Undocumented function
-     *
-     * @param [type] $args
-     * @return void
-     */
     public function send($args)
     {
         $mail = new PHPMailer(true);

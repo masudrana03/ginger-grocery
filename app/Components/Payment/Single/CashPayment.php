@@ -4,19 +4,10 @@ namespace App\Components\Payment\Single;
 
 use App\Components\Payment\PaymentMethodInterface;
 
-
-/**
- * Undocumented class
- */
 class CashPayment implements PaymentMethodInterface
 {
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function acceptPayment()
+    public function acceptPayment($request = null)
     {
-       return ['status' => true, 'payment_status' => 'Unpaid'];
+       return ['status' => true, 'payment_status' => false];
     }
 }

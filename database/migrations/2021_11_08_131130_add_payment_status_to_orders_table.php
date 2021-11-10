@@ -14,7 +14,7 @@ class AddPaymentStatusToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->boolean('payment_status')->default(false)->after('total');
         });
     }
 
@@ -26,7 +26,7 @@ class AddPaymentStatusToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropColumn('payment_status');
         });
     }
 }

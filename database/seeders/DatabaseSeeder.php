@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             StoreSeeder::class,
             ProductSeeder::class,
             OrderStatusSeeder::class,
-            EmailTemplateSeeder::class
+            EmailTemplateSeeder::class,
+            ShippingServiceSeeder::class,
+            TaxSeeder::class,
         ]);
     }
 }
