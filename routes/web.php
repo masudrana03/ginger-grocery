@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
     Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
     Route::get('/orders/{order}/update_status/{orderStatus}', [OrderController::class, 'updateStatus'])->name('orders.update_status');
+    Route::get('/orders/{order}/updatePaymentStatus', [OrderController::class, 'updatePaymentStatus'])->name('orders.updatePaymentStatus');
 
     Route::get('/allcarts', [CartController::class, 'allCarts'])->name('allcarts');
 

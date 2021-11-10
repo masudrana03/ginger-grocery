@@ -31,7 +31,7 @@
                                     <a href="{{ route('orders.create') }}" class="btn_1">Add New</a>
                                 </div> --}}
                             </div>
-                            
+
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
@@ -45,6 +45,7 @@
                                             <th>Discount</th>
                                             <th>Adjust</th>
                                             <th>Total</th>
+                                            <th>Payment Status</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                   </div>
-               
+
             </div>
         </div>
     </div>
@@ -100,6 +101,24 @@
 </script>
 
 <script>
+    // Banner Status Change
+    function ChangePaymentStatus(id) {
+            Swal.fire({
+                title: 'Are you sure to change?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = $('#paymentStatus-' + id).data('href');
+                }
+            });
+        }
+</script>
+
+<script>
     $(document).ready(function () {
         $('#orders').DataTable({
             "processing": true,
@@ -118,10 +137,11 @@
                 { "data": "discount" },
                 { "data": "adjust" },
                 { "data": "total" },
+                { "data": "payment_status" },
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }
-            ]	 
+            ]
 
         });
     });

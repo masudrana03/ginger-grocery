@@ -9,4 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Nutrition extends Model
 {
     use HasFactory, SoftDeletes;
+
+    /**
+     * Get the product associated with the nutritions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

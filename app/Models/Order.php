@@ -53,4 +53,20 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetails::class);
     }
+
+
+    public function getPaymentStatusAttribute()
+    {
+        return $this->attributes['payment_status'] == 1 ? 'Paid' : 'Unpaid';
+    }
+
+    public function setPaymentStatusAttribute($value)
+    {
+        $this->attributes['payment_status'] = $value == 'Paid' ? true : false;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
 }

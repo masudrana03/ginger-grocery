@@ -20,31 +20,31 @@ class NutritionController extends Controller
 
     public function allNutrition(Request $request)
     {
-        $columns = array( 
-                            0 =>'id', 
+        $columns = array(
+                            0 =>'id',
                             1 =>'name',
                             3=> 'created_at',
                             4=> 'id',
                         );
-    
+
         $totalData = Nutrition::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
-            
+
         if(empty($request->input('search.value')))
-        {            
+        {
             $nutritions = Nutrition::offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         }
         else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $nutritions =  Nutrition::where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
@@ -85,15 +85,15 @@ class NutritionController extends Controller
 
             }
         }
-            
+
         $json_data = array(
-                    "draw"            => intval($request->input('draw')),  
-                    "recordsTotal"    => intval($totalData),  
-                    "recordsFiltered" => intval($totalFiltered), 
-                    "data"            => $data   
+                    "draw"            => intval($request->input('draw')),
+                    "recordsTotal"    => intval($totalData),
+                    "recordsFiltered" => intval($totalFiltered),
+                    "data"            => $data
                     );
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -123,7 +123,7 @@ class NutritionController extends Controller
         $nutrition->save();
 
         Alert::toast('Nutrition successfully created', 'success');
-        
+
         return redirect()->route('nutrition.index');
     }
 
@@ -166,7 +166,7 @@ class NutritionController extends Controller
         $nutrition->save();
 
         Alert::toast('Nutrition successfully updated', 'success');
-        
+
         return redirect()->route('nutrition.index');
     }
 
@@ -178,10 +178,16 @@ class NutritionController extends Controller
      */
     public function destroy(Nutrition $nutrition)
     {
+        if ($nutrition->products) {
+            toast('Nutrition could not deleted as it already used', 'error');
+
+            return back();
+        }
+
         $nutrition->delete();
 
-        Alert::toast('Nutrition successfully deleted', 'success');
+        toast('Nutrition successfully deleted', 'success');
 
-        return redirect()->back();
+        return back();
     }
 }

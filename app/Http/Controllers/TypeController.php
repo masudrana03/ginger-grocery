@@ -26,16 +26,16 @@ class TypeController extends Controller
             3 => 'created_at',
             4 => 'id',
         ];
-    
+
         $totalData = Type::count();
-            
+
         $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
+
         if (empty($request->input('search.value'))) {
             $types = Type::offset($start)
                             ->limit($limit)
@@ -78,14 +78,14 @@ class TypeController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
             "draw"            => intval($request->input('draw')),
             "recordsTotal"    => intval($totalData),
             "recordsFiltered" => intval($totalFiltered),
             "data"            => $data
         ];
-            
+
         echo json_encode($json_data);
     }
 
@@ -116,7 +116,7 @@ class TypeController extends Controller
         $type->save();
 
         Alert::toast('Type successfully created', 'success');
-        
+
         return redirect()->route('types.index');
     }
 
@@ -159,7 +159,7 @@ class TypeController extends Controller
         $type->save();
 
         Alert::toast('Type successfully updated', 'success');
-        
+
         return redirect()->route('types.index');
     }
 
@@ -171,10 +171,16 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+        if ($type->products) {
+            toast('Type could not deleted as it already used', 'error');
+
+            return back();
+        }
+
         $type->delete();
 
-        Alert::toast('Type successfully deleted', 'success');
+        toast('Type successfully deleted', 'success');
 
-        return redirect()->back();
+        return back();
     }
 }

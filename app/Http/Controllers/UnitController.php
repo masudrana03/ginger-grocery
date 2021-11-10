@@ -21,30 +21,30 @@ class UnitController extends Controller
     public function allUnits(Request $request)
     {
         $columns = [
-            0 => 'id', 
+            0 => 'id',
             1 => 'name',
             3 => 'created_at',
             4 => 'id',
         ];
-    
+
         $totalData = Unit::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
+
         if(empty($request->input('search.value')))
-        {            
+        {
             $units = Unit::offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         }
         else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $units =  Unit::where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
@@ -82,15 +82,15 @@ class UnitController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
-            "draw"            => intval($request->input('draw')),  
-            "recordsTotal"    => intval($totalData),  
-            "recordsFiltered" => intval($totalFiltered), 
-            "data"            => $data   
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         ];
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -120,7 +120,7 @@ class UnitController extends Controller
         $unit->save();
 
         Alert::toast('Unit successfully created', 'success');
-        
+
         return redirect()->route('units.index');
     }
 
@@ -163,7 +163,7 @@ class UnitController extends Controller
         $unit->save();
 
         Alert::toast('Unit successfully updated', 'success');
-        
+
         return redirect()->route('units.index');
     }
 
@@ -175,10 +175,16 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
+        if ($unit->products) {
+            toast('Unit could not deleted as it already used', 'error');
+
+            return back();
+        }
+
         $unit->delete();
 
-        Alert::toast('Unit successfully deleted', 'success');
+        toast('Unit successfully deleted', 'success');
 
-        return redirect()->back();
+        return back();
     }
 }
