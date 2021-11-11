@@ -8,10 +8,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use App\Components\Email\EmailInterface;
 
 /**
- * Undocumented class
+ * Handle smtp mail sending
  */
 class Smtp implements EmailInterface
 {
+    /**
+     * Send email
+     *
+     * @param array $args
+     */
     public function send($args)
     {
         $mail = new PHPMailer(true);

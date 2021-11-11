@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\TypeController;
+use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\OrderController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\NutritionController;
+use App\Http\Controllers\Api\V1\OrderRatingController;
 use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
@@ -75,8 +77,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('payment-method', [PaymentMethodController::class, 'getPaymentMethod']);
 
     Route::post('buy-now', [BuyNowController::class, 'buyNow']);
-
-
+    Route::get('get-referral-code', [UserController::class, 'getReferralCode']);
 });
 
 Route::get('category', [CategoryController::class, 'getCategories']);
@@ -101,6 +102,8 @@ Route::get('promo/{id}', [PromoController::class, 'promoDetails']);
 
 Route::get('order-list/{id}', [OrderController::class, 'orderList']);
 Route::get('order-details/{id}', [OrderController::class, 'OrderDetails']);
+Route::post('order-rating', [OrderRatingController::class, 'addOrderRating']);
 
 Route::get('nutrition', [NutritionController::class, 'getNutritions']);
 Route::get('nutrition/{id}', [NutritionController::class, 'nutritionDetails']);
+ 

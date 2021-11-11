@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +32,10 @@ class RegisterController extends Controller {
             return api()->validation( null, $validation->errors() );
         }
 
-        $user           = new User();
-        $user->email    = $request->email;
-        $user->password = Hash::make( $request->password );
+        $user                 = new User();
+        $user->email          = $request->email;
+        $user->password       = Hash::make( $request->password );
+        $user->referral_token = Str::random(20);
         $user->save();
 
         $token = $user->createToken( 'Bearer' );

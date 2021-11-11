@@ -22,11 +22,11 @@ use App\Http\Requests\CheckoutRequest;
 
 class CheckoutController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
+    /**
+     * Handle checkout process
+     *
+     * @param CheckoutRequest $request
+     */
     public function checkout(CheckoutRequest $request)
     {
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
@@ -39,7 +39,7 @@ class CheckoutController extends Controller
 
         // Create order if payment status is true
         if ($payment['status']) {
-            $invoiceId = $this->createOrder($cart, $payment['payment_status']);
+            $invoiceId = $this->createOrder($cart, $payment['payment_status'], $request->billing_id, $request->shipping_id);
 
             // Send order confirmation email
             $this->sendOrderConfirmationEmail($invoiceId);
@@ -50,7 +50,15 @@ class CheckoutController extends Controller
         }
     }
 
-    public function createOrder($cart, $paymentStatus)
+    /**
+     * Create order
+     *
+     * @param Cart $cart
+     * @param boolean $paymentStatus
+     * @param integer $billingId
+     * @param integer $shippingId
+     */
+    public function createOrder($cart, $paymentStatus, $billingId, $shippingId)
     {
         DB::beginTransaction();
 
@@ -74,6 +82,8 @@ class CheckoutController extends Controller
             $order->total           = $calculatedPrice['total'];
             $order->user_id         = auth()->id();
             $order->store_id        = $cart->products->first()->id;
+            $order->billing_id      = $billingId;
+            $order->shipping_id     = $shippingId;
             $order->payment_status  = $paymentStatus;
             $order->save();
 
@@ -98,6 +108,11 @@ class CheckoutController extends Controller
         }
     }
 
+    /**
+     * Update promo 
+     *
+     * @param integer $id
+     */
     public function updatePromo($id)
     {
         $promo = Promo::find($id);

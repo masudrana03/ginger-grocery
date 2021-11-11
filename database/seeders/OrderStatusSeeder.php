@@ -20,7 +20,7 @@ class OrderStatusSeeder extends Seeder
         ]);
 
         DB::table('order_statuses')->insert([
-            'name' => 'In progress',
+            'name' => 'Processing',
             'created_at' => now(),
         ]);
     }

@@ -4,11 +4,13 @@ namespace App\Components\Email;
 
 use App\Components\Email\Single\Smtp;
 
-/**
- * Undocumented class
- */
 class Email
 {
+    /**
+     * Handle email sending proces
+     *
+     * @param array $args
+     */
     public function handle($args)
     {
         switch (settings('mail_driver')) {
@@ -18,6 +20,12 @@ class Email
         }
     }
 
+    /**
+     * Let's start sending email
+     *
+     * @param EmailInterface $email
+     * @param array $args
+     */
     public function begin(EmailInterface $email, $args)
     {
         return $email->send($args);

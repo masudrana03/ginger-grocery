@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Cart;
 use App\Components\Payment\PaymentMethodInterface;
 use App\Models\PaymentMethod;
+use Illuminate\Http\Request;
 
 class StripePayment implements PaymentMethodInterface
 {
@@ -18,6 +19,12 @@ class StripePayment implements PaymentMethodInterface
         env('STRIPE_SECRET', $stripe->client_secret);
     }
 
+    /**
+     * Accept stripe payment
+     *
+     * @param Request|null $request
+     * @return array
+     */
     public function acceptPayment($request = null)
     {
         $cart = Cart::whereUserId(auth()->id())->first();
