@@ -23,7 +23,7 @@ use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\TaxController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('backend.auth.login');
 });
 
 Auth::routes();

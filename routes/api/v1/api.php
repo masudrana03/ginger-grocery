@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
-
+use App\Http\Controllers\Api\V1\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +76,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('buy-now', [BuyNowController::class, 'buyNow']);
 
+    Route::post('date-of-birth', [UserController::class, 'addDateOfBirth']);
 
 });
 

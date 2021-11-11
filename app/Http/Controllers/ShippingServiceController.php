@@ -15,7 +15,7 @@ class ShippingServiceController extends Controller
      */
     public function index()
     {
-       return view('shipping_services.index');
+       return view('backend.shipping_services.index');
     }
 
     /**
@@ -108,7 +108,7 @@ class ShippingServiceController extends Controller
      */
     public function create()
     {
-        return view('shipping_services.create');
+        return view('backend.shipping_services.create');
     }
 
     /**
@@ -147,7 +147,7 @@ class ShippingServiceController extends Controller
      */
     public function edit(ShippingService $shippingService)
     {
-        return view('shipping_services.edit', compact('shippingService'));
+        return view('backend.shipping_services.edit', compact('shippingService'));
     }
 
     /**

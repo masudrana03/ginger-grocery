@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        return view('backend.products.index');
     }
 
     /**
@@ -126,7 +126,7 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
 
-        return view('products.create', compact('brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
+        return view('backend.products.create', compact('brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
     /**
@@ -182,7 +182,7 @@ class ProductController extends Controller
         $nutritions = Nutrition::all();
         $product    = $product->with('types', 'nutritions');
 
-        return view('products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
+        return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
     /**

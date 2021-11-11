@@ -18,7 +18,7 @@ class CartController extends Controller
     {
 
 
-        return view('carts.index');
+        return view('backend.carts.index');
     }
 
     /**
@@ -131,7 +131,7 @@ class CartController extends Controller
     {
         $cart->with('details','product');
 
-        return view('carts.details', compact('cart'));
+        return view('backend.carts.details', compact('cart'));
     }
 
     /**

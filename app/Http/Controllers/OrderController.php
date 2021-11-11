@@ -22,7 +22,7 @@ class OrderController extends Controller
             $url = url('all_orders?status=' . $request->status);
         }
 
-        return view('orders.index', compact('url'));
+        return view('backend.orders.index', compact('url'));
     }
 
     /**
@@ -177,7 +177,7 @@ class OrderController extends Controller
     {
         $order->with('details', 'product', 'user', 'store');
 
-        return view('orders.details', compact('order'));
+        return view('backend.orders.details', compact('order'));
     }
 
     /**

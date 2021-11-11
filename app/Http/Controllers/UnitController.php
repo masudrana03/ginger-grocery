@@ -15,7 +15,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return view('units.index');
+        return view('backend.units.index');
     }
 
     public function allUnits(Request $request)
@@ -100,7 +100,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('units.create');
+        return view('backend.units.create');
     }
 
     /**
@@ -143,7 +143,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        return view('units.edit', compact('unit'));
+        return view('backend.units.edit', compact('unit'));
     }
 
     /**

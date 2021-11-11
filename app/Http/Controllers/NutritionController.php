@@ -15,7 +15,7 @@ class NutritionController extends Controller
      */
     public function index()
     {
-        return view('nutrition.index');
+        return view('backend.nutrition.index');
     }
 
     public function allNutrition(Request $request)
@@ -103,7 +103,7 @@ class NutritionController extends Controller
      */
     public function create()
     {
-        return view('nutrition.create');
+        return view('backend.nutrition.create');
     }
 
     /**
@@ -146,7 +146,7 @@ class NutritionController extends Controller
      */
     public function edit(Nutrition $nutrition)
     {
-        return view('nutrition.edit', compact('nutrition'));
+        return view('backend.nutrition.edit', compact('nutrition'));
     }
 
     /**

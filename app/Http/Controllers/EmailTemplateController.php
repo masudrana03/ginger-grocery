@@ -16,7 +16,7 @@ class EmailTemplateController extends Controller
     {
         $emailTemplates = EmailTemplate::all();
 
-        return view('settings.email_templates.index', compact('emailTemplates'));
+        return view('backend.settings.email_templates.index', compact('emailTemplates'));
     }
 
     /**
@@ -59,7 +59,7 @@ class EmailTemplateController extends Controller
      */
     public function edit(EmailTemplate $emailTemplate)
     {
-        return view('settings.email_templates.edit', compact('emailTemplate'));
+        return view('backend.settings.email_templates.edit', compact('emailTemplate'));
     }
 
     /**

@@ -16,7 +16,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('banners.index');
+        return view('backend.banners.index');
     }
 
     /**
@@ -108,7 +108,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('banners.create');
+        return view('backend.banners.create');
     }
 
     /**
@@ -125,7 +125,7 @@ class BannerController extends Controller
             $location          = public_path( 'assets/img/uploads/banners/' . $filename );
             $thumbnailLocation = public_path( 'assets/img/uploads/banners/thumbnail/' . $filename );
 
-            saveImageWithThumbnail($image, $location, $thumbnailLocation); 
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
         $request = $request->all();
@@ -156,7 +156,7 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('banners.edit', compact('banner'));
+        return view('backend.banners.edit', compact('banner'));
     }
 
     /**
@@ -180,7 +180,7 @@ class BannerController extends Controller
             $location          = public_path( 'assets/img/uploads/banners/' . $filename );
             $thumbnailLocation = public_path( 'assets/img/uploads/banners/thumbnail/' . $filename );
 
-            saveImageWithThumbnail($image, $location, $thumbnailLocation); 
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
         $request = $request->all();
@@ -221,7 +221,7 @@ class BannerController extends Controller
      * @param Banner $banner
      * @return void
      */
-    public function updateStatus(Banner $banner)  
+    public function updateStatus(Banner $banner)
     {
         $banner->update([
             'status' => $banner->status == 'Active' ? 'Inactive' : 'Active'

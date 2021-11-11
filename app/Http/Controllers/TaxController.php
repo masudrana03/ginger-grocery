@@ -15,7 +15,7 @@ class TaxController extends Controller
      */
     public function index()
     {
-        return view('taxes.index');
+        return view('backend.taxes.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class TaxController extends Controller
      */
     public function create()
     {
-        return view('taxes.create');
+        return view('backend.taxes.create');
     }
 
     /**
@@ -147,7 +147,7 @@ class TaxController extends Controller
      */
     public function edit(Tax $tax)
     {
-        return view('taxes.edit', compact('tax'));
+        return view('backend.taxes.edit', compact('tax'));
     }
 
     /**

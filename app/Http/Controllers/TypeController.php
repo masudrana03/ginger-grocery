@@ -15,7 +15,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        return view('types.index');
+        return view('backend.types.index');
     }
 
     public function allTypes(Request $request)
@@ -96,7 +96,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('types.create');
+        return view('backend.types.create');
     }
 
     /**
@@ -139,7 +139,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        return view('types.edit', compact('type'));
+        return view('backend.types.edit', compact('type'));
     }
 
     /**

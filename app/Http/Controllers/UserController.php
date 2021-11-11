@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\PasswordUpdateRequest;
- 
+
 class UserController extends Controller
 {
     /**
@@ -18,36 +18,36 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        return view('backend.users.index');
     }
 
     public function allUsers(Request $request)
     {
         $columns = [
-            0 => 'id', 
+            0 => 'id',
             1 => 'name',
             2 => 'email',
             3 => 'phone',
             4 => 'created_at',
             5 => 'id',
         ];
-    
+
         $totalData = User::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
-        if (empty($request->input('search.value'))) {            
+
+        if (empty($request->input('search.value'))) {
             $users = User::offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         } else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $users =  User::where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
@@ -85,15 +85,15 @@ class UserController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
-            "draw"            => intval($request->input('draw')),  
-            "recordsTotal"    => intval($totalData),  
-            "recordsFiltered" => intval($totalFiltered), 
-            "data"            => $data   
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         ];
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('backend.users.create');
     }
 
     /**
@@ -142,7 +142,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        return view('backend.users.edit', compact('user'));
     }
 
     /**
@@ -185,7 +185,7 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        return view('users.profile', compact('user'));
+        return view('backend.users.profile', compact('user'));
     }
 
     /**
@@ -195,7 +195,7 @@ class UserController extends Controller
      */
     public function changePassword()
     {
-        return view('users.change-password');
+        return view('backend.users.change-password');
     }
 
     /**
@@ -207,12 +207,12 @@ class UserController extends Controller
     public function passwordUpdate(PasswordUpdateRequest $request)
     {
         $user = Auth()->user();
-        
+
         if (!Hash::check($request->old_password, $user->password)) {
             toast('Your Current password did not match', 'error');
-            return back(); 
-        } 
-        
+            return back();
+        }
+
         $user->password = Hash::make($request->password);
         $user->save();
 
