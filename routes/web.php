@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\TaxController;
 
@@ -86,3 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);
 });
+
+
+//Frontend Route
+    Route::get('/test', [HomeController::class, 'index'])->name('index');
