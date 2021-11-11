@@ -20,7 +20,7 @@ class CreateAddressesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('address');
-            $table->string('street')->nullable();
+            $table->string('state')->nullable();
             $table->string('country');
             $table->string('city');
             $table->string('zip');
