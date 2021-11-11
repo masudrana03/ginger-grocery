@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use App\Components\Email\Email;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 
@@ -97,11 +98,22 @@ class SettingController extends Controller
         return back();
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function emailSetting()
     {
         return view('settings.email');
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
     public function emailSettingsUpdate(Request $request)
     {
         $request = $request->except('_token');
@@ -117,13 +129,25 @@ class SettingController extends Controller
         return back();
     }
 
+    /**
+     * Send email for testing
+     *
+     * @param Request $request
+     */
     public function sendTestMail(Request $request)
     {
         $subject = 'Testing Email';
         $message = 'This is a test email, please ignore if you are not meant to be get this email.';
 
         try {
-            sendGeneralEmail($request->email, $subject, $message);
+            $emailDetails = [
+                'to'      => $request->email,
+                'subject' => $subject,
+                'body'    => $message,
+            ];
+
+            new Email($emailDetails);
+
             toast('You will receive a test email soon', 'success');
 
             return back();
@@ -135,15 +159,22 @@ class SettingController extends Controller
         }
     }
 
+    /**
+     * Payment gateway settings
+     */
     public function paymentGatewaySetting()
     {
         $strripe = PaymentMethod::whereProvider('stripe')->first();
-        $paypal  = PaymentMethod::whereProvider('paypal')->first();
         $cash    = PaymentMethod::whereProvider('cash')->first();
 
-        return view('settings.payment', compact('strripe', 'paypal', 'cash'));
+        return view('settings.payment', compact('strripe', 'cash'));
     }
 
+    /**
+     * Update payment gateway settings
+     *
+     * @param Request $request
+     */
     public function paymentSettingsUpdate(Request $request)
     {
         if ($request->provider != 'cash') {
@@ -160,10 +191,5 @@ class SettingController extends Controller
         toast('Payment method successfully updated', 'success');
 
         return back();
-    }
-
-    public function smsSetting()
-    {
-        return view('settings.sms');
     }
 }

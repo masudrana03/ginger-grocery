@@ -6,8 +6,8 @@ use App\Components\Payment\PaymentMethodInterface;
 
 class CashPayment implements PaymentMethodInterface
 {
-    public function acceptPayment()
+    public function acceptPayment($request = null)
     {
-       return 'Payment method is cash';
+       return ['status' => true, 'payment_status' => false];
     }
 }

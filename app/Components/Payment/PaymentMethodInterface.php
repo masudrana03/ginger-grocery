@@ -4,5 +4,5 @@ namespace App\Components\Payment;
 
 interface PaymentMethodInterface
 {
-    public function acceptPayment();
+    public function acceptPayment($request = null);
 }

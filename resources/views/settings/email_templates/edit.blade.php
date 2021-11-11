@@ -90,8 +90,8 @@
                                             <td>Name of the customer</td>
                                         </tr>
                                         <tr>
-                                            <td>{transaction_number}</td>
-                                            <td>Order Transaction Number</td>
+                                            <td>{invoice_number}</td>
+                                            <td>Invoice Number</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -2,26 +2,29 @@
 
 namespace App\Components\Payment;
 
+use App\Models\PaymentMethod;
 use App\Components\Payment\Single\CashPayment;
 use App\Components\Payment\Single\StripePayment;
 
-abstract class Payment
+class Payment
 {
-    public function __construct($paymentMethod)
+    public function handle($request)
     {
-        switch ($paymentMethod) {
-            case 'Stripe':
-                $payment = $this->begin(new StripePayment());
+        $provider = PaymentMethod::find($request->payment_method)->provider;
+
+        switch ($provider) {
+            case 'stripe':
+                return $this->begin(new StripePayment(), $request);
             break;
 
-            case 'Cash':
-                $payment = $this->begin(new CashPayment());
+            case 'cash':
+                return $this->begin(new CashPayment());
             break;
         }
     }
 
-    public function begin(PaymentMethodInterface $payment)
+    public function begin(PaymentMethodInterface $payment, $request = null)
     {
-        return $payment->acceptPayment();
+        return $payment->acceptPayment($request);
     }
 }

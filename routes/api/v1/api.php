@@ -10,16 +10,17 @@ use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PromoController;
 use App\Http\Controllers\Api\V1\StoreController;
 use App\Http\Controllers\Api\V1\BannerController;
-use App\Http\Controllers\Api\V1\AddressController;
 use App\Http\Controllers\Api\V1\BuyNowController;
+use App\Http\Controllers\Api\V1\AddressController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\SavedProductController;
-use App\Http\Controllers\Api\V1\ResetPasswordController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
+use App\Http\Controllers\Api\V1\ResetPasswordController;
 
 
 /*
@@ -62,7 +63,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('cart-product-remove/{id}', [CartController::class, 'destroy']);
 
     Route::post('apply-promo', [CartController::class, 'applyPromo']);
-    Route::post('place-order', [CheckoutController::class, 'placeOrder']);
+    Route::post('checkout', [CheckoutController::class, 'checkout']);
 
     Route::post('address', [AddressController::class, 'store']);
     Route::get('address-details/{id}', [AddressController::class, 'show']);
