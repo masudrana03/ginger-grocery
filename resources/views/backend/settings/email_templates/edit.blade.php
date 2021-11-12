@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('email_templates.update', $emailTemplate->id) }}" method="POST">
+                            <form action="{{ route('admin.email_templates.update', $emailTemplate->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

@@ -66,9 +66,9 @@ class BannerController extends Controller
 
         if ( !empty( $banners ) ) {
             foreach ( $banners as $banner ) {
-                $updateStatus = route( 'banners.update_status', $banner->id );
-                $edit         = route( 'banners.edit', $banner->id );
-                $delete       = route( 'banners.destroy', $banner->id );
+                $updateStatus = route('admin.banners.update_status', $banner->id );
+                $edit         = route('admin.banners.edit', $banner->id );
+                $delete       = route('admin.banners.destroy', $banner->id );
                 $token        = csrf_token();
                 $img          = asset( 'assets/img/uploads/banners/thumbnail/' . $banner->image );
                 $class        = $banner->status == 'Active' ? 'status_btn' : 'status_btn_danger';
@@ -134,7 +134,7 @@ class BannerController extends Controller
 
         toast( 'Banner successfully created', 'success' );
 
-        return redirect()->route( 'banners.index' );
+        return redirect()->route('admin.banners.index' );
     }
 
     /**
@@ -193,7 +193,7 @@ class BannerController extends Controller
 
         toast( 'Banner successfully updated', 'success' );
 
-        return redirect()->route( 'banners.index' );
+        return redirect()->route('admin.banners.index' );
     }
 
     /**

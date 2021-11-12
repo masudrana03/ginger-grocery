@@ -63,8 +63,8 @@ class NutritionController extends Controller
         {
             foreach ($nutritions as $nutrition)
             {
-                $edit =  route('nutrition.edit',$nutrition->id);
-                $delete =  route('nutrition.destroy', $nutrition->id);
+                $edit =  route('admin.nutrition.edit',$nutrition->id);
+                $delete =  route('admin.nutrition.destroy', $nutrition->id);
                 $token = csrf_token();
 
                 $nestedData['id'] = $nutrition->id;
@@ -124,7 +124,7 @@ class NutritionController extends Controller
 
         Alert::toast('Nutrition successfully created', 'success');
 
-        return redirect()->route('nutrition.index');
+        return redirect()->route('admin.nutrition.index');
     }
 
     /**
@@ -167,7 +167,7 @@ class NutritionController extends Controller
 
         Alert::toast('Nutrition successfully updated', 'success');
 
-        return redirect()->route('nutrition.index');
+        return redirect()->route('admin.nutrition.index');
     }
 
     /**

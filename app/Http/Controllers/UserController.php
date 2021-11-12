@@ -65,8 +65,8 @@ class UserController extends Controller
 
         if (!empty($users)) {
             foreach ($users as $user) {
-                $edit   = route('users.edit',$user->id);
-                $delete = route('users.destroy', $user->id);
+                $edit   = route('admin.users.edit',$user->id);
+                $delete = route('admin.users.destroy', $user->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $user->id;
@@ -120,7 +120,7 @@ class UserController extends Controller
 
         toast('User successfully created', 'success');
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -158,7 +158,7 @@ class UserController extends Controller
 
         toast('User successfully updated', 'success');
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**

@@ -76,8 +76,8 @@ class ProductController extends Controller
 
         if ( !empty( $products ) ) {
             foreach ( $products as $product ) {
-                $edit   = route( 'products.edit', $product->id );
-                $delete = route( 'products.destroy', $product->id );
+                $edit   = route('admin.products.edit', $product->id );
+                $delete = route('admin.products.destroy', $product->id );
                 $token  = csrf_token();
                 // $img    = asset( 'assets/img/uploads/products/thumbnail/' . $product->image );
 
@@ -151,7 +151,7 @@ class ProductController extends Controller
 
         toast( 'Product successfully created', 'success' );
 
-        return redirect()->route( 'products.index' );
+        return redirect()->route('admin.products.index' );
     }
 
     /**
@@ -208,7 +208,7 @@ class ProductController extends Controller
 
         toast('Product successfully updated', 'success');
 
-        return redirect()->route('products.index');
+        return redirect()->route('admin.products.index');
     }
 
     /**

@@ -97,7 +97,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allcarts') }}",
+                     "url": "{{ route('admin.allcarts') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

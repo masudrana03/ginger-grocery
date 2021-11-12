@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('taxes.update', $shippingService->id) }}" method="POST">
+                            <form action="{{ route('admin.taxes.update', $shippingService->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

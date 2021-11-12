@@ -16,7 +16,7 @@
                                     <h5 class="modal-title text_white">Sign Up</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form method="POST" action="{{ route('admin.register') }}">
                                         @csrf
                                         <div class="form-group">
                                             {{-- <input type="text" class="form-control" placeholder="Full Name"> --}}
@@ -68,7 +68,7 @@
 
                                         <button type="submit" class="btn_1 full_width text-center"> Sign Up</button>
 
-                                        <p>Need an account? <a href="{{ route('login') }}">Log in</a></p>
+                                        <p>Need an account? <a href="{{ route('admin.login') }}">Log in</a></p>
                                     </form>
                                 </div>
                             </div>

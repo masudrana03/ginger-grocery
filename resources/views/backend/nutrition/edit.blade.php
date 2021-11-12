@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('nutrition.update', $nutrition->id) }}" method="POST">
+                            <form action="{{ route('admin.nutrition.update', $nutrition->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

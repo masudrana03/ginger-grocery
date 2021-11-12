@@ -20,6 +20,7 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\TaxController;
 
@@ -27,9 +28,10 @@ Route::get('/', function () {
     return view('backend.auth.login');
 });
 
-Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
+    Auth::routes();
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Datatables routes
@@ -91,3 +93,9 @@ Route::middleware(['auth'])->group(function () {
 
 //Frontend Route
     Route::get('/test', [HomeController::class, 'index'])->name('index');
+    Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
+    Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
+    Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+    Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
+    Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+

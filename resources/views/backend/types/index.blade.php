@@ -29,7 +29,7 @@
                                     <h3 class="m-0">Types</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('types.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.types.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('alltypes') }}",
+                     "url": "{{ route('admin.alltypes') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

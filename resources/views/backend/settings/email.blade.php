@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('settings.email.update') }}" method="POST">
+                            <form action="{{ route('admin.settings.email.update') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="company_name">Mail Driver</label>
@@ -135,7 +135,7 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form action="{{ route('send_test_email') }}" method="POST">
+                <form action="{{ route('admin.send_test_email') }}" method="POST">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Sending Test Mail
@@ -145,7 +145,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('send_test_email') }}" method="POST">
+                        <form action="{{ route('admin.send_test_email') }}" method="POST">
                             <div class="form-group">
                                 <input class="form-control" type="email" name="email" placeholder="Test email">
                             </div>

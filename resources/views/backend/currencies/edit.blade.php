@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('currencies.update', $currency->id) }}" method="POST">
+                            <form action="{{ route('admin.currencies.update', $currency->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

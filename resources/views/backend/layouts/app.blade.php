@@ -62,9 +62,9 @@
     <!-- sidebar  -->
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
-            <a class="large_logo" href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/logo.png') }}"
+            <a class="large_logo" href="{{ route('admin.dashboard') }}"><img src="{{ asset('assets/img/logo.png') }}"
                     alt=""></a>
-            <a class="small_logo" href="{{ route('dashboard') }}"><img
+            <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
                     src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
@@ -72,7 +72,7 @@
         </div>
         <ul id="sidebar_menu">
             <li>
-                <a href="{{ route('dashboard') }}" aria-expanded="false">
+                <a href="{{ route('admin.dashboard') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/dashboard.svg') }}" alt="">
                     </div>
@@ -82,7 +82,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('brands.index') }}" aria-expanded="false" class="active">
+                <a href="{{ route('admin.brands.index') }}" aria-expanded="false" class="active">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -92,7 +92,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('promos.index') }}" aria-expanded="false" class="active">
+                <a href="{{ route('admin.promos.index') }}" aria-expanded="false" class="active">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -102,7 +102,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('currencies.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -113,7 +113,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('users.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.users.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -124,7 +124,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('stores.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.stores.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('banners.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.banners.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -156,24 +156,24 @@
                 </a>
                 <ul class="mm-collapse mm-show" style="height: 5px;">
                     <li>
-                        <a href="{{ route('products.index') }}">Products</a>
+                        <a href="{{ route('admin.products.index') }}">Products</a>
                     </li>
                     <li>
-                        <a href="{{ route('categories.index') }}">Categories</a>
+                        <a href="{{ route('admin.categories.index') }}">Categories</a>
                     </li>
                     <li>
-                        <a href="{{ route('types.index') }}">Types</a>
+                        <a href="{{ route('admin.types.index') }}">Types</a>
                     </li>
                     <li>
-                        <a href="{{ route('units.index') }}">Units</a>
+                        <a href="{{ route('admin.units.index') }}">Units</a>
                     </li>
                     <li>
-                        <a href="{{ route('nutrition.index') }}">Nutritions</a>
+                        <a href="{{ route('admin.nutrition.index') }}">Nutritions</a>
                     </li>
                 </ul>
             </li>
             <li class="">
-                <a href="{{ route('carts.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.carts.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -193,10 +193,10 @@
                 </a>
                 <ul class="mm-collapse" style="height: 5px;">
                     <li class="">
-                        <a href="{{ route('order_statuses.index') }}">Order Status</a>
-                        <a href="{{ route('orders.index') }}">All Orders</a>
+                        <a href="{{ route('admin.order_statuses.index') }}">Order Status</a>
+                        <a href="{{ route('admin.orders.index') }}">All Orders</a>
                         @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-                            <a href="{{ url('orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+                            <a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
                                 Orders</a>
                         @endforeach
                     </li>
@@ -213,12 +213,12 @@
                 </a>
                 <ul class="mm-collapse" style="height: 5px;">
                     <li class="">
-                        <a href="{{ route('settings.general') }}">General Settings</a>
-                        <a href="{{ route('settings.email') }}">Email Settings</a>
-                        <a href="{{ route('email_templates.index') }}">Email Templates</a>
-                        <a href="{{ route('settings.payment_gateway') }}">Payment Gateway</a>
-                        <a href="{{ route('shipping_services.index') }}">Shipping Service</a>
-                        <a href="{{ route('taxes.index') }}">Tax</a>
+                        <a href="{{ route('admin.settings.general') }}">General Settings</a>
+                        <a href="{{ route('admin.settings.email') }}">Email Settings</a>
+                        <a href="{{ route('admin.email_templates.index') }}">Email Templates</a>
+                        <a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a>
+                        <a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a>
+                        <a href="{{ route('admin.taxes.index') }}">Tax</a>
                     </li>
                 </ul>
             </li>
@@ -371,14 +371,14 @@
                                         <h5>{{ auth()->user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="{{ route('user.profile') }}">My Profile </a>
-                                        <a href="{{ route('user.change_password') }}">Change Password</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        <a href="{{ route('admin.user.profile') }}">My Profile </a>
+                                        <a href="{{ route('admin.user.change_password') }}">Change Password</a>
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Log Out') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
                                             class="d-none">
                                             @csrf
                                         </form>

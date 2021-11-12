@@ -28,7 +28,7 @@
                                     <h3 class="m-0">Banners</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('banners.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.banners.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allbanners') }}",
+                     "url": "{{ route('admin.allbanners') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

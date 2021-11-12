@@ -60,8 +60,8 @@ class CategoryController extends Controller {
 
         if ( !empty( $categories ) ) {
             foreach ( $categories as $category ) {
-                $edit   = route( 'categories.edit', $category->id );
-                $delete = route( 'categories.destroy', $category->id );
+                $edit   = route('admin.categories.edit', $category->id );
+                $delete = route('admin.categories.destroy', $category->id );
                 $token  = csrf_token();
                 $img    = asset( 'assets/img/uploads/categories/thumbnail/' . $category->image );
 
@@ -128,7 +128,7 @@ class CategoryController extends Controller {
 
         toast( 'Category successfully created', 'success' );
 
-        return redirect()->route( 'categories.index' );
+        return redirect()->route('admin.categories.index' );
     }
 
     /**
@@ -184,7 +184,7 @@ class CategoryController extends Controller {
 
         toast( 'Category successfully updated', 'success' );
 
-        return redirect()->route( 'categories.index' );
+        return redirect()->route('admin.categories.index' );
     }
 
     /**

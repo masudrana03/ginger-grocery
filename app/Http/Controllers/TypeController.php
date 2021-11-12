@@ -60,8 +60,8 @@ class TypeController extends Controller
 
         if (!empty($types)) {
             foreach ($types as $type) {
-                $edit   =  route('types.edit', $type->id);
-                $delete =  route('types.destroy', $type->id);
+                $edit   =  route('admin.types.edit', $type->id);
+                $delete =  route('admin.types.destroy', $type->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $type->id;
@@ -117,7 +117,7 @@ class TypeController extends Controller
 
         Alert::toast('Type successfully created', 'success');
 
-        return redirect()->route('types.index');
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -160,7 +160,7 @@ class TypeController extends Controller
 
         Alert::toast('Type successfully updated', 'success');
 
-        return redirect()->route('types.index');
+        return redirect()->route('admin.types.index');
     }
 
     /**

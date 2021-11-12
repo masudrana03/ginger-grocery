@@ -74,8 +74,8 @@ class OrderStatusController extends Controller
 
         if (!empty($orderStatuses)) {
             foreach ($orderStatuses as $orderStatus) {
-                $edit   =  route('order_statuses.edit', $orderStatus->id);
-                $delete =  route('order_statuses.destroy', $orderStatus->id);
+                $edit   =  route('admin.order_statuses.edit', $orderStatus->id);
+                $delete =  route('admin.order_statuses.destroy', $orderStatus->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $orderStatus->id;
@@ -115,7 +115,7 @@ class OrderStatusController extends Controller
 
         toast('Order Status successfully created', 'success');
 
-        return redirect()->route('order_statuses.index');
+        return redirect()->route('admin.order_statuses.index');
     }
 
     /**
@@ -153,7 +153,7 @@ class OrderStatusController extends Controller
 
         toast('Order Status successfully updated', 'success');
 
-        return redirect()->route('order_statuses.index');
+        return redirect()->route('admin.order_statuses.index');
     }
 
     /**

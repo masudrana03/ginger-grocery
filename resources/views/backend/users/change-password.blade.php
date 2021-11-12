@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('user.update_password') }}" method="POST">
+                            <form action="{{ route('admin.user.update_password') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="old_password">Old Password</label>

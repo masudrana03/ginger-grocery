@@ -28,7 +28,7 @@
                                     <h3 class="m-0">Orders</h3>
                                 </div>
                                 {{-- <div class="add_button ml-10">
-                                    <a href="{{ route('orders.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.orders.create') }}" class="btn_1">Add New</a>
                                 </div> --}}
                             </div>
 
