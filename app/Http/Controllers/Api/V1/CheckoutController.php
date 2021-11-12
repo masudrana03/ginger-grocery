@@ -41,6 +41,9 @@ class CheckoutController extends Controller
         if ($payment['status']) {
             $invoiceId = $this->createOrder($cart, $payment['payment_status'], $request->billing_id, $request->shipping_id);
 
+            // give points if match any condition
+            $this->givePoints($cart);
+
             // Send order confirmation email
             $this->sendOrderConfirmationEmail($invoiceId);
 
@@ -134,5 +137,14 @@ class CheckoutController extends Controller
         ];
 
         (new Email())->handle($emailDetails);
+    }
+
+    public function givePoints($cart)
+    {
+        // $totalPurchase = $cart->products->sum('price');
+
+        // $totalPurchase;
+            
+        
     }
 }

@@ -219,6 +219,7 @@
                         <a href="{{ route('settings.payment_gateway') }}">Payment Gateway</a>
                         <a href="{{ route('shipping_services.index') }}">Shipping Service</a>
                         <a href="{{ route('taxes.index') }}">Tax</a>
+                        <a href="{{ route('points.index') }}">Loyalty Cards</a>
                     </li>
                 </ul>
             </li>

@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'purchase_target',
+        'points',
+        'status'
+    ];
+
+    public function getStatusAttribute()
+    {
+        return $this->attributes['status'] == 1 ? 'Active' : 'Inactive';
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value == 'Active' ? true : false;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
 }
