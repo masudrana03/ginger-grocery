@@ -15,35 +15,35 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        return view('currencies.index');
+        return view('backend.currencies.index');
     }
 
     public function allCurrencies(Request $request)
     {
         $columns = [
-            0 => 'id', 
+            0 => 'id',
             1 => 'name',
             1 => 'symbol',
             3 => 'created_at',
             4 => 'id',
         ];
-    
+
         $totalData = Currency::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
-        if (empty($request->input('search.value'))) {            
+
+        if (empty($request->input('search.value'))) {
             $currencies = Currency::offset($start)
                             ->limit($limit)
                             ->orderBy($order, $dir)
                             ->get();
         } else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $currencies =  Currency::where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
@@ -80,15 +80,15 @@ class CurrencyController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
-            "draw"            => intval($request->input('draw')),  
-            "recordsTotal"    => intval($totalData),  
-            "recordsFiltered" => intval($totalFiltered), 
-            "data"            => $data   
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         ];
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -98,7 +98,7 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        return view('currencies.create');
+        return view('backend.currencies.create');
     }
 
     /**
@@ -120,7 +120,7 @@ class CurrencyController extends Controller
         $currency->save();
 
         Alert::toast('Currency successfully created', 'success');
-        
+
         return redirect()->route('currencies.index');
     }
 
@@ -143,7 +143,7 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
-        return view('currencies.edit', compact('currency'));
+        return view('backend.currencies.edit', compact('currency'));
     }
 
     /**
@@ -165,7 +165,7 @@ class CurrencyController extends Controller
         $currency->save();
 
         Alert::toast('Currency successfully updated', 'success');
-        
+
         return redirect()->route('currencies.index');
     }
 

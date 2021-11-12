@@ -194,6 +194,13 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Category $category ) {
+
+        if ($category->products) {
+            toast('Category could not deleted as it already used', 'error');
+
+            return back();
+        }
+
         $imageDirectory = 'assets/img/uploads/categories/';
 
         deleteImage( $category->image, $imageDirectory );
@@ -202,6 +209,6 @@ class CategoryController extends Controller {
 
         toast( 'Category successfully deleted', 'success' );
 
-        return redirect()->back();
+        return back();
     }
 }

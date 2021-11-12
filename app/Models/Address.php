@@ -20,7 +20,7 @@ class Address extends Model
         'email',
         'phone',
         'address',
-        'street',
+        'state',
         'country',
         'city',
         'zip',

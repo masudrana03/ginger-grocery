@@ -19,11 +19,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\TaxController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('backend.auth.login');
 });
 
 Auth::routes();
@@ -49,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all_order_statuses', [OrderStatusController::class, 'allOrderStatuses'])->name('all_order_statuses');
     Route::get('/all_orders', [OrderController::class, 'allOrders'])->name('all_orders');
     Route::get('/orders/{order}/update_status/{orderStatus}', [OrderController::class, 'updateStatus'])->name('orders.update_status');
+    Route::get('/orders/{order}/updatePaymentStatus', [OrderController::class, 'updatePaymentStatus'])->name('orders.updatePaymentStatus');
 
     Route::get('/allcarts', [CartController::class, 'allCarts'])->name('allcarts');
 
@@ -85,3 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);
 });
+
+
+//Frontend Route
+    Route::get('/test', [HomeController::class, 'index'])->name('index');

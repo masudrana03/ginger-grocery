@@ -15,7 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('brands.index');
+        return view('backend.brands.index');
     }
 
     /**
@@ -25,28 +25,28 @@ class BrandController extends Controller
     public function allBrands(Request $request)
     {
         $columns = [
-            0 => 'id', 
+            0 => 'id',
             1 => 'name',
             3 => 'created_at',
             4 => 'id',
         ];
-    
+
         $totalData = Brand::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
-        if (empty($request->input('search.value'))) {            
+
+        if (empty($request->input('search.value'))) {
             $brands = Brand::offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         } else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $brands =  Brand::where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
@@ -82,15 +82,15 @@ class BrandController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
-            "draw"            => intval($request->input('draw')),  
-            "recordsTotal"    => intval($totalData),  
-            "recordsFiltered" => intval($totalFiltered), 
-            "data"            => $data   
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         ];
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -100,7 +100,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brands.create');
+        return view('backend.brands.create');
     }
 
     /**
@@ -120,7 +120,7 @@ class BrandController extends Controller
         $brand->save();
 
         Alert::toast('Brand successfully created', 'success');
-        
+
         return redirect()->route('brands.index');
     }
 
@@ -143,7 +143,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        return view('brands.edit', compact('brand'));
+        return view('backend.brands.edit', compact('brand'));
     }
 
     /**
@@ -163,7 +163,7 @@ class BrandController extends Controller
         $brand->save();
 
         Alert::toast('Brand successfully updated', 'success');
-        
+
         return redirect()->route('brands.index');
     }
 
@@ -175,10 +175,16 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        if ($brand->products) {
+            toast('Brand could not deleted as it already used', 'error');
+
+            return back();
+        }
+
         $brand->delete();
 
-        Alert::toast('Brand successfully deleted', 'success');
+        toast('Brand successfully deleted', 'success');
 
-        return redirect()->back();
+        return back();
     }
 }

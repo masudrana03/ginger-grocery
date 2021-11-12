@@ -15,7 +15,7 @@ class PromoController extends Controller
      */
     public function index()
     {
-        return view('promos.index');
+        return view('backend.promos.index');
     }
 
         /**
@@ -25,7 +25,7 @@ class PromoController extends Controller
     public function allPromos(Request $request)
     {
         $columns = [
-            0 => 'id', 
+            0 => 'id',
             1 => 'title',
             1 => 'type',
             1 => 'code',
@@ -35,23 +35,23 @@ class PromoController extends Controller
             3 => 'created_at',
             4 => 'id',
         ];
-    
+
         $totalData = Promo::count();
-            
-        $totalFiltered = $totalData; 
+
+        $totalFiltered = $totalData;
 
         $limit = $request->input('length');
         $start = $request->input('start');
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
-            
-        if (empty($request->input('search.value'))) {            
+
+        if (empty($request->input('search.value'))) {
             $promos = Promo::offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         } else {
-            $search = $request->input('search.value'); 
+            $search = $request->input('search.value');
 
             $promos =  Promo::where('id','LIKE',"%{$search}%")
                             ->orWhere('title', 'LIKE',"%{$search}%")
@@ -94,15 +94,15 @@ class PromoController extends Controller
                 $data[] = $nestedData;
             }
         }
-            
+
         $json_data = [
-            "draw"            => intval($request->input('draw')),  
-            "recordsTotal"    => intval($totalData),  
-            "recordsFiltered" => intval($totalFiltered), 
-            "data"            => $data   
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
         ];
-            
-        echo json_encode($json_data); 
+
+        echo json_encode($json_data);
     }
 
     /**
@@ -112,7 +112,7 @@ class PromoController extends Controller
      */
     public function create()
     {
-        return view('promos.create');
+        return view('backend.promos.create');
     }
 
     /**
@@ -126,7 +126,7 @@ class PromoController extends Controller
         Promo::create($request->all());
 
         toast('Promo successfully created', 'success');
-        
+
         return redirect()->route('promos.index');
     }
 
@@ -149,7 +149,7 @@ class PromoController extends Controller
      */
     public function edit(Promo $promo)
     {
-        return view('promos.edit', compact('promo'));
+        return view('backend.promos.edit', compact('promo'));
     }
 
     /**
@@ -164,7 +164,7 @@ class PromoController extends Controller
         $promo->update($request->all());
 
         toast('Promo successfully updated', 'success');
-        
+
         return redirect()->route('promos.index');
     }
 
@@ -179,7 +179,7 @@ class PromoController extends Controller
         $promo->delete();
 
         toast('Promo successfully deleted', 'success');
-        
+
         return back();
     }
 
@@ -189,7 +189,7 @@ class PromoController extends Controller
      * @param Promo $promo
      * @return void
      */
-    public function updateStatus(Promo $promo)  
+    public function updateStatus(Promo $promo)
     {
         $promo->update([
             'status' => $promo->status == 'Active' ? 'Inactive' : 'Active'

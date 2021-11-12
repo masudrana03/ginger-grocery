@@ -21,7 +21,7 @@ class SettingController extends Controller
     {
         $settings = $this->getSettings();
 
-        return view('settings.general', compact('settings'));
+        return view('backend.settings.general', compact('settings'));
     }
 
     /**
@@ -105,7 +105,7 @@ class SettingController extends Controller
      */
     public function emailSetting()
     {
-        return view('settings.email');
+        return view('backend.settings.email');
     }
 
     /**
@@ -167,7 +167,7 @@ class SettingController extends Controller
         $strripe = PaymentMethod::whereProvider('stripe')->first();
         $cash    = PaymentMethod::whereProvider('cash')->first();
 
-        return view('settings.payment', compact('strripe', 'cash'));
+        return view('backend.settings.payment', compact('strripe', 'cash'));
     }
 
     /**

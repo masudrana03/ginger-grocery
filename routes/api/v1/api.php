@@ -24,7 +24,6 @@ use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -77,7 +76,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('payment-method', [PaymentMethodController::class, 'getPaymentMethod']);
 
     Route::post('buy-now', [BuyNowController::class, 'buyNow']);
+
     Route::get('get-referral-code', [UserController::class, 'getReferralCode']);
+
+    Route::post('date-of-birth', [UserController::class, 'addDateOfBirth']);
+
 });
 
 Route::get('category', [CategoryController::class, 'getCategories']);
