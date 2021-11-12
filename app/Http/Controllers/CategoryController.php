@@ -12,7 +12,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'categories.index' );
+        return view( 'backend.categories.index' );
     }
 
     /**
@@ -148,7 +148,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( Category $category ) {
-        return view( 'categories.edit', compact( 'category' ) );
+        return view( 'backend.categories.edit', compact( 'category' ) );
     }
 
     /**
