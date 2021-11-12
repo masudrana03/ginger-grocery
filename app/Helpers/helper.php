@@ -54,7 +54,7 @@ function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false )
  */
 function makeDirectory( $location ) {
     if ( !file_exists( $location ) ) {
-        mkdir( $location, 666, true );
+        mkdir( $location );
     }
 }
 

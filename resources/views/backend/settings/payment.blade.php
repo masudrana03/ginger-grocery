@@ -83,7 +83,7 @@
                                                 <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab"
                                                     data-toggle="pill" href="#v-pills-messages" role="tab"
                                                     aria-controls="v-pills-messages" aria-selected="false">
-                                                    <span class="font-weight-bold">Cash on Devivery</span></a>
+                                                    <span class="font-weight-bold">Cash on Delivery</span></a>
                                             </div>
                                         </div>
 
