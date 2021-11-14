@@ -13,6 +13,10 @@ class ProductUpdateRequest extends FormRequest
      */
     public function authorize()
     {
+        if ( !isShopManager( $this->store_id ) && !isAdmin() ) {
+            return false;
+        }
+
         return true;
     }
 

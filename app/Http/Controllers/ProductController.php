@@ -43,7 +43,12 @@ class ProductController extends Controller
             9 => 'id',
         ];
 
-        $totalData = Product::count();
+        $product = Product::query();
+        if ( !isAdmin() ) {
+            $product = $product->where( 'store_id', auth()->user()->store_id );
+        }
+
+        $totalData = $product->count();
 
         $totalFiltered = $totalData;
 
@@ -53,21 +58,21 @@ class ProductController extends Controller
         $dir   = $request->input( 'order.0.dir' );
 
         if ( empty( $request->input( 'search.value' )) ) {
-            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset( $start )
+            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
                 ->get();
         } else {
             $search = $request->input( 'search.value' );
 
-            $products = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
+            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
                 ->orWhere( 'name', 'LIKE', "%{$search}%" )
                 ->offset( $start )
                 ->limit( $limit )
                 ->orderBy( $order, $dir )
                 ->get();
 
-            $totalFiltered = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
+            $totalFiltered = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
                 ->orWhere( 'name', 'LIKE', "%{$search}%" )
                 ->count();
         }
@@ -121,7 +126,7 @@ class ProductController extends Controller
         $brands     = Brand::all();
         $categories = Category::all();
         $units      = Unit::all();
-        $stores     = Store::all();
+        $stores     = isAdmin() ? Store::all() : [auth()->user()->store];
         $currencies = Currency::all();
         $types      = Type::all();
         $nutritions = Nutrition::all();
@@ -137,6 +142,7 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
+
         $product            = $request->except('image', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
 
@@ -176,7 +182,7 @@ class ProductController extends Controller
         $brands     = Brand::all();
         $categories = Category::all();
         $units      = Unit::all();
-        $stores     = Store::all();
+        $stores     = isAdmin() ? Store::all() : [auth()->user()->store];
         $currencies = Currency::all();
         $types      = Type::all();
         $nutritions = Nutrition::all();
@@ -219,6 +225,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
+        if ( !isShopManager( $product->store_id ) && !isAdmin() ) {
+            return abort( 403 );
+        }
+        
         foreach ($product->images as $image) {
             $imageDirectory = 'assets/img/uploads/products/';
 

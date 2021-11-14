@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Store extends Model
-{
+class Store extends Model {
     use HasFactory, SoftDeletes;
 
     /**
@@ -18,6 +17,15 @@ class Store extends Model
     protected $fillable = [
         'name',
         'type',
-        'image'
+        'image',
     ];
+
+    /**
+     * Return the store's manager
+     * 
+     * @return Relationship
+     */
+    public function user() {
+        return $this->hasOne( User::class )->withDefault();
+    }
 }

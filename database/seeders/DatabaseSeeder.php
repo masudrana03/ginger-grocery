@@ -5,21 +5,19 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
     /**
      * Seed the application's database.
      *
      * @return void
      */
-    public function run()
-    {
-        // \App\Models\User::factory(10)->create();
-        Artisan::call('cache:clear');
+    public function run() {
+        Artisan::call( 'cache:clear' );
 
-        $this->call([
+        $this->call( [
             SettingSeeder::class,
             PaymentMethodSeeder::class,
+            StoreSeeder::class,
             UserSeeder::class,
             BannerSeeder::class,
             BrandSeeder::class,
@@ -27,13 +25,12 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             NutritionSeeder::class,
             CurrencySeeder::class,
-            StoreSeeder::class,
             ProductSeeder::class,
             OrderStatusSeeder::class,
             EmailTemplateSeeder::class,
             ShippingServiceSeeder::class,
             TaxSeeder::class,
             PointSeeder::class,
-        ]);
+        ] );
     }
 }
