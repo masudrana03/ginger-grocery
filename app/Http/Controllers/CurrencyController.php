@@ -61,8 +61,8 @@ class CurrencyController extends Controller
 
         if (!empty($currencies)) {
             foreach ($currencies as $currency) {
-                $edit   = route('currencies.edit',$currency->id);
-                $delete = route('currencies.destroy', $currency->id);
+                $edit   = route('admin.currencies.edit',$currency->id);
+                $delete = route('admin.currencies.destroy', $currency->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $currency->id;
@@ -121,7 +121,7 @@ class CurrencyController extends Controller
 
         Alert::toast('Currency successfully created', 'success');
 
-        return redirect()->route('currencies.index');
+        return redirect()->route('admin.currencies.index');
     }
 
     /**
@@ -166,7 +166,7 @@ class CurrencyController extends Controller
 
         Alert::toast('Currency successfully updated', 'success');
 
-        return redirect()->route('currencies.index');
+        return redirect()->route('admin.currencies.index');
     }
 
     /**

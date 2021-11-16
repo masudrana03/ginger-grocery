@@ -69,9 +69,9 @@ class PromoController extends Controller
 
         if (!empty($promos)) {
             foreach ($promos as $promo) {
-                $updateStatus = route( 'promos.update_status', $promo->id );
-                $edit   =  route('promos.edit',$promo->id);
-                $delete =  route('promos.destroy', $promo->id);
+                $updateStatus = route('admin.promos.update_status', $promo->id );
+                $edit   =  route('admin.promos.edit',$promo->id);
+                $delete =  route('admin.promos.destroy', $promo->id);
                 $token  = csrf_token();
                 $class        = $promo->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
@@ -127,7 +127,7 @@ class PromoController extends Controller
 
         toast('Promo successfully created', 'success');
 
-        return redirect()->route('promos.index');
+        return redirect()->route('admin.promos.index');
     }
 
     /**
@@ -165,7 +165,7 @@ class PromoController extends Controller
 
         toast('Promo successfully updated', 'success');
 
-        return redirect()->route('promos.index');
+        return redirect()->route('admin.promos.index');
     }
 
     /**

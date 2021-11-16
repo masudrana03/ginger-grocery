@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
-use App\Models\EmailTemplate;
+use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class EmailTemplateController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +16,26 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-        $emailTemplates = EmailTemplate::all();
+        $user  = User::find(auth()->id());
 
-        return view('backend.settings.email_templates.index', compact('emailTemplates'));
+       return view('frontend.users.dashboard', compact('user'));
     }
+
+    public function getOrders(){
+
+        $user  = User::find(auth()->id());
+
+
+        $orders = Order::with('status')->where('user_id', $user->id)->get();
+
+        return view('frontend.users.order', compact('user', 'orders'));
+    }
+
+    public function getTrackOrders(){}
+
+    public function getAddress(){}
+
+    public function getProfile(){}
 
     /**
      * Show the form for creating a new resource.
@@ -43,10 +61,10 @@ class EmailTemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EmailTemplate  $emailTemplate
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EmailTemplate $emailTemplate)
+    public function show($id)
     {
         //
     }
@@ -54,43 +72,34 @@ class EmailTemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EmailTemplate  $emailTemplate
+     * @param  int  $id
+     * @param  \App\Models\Models\User
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmailTemplate $emailTemplate)
+    public function edit(User $user)
     {
-        return view('backend.settings.email_templates.edit', compact('emailTemplate'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmailTemplate  $emailTemplate
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmailTemplate $emailTemplate)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'type'    => 'required',
-            'subject' => 'required',
-            'body'    => 'required',
-        ]);
-
-        $emailTemplate->update($request->all());
-
-        toast( 'Email template successfully updated', 'success' );
-
-        return redirect()->route('admin.email_templates.index' );
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EmailTemplate  $emailTemplate
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmailTemplate $emailTemplate)
+    public function destroy($id)
     {
         //
     }

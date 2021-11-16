@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('stores.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.stores.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>

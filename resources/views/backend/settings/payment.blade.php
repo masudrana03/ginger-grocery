@@ -94,7 +94,7 @@
                                                     id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                                     <h4 class="mb-4">Stripe</h4>
                                                     <hr>
-                                                    <form action="{{ route('settings.payment.update') }}" method="POST">
+                                                    <form action="{{ route('admin.settings.payment.update') }}" method="POST">
                                                         @csrf
                                                         <div class="form-group">
                                                             <input type="hidden" name="provider" value="stripe">
@@ -153,7 +153,7 @@
                                                     role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                                     <h4 class="mb-4">paypal</h4>
                                                     <hr>
-                                                    <form action="{{ route('settings.payment.update') }}" method="POST">
+                                                    <form action="{{ route('admin.settings.payment.update') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="provider" value="paypal">
                                                         <div class="form-group">
@@ -212,7 +212,7 @@
                                                     role="tabpanel" aria-labelledby="v-pills-messages-tab">
                                                     <h4 class="mb-4">Cash on Delivery</h4>
                                                     <hr>
-                                                    <form action="{{ route('settings.payment.update') }}" method="POST">
+                                                    <form action="{{ route('admin.settings.payment.update') }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="provider" value="cash">
                                                         <div class="form-group">

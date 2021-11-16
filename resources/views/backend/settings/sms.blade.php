@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('settings.email.update') }}" method="POST">
+                            <form action="{{ route('admin.settings.email.update') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="company_name">SMS Driver</label>

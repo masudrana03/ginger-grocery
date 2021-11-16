@@ -65,8 +65,8 @@ class StoreController extends Controller
 
         if ( !empty( $stores ) ) {
             foreach ( $stores as $store ) {
-                $edit   = route( 'stores.edit', $store->id );
-                $delete = route( 'stores.destroy', $store->id );
+                $edit   = route('admin.stores.edit', $store->id );
+                $delete = route('admin.stores.destroy', $store->id );
                 $token  = csrf_token();
                 $img    = asset( 'assets/img/uploads/stores/thumbnail/' . $store->image );
 
@@ -131,7 +131,7 @@ class StoreController extends Controller
 
         toast('Store successfully created', 'success');
 
-        return redirect()->route('stores.index');
+        return redirect()->route('admin.stores.index');
     }
 
     /**
@@ -186,7 +186,7 @@ class StoreController extends Controller
 
         toast('Store successfully updated', 'success');
 
-        return redirect()->route('stores.index');
+        return redirect()->route('admin.stores.index');
     }
 
     /**

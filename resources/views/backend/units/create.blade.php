@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('units.store') }}" method="POST">
+                            <form action="{{ route('admin.units.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>

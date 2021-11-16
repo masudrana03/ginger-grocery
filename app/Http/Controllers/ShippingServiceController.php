@@ -67,9 +67,9 @@ class ShippingServiceController extends Controller
 
         if (!empty($shippingServices)) {
             foreach ($shippingServices as $shippingService) {
-                $updateStatus = route('shipping_services.update_status', $shippingService->id );
-                $edit         = route('shipping_services.edit', $shippingService->id);
-                $delete       = route('shipping_services.destroy', $shippingService->id);
+                $updateStatus = route('admin.shipping_services.update_status', $shippingService->id );
+                $edit         = route('admin.shipping_services.edit', $shippingService->id);
+                $delete       = route('admin.shipping_services.destroy', $shippingService->id);
                 $token        = csrf_token();
                 $class        = $shippingService->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
@@ -125,7 +125,7 @@ class ShippingServiceController extends Controller
 
         toast( 'Shipping service successfully created', 'success' );
 
-        return redirect()->route( 'shipping_services.index' );
+        return redirect()->route('admin.shipping_services.index' );
     }
 
     /**
@@ -165,7 +165,7 @@ class ShippingServiceController extends Controller
 
         toast( 'Shipping service successfully updated', 'success' );
 
-        return redirect()->route( 'shipping_services.index' );
+        return redirect()->route('admin.shipping_services.index' );
     }
 
     /**

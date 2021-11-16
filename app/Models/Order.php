@@ -54,6 +54,24 @@ class Order extends Model
         return $this->hasMany(OrderDetails::class);
     }
 
+    /**
+     * Get the order details associated with the product.
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function shipping()
+    {
+        return $this->belongsTo(Address::class, 'shipping_id')->where('type', 1);
+    }
+
+    /**
+     * Get the order details associated with the product.
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function billing()
+    {
+        return $this->belongsTo(Address::class, 'billing_id')->where('type', 2);
+    }
+
 
     public function getPaymentStatusAttribute()
     {

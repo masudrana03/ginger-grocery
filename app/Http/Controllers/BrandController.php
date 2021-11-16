@@ -64,8 +64,8 @@ class BrandController extends Controller
 
         if (!empty($brands)) {
             foreach ($brands as $brand) {
-                $edit   =  route('brands.edit',$brand->id);
-                $delete =  route('brands.destroy', $brand->id);
+                $edit   =  route('admin.brands.edit', $brand->id);
+                $delete =  route('admin.brands.destroy', $brand->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $brand->id;
@@ -121,7 +121,7 @@ class BrandController extends Controller
 
         Alert::toast('Brand successfully created', 'success');
 
-        return redirect()->route('brands.index');
+        return redirect()->route('admin.brands.index');
     }
 
     /**
@@ -164,7 +164,7 @@ class BrandController extends Controller
 
         Alert::toast('Brand successfully updated', 'success');
 
-        return redirect()->route('brands.index');
+        return redirect()->route('admin.brands.index');
     }
 
     /**

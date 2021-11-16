@@ -29,7 +29,7 @@
                                     <h3 class="m-0">Users</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('users.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.users.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allusers') }}",
+                     "url": "{{ route('admin.allusers') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
