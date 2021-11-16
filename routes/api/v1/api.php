@@ -100,6 +100,7 @@ Route::get('type', [TypeController::class, 'getTypes']);
 Route::get('product', [ProductController::class, 'getProducts']);
 Route::get('product/{id}', [ProductController::class, 'productDetails']);
 Route::get('product-search', [ProductController::class, 'searchProduct']);
+Route::get('product-filter', [ProductController::class, 'filterProduct']);
 
 
 Route::get('promo', [PromoController::class, 'getPromos']);
