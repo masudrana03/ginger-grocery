@@ -99,6 +99,8 @@ Route::get('type', [TypeController::class, 'getTypes']);
 
 Route::get('product', [ProductController::class, 'getProducts']);
 Route::get('product/{id}', [ProductController::class, 'productDetails']);
+Route::get('product-search', [ProductController::class, 'searchProduct']);
+
 
 Route::get('promo', [PromoController::class, 'getPromos']);
 Route::get('promo/{id}', [PromoController::class, 'promoDetails']);
@@ -109,4 +111,3 @@ Route::post('order-rating', [OrderRatingController::class, 'addOrderRating']);
 
 Route::get('nutrition', [NutritionController::class, 'getNutritions']);
 Route::get('nutrition/{id}', [NutritionController::class, 'nutritionDetails']);
- 

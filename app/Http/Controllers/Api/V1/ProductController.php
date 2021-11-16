@@ -43,4 +43,36 @@ class ProductController extends Controller
 
         return ok( 'Product details retrived successfully', $product );
     }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request    $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchProduct(Request $request)
+    {
+        $query = Product::query();
+
+        if($search = $request->input('search')){
+            $query->where('name', 'LIKE', "%{$search}%");
+        }
+
+        $allSearch = $query->get()
+                           ->load(
+                                 'brand',
+                                 'category',
+                                 'unit',
+                                 'user:id,name',
+                                 'store',
+                                 'currency',
+                                 'types',
+                                 'nutritions',
+                                 'images');
+
+
+        return ok( 'Search product details successfully', $allSearch);
+    }
+
 }
