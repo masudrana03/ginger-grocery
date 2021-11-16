@@ -19,21 +19,21 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="dashboard-menu">
-                                <ul class="nav flex-column">
+                                <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('index') }}" ><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                        <a class="nav-link" href="{{ route('index') }}"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link active" href="{{ route('user.orders') }}"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active"  href="#orders"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                        <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#track-orders" ><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
+                                        <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#address" ><i class="fi-rs-marker mr-10"></i>My Address</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#account-detail"  a><i class="fi-rs-user mr-10"></i>Account details</a>
+                                        <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="page-login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
@@ -42,9 +42,8 @@
                             </div>
                         </div>
                         <div class="col-md-9">
-                            <div class="dashboard-content pl-50">
-
-                                <div>
+                            <div class="tab-content account dashboard-content pl-50">
+                                <div class="tab-pane fade active show" >
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="mb-0">Your Orders</h3>
@@ -88,3 +87,15 @@
 
 
 @endsection
+
+
+
+{{-- @foreach ($orders as $item )
+                                                        <tr>
+                                                            <td>#{{ $item->invoice_id }}</td>
+                                                            <td>{{ $item->created_at->format('F j, Y')}}</td>
+                                                            <td>{{ $item->status->name}}</td>
+                                                            <td>${{ $item->total }}</td>
+                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                        </tr>
+                                                        @endforeach --}}

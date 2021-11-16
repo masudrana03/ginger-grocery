@@ -16,7 +16,7 @@
                                         <h5 class="modal-title text_white">Sign In</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('admin.login') }}">
+                                        <form method="POST" action="{{ route('login') }}">
                                             @csrf
                                             <div class="form-group">
                                                 {{-- <input type="text" class="form-control" placeholder="Enter your email"> --}}
@@ -48,12 +48,12 @@
                                             </div>
 
                                             <button type="submit" class="btn_1 full_width text-center">Log in</button>
-                                            <p>Need an account? <a  href="{{ route('admin.register') }}"> Sign Up</a></p>
+                                            <p>Need an account? <a  href="{{ route('register') }}"> Sign Up</a></p>
                                             <div class="text-center">
                                                 {{-- <a href="#" data-toggle="modal" data-target="#forgot_password"
                                                     data-dismiss="modal" class="pass_forget_btn">Forget Password?</a> --}}
                                                     @if (Route::has('password.request'))
-                                                        <a class="btn btn-link pass_forget_btn" href="{{ route('admin.password.request') }}">
+                                                        <a class="btn btn-link pass_forget_btn" href="{{ route('password.request') }}">
                                                             {{ __('Forgot Your Password?') }}
                                                         </a>
                                                     @endif

@@ -373,12 +373,12 @@
                                     <div class="profile_info_details">
                                         <a href="{{ route('admin.user.profile') }}">My Profile </a>
                                         <a href="{{ route('admin.user.change_password') }}">Change Password</a>
-                                        <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Log Out') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             class="d-none">
                                             @csrf
                                         </form>

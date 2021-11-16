@@ -25,12 +25,11 @@ use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\TaxController;
 
 Route::get('/', function () {
-    return view('backend.auth.login');
+    return view('auth.login');
 });
 
 
 Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
-    Auth::routes();
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -98,4 +97,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
     Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
     Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+
+    Auth::routes();
+
 

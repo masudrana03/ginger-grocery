@@ -18,9 +18,17 @@ class OrderController extends Controller
      *
      */
     public function orderList($userId){
+
         $userOrders = Order::where('user_id', $userId)->get();
 
-        return ok('User order list retrive successfully', $userOrders);
+        $userAllOrders = $userOrders->load(
+                                            'user:id,name',
+                                            'store',
+                                            'shipping',
+                                            'billing'
+                                           );
+
+        return ok('User order list retrive successfully', $userAllOrders);
     }
 
     /**
@@ -29,9 +37,28 @@ class OrderController extends Controller
      *
      */
     public function orderDetails($orderId){
+
         $orderDetails = OrderDetails::where('order_id', $orderId)->get();
 
-        return ok('Order details retrive successfully', $orderDetails);
+        $userOrderDetails = $orderDetails->load(
+                                                'order',
+                                                'order.user:id,name',
+                                                'order.store',
+                                                'order.shipping',
+                                                'order.billing',
+                                                'product',
+                                                'product.brand',
+                                                'product.category',
+                                                'product.unit',
+                                                'product.user:id,name',
+                                                'product.store',
+                                                'product.currency',
+                                                'product.types',
+                                                'product.nutritions',
+                                                'product.images'
+                                                );
+
+        return ok('Order details retrive successfully', $userOrderDetails);
 
     }
 }
