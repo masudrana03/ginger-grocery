@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Exception;
-use App\Models\Tax;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Point;
 use App\Models\Promo;
+use App\Models\UserPoint;
 use App\Models\OrderStatus;
 use Illuminate\Support\Str;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
-use App\Models\PaymentMethod;
 use App\Components\Email\Email;
-use App\Models\ShippingService;
 use Illuminate\Support\Facades\DB;
 use App\Components\Payment\Payment;
 use App\Http\Controllers\Controller;
@@ -42,7 +41,7 @@ class CheckoutController extends Controller
             $invoiceId = $this->createOrder($cart, $payment['payment_status'], $request->billing_id, $request->shipping_id);
 
             // give points if match any condition
-            $this->givePoints($cart);
+            $this->givePointsToCustomer($cart);
 
             // Send order confirmation email
             $this->sendOrderConfirmationEmail($invoiceId);
@@ -74,7 +73,9 @@ class CheckoutController extends Controller
 
             $calculatedPrice = priceCalculator($cart);
 
-            $this->updatePromo($cart->promo_id);
+            if ($cart->promo_id) {
+                $this->updatePromo($cart->promo_id);
+            }
 
             $order                  = new Order();
             $order->invoice_id      = Str::random(10);
@@ -122,6 +123,11 @@ class CheckoutController extends Controller
         $promo->update(['limit' => $promo->limit - 1, 'used' => $promo->limit + 1]);
     }
 
+    /**
+     * Send order cnfirmation email
+     *
+     * @param string $invoiceId
+     */
     public function sendOrderConfirmationEmail($invoiceId)
     {
         $emailTemplate = EmailTemplate::whereType('Order')->first();
@@ -139,12 +145,26 @@ class CheckoutController extends Controller
         (new Email())->handle($emailDetails);
     }
 
-    public function givePoints($cart)
+    /**
+     * give points to customer
+     *
+     * @param Cart $cart
+     */
+    public function givePointsToCustomer($cart)
     {
-        // $totalPurchase = $cart->products->sum('price');
+        $totalPurchase = $cart->products->sum('price');
 
-        // $totalPurchase;
-            
-        
+        $points = Point::where('points', '<=', $totalPurchase)->active()->orderByDesc('points', 'desc')->first();
+
+        if (! $points) {
+            return;
+        }
+
+        UserPoint::create([
+            'user_id' => auth()->id(),
+            'points'  => $points->points
+        ]);
+
+        // We can send notification after geting points
     }
 }

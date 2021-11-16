@@ -14,11 +14,10 @@ class OrderController extends Controller
 {
     /**
      * Display a listing of the order by user id.
-     * @param  integer $userId
      *
      */
-    public function orderList($userId){
-        $userOrders = Order::where('user_id', $userId)->get();
+    public function orderList(){
+        $userOrders = Order::where('user_id', auth()->id())->get();
 
         return ok('User order list retrive successfully', $userOrders);
     }
@@ -32,6 +31,5 @@ class OrderController extends Controller
         $orderDetails = OrderDetails::where('order_id', $orderId)->get();
 
         return ok('Order details retrive successfully', $orderDetails);
-
     }
 }

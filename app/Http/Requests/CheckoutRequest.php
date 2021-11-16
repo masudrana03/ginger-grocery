@@ -24,7 +24,9 @@ class CheckoutRequest extends FormRequest
     public function rules()
     {
         return [
-            'payment_method' => 'required'
+            'payment_method' => 'required',
+            'billing_id' => 'required',
+            'shipping_id' => 'required'
         ];
     }
 }
