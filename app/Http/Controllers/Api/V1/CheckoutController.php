@@ -32,7 +32,7 @@ class CheckoutController extends Controller
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
 
         if (!$cart) {
-            return api()->error('Your cart is empty, please add product in your cart');
+            return api()->notFound('Your cart is empty, please add product in your cart');
         }
 
         $payment = (new Payment())->handle($request);
@@ -109,7 +109,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Update promo 
+     * Update promo
      *
      * @param integer $id
      */

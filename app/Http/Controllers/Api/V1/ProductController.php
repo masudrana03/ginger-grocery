@@ -126,15 +126,17 @@ class ProductController extends Controller
 
         if ($request->categories)
         {
-            $productQuery->orWhereHas('category', function($query) use ($request) {
-                $query->where('name', $request->categories);
+            $categories = explode(",", $request->categories);
+            $productQuery->orWhereHas('category', function($query) use ($categories) {
+                $query->where('name', $categories);
             });
         }
 
         if ($request->brands)
         {
-            $productQuery->orWhereHas('brand', function($query) use ($request) {
-                $query->where('name', $request->brands);
+            $brands = explode(",", $request->brands);
+            $productQuery->orWhereHas('brand', function($query) use ($brands) {
+                $query->whereIn('name', $brands);
             });
         }
 
@@ -154,6 +156,10 @@ class ProductController extends Controller
 
         $filter =  $productQuery->get();
 
-        return ok( 'product filter successfully', $filter );
+        if (!$filter) {
+            return ok('No product found');
+        }
+
+        return ok( 'Product filter successfully', $filter );
     }
 }
