@@ -44,6 +44,19 @@ class BuyNowController extends Controller
         ]
         );
 
-        return ok('Product added successfully', $cart->load( 'products' ));
+        $allCart = $cart->load(
+                     'user:id,name',
+                     'promo',
+                     'products',
+                     'products.currency',
+                     'products.category',
+                     'products.brand',
+                     'products.unit',
+                     'products.nutritions',
+                     'products.images'
+                    );
+
+        return ok('Product added successfully', $allCart);
+
     }
 }

@@ -28,7 +28,7 @@
                                     <h3 class="m-0">Nutrition</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('nutrition.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.nutrition.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allnutrition') }}",
+                     "url": "{{ route('admin.allnutrition') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

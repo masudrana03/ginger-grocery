@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('stores.update', $store->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.stores.update', $store->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

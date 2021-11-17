@@ -1,3 +1,8 @@
 @extends('frontend.layouts.app')
-@section('title', 'index')
+@section('title', 'Home')
 
+@section('content')
+
+
+
+@endsection

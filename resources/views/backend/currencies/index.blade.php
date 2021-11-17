@@ -28,7 +28,7 @@
                                     <h3 class="m-0">Currencies</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('currencies.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.currencies.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
@@ -82,7 +82,7 @@
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ url('allcurrencies') }}",
+                     "url": "{{ route('admin.allcurrencies') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}

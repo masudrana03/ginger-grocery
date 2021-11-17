@@ -30,7 +30,7 @@
                                 <h3 class="m-0">Order Invoice</h3>
                             </div>
                             <div class="add_button ml-10">
-                                <a href="{{ route('orders.index') }}" class="btn_1">Back</a>
+                                <a href="{{ route('admin.orders.index') }}" class="btn_1">Back</a>
                                 &nbsp;&nbsp;<button onclick="printDiv('printableArea')" class="white_btn3">Print</button>
                             </div>
                         </div>

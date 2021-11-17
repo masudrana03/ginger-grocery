@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('types.update', $type->id) }}" method="POST">
+                            <form action="{{ route('admin.types.update', $type->id) }}" method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

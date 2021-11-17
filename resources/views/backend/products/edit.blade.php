@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">

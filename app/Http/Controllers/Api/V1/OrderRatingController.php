@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\OrderRating;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 
 class OrderRatingController extends Controller
 {
@@ -20,14 +21,20 @@ class OrderRatingController extends Controller
             'order_id' => 'required'
         ]);
 
-        $OrderRating = OrderRating::whereOrderId($request->order_id)->first();
+        $order = Order::find($request->order_id);
+
+        if (! $order) {
+            return api()->notFound( 'Order is not found');
+        }
+
+        $OrderRating = OrderRating::whereOrderId($order->id)->first();
 
         if ($OrderRating) {
             return api()->error( 'Your feedback already taken');
         }
 
-        OrderRating::create($request->all());
+        $OrderRating = OrderRating::create($request->all());
 
-        return api()->success( 'Thank You! Your feedback has been successfully submit');
+        return api()->success( 'Thank You! Your feedback has been successfully submit', $OrderRating);
     }
 }

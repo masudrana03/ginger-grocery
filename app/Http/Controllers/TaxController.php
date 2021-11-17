@@ -67,9 +67,9 @@ class TaxController extends Controller
 
         if (!empty($taxes)) {
             foreach ($taxes as $tax) {
-                $updateStatus = route('taxes.update_status', $tax->id );
-                $edit         = route('taxes.edit', $tax->id);
-                $delete       = route('taxes.destroy', $tax->id);
+                $updateStatus = route('admin.taxes.update_status', $tax->id );
+                $edit         = route('admin.taxes.edit', $tax->id);
+                $delete       = route('admin.taxes.destroy', $tax->id);
                 $token        = csrf_token();
                 $class        = $tax->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
@@ -125,7 +125,7 @@ class TaxController extends Controller
 
         toast( 'Tax successfully created', 'success' );
 
-        return redirect()->route( 'taxes.index' );
+        return redirect()->route('admin.taxes.index' );
     }
 
     /**
@@ -164,7 +164,7 @@ class TaxController extends Controller
 
         toast( 'Tax successfully updated', 'success' );
 
-        return redirect()->route( 'taxes.index' );
+        return redirect()->route('admin.taxes.index' );
     }
 
     /**

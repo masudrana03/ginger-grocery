@@ -10,11 +10,37 @@ class ProductController extends Controller
 {
     public function getProducts()
     {
-        return ok( 'Products list retrived successfully', Product::all() );
+
+        $product = Product::with(
+                                'brand',
+                                'category',
+                                'unit',
+                                'user:id,name',
+                                'store',
+                                'currency',
+                                'types',
+                                'nutritions',
+                                'images'
+                                )->get();
+
+        return ok( 'Products list retrived successfully', $product );
     }
 
     public function productDetails($id)
     {
-        return ok( 'Product details retrived successfully', Product::find($id) );
+
+        $product = Product::with(
+                                'brand',
+                                'category',
+                                'unit',
+                                'user:id,name',
+                                'store',
+                                'currency',
+                                'types',
+                                'nutritions',
+                                'images'
+                                )->find($id);
+
+        return ok( 'Product details retrived successfully', $product );
     }
 }

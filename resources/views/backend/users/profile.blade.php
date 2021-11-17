@@ -17,7 +17,7 @@
                         <div class="text-center profile-details">
                             <h4>{{ $user->name }}</h4><br>
                             {{-- <h6>Manager</h6> --}}
-                            <a href="{{ route('users.edit', auth()->id()) }}" type="button" class="btn btn-primary mb-3">Edit Profile</a>
+                            <a href="{{ route('admin.users.edit', auth()->id()) }}" type="button" class="btn btn-primary mb-3">Edit Profile</a>
                         </div>
                     </div>
                 </div>

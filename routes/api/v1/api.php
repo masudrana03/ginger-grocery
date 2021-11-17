@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\Api\V1\RegisterController;
 use App\Http\Controllers\Api\V1\NutritionController;
 use App\Http\Controllers\Api\V1\OrderRatingController;
+use App\Http\Controllers\Api\V1\SocialLoginController;
 use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
@@ -44,6 +45,8 @@ Route::get('test', [TestController::class, 'test']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
 
+Route::get('/login/{provider}', [SocialLoginController::class, 'redirectToProvider']);
+Route::get('/callback/{provider}', [SocialLoginController::class, 'handleProviderCallback']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('test-auth', [TestController::class, 'testAuth']);
@@ -66,7 +69,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('apply-promo', [CartController::class, 'applyPromo']);
     Route::post('checkout', [CheckoutController::class, 'checkout']);
 
-    Route::post('address', [AddressController::class, 'store']);
+    Route::get('get-addresses', [AddressController::class, 'getAddresses']);
+    Route::post('address', [AddressController::class, 'addressDetails']);
     Route::get('address-details/{id}', [AddressController::class, 'show']);
 
     Route::get('get-saved-products', [SavedProductController::class, 'getSavedProducts']);
@@ -74,6 +78,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('remove-saved-product', [SavedProductController::class, 'removeSavedProduct']);
 
     Route::get('payment-method', [PaymentMethodController::class, 'getPaymentMethod']);
+    Route::get('payment-method-details/{id}', [PaymentMethodController::class, 'paymentMethodDetails']);
 
     Route::post('buy-now', [BuyNowController::class, 'buyNow']);
 
@@ -81,13 +86,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('date-of-birth', [UserController::class, 'addDateOfBirth']);
 
+    Route::get('order-list', [OrderController::class, 'orderList']);
+    Route::get('order-details/{id}', [OrderController::class, 'OrderDetails']);
+    Route::post('order-rating', [OrderRatingController::class, 'addOrderRating']);
 });
 
 Route::get('category', [CategoryController::class, 'getCategories']);
 Route::get('category/{id}', [CategoryController::class, 'categoryDetails']);
 
-Route::get('banner',[BannerController::class, 'getBanners']);
-Route::get('banner/{id}',[BannerController::class,'bannerDetails']);
+Route::get('banner', [BannerController::class, 'getBanners']);
+Route::get('banner/{id}', [BannerController::class, 'bannerDetails']);
 
 Route::get('brand', [BrandController::class, 'getBrands']);
 Route::get('brand/{id}', [BrandController::class, 'brandDetails']);
@@ -103,10 +111,5 @@ Route::get('product/{id}', [ProductController::class, 'productDetails']);
 Route::get('promo', [PromoController::class, 'getPromos']);
 Route::get('promo/{id}', [PromoController::class, 'promoDetails']);
 
-Route::get('order-list/{id}', [OrderController::class, 'orderList']);
-Route::get('order-details/{id}', [OrderController::class, 'OrderDetails']);
-Route::post('order-rating', [OrderRatingController::class, 'addOrderRating']);
-
 Route::get('nutrition', [NutritionController::class, 'getNutritions']);
 Route::get('nutrition/{id}', [NutritionController::class, 'nutritionDetails']);
- 

@@ -64,8 +64,8 @@ class UnitController extends Controller
         {
             foreach ($units as $unit)
             {
-                $edit   =  route('units.edit',$unit->id);
-                $delete =  route('units.destroy', $unit->id);
+                $edit   =  route('admin.units.edit',$unit->id);
+                $delete =  route('admin.units.destroy', $unit->id);
                 $token  = csrf_token();
 
                 $nestedData['id']         = $unit->id;
@@ -121,7 +121,7 @@ class UnitController extends Controller
 
         Alert::toast('Unit successfully created', 'success');
 
-        return redirect()->route('units.index');
+        return redirect()->route('admin.units.index');
     }
 
     /**
@@ -164,7 +164,7 @@ class UnitController extends Controller
 
         Alert::toast('Unit successfully updated', 'success');
 
-        return redirect()->route('units.index');
+        return redirect()->route('admin.units.index');
     }
 
     /**

@@ -17,9 +17,9 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if (!$request->status) {
-            $url = url('all_orders');
+            $url = url('admin/all_orders');
         } else {
-            $url = url('all_orders?status=' . $request->status);
+            $url = url('admin/all_orders?status=' . $request->status);
         }
 
         return view('backend.orders.index', compact('url'));
@@ -89,15 +89,15 @@ class OrderController extends Controller
 
         if (!empty($orders)) {
             foreach ($orders as $order) {
-                $updatePaymentStatus = route('orders.updatePaymentStatus', $order->id );
-                $show                = route('orders.show', $order->id);
-                $edit                = route('orders.edit', $order->id);
-                $delete              = route('orders.destroy', $order->id);
+                $updatePaymentStatus = route('admin.orders.updatePaymentStatus', $order->id );
+                $show                = route('admin.orders.show', $order->id);
+                $edit                = route('admin.orders.edit', $order->id);
+                $delete              = route('admin.orders.destroy', $order->id);
                 $token               = csrf_token();
                 $status              = '';
 
                 foreach ($orderStatuses as $orderStatus) {
-                    $updateStatus = route( 'orders.update_status', [$order->id, $orderStatus->id] );
+                    $updateStatus = route('admin.orders.update_status', [$order->id, $orderStatus->id] );
                     $status .= "<a class='dropdown-item' <a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' onclick='ChangeOrderStatus({$orderStatus->id})' id='orderStatus-{$orderStatus->id}'>$orderStatus->name</a>";
                 }
 

@@ -26,6 +26,14 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class);
     }
+    /**
+     * Get the user associated with the cart.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function promo()
+    {
+        return $this->belongsTo(Promo::class);
+    }
 
     /**
      * Get the order details associated with the product.
@@ -43,4 +51,5 @@ class Cart extends Model
         return $this->belongsToMany(Product::class)
                     ->select('products.*', 'cart_product.quantity as quantity', 'cart_product.options as options');
     }
+
 }

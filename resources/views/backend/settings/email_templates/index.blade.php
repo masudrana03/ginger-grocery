@@ -45,7 +45,7 @@
                                         <tr>
                                             <td>{{ $emailTemplate->type }}</td>
                                             <td>{{ $emailTemplate->subject }}</td>
-                                            <td><a href="{{ route('email_templates.edit', $emailTemplate->id) }}"><i class="fas fa-edit"></i></a></td>
+                                            <td><a href="{{ route('admin.email_templates.edit', $emailTemplate->id) }}"><i class="fas fa-edit"></i></a></td>
                                         </tr>
                                         @empty
                                         <p class="text-center">No email template found!</p>

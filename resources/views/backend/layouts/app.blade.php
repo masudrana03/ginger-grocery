@@ -16,25 +16,25 @@
     <!-- themefy CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/themefy_icon/themify-icons.css') }}" />
     <!-- select2 CSS -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/niceselect/css/nice-select.css') }}" />
     <!-- owl carousel CSS -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/owl_carousel/css/owl.carousel.css') }}" />
     <!-- gijgo css -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/gijgo/gijgo.min.css') }}" />
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/font_awesome/css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/tagsinput/tagsinput.css') }}" />
 
     <!-- date picker -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/datepicker/date-picker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/datepicker/date-picker.css') }}" />
 
-     <link rel="stylesheet" href="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.css') }}" />
 
     <!-- scrollabe  -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/scroll/scrollable.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/scroll/scrollable.css') }}" />
     <!-- datatable CSS -->
-     <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/jquery.dataTables.min.css') }}" />
-     <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/responsive.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/jquery.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/responsive.dataTables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/datatable/css/buttons.dataTables.min.css') }}" />
     <!-- text editor css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/text_editor/summernote-bs4.css') }}" />
@@ -62,9 +62,9 @@
     <!-- sidebar  -->
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
-            <a class="large_logo" href="{{ route('dashboard') }}"><img src="{{ asset('assets/img/logo.png') }}"
-                    alt=""></a>
-            <a class="small_logo" href="{{ route('dashboard') }}"><img
+            <a class="large_logo" href="{{ route('admin.dashboard') }}"><img
+                    src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+            <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
                     src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
@@ -72,7 +72,7 @@
         </div>
         <ul id="sidebar_menu">
             <li>
-                <a href="{{ route('dashboard') }}" aria-expanded="false">
+                <a href="{{ route('admin.dashboard') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/dashboard.svg') }}" alt="">
                     </div>
@@ -82,7 +82,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('brands.index') }}" aria-expanded="false" class="active">
+                <a href="{{ route('admin.brands.index') }}" aria-expanded="false" class="active">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -92,7 +92,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('promos.index') }}" aria-expanded="false" class="active">
+                <a href="{{ route('admin.promos.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -102,7 +102,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('currencies.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -113,7 +113,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('users.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.users.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -124,7 +124,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('stores.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.stores.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('banners.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.banners.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -156,24 +156,24 @@
                 </a>
                 <ul class="mm-collapse mm-show" style="height: 5px;">
                     <li>
-                        <a href="{{ route('products.index') }}">Products</a>
+                        <a href="{{ route('admin.products.index') }}">Products</a>
                     </li>
                     <li>
-                        <a href="{{ route('categories.index') }}">Categories</a>
+                        <a href="{{ route('admin.categories.index') }}">Categories</a>
                     </li>
                     <li>
-                        <a href="{{ route('types.index') }}">Types</a>
+                        <a href="{{ route('admin.types.index') }}">Types</a>
                     </li>
                     <li>
-                        <a href="{{ route('units.index') }}">Units</a>
+                        <a href="{{ route('admin.units.index') }}">Units</a>
                     </li>
                     <li>
-                        <a href="{{ route('nutrition.index') }}">Nutritions</a>
+                        <a href="{{ route('admin.nutrition.index') }}">Nutritions</a>
                     </li>
                 </ul>
             </li>
             <li class="">
-                <a href="{{ route('carts.index') }}" aria-expanded="false">
+                <a href="{{ route('admin.carts.index') }}" aria-expanded="false">
                     <div class="nav_icon_small">
                         <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
                     </div>
@@ -193,10 +193,10 @@
                 </a>
                 <ul class="mm-collapse" style="height: 5px;">
                     <li class="">
-                        <a href="{{ route('order_statuses.index') }}">Order Status</a>
-                        <a href="{{ route('orders.index') }}">All Orders</a>
+                        <a href="{{ route('admin.order_statuses.index') }}">Order Status</a>
+                        <a href="{{ route('admin.orders.index') }}">All Orders</a>
                         @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-                            <a href="{{ url('orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+                            <a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
                                 Orders</a>
                         @endforeach
                     </li>
@@ -211,15 +211,14 @@
                         <span>Settings</span>
                     </div>
                 </a>
-                <ul class="mm-collapse" style="height: 5px;">
+                <ul style="height: 5px;">
                     <li class="">
-                        <a href="{{ route('settings.general') }}">General Settings</a>
-                        <a href="{{ route('settings.email') }}">Email Settings</a>
-                        <a href="{{ route('email_templates.index') }}">Email Templates</a>
-                        <a href="{{ route('settings.payment_gateway') }}">Payment Gateway</a>
-                        <a href="{{ route('shipping_services.index') }}">Shipping Service</a>
-                        <a href="{{ route('taxes.index') }}">Tax</a>
-                        <a href="{{ route('points.index') }}">Loyalty Cards</a>
+                        <a href="{{ route('admin.settings.general') }}">General Settings</a>
+                        <a href="{{ route('admin.settings.email') }}">Email Settings</a>
+                        <a href="{{ route('admin.email_templates.index') }}">Email Templates</a>
+                        <a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a>
+                        <a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a>
+                        <a href="{{ route('admin.taxes.index') }}">Tax</a>
                     </li>
                 </ul>
             </li>
@@ -244,7 +243,7 @@
 
                         <div class="header_right d-flex justify-content-between align-items-center">
                             <div class="header_notification_warp d-flex align-items-center">
-                                <li>
+                                {{-- <li>
                                     <div class="serach_button">
                                         <i class="ti-search"></i>
                                         <div class="serach_field-area d-flex align-items-center">
@@ -260,7 +259,7 @@
                                             <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a class="bell_notification_clicker" href="#"> <img
                                             src="{{ asset('assets/img/icon/bell.svg') }}" alt="">
@@ -372,8 +371,8 @@
                                         <h5>{{ auth()->user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="{{ route('user.profile') }}">My Profile </a>
-                                        <a href="{{ route('user.change_password') }}">Change Password</a>
+                                        <a href="{{ route('admin.user.profile') }}">My Profile </a>
+                                        <a href="{{ route('admin.user.change_password') }}">Change Password</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Log Out') }}
@@ -552,19 +551,19 @@
     <!-- sidebar menu  -->
     <script src="{{ asset('assets/js/metisMenu.js') }}"></script>
     <!-- waypoints js -->
-     <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script>
     <!-- waypoints js -->
-     <script src="{{ asset('assets/vendors/chartlist/Chart.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/chartlist/Chart.min.js') }}"></script>
     <!-- counterup js -->
-     <script src="{{ asset('assets/vendors/count_up/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/count_up/jquery.counterup.min.js') }}"></script>
 
     <!-- nice select -->
-     <script src="{{ asset('assets/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script>
     <!-- owl carousel -->
-     <script src="{{ asset('assets/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script>
 
     <!-- responsive table -->
-     <script src="{{ asset('assets/vendors/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatable/js/buttons.flash.min.js') }}"></script>
@@ -575,37 +574,37 @@
     <script src="{{ asset('assets/vendors/datatable/js/buttons.print.min.js') }}"></script>
 
     <!-- datepicker  -->
-     <script src="{{ asset('assets/vendors/datepicker/datepicker.js') }}"></script>
+    <script src="{{ asset('assets/vendors/datepicker/datepicker.js') }}"></script>
     <script src="{{ asset('assets/vendors/datepicker/datepicker.en.js') }}"></script>
     <script src="{{ asset('assets/vendors/datepicker/datepicker.custom.js') }}"></script>
 
-     <script src="{{ asset('assets/js/chart.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/chartjs/roundedBar.min.js') }}"></script>
 
     <!-- progressbar js -->
-     <script src="{{ asset('assets/vendors/progressbar/jquery.barfiller.js') }}"></script>
+    <script src="{{ asset('assets/vendors/progressbar/jquery.barfiller.js') }}"></script>
     <!-- tag input -->
-     <script src="{{ asset('assets/vendors/tagsinput/tagsinput.js') }}"></script>
+    <script src="{{ asset('assets/vendors/tagsinput/tagsinput.js') }}"></script>
     <!-- text editor js -->
-     <script src="{{ asset('assets/vendors/text_editor/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('assets/vendors/text_editor/summernote-bs4.js') }}"></script>
     <script src="{{ asset('assets/vendors/am_chart/amcharts.js') }}"></script>
 
     <!-- scrollabe  -->
-     <script src="{{ asset('assets/vendors/scroll/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/scroll/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/scroll/scrollable-custom.js') }}"></script>
 
     <!-- vector map  -->
-     <script src="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/vectormap-home/vectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/vectormap-home/vectormap-world-mill-en.js') }}"></script>
 
     <!-- apex chrat  -->
-     <script src="{{ asset('assets/vendors/apex_chart/apex-chart2.js') }}"></script>
+    <script src="{{ asset('assets/vendors/apex_chart/apex-chart2.js') }}"></script>
     <script src="{{ asset('assets/vendors/apex_chart/apex_dashboard.js') }}"></script>
 
     <script src="{{ asset('assets/vendors/echart/echarts.min.js') }}"></script>
 
 
-     <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
+    <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/charts.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/animated.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/kelly.js') }}"></script>
