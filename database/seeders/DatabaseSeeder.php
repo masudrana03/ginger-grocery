@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        Artisan::call('cache:clear');
 
         $this->call([
             SettingSeeder::class,
@@ -31,6 +33,7 @@ class DatabaseSeeder extends Seeder
             EmailTemplateSeeder::class,
             ShippingServiceSeeder::class,
             TaxSeeder::class,
+            PointSeeder::class,
         ]);
     }
 }

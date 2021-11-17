@@ -12,6 +12,13 @@ class PaymentMethodController extends Controller
      * Display a listing of the Payment method.
      */
     public function getPaymentMethod() {
-        return ok( 'Payment Method list retrived successfully', PaymentMethod::all() );
+        return ok('Payment Method list retrived successfully', PaymentMethod::all());
+    }
+
+    /**
+     * Display the specified payment method.
+     */
+    public function paymentMethodDetails($id) {
+        return ok('Payment method details retrived successfully', PaymentMethod::find($id));
     }
 }

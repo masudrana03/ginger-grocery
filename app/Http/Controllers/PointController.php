@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Point;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class PointController extends Controller
 {
@@ -14,7 +16,9 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        $points = Point::all();
+        
+        return view('backend.settings.loyalty_card.index', compact('points'));
     }
 
     /**
@@ -57,7 +61,7 @@ class PointController extends Controller
      */
     public function edit(Point $point)
     {
-        //
+        return view('backend.settings.loyalty_card.edit', compact('point'));
     }
 
     /**
@@ -69,7 +73,16 @@ class PointController extends Controller
      */
     public function update(Request $request, Point $point)
     {
-        //
+        $this->validate($request, [
+            'purchase_target' => 'required|int',
+            'points' => 'required|int'
+        ]);
+
+        $point->update($request->all());
+
+        toast('Product successfully updated', 'success');
+
+        return redirect()->route('points.index');
     }
 
     /**
@@ -81,5 +94,45 @@ class PointController extends Controller
     public function destroy(Point $point)
     {
         //
+    }
+
+    /**
+     * Update points status
+     *
+     * @param Banner $banner
+     * @return void
+     */
+    public function updateStatus(Point $point)
+    {
+        $point->update([
+            'status' => $point->status == 'Active' ? 'Inactive' : 'Active'
+        ]);
+
+        toast( 'Status successfully updated', 'success' );
+
+        return redirect()->back();
+    }
+
+    /**
+     * Update points settings
+     *
+     * @param Request $request
+     */
+    public function settingsUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'loyalty_points' => 'required',
+            'loyalty_points_value' => 'required'
+        ]);
+
+        foreach ($request->all() as $key => $value) {
+            Setting::where('key', $key)->update(['value' => $value]);
+        }
+
+        toast('Points settings successfully updated', 'success');
+
+        Artisan::call('cache:clear');
+
+        return back();
     }
 }

@@ -2,15 +2,17 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaxController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PointController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
@@ -22,7 +24,6 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\ShippingServiceController;
-use App\Http\Controllers\TaxController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -68,6 +69,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/shipping_services/{shipping_service}/update_status', [ShippingServiceController::class, 'updateStatus'])->name('shipping_services.update_status');
     Route::get('/allTaxes', [TaxController::class, 'allTaxes'])->name('allTaxes');
     Route::get('/taxes/{tax}/update_status', [TaxController::class, 'updateStatus'])->name('taxes.update_status');
+    Route::get('/points/{point}/update_status', [PointController::class, 'updateStatus'])->name('points.update_status');
+    Route::post('/points/settings/update', [PointController::class, 'settingsUpdate'])->name('points.settings.update');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -84,6 +87,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class);
     Route::resource('carts', CartController::class);
     Route::resource('email_templates', EmailTemplateController::class);
+    Route::resource('points', PointController::class);
     Route::resource('promos', PromoController::class);
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);

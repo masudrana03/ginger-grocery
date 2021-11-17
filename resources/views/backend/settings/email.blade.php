@@ -112,8 +112,8 @@
                                     <select name="encryption" class="form-control @error('encryption') is-invalid @enderror"
                                         aria-describedby="emailHelp" placeholder="Encryption"
                                         value="{{ old('encryption') ?? settings('encryption') }}">
-                                        <option value="SSL">SSL</option>
-                                        <option value="TLS">TLS</option>
+                                        <option value="TLS" {{ settings('encryption') == 'tls' ? 'selected' : ''  }}>TLS</option>
+                                        <option value="SSL" {{ settings('encryption') == 'ssl' ? 'selected' : ''  }}>SSL</option>
                                     </select>
                                     @error('encryption')
                                         <span class="invalid-feedback" role="alert">

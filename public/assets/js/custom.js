@@ -34,12 +34,22 @@ $( "#sidebar_menu" ).find( "a" ).removeClass("active");
 $( "#sidebar_menu" ).find( "li" ).removeClass("mm-active");
 $( "#sidebar_menu" ).find( "li ul" ).removeClass("mm-show");
 
-var current = window.location.pathname
+var current = window.location.href
 $("#sidebar_menu >li a").filter(function() {
 
+    // var str = "Kenya, Garden/ PFO";
+    // var newStr = str.split("/ ").slice(1).join(", ");
+    // console.log(newStr);
+
     var link = $(this).attr("href");
+    // console.log('start');
+    // console.log(current);
+    // console.log(link);
+
+    // console.log(link.split("/ ").slice(1).join(", "));
+    // console.log('end');
     if(link){
-        if (current.indexOf(link) != -1) {
+        if (current == link) {
             $(this).parents().parents().children('ul.mm-collapse').addClass('mm-show').closest('li').addClass('mm-active');
             $(this).addClass('active');
             return false;
