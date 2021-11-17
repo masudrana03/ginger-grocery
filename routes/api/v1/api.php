@@ -66,11 +66,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('apply-promo', [CartController::class, 'applyPromo']);
     Route::post('checkout', [CheckoutController::class, 'checkout']);
 
+    Route::post('add-address', [AddressController::class, 'store']);
     Route::get('get-addresses', [AddressController::class, 'getAddresses']);
-    Route::post('address', [AddressController::class, 'addressDetails']);
-    Route::get('address-details/{id}', [AddressController::class, 'show']);
+    Route::get('address-details/{id}', [AddressController::class, 'addressDetails']);
 
-    Route::get('get-saved-products', [SavedProductController::class, 'getSavedProducts']);
+    Route::get('get-saved-product', [SavedProductController::class, 'getSavedProducts']);
     Route::post('add-saved-product', [SavedProductController::class, 'addSavedProduct']);
     Route::post('remove-saved-product', [SavedProductController::class, 'removeSavedProduct']);
 

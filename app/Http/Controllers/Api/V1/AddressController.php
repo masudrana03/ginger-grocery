@@ -26,7 +26,7 @@ class AddressController extends Controller
     public function store(Request $request)
     {
 
-        $validation = validateData( [
+        $request->validate( [
             'name'     => 'required',
             'email'    => 'required',
             'phone'    => 'required',

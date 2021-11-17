@@ -71,7 +71,18 @@ class User extends Authenticatable
 
     public function savedProducts()
     {
-        return $this->belongsToMany(Product::class, 'saved_product')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'saved_product')
+                    ->with(
+                          'brand',
+                          'category',
+                          'unit',
+                          'user:id,name',
+                          'store',
+                          'currency',
+                          'types',
+                          'nutritions',
+                          'images')
+                    ->withTimestamps();
     }
 
     /**
