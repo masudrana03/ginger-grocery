@@ -29,6 +29,19 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/install', function () {
+    return view('auth.login');
+});
+
+Route::get('/getCode', function () {
+    return ['get code'];
+});
+
+Route::post('/valideCodeCheck', function () {
+    return request()->all();
+});
+
+
 
 Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
