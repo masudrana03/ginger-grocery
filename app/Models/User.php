@@ -25,6 +25,8 @@ class User extends Authenticatable {
         'referral_token',
         'referrer_id',
         'date_of_birth',
+        'type',
+        'store_id',
     ];
 
     /**

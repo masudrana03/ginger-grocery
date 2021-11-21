@@ -103,7 +103,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        $stores = \App\Models\Store::all();
+        return view('backend.users.create', compact('stores'));
     }
 
     /**
@@ -154,6 +155,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
+        $request['password'] = Hash::make($request->password);
         $user->update($request->all());
 
         toast('User successfully updated', 'success');
