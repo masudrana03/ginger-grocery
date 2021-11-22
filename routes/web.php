@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/cache-clear', function () {
+Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('view:clear');
