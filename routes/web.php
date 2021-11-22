@@ -95,13 +95,19 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
 
 //Frontend Route
-    Route::get('/test', [HomeController::class, 'index'])->name('index');
-    Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
-    Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
-    Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
-    Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
-    Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+Route::get('/privacy-policy', function () {
+    return 'This is privacy policy page';
+});
 
-    Auth::routes();
+Route::get('/terms', function () {
+    return 'This is terms page';
+});
 
+Route::get('/test', [HomeController::class, 'index'])->name('index');
+Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
+Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
+Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
+Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
 
+Auth::routes();
