@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaxController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
@@ -22,11 +23,20 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\ShippingServiceController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::get('/cache-clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    
+    return 'Cache is cleared';
 });
 
 
