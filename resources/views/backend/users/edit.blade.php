@@ -45,6 +45,33 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="type">Role</label>
+                                    <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                        <option value="3" {{ $user->type == 3 ? 'selected' : '' }}>User</option>
+                                        <option value="2" {{ $user->type == 2 ? 'selected' : '' }}>Store Manager</option>
+                                        <option value="1" {{ $user->type == 1 ? 'selected' : '' }}>Admin</option>
+                                    </select>
+                                    @error('type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_id">Store (if store manager)</label>
+                                    <select name="store_id" id="store_id" class="form-control @error('store_id') is-invalid @enderror">
+                                        <option value="">Select Store</option>
+                                        @foreach ($stores as $store)
+                                            <option value="{{ $store->id }}" {{ $user->store_id == $store->id ? 'selected' : '' }}>{{ $store->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('store_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>

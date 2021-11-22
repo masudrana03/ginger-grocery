@@ -5,20 +5,18 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BannerSeeder extends Seeder
-{
+class BannerSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
-        DB::table('banners')->insert([
-            'title' => 'Banner title',
-            'body' => 'This is banner body',
-            'image' => 'default.png',
+    public function run() {
+        DB::table( 'banners' )->insert( [
+            'title'      => 'Banner title',
+            'body'       => 'This is banner body',
+            'image'      => 'default.png',
             'created_at' => now(),
-        ]);
+        ] );
     }
 }

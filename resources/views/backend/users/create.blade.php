@@ -57,6 +57,33 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="type">Role</label>
+                                    <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                        <option value="3">User</option>
+                                        <option value="2">Store Manager</option>
+                                        <option value="1">Admin</option>
+                                    </select>
+                                    @error('type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="store_id">Store (if store manager)</label>
+                                    <select name="store_id" id="store_id" class="form-control @error('store_id') is-invalid @enderror">
+                                        <option value="">Select Store</option>
+                                        @foreach ($stores as $store)
+                                            <option value="{{ $store->id }}">{{ $store->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('store_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>
