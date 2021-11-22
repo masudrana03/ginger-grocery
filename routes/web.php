@@ -34,7 +34,7 @@ Route::get('/install', function () {
 });
 
 Route::get('/getCode', function () {
-    return ['get code'];
+    return view('install');
 });
 
 Route::post('/valideCodeCheck', function () {

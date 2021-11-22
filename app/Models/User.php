@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable, Billable, SoftDeletes;
 
     /**
@@ -25,7 +24,9 @@ class User extends Authenticatable
         'password',
         'referral_token',
         'referrer_id',
-        'date_of_birth'
+        'date_of_birth',
+        'type',
+        'store_id',
     ];
 
     /**
@@ -51,8 +52,7 @@ class User extends Authenticatable
      * @param  Request $request
      * @return User    $user
      */
-    public function updateProfile($request)
-    {
+    public function updateProfile( $request ) {
         $this->name  = $request->name;
         $this->phone = $request->phone ?: $this->phone;
         $this->save();
@@ -64,11 +64,12 @@ class User extends Authenticatable
      * Get the cart associated with the uesr.
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
-    public function cart()
-    {
-        return $this->hasOne(Cart::class);
+    public function cart() {
+        return $this->hasOne( Cart::class );
     }
-
+    /**
+     * @return mixed
+     */
     public function savedProducts()
     {
         return $this->belongsToMany(Product::class, 'saved_product')
@@ -90,9 +91,8 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function referrer()
-    {
-        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    public function referrer() {
+        return $this->belongsTo( User::class, 'referrer_id', 'id' );
     }
 
     /**
@@ -100,8 +100,16 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function referrals()
-    {
-        return $this->hasMany(User::class, 'referrer_id', 'id');
+    public function referrals() {
+        return $this->hasMany( User::class, 'referrer_id', 'id' );
+    }
+
+    /**
+     * Returns Store model associated with the user.
+     *
+     * @return Relationship
+     */
+    public function store() {
+        return $this->belongsTo( Store::class )->withDefault();
     }
 }

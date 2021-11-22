@@ -41,7 +41,7 @@ function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false )
     makeDirectory( $thumbnailDirectory );
 
     Image::make( $image )->save( $location );
-    $thumbnailLocation && Image::make( $image )->fit(200)->resize( 200, 200, function ( $constraint ) {
+    $thumbnailLocation && Image::make( $image )->fit( 200 )->resize( 200, 200, function ( $constraint ) {
         $constraint->aspectRatio();
     } )->save( $thumbnailLocation );
 }
@@ -82,6 +82,9 @@ function validateData( $rules ) {
 function settings( $key ) {
     /**
      * @var mixed
+     */
+    /**
+     * @param $shop_id
      */
     static $settings;
 
@@ -141,4 +144,21 @@ function priceCalculator( $cart ) {
     $total = $subtotal - $discount - $adjust + $shipping + taxCalculator( $subtotal, $tax );
 
     return ['subtotal' => $subtotal, 'discount' => $discount, 'total' => $total, 'adjust' => $adjust];
+}
+
+/**
+ * Check if the current loggedin user is admin
+ * @return  bool
+ */
+function isAdmin() {
+    return auth()->user()->type == 1;
+}
+
+/**
+ * Check if the current loggedin user is the shop manager
+ * 
+ * @return  bool
+ */
+function isShopManager( $store_id ) {
+    return auth()->user()->type == 2 && auth()->user()->store_id == $store_id;
 }
