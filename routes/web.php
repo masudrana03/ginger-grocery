@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaxController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
@@ -22,8 +23,8 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\ShippingServiceController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -41,7 +42,14 @@ Route::post('/valideCodeCheck', function () {
     return request()->all();
 });
 
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
 
+    return 'Cache is cleared';
+});
 
 Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
@@ -108,13 +116,19 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
 
 //Frontend Route
-    Route::get('/test', [HomeController::class, 'index'])->name('index');
-    Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
-    Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
-    Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
-    Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
-    Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+Route::get('/privacy-policy', function () {
+    return 'This is privacy policy page';
+});
 
-    Auth::routes();
+Route::get('/terms', function () {
+    return 'This is terms page';
+});
 
+Route::get('/test', [HomeController::class, 'index'])->name('index');
+Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
+Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
+Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
+Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
 
+Auth::routes();
