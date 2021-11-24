@@ -25,22 +25,31 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+use App\Http\Controllers\InstallController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/install', function () {
+Route::get('/installcheck', function () {
     return view('auth.login');
 });
 
-Route::get('/getCode', function () {
-    return view('install');
-});
+// Route::get('/getCode', function () {
+//     return view('install');
+// });
 
-Route::post('/valideCodeCheck', function () {
-    return request()->all();
-});
+// Route::get('/getCode', function () {
+//    [ InstallController::class, 'getCode'];
+// })->middleware('allowInstall');
+
+Route::get('/getCode', [InstallController::class, 'getCode'])->name('getCode')->middleware('allowInstall');
+
+// Route::post('/valideCodeCheck', function () {
+//     // return request()->all();
+// });
+
+Route::post('/valideCodeCheck', [InstallController::class, 'valideCodeCheck'])->name('valideCodeCheck');
 
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
