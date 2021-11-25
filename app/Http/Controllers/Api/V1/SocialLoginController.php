@@ -23,7 +23,8 @@ class SocialLoginController extends Controller
     public function redirectToProvider($provider)
     {
         // Redirect the user to desire auth provider
-        return Socialite::driver($provider)->stateless()->redirect();
+       // return Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+        return Socialite::with($provider)->stateless()->redirect()();
     }
 
     /**
@@ -40,7 +41,9 @@ class SocialLoginController extends Controller
         try {
            // $user = Socialite::driver($name)->user();
             
-            $user = Socialite::driver($name)->stateless()->user();
+           // $user = Socialite::driver($name)->stateless()->user();
+
+           $user = Socialite::with('facebook')->stateless()->user();
 
             return $user;
 
@@ -56,6 +59,8 @@ class SocialLoginController extends Controller
 
         // Login the user
        // Auth::guard('web')->loginUsingId($user->id);
+
+       // register this user
 
     }
 
