@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/morris/morris.css') }}">
     <!-- metarial icon css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/material_icon/material-icons.css') }}" />
+    <!-- map css  -->
+    <link rel="stylesheet" href="{{ asset('assets/vendors/mapJs/mapsjs-ui.css') }}" />
 
     <!-- menu css  -->
     <link rel="stylesheet" href="{{ asset('assets/css/metisMenu.css') }}">
@@ -452,6 +454,12 @@
     <script src="{{ asset('assets/vendors/apex_chart/apex_dashboard.js') }}"></script>
 
     <script src="{{ asset('assets/vendors/echart/echarts.min.js') }}"></script>
+
+    <!-- map js  -->
+    <script src="{{ asset('assets/vendors/mapJs/mapsjs-core.js') }}"></script>
+    <script src="{{ asset('assets/vendors/mapJs/mapsjs_service.js') }}"></script>
+    <script src="{{ asset('assets/vendors/mapJs/mapsjs-ui.js') }}"></script>
+    <script src="{{ asset('assets/vendors/mapJs/mapsjs-mapevents.js') }}"></script>
 
 
     <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>

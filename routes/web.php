@@ -26,6 +26,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\InstallController;
+use App\Http\Controllers\ZoneController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -101,6 +102,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/taxes/{tax}/update_status', [TaxController::class, 'updateStatus'])->name('taxes.update_status');
     Route::get('/points/{point}/update_status', [PointController::class, 'updateStatus'])->name('points.update_status');
     Route::post('/points/settings/update', [PointController::class, 'settingsUpdate'])->name('points.settings.update');
+
+    Route::get('/zone', [ZoneController::class, 'index'])->name('zone.index');
 
     // Resource routes
     Route::resource('brands', BrandController::class);

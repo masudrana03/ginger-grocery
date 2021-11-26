@@ -8,7 +8,7 @@
         </div>
     </a>
 </li>
-@if (isAdmin())    
+@if (isAdmin())
 <li class="">
     <a href="{{ route('admin.brands.index') }}" aria-expanded="false" class="active">
         <div class="nav_icon_small">
@@ -67,7 +67,7 @@
 </li>
 
 @if (isAdmin())
-    
+
 <li>
     <a href="{{ route('admin.banners.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
@@ -118,6 +118,16 @@
     </a>
 </li>
 <li class="">
+    <a href="{{ route('admin.zone.index') }}" aria-expanded="false">
+        <div class="nav_icon_small">
+            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+        </div>
+        <div class="nav_title">
+            <span>Delivery Zone</span>
+        </div>
+    </a>
+</li>
+<li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
@@ -137,7 +147,7 @@
         </li>
     </ul>
 </li>
-@if (isAdmin())    
+@if (isAdmin())
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
@@ -159,3 +169,4 @@
     </ul>
 </li>
 @endif
+
