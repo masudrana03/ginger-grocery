@@ -57,9 +57,6 @@ class InstallController extends Controller
             catch (\Exception $ex) {
                 // Print the error so the user knows what's wrong
                 // echo $ex->getMessage();
-                // toast('demo test', 'error');
-                // Session::flash('message', 'This is a message!');
-                // Session::flash('alert-class', 'alert-danger');
 
                 return Redirect::back()->withErrors(['msg' => 'Invalid purchase code !']);
                 return redirect()->route('getCode');
