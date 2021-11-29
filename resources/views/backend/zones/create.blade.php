@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Create New Product')
+@section('title', 'Delivery Zone')
 
 @push('styles')
     <style>
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.zone.create') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>

@@ -13,7 +13,7 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        return view('backend.zones.create');
+        return view('backend.zones.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.zones.create');
     }
 
     /**

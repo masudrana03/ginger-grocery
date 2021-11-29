@@ -103,7 +103,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/points/{point}/update_status', [PointController::class, 'updateStatus'])->name('points.update_status');
     Route::post('/points/settings/update', [PointController::class, 'settingsUpdate'])->name('points.settings.update');
 
-    Route::get('/zone', [ZoneController::class, 'index'])->name('zone.index');
+    // Route::get('/zone', [ZoneController::class, 'index'])->name('zone.index');
+    // Route::get('/zone-add', [ZoneController::class, 'create'])->name('zone.create');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -124,6 +125,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('promos', PromoController::class);
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);
+    Route::resource('zone', ZoneController::class);
 });
 
 
