@@ -105,6 +105,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     // Route::get('/zone', [ZoneController::class, 'index'])->name('zone.index');
     // Route::get('/zone-add', [ZoneController::class, 'create'])->name('zone.create');
+    Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -125,7 +126,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('promos', PromoController::class);
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);
-    Route::resource('zone', ZoneController::class);
+    Route::resource('zones', ZoneController::class);
 });
 
 

@@ -156,9 +156,20 @@ function isAdmin() {
 
 /**
  * Check if the current loggedin user is the shop manager
- * 
+ *
  * @return  bool
  */
 function isShopManager( $store_id ) {
     return auth()->user()->type == 2 && auth()->user()->store_id == $store_id;
+}
+
+
+function format_coordiantes($coordinates)
+{
+    $data = [];
+    foreach($coordinates as $coord)
+    {
+        $data[] = (object)['lat'=>$coord->getlat(), 'lng'=>$coord->getlng()];
+    }
+    return $data;
 }
