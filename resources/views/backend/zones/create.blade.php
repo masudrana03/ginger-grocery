@@ -9,6 +9,9 @@
         .note-editable {
             height: 250px!important;
         }
+        #pac-input{
+            left: 320px !important;
+        }
 
     </style>
 @endpush
@@ -27,7 +30,7 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('admin.zone.create') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.zones.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -42,9 +45,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="coordinates">Coordinates<small style="font-size: 12px"> ( draw your zone area on the map )</small></label>
-                                    <textarea name="coordinates"
+                                    <textarea rows="5" name="coordinates"
                                         class="form-control @error('coordinates') is-invalid @enderror" name="coordinates"  id="coordinates"
-                                        aria-describedby="emailHelp" placeholder="coordinates" value="{{ old('coordinates') }}"></textarea>
+                                        aria-describedby="emailHelp" placeholder="coordinates" value="{{ old('coordinates') }}" >
+                                    </textarea>
                                     @error('coordinates')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,7 +65,7 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Create New Zone</h3>
+                                    <h3 class="m-0">New Zone Coordinates</h3>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +320,7 @@
     function set_all_zones()
     {
         $.get({
-            url: '{{ route('admin.zones.zoneCoordinates') }}',
+            url: '/',
             dataType: 'json',
             success: function (data) {
 

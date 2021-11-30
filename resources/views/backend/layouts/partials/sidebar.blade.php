@@ -118,7 +118,7 @@
     </a>
 </li>
 <li class="">
-    <a href="{{ route('admin.zone.index') }}" aria-expanded="false">
+    <a href="{{ route('admin.zones.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>

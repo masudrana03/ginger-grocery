@@ -28,14 +28,14 @@
                                     <h3 class="m-0">Create New Zone</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('admin.zone.create') }}" class="btn_1">Add New</a>
+                                    <a href="{{ route('admin.zones.create') }}" class="btn_1">Add New</a>
                                 </div>
                             </div>
 
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="zone">
+                                <table class="table" id="zones">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -43,6 +43,7 @@
                                             <th>Store</th>
                                             <th>Delivery Men</th>
                                             <th>Status</th>
+                                            <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -78,7 +79,7 @@
 
 <script>
     // Banner Status Change
-    function ChangePromoStatus(id) {
+    function ChangeZoneStatus(id) {
             Swal.fire({
                 title: 'Are you sure to change?',
                 icon: 'warning',
@@ -88,7 +89,7 @@
                 confirmButtonText: 'Yes, update it!'
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = $('#promoStatus-' + id).data('href');
+                    window.location.href = $('#zoneStatus-' + id).data('href');
                 }
             });
         }
@@ -96,22 +97,19 @@
 
 <script>
     $(document).ready(function () {
-        $('#promos').DataTable({
+        $('#zones').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ route('admin.allpromos') }}",
+                     "url": "{{ route('admin.allzones') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "title" },
-                { "data": "type" },
-                { "data": "code" },
-                { "data": "used" },
-                { "data": "limit" },
+                { "data": "name" },
+                { "data": "coordinates" },
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }

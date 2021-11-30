@@ -11,6 +11,25 @@ class Zone extends Model
     use HasFactory;
     use SpatialTrait;
 
+    protected $spatialFields = [
+        'name',
+        'coordinates'
+    ];
 
- 
+
+
+    public function getStatusAttribute()
+    {
+        return $this->attributes['status'] == 1 ? 'Active' : 'Inactive';
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value == 'Active' ? true : false;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
 }

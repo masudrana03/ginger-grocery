@@ -75,13 +75,13 @@ class PromoController extends Controller
                 $token  = csrf_token();
                 $class        = $promo->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
-                $nestedData['id']     = $promo->id;
-                $nestedData['title']  = $promo->title;
-                $nestedData['type']   = $promo->type;
-                $nestedData['code']   = $promo->code;
-                $nestedData['used']   = $promo->used;
-                $nestedData['limit']  = $promo->limit;
-                $nestedData['status'] = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePromoStatus({$promo->id})' id='promoStatus-{$promo->id}'>$promo->status</a>";
+                $nestedData['id']         = $promo->id;
+                $nestedData['title']      = $promo->title;
+                $nestedData['type']       = $promo->type;
+                $nestedData['code']       = $promo->code;
+                $nestedData['used']       = $promo->used;
+                $nestedData['limit']      = $promo->limit;
+                $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePromoStatus({$promo->id})' id='promoStatus-{$promo->id}'>$promo->status</a>";
                 $nestedData['created_at'] = $promo->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
