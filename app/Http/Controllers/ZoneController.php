@@ -69,9 +69,9 @@ class ZoneController extends Controller
 
         if (!empty($zones)) {
             foreach ($zones as $zone) {
-                $updateStatus = route('admin.promos.update_status', $zone->id );
-                $edit   =  route('admin.promos.edit',$zone->id);
-                $delete =  route('admin.promos.destroy', $zone->id);
+                $updateStatus = route('admin.zones.update_status', $zone->id );
+                $edit   =  route('admin.zones.edit',$zone->id);
+                $delete =  route('admin.zones.destroy', $zone->id);
                 $token  = csrf_token();
                 $class        = $zone->status == 'Active' ? 'status_btn' : 'status_btn_danger';
 
@@ -165,9 +165,10 @@ class ZoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Zone $zone)
     {
-        //
+        $zone=Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($zone->id);
+        return view('backend.zones.edit', compact('zone') );
     }
 
     /**
@@ -179,7 +180,47 @@ class ZoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:zones,name,'.$id,
+            'coordinates' => 'required',
+        ]);
+        $value = $request->coordinates;
+        foreach(explode('),(',trim($value,'()')) as $index=>$single_array){
+            if($index == 0)
+            {
+                $lastcord = explode(',',$single_array);
+            }
+            $coords = explode(',',$single_array);
+            $polygon[] = new Point($coords[0], $coords[1]);
+        }
+        $polygon[] = new Point($lastcord[0], $lastcord[1]);
+        $zone=Zone::findOrFail($id);
+        $zone->name = $request->name;
+        $zone->coordinates = new Polygon([new LineString($polygon)]);
+        // $zone->restaurant_wise_topic =  'zone_'.$id.'_restaurant';
+        // $zone->customer_wise_topic = 'zone_'.$id.'_customer';
+        // $zone->deliveryman_wise_topic = 'zone_'.$id.'_delivery_man';
+        $zone->save();
+
+        Alert::toast('Zone successfully updated', 'success');
+        return redirect()->route('admin.zones.index');
+    }
+
+        /**
+     * Update zone status
+     *
+     * @param Zone $zone
+     * @return void
+     */
+    public function updateStatus(Zone $zone)
+    {
+        $zone->update([
+            'status' => $zone->status == 'Active' ? 'Inactive' : 'Active'
+        ]);
+
+        toast( 'Status successfully updated', 'success' );
+
+        return redirect()->back();
     }
 
     /**

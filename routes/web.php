@@ -107,6 +107,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     // Route::get('/zone-add', [ZoneController::class, 'create'])->name('zone.create');
     Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
     Route::get('allzones', [ZoneController::class, 'allZones'])->name('allzones');
+    Route::get('/zones/{zone}/update_status', [ZoneController::class, 'updateStatus'])->name('zones.update_status');
 
     // Resource routes
     Route::resource('brands', BrandController::class);

@@ -11,9 +11,15 @@ class Zone extends Model
     use HasFactory;
     use SpatialTrait;
 
+    protected $fillable = [
+        'name',
+        'coordinates',
+        'status',
+    ];
+
     protected $spatialFields = [
         'name',
-        'coordinates'
+        'coordinates',
     ];
 
 
