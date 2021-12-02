@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Delivery Men</th>
+                                            <th>Phone</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
