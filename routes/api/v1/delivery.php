@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('test-auth', [TestController::class, 'testAuth']);
     Route::get('logout', [LoginController::class, 'logout']);
     Route::get('profile', [ProfileController::class, 'getProfile']);
+    Route::put('profile', [ProfileController::class, 'updateProfile']);
     Route::post('change-password', [LoginController::class, 'changePassword']);
     // Route::get('orders', [OrdersController::class, 'orders']);
     // Route::get('orders/{order}', [OrdersController::class, 'order']);
