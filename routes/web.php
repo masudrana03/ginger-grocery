@@ -27,6 +27,8 @@ use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\ZoneController;
+use App\Http\Controllers\DeliveryManDetailsController;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -105,9 +107,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     // Route::get('/zone', [ZoneController::class, 'index'])->name('zone.index');
     // Route::get('/zone-add', [ZoneController::class, 'create'])->name('zone.create');
-    Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
+    // Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
     Route::get('allzones', [ZoneController::class, 'allZones'])->name('allzones');
     Route::get('/zones/{zone}/update_status', [ZoneController::class, 'updateStatus'])->name('zones.update_status');
+
+    Route::get('/delivery-men', [DeliveryManDetailsController::class, 'index'])->name('delivery_men');
 
     // Resource routes
     Route::resource('brands', BrandController::class);

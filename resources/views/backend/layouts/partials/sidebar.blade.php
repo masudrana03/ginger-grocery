@@ -128,6 +128,16 @@
     </a>
 </li>
 <li class="">
+    <a href="{{ route('admin.delivery_men') }}" aria-expanded="false">
+        <div class="nav_icon_small">
+            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+        </div>
+        <div class="nav_title">
+            <span>Delivery Man</span>
+        </div>
+    </a>
+</li>
+<li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">

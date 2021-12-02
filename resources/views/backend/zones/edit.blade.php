@@ -32,6 +32,7 @@
                         <div class="white_card_body">
                             <form action="{{ route('admin.zones.update', $zone->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('patch')
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
@@ -90,72 +91,9 @@
         </div>
     </div>
 
-    <div id="action-button-row" style="display: none;">
-        <div class="form-group row">
-
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
-                    <div class="image-upload-wrap" style="display: none;">
-                      <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image[]" />
-                    </div>
-                    <div class="file-upload-content">
-                      <img class="file-upload-image" src="#" alt="your image" />
-                      <div class="image-title-wrap">
-                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-            {{-- <div class="col-sm-3">
-                <input type="file" name="image[]">
-            </div> --}}
-            <div class="col-sm-2">
-                <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
-                    class="fas fa-plus-circle addRow"></i>
-                <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
-                    class="fas fa-minus-circle removeRow"></i>
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @push('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.single2').select2();
-
-            let length = $('#inputFormRow').find(".form-group").length
-            if (length === 1) {
-                $('.removeRow').hide();
-            }
-
-            // add row
-            $(document).on('click', '.addRow', function() {
-                var html = $("#action-button-row").html();
-                $('#inputFormRow').append(html);
-                $(".removeRow").show();
-            });
-
-            // remove row
-            $(document).on('click', '.removeRow', function() {
-                var childRows = $(this).parents('#inputFormRow').find(".form-group").length;
-                if (childRows > 1) $(this).closest('.form-group').remove();
-                if (childRows == 2) $('.removeRow').hide();
-            });
-
-            $(document).on('click', '.save', function() {
-                var oldValue = $('#inputFormRow').find(".form-group").length;
-
-                if (oldValue > 1) {
-                    $(".addRow").show();
-                    $(".removeRow").show();
-                }
-            });
-        });
-    </script>
-
     <script>
     auto_grow();
     function auto_grow() {
@@ -226,7 +164,7 @@
 
         var zonePolygon = new google.maps.Polygon({
             paths: polygonCoords,
-            strokeColor: "#050df2",
+            strokeColor: "#110da8",
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillOpacity: 0,

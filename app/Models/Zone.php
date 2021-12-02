@@ -26,12 +26,12 @@ class Zone extends Model
 
     public function getStatusAttribute()
     {
-        return $this->attributes['status'] == 1 ? 'Active' : 'Inactive';
+        return $this->attributes['status'] == 1 ? 'Online' : 'Offline';
     }
 
     public function setStatusAttribute($value)
     {
-        $this->attributes['status'] = $value == 'Active' ? true : false;
+        $this->attributes['status'] = $value == 'Online' ? true : false;
     }
 
     public function scopeActive($query)

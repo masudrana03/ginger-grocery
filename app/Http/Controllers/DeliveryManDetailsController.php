@@ -15,17 +15,13 @@ class DeliveryManDetailsController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.delivery_men.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function allDeliveryManDetails()
     {
-        //
+
     }
 
     /**
