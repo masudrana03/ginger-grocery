@@ -31,13 +31,14 @@
                         </div>
                         <div class="white_card_body">
                             <div class="table-responsive">
-                                <table class="table" id="zones">
+                                <table class="table" id="deliveryMen">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Status</th>
+                                            <th>Online Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -73,8 +74,8 @@
 </script>
 
 <script>
-    // Banner Status Change
-    function ChangeZoneStatus(id) {
+    // Dalivery Status Change
+    function ChangeDeliveryManStatus(id) {
             Swal.fire({
                 title: 'Are you sure to change?',
                 icon: 'warning',
@@ -84,7 +85,25 @@
                 confirmButtonText: 'Yes, update it!'
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = $('#zoneStatus-' + id).data('href');
+                    window.location.href = $('#deliveryManStatus-' + id).data('href');
+                }
+            });
+        }
+</script>
+
+<script>
+    // Dalivery Online Status Change
+    function ChangeDeliveryManOnlineStatus(id) {
+            Swal.fire({
+                title: 'Are you sure to change?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = $('#deliveryManOnlineStatus-' + id).data('href');
                 }
             });
         }
@@ -92,11 +111,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#zones').DataTable({
+        $('#deliveryMen').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax":{
-                     "url": "{{ route('admin.allzones') }}",
+                     "url": "{{ route('admin.allDeliveryManDetails') }}",
                      "dataType": "json",
                      "type": "GET",
                      "data":{ _token: "{{csrf_token()}}"}
@@ -104,8 +123,9 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
-                { "data": "coordinates" },
+                { "data": "phone" },
                 { "data": "status" },
+                { "data": "online_status" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]

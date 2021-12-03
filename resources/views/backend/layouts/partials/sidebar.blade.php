@@ -128,7 +128,7 @@
     </a>
 </li>
 <li class="">
-    <a href="{{ route('admin.delivery_men') }}" aria-expanded="false">
+    <a href="{{ route('admin.delivery_men.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>

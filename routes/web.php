@@ -110,8 +110,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     // Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
     Route::get('allzones', [ZoneController::class, 'allZones'])->name('allzones');
     Route::get('/zones/{zone}/update_status', [ZoneController::class, 'updateStatus'])->name('zones.update_status');
-
-    Route::get('/delivery-men', [DeliveryManDetailsController::class, 'index'])->name('delivery_men');
+    
+    Route::get('/all-delivery-men', [DeliveryManDetailsController::class, 'allDeliveryManDetails'])->name('allDeliveryManDetails');
+    Route::get('/delivery-men/{deliveryMan}/update_status', [DeliveryManDetailsController::class, 'updateStatus'])->name('delivery_men.update_status');
+    Route::get('/delivery-men/{deliveryMan}/update_online_status', [DeliveryManDetailsController::class, 'updateOnlineStatus'])->name('delivery_men.update_online_status');
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -133,6 +135,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('shipping_services', ShippingServiceController::class);
     Route::resource('taxes', TaxController::class);
     Route::resource('zones', ZoneController::class);
+    Route::resource('delivery_men', DeliveryManDetailsController::class);
 });
 
 
