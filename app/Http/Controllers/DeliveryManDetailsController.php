@@ -42,18 +42,18 @@ class DeliveryManDetailsController extends Controller
 
         if (empty($request->input('search.value'))) {
             $deliveryMen = DeliveryManDetails::offset($start)
-                ->limit($limit)
-                ->orderBy($order, $dir)
-                ->get();
+                                            ->limit($limit)
+                                            ->orderBy($order, $dir)
+                                            ->get();
         } else {
             $search = $request->input('search.value');
 
             $deliveryMen = DeliveryManDetails::where('id', 'LIKE', "%{$search}%")
-                // ->orWhere('name', 'LIKE', "%{$search}%")
-                ->offset($start)
-                ->limit($limit)
-                ->orderBy($order, $dir)
-                ->get();
+                                            // ->orWhere('name', 'LIKE', "%{$search}%")
+                                            ->offset($start)
+                                            ->limit($limit)
+                                            ->orderBy($order, $dir)
+                                            ->get();
 
             $totalFiltered = DeliveryManDetails::where('id', 'LIKE', "%{$search}%")
                 // ->orWhere('name', 'LIKE', "%{$search}%")
@@ -184,8 +184,13 @@ class DeliveryManDetailsController extends Controller
      * @param  \App\Models\DeliveryManDetails  $deliveryManDetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeliveryManDetails $deliveryManDetails)
+    public function destroy(DeliveryManDetails $deliveryMan)
     {
-        //
+        
+       $deliveryMan->delete();
+
+       toast('Delivery Man successfully deleted', 'success');
+
+       return back();
     }
 }
