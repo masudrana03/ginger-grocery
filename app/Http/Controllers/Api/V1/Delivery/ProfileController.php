@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Delivery;
 
 use App\Http\Controllers\Controller;
+use App\Models\DeliveryManDetails;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -30,5 +32,20 @@ class ProfileController extends Controller
         $user = auth()->user()->updateProfile( $request );
 
         return ok( 'Profile updated successfully', $user );
+    }
+
+
+    /**
+     *
+     */
+    public function getStatus($id) {
+        
+        $deliveryMan = DeliveryManDetails::where('user_id', $id)->first();
+
+        $deliveryMan->update([
+            'online_status' => $deliveryMan->online_status == 'Online' ? 'Offline' : 'Online'
+        ]);
+
+        return ok( 'Status updated successfully', $deliveryMan );
     }
 }
