@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\V1\TestController;
 use App\Http\Controllers\Api\V1\Delivery\LoginController;
 use App\Http\Controllers\Api\V1\Delivery\ProfileController;
 use App\Http\Controllers\Api\V1\Delivery\RegisterController;
-
+use App\Http\Controllers\Api\V1\Delivery\TransportController;
 
 /**
  *
@@ -26,6 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('profile', [ProfileController::class, 'getProfile']);
     Route::put('profile', [ProfileController::class, 'updateProfile']);
     Route::get('check-status/{id}', [ProfileController::class, 'getStatus']);
+
+    Route::post('register-doc/{id}', [TransportController::class, 'getRegistationDoc']);
+    Route::post('vehicle-info/{id}', [TransportController::class, 'store']);
 
     // Route::get('orders', [OrdersController::class, 'orders']);
     // Route::get('orders/{order}', [OrdersController::class, 'order']);
