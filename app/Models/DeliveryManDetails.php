@@ -20,12 +20,21 @@ class DeliveryManDetails extends Model
     ];
 
     /**
-     * Get the user associated with the product.
+     * Get the user associated with the Delivery Man.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the zone associated with the Delivery Man.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class);
     }
 
 
