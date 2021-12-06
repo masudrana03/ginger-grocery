@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('check-status/{id}', [ProfileController::class, 'getStatus']);
 
     Route::post('register-doc/{id}', [TransportController::class, 'getRegistationDoc']);
-    Route::post('vehicle-info/{id}', [TransportController::class, 'store']);
+    Route::post('vehicle-info/{id}', [TransportController::class, 'Update']);
 
     // Route::get('orders', [OrdersController::class, 'orders']);
     // Route::get('orders/{order}', [OrdersController::class, 'order']);

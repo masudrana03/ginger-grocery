@@ -11,18 +11,19 @@ class TransportController extends Controller
 {
 
     public function getRegistationDoc(Request $request){
+
         $request->validate( [
             'images'        => 'required',
         ] );
 
-        $transport = $request->except('_token');
+        $requestInfo = $request->except('_token');
 
-        $transport['user_id'] = auth()->id();
+        $requestInfo['user_id'] = auth()->id();
 
-        $transport = Transport::create($transport);
+        $transport = Transport::create($requestInfo);
 
         if ($request->hasFile('images')) {
-            return $this->uploadTransportImage($transport, $request->file('images'));
+          return $this->uploadTransportImage($transport, $request->file('images'));
         }
 
        return ok( 'Transport registation document save successfully', $transport);
@@ -30,46 +31,37 @@ class TransportController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function Update(Request $request , $id)
     {
-        $filename = '';
+
         $request->validate( [
             'vehicle_brand'        => 'required',
             'vehicle_model'        => 'required',
             'vehicle_number_plate' => 'required',
-            'image'                => 'required',
+            'vehicle_image'        => 'required',
         ] );
 
+        $transport = Transport::find($id);
 
+        $filename = '';
 
-        // $transport                        = new Transport();
-        // $transport->vehicle_brand         = $request->vehicle_brand;
-        // $transport->vehicle_model         = $request->vehicle_model;
-        // $transport->vehicle_number_plate  = $request->vehicle_number_plate;
-        // $transport->image = $filename;
-        // $transport->save();
+        $requestInfo = $request->except('_token');
 
-        $transport = $request->except('_token');
+        $requestInfo['user_id'] = auth()->id();
 
-        $transport['user_id'] = auth()->id();
+        if ( $request->hasFile( 'vehicle_image' ) ) {
 
-        // return  $request;
-
-        if ( $request->hasFile( 'image' ) ) {
-
-            $image             = $request->file( 'image' );
+            $image             = $request->file( 'vehicle_image' );
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
             $location          = public_path( 'assets/img/uploads/transports/' . $filename );
             $thumbnailLocation = public_path( 'assets/img/uploads/transports/thumbnail/' . $filename );
 
-            // return $thumbnailLocation;
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $transport          = $request->all();
-        $transport['image'] = $filename;
+        $requestInfo['vehicle_image'] = $filename;
 
-        $transport = Transport::create($transport);
+        $transport->update($requestInfo);
 
         return ok( 'Transport save successfully', $transport);
     }
@@ -87,12 +79,12 @@ class TransportController extends Controller
         $filenames = [];
 
         foreach ($images as $image) {
-            die($image);
-            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $filename          = generateUniqueFileName($images->getClientOriginalExtension());
             $location          = public_path('assets/img/uploads/transports/' . $filename);
             $thumbnailLocation = public_path('assets/img/uploads/transports/thumbnail/' . $filename);
 
             $filenames['image'] = $filename;
+
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
 
             $transport->images()->create($filenames);
