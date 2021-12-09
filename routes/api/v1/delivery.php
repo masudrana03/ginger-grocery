@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Delivery\LoginController;
 use App\Http\Controllers\Api\V1\Delivery\ProfileController;
 use App\Http\Controllers\Api\V1\Delivery\RegisterController;
 use App\Http\Controllers\Api\V1\Delivery\TransportController;
+use App\Http\Controllers\Api\V1\Delivery\DeliveryManReviewController;
 
 /**
  *
@@ -29,6 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('register-doc/{id}', [TransportController::class, 'getRegistationDoc']);
     Route::post('vehicle-info/{id}', [TransportController::class, 'Update']);
+
+
+    Route::post('delivery-man-review', [DeliveryManReviewController::class, 'addDeliveryManRating']);
 
     // Route::get('orders', [OrdersController::class, 'orders']);
     // Route::get('orders/{order}', [OrdersController::class, 'order']);
