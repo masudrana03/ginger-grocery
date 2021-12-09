@@ -28,7 +28,7 @@ use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\DeliveryManDetailsController;
-
+use App\Http\Controllers\DeliveryManReviewController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -110,10 +110,13 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     // Route::get('get-all-zone-cordinates/{id?}', [ZoneController::class, 'get_all_zone_cordinates'])->name('zoneCoordinates');
     Route::get('allzones', [ZoneController::class, 'allZones'])->name('allzones');
     Route::get('/zones/{zone}/update_status', [ZoneController::class, 'updateStatus'])->name('zones.update_status');
-    
+
     Route::get('/all-delivery-men', [DeliveryManDetailsController::class, 'allDeliveryManDetails'])->name('allDeliveryManDetails');
     Route::get('/delivery-men/{deliveryMan}/update_status', [DeliveryManDetailsController::class, 'updateStatus'])->name('delivery_men.update_status');
     Route::get('/delivery-men/{deliveryMan}/update_online_status', [DeliveryManDetailsController::class, 'updateOnlineStatus'])->name('delivery_men.update_online_status');
+
+    Route::get('/delivery-man-review', [DeliveryManReviewController::class, 'index'])->name('delivery_man_review');
+    Route::get('/delivery-Reviews', [DeliveryManReviewController::class, 'getDeliveryReviews'])->name('getDeliveryManReviews');
 
     // Resource routes
     Route::resource('brands', BrandController::class);

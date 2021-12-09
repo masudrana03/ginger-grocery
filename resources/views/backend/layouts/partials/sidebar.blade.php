@@ -128,14 +128,22 @@
     </a>
 </li>
 <li class="">
-    <a href="{{ route('admin.delivery_men.index') }}" aria-expanded="false">
+    <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
         </div>
         <div class="nav_title">
-            <span>Delivery Man</span>
+            <span>Delivery Men</span>
         </div>
     </a>
+    <ul class="mm-collapse mm-show" style="height: 5px;">
+        <li>
+            <a href="{{ route('admin.delivery_men.index') }}">Delivery Man Details</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.delivery_man_review') }}">Delivery Man Review</a>
+        </li>
+    </ul>
 </li>
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
