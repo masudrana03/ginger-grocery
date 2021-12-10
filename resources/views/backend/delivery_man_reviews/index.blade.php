@@ -3,6 +3,7 @@
 @section('title', 'Delivery Man Review')
 
 @push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     #promos_previous {
         padding-right: 57px!important;
@@ -14,6 +15,9 @@
     table tbody tr td a {
         color: #884FFB;
         font-size: 18px;
+    }
+    .checked {
+  color: orange;
     }
 </style>
 @endpush
@@ -40,6 +44,7 @@
                                             <th>Review</th>
                                             <th>Comments</th>
                                             <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -104,7 +109,7 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
-                { "data": "review" },
+                { "data": "rating" },
                 { "data": "comment" },
                 { "data": "created_at" },
                 { "data": "actions" }

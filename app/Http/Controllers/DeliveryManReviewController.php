@@ -16,11 +16,10 @@ class DeliveryManReviewController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            2 => 'phone',
-            3 => 'status',
-            4 => 'online_status',
-            5 => 'created_at',
-            6 => 'id'
+            2 => 'rating',
+            3 => 'comment',
+            4 => 'created_at',
+            5 => 'id'
         ];
 
         $totalData = DeliveryManReview::count();
@@ -33,47 +32,40 @@ class DeliveryManReviewController extends Controller
         $dir   = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $deliveryMen = DeliveryManReview::offset($start)
+            $deliveryManReview = DeliveryManReview::offset($start)
                                             ->limit($limit)
                                             ->orderBy($order, $dir)
                                             ->get();
         } else {
             $search = $request->input('search.value');
 
-            $deliveryMen = DeliveryManReview::where('id', 'LIKE', "%{$search}%")
-                                            // ->orWhere('name', 'LIKE', "%{$search}%")
+            $deliveryManReview = DeliveryManReview::where('id', 'LIKE', "%{$search}%")
+                                            ->orWhere('name', 'LIKE', "%{$search}%")
                                             ->offset($start)
                                             ->limit($limit)
                                             ->orderBy($order, $dir)
                                             ->get();
 
             $totalFiltered = DeliveryManReview::where('id', 'LIKE', "%{$search}%")
-                // ->orWhere('name', 'LIKE', "%{$search}%")
-                ->count();
+                                              ->orWhere('name', 'LIKE', "%{$search}%")
+                                              ->count();
         }
 
         $data = [];
 
-        if (!empty($deliveryMen)) {
-            foreach ($deliveryMen as $deliveryMan) {
-                $updateStatus        = route('admin.delivery_men.update_status', $deliveryMan->id);
-                $updateOnelineStatus = route('admin.delivery_men.update_online_status', $deliveryMan->id);
-                $show                = route('admin.delivery_men.show', $deliveryMan->id);
-                $delete              = route('admin.delivery_men.destroy', $deliveryMan->id);
+        if (!empty($deliveryManReview)) {
+            foreach ($deliveryManReview as $deliveryReview) {
+                $delete              = route('admin.delivery_men.destroy', $deliveryReview->id);
                 $token               = csrf_token();
-                $class               = $deliveryMan->status == 'Approve' ? 'status_btn' : 'status_btn_danger';
-                $class1              = $deliveryMan->online_status == 'Online' ? 'status_btn' : 'status_btn_danger';
 
-                $nestedData['id']             = $deliveryMan->id;
-                $nestedData['name']           = $deliveryMan->user->name;
-                $nestedData['phone']          = $deliveryMan->user->phone;
-                $nestedData['status']         = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeDeliveryManStatus({$deliveryMan->id})' id='deliveryManStatus-{$deliveryMan->id}'>$deliveryMan->status</a>";
-                $nestedData['online_status']  = "<a href='javascript:void(0)' data-href='{$updateOnelineStatus}' data-toggle='tooltip' title='Change status' class='{$class1}' onclick='ChangeDeliveryManOnlineStatus({$deliveryMan->id})' id='deliveryManOnlineStatus-{$deliveryMan->id}'>$deliveryMan->online_status</a>";
-                $nestedData['created_at']     = $deliveryMan->created_at->format('d-m-Y');
+                $nestedData['id']             = $deliveryReview->id;
+                $nestedData['name']           = $deliveryReview->user->name;
+                $nestedData['rating']         = $this->getReview($deliveryReview->rating);
+                $nestedData['comment']        = $deliveryReview->comment;
+                $nestedData['created_at']     = $deliveryReview->created_at->format('d-m-Y');
                 $nestedData['actions']        = "
-                <a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
-                    &emsp;<a href='#' onclick='deletePromo({$deliveryMan->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
-                    <form id='delete-form-{$deliveryMan->id}' action='{$delete}' method='POST' style='display: none;'>
+                    &emsp;<a href='#' onclick='deletePromo({$deliveryReview->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    <form id='delete-form-{$deliveryReview->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>
                     <input type='hidden' name='_method' value='DELETE'>
                     </form>
@@ -90,5 +82,48 @@ class DeliveryManReviewController extends Controller
         ];
 
         echo json_encode($json_data);
+    }
+
+
+    /**
+     * Get the delivery boy review
+     */
+    public function getReview($review){
+
+        // return $review;
+        $star = 'fa fa-star';
+        $starChecked = 'fa fa-star checked';
+
+        $result = '';
+
+        for ($i = 1; $i <= 5; $i++) {
+            if ($review >= $i) {
+                $result .= "<span class='{$starChecked}'></span> ";
+            } else {
+                $result .= "<span class='{$star}'></span>";
+            }
+        }
+
+        return $result;
+
+        // if($review == 0){
+        //     return "<span class='fa fa-star'></span> <span class='fa fa-star'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span>";
+        // }
+        // if($review == 1){
+        //     return "<span class='fa fa-star checked'></span> <span class='fa fa-star'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span>";
+        // }
+        // if($review == 2){
+        //     return "<span class='fa fa-star checked'></span> <span class='fa fa-star checked'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span>";
+        // }
+        // if($review == 3){
+        //     return "<span class='fa fa-star checked'></span> <span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span> </span><span class='fa fa-star'></span> </span><span class='fa fa-star'></span>";
+        // }
+        // if($review == 4){
+        //     return "<span class='fa fa-star checked'></span> <span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span> </span><span class='fa fa-star'></span>";
+        // }
+        // if($review == 5){
+        //     return "<span class='fa fa-star checked'></span> <span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span> </span><span class='fa fa-star checked'></span>";
+        // }
+
     }
 }
