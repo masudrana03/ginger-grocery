@@ -29,6 +29,7 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\DeliveryManReviewController;
+use App\Http\Controllers\FaqController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -118,6 +119,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/delivery-man-review', [DeliveryManReviewController::class, 'index'])->name('delivery_man_review');
     Route::get('/delivery-Reviews', [DeliveryManReviewController::class, 'getDeliveryReviews'])->name('getDeliveryManReviews');
 
+    Route::get('/faq', [FaqController::class, 'getFaq'])->name('getFaq');
+    Route::get('/faq-status/{faq}/update_status', [FaqController::class, 'updateStatus'])->name('faqs.update_status');
+
+
     // Resource routes
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
@@ -139,6 +144,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('taxes', TaxController::class);
     Route::resource('zones', ZoneController::class);
     Route::resource('delivery_men', DeliveryManDetailsController::class);
+    Route::resource('faqs', FaqController::class);
 });
 
 

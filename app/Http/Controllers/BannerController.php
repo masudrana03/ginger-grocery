@@ -22,7 +22,8 @@ class BannerController extends Controller
     /**
      * @param Request $request
      */
-    public function allBanners( Request $request ) {
+    public function allBanners( Request $request )
+    {
         $columns = [
             0 => 'id',
             1 => 'title',
