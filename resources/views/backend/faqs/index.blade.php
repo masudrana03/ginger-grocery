@@ -28,7 +28,7 @@
                                 <h3 class="m-0">All FAQ</h3>
                             </div>
                             <div class="add_button ml-10">
-                                <a href="{{ route('admin.promos.create') }}" class="btn_1">Add New</a>
+                                <a href="{{ route('admin.faqs.create') }}" class="btn_1">Add New</a>
                             </div>
                         </div>
 

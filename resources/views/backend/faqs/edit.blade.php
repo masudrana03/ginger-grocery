@@ -20,7 +20,7 @@
                                 @method('patch')
                                 <div class="form-group">
                                     <label for="question">Question</label>
-                                    <input type="text" name="question" class="form-control @error('question') is-invalid @enderror" id="question" aria-describedby="emailHelp" placeholder="question" value="{{ old('question') ?? $currency->question }}">
+                                    <input type="text" name="question" class="form-control @error('question') is-invalid @enderror" id="question" aria-describedby="emailHelp" placeholder="question" value="{{ old('question') ?? $faq->question }}">
                                     @error('question')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -28,10 +28,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="answer">Answer</label>
-                                    <input type="text" name="answer"
-                                        class="form-control @error('answer') is-invalid @enderror" id="answer"
-                                        aria-describedby="emailHelp" placeholder="answer" value="{{ old('answer') }}">
+                                    <label for="answer">answer</label>
+                                    <input type="text" name="answer" class="form-control @error('answer') is-invalid @enderror" id="answer" aria-describedby="emailHelp" placeholder="answer" value="{{ old('answer') ?? $faq->answer }}">
                                     @error('answer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,8 +41,8 @@
                                     <select name="type"
                                     class="form-control @error('type') is-invalid @enderror">
                                         <option value="">Select App</option>
-                                        <option value="1">Customer App</option>
-                                        <option value="2">Delivery Boy App</option>
+                                        <option value="1" {{ $faq->type == '1' ? 'selected' : '' }} >Customer App</option>
+                                        <option value="2" {{ $faq->type == '2' ? 'selected' : '' }} >Delivery Boy App</option>
                                     </select>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
@@ -55,11 +53,11 @@
                                 <div class="form-group">
                                     <label for="body">Status</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input checked name="status" class="form-check-input" type="radio" id="inlineRadio1" value="Active">
+                                        <input {{ $faq->status == 'Active' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio1" value="Active">
                                         <label class="form-check-label" for="inlineRadio1">Active</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input name="status" class="form-check-input" type="radio" id="inlineRadio2" value="Inactive">
+                                        <input {{ $faq->status == 'Inactive' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio2" value="Inactive">
                                         <label class="form-check-label" for="inlineRadio2">Inactive</label>
                                     </div>
                                 </div>

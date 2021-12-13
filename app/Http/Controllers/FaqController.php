@@ -78,12 +78,12 @@ class FaqController extends Controller
                 $nestedData['id']         = $faq->id;
                 $nestedData['question']   = Str::limit($faq->question, 20);
                 $nestedData['answer']     = Str::limit($faq->answer, 20);
-                $nestedData['type']       = $faq->type;
+                $nestedData['type']       = $faq->type == '1' ? 'Customer App' : 'Delivery Boy App';
                 $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeFaqStatus({$faq->id})' id='faqStatus-{$faq->id}'>$faq->status</a>";
                 $nestedData['created_at'] = $faq->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                    &emsp;<a href='#' onclick='deleteBanner({$faq->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    &emsp;<a href='#' onclick='deletePromo({$faq->id})'title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$faq->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>
                     <input type='hidden' name='_method' value='DELETE'>
@@ -148,7 +148,7 @@ class FaqController extends Controller
      */
     public function show(Faq $faq)
     {
-        return view('backend.faqs.edit', compact('faqs'));
+        //
     }
 
     /**
@@ -159,7 +159,7 @@ class FaqController extends Controller
      */
     public function edit(Faq $faq)
     {
-        //
+        return view('backend.faqs.edit', compact('faq'));
     }
 
     /**
@@ -170,20 +170,19 @@ class FaqController extends Controller
      */
     public function update(Request $request, Faq $faq)
     {
+        // return $faq;
         $this->validate($request, [
-            'question' => 'required|unique:units,name,'. $faq->id,
-            'answer'   => 'required',
-            'type'     => 'required'
+            'question' => 'required',
+            'answer'   => 'required'
         ]);
 
-        $faq = new Faq();
         $faq->question = $request->question;
         $faq->answer   = $request->answer;
         $faq->type     = $request->type;
         $faq->status   = $request->status;
         $faq->save();
 
-        Alert::toast('FAQ successfully created', 'success');
+        Alert::toast('FAQ successfully update', 'success');
 
         return redirect()->route('admin.faqs.index');
     }
@@ -213,6 +212,10 @@ class FaqController extends Controller
      */
     public function destroy(Faq $faq)
     {
-        //
+        $faq->delete();
+
+       toast('FAQ successfully deleted', 'success');
+
+       return back();
     }
 }
