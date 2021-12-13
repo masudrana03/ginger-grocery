@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Delivery\RegisterController;
 use App\Http\Controllers\Api\V1\Delivery\TransportController;
 use App\Http\Controllers\Api\V1\Delivery\DeliveryManReviewController;
 use App\Http\Controllers\Api\V1\Delivery\FaqController;
+use App\Http\Controllers\Api\V1\Delivery\OrderController;
 
 /**
  *
@@ -37,13 +38,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('delivery-man-faq', [FaqController::class, 'getFaqlist']);
 
-    // Route::get('orders', [OrdersController::class, 'orders']);
-    // Route::get('orders/{order}', [OrdersController::class, 'order']);
+    Route::get('orders', [OrdersController::class, 'orders']);
+    Route::get('orders/{order}', [OrdersController::class, 'order']);
     // Route::post('orders/{order}/complete', [OrdersController::class, 'complete']);
     // Route::post('orders/{order}/cancel', [OrdersController::class, 'cancel']);
     // Route::post('orders/{order}/pickup', [OrdersController::class, 'pickup']);
     // Route::post('orders/{order}/deliver', [OrdersController::class, 'deliver']);
     // Route::post('orders/{order}/rate', [OrdersController::class, 'rate']);
+
+    Route::post('orders/{order}/{status}', [OrderController::class, 'updateStatus']);
 
 
 
