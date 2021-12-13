@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\Delivery\ProfileController;
 use App\Http\Controllers\Api\V1\Delivery\RegisterController;
 use App\Http\Controllers\Api\V1\Delivery\TransportController;
 use App\Http\Controllers\Api\V1\Delivery\DeliveryManReviewController;
+use App\Http\Controllers\Api\V1\Delivery\FaqController;
 
 /**
  *
@@ -33,6 +34,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
     Route::post('delivery-man-review', [DeliveryManReviewController::class, 'addDeliveryManRating']);
+
+    Route::get('delivery-man-faq', [FaqController::class, 'getFaqlist']);
 
     // Route::get('orders', [OrdersController::class, 'orders']);
     // Route::get('orders/{order}', [OrdersController::class, 'order']);
