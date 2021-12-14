@@ -18,5 +18,12 @@ class EmailTemplateSeeder extends Seeder {
             'body'       => 'Your Have Successfully Placed The Order, <p>Hello {user_name},</p><p>Your Order Has Been Placed Successfilly.<br>Your Invoice Number is {invoice_number}.<br></p>',
             'created_at' => now(),
         ] );
+
+        EmailTemplate::create( [
+            'type'       => 'Forgot_Password',
+            'subject'    => 'Reset password OTP Verification',
+            'body'       => '<p>Hello {user_name},</p><p>Reset your password.<br>Your OTP Number is {verify_otp}.<br></p>',
+            'created_at' => now(),
+        ] );
     }
 }

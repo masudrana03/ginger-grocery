@@ -91,6 +91,5 @@ class LoginController extends Controller
         $user->save();
 
         return ok( 'Password changed successfully' );
-
     }
 }

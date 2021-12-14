@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Delivery\TransportController;
 use App\Http\Controllers\Api\V1\Delivery\DeliveryManReviewController;
 use App\Http\Controllers\Api\V1\Delivery\FaqController;
 use App\Http\Controllers\Api\V1\Delivery\OrderController;
+use App\Http\Controllers\Api\V1\Delivery\ForgotPasswordController;
 
 /**
  *
@@ -26,13 +27,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout']);
     Route::post('change-password', [LoginController::class, 'changePassword']);
 
+    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+    Route::post('forgot-password-submit', [ForgotPasswordController::class, 'forgotPasswordSubmit']);
+
     Route::get('profile', [ProfileController::class, 'getProfile']);
     Route::put('profile', [ProfileController::class, 'updateProfile']);
     Route::get('check-status/{id}', [ProfileController::class, 'getStatus']);
 
     Route::post('register-doc/{id}', [TransportController::class, 'getRegistationDoc']);
     Route::post('vehicle-info/{id}', [TransportController::class, 'Update']);
-
 
     Route::post('delivery-man-review', [DeliveryManReviewController::class, 'addDeliveryManRating']);
 

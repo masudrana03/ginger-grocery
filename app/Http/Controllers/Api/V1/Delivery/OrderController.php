@@ -85,7 +85,7 @@ class OrderController extends Controller
         $order->payment_status = true;
         $order->save();
 
-        return ok('Order cash collected successfully');
+        return ok('Payment successfully collected');
     }
 
 }
