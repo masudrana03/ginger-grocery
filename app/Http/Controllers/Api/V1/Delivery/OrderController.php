@@ -79,4 +79,13 @@ class OrderController extends Controller
 
     }
 
+    public function getCash($id){
+
+        $order = Order::find($id);
+        $order->payment_status = true;
+        $order->save();
+
+        return ok('Order cash collected successfully');
+    }
+
 }
