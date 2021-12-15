@@ -25,6 +25,7 @@ class CheckoutController extends Controller
      * Handle checkout process
      *
      * @param CheckoutRequest $request
+     * @return JsonResponse
      */
     public function checkout(CheckoutRequest $request)
     {
@@ -59,6 +60,7 @@ class CheckoutController extends Controller
      * @param boolean $paymentStatus
      * @param integer $billingId
      * @param integer $shippingId
+     * @return JsonResponse
      */
     public function createOrder($cart, $paymentStatus, $billingId, $shippingId)
     {
@@ -116,11 +118,11 @@ class CheckoutController extends Controller
     /**
      * Update promo
      *
-     * @param integer $id
+     * @param integer $promoId
      */
-    public function updatePromo($id)
+    public function updatePromo( $promoId )
     {
-        $promo = Promo::find($id);
+        $promo = Promo::find($promoId);
         $promo->update(['limit' => $promo->limit - 1, 'used' => $promo->limit + 1]);
     }
 
@@ -129,7 +131,7 @@ class CheckoutController extends Controller
      *
      * @param string $invoiceId
      */
-    public function sendOrderConfirmationEmail($invoiceId)
+    public function sendOrderConfirmationEmail( $invoiceId )
     {
         $emailTemplate = EmailTemplate::whereType('Order')->first();
         $user = auth()->user();
@@ -151,7 +153,7 @@ class CheckoutController extends Controller
      *
      * @param Cart $cart
      */
-    public function givePointsToCustomer($cart)
+    public function givePointsToCustomer( $cart )
     {
         $totalPurchase = $cart->products->sum('price');
 

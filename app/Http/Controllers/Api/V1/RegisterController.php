@@ -9,12 +9,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class RegisterController extends Controller {
+class RegisterController extends Controller
+{
     /**
      * Register a user via API
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function register( Request $request ) {
+    public function register( Request $request )
+    {
 
         $validation = validateData( [
             'email'    => 'required|email|unique:users,email',

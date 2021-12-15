@@ -8,12 +8,16 @@ use App\Notifications\SendOtp;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rules\Password;
 
-class ResetPasswordController extends Controller {
+class ResetPasswordController extends Controller
+{
     /**
+     * Send OTP On Email.
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function sendOtp( Request $request ) {
-
+    public function sendOtp( Request $request )
+    {
         $validation = validateData( [
             'email' => 'required|email',
         ] );
@@ -38,9 +42,13 @@ class ResetPasswordController extends Controller {
     }
 
     /**
+     * Reset the user's password.
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function resetPassword( Request $request ) {
+    public function resetPassword( Request $request )
+    {
         $validation = validateData( [
             'email'    => 'required|email',
             'otp'      => 'required',

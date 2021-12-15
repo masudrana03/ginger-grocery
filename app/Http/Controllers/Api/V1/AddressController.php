@@ -11,6 +11,8 @@ class AddressController extends Controller
 {
     /**
      * Display a listing of the addresses.
+     *
+     * @return JsonResponse
      */
     public function getAddresses()
     {
@@ -18,10 +20,10 @@ class AddressController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created address.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -47,12 +49,12 @@ class AddressController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user address define by user id.
      *
      * @param  $userId
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function addressDetails($userId)
+    public function addressDetails( $userId )
     {
         $address = Address::where('user_id', $userId)->get();
         return ok( 'Address details retrived successfully', $address);

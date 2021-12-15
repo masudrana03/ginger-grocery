@@ -11,6 +11,8 @@ class OrderController extends Controller
 {
     /**
      * Display a listing of the order by user id.
+     *
+     * @return JsonResponse
      */
     public function orderList()
     {
@@ -23,9 +25,11 @@ class OrderController extends Controller
 
     /**
      * Display the specified order details.
+     *
      * @param integer $orderId
+     * @return JsonResponse
      */
-    public function orderDetails($orderId)
+    public function orderDetails( $orderId )
     {
         $orderDetails = OrderDetails::with(
             'order',

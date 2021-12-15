@@ -12,7 +12,8 @@ class OrderRatingController extends Controller
     /**
      * Add order rating
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     * @return JsonResponse
      */
     public function addOrderRating(Request $request)
     {
@@ -29,7 +30,7 @@ class OrderRatingController extends Controller
 
         $OrderRating = OrderRating::whereOrderId($order->id)->first();
 
-        if ($OrderRating) {
+        if ( $OrderRating ) {
             return api()->error( 'Your feedback already taken');
         }
 

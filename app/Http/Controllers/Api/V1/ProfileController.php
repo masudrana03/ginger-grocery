@@ -10,13 +10,19 @@ class ProfileController extends Controller {
 
     /**
      * Return json response of loggedin user
+     *
+     * @return JsonResponse
      */
-    public function getProfile() {
+    public function getProfile()
+    {
         return ok( 'Profile retrived successfully', auth()->user() );
     }
 
     /**
+     * Update of user profile.
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function updateProfile( Request $request ) {
 

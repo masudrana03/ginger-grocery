@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class SavedProductController extends Controller
 {
+
+     /**
+     * Display the specified Saved Products.
+     *
+     * @return JsonResponse
+     */
     public function getSavedProducts()
     {
         $savedProducts = auth()->user()->savedProducts ?? [];
@@ -15,6 +21,12 @@ class SavedProductController extends Controller
         return ok('Saved Products retrived successfully',$savedProducts);
     }
 
+    /**
+     * Display the specified Add Saved Products.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function addSavedProduct(Request $request)
     {
         $request->validate([
@@ -28,6 +40,12 @@ class SavedProductController extends Controller
         return ok('Product saved successfully', $user->savedProducts);
     }
 
+    /**
+     * Display the specified Remove Saved Products.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function removeSavedProduct(Request $request)
     {
         $request->validate([

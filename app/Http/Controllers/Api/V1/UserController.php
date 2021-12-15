@@ -24,7 +24,6 @@ class UserController extends Controller
      * Add date of birth
      *
      * @param Request $request
-     * 
      * @return JsonResponse
      */
    public function addDateOfBirth(Request $request){

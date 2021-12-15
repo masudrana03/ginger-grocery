@@ -9,6 +9,8 @@ class CategoryController extends Controller {
 
     /**
      * Display a listing of the categories.
+     *
+     * @return JsonResponse
      */
     public function getCategories() {
         return ok( 'Categories list retrived successfully', Category::all() );
@@ -16,8 +18,11 @@ class CategoryController extends Controller {
 
     /**
      * Display the specified category.
+     *
+     * @param integer $categoryId
+     * @return JsonResponse
      */
-    public function categoryDetails($id) {
-        return ok( 'Category details retrived successfully', Category::find($id) );
+    public function categoryDetails( $categoryId ) {
+        return ok( 'Category details retrived successfully', Category::find( $categoryId ) );
     }
 }

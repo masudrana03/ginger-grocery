@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+
+    
     public function getFaqlist() {
 
         $faq = Faq::where('status', 1 )->where( 'type', 2 )->get();

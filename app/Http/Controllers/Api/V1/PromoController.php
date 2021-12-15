@@ -8,13 +8,24 @@ use Illuminate\Http\Request;
 
 class PromoController extends Controller
 {
+    /**
+     * Display a listing of the Promos.
+     *
+     * @return JsonResponse
+     */
     public function getPromos()
     {
         return ok( 'Promos list retrived successfully', Promo::all() );
     }
 
-    public function promoDetails($id)
+    /**
+     * Display the specified Promos.
+     *
+     * @param integer $promoId
+     * @return JsonResponse
+     */
+    public function promoDetails($promoId)
     {
-        return ok( 'Promo details retrived successfully', Promo::find($id) );
+        return ok( 'Promo details retrived successfully', Promo::find($promoId) );
     }
 }

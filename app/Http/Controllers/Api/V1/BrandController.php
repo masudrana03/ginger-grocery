@@ -10,6 +10,8 @@ class BrandController extends Controller
 {
     /**
      * Display a listing of the categories.
+     *
+     * @return JsonResponse
      */
     public function getBrands() {
         return ok( 'Brands list retrived successfully', Brand::all() );
@@ -17,8 +19,11 @@ class BrandController extends Controller
 
     /**
      * Display the specified brand.
+     *
+     * @param integer $brandId
+     * @return JsonResponse
      */
-    public function brandDetails($id) {
-        return ok( 'Brand details retrived successfully', Brand::find($id) );
+    public function brandDetails( $brandId ) {
+        return ok( 'Brand details retrived successfully', Brand::find( $brandId ) );
     }
 }
