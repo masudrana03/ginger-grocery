@@ -14,7 +14,7 @@ class BrandController extends Controller
      * @return JsonResponse
      */
     public function getBrands() {
-        return ok( 'Brands list retrived successfully', Brand::all() );
+        return ok( 'Brands list retrieved successfully', Brand::all() );
     }
 
     /**
@@ -24,6 +24,6 @@ class BrandController extends Controller
      * @return JsonResponse
      */
     public function brandDetails( $brandId ) {
-        return ok( 'Brand details retrived successfully', Brand::find( $brandId ) );
+        return ok( 'Brand details retrieved successfully', Brand::find( $brandId ) );
     }
 }

@@ -27,8 +27,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout']);
     Route::post('change-password', [LoginController::class, 'changePassword']);
 
-    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
-    Route::post('forgot-password-submit', [ForgotPasswordController::class, 'forgotPasswordSubmit']);
+    Route::post('forgot-password-otp', [ForgotPasswordController::class, 'sendOtp']);
+    Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
 
     Route::get('profile', [ProfileController::class, 'getProfile']);
     Route::put('profile', [ProfileController::class, 'updateProfile']);

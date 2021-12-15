@@ -13,7 +13,7 @@ class StoreController extends Controller
      * @return JsonResponse
      */
     public function getStores() {
-        return ok( 'Stores list retrived successfully', Store::all() );
+        return ok( 'Stores list retrieved successfully', Store::all() );
     }
 
     /**
@@ -23,6 +23,6 @@ class StoreController extends Controller
      * @return JsonResponse
      */
     public function storeDetails( $storeId ) {
-        return ok( 'Store details retrived successfully', Store::find( $storeId ) );
+        return ok( 'Store details retrieved successfully', Store::find( $storeId ) );
     }
 }

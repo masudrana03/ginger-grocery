@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function getReferralCode()
     {
-        return ok('Referral code retrived successfully', auth()->user()->referral_token);
+        return ok('Referral code retrieved successfully', auth()->user()->referral_token);
     }
 
 

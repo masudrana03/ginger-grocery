@@ -71,7 +71,7 @@ class Product extends Model
 
     /**
      * Get the store associated with the product.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function store()
@@ -81,7 +81,7 @@ class Product extends Model
 
     /**
      * Get the currency associated with the product.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function currency()
@@ -91,7 +91,7 @@ class Product extends Model
 
     /**
      * Get the types associated with the product.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function types()
@@ -101,7 +101,7 @@ class Product extends Model
 
     /**
      * Get the nutritions associated with the product.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function nutritions()
@@ -111,7 +111,7 @@ class Product extends Model
 
     /**
      * Get the currency associated with the product.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()

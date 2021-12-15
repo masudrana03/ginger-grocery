@@ -9,13 +9,13 @@ use App\Http\Controllers\Controller;
 class ProfileController extends Controller {
 
     /**
-     * Return json response of loggedin user
+     * Return json response of logged user
      *
      * @return JsonResponse
      */
     public function getProfile()
     {
-        return ok( 'Profile retrived successfully', auth()->user() );
+        return ok( 'Profile retrieved successfully', auth()->user() );
     }
 
     /**

@@ -18,6 +18,6 @@ class FaqController extends Controller
 
         $faq = Faq::where('status', 1 )->where( 'type', 2 )->get();
 
-        return ok('Faq list retrived successfully', $faq );
+        return ok('Faq list retrieved successfully', $faq );
     }
 }

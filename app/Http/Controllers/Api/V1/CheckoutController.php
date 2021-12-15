@@ -91,7 +91,7 @@ class CheckoutController extends Controller
             $order->billing_id      = $billingId;
             $order->shipping_id     = $shippingId;
             $order->payment_status  = $paymentStatus;
-            $order->delivery_otp    = random_int(1000 , 3999);
+            $order->delivery_otp    = rand(1000 , 3999);
             $order->save();
 
             foreach ($cart->products as $item) {

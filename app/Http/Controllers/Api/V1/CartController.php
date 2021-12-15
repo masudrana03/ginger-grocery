@@ -17,7 +17,7 @@ class CartController extends Controller {
      */
     public function getCart() {
         $cart = auth()->user()->cart ?: new Cart();
-        return ok( 'Cart retrived successfully', $cart );
+        return ok( 'Cart retrieved successfully', $cart );
     }
 
     /**

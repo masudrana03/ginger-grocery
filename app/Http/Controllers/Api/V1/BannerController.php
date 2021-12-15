@@ -13,12 +13,12 @@ class BannerController extends Controller
      * @return JsonResponse
      */
     public function getBanners(){
-        return ok('Banner list retrived successfully', Banner::all() );
+        return ok('Banner list retrieved successfully', Banner::all() );
     }
 
     /**
      * Display the specified banner.
-     * 
+     *
      * @param Integer $bannerId
      * @return JsonResponse
      */

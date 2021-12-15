@@ -16,7 +16,7 @@ class AddressController extends Controller
      */
     public function getAddresses()
     {
-        return ok( 'Address retrived successfully',  Address::all());
+        return ok( 'Address retrieved successfully',  Address::all());
     }
 
     /**
@@ -57,6 +57,6 @@ class AddressController extends Controller
     public function addressDetails( $userId )
     {
         $address = Address::where('user_id', $userId)->get();
-        return ok( 'Address details retrived successfully', $address);
+        return ok( 'Address details retrieved successfully', $address);
     }
 }

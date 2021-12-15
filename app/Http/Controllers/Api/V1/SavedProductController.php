@@ -18,7 +18,7 @@ class SavedProductController extends Controller
     {
         $savedProducts = auth()->user()->savedProducts ?? [];
 
-        return ok('Saved Products retrived successfully',$savedProducts);
+        return ok('Saved Products retrieved successfully',$savedProducts);
     }
 
     /**

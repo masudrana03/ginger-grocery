@@ -40,7 +40,7 @@ class SocialLoginController extends Controller
 
         try {
            // $user = Socialite::driver($name)->user();
-            
+
            // $user = Socialite::driver($name)->stateless()->user();
 
            $user = Socialite::with('facebook')->stateless()->user();
@@ -65,7 +65,7 @@ class SocialLoginController extends Controller
     }
 
     /**
-     * Register the user's all necessery data
+     * Register the user's all necessary data
      *
      * @param Request $request
      *
@@ -79,7 +79,7 @@ class SocialLoginController extends Controller
         ]);
 
         try {
-            // Register the user's all necessery data
+            // Register the user's all necessary data
             $user                 = new User();
             $user->email          = $request->email;
             $user->password       = Hash::make($request->password);

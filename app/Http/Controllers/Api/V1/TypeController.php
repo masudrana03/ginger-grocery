@@ -13,6 +13,6 @@ class TypeController extends Controller
      * @return JsonResponse
      */
     public function getTypes() {
-        return ok( 'Types list retrived successfully', Type::all() );
+        return ok( 'Types list retrieved successfully', Type::all() );
     }
 }

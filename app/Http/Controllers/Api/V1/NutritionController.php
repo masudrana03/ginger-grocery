@@ -15,7 +15,7 @@ class NutritionController extends Controller
      */
     public function getNutritions()
     {
-        return ok('Nutrition list retrived successfully', Nutrition::all());
+        return ok('Nutrition list retrieved successfully', Nutrition::all());
     }
 
     /**

@@ -29,7 +29,7 @@ class ProductController extends Controller
                                 'images'
                                 )->get();
 
-        return ok( 'Products list retrived successfully', $product );
+        return ok( 'Products list retrieved successfully', $product );
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductController extends Controller
                                 'images'
                                 )->find($productId);
 
-        return ok( 'Product details retrived successfully', $product );
+        return ok( 'Product details retrieved successfully', $product );
     }
 
     /**

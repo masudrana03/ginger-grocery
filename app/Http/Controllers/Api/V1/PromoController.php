@@ -15,7 +15,7 @@ class PromoController extends Controller
      */
     public function getPromos()
     {
-        return ok( 'Promos list retrived successfully', Promo::all() );
+        return ok( 'Promos list retrieved successfully', Promo::all() );
     }
 
     /**
@@ -26,6 +26,6 @@ class PromoController extends Controller
      */
     public function promoDetails($promoId)
     {
-        return ok( 'Promo details retrived successfully', Promo::find($promoId) );
+        return ok( 'Promo details retrieved successfully', Promo::find($promoId) );
     }
 }

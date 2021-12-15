@@ -13,7 +13,7 @@ class CategoryController extends Controller {
      * @return JsonResponse
      */
     public function getCategories() {
-        return ok( 'Categories list retrived successfully', Category::all() );
+        return ok( 'Categories list retrieved successfully', Category::all() );
     }
 
     /**
@@ -23,6 +23,6 @@ class CategoryController extends Controller {
      * @return JsonResponse
      */
     public function categoryDetails( $categoryId ) {
-        return ok( 'Category details retrived successfully', Category::find( $categoryId ) );
+        return ok( 'Category details retrieved successfully', Category::find( $categoryId ) );
     }
 }

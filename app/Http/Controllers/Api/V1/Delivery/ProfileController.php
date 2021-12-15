@@ -14,7 +14,7 @@ class ProfileController extends Controller
      * @return JsonResponse
      */
     public function getProfile() {
-        return ok( 'Profile retrived successfully', auth()->user() );
+        return ok( 'Profile retrieved successfully', auth()->user() );
     }
 
     /**

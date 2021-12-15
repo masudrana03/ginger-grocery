@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api\V1\Delivery;
 
-use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\OrderDetails;
-use App\Models\OrderStatus;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\OrderDetails;
+use App\Http\Controllers\Controller;
+use App\Notifications\Delivery\OrderPicked;
+use App\Notifications\Delivery\OrderAccepted;
+use App\Notifications\Delivery\OrderCanceled;
+use App\Notifications\Delivery\PaymentFailed;
+use App\Notifications\Delivery\NewOrderPlaced;
+use App\Notifications\Delivery\OrderDelivered;
+use App\Notifications\Delivery\OrderInProgress;
+use App\Notifications\Delivery\ProductOnTheWay;
 
 class OrderController extends Controller
 {
@@ -64,6 +72,7 @@ class OrderController extends Controller
      */
     public function updateStatus( $orderId , $status )
     {
+
         $orderStatus = OrderStatus::where('name' ,$status)->first();
 
         $order = Order::find($orderId);
@@ -73,7 +82,27 @@ class OrderController extends Controller
 
         $user = User::find($order->user_id);
 
-        $user->notify(new NewOrderPlaced);
+        if( $status == 'Accepted' ){
+            $user->notify(new OrderAccepted);
+        }
+        if( $status == 'Processing' ){
+            $user->notify(new OrderInProgress);
+        }
+        if( $status == 'Picked up' ){
+            $user->notify(new OrderPicked);
+        }
+        if( $status == 'Product On The Way' ){
+            $user->notify(new ProductOnTheWay);
+        }
+        if( $status == 'Delivered' ){
+            $user->notify(new OrderDelivered);
+        }
+        if( $status == 'Canceled' ){
+            $user->notify(new OrderCanceled);
+        }
+        if( $status == 'Payment Failed' ){
+            $user->notify(new PaymentFailed);
+        }
 
         return ok("Order {$status} successfully");
 

@@ -15,7 +15,7 @@ class PaymentMethodController extends Controller
      */
     public function getPaymentMethod()
     {
-        return ok('Payment Method list retrived successfully', PaymentMethod::all());
+        return ok('Payment Method list retrieved successfully', PaymentMethod::all());
     }
 
     /**
@@ -26,6 +26,6 @@ class PaymentMethodController extends Controller
      */
     public function paymentMethodDetails( $paymentMethodId )
     {
-        return ok('Payment method details retrived successfully', PaymentMethod::find( $paymentMethodId ));
+        return ok('Payment method details retrieved successfully', PaymentMethod::find( $paymentMethodId ));
     }
 }
