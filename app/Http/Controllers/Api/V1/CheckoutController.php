@@ -13,11 +13,14 @@ use Illuminate\Support\Str;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
+use App\Models\PaymentMethod;
 use App\Components\Email\Email;
 use Illuminate\Support\Facades\DB;
 use App\Components\Payment\Payment;
 use App\Http\Controllers\Controller;
+use App\Components\Email\EmailFactory;
 use App\Http\Requests\CheckoutRequest;
+use App\Components\Payment\PaymentFactory;
 
 class CheckoutController extends Controller
 {
@@ -34,7 +37,14 @@ class CheckoutController extends Controller
             return api()->notFound('Your cart is empty, please add product in your cart');
         }
 
-        $payment = (new Payment())->handle($request);
+        $provider = PaymentMethod::find($request->payment_method_id);
+
+        if (! $provider) {
+            return api()->notFound('Payment method not found');
+        }
+
+        // Accept payment
+        $payment = $this->acceptPayment($provider->provider);
 
         // Create order if payment status is true
         if ($payment['status']) {
@@ -53,6 +63,19 @@ class CheckoutController extends Controller
     }
 
     /**
+     * accept the payment
+     *
+     * @param string $provider
+     * @return array
+     */
+    public function acceptPayment($provider): array
+    {
+        $paymentFactory = new PaymentFactory();
+        $payment = $paymentFactory->initializePayment($provider);
+        return $payment->acceptPayment();
+    }
+
+    /**
      * Create order
      *
      * @param Cart $cart
@@ -67,7 +90,7 @@ class CheckoutController extends Controller
         try {
             $orderStatus = OrderStatus::whereName('Pending')->first();
 
-            if (!$orderStatus) {
+            if (! $orderStatus) {
                 return api()->notFound('Order status not found');
             }
 
@@ -142,7 +165,7 @@ class CheckoutController extends Controller
             'body'    => $body
         ];
 
-        (new Email())->handle($emailDetails);
+        (new EmailFactory())->initializeEmail($emailDetails);
     }
 
     /**

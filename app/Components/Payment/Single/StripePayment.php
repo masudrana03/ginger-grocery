@@ -4,43 +4,64 @@ namespace App\Components\Payment\Single;
 
 use Exception;
 use App\Models\Cart;
-use App\Components\Payment\PaymentMethodInterface;
+use App\Components\Payment\PayableInterface;
 use App\Models\PaymentMethod;
-use Illuminate\Http\Request;
-
-class StripePayment implements PaymentMethodInterface
+class StripePayment implements PayableInterface
 {
+    protected $client_key;
+    protected $client_secret;
 
     public function __construct()
     {
         $stripe = PaymentMethod::whereProvider('stripe')->first();
 
-        env('STRIPE_KEY', $stripe->client_key);
-        env('STRIPE_SECRET', $stripe->client_secret);
+        $this->client_key = $stripe->client_key;
+        $this->client_secret = $stripe->client_secret;
     }
 
     /**
      * Accept stripe payment
      *
-     * @param Request|null $request
      * @return array
      */
-    public function acceptPayment($request = null)
+    public function acceptPayment()
     {
+        // this method should accept the payment 
+        // and if payment is successful then it returns an array with status 
+        
         $cart = Cart::whereUserId(auth()->id())->first();
 
         $calculatedPrice = priceCalculator($cart);
 
-        try {
-            $request->user()->charge(
-                $calculatedPrice['total'],
-                $request->paymentMethodId
-            );
+        $stripe = new \Stripe\StripeClient($this->client_secret);
+    
+        $stripeCustomer = $stripe->customers->create([
+            'description' => 'A new customer created',
+        ]);
 
-            return ['status' => true, 'payment_status' => true];
-        } catch (Exception $e) {
-            return ['status' => false, 'message' => $e->getMessage()];
-            logger($e);
-        }
+        \Stripe\Stripe::setApiKey($this->client_secret);
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $calculatedPrice['total'] * 100,
+            'currency' => 'usd',
+            'customer' => $stripeCustomer->id,
+        ]);
+
+        $client_secret = $intent->client_secret;
+        $publish_key   = $this->client_key;
+
+        return view('api.stripe', compact('client_secret', 'publish_key'));
+
+        // try {
+        //     $request->user()->charge(
+        //         $calculatedPrice['total'],
+        //         $request->paymentMethodId
+        //     );
+
+        //     return ['status' => true, 'payment_status' => true];
+        // } catch (Exception $e) {
+        //     return ['status' => false, 'message' => $e->getMessage()];
+        //     logger($e);
+        // }
     }
 } 
