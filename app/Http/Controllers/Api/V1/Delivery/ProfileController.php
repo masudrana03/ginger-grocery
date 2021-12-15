@@ -9,17 +9,22 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     /**
-     * Return json response of loggedin user
+     * Return json response of loggedin user.
+     *
+     * @return JsonResponse
      */
     public function getProfile() {
         return ok( 'Profile retrived successfully', auth()->user() );
     }
 
     /**
+     *  Return json response of update user profile.
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function updateProfile( Request $request ) {
-
+    public function updateProfile( Request $request )
+    {
         $validation = validateData( [
             'name' => 'required',
         ] );
@@ -36,10 +41,13 @@ class ProfileController extends Controller
 
     /**
      * Return response Delivery Boy Online Status
+     *
+     * @param integer $userId
+     * @return JsonResponse
      */
-    public function getStatus($id) {
-
-        $deliveryMan = DeliveryManDetails::where('user_id', $id)->first();
+    public function getStatus( $userId )
+    {
+        $deliveryMan = DeliveryManDetails::where('user_id', $userId )->first();
 
         $deliveryMan->update([
             'online_status' => $deliveryMan->online_status == 'Online' ? 'Offline' : 'Online'

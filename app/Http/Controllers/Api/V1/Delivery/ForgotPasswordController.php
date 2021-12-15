@@ -14,8 +14,12 @@ use Illuminate\Validation\ValidationException;
 
 class ForgotPasswordController extends Controller
 {
-
-
+    /**
+     * Delivery Man Fogot Password Authentication.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function forgotPassword(Request $request){
 
         $request->validate( [
@@ -42,7 +46,13 @@ class ForgotPasswordController extends Controller
 
     }
 
-    public function generateOtp($user)
+    /**
+     * Generate OTP for send confirmation email.
+     *
+     * @param object $user
+     * @return JsonResponse
+     */
+    public function generateOtp( $user )
     {
         $otp =  random_int(100000 , 599999);
 
@@ -53,7 +63,13 @@ class ForgotPasswordController extends Controller
         return $user;
     }
 
-    public function sendOrderConfirmationEmail($user)
+    /**
+     * User forget confirmation email with OTP.
+     *
+     * @param object $user
+     * @return JsonResponse
+     */
+    public function sendOrderConfirmationEmail( $user )
     {
         $emailTemplate = EmailTemplate::whereType('Forgot_Password')->first();
 
