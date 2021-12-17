@@ -154,8 +154,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries=drawing,places&v=3"></script>
 <script>
   function initialize() {
-        var myLatlng = { lat: '23.757989', lng: '90.360587' };
-
+        var myLatlng = { lat: parseFloat('23.757989'), lng: parseFloat('90.360587') };
+        var lastpolygon = null;
 
         var myOptions = {
             zoom: 13,
@@ -184,8 +184,8 @@
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                 const pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
+                    lat: parseFloat(position.coords.latitude),
+                    lng: parseFloat(position.coords.longitude),
                 };
                 map.setCenter(pos);
             });
@@ -262,6 +262,41 @@
         });
     }
 
+    function resetMap(controlDiv) {
+        // Set CSS for the control border.
+        const controlUI = document.createElement("div");
+        controlUI.style.backgroundColor = "#fff";
+        controlUI.style.border = "2px solid #fff";
+        controlUI.style.borderRadius = "3px";
+        controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+        controlUI.style.cursor = "pointer";
+        controlUI.style.marginTop = "8px";
+        controlUI.style.marginBottom = "22px";
+        controlUI.style.textAlign = "center";
+        controlUI.title = "Reset map";
+        controlDiv.appendChild(controlUI);
+        // Set CSS for the control interior.
+        const controlText = document.createElement("div");
+        controlText.style.color = "rgb(25,25,25)";
+        controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+        controlText.style.fontSize = "10px";
+        controlText.style.lineHeight = "16px";
+        controlText.style.paddingLeft = "2px";
+        controlText.style.paddingRight = "2px";
+        controlText.innerHTML = "X";
+        controlUI.appendChild(controlText);
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener("click", () => {
+            lastpolygon.setMap(null);
+            $('#coordinates').val('');
+
+        });
+    }
+    function auto_grow() {
+    let element = document.getElementById("coordinates");
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+    }
     google.maps.event.addDomListener(window, 'load', initialize);
 
 
