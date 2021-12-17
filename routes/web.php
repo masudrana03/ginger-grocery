@@ -76,6 +76,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/allnutrition', [NutritionController::class, 'allNutrition'])->name('allnutrition');
     Route::get('/allcategories', [CategoryController::class, 'allCategories'])->name('allcategories');
     Route::get('/allstores', [StoreController::class, 'allStores'])->name('allstores');
+    Route::get('/zone/get-coordinates/{id}', [StoreController::class, 'getCoordinates'])->name('getCoordinates');
+
     Route::get('/allusers', [UserController::class, 'allUsers'])->name('allusers');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/change-password', [UserController::class, 'changePassword'])->name('user.change_password');

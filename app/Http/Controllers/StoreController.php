@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Zone;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
@@ -14,7 +15,7 @@ class StoreController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.stores.index' );
+        return view('backend.stores.index');
     }
 
     /**
@@ -110,7 +111,9 @@ class StoreController extends Controller {
             return abort( 403 );
         }
 
-        return view( 'backend.stores.create' );
+        $zones = Zone::all();
+
+        return view('backend.stores.create', compact('zones'));
     }
 
     /**
@@ -164,7 +167,7 @@ class StoreController extends Controller {
         if ( !isShopManager( $store->id ) && !isAdmin() ) {
             return abort( 403 );
         }
-        
+
         return view( 'backend.stores.edit', compact( 'store' ) );
     }
 
@@ -227,4 +230,14 @@ class StoreController extends Controller {
 
         return redirect()->back();
     }
+
+
+
+    public function getCoordinates($id){
+        $zone= Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
+        $data = format_coordiantes($zone->coordinates[0]);
+        $center = (object)['lat'=>(float)trim(explode(' ',$zone->center)[1], 'POINT()'), 'lng'=>(float)trim(explode(' ',$zone->center)[0], 'POINT()')];
+        return response()->json(['coordinates'=>$data, 'center'=>$center]);
+    }
+
 }
