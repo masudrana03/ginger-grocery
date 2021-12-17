@@ -4,14 +4,14 @@ namespace App\Components\Email;
 
 use App\Components\Email\Single\Smtp;
 
-class Email
+class EmailFactory
 {
     /**
-     * Handle email sending proces
+     * Initialize email sending process
      *
      * @param array $args
      */
-    public function handle($args)
+    public function initializeEmail($args)
     {
         switch (settings('mail_driver')) {
             case 'smtp':

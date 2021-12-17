@@ -2,18 +2,16 @@
 
 namespace App\Components\Payment\Single;
 
-use App\Components\Payment\PaymentMethodInterface;
-use Illuminate\Http\Request;
+use App\Components\Payment\PayableInterface;
 
-class CashPayment implements PaymentMethodInterface
+class CashPayment implements PayableInterface
 {
     /**
      * Accept cash payment
-     *
-     * @param Request $request
+     * 
      * @return array
      */
-    public function acceptPayment($request = null)
+    public function acceptPayment(): array
     {
        return ['status' => true, 'payment_status' => false];
     }
