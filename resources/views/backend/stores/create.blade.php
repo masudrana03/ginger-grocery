@@ -153,6 +153,7 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries=drawing,places&v=3"></script>
 <script>
+    const bounds = new google.maps.LatLngBounds();
   function initialize() {
         var myLatlng = { lat: parseFloat('23.757989'), lng: parseFloat('90.360587') };
         var lastpolygon = null;
@@ -164,14 +165,14 @@
         }
         map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
         drawingManager = new google.maps.drawing.DrawingManager({
-            drawingMode: google.maps.drawing.OverlayType.POLYGON,
+            drawingMode: false,
             drawingControl: true,
             drawingControlOptions: {
             position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: [google.maps.drawing.OverlayType.POLYGON]
+            drawingModes: []
             },
             polygonOptions: {
-            editable: true
+            editable: false
             }
         });
         drawingManager.setMap(map);
@@ -228,7 +229,7 @@
             });
             markers = [];
             // For each place, get the icon, name and location.
-            const bounds = new google.maps.LatLngBounds();
+            
             places.forEach((place) => {
             if (!place.geometry || !place.geometry.location) {
                 console.log("Returned place contains no geometry");
@@ -299,6 +300,9 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
+    
+        var zonePolygon = null
+       
 
     $('#choice_zones').on('change', function(){
             var id = $(this).val();
