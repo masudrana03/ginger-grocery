@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 
 class BuyNowController extends Controller
 {
-
     /**
-     * add product to cart
+     * Add product to cart
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function buyNow(Request $request){
 

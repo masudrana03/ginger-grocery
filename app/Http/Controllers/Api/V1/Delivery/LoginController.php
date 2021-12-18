@@ -13,10 +13,12 @@ class LoginController extends Controller
 {
     /**
      * login a user via API
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function login( Request $request ) {
-
+    public function login( Request $request )
+    {
         $validation = validateData( [
             'email'    => 'required|email',
             'password' => 'required',
@@ -50,18 +52,24 @@ class LoginController extends Controller
 
     /**
      * Logout a user via API
+     *
+     * @return JsonResponse
      */
-    public function logout() {
+    public function logout()
+    {
         auth()->user()->tokens()->delete();
 
         return ok( 'Logout successfull' );
     }
 
     /**
+     * Password changed a user via API
+     *
      * @param Request $request
+     * @return JsonResponse
      */
-    public function changePassword( Request $request ) {
-
+    public function changePassword( Request $request )
+    {
         $validation = validateData( [
             'old_password' => 'required',
             'new_password' => [
@@ -91,6 +99,5 @@ class LoginController extends Controller
         $user->save();
 
         return ok( 'Password changed successfully' );
-
     }
 }

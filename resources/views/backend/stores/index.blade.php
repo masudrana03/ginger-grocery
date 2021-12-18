@@ -42,6 +42,7 @@
                                             <th>Name</th>
                                             <th>Type</th>
                                             <th>Image</th>
+                                            <th>Zone</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -93,6 +94,7 @@
                 { "data": "name" },
                 { "data": "type" },
                 { "data": "image" },
+                { "data": "zone" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]

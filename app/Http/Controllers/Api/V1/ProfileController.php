@@ -9,14 +9,20 @@ use App\Http\Controllers\Controller;
 class ProfileController extends Controller {
 
     /**
-     * Return json response of loggedin user
+     * Return json response of logged user
+     *
+     * @return JsonResponse
      */
-    public function getProfile() {
-        return ok( 'Profile retrived successfully', auth()->user() );
+    public function getProfile()
+    {
+        return ok( 'Profile retrieved successfully', auth()->user() );
     }
 
     /**
+     * Update of user profile.
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function updateProfile( Request $request ) {
 

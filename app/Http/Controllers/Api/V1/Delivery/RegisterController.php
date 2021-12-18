@@ -13,7 +13,9 @@ class RegisterController extends Controller
 {
     /**
      * Register a user via API
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function register( Request $request ) {
 

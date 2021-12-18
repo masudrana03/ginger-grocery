@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 class DeliveryManReviewController extends Controller
 {
     /**
-     * Add order rating
+     * Delivery Man rating vai user.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     * @return JsonResponse
      */
     public function addDeliveryManRating(Request $request)
     {

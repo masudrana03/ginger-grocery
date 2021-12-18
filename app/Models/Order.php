@@ -60,7 +60,7 @@ class Order extends Model
      */
     public function shipping()
     {
-        return $this->belongsTo(Address::class, 'shipping_id')->where('type', 1);
+        return $this->belongsTo(Address::class, 'shipping_id')->where('type', 2);
     }
 
     /**
@@ -69,7 +69,7 @@ class Order extends Model
      */
     public function billing()
     {
-        return $this->belongsTo(Address::class, 'billing_id')->where('type', 2);
+        return $this->belongsTo(Address::class, 'billing_id')->where('type', 1);
     }
 
 

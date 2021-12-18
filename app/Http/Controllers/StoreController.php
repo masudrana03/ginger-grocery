@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Zone;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
@@ -14,20 +15,22 @@ class StoreController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.stores.index' );
+        return view('backend.stores.index');
     }
 
     /**
      * @param Request $request
      */
     public function allStores( Request $request ) {
+
         $columns = [
             0 => 'id',
             1 => 'name',
-            1 => 'type',
-            1 => 'image',
-            3 => 'created_at',
-            4 => 'id',
+            2 => 'type',
+            3 => 'image',
+            4 => 'zone',
+            5 => 'created_at',
+            6 => 'id',
         ];
 
         $store = Store::query();
@@ -77,6 +80,7 @@ class StoreController extends Controller {
                 $nestedData['name']       = $store->name;
                 $nestedData['type']       = $store->type;
                 $nestedData['image']      = "<img src='{$img}' width='60'>";
+                $nestedData['zone']       = $store->zone->name;
                 $nestedData['created_at'] = $store->created_at->format( 'd-m-Y' );
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
@@ -110,7 +114,9 @@ class StoreController extends Controller {
             return abort( 403 );
         }
 
-        return view( 'backend.stores.create' );
+        $zones = Zone::all();
+
+        return view('backend.stores.create', compact('zones'));
     }
 
     /**
@@ -119,8 +125,8 @@ class StoreController extends Controller {
      * @param  \App\Http\Requests\StoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store( StoreRequest $request ) {
-
+    public function store( StoreRequest $request )
+    {
         if ( !isAdmin() ) {
             return abort( 403 );
         }
@@ -164,8 +170,10 @@ class StoreController extends Controller {
         if ( !isShopManager( $store->id ) && !isAdmin() ) {
             return abort( 403 );
         }
-        
-        return view( 'backend.stores.edit', compact( 'store' ) );
+
+        $zones = Zone::all();
+
+        return view('backend.stores.edit', compact( 'store','zones' ) );
     }
 
     /**
@@ -227,4 +235,14 @@ class StoreController extends Controller {
 
         return redirect()->back();
     }
+
+
+
+    public function getCoordinates($id){
+        $zone= Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
+        $data = format_coordiantes($zone->coordinates[0]);
+        $center = (object)['lat'=>(float)trim(explode(' ',$zone->center)[1], 'POINT()'), 'lng'=>(float)trim(explode(' ',$zone->center)[0], 'POINT()')];
+        return response()->json(['coordinates'=>$data, 'center'=>$center]);
+    }
+
 }

@@ -11,17 +11,20 @@ use App\Http\Controllers\Controller;
 class CartController extends Controller {
 
     /**
-     * get cart
-     * return cart
+     * Get cart
+     *
+     * @return JsonResponse
      */
     public function getCart() {
         $cart = auth()->user()->cart ?: new Cart();
-        return ok( 'Cart retrived successfully', $cart );
+        return ok( 'Cart retrieved successfully', $cart );
     }
 
     /**
-     * add product to cart
+     * Add product to cart
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function addToCart( Request $request ) {
         $request->validate( [
@@ -58,7 +61,9 @@ class CartController extends Controller {
 
     /**
      * Add multiple products to cart
+     *
      * @param Request $request
+     * @return JsonResponse
      */
     public function addToCartMultipleProduct( Request $request ) {
         $request->validate( [
@@ -89,6 +94,7 @@ class CartController extends Controller {
      * Apply promo
      *
      * @param Request $request
+     * @return JsonResponse
      */
     public function applyPromo(Request $request)
     {
@@ -121,10 +127,12 @@ class CartController extends Controller {
 
     /**
      * Display a listing of the  Cart Details.
-     * @param integer $id
+     *
+     * @param integer $cartProductId
+     * @return JsonResponse
      */
-    public function getCartProducts($id){
-        $cartsProducts = Cart::with('products')->find($id);
+    public function getCartProducts( $cartProductId ){
+        $cartsProducts = Cart::with('products')->find( $cartProductId );
 
         return ok('Cart Product list retrive successfully', $cartsProducts);
     }
@@ -133,9 +141,9 @@ class CartController extends Controller {
      * Remove the specified resource from storage.
      *
      * @param integer $productId
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy($productId)
+    public function destroy( $productId )
     {
         $cart = Cart::whereUserId(auth()->id())->first();
 

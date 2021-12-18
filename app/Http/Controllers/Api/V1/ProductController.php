@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * Display a listing of the Product with there relational data.
+     *
+     * @return JsonResponse
+     */
     public function getProducts()
     {
 
@@ -24,12 +29,17 @@ class ProductController extends Controller
                                 'images'
                                 )->get();
 
-        return ok( 'Products list retrived successfully', $product );
+        return ok( 'Products list retrieved successfully', $product );
     }
 
-    public function productDetails($id)
+    /**
+     * Display the specified Product with there relational data.
+     *
+     * @param integer $productId
+     * @return JsonResponse
+     */
+    public function productDetails($productId)
     {
-
         $product = Product::with(
                                 'brand',
                                 'category',
@@ -40,17 +50,16 @@ class ProductController extends Controller
                                 'types',
                                 'nutritions',
                                 'images'
-                                )->find($id);
+                                )->find($productId);
 
-        return ok( 'Product details retrived successfully', $product );
+        return ok( 'Product details retrieved successfully', $product );
     }
 
-
     /**
-     * Store a newly created resource in storage.
+     * User search the product.
      *
-     * @param  \Illuminate\Http\Request    $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function searchProduct(Request $request)
     {
@@ -66,7 +75,7 @@ class ProductController extends Controller
             $query->orderBy('price', $sort_by);
         }
 
-        $all_search = $query->get()
+        $allSearch = $query->get()
                             ->load(
                                   'brand',
                                   'category',
@@ -78,17 +87,14 @@ class ProductController extends Controller
                                   'nutritions',
                                   'images');
 
-
-        return ok( 'Search product successfully', $all_search );
+        return ok( 'Search product successfully', $allSearch );
     }
 
-
-
     /**
-     * Store a newly created resource in storage.
+     * User filter there product by calories, price, categories, brands, types, nutritions.
      *
-     * @param  \Illuminate\Http\Request    $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function filterProduct(Request $request)
     {
@@ -104,27 +110,27 @@ class ProductController extends Controller
                                       'images');
 
 
-        if ($request->calories)
+        if ( $request->calories )
         {
             $productQuery->where('calories_per_serving', 'LIKE', '%'.$request->calories.'%');
         }
 
-        if ($request->fat_calories)
+        if ( $request->fat_calories )
         {
             $productQuery->orWhere('fat_calories_per_serving', 'LIKE', '%'.$request->fat_calories.'%');
         }
 
-        if ($request->low_price)
+        if ( $request->low_price )
         {
             $productQuery->where('price','>=', $request->low_price);
         }
 
-        if ($request->high_price)
+        if ( $request->high_price )
         {
             $productQuery->where('price','<=', $request->high_price);
         }
 
-        if ($request->categories)
+        if ( $request->categories )
         {
             $categories = explode(",", $request->categories);
             $productQuery->orWhereHas('category', function($query) use ($categories) {
@@ -132,31 +138,31 @@ class ProductController extends Controller
             });
         }
 
-        if ($request->brands)
+        if ( $request->brands )
         {
-            $brands = explode(",", $request->brands);
-            $productQuery->orWhereHas('brand', function($query) use ($brands) {
-                $query->whereIn('name', $brands);
+            $brands = explode(",", $request->brands );
+            $productQuery->orWhereHas('brand', function( $query ) use ( $brands ) {
+                $query->whereIn('name', $brands );
             });
         }
 
-        if ($request->types)
+        if ( $request->types )
         {
-            $productQuery->orWhereHas('types', function($query) use ($request) {
-                $query->where('name', $request->types);
+            $productQuery->orWhereHas('types', function( $query ) use ( $request ) {
+                $query->where('name', $request->types );
             });
         }
 
-        if ($request->nutritions)
+        if ( $request->nutritions )
         {
-            $productQuery->orWhereHas('nutritions', function($query) use ($request) {
+            $productQuery->orWhereHas('nutritions', function( $query ) use ($request) {
                 $query->where('name', $request->nutritions);
             });
         }
 
         $filter =  $productQuery->get();
 
-        if (!$filter) {
+        if ( !$filter ) {
             return ok('No product found');
         }
 

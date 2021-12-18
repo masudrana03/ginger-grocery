@@ -16,6 +16,7 @@ class StoreSeeder extends Seeder {
             'name'       => 'My Store',
             'type'       => 'Store type',
             'image'      => 'default.png',
+            // 'zone_id'    => '1',
             'created_at' => now(),
         ] );
     }

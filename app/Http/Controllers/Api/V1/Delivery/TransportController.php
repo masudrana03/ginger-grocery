@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class TransportController extends Controller
 {
-
-    public function getRegistationDoc(Request $request){
-
+    /**
+     * Delivery man transport registation document.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getRegistationDoc(Request $request)
+    {
         $request->validate( [
             'images'        => 'required',
         ] );
@@ -30,10 +35,15 @@ class TransportController extends Controller
 
     }
 
-
-    public function Update(Request $request , $id)
+    /**
+     * Delivery man registation document update .
+     *
+     * @param integer $transportId
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function Update(Request $request , $transportId)
     {
-
         $request->validate( [
             'vehicle_brand'        => 'required',
             'vehicle_model'        => 'required',
@@ -41,7 +51,7 @@ class TransportController extends Controller
             'vehicle_image'        => 'required',
         ] );
 
-        $transport = Transport::find($id);
+        $transport = Transport::find( $transportId );
 
         $filename = '';
 
@@ -67,8 +77,14 @@ class TransportController extends Controller
     }
 
 
-
-    public function uploadTransportImage($transport, $images)
+    /**
+     * Delivery man multiple image upload.
+     *
+     * @param Transport $transport
+     * @param array $images
+     * @return JsonResponse
+     */
+    public function uploadTransportImage( $transport, $images )
     {
         foreach ($transport->images as $image) {
             $imageDirectory = 'assets/img/uploads/transports/';
@@ -79,7 +95,7 @@ class TransportController extends Controller
         $filenames = [];
 
         foreach ($images as $image) {
-            $filename          = generateUniqueFileName($images->getClientOriginalExtension());
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
             $location          = public_path('assets/img/uploads/transports/' . $filename);
             $thumbnailLocation = public_path('assets/img/uploads/transports/thumbnail/' . $filename);
 

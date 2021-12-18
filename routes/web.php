@@ -29,6 +29,7 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\DeliveryManReviewController;
+use App\Http\Controllers\FaqController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -75,6 +76,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/allnutrition', [NutritionController::class, 'allNutrition'])->name('allnutrition');
     Route::get('/allcategories', [CategoryController::class, 'allCategories'])->name('allcategories');
     Route::get('/allstores', [StoreController::class, 'allStores'])->name('allstores');
+    Route::get('/zone/get-coordinates/{id}', [StoreController::class, 'getCoordinates'])->name('getCoordinates');
+
     Route::get('/allusers', [UserController::class, 'allUsers'])->name('allusers');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/change-password', [UserController::class, 'changePassword'])->name('user.change_password');
@@ -118,6 +121,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/delivery-man-review', [DeliveryManReviewController::class, 'index'])->name('delivery_man_review');
     Route::get('/delivery-Reviews', [DeliveryManReviewController::class, 'getDeliveryReviews'])->name('getDeliveryManReviews');
 
+    Route::get('/faq', [FaqController::class, 'getFaq'])->name('getFaq');
+    Route::get('/faq-status/{faq}/update_status', [FaqController::class, 'updateStatus'])->name('faqs.update_status');
+
+
     // Resource routes
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
@@ -139,6 +146,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('taxes', TaxController::class);
     Route::resource('zones', ZoneController::class);
     Route::resource('delivery_men', DeliveryManDetailsController::class);
+    Route::resource('faqs', FaqController::class);
 });
 
 
