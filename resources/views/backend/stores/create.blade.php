@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="zone">Zone</label>
-                                    <select name="zone" id="choice_zones"
+                                    <select name="zone_id" id="choice_zones"
                                     class="form-control @error('zone') is-invalid @enderror">
                                         <option value="">Seclect Zone</option>
                                     @foreach ( $zones as $zone )
@@ -68,18 +68,18 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="longitude">Longitude</label>
-                                    <input type="text" name="longitude" class="form-control @error('longitude') is-invalid @enderror" id="longitude" aria-describedby="emailHelp" placeholder="Longitude" value="{{ old('longitude') }}">
-                                    @error('longitude')
+                                    <label for="latitude">Latitude</label>
+                                    <input type="text" name="latitude" id="latitude" class="form-control @error('latitude') is-invalid @enderror" id="latitude" aria-describedby="emailHelp" placeholder="Ex : -94.22213" value="{{ old('latitude') }}">
+                                    @error('latitude')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="latitude">Latitude</label>
-                                    <input type="text" name="latitude" class="form-control @error('latitude') is-invalid @enderror" id="latitude" aria-describedby="emailHelp" placeholder="Latitude" value="{{ old('latitude') }}">
-                                    @error('latitude')
+                                    <label for="longitude">Longitude</label>
+                                    <input type="text" name="longitude" id="longitude" class="form-control @error('longitude') is-invalid @enderror" id="longitude" aria-describedby="emailHelp" placeholder="Ex : 103.344322" value="{{ old('longitude') }}">
+                                    @error('longitude')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -229,7 +229,7 @@
             });
             markers = [];
             // For each place, get the icon, name and location.
-            
+
             places.forEach((place) => {
             if (!place.geometry || !place.geometry.location) {
                 console.log("Returned place contains no geometry");
@@ -300,11 +300,12 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
-    
-        var zonePolygon = null
-       
+
+        var zonePolygon = null;
+
 
     $('#choice_zones').on('change', function(){
+        infoWindow = new google.maps.InfoWindow();
             var id = $(this).val();
             $.get({
                 url: '{{url('/')}}/admin/zone/get-coordinates/'+id,

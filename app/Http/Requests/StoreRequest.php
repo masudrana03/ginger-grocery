@@ -24,9 +24,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required',
-            'type'  => 'required',
-            'image' => 'required|image',
+            'name'      => 'required',
+            'type'      => 'required',
+            'image'     => 'required|image',
+            'zone_id'   => 'required',
+            'latitude'  => 'required',
+            'longitude' => 'required',
         ];
     }
 }

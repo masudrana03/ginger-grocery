@@ -18,14 +18,26 @@ class Store extends Model {
         'name',
         'type',
         'image',
+        'zone_id',
+        'latitude',
+        'longitude',
     ];
 
     /**
      * Return the store's manager
-     * 
+     *
      * @return Relationship
      */
     public function user() {
         return $this->hasOne( User::class )->withDefault();
+    }
+
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function zone() {
+        return $this->belongsTo( Zone::class );
     }
 }
