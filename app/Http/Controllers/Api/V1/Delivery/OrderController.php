@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\OrderDetails;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 use App\Notifications\Delivery\OrderPicked;
 use App\Notifications\Delivery\OrderAccepted;
 use App\Notifications\Delivery\OrderCanceled;
@@ -45,7 +46,7 @@ class OrderController extends Controller
             'product.images'
         )->where('order_id', $orderId )->get();
 
-        return ok('Order details retrive successfully', $orderDetails);
+        return ok('Order details retrieve successfully', $orderDetails);
     }
 
     /**
@@ -158,6 +159,18 @@ class OrderController extends Controller
         $order->save();
 
         return ok('Payment successfully collected');
+    }
+
+
+    /**
+     * Display the specified order user with there relational data..
+     *
+     * @param integer $order
+     * @return JsonResponse
+     */
+    public function storeNavigation($orderId)
+    {
+        $store = Store::find($orderId->store_id);
     }
 
 }

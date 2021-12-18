@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('orders/{order}/{status}', [OrderController::class, 'updateStatus']);
     Route::get('orders/{id}', [OrderController::class, 'getOrderDetails']);
     Route::get('orders/{id}/customer/details', [OrderController::class, 'getCustomerDetails']);
+    Route::get('orders/{id}/customer/details', [OrderController::class, 'getCustomerDetails']);
     Route::post('delivery-man-otp/{id}', [OrderController::class, 'getOtp']);
     Route::post('delivery-man-otp-verify/{id}/{otp}', [OrderController::class, 'getOtpVerify']);
     Route::post('orders-cash-collection/{id}', [OrderController::class, 'getCash']);
