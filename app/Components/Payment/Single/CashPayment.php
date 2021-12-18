@@ -8,11 +8,10 @@ class CashPayment implements PayableInterface
 {
     /**
      * Accept cash payment
-     * 
-     * @return array
+     * @param string $invoiceId
      */
-    public function acceptPayment(): array
+    public function acceptPayment($invoiceId)
     {
-       return ['status' => true, 'payment_status' => false];
+       return view('api.order-placed');
     }
 }

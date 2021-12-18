@@ -134,13 +134,19 @@
                     }
                 },
                 setup_future_usage: 'off_session'
-            }).then(function(result) {
+            }).then(function(result) { 
+                var orderId = "{{ $orderId }}";
                 if (result.error) {
                     // Show error to your customer
+                    var url = "{{ route('stripe_payment_failed', ":orderId") }}";
+                    url = url.replace(':orderId', orderId);
+                    window.location.href = url;
                     console.log(result.error.message);
                 } else {
                     if (result.paymentIntent.status === 'succeeded') {
-                        window.location.href = "{{ route('stripe_payment_success') }}";
+                        var url = "{{ route('stripe_payment_success', ":orderId") }}";
+                        url = url.replace(':orderId', orderId);
+                        window.location.href = url;
     
                         // Show a success message to your customer
                         // There's a risk of the customer closing the window before callback execution
@@ -148,7 +154,7 @@
                         // to save the card to a Customer
 
                         // The PaymentMethod ID can be found on result.paymentIntent.payment_method
-                    }
+                    } 
                 }
             });
         }

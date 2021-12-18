@@ -11,12 +11,9 @@ use App\Models\UserPoint;
 use App\Models\OrderStatus;
 use Illuminate\Support\Str;
 use App\Models\OrderDetails;
-use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\Models\PaymentMethod;
-use App\Components\Email\Email;
 use Illuminate\Support\Facades\DB;
-use App\Components\Payment\Payment;
 use App\Http\Controllers\Controller;
 use App\Components\Email\EmailFactory;
 use App\Http\Requests\CheckoutRequest;
@@ -43,47 +40,40 @@ class CheckoutController extends Controller
             return api()->notFound('Payment method not found');
         }
 
+        $invoiceId = $this->createOrder($cart, $request->billing_id, $request->shipping_id);
+
+        // give points if match any condition
+        $this->givePointsToCustomer($cart);
+
+        // Send order confirmation email
+        $this->sendOrderConfirmationEmail($invoiceId);
+
         // Accept payment
-        $payment = $this->acceptPayment($provider->provider);
-
-        // Create order if payment status is true
-        if ($payment['status']) {
-            $invoiceId = $this->createOrder($cart, $payment['payment_status'], $request->billing_id, $request->shipping_id);
-
-            // give points if match any condition
-            $this->givePointsToCustomer($cart);
-
-            // Send order confirmation email
-            $this->sendOrderConfirmationEmail($invoiceId);
-
-            return ok('Order placed');
-        } else {
-            return api()->error($payment['message']);
-        }
+        $this->acceptPayment($provider->provider, $invoiceId);
     }
 
     /**
      * accept the payment
      *
      * @param string $provider
-     * @return array
+     * @param string $invoiceId
+     * @return void
      */
-    public function acceptPayment($provider): array
+    public function acceptPayment($provider, $invoiceId)
     {
         $paymentFactory = new PaymentFactory();
         $payment = $paymentFactory->initializePayment($provider);
-        return $payment->acceptPayment();
+        $payment->acceptPayment($invoiceId);
     }
 
     /**
      * Create order
      *
      * @param Cart $cart
-     * @param boolean $paymentStatus
      * @param integer $billingId
      * @param integer $shippingId
      */
-    public function createOrder($cart, $paymentStatus, $billingId, $shippingId)
+    public function createOrder($cart, $billingId, $shippingId)
     {
         DB::beginTransaction();
 
@@ -111,7 +101,7 @@ class CheckoutController extends Controller
             $order->store_id        = $cart->products->first()->id;
             $order->billing_id      = $billingId;
             $order->shipping_id     = $shippingId;
-            $order->payment_status  = $paymentStatus;
+            $order->payment_status  = false;
             $order->save();
 
             foreach ($cart->products as $item) {
@@ -147,7 +137,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Send order cnfirmation email
+     * Send order confirmation email
      *
      * @param string $invoiceId
      */
@@ -188,6 +178,20 @@ class CheckoutController extends Controller
             'points'  => $points->points
         ]);
 
-        // We can send notification after geting points
+        // We can send notification after getting points
+    }
+
+    public function paymentSuccess($invoiceId)
+    {
+        $order = Order::whereInvoiceId($invoiceId)->first();
+        $order->payment_status = true;
+        $order->save();
+
+        return view('api.payment-success');
+    }
+
+    public function paymentFailed($invoiceId)
+    {
+        return view('api.payment-failed');
     }
 }

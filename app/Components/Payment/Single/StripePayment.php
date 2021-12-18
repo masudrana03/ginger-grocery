@@ -5,6 +5,7 @@ namespace App\Components\Payment\Single;
 use Exception;
 use App\Models\Cart;
 use App\Components\Payment\PayableInterface;
+use App\Models\Order;
 use App\Models\PaymentMethod;
 class StripePayment implements PayableInterface
 {
@@ -22,16 +23,11 @@ class StripePayment implements PayableInterface
     /**
      * Accept stripe payment
      *
-     * @return array
+     * @param string $invoiceId
      */
-    public function acceptPayment()
+    public function acceptPayment($invoiceId)
     {
-        // this method should accept the payment 
-        // and if payment is successful then it returns an array with status 
-        
-        $cart = Cart::whereUserId(auth()->id())->first();
-
-        $calculatedPrice = priceCalculator($cart);
+        $amount = Order::whereInvoiceId($invoiceId)->total;
 
         $stripe = new \Stripe\StripeClient($this->client_secret);
     
@@ -42,7 +38,7 @@ class StripePayment implements PayableInterface
         \Stripe\Stripe::setApiKey($this->client_secret);
 
         $intent = \Stripe\PaymentIntent::create([
-            'amount' => $calculatedPrice['total'] * 100,
+            'amount' => $amount * 100,
             'currency' => 'usd',
             'customer' => $stripeCustomer->id,
         ]);
@@ -50,18 +46,6 @@ class StripePayment implements PayableInterface
         $client_secret = $intent->client_secret;
         $publish_key   = $this->client_key;
 
-        return view('api.stripe', compact('client_secret', 'publish_key'));
-
-        // try {
-        //     $request->user()->charge(
-        //         $calculatedPrice['total'],
-        //         $request->paymentMethodId
-        //     );
-
-        //     return ['status' => true, 'payment_status' => true];
-        // } catch (Exception $e) {
-        //     return ['status' => false, 'message' => $e->getMessage()];
-        //     logger($e);
-        // }
+        return view('api.stripe', compact('client_secret', 'publish_key', 'invoiceId'));
     }
 } 

@@ -68,6 +68,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('apply-promo', [CartController::class, 'applyPromo']);
     Route::post('checkout', [CheckoutController::class, 'checkout']);
+    Route::get('stripe_payment_success/{invoice_id}', [CheckoutController::class, 'paymentSuccess'])->name('stripe_payment_success');
+    Route::get('stripe_payment_failed/{invoice_id}', [CheckoutController::class, 'paymentFailed'])->name('stripe_payment_failed');
 
     Route::post('add-address', [AddressController::class, 'store']);
     Route::get('get-addresses', [AddressController::class, 'getAddresses']);

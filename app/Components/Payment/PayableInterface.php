@@ -8,6 +8,7 @@ interface PayableInterface
 {
     /**
      * Accept the payment
+     * @param string $invoiceId
      */
-    public function acceptPayment();
+    public function acceptPayment($invoiceId);
 }
