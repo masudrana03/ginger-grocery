@@ -52,4 +52,9 @@ class CartController extends Controller {
 
         return $this->addToCart( $request );
     }
+
+    public function cart()
+    {
+        return view('frontend.cart');
+    }
 }
