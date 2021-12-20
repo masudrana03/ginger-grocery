@@ -2,18 +2,21 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\InstallController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
@@ -24,13 +27,11 @@ use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
-use App\Http\Controllers\Frontend\UserController as FrontendUserController;
-use App\Http\Controllers\InstallController;
-use App\Http\Controllers\ZoneController;
-use App\Http\Controllers\DeliveryManDetailsController;
+use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\DeliveryManReviewController;
-use App\Http\Controllers\FaqController;
+use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -168,8 +169,12 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
 Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
-Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+Route::get('/user-track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
 Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
 Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+
+Route::get('/compare', [CompareController::class, 'compare'])->name('compare');
+Route::get('/compare-product/{id}', [CompareController::class, 'compareProduct'])->name('compareProduct');
+
 
 Auth::routes();
