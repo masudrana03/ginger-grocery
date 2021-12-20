@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('check-status/{id}', [ProfileController::class, 'getStatus']);
 
     Route::post('register-doc/{id}', [TransportController::class, 'getRegistationDoc']);
-    Route::post('vehicle-info/{id}', [TransportController::class, 'Update']);
+    Route::post('vehicle-info/{id}', [TransportController::class, 'update']);
 
     Route::post('delivery-man-review', [DeliveryManReviewController::class, 'addDeliveryManRating']);
 
@@ -45,7 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('orders/{order}/{status}', [OrderController::class, 'updateStatus']);
     Route::get('orders/{id}', [OrderController::class, 'getOrderDetails']);
     Route::get('orders/{id}/customer/details', [OrderController::class, 'getCustomerDetails']);
-    Route::get('orders/{id}/customer/details', [OrderController::class, 'getCustomerDetails']);
+    Route::get('order-store-navigation/{id}', [OrderController::class, 'storeNavigation']);
     Route::post('delivery-man-otp/{id}', [OrderController::class, 'getOtp']);
     Route::post('delivery-man-otp-verify/{id}/{otp}', [OrderController::class, 'getOtpVerify']);
     Route::post('orders-cash-collection/{id}', [OrderController::class, 'getCash']);

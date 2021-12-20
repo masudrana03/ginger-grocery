@@ -42,7 +42,7 @@ class TransportController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function Update(Request $request , $transportId)
+    public function update(Request $request , $transportId)
     {
         $request->validate( [
             'vehicle_brand'        => 'required',

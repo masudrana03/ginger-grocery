@@ -50,7 +50,8 @@ class CheckoutController extends Controller
         $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
-        $this->acceptPayment($provider->provider, $invoiceId);
+        return $this->acceptPayment($provider->provider, $invoiceId);
+
     }
 
     /**
@@ -64,7 +65,8 @@ class CheckoutController extends Controller
     {
         $paymentFactory = new PaymentFactory();
         $payment = $paymentFactory->initializePayment($provider);
-        $payment->acceptPayment($invoiceId);
+        return $payment->acceptPayment($invoiceId);
+
     }
 
     /**

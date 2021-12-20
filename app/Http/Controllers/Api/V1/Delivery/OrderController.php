@@ -163,14 +163,20 @@ class OrderController extends Controller
 
 
     /**
-     * Display the specified order user with there relational data..
+     * Display the specified order Store with there relational data
      *
-     * @param integer $order
+     * @param integer $orderId
      * @return JsonResponse
      */
     public function storeNavigation($orderId)
     {
-        $store = Store::find($orderId->store_id);
+        $store = Order::find($orderId);
+
+        $storeId = $store->store_id;
+
+        $storeLocation = Store::with('zone:id,name')->select('name','latitude','longitude','zone_id')->find($storeId);
+
+        return ok('Store successfully found', $storeLocation );
     }
 
 }
