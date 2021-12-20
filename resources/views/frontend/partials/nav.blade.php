@@ -241,11 +241,11 @@
                                     </form>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="shop-compare.html">
+                                    <a href="#">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
                                         <span class="pro-count blue">{{count($compareProduct)}}</span>
                                     </a>
-                                    <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
+                                    <a href="{{route('compare')}}"><span class="lable ml-0">Compare</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             @forelse( $compareProduct as $product )
