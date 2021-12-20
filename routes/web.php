@@ -26,12 +26,14 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -165,6 +167,7 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
+    Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
 });
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
