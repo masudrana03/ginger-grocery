@@ -243,9 +243,40 @@
                                 <div class="header-action-icon-2">
                                     <a href="shop-compare.html">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
-                                        <span class="pro-count blue">3</span>
+                                        <span class="pro-count blue">{{count($compareProduct)}}</span>
                                     </a>
                                     <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <ul>
+                                            @forelse( $compareProduct as $product )
+                                            <li>
+                                                <div class="shopping-cart-img">
+                                                    <a href="#"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="{{route('products', $product->id)}}">{{$product->name}}</a></h4>
+                                                    <h4>{{$product->currency->symbol}}{{$product->price}}</h4>
+                                                </div>
+                                                <div class="shopping-cart-delete">
+                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                </div>
+                                            </li>
+                                            @empty
+                                            <li>
+
+                                                <div class="shopping-cart-title">
+                                                    <h4>No Items</h4>
+                                                </div>
+
+                                            </li>
+                                            @endforelse
+                                        </ul>
+                                        <div class="shopping-cart-footer">
+                                            <div class="shopping-cart-button">
+                                                <a href="{{route('compare')}}" class="outline">View Compare</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a href="shop-wishlist.html">
@@ -257,7 +288,7 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
-                                        <span class="pro-count blue">{{auth()->user()?->cart->products()->count() ?? 0}}</span>
+                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
                                     </a>
                                     <a href="shop-cart.html"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -285,11 +316,11 @@
                                             @endphp
                                             @empty
                                             <li>
-                                                
+
                                                 <div class="shopping-cart-title">
                                                     <h4>No Items</h4>
                                                 </div>
-                                                
+
                                             </li>
                                             @endforelse
                                         </ul>
@@ -327,7 +358,11 @@
                                                 <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                             </li>
                                             <li>
-                                                <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><i class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>
@@ -414,7 +449,7 @@
                             <nav>
                                 <ul>
                                     <li class="hot-deals"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}" alt="hot deals" /><a href="shop-grid-right.html">Hot Deals</a></li>
-                                    <li>
+                                    {{-- <li>
                                         <a class="active" href="{{url('/')}}">Home <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="{{url('/')}}">Home 1</a></li>
@@ -424,11 +459,17 @@
                                             <li><a href="index-5.html">Home 5</a></li>
                                             <li><a href="index-6.html">Home 6</a></li>
                                         </ul>
+                                    </li> --}}
+                                    <li>
+                                        <a class="active" href="{{url('/')}}">Home</a>
                                     </li>
                                     <li>
                                         <a href="page-about.html">About</a>
                                     </li>
                                     <li>
+                                        <a href="#">Shop</a>
+                                    </li>
+                                    {{-- <li>
                                         <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
@@ -451,7 +492,7 @@
                                             <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                             <li><a href="shop-compare.html">Shop – Compare</a></li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -463,7 +504,7 @@
                                             <li><a href="vendor-guide.html">Vendor Guide</a></li>
                                         </ul>
                                     </li>
-                                    <li class="position-static">
+                                    {{-- <li class="position-static">
                                         <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -524,8 +565,8 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li>
+                                    </li> --}}
+                                    {{-- <li>
                                         <a href="blog-category-grid.html">Blog <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
@@ -541,8 +582,8 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li>
+                                    </li> --}}
+                                    {{-- <li>
                                         <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="page-about.html">About Us</a></li>
@@ -555,10 +596,18 @@
                                             <li><a href="page-terms.html">Terms of Service</a></li>
                                             <li><a href="page-404.html">404 Page</a></li>
                                         </ul>
+                                    </li> --}}
+                                    <li>
+                                        <a href="#">Contact</a>
+                                    </li>
+                                    @if (!auth()->user())
+                                    <li>
+                                        <a href="{{ route('login')}}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="page-contact.html">Contact</a>
+                                        <a href="{{ route('register')}}">Register</a>
                                     </li>
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
