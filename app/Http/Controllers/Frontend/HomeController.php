@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller {
     public function index() {
-        $productId = session('compare');
-        $compareProduct = Product::find($productId) ?? [];
+        $productIds = session('compare');
+        $compareProduct = Product::find($productIds) ?? [];
         $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
         return view( 'frontend.index', compact( 'categories','compareProduct' ) );
     }

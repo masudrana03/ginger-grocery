@@ -10,8 +10,11 @@ class CompareController extends Controller
 {
     public function compare()
     {
-        $productId = session('compare');
-        $compareProduct = Product::find($productId) ?? [] ;
+        $productIds = session('compare');
+        if($productIds < 2 ){
+            $compareProduct = Product::find($productIds) ?? [] ;
+        }
+        return back();
         return view('frontend.compare' , compact( 'compareProduct' ) );
     }
 

@@ -55,6 +55,8 @@ class CartController extends Controller {
 
     public function cart()
     {
-        return view('frontend.cart');
+        $productIds = session('compare');
+        $compareProduct = Product::find($productIds) ?? [];
+        return view('frontend.cart', compact( 'compareProduct' ) );
     }
 }
