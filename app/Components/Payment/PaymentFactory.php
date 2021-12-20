@@ -4,6 +4,7 @@ namespace App\Components\Payment;
 
 use Exception;
 use App\Components\Payment\Single\CashPayment;
+use App\Components\Payment\Single\PaypalPayment;
 use App\Components\Payment\Single\StripePayment;
 
 class PaymentFactory
@@ -18,6 +19,10 @@ class PaymentFactory
         switch ($provider) {
             case 'stripe':
                 return new StripePayment();
+            break;
+
+            case 'paypal':
+                return new PaypalPayment();
             break;
 
             case 'cash':

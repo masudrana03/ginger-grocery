@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\V1\OrderRatingController;
 use App\Http\Controllers\Api\V1\SocialLoginController;
 use App\Http\Controllers\Api\V1\SavedProductController;
 use App\Http\Controllers\Api\V1\PaymentMethodController;
+use App\Http\Controllers\Api\V1\PaypalPaymentController;
 use App\Http\Controllers\Api\V1\ResetPasswordController;
 
 /*
@@ -118,3 +119,9 @@ Route::get('promo/{id}', [PromoController::class, 'promoDetails']);
 
 Route::get('nutrition', [NutritionController::class, 'getNutritions']);
 Route::get('nutrition/{id}', [NutritionController::class, 'nutritionDetails']);
+
+// route for processing payment
+Route::post('paypal-pay', 'PaypalPaymentController@payWithpaypal');
+
+// route for check status of the payment
+Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus');
