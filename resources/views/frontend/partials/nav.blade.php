@@ -240,6 +240,10 @@
                                         </select>
                                     </form>
                                 </div>
+                                @php
+                                    $productIds = session('compare');
+                                    $compareProduct = App\Models\Product::find($productIds) ?? [];
+                                @endphp
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
