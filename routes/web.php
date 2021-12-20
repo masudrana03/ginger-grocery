@@ -30,10 +30,7 @@ use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\FaqController;
-
-Route::get('/', function () {
-    return view('auth.login');
-});
+use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -159,7 +156,16 @@ Route::get('/terms', function () {
     return 'This is terms page';
 });
 
-Route::get('/test', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/products/{id}', [HomeController::class, 'productDetails'])->name('products');
+Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name('categories');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
+    Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
+});
+
 Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
 Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
 Route::get('/user-track-odres', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');

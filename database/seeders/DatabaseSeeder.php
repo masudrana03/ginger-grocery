@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
@@ -32,5 +34,12 @@ class DatabaseSeeder extends Seeder {
             TaxSeeder::class,
             PointSeeder::class,
         ] );
+
+        Category::factory()
+            ->has(
+                Product::factory()->count( rand( 10, 25 ) ), 'products'
+            )
+            ->count( 15 )
+            ->create();
     }
 }
