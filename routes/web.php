@@ -28,12 +28,14 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\ShippingServiceController;
-use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
+use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
+use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
+use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -178,8 +180,16 @@ Route::get('/user-track-orders', [FrontendUserController::class, 'getTrackOrders
 Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
 Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
 
-Route::get('/compare', [CompareController::class, 'compare'])->name('compare');
-Route::get('/compare-product/{id}', [CompareController::class, 'compareProduct'])->name('compareProduct');
+Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
+Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
+
+Route::get('/wishlist', [FrontendWishlistController::class, 'index'])->name('wishlist.index');
+Route::get('/wishlist-product/{id}', [FrontendWishlistController::class, 'addToWishlistById'])->name('wishlist');
+Route::get('/wishlist-product-remove/{id}', [FrontendWishlistController::class, 'removeToWishlistById'])->name('wishlist.remove');
+
+// Route::get('/shop', [FrontendStoreController::class, 'shop'])->name('shop');
+Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
+
 
 
 Auth::routes();

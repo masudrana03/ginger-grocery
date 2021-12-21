@@ -11,10 +11,11 @@ class CompareController extends Controller
     public function compare()
     {
         $productIds = session('compare');
-        if($productIds < 2 ){
+        $compareProduct = Product::find($productIds) ?? [];
+        if($productIds < 1 ){
             $compareProduct = Product::find($productIds) ?? [] ;
+            return back();
         }
-        return back();
         return view('frontend.compare' , compact( 'compareProduct' ) );
     }
 
@@ -24,6 +25,19 @@ class CompareController extends Controller
      */
     public function compareProduct($id)
     {
+        // return time() - session('start_time');
+        if (! session('start_time')) {
+            session()->put('start_time', time());
+        } else if (time() - session('start_time') > 1800) {
+            session()->flush();
+        }
+
+        // session()->put('start_time', time());
+
+        // if (time() - session('start_time') < 10) {
+        //     session()->flush();
+        // }
+
         // return session()->flush();
 
         if (! session('compare')) {
@@ -39,7 +53,6 @@ class CompareController extends Controller
             unset($compare[0]);
             session()->push('compare', $id);
         }
-
         // return session('compare');
         return back();
     }

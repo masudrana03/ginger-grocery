@@ -283,11 +283,42 @@
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.html">
+                                    <a href="#">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
-                                        <span class="pro-count blue">6</span>
+                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts ? auth()->user()->savedProducts->count() : 0 }}</span>
                                     </a>
-                                    <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
+                                    <a href="{{ route('wishlist.index') }}"><span class="lable">Wishlist</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <ul>
+                                            @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
+                                            <li>
+                                                <div class="shopping-cart-img">
+                                                    <a href="#"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="{{route('products', $wishlistProduct->id)}}">{{$wishlistProduct->name}}</a></h4>
+                                                    <h4>{{$wishlistProduct->currency->symbol}}{{$wishlistProduct->price}}</h4>
+                                                </div>
+                                                <div class="shopping-cart-delete">
+                                                    <a href="{{route('wishlist.remove', $wishlistProduct->id)}}"><i class="fi-rs-cross-small"></i></a>
+                                                </div>
+                                            </li>
+                                            @empty
+                                            <li>
+
+                                                <div class="shopping-cart-title">
+                                                    <h4>No Items</h4>
+                                                </div>
+
+                                            </li>
+                                            @endforelse
+                                        </ul>
+                                        <div class="shopping-cart-footer">
+                                            <div class="shopping-cart-button">
+                                                <a href="{{ route('wishlist.index') }}" class="outline">View Wishlist</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
@@ -606,10 +637,10 @@
                                     </li>
                                     @if (!auth()->user())
                                     <li>
-                                        <a href="{{ route('login')}}">Login</a>
+                                        <a href="{{ route('login') }}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register')}}">Register</a>
+                                        <a href="{{ route('register') }}">Register</a>
                                     </li>
                                     @endif
                                 </ul>

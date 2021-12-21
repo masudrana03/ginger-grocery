@@ -71,7 +71,7 @@ class User extends Authenticatable {
     }
 
     /**
-     * Get the cart associated with the uesr.
+     * Get the cart associated with the user.
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
     public function cart() {
