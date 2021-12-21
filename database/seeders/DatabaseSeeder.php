@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
         Artisan::call( 'cache:clear' );
 
         $this->call( [
+            CountrySeeder::class,
             SettingSeeder::class,
             PaymentMethodSeeder::class,
             StoreSeeder::class,

@@ -36,4 +36,9 @@ class PaymentMethod extends Model
     {
         $this->attributes['platform'] = $value == 'Live' ? true : false;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
 }

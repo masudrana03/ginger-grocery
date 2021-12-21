@@ -25,6 +25,7 @@ class PaymentMethodSeeder extends Seeder {
 
         PaymentMethod::create( [
             'provider'   => 'cash',
+            'status'     => true,
             'created_at' => now(),
         ] );
     }

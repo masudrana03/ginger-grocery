@@ -118,7 +118,7 @@ class CartController extends Controller {
 
         $total = $cart->products->sum('price');
 
-        $discount = promoDiscount($total, $promo->type, $promo->discount);
+        $discount = getAmountAfterDiscount($total, $promo->type, $promo->discount);
 
         return api()->success( 'Promo applied', [
             'discount' => $discount,
