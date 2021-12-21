@@ -133,7 +133,7 @@
             </div>
         </div>
     </div>
-    <header class="header-area header-style-1 header-height-2">
+    <header class="header-area header-style-1 header-style-5 header-height-2">
         <div class="mobile-promotion">
             <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
         </div>
@@ -648,7 +648,7 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-flex">
-                        <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline" />
+                        <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone-white.svg') }}" alt="hotline" />
                         <p>1900 - 888<span>24/7 Support Center</span></p>
                     </div>
                     <div class="header-action-icon-2 d-block d-lg-none">
