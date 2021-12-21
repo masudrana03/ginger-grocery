@@ -53,7 +53,6 @@ class CompareController extends Controller
             unset($compare[0]);
             session()->push('compare', $id);
         }
-
         // return session('compare');
         return back();
     }
