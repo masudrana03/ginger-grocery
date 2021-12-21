@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Home')
+@section('title', 'Product Wishlist')
 
 @section('content')
 <div class="page-header breadcrumb-wrap">
@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ( $wishlistProducts as $item)
+                        @forelse ( $wishlistProducts as $item )
                         <tr class="pt-30">
                             <td class="custome-checkbox pl-30">
                                 <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />

@@ -34,6 +34,7 @@ use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
+use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 
 Route::get('/installcheck', function () {
@@ -184,7 +185,8 @@ Route::get('/wishlist', [FrontendWishlistController::class, 'index'])->name('wis
 Route::get('/wishlist-product/{id}', [FrontendWishlistController::class, 'addToWishlistById'])->name('wishlist');
 Route::get('/wishlist-product-remove/{id}', [FrontendWishlistController::class, 'removeToWishlistById'])->name('wishlist.remove');
 
-Route::get('/shop', [FrontendWishlistController::class, 'shop'])->name('shop');
+// Route::get('/shop', [FrontendStoreController::class, 'shop'])->name('shop');
+Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 
 
 
