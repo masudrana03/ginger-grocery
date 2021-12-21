@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller {
     public function index() {
+        // if (! session('start_time')) {
+        //     session()->put('start_time', time());
+        // } else if (time() - session('start_time') > 1800) {
+        //     session()->forget('compare');
+        // }
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
         $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
