@@ -272,27 +272,24 @@
             <!--product grid-->
             <div class="pagination-area mt-20 mb-20">
 
-                <nav aria-label="Page navigation example">
+                {{-- <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-start">
-
-                        @foreach ($storeWiseProduct->links as $link)
-                        {{-- <li class="page-item">
+                        <li class="page-item">
                             <a class="page-link" href=""><i class="fi-rs-arrow-small-left"></i></a>
                         </li>
 
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li> --}}
-                        {{-- <li class="page-item"><a class="page-link dot" href="#">...</a></li> --}}
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
                         <li class="page-item"><a class="page-link" href="#">6</a></li>
 
-                        {{-- <li class="page-item">
+                        <li class="page-item">
                             <a class="page-link" href="#"><i class="fi-rs-arrow-small-right"></i></a>
-                        </li> --}}
-                        @endforeach
+                        </li>
                     </ul>
-
-                </nav>
+                </nav> --}}
+                {{ $storeWiseProduct->links() }}
             </div>
             <section class="section-padding pb-5">
                 <div class="section-title">

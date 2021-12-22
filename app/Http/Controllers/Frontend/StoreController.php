@@ -30,7 +30,7 @@ class StoreController extends Controller
             //  )->find( $storeId );
 
             //  return $store->name  ;
-            return $storeWiseProduct;
+            // return $storeWiseProduct;
 
         return view('frontend.store', compact( 'storeWiseProduct', 'store' ) );
     }
