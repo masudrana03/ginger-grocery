@@ -637,10 +637,10 @@
                                     </li>
                                     @if (!auth()->user())
                                     <li>
-                                        <a href="{{ route('login') }}">Login</a>
+                                        <a href="{{ route('frontend.login') }}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register') }}">Register</a>
+                                        <a href="{{ route('frontend.register') }}">Register</a>
                                     </li>
                                     @endif
                                 </ul>

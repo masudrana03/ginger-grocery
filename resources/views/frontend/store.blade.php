@@ -92,8 +92,8 @@
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
-                                    <img class="default-img" src="{{ asset('assets/frontend//imgs/shop/product-1-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend//imgs/shop/product-1-2.jpg') }}" alt="" />
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-action-1">

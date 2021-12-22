@@ -64,19 +64,20 @@
             <div class="col-lg-7">
                 <div class="home-slide-cover mt-30">
                     <div class="hero-slider-1 style-5 dot-style-1 dot-style-1-position-2">
-                        <div class="single-hero-slider single-animation-wrap" style="background-image: url({{ asset('assets/frontend/imgs/slider/slider-7.png') }})">
+                        @forelse ( $sliders as $slider )
+                        <div class="single-hero-slider single-animation-wrap" style="background-image: url({{ asset( 'assets/img/uploads/banners/' .$slider->image ) }})">
                             <div class="slider-content">
-                                <h1 class="display-2 mb-40">
-                                    Don’t miss amazing<br />
-                                    grocery deals
+                                <h1 class="display-2" style="font-size: 36px!important; margin-bottom: 22px !important;">
+                                    {{$slider->title}}
                                 </h1>
-                                <p class="mb-65">Sign up for the daily newsletter</p>
+                                <p class="" style="font-size: 22px; margin-bottom: 40px !important;">{{$slider->body}}</p>
                                 <form class="form-subcriber d-flex">
                                     <input type="email" placeholder="Your emaill address" />
                                     <button class="btn" type="submit">Subscribe</button>
                                 </form>
                             </div>
                         </div>
+                        @empty
                         <div class="single-hero-slider single-animation-wrap" style="background-image: url({{ asset('assets/frontend/imgs/slider/slider-8.png') }})">
                             <div class="slider-content">
                                 <h1 class="display-2 mb-40">
@@ -90,6 +91,7 @@
                                 </form>
                             </div>
                         </div>
+                        @endforelse
                     </div>
                     <div class="slider-arrow hero-slider-1-arrow"></div>
                 </div>

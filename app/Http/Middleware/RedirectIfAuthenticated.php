@@ -19,6 +19,23 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+
+        // $guards = empty($guards) ? [null] : $guards;
+
+        // foreach ($guards as $guard) {
+
+        // // return Auth::user();
+
+        //     if (Auth::guard($guard)->check() && Auth::guard($guard)->user()->type == 1 || Auth::guard($guard)->user()->type == 2) {
+        //         return redirect()->route('admin.dashboard');
+        //         // return redirect(RouteServiceProvider::HOME);
+        //     } elseif (Auth::guard($guard)->check() && Auth::guard($guard)->user()->type == 3) {
+        //         return redirect()->route('index');
+        //     }
+        // }
+
+        // return $next($request);
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
