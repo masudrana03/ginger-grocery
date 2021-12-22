@@ -104,9 +104,24 @@ function settings( $key ) {
  * @param string           $type       discount type
  * @param integer          $discount
  */
-function promoDiscount( $total, $type, $discount ) {
+function getAmountAfterDiscount( $total, $type, $discount ) {
     if ( $type == 'amount' ) {
         return $total -= $discount;
+    }
+
+    return $total -= ( $discount / 100 ) * $total;
+}
+
+/**
+ * Give me discount of given promo
+ *
+ * @param \App\Models\Cart $cart
+ * @param string           $type       discount type
+ * @param integer          $discount
+ */
+function getDiscountAmount( $total, $type, $discount ) {
+    if ( $type == 'amount' ) {
+        return $discount;
     }
 
     return ( $discount / 100 ) * $total;
@@ -132,7 +147,7 @@ function priceCalculator( $cart ) {
 
     if ( $cart->promo_id ) {
         $promo    = Promo::find( $cart->promo_id );
-        $discount = promoDiscount( $subtotal, $promo->type, $promo->discount );
+        $discount = getDiscountAmount( $subtotal, $promo->type, $promo->discount );
     }
 
     $shipping = ShippingService::active()->first();

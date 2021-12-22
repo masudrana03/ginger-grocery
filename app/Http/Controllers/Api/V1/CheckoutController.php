@@ -66,7 +66,6 @@ class CheckoutController extends Controller
         $paymentFactory = new PaymentFactory();
         $payment = $paymentFactory->initializePayment($provider);
         return $payment->acceptPayment($invoiceId);
-
     }
 
     /**
