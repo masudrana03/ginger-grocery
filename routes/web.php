@@ -24,6 +24,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
+use App\Http\Controllers\CallToActionController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Api\V1\CheckoutController;
@@ -32,10 +33,10 @@ use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
-use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
-use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
 use App\Http\Controllers\Frontend\LoginController as FrontendLoginController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
+use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
+use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 
 Route::get('/installcheck', function () {
@@ -127,6 +128,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/faq', [FaqController::class, 'getFaq'])->name('getFaq');
     Route::get('/faq-status/{faq}/update_status', [FaqController::class, 'updateStatus'])->name('faqs.update_status');
 
+    // Route::get('/call-to-action', [CallToActionController::class, ''])->name('');
+
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -150,6 +153,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('zones', ZoneController::class);
     Route::resource('delivery_men', DeliveryManDetailsController::class);
     Route::resource('faqs', FaqController::class);
+    Route::resource('call_to_actions', CallToActionController::class);
 });
 
 
