@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 
 class StoreController extends Controller
 {
@@ -13,14 +14,11 @@ class StoreController extends Controller
     */
     public function storeById( $storeId )
     {
-        $storeWiseProduct = Product::with(  'brand', 'category', 'unit', 'store', 'currency', 'types', 'images' )->where( 'store_id', $storeId )->get();
+        $store = Store::findOrFail($storeId);
 
-        return view('frontend.store', compact('storeWiseProduct'));
+        $storeWiseProduct = Product::with( 'store', 'currency', 'category.products', 'brand', 'unit' )->where( 'store_id' ,$store->id )->paginate(15);
+
+        return view('frontend.store', compact( 'storeWiseProduct', 'store' ) );
     }
 
-
-    // public function shop()
-    // {
-    //      return view('frontend.store');
-    // }
 }

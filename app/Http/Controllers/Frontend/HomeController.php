@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,8 @@ class HomeController extends Controller {
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
         $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
-        return view( 'frontend.index', compact( 'categories','compareProduct' ) );
+        $sliders = Banner::where( 'status', 1 )->get() ?? [];
+        return view( 'frontend.index', compact( 'categories','compareProduct','sliders' ) );
     }
 
     /**

@@ -40,4 +40,13 @@ class Store extends Model {
     public function zone() {
         return $this->belongsTo( Zone::class );
     }
+
+    /**
+     * Get the product associated with the category.
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
