@@ -24,6 +24,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
+use App\Components\Payment\Single\StripePayment;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Api\V1\CheckoutController;
@@ -32,9 +33,9 @@ use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
-use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
-use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
+use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
+use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 
 Route::get('/installcheck', function () {
@@ -190,6 +191,8 @@ Route::get('/wishlist-product-remove/{id}', [FrontendWishlistController::class, 
 // Route::get('/shop', [FrontendStoreController::class, 'shop'])->name('shop');
 Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 
-
+Route::get('/payment_from_card/{invoice_id}', [StripePayment::class, 'paymentFromCard'])->name('payment_from_card');
+Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+Route::get('payment-from-saved-card/{order_id}/{payment_method_id}', [StripePayment::class, 'paymentFromSavedCard'])->name('payment_from_saved_card');
 
 Auth::routes();

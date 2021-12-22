@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AllowInstall
 {
@@ -16,7 +17,6 @@ class AllowInstall
      */
     public function handle(Request $request, Closure $next)
     {
-
         if($request->route()->uri == 'installcheck'){
             $purchaseCode = session('purchase-code', false);
             if(!$purchaseCode){

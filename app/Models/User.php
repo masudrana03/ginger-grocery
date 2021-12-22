@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
-    use HasApiTokens, HasFactory, Notifiable, Billable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -121,5 +120,15 @@ class User extends Authenticatable {
      */
     public function store() {
         return $this->belongsTo( Store::class )->withDefault();
+    }
+
+    /**
+     * A user has many stripe cards.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stripeCards()
+    {
+        return $this->hasMany(StripeCustomerCard::class);
     }
 }

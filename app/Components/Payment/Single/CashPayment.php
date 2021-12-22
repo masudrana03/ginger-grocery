@@ -2,6 +2,8 @@
 
 namespace App\Components\Payment\Single;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Components\Payment\PayableInterface;
 
 class CashPayment implements PayableInterface
@@ -12,6 +14,12 @@ class CashPayment implements PayableInterface
      */
     public function acceptPayment($invoiceId)
     {
-       return view('api.order-placed');
+        $route = Route::current()->uri;
+
+        if (strpos($route, 'api') !== false) {
+            return view('api.order-placed');
+        }
+
+        return view('frontend.order-placed');
     }
 }

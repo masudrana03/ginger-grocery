@@ -17,7 +17,7 @@
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span
-                            class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your
+                            class="text-brand">{{ auth()->user()->cart ? auth()->user()->cart->products->count() : 0 }}</span> products in your
                         cart</h6>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                                     $total = 0;
                                     $currency_symbol = '$';
                                 @endphp
-                                @forelse (auth()->user()->cart->products as $product)
+                                @forelse (auth()->user()->cart ? auth()->user()->cart->products : [] as $product)
                                     <tr>
                                         <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-1.jpg"
                                                 alt="#">

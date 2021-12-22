@@ -111,7 +111,7 @@ class CheckoutController extends Controller
         $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
-        $this->sendOrderConfirmationEmail($invoiceId);
+        //$this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
         return $this->acceptPayment($provider->provider, $invoiceId);
@@ -201,7 +201,7 @@ class CheckoutController extends Controller
     {
         DB::beginTransaction();
 
-        try {
+        //try {
             $orderStatus = OrderStatus::whereName('Pending')->first();
 
             if (!$orderStatus) {
@@ -247,11 +247,11 @@ class CheckoutController extends Controller
             session()->forget('discountAmount');
 
             return $order->invoice_id;
-        } catch (Exception $e) {
-            DB::rollback();
-            logger($e->getMessage());
+        //} catch (Exception $e) {
+           // DB::rollback();
+            //logger($e->getMessage());
             //return api()->error('Something went wrong');
-        }
+        //}
     }
 
     /**
