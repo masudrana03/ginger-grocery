@@ -129,7 +129,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/faq', [FaqController::class, 'getFaq'])->name('getFaq');
     Route::get('/faq-status/{faq}/update_status', [FaqController::class, 'updateStatus'])->name('faqs.update_status');
 
-    // Route::get('/call-to-action', [CallToActionController::class, ''])->name('');
+    // Route::get('/call-to-action/edit', [CallToActionController::class, 'editn'])->name('');
+    Route::get('/call-to-action/{callToAction}/update_status', [CallToActionController::class, 'updateStatus'])->name('callToAction.update_status');
 
 
     // Resource routes

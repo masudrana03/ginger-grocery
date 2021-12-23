@@ -98,27 +98,29 @@
             </div>
             <div class="col-lg-3">
                 <div class="row">
+                    @php
+                    $actonRightOne = $callToActions->find(1);
+                    $actonRightTwo = $callToActions->find(2);
+                    @endphp
                     <div class="col-md-6 col-lg-12">
                         <div class="banner-img style-4 mt-30">
-                            <img src="{{ asset('assets/frontend/imgs/banner/banner-14.png') }}" alt="" />
+                            <img src="{{ asset( 'assets/img/uploads/actions/' .$actonRightOne->image ) }}" alt="" />
                             <div class="banner-text">
                                 <h4 class="mb-30">
-                                    Everyday Fresh &amp; <br />Clean with Our<br />
-                                    Products
+                                    {{$actonRightOne->action_tittle}}
                                 </h4>
-                                <a href="shop-grid-right.html" class="btn btn-xs mb-50">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop.product', $actonRightOne->id)}}" class="btn btn-xs mb-50">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-12">
                         <div class="banner-img style-5 mt-5 mt-md-30">
-                            <img src="{{ asset('assets/frontend/imgs/banner/banner-15.png') }}" alt="" />
+                            <img src="{{ asset( 'assets/img/uploads/actions/' .$actonRightTwo->image ) }}" alt="" />
                             <div class="banner-text">
                                 <h5 class="mb-20">
-                                    The best Organic <br />
-                                    Products Online
+                                    {{$actonRightTwo->action_tittle}}
                                 </h5>
-                                <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop.product', $actonRightTwo->id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>

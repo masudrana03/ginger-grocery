@@ -13,7 +13,7 @@ class UpdateCallToActionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateCallToActionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'store'            => 'required',
+            'action_tittle'    => 'required',
+            'status'           => 'required',
+            'image'            => 'required'
         ];
     }
 }
