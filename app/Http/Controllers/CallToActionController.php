@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\CallToAction;
 use App\Http\Requests\StoreCallToActionRequest;
 use App\Http\Requests\UpdateCallToActionRequest;
@@ -15,7 +16,10 @@ class CallToActionController extends Controller
      */
     public function index()
     {
-        //
+        $callToActions = CallToAction::all();
+        $stores  = Store::all();
+
+        return view('backend.call_to_actions.index', compact('callToActions','stores'));
     }
 
     /**
@@ -58,7 +62,9 @@ class CallToActionController extends Controller
      */
     public function edit(CallToAction $callToAction)
     {
-        //
+        // $callToActions = CallToAction::all();
+        $stores  = Store::all();
+        return view('backend.call_to_actions.edit', compact('stores','callToAction'));
     }
 
     /**
@@ -70,7 +76,50 @@ class CallToActionController extends Controller
      */
     public function update(UpdateCallToActionRequest $request, CallToAction $callToAction)
     {
-        //
+
+        $filename = '';
+
+        if ( $request->hasFile( 'image' ) ) {
+            $imageDirectory = 'assets/img/uploads/actions/';
+
+            deleteImage( $callToAction->image, $imageDirectory );
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/uploads/actions/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/actions/thumbnail/' . $filename );
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $callToAction->update($request);
+
+        toast( 'Call to Action successfully updated', 'success' );
+
+        return redirect()->route('admin.call_to_actions.index' );
+    }
+
+    /**
+     * Update banner status
+     *
+     * @param CallToAction $callToAction
+     * @return void
+     */
+    public function updateStatus(CallToAction $callToAction)
+    {
+        $callToAction->update([
+            'status' => $callToAction->status == 'Active' ? 'Inactive' : 'Active'
+        ]);
+
+        toast( 'Status successfully updated', 'success' );
+
+        return redirect()->back();
     }
 
     /**

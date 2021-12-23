@@ -65,6 +65,16 @@
         </div>
     </a>
 </li>
+<li class="">
+    <a href="{{ route('admin.call_to_actions.index') }}" aria-expanded="false">
+        <div class="nav_icon_small">
+            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+        </div>
+        <div class="nav_title">
+            <span>Call to Action</span>
+        </div>
+    </a>
+</li>
 
 @if (isAdmin())
 

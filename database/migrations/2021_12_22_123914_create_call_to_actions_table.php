@@ -17,8 +17,9 @@ class CreateCallToActionsTable extends Migration
             $table->id();
             $table->string('action_location');
             $table->string('action_tittle');
-            $table->string('action_image');
+            $table->string('image');
             $table->foreignId('store_id')->constrained()->onDelete('restrict');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

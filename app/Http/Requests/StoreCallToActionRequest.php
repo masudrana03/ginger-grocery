@@ -24,7 +24,11 @@ class StoreCallToActionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'store'            => 'required',
+            'action_location'  => 'required',
+            'action_location'  => 'required',
+            'status'           => 'required',
+            'image'            => 'required'
         ];
     }
 }

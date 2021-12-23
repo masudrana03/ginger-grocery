@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
+use Prophecy\Call\Call;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder {
             ShippingServiceSeeder::class,
             TaxSeeder::class,
             PointSeeder::class,
+            CallToActionSeeder::class,
         ] );
 
         Category::factory()
