@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+{{-- @extends('frontend.layouts.app')
 @section('title', 'Save cards')
 
 @section('content')
@@ -10,12 +10,12 @@
                 <span></span> save cards
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="page-content pt-150 pb-150">
+    {{-- <div class="page-content pt-150 pb-150">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-8 col-lg-10 col-md-12 m-auto text-center">
+            <div class="row"> --}}
+                {{-- <div class="col-xl-8 col-lg-10 col-md-12 m-auto text-center"> --}}
                     <div class="design" style="width: 316px;">
                         <br><br>
                         <ul style="list-style: none;" >
@@ -31,12 +31,12 @@
                         <button class="btn success btn-design" id="new">Add new card </button>
                         <input type="hidden" id="invoiceId" value ="{{ $invoiceId }}" >
                     </div>
-                </div>
-            </div>
+                {{-- </div> --}}
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 
-@endsection
+{{-- @endsection --}}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
