@@ -79,7 +79,7 @@ class DeliveryManDetailsController extends Controller
                 $nestedData['online_status']  = "<a href='javascript:void(0)' data-href='{$updateOnelineStatus}' data-toggle='tooltip' title='Change status' class='{$class1}' onclick='ChangeDeliveryManOnlineStatus({$deliveryMan->id})' id='deliveryManOnlineStatus-{$deliveryMan->id}'>$deliveryMan->online_status</a>";
                 $nestedData['created_at']     = $deliveryMan->created_at->format('d-m-Y');
                 $nestedData['actions']        = "
-                <a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
+                    &emsp;<a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
                     &emsp;<a href='#' onclick='deletePromo({$deliveryMan->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$deliveryMan->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>

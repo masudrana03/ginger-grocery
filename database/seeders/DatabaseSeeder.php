@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder {
             TaxSeeder::class,
             PointSeeder::class,
             CallToActionSeeder::class,
+            ContactWithUsSeeder::class,
         ] );
 
         Category::factory()

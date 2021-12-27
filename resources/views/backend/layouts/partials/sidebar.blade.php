@@ -197,6 +197,16 @@
     </ul>
 </li>
 <li class="">
+    <a href="{{ route('admin.contacts.index') }}" aria-expanded="false">
+        <div class="nav_icon_small">
+            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+        </div>
+        <div class="nav_title">
+            <span>Contact us</span>
+        </div>
+    </a>
+</li>
+<li class="">
     <a href="{{ route('admin.faqs.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">

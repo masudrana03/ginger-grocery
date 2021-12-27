@@ -26,9 +26,9 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Components\Payment\Single\StripePayment;
 use App\Http\Controllers\CallToActionController;
+use App\Http\Controllers\ContactWithUsController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
@@ -133,6 +133,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/call-to-action/{callToAction}/update_status', [CallToActionController::class, 'updateStatus'])->name('callToAction.update_status');
 
 
+    Route::get('/contact-us', [ContactWithUsController::class, 'allContactsMassage'])->name('all_contacts');
+    Route::get('/contact-massage', [ContactWithUsController::class, 'contactMassage'])->name('contact.massage');
+
+
     // Resource routes
     Route::resource('brands', BrandController::class);
     Route::resource('types', TypeController::class);
@@ -156,6 +160,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('delivery_men', DeliveryManDetailsController::class);
     Route::resource('faqs', FaqController::class);
     Route::resource('call_to_actions', CallToActionController::class);
+    Route::resource('contacts', ContactWithUsController::class);
 });
 
 
