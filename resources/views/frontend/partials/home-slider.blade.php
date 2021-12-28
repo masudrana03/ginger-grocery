@@ -116,7 +116,7 @@
                     <div class="col-md-6 col-lg-12">
                         <div class="banner-img style-5 mt-5 mt-md-30">
                             <img src="{{ asset( 'assets/img/uploads/actions/' .$actonRightTwo->image ) }}" alt="" />
-                            <div class="banner-text">
+                            <div class="banner-text" style="padding: 0px 70px!important; text-align: right;">
                                 <h5 class="mb-20">
                                     {{$actonRightTwo->action_tittle}}
                                 </h5>

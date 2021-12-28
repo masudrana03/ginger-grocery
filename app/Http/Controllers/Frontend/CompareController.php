@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\CallToAction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CompareController extends Controller
 {
@@ -16,7 +17,8 @@ class CompareController extends Controller
             $compareProduct = Product::find($productIds) ?? [] ;
             return back();
         }
-        return view('frontend.compare' , compact( 'compareProduct' ) );
+        $callToActions = CallToAction::all();
+        return view('frontend.compare' , compact( 'compareProduct' ,'callToActions') );
     }
 
 

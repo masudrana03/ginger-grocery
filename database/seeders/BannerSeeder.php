@@ -13,9 +13,16 @@ class BannerSeeder extends Seeder {
      */
     public function run() {
         DB::table( 'banners' )->insert( [
-            'title'      => 'Banner title',
-            'body'       => 'This is banner body',
-            'image'      => 'default.png',
+            'title'      => 'Don’t miss amazing grocery deals',
+            'body'       => 'Sign up for the daily newsletter',
+            'image'      => '2021-12-28-61caa0a67eeee.png',
+            'created_at' => now(),
+        ] );
+
+        DB::table( 'banners' )->insert( [
+            'title'      => 'Fresh Vegetables Big discount',
+            'body'       => 'Save up to 50% off on your first order',
+            'image'      => '2021-12-28-61caa1fc2152d.png',
             'created_at' => now(),
         ] );
     }
