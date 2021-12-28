@@ -34,11 +34,14 @@ use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
 use App\Http\Controllers\Frontend\LoginController as FrontendLoginController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
 use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
+use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
+use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -135,6 +138,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     Route::get('/contact-us', [ContactWithUsController::class, 'allContactsMassage'])->name('all_contacts');
     Route::get('/contact-massage', [ContactWithUsController::class, 'contactMassage'])->name('contact.massage');
+    // Route::get('/zone/get-coordinates/{id}', [StoreController::class, 'getCoordinates'])->name('getCoordinates');
 
 
     // Resource routes
@@ -207,6 +211,14 @@ Route::get('payment-from-saved-card/{order_id}/{payment_method_id}', [StripePaym
 
 Route::get('/front-end/login', [FrontendLoginController::class, 'login'])->name('frontend.login');
 Route::get('/front-end/register', [FrontendLoginController::class, 'register'])->name('frontend.register');
+
+Route::get('/contact', [FrontendContactController::class, 'contact'])->name('contact');
+Route::post('/contact-massage-from', [FrontendContactController::class, 'contactMassage'])->name('frontend.contact.massage');
+
+Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
+
+Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
+Route::get('/vendor-details', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
 
 
 Auth::routes();

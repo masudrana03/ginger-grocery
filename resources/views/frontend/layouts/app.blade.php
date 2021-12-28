@@ -21,6 +21,8 @@
         <!-- Template CSS -->
         <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/animate.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
 
@@ -270,6 +272,7 @@
         <script src="{{ asset('assets/frontend/js/plugins/jquery.vticker-min.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/plugins/jquery.theia.sticky.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/plugins/jquery.elevatezoom.js') }}"></script>
+        <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
         <!-- Template  JS -->
         <script src="{{ asset('assets/frontend/js/main.js?v=3.2') }}"></script>
         <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>

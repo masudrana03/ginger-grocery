@@ -499,7 +499,7 @@
                                         <a class="active" href="{{url('/')}}">Home</a>
                                     </li>
                                     <li>
-                                        <a href="page-about.html">About</a>
+                                        <a href="{{ route('about') }}">About</a>
                                     </li>
                                     <li>
                                         <a href="#">Shop</a>
@@ -531,12 +531,12 @@
                                     <li>
                                         <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="vendors-grid.html">Vendors Grid</a></li>
-                                            <li><a href="vendors-list.html">Vendors List</a></li>
-                                            <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                            <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
-                                            <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
-                                            <li><a href="vendor-guide.html">Vendor Guide</a></li>
+                                            {{-- <li><a href="vendors-grid.html">Vendors Grid</a></li> --}}
+                                            <li><a href="{{ route('vendor.list') }}">Vendors List</a></li>
+                                            <li><a href="{{ route('vendor.details') }}">Vendor Details</a></li>
+                                            {{-- <li><a href="vendor-details-2.html">Vendor Details 02</a></li> --}}
+                                            <li><a href="#">Vendor Dashboard</a></li>
+                                            <li><a href="#">Vendor Guide</a></li>
                                         </ul>
                                     </li>
                                     {{-- <li class="position-static">
@@ -633,7 +633,7 @@
                                         </ul>
                                     </li> --}}
                                     <li>
-                                        <a href="#">Contact</a>
+                                        <a href="{{ route('contact') }}">Contact</a>
                                     </li>
                                     @if (!auth()->user())
                                     <li>

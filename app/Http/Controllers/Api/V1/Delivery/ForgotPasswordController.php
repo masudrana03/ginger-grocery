@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api\V1\Delivery;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\EmailTemplate;
 use App\Components\Email\Email;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Components\Email\EmailFactory;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 

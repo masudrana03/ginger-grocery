@@ -109,7 +109,7 @@
                                 <h4 class="mb-30">
                                     {{$actonRightOne->action_tittle}}
                                 </h4>
-                                <a href="{{route('shop.product', $actonRightOne->id)}}" class="btn btn-xs mb-50">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop.product', $actonRightOne->store_id)}}" class="btn btn-xs mb-50">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                                 <h5 class="mb-20">
                                     {{$actonRightTwo->action_tittle}}
                                 </h5>
-                                <a href="{{route('shop.product', $actonRightTwo->id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{{route('shop.product', $actonRightTwo->store_id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>

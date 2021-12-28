@@ -192,7 +192,7 @@
         var lastpolygon = null;
 
         var myOptions = {
-            zoom: 10,
+            zoom: 13,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -212,8 +212,8 @@
 
 
         //get current location block
-        // infoWindow = new google.maps.InfoWindow();
         // Try HTML5 geolocation.
+        infoWindow = new google.maps.InfoWindow();
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -224,6 +224,7 @@
                 map.setCenter(pos);
             });
         }
+
 
         google.maps.event.addListener(drawingManager, "overlaycomplete", function(event) {
             if(lastpolygon)
@@ -248,8 +249,10 @@
             searchBox.setBounds(map.getBounds());
         });
         let markers = [];
+
         // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
+        // more details for that place. geometry.
+
         searchBox.addListener("places_changed", () => {
             const places = searchBox.getPlaces();
 
@@ -296,6 +299,7 @@
         });
     }
 
+
     function resetMap(controlDiv) {
         // Set CSS for the control border.
         const controlUI = document.createElement("div");
@@ -333,8 +337,56 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
+    var zonePolygon = null;
 
-        var zonePolygon = null;
+    function get_zone_data(id) {
+            $.get({
+                url: '{{url('/')}}/admin/zone/get-coordinates/'+id,
+                dataType: 'json',
+                success: function (data) {
+                    if(zonePolygon)
+                    {
+                        zonePolygon.setMap(null);
+                    }
+                    zonePolygon = new google.maps.Polygon({
+                        paths: data.coordinates,
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: 'white',
+                        fillOpacity: 0,
+                    });
+
+
+                    zonePolygon.getPaths().forEach(function(path) {
+                        path.forEach(function(latlng) {
+                            bounds.extend(latlng);
+                            map.fitBounds(bounds);
+                        });
+                    });
+
+
+                    zonePolygon.setMap(map);
+                    map.setCenter(data.center);
+                    google.maps.event.addListener(zonePolygon, 'click', function (mapsMouseEvent) {
+                        infoWindow.close();
+                        // Create a new InfoWindow.
+                        infoWindow = new google.maps.InfoWindow({
+                        position: mapsMouseEvent.latLng,
+                        content: JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2),
+                        });
+                        var coordinates = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
+                        var coordinates = JSON.parse(coordinates);
+
+                        document.getElementById('latitude').value = coordinates['lat'];
+                        document.getElementById('longitude').value = coordinates['lng'];
+                        infoWindow.open(map);
+                    });
+                },
+            });
+    }
+
+
 </script>
 @endpush
 

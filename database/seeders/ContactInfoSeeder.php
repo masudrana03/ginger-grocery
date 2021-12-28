@@ -15,38 +15,38 @@ class ContactInfoSeeder extends Seeder
     public function run()
     {
         ContactInfo::create( [
-            'name'       => 'Shop',
-            'email'      => 'Workmail@work.com',
-            'phone'      => '01800000000',
+            'name'       => 'Office',
+            'email'      => 'contact@Evara.com',
+            'phone'      => '(123) 456-7890',
             'country_id' => 5,
             'state'      => 'Test subject',
-            'city'       => 'Test subject',
-            'zip'        => 'Test subject',
-            'address'    => 'Test subject',
+            'city'       => 'Chicago',
+            'zip'        => '60601',
+            'address'    => '205 North Michigan Avenue, Suite 810',
             'created_at' => now(),
         ] );
 
         ContactInfo::create( [
             'name'       => 'Shop',
             'email'      => 'Workmail@work.com',
-            'phone'      => '01800000000',
+            'phone'      => '(123) 456-7890',
             'country_id' => 5,
             'state'      => 'Test subject',
-            'city'       => 'Test subject',
-            'zip'        => 'Test subject',
-            'address'    => 'Test subject',
+            'city'       => 'Chicago',
+            'zip'        => '60601',
+            'address'    => '205 North Michigan Avenue, Suite 810',
             'created_at' => now(),
         ] );
-        
+
         ContactInfo::create( [
             'name'       => 'Shop',
             'email'      => 'Workmail@work.com',
-            'phone'      => '01800000000',
+            'phone'      => '(123) 456-7890',
             'country_id' => 5,
             'state'      => 'Test subject',
-            'city'       => 'Test subject',
-            'zip'        => 'Test subject',
-            'address'    => 'Test subject',
+            'city'       => 'Chicago',
+            'zip'        => '60601',
+            'address'    => '205 North Michigan Avenue, Suite 810',
             'created_at' => now(),
         ] );
     }

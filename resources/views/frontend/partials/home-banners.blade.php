@@ -14,7 +14,7 @@
                         <h4>
                             {{$actonBannerOne->action_tittle}}
                         </h4>
-                        <a href="{{route('shop.product', $actonBannerOne->id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="{{route('shop.product', $actonBannerOne->store_id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <h4>
                             {{$actonBannerTwo->action_tittle}}
                         </h4>
-                        <a href="{{route('shop.product', $actonBannerTwo->id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="{{route('shop.product', $actonBannerTwo->store_id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <img src="{{ asset( 'assets/img/uploads/actions/' .$actonBannerThree->image ) }}" alt="" />
                     <div class="banner-text">
                         <h4>{{$actonBannerThree->action_tittle}}</h4>
-                        <a href="{{route('shop.product', $actonBannerThree->id)}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="{{route('shop.product', $actonBannerThree->store_id)}}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>

@@ -123,7 +123,7 @@ class ContactWithUsController extends Controller
      */
     public function create()
     {
-        //
+       //
     }
 
     /**
@@ -188,9 +188,9 @@ class ContactWithUsController extends Controller
             'longitude'  => 'required'
         ]);
 
-        return $request;
-        $contact = $request->all();
-        $contact->save();
+        // return $request;
+        $request = $request->all();
+        $contact->update( $request );
 
         Alert::toast('Contact Info successfully updated', 'success');
 
@@ -210,5 +210,13 @@ class ContactWithUsController extends Controller
        toast('Delivery Man successfully deleted', 'success');
 
        return back();
+    }
+
+
+    public function getCoordinates($id){
+        $zone = ContactInfo::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
+        $data = format_coordiantes($zone->coordinates[0]);
+        $center = (object)['lat'=>(float)trim(explode(' ',$zone->center)[1], 'POINT()'), 'lng'=>(float)trim(explode(' ',$zone->center)[0], 'POINT()')];
+        return response()->json(['coordinates'=>$data, 'center'=>$center]);
     }
 }
