@@ -10,6 +10,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZoneController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PointController;
@@ -37,11 +38,11 @@ use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
 use App\Http\Controllers\Frontend\LoginController as FrontendLoginController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
+use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
 use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
-use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -138,7 +139,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     Route::get('/contact-us', [ContactWithUsController::class, 'allContactsMassage'])->name('all_contacts');
     Route::get('/contact-massage', [ContactWithUsController::class, 'contactMassage'])->name('contact.massage');
-    // Route::get('/zone/get-coordinates/{id}', [StoreController::class, 'getCoordinates'])->name('getCoordinates');
+
+    Route::post('/about-update', [AboutController::class, 'update'])->name('about.update');
+    Route::get('/about-slider-update', [AboutController::class, 'sliderUpdate'])->name('about.update.slider');
 
 
     // Resource routes
@@ -165,6 +168,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('faqs', FaqController::class);
     Route::resource('call_to_actions', CallToActionController::class);
     Route::resource('contacts', ContactWithUsController::class);
+    Route::resource('abouts', AboutController::class);
 });
 
 

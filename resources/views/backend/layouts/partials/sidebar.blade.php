@@ -207,6 +207,25 @@
     </a>
 </li>
 <li class="">
+    <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+            <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+        </div>
+        <div class="nav_title">
+            <span>About</span>
+        </div>
+    </a>
+    <ul class="mm-collapse mm-show" style="height: 5px;">
+        <li>
+            <a href="{{ route('admin.abouts.index') }}">About Info</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.about.update.slider') }}">About Image slider</a>
+        </li>
+
+    </ul>
+</li>
+<li class="">
     <a href="{{ route('admin.faqs.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
