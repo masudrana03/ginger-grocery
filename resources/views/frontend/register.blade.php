@@ -24,6 +24,7 @@
                                     <p class="mb-30">Already have an account? <a href="{{ route( 'frontend.login' ) }}">Login</a></p>
                                 </div>
                                 <form method="POST" action="{{ route('register') }}">
+                                    @csrf
                                     <div class="form-group">
                                         {{-- <input type="text" required="" name="username" placeholder="Username" /> --}}
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Full Name" autofocus>
