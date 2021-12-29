@@ -14,7 +14,7 @@ class AddTypeStoreIdInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('type')->default(3)->comment('1: admin, 2: store manager, 3: customer, 4: delivery man');
+            $table->tinyInteger('type')->default(3)->comment('1: admin, 2: store manager, 3: customer, 4: delivery man');
             $table->foreignId('store_id')->nullable()->constrained()->onDelete('restrict');
         });
     }

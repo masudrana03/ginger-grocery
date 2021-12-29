@@ -370,6 +370,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @auth
                                 <div class="header-action-icon-2">
                                     <a href="page-account.html">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
@@ -378,19 +379,16 @@
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                                <a href="{{ route('index') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                                             </li>
                                             <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                <a href="{{ route('user.track.orders') }}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
                                             </li>
                                             <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                                <a href="{{ route('user.orders') }}"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
                                             </li>
                                             <li>
-                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                                                <a href="{{ route('wishlist.index') }}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                                             </li>
                                             <li>
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -402,6 +400,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -637,10 +636,10 @@
                                     </li>
                                     @if (!auth()->user())
                                     <li>
-                                        <a href="{{ route('frontend.login') }}">Login</a>
+                                        <a href="{{ route('login') }}">Login</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('frontend.register') }}">Register</a>
+                                        <a href="{{ route('register') }}">Register</a>
                                     </li>
                                     @endif
                                 </ul>
