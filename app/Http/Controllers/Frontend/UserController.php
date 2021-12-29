@@ -18,10 +18,11 @@ class UserController extends Controller
     {
         $user  = User::find(auth()->id());
 
-       return view('frontend.users.dashboard', compact('user'));
+        return view('frontend.users.dashboard', compact('user'));
     }
 
-    public function getOrders(){
+    public function getOrders()
+    {
 
         $user  = User::find(auth()->id());
 
@@ -31,11 +32,22 @@ class UserController extends Controller
         return view('frontend.users.order', compact('user', 'orders'));
     }
 
-    public function getTrackOrders(){}
+    public function getTrackOrders()
+    {
+        $user  = User::find(auth()->id());
 
-    public function getAddress(){}
+        $orders = Order::with('status')->where('user_id', $user->id)->get();
 
-    public function getProfile(){}
+        return view('frontend.users.track-order', compact('user', 'orders'));
+    }
+
+    public function getAddress()
+    {
+    }
+
+    public function getProfile()
+    {
+    }
 
     /**
      * Show the form for creating a new resource.

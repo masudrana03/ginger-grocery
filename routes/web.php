@@ -36,7 +36,7 @@ use App\Http\Controllers\DeliveryManDetailsController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
-use App\Http\Controllers\Frontend\LoginController as FrontendLoginController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
 use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
 use App\Http\Controllers\Frontend\CompareController as FrontendCompareController;
@@ -73,8 +73,12 @@ Route::get('/clear', function () {
     return 'Cache is cleared';
 });
 
-Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/register', [LoginController::class, 'register'])->name('register');
+});  
 
+Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Datatables routes
@@ -212,9 +216,6 @@ Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])-
 Route::get('/payment_from_card/{invoice_id}', [StripePayment::class, 'paymentFromCard'])->name('payment_from_card');
 Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
 Route::get('payment-from-saved-card/{order_id}/{payment_method_id}', [StripePayment::class, 'paymentFromSavedCard'])->name('payment_from_saved_card');
-
-Route::get('/front-end/login', [FrontendLoginController::class, 'login'])->name('frontend.login');
-Route::get('/front-end/register', [FrontendLoginController::class, 'register'])->name('frontend.register');
 
 Route::get('/contact', [FrontendContactController::class, 'contact'])->name('contact');
 Route::post('/contact-massage-from', [FrontendContactController::class, 'contactMassage'])->name('frontend.contact.massage');

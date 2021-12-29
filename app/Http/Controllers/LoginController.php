@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-
     public function login()
     {
-      return view('frontend.login');
+      return view('backend.auth.login');
     }
 
     public function register()
     {
-      return view('frontend.register');
+      return view('backend.auth.register');
     }
 }
