@@ -220,7 +220,10 @@
             <a href="{{ route('admin.abouts.index') }}">About Info</a>
         </li>
         <li>
-            <a href="{{ route('admin.about.update.slider') }}">About Image slider</a>
+            <a href="{{ route('admin.about.slider.index') }}">About Image slider</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.about.service.index') }}">About Service</a>
         </li>
 
     </ul>

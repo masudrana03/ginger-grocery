@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder {
             CallToActionSeeder::class,
             ContactWithUsSeeder::class,
             ContactInfoSeeder::class,
+            AboutSeeder::class,
+            AboutImageSeeder::class,
 
         ] );
 

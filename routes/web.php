@@ -76,7 +76,7 @@ Route::get('/clear', function () {
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/register', [LoginController::class, 'register'])->name('register');
-});  
+});
 
 Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -145,7 +145,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/contact-massage', [ContactWithUsController::class, 'contactMassage'])->name('contact.massage');
 
     Route::post('/about-update', [AboutController::class, 'update'])->name('about.update');
-    Route::get('/about-slider-update', [AboutController::class, 'sliderUpdate'])->name('about.update.slider');
+    Route::get('/about-slider-index', [AboutController::class, 'sliderIndex'])->name('about.slider.index');
+    Route::post('/about-slider-update', [AboutController::class, 'sliderUpdate'])->name('about.slider.update');
+    Route::get('/about-service-index', [AboutController::class, 'serviceIndex'])->name('about.service.index');
+    Route::get('/about-service-edit', [AboutController::class, 'serviceEdit'])->name('about.service.edit');
+    Route::post('/about-service-update', [AboutController::class, 'serviceUpdate'])->name('about.service.update');
 
 
     // Resource routes

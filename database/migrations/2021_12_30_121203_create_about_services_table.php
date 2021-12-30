@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAboutsServiceTable extends Migration
+class CreateAboutServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAboutsServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('abouts_service', function (Blueprint $table) {
+        Schema::create('about_services', function (Blueprint $table) {
             $table->id();
             $table->string('service_section_tittle1');
             $table->longText('service_section_description1');
@@ -38,6 +38,6 @@ class CreateAboutsServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abouts_service');
+        Schema::dropIfExists('about_services');
     }
 }

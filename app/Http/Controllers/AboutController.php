@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\AboutService;
+use Illuminate\Http\Request;
 use App\Models\AboutsliderImage;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
@@ -21,11 +23,73 @@ class AboutController extends Controller
         return view('backend.abouts.index', compact('abouts'));
     }
 
-    public function sliderUpdate()
+    public function serviceIndex()
+    {
+        $aboutService = AboutService::first();
+
+        return view('backend.abouts.service-index', compact('aboutService'));
+    }
+
+    public function serviceEdit(AboutService $about)
+    {
+        return view('backend.abouts.service-edit', compact('about'));
+    }
+
+    public function serviceUpdate(Request $request, AboutService $about)
+    {
+        $request->validate([
+
+        ]);
+
+        $request = $request->all();
+
+        $about->update($request);
+
+        toast( 'About slider successfully updated', 'success' );
+
+        return redirect()->route('admin.about.service.index');
+    }
+
+    public function sliderIndex()
     {
         $aboutsImage = AboutsliderImage::all();
         // return $abouts;
         return view('backend.abouts.image-slider', compact('aboutsImage'));
+    }
+
+    public function sliderUpdate(Request $request)
+    {
+        // dd($request->all());
+        $about = AboutsliderImage::find($request->id);
+        // return $request ;
+
+        $filename = '';
+
+        if ( $request->hasFile( 'image' ) ) {
+            $imageDirectory = 'assets/img/uploads/abouts/';
+
+            deleteImage( $about->image, $imageDirectory );
+            $image             = $request->file( 'image' );
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path( 'assets/img/uploads/abouts/' . $filename );
+            $thumbnailLocation = public_path( 'assets/img/uploads/abouts/thumbnail/' . $filename );
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $about->update($request);
+
+        toast( 'About slider successfully updated', 'success' );
+
+        return redirect()->route('admin.about.slider.index');
+
     }
 
     /**
@@ -66,9 +130,9 @@ class AboutController extends Controller
      * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function edit(About $about)
+    public function edit( $about)
     {
-        //
+       //
     }
 
     /**
