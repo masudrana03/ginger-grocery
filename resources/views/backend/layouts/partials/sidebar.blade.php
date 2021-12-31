@@ -225,6 +225,9 @@
         <li>
             <a href="{{ route('admin.about.service.index') }}">About Service</a>
         </li>
+        <li>
+            <a href="{{ route('admin.about.performance') }}">About Performance</a>
+        </li>
 
     </ul>
 </li>

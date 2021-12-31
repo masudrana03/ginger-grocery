@@ -23,6 +23,12 @@ class AboutController extends Controller
         return view('backend.abouts.index', compact('abouts'));
     }
 
+    public function aboutPerformance()
+    {
+        $abouts = About::first();
+        return view('backend.abouts.our-performance', compact('abouts'));
+    }
+
     public function serviceIndex()
     {
         $aboutService = AboutService::first();
@@ -30,22 +36,29 @@ class AboutController extends Controller
         return view('backend.abouts.service-index', compact('aboutService'));
     }
 
-    public function serviceEdit(AboutService $about)
+    public function serviceEdit()
     {
-        return view('backend.abouts.service-edit', compact('about'));
+        $aboutService = AboutService::first();
+
+        return view('backend.abouts.service-edit', compact('aboutService'));
     }
 
-    public function serviceUpdate(Request $request, AboutService $about)
+    public function serviceUpdate(Request $request )
     {
+
+        $aboutService = AboutService::first();
+
+        // return $request;
+
         $request->validate([
 
         ]);
 
         $request = $request->all();
 
-        $about->update($request);
+        $aboutService->update($request);
 
-        toast( 'About slider successfully updated', 'success' );
+        toast( 'About service successfully updated', 'success' );
 
         return redirect()->route('admin.about.service.index');
     }
@@ -150,31 +163,29 @@ class AboutController extends Controller
         $about = About::first();
 
         $filename = '';
+        $filename2 = '';
 
-        if ( $request->hasFile( 'main_section_image' ) ) {
-            $imageDirectory = 'assets/img/uploads/abouts/';
-
-            deleteImage( $about->image, $imageDirectory );
-            $image             = $request->file( 'main_section_image' );
-            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-            $location          = public_path( 'assets/img/uploads/abouts/' . $filename );
-            $thumbnailLocation = public_path( 'assets/img/uploads/abouts/thumbnail/' . $filename );
-
-            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        if ($request->hasFile('main_section_image')) {
+            $filename = $this->uploadImage($about->main_section_image, $request->file('main_section_image'));
         }
-
+        if ($request->hasFile('section2_image1')) {
+            $filename2 = $this->uploadImage($about->section2_image1, $request->file('section2_image1'));
+        }
 
         $request = $request->all();
 
         if ($filename != '') {
             $request['main_section_image'] = $filename;
         }
+        if ($filename2 != '') {
+            $request['section2_image1'] = $filename2;
+        }
 
         $about->update($request);
 
-        toast( 'About info successfully updated', 'success' );
+        toast( 'About successfully updated', 'success' );
 
-        return redirect()->route('admin.abouts.index' );
+        return back();
 
     }
 
@@ -187,5 +198,33 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
         //
+    }
+
+
+    /**
+     * Upload about image
+     *
+     * @param about $about
+     * @param array $images
+     * @return void
+     */
+    public function uploadImage($oldImage, $image)
+    {
+
+        $imageDirectory = 'assets/img/uploads/abouts/';
+
+        deleteImage( $oldImage, $imageDirectory );
+
+
+        $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+        $location          = public_path('assets/img/uploads/abouts/' . $filename);
+        $thumbnailLocation = public_path('assets/img/uploads/abouts/thumbnail/' . $filename);
+
+        $filenames['image'] = $filename;
+
+        saveImageWithThumbnail($image, $location, $thumbnailLocation);
+
+        return $filename;
+
     }
 }

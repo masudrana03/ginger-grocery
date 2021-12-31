@@ -150,6 +150,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/about-service-index', [AboutController::class, 'serviceIndex'])->name('about.service.index');
     Route::get('/about-service-edit', [AboutController::class, 'serviceEdit'])->name('about.service.edit');
     Route::post('/about-service-update', [AboutController::class, 'serviceUpdate'])->name('about.service.update');
+    Route::get('/about-our-performance', [AboutController::class, 'aboutPerformance'])->name('about.performance');
 
 
     // Resource routes

@@ -80,7 +80,7 @@ class StoreController extends Controller {
                 $nestedData['name']       = $store->name;
                 $nestedData['type']       = $store->type;
                 $nestedData['image']      = "<img src='{$img}' width='60'>";
-                $nestedData['zone']       = $store->zone->name;
+                $nestedData['zone']       = $store->zone ? $store->zone->name : '';
                 $nestedData['created_at'] = $store->created_at->format( 'd-m-Y' );
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
