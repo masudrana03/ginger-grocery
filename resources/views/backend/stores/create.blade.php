@@ -35,8 +35,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
+                                            <label for="name">Store Name</label>
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name : XYZ.ltd" value="{{ old('name') }}">
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -44,9 +44,9 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Phone</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="phone">Phone</label>
+                                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" placeholder="Exp : +880 1712 112233" value="{{ old('phone') }}">
+                                            @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -55,18 +55,18 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">Type</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="type">Type</label>
+                                            <input type="text" name="type" class="form-control @error('type') is-invalid @enderror" id="type" aria-describedby="emailHelp" placeholder="Exp : Fruit Shop" value="{{ old('type') }}">
+                                            @error('type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Established At</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="established_at">Established At</label>
+                                            <input type="number" name="established_at" class="form-control @error('established_at') is-invalid @enderror" id="established_at" aria-describedby="emailHelp" placeholder="Exp : 1952" value="{{ old('established_at') }}">
+                                            @error('established_at')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -80,36 +80,42 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">Country </label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="country_id">Country</label>
+                                            <select name="country_id"
+                                            class="form-control @error('country_id') is-invalid @enderror">
+                                                <option value="">Seclect Country</option>
+                                            @foreach ( $countries as $country )
+                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                            @endforeach
+                                            </select>
+                                            @error('country_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">State</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="state">State</label>
+                                            <input type="text" name="state" class="form-control @error('state') is-invalid @enderror" id="state" aria-describedby="emailHelp" placeholder="Exp : Florida" value="{{ old('state') }}">
+                                            @error('state')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Twitter link</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="facebook_link">Twitter link</label>
+                                            <input type="text" name="facebook_link" class="form-control @error('facebook_link') is-invalid @enderror" id="facebook_link" aria-describedby="emailHelp" placeholder="Exp : https://twitter.com/" value="{{ old('facebook_link') }}">
+                                            @error('facebook_link')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Youtube link</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="youtube_link">Youtube link</label>
+                                            <input type="text" name="youtube_link" class="form-control @error('youtube_link') is-invalid @enderror" id="youtube_link" aria-describedby="emailHelp" placeholder="Exp : https://www.youtube.com/" value="{{ old('youtube_link') }}">
+                                            @error('youtube_link')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -119,36 +125,36 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">City</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="city">City</label>
+                                            <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" id="city" aria-describedby="emailHelp" placeholder="Exp : Miami" value="{{ old('city') }}">
+                                            @error('city')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Zip</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="zip">Zip</label>
+                                            <input type="text" name="zip" class="form-control @error('zip') is-invalid @enderror" id="zip" aria-describedby="emailHelp" placeholder="Exp : 33101" value="{{ old('zip') }}">
+                                            @error('zip')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Facebook link </label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="facebook_link">Facebook link </label>
+                                            <input type="text" name="facebook_link" class="form-control @error('facebook_link') is-invalid @enderror" id="facebook_link" aria-describedby="emailHelp" placeholder="Exp : https://www.facebook.com/" value="{{ old('facebook_link') }}">
+                                            @error('facebook_link')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Instagram link</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name" value="{{ old('name') }}">
-                                            @error('name')
+                                            <label for="instagram_link">Instagram link</label>
+                                            <input type="text" name="instagram_link" class="form-control @error('instagram_link') is-invalid @enderror" id="instagram_link" aria-describedby="emailHelp" placeholder="Exp : https://www.instagram.com/" value="{{ old('instagram_link') }}">
+                                            @error('instagram_link')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -157,24 +163,24 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="mission_description">Address</label>
-                                            <textarea rows="4" name="mission_description"
-                                                class="form-control @error('mission_description') is-invalid @enderror"
-                                                aria-describedby="emailHelp" placeholder="mission_description"
-                                                >{{ old('mission_description') }}</textarea>
-                                            @error('mission_description')
+                                            <label for="address">Address</label>
+                                            <textarea rows="4" name="address"
+                                                class="form-control @error('address') is-invalid @enderror"
+                                                aria-describedby="emailHelp" placeholder="Exp : 1255 Timbercrest Road"
+                                                >{{ old('address') }}</textarea>
+                                            @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="mission_description">Description</label>
-                                            <textarea rows="4" name="mission_description"
-                                                class="form-control @error('mission_description') is-invalid @enderror"
-                                                aria-describedby="emailHelp" placeholder="mission_description"
-                                                >{{ old('mission_description') }}</textarea>
-                                            @error('mission_description')
+                                            <label for="description">Description</label>
+                                            <textarea rows="4" name="description"
+                                                class="form-control @error('description') is-invalid @enderror"
+                                                aria-describedby="emailHelp" placeholder="Exp : Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef."
+                                                >{{ old('description') }}</textarea>
+                                            @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

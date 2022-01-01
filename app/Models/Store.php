@@ -18,6 +18,19 @@ class Store extends Model {
         'name',
         'type',
         'image',
+        'phone',
+        'established_at',
+        'country_id',
+        'state',
+        'city',
+        'zip',
+        'address',
+        'description',
+        'facebook_link',
+        'instagram_link',
+        'twitter_link',
+        'youtube_link',
+        'pinterest_link',
         'zone_id',
         'latitude',
         'longitude',
@@ -39,6 +52,15 @@ class Store extends Model {
      */
     public function zone() {
         return $this->belongsTo( Zone::class );
+    }
+
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function country() {
+        return $this->belongsTo( Country::class );
     }
 
     /**

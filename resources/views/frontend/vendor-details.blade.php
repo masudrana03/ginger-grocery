@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Vendor List')
+@section('title', 'Vendor Details')
 
 @section('content')
 
@@ -12,63 +12,16 @@
     </div>
 </div>
 <div class="container mb-30">
-    <div class="archive-header-3 mt-30 mb-80" style="background-image: url({{ asset('assets/frontend/imgs/vendor/vendor-header-bg.png') }})">
-        <div class="archive-header-3-inner">
-            <div class="vendor-logo mr-50">
-                <img src="{{ asset('assets/frontend/imgs/vendor/vendor-17.png') }}" alt="" />
-            </div>
-            <div class="vendor-content">
-                <div class="product-category">
-                    <span class="text-muted">Since 2012</span>
-                </div>
-                <h3 class="mb-5 text-white"><a href="vendor-details-1.html" class="text-white">Nest Food.,Ltd</a></h3>
-                <div class="product-rate-cover mb-15">
-                    <div class="product-rate d-inline-block">
-                        <div class="product-rating" style="width: 90%"></div>
-                    </div>
-                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="vendor-des mb-15">
-                            <p class="font-sm text-white">Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef. This brand made Lionto's list of the most popular grocery brands across the country.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="vendor-info text-white mb-15">
-                            <ul class="font-sm">
-                                <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined, Utah 53127 United States</span></li>
-                                <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="follow-social">
-                            <h6 class="mb-15 text-white">Follow Us</h6>
-                            <ul class="social-network">
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/social-tw.svg') }}" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/social-fb.svg') }}" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/social-insta.svg') }}" alt="" />
-                                    </a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/social-pin.svg') }}" alt="" />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+    <div class="archive-header-2 text-center pt-80 pb-50">
+        <h1 class="display-2 mb-50">{{ $store->name }}</h1>
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <div class="sidebar-widget-2 widget_search mb-50">
+                    <div class="search-form">
+                        <form action="#">
+                            <input type="text" placeholder="Search in this store..." />
+                            <button type="submit"><i class="fi-rs-search"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -78,7 +31,7 @@
         <div class="col-lg-4-5">
             <div class="shop-product-fillter">
                 <div class="totall-product">
-                    <p>We found <strong class="text-brand">29</strong> items for you!</p>
+                    <p>We found <strong class="text-brand">{{ $store->products->count() }}</strong> items for you!</p>
                 </div>
                 <div class="sort-by-product-area">
                     <div class="sort-by-cover mr-10">
@@ -121,229 +74,883 @@
                     </div>
                 </div>
             </div>
-            <div class="product-list mb-50">
-                <div class="product-cart-wrap">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <div class="product-img-inner">
+            <div class="row product-grid">
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">Hot</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$28.85</span>
+                                    <span class="old-price">$32.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
                                 </a>
                             </div>
-                        </div>
-                        <div class="product-action-1">
-                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="hot">Hot</span>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop-grid-right.html">Hodo Foods</a>
-                        </div>
-                        <h2><a href="shop-product-right.html">Field Roast Chao Cheese Creamy Original</a></h2>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            <span class="ml-30">500g</span>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="sale">Sale</span>
+                            </div>
                         </div>
-                        <p class="mt-15 mb-15">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam beatae consectetur, atque inventore aliquam adipisci perspiciatis nostrum qui consequatur praesentium?</p>
-
-                        <div class="product-price">
-                            <span>$238.85 </span>
-                            <span class="old-price">$245.8</span>
-                        </div>
-
-                        <div class="mt-30 d-flex align-items-center">
-                            <a aria-label="Buy now" class="btn" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add to Cart</a>
-                            <a href="#" class="add-wishlish ml-30 text-body font-sm font-heading font-weight-bold"><i class="fi-rs-shuffle mr-5"></i>Add Compare</a>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Hodo Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 80%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (3.5)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Stouffer</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$52.85</span>
+                                    <span class="old-price">$55.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--single product-->
-                <div class="product-cart-wrap">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <div class="product-img-inner">
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-3-2.jpg') }}" alt="" />
                                 </a>
                             </div>
-                        </div>
-                        <div class="product-action-1">
-                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="sale">sale</span>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop-grid-right.html">Hodo Foods</a>
-                        </div>
-                        <h2><a href="shop-product-right.html">Fresh Organic Mustard Leaves</a></h2>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            <span class="ml-30">500g</span>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="new">New</span>
+                            </div>
                         </div>
-                        <p class="mt-15 mb-15">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam beatae consectetur, atque inventore aliquam adipisci perspiciatis nostrum qui consequatur praesentium?</p>
-
-                        <div class="product-price">
-                            <span>$238.85 </span>
-                            <span class="old-price">$245.8</span>
-                        </div>
-
-                        <div class="mt-30">
-                            <a aria-label="Buy now" class="btn" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add to Cart</a>
-                            <a href="#" class="add-wishlish ml-30 text-body font-sm font-heading font-weight-bold"><i class="fi-rs-shuffle mr-5"></i>Add Compare</a>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Angie’s Boomchickapop Sweet & Salty</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 85%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">StarKist</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$48.85</span>
+                                    <span class="old-price">$52.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--single product-->
-                <div class="product-cart-wrap">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <div class="product-img-inner">
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-4-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-4-2.jpg') }}" alt="" />
                                 </a>
                             </div>
-                        </div>
-                        <div class="product-action-1">
-                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="new">New</span>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop-grid-right.html">Hodo Foods</a>
-                        </div>
-                        <h2><a href="shop-product-right.html">Organic Green Bell Pepper</a></h2>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            <span class="ml-30">500g</span>
                         </div>
-                        <p class="mt-15 mb-15">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam beatae consectetur, atque inventore aliquam adipisci perspiciatis nostrum qui consequatur praesentium?</p>
-
-                        <div class="product-price">
-                            <span>$238.85 </span>
-                            <span class="old-price">$245.8</span>
-                        </div>
-
-                        <div class="mt-30">
-                            <a aria-label="Buy now" class="btn" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add to Cart</a>
-                            <a href="#" class="add-wishlish ml-30 text-body font-sm font-heading font-weight-bold"><i class="fi-rs-shuffle mr-5"></i>Add Compare</a>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Vegetables</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Foster Farms Takeout Crispy Classic</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$17.85</span>
+                                    <span class="old-price">$19.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--single product-->
-                <div class="product-cart-wrap">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <div class="product-img-inner">
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-5-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-5-2.jpg') }}" alt="" />
                                 </a>
                             </div>
-                        </div>
-                        <div class="product-action-1">
-                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop-grid-right.html">Hodo Foods</a>
-                        </div>
-                        <h2><a href="shop-product-right.html">Angie’s Boomchickapop Sweet & Salty Kettle Corn</a></h2>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            <span class="ml-30">500g</span>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="best">-14%</span>
+                            </div>
                         </div>
-                        <p class="mt-15 mb-15">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam beatae consectetur, atque inventore aliquam adipisci perspiciatis nostrum qui consequatur praesentium?</p>
-
-                        <div class="product-price">
-                            <span>$238.85 </span>
-                            <span class="old-price">$245.8</span>
-                        </div>
-
-                        <div class="mt-30">
-                            <a aria-label="Buy now" class="btn" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add to Cart</a>
-                            <a href="#" class="add-wishlish ml-30 text-body font-sm font-heading font-weight-bold"><i class="fi-rs-shuffle mr-5"></i>Add Compare</a>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Pet Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Blue Diamond Almonds Lightly</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$23.85</span>
+                                    <span class="old-price">$25.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--single product-->
-                <div class="product-cart-wrap">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <div class="product-img-inner">
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
                                 <a href="shop-product-right.html">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-6-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-6-2.jpg') }}" alt="" />
                                 </a>
                             </div>
-                        </div>
-                        <div class="product-action-1">
-                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="best">Best</span>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop-grid-right.html">Hodo Foods</a>
-                        </div>
-                        <h2><a href="shop-product-right.html">Foster Farms Takeout Crispy Classic Buffalo Wings</a></h2>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            <span class="ml-30">500g</span>
                         </div>
-                        <p class="mt-15 mb-15">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam beatae consectetur, atque inventore aliquam adipisci perspiciatis nostrum qui consequatur praesentium?</p>
-
-                        <div class="product-price">
-                            <span>$238.85 </span>
-                            <span class="old-price">$245.8</span>
-                        </div>
-
-                        <div class="mt-30">
-                            <a aria-label="Buy now" class="btn" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add to Cart</a>
-                            <a href="#" class="add-wishlish ml-30 text-body font-sm font-heading font-weight-bold"><i class="fi-rs-shuffle mr-5"></i>Add Compare</a>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Hodo Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Chobani Complete Vanilla Greek</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$54.85</span>
+                                    <span class="old-price">$55.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--single product-->
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-7-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-7-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Meats</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Canada Dry Ginger Ale – 2 L Bottle</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$32.85</span>
+                                    <span class="old-price">$33.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-8-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-8-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="sale">Sale</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Encore Seafoods Stuffed Alaskan</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$35.85</span>
+                                    <span class="old-price">$37.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-9-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-9-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">Hot</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Coffes</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Gorton’s Beer Battered Fish Fillets</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Old El Paso</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$23.85</span>
+                                    <span class="old-price">$25.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Cream</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 50%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (2.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Tyson</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$22.85</span>
+                                    <span class="old-price">$24.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">Hot</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$28.85</span>
+                                    <span class="old-price">$32.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="sale">Sale</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Hodo Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 80%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (3.5)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Stouffer</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$52.85</span>
+                                    <span class="old-price">$55.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-3-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="new">New</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Angie’s Boomchickapop Sweet & Salty</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 85%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">StarKist</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$48.85</span>
+                                    <span class="old-price">$52.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-4-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-4-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Vegetables</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Foster Farms Takeout Crispy Classic</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$17.85</span>
+                                    <span class="old-price">$19.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-5-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-5-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="best">-14%</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Pet Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Blue Diamond Almonds Lightly</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$23.85</span>
+                                    <span class="old-price">$25.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-6-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-6-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Hodo Foods</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Chobani Complete Vanilla Greek</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$54.85</span>
+                                    <span class="old-price">$55.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-7-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-7-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Meats</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Canada Dry Ginger Ale – 2 L Bottle</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$32.85</span>
+                                    <span class="old-price">$33.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-8-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-8-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="sale">Sale</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Snack</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Encore Seafoods Stuffed Alaskan</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$35.85</span>
+                                    <span class="old-price">$37.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-9-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-9-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">Hot</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Coffes</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Gorton’s Beer Battered Fish Fillets</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Old El Paso</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$23.85</span>
+                                    <span class="old-price">$25.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
+                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
+                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
+                                </a>
+                            </div>
+                            <div class="product-action-1">
+                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <div class="product-category">
+                                <a href="shop-grid-right.html">Cream</a>
+                            </div>
+                            <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 50%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (2.0)</span>
+                            </div>
+                            <div>
+                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Tyson</a></span>
+                            </div>
+                            <div class="product-card-bottom">
+                                <div class="product-price">
+                                    <span>$22.85</span>
+                                    <span class="old-price">$24.8</span>
+                                </div>
+                                <div class="add-cart">
+                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end product card-->
             </div>
             <!--product grid-->
             <div class="pagination-area mt-20 mb-20">
@@ -525,10 +1132,66 @@
             <!--End Deals-->
         </div>
         <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
-            <div class="banner-img mb-30">
-                <img src="{{ asset('assets/frontend/imgs/banner/banner-10.jpg') }}" alt="" />
-            </div>
+            <div class="sidebar-widget widget-store-info mb-30 bg-3 border-0">
+                <div class="vendor-logo mb-30">
+                    <img src="{{ asset('assets/frontend/imgs/vendor/vendor-16.png') }}" alt="" />
+                </div>
+                <div class="vendor-info">
+                    <div class="product-category">
+                        <span class="text-muted">Since {{ $store->established_at }}</span>
+                    </div>
+                    <h4 class="mb-5"><a href="vendor-details-1.html" class="text-heading">{{ $store->name }}</a></h4>
 
+                    <div class="product-rate-cover mb-15">
+                        <div class="product-rate d-inline-block">
+                            <div class="product-rating" style="width: 90%"></div>
+                        </div>
+                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                    </div>
+
+                    <div class="vendor-des mb-30">
+                        <p class="font-sm text-heading">{{ $store->description }}</p>
+                    </div>
+                    <div class="follow-social mb-20">
+                        <h6 class="mb-15">Follow Us</h6>
+                        <ul class="social-network">
+                            <li class="hover-up">
+                                <a href="{{ $store->twitter_link }}">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/social-tw.svg') }}" alt="" />
+                                </a>
+                            </li>
+                            <li class="hover-up">
+                                <a href="{{ $store->facebook_link }}">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/social-fb.svg') }}" alt="" />
+                                </a>
+                            </li>
+                            <li class="hover-up">
+                                <a href="{{ $store->instagram_link }}">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/social-insta.svg') }}" alt="" />
+                                </a>
+                            </li>
+                            <li class="hover-up">
+                                <a href="{{ $store->pinterest_link }}">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/social-pin.svg') }}" alt="" />
+                                </a>
+                            </li>
+                            <li class="hover-up">
+                                <a href="{{ $store->youtube_link }}">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/youtube-icon.png') }}" width="32" height="33" alt="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="vendor-info">
+                        <ul class="font-sm mb-20">
+                            <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: <strong>Address: </strong> <span>{{ $store->address }}, {{ $store->city }} {{ $store->zip }} ,{{ $store->country->name }}</span></li>
+                            <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>
+                        </ul>
+                        <a href="tel:{{ $store->phone }}" class="btn btn-xs">Contact Seller <i class="fi-rs-arrow-small-right"></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="sidebar-widget widget-category-2 mb-30">
                 <h5 class="section-title style-1 mb-30">Category</h5>
                 <ul>

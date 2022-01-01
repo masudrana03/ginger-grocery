@@ -24,12 +24,20 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
-            'type'      => 'required',
-            'image'     => 'required|image',
-            'zone_id'   => 'required',
-            'latitude'  => 'required',
-            'longitude' => 'required',
+            'name'           => 'required',
+            'type'           => 'required',
+            'image'          => 'required|image',
+            'phone'          => 'required',
+            'established_at' => 'required',
+            'country_id'     => 'required',
+            'state'          => 'required',
+            'city'           => 'required',
+            'zip'            => 'required|numeric',
+            'address'        => 'required',
+            'description'    => 'required',
+            'zone_id'        => 'required|numeric',
+            'latitude'       => 'required',
+            'longitude'      => 'required',
         ];
     }
 }

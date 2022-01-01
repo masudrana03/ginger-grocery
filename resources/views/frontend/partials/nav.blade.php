@@ -532,7 +532,7 @@
                                         <ul class="sub-menu">
                                             {{-- <li><a href="vendors-grid.html">Vendors Grid</a></li> --}}
                                             <li><a href="{{ route('vendor.list') }}">Vendors List</a></li>
-                                            <li><a href="{{ route('vendor.details') }}">Vendor Details</a></li>
+                                            <li><a href="#">Vendor Details</a></li>
                                             {{-- <li><a href="vendor-details-2.html">Vendor Details 02</a></li> --}}
                                             <li><a href="#">Vendor Dashboard</a></li>
                                             <li><a href="#">Vendor Guide</a></li>

@@ -32,7 +32,7 @@
             <div class="col-12 col-lg-8 mx-auto">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-                        <p>We have <strong class="text-brand">780</strong> vendors now</p>
+                        <p>We have <strong class="text-brand">{{$stores->count()}}</strong> vendors now</p>
                     </div>
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
@@ -85,7 +85,7 @@
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
                             <a href="vendor-details-1.html">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-1.png') }}" alt="" />
+                                <img class="default-img" src="{{ asset('assets/img/uploads/stores/'.$store ->image) }}" alt="" />
                             </a>
                         </div>
                         <div class="product-badges product-badges-position product-badges-mrg">
@@ -96,9 +96,9 @@
                         <div class="d-flex justify-content-between align-items-end mb-30">
                             <div>
                                 <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
+                                    <span class="text-muted">Since {{ $store->established_at }}</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">{{$store->name}}</a></h4>
+                                <h4 class="mb-5"><a href="vendor-details-1.html">{{ $store->name }}</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -115,8 +115,8 @@
 
                         <div class="vendor-info mb-30">
                             <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
+                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>{{ $store->address }},<br> {{ $store->city }} {{ $store->zip }} {{ $store->country->name }}</span></li>
+                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>
                             </ul>
                         </div>
                         <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>

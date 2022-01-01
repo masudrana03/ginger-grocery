@@ -228,7 +228,7 @@ Route::post('/contact-massage-from', [FrontendContactController::class, 'contact
 Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
 Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
-Route::get('/vendor-details', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
+Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
 
 
 Auth::routes();

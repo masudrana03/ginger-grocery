@@ -24,11 +24,17 @@ class StoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
-            'type'      => 'required',
-            'zone_id'   => 'required',
-            'latitude'  => 'required',
-            'longitude' => 'required',
+            'name'           => 'required',
+            'type'           => 'required',
+            'phone'          => 'required',
+            'country_id'     => 'required',
+            'city'           => 'required',
+            'zip'            => 'required|numeric',
+            'address'        => 'required',
+            'description'    => 'required',
+            'zone_id'        => 'required|numeric',
+            'latitude'       => 'required',
+            'longitude'      => 'required',
         ];
     }
 }

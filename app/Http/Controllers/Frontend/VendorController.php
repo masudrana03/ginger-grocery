@@ -15,8 +15,14 @@ class VendorController extends Controller
         return view('frontend.vendor', compact('stores'));
     }
 
-    public function vendorDetails()
+    public function vendorDetails( $id )
     {
-        return view('frontend.vendor-details');
+        $store = Store::with('products')->find($id);
+        // $store = Store::where( $id ,'id')->with('products')->get();
+        // $store = Store::find($id);
+
+        // return  $store ;
+
+        return view('frontend.vendor-details', compact('store'));
     }
 }

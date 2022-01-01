@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Zone;
 use App\Models\Store;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\StoreUpdateRequest;
@@ -72,6 +73,7 @@ class StoreController extends Controller {
         if ( !empty( $stores ) ) {
             foreach ( $stores as $store ) {
                 $edit   = route('admin.stores.edit', $store->id );
+                $show   = route('admin.stores.show', $store->id);
                 $delete = route('admin.stores.destroy', $store->id );
                 $token  = csrf_token();
                 $img    = asset( 'assets/img/uploads/stores/thumbnail/' . $store->image );
@@ -83,6 +85,7 @@ class StoreController extends Controller {
                 $nestedData['zone']       = $store->zone ? $store->zone->name : '';
                 $nestedData['created_at'] = $store->created_at->format( 'd-m-Y' );
                 $nestedData['actions']    = "
+                    &emsp;<a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
                     &emsp;<a href='#' onclick='deleteStore({$store->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$store->id}' action='{$delete}' method='POST' style='display: none;'>
@@ -115,8 +118,9 @@ class StoreController extends Controller {
         }
 
         $zones = Zone::all();
+        $countries = Country::all();
 
-        return view('backend.stores.create', compact('zones'));
+        return view('backend.stores.create', compact('zones', 'countries'));
     }
 
     /**
@@ -127,6 +131,7 @@ class StoreController extends Controller {
      */
     public function store( StoreRequest $request )
     {
+        // return $request;
         if ( !isAdmin() ) {
             return abort( 403 );
         }
@@ -156,8 +161,14 @@ class StoreController extends Controller {
      * @param  \App\Models\Store           $store
      * @return \Illuminate\Http\Response
      */
-    public function show( Store $store ) {
-        //
+    public function show( Store $store )
+    {
+
+        if ( !isShopManager( $store->id ) && !isAdmin() ) {
+            return abort( 403 );
+        }
+
+        return view('backend.stores.view', compact('store'));
     }
 
     /**
