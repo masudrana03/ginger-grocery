@@ -114,6 +114,24 @@ class User extends Authenticatable {
     }
 
     /**
+     * A user has many referrals.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function billingAddresses() {
+        return $this->hasMany(Address::class)->whereType(1);
+    }
+
+    /**
+     * A user has many referrals.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shippingAddresses() {
+        return $this->hasMany(Address::class)->whereType(2);
+    }
+
+    /**
      * Returns Store model associated with the user.
      *
      * @return Relationship

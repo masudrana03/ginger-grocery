@@ -204,10 +204,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
-Route::get('/user-orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
-Route::get('/user-track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
-Route::get('/user-address', [FrontendUserController::class, 'getAddress'])->name('user.address');
-Route::get('/user-profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+Route::get('/user/orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
+Route::get('/user/track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+Route::get('/user/address', [FrontendUserController::class, 'getAddress'])->name('user.address');
+Route::get('/user/profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+Route::post('/user/profile-update', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
+Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
+Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
