@@ -27,4 +27,20 @@ class Address extends Model
         'type',
     ];
 
+    public function scopeBilling($query)
+    {
+        return $query->whereType(1);
+    }
+
+    public function scopeShipping($query)
+    {
+        return $query->whereType(1);
+    }
+
+    /**
+     * Returns country model associated with the user.
+     */
+    public function country() {
+        return $this->belongsTo( Country::class );
+    }
 }

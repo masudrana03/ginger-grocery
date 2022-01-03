@@ -60,55 +60,41 @@
                                         aria-labelledby="account-detail-tab">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Account Details</h5>
+                                                <h5>Chnage Password</h5>
                                             </div>
                                             <div class="card-body">
-                                                <form method="post" name="enq"
-                                                    action="{{ route('user.profile.update') }}">
+                                                <form method="post" action="{{ route('user.update.password') }}">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
-                                                            <label>Name <span class="required">*</span></label>
-                                                            <input required="" class="form-control @error('name') is-invalid @enderror" name="name"
-                                                                type="text" value="{{ old('name') ?? $user->name }}" />
-                                                            @error('name')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label>Email Address <span
+                                                            <label>Current Password <span
                                                                     class="required">*</span></label>
-                                                            <input required="" class="form-control @error('email') is-invalid @enderror" name="email"
-                                                                type="email" value="{{ old('email') ?? $user->email }}" />
-                                                            @error('email')
+                                                            <input required=""
+                                                                class="form-control @error('old_password') is-invalid @enderror"
+                                                                name="old_password" type="password" />
+                                                            @error('old_password')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group col-md-12">
-                                                            <label>Phone <span class="required">*</span></label>
-                                                            <input required="" class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                                                type="text" value="{{ old('phone') ?? $user->phone }}" />
-                                                            @error('phone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label>Date of Birth <span
+                                                            <label>New Password <span
                                                                     class="required">*</span></label>
-                                                            <input required="" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth"
-                                                                type="date"
-                                                                value="{{ old('date_of_birth') ?? $user->date_of_birth }}" />
-                                                            @error('date_of_birth')
+                                                            <input required=""
+                                                                class="form-control @error('new_password') is-invalid @enderror"
+                                                                name="new_password" type="password" />
+                                                            @error('new_password')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Confirm Password <span
+                                                                    class="required">*</span></label>
+                                                            <input required="" class="form-control"
+                                                                name="password_confirmation" type="password" />
                                                         </div>
                                                         <div class="col-md-12">
                                                             <button type="submit"
