@@ -84,7 +84,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="{{ route('vendor.details', $store->id) }}">
                                 <img class="default-img" src="{{ asset('assets/img/uploads/stores/'.$store ->image) }}" alt="" />
                             </a>
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since {{ $store->established_at }}</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">{{ $store->name }}</a></h4>
+                                <h4 class="mb-5"><a href="{{ route('vendor.details', $store->id) }}">{{ $store->name }}</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -109,7 +109,7 @@
                             </div>
 
                             <div class="mb-10">
-                                <span class="font-small total-product">{{$store->products->count()}} products</span>
+                                <span class="font-small total-product">{{ $store->products->count() }} products</span>
                             </div>
                         </div>
 
