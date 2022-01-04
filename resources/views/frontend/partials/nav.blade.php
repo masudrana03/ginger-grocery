@@ -143,10 +143,20 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><a href="page-about.htlm">About Us</a></li>
-                                <li><a href="page-account.html">My Account</a></li>
-                                <li><a href="shop-wishlist.html">Wishlist</a></li>
-                                <li><a href="shop-order.html">Order Tracking</a></li>
+                                <li><a href="{{ route('about') }}">About Us</a></li>
+
+                                @if (auth()->user())
+                                    <li><a href="{{ route('index') }}">My Account</a></li>
+                                    <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                @else
+                                    <li><a href="{{ route('login') }}">My Account</a></li>
+                                    <li><a href="{{ route('login') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                @endif
+                                {{-- <li><a href="#">My Account</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">Order Tracking</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -372,10 +382,10 @@
                                 </div>
                                 @auth
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <a href="#">
                                         <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
                                     </a>
-                                    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                    <a href="#"><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li>
@@ -500,9 +510,9 @@
                                     <li>
                                         <a href="{{ route('about') }}">About</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="#">Shop</a>
-                                    </li>
+                                    </li> --}}
                                     {{-- <li>
                                         <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -521,22 +531,22 @@
                                                 </ul>
                                             </li>
                                             <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                            <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                            <li><a href="#">Shop – Wishlist</a></li>
                                             <li><a href="shop-cart.html">Shop – Cart</a></li>
                                             <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                             <li><a href="shop-compare.html">Shop – Compare</a></li>
                                         </ul>
                                     </li> --}}
                                     <li>
-                                        <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            {{-- <li><a href="vendors-grid.html">Vendors Grid</a></li> --}}
+                                        <a href="{{ route('vendor.list') }}">Vendors</a>
+                                        {{-- <ul class="sub-menu">
+                                            <li><a href="vendors-grid.html">Vendors Grid</a></li>
                                             <li><a href="{{ route('vendor.list') }}">Vendors List</a></li>
                                             <li><a href="#">Vendor Details</a></li>
-                                            {{-- <li><a href="vendor-details-2.html">Vendor Details 02</a></li> --}}
+                                            <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
                                             <li><a href="#">Vendor Dashboard</a></li>
                                             <li><a href="#">Vendor Guide</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                     {{-- <li class="position-static">
                                         <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
@@ -622,7 +632,7 @@
                                         <ul class="sub-menu">
                                             <li><a href="page-about.html">About Us</a></li>
                                             <li><a href="page-contact.html">Contact</a></li>
-                                            <li><a href="page-account.html">My Account</a></li>
+                                            <li><a href="#">My Account</a></li>
                                             <li><a href="page-login.html">Login</a></li>
                                             <li><a href="page-register.html">Register</a></li>
                                             <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
@@ -660,7 +670,7 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="#">
                                     <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                     <span class="pro-count white">4</span>
                                 </a>
@@ -740,14 +750,14 @@
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
                                 <a href="{{url('/')}}">Home</a>
-                                <ul class="dropdown">
+                                {{-- <ul class="dropdown">
                                     <li><a href="{{url('/')}}">Home 1</a></li>
                                     <li><a href="index-2.html">Home 2</a></li>
                                     <li><a href="index-3.html">Home 3</a></li>
                                     <li><a href="index-4.html">Home 4</a></li>
                                     <li><a href="index-5.html">Home 5</a></li>
                                     <li><a href="index-6.html">Home 6</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="shop-grid-right.html">shop</a>
@@ -767,7 +777,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                    <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                    <li><a href="#">Shop – Wishlist</a></li>
                                     <li><a href="shop-cart.html">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
@@ -838,7 +848,7 @@
                                 <ul class="dropdown">
                                     <li><a href="page-about.html">About Us</a></li>
                                     <li><a href="page-contact.html">Contact</a></li>
-                                    <li><a href="page-account.html">My Account</a></li>
+                                    <li><a href="#">My Account</a></li>
                                     <li><a href="page-login.html">Login</a></li>
                                     <li><a href="page-register.html">Register</a></li>
                                     <li><a href="page-purchase-guide.html">Purchase Guide</a></li>

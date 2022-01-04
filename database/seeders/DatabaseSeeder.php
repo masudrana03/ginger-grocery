@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder {
             ContactInfoSeeder::class,
             AboutSeeder::class,
             AboutImageSeeder::class,
+            AboutServicesSeeder::class,
 
         ] );
 

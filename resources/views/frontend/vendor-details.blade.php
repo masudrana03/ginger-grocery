@@ -91,7 +91,7 @@
                                 <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">Hot</span>
+                                {{-- <span class="hot">Hot</span> --}}
                             </div>
                         </div>
                         <div class="product-content-wrap">
@@ -439,13 +439,13 @@
         <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
             <div class="sidebar-widget widget-store-info mb-30 bg-3 border-0">
                 <div class="vendor-logo mb-30">
-                    <img src="{{ asset('assets/frontend/imgs/vendor/vendor-16.png') }}" alt="" />
+                    <img src="{{ asset('assets/img/uploads/stores/'.$store ->image) }}" alt="" />
                 </div>
                 <div class="vendor-info">
                     <div class="product-category">
                         <span class="text-muted">Since {{ $store->established_at }}</span>
                     </div>
-                    <h4 class="mb-5"><a href="vendor-details-1.html" class="text-heading">{{ $store->name }}</a></h4>
+                    <h4 class="mb-5"><a href="#" class="text-heading">{{ $store->name }}</a></h4>
 
                     <div class="product-rate-cover mb-15">
                         <div class="product-rate d-inline-block">
@@ -557,7 +557,7 @@
                 <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
             </div>
 
-            <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
+            {{-- <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
                 <img src="{{ asset('assets/frontend/imgs/banner/banner-11.png') }}" alt="" />
                 <div class="banner-text">
                     <span>Oganic</span>
@@ -567,7 +567,7 @@
                         Juice
                     </h4>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

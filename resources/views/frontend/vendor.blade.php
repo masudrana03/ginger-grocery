@@ -89,7 +89,7 @@
                             </a>
                         </div>
                         <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="hot">Mall</span>
+                            {{-- <span class="hot">Mall</span> --}}
                         </div>
                     </div>
                     <div class="vendor-content-wrap">
@@ -119,19 +119,16 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="{{ route('vendor.details', $store->id) }}" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
             @empty
-
-            @endforelse
-
             <div class="col-lg-3 col-md-6 col-12 col-sm-6">
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-1.png') }}" alt="" />
                             </a>
                         </div>
@@ -145,7 +142,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Nature Food</a></h4>
+                                <h4 class="mb-5"><a href="#">Nature Food</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -166,10 +163,12 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
+            @endforelse
+
 
 
             <!--end vendor card-->
@@ -803,7 +802,7 @@
         </div>
 
         <div class="pagination-area mt-20 mb-20">
-            <nav aria-label="Page navigation example">
+            {{-- <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-start">
                     <li class="page-item">
                         <a class="page-link" href="#"><i class="fi-rs-arrow-small-left"></i></a>
@@ -817,7 +816,8 @@
                         <a class="page-link" href="#"><i class="fi-rs-arrow-small-right"></i></a>
                     </li>
                 </ul>
-            </nav>
+            </nav> --}}
+            {{ $stores->links() }}
         </div>
     </div>
 </div>

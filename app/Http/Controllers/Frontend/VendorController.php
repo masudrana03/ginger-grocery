@@ -11,7 +11,7 @@ class VendorController extends Controller
 {
     public function vendors()
     {
-        $stores = Store::with('products')->get();
+        $stores = Store::with('products')->paginate(12);
 
         return view('frontend.vendor', compact('stores'));
     }
@@ -27,15 +27,6 @@ class VendorController extends Controller
         }
 
         $vendorWise = $vendorWise->paginate(15);
-
-        // return $vendorWise;
-       // $store = Store::with('products')->where('');
-        // $store = Store::where( $id ,'id')->with('products')->get();
-        // $store = Store::find($id);
-
-        // return  $store ;
-        // $storeWiseProduct = Product::with( 'store', 'currency', 'category.products', 'brand', 'unit' )->where( 'id' ,$id)->paginate(15);
-        // return $storeWiseProduct;
 
         return view('frontend.vendor-details', compact('store', 'vendorWise'));
     }
