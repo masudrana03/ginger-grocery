@@ -33,7 +33,7 @@
                                     <span class="font-small ml-5 text-muted"> (32 rates)</span>
                                 </div>
                             </div>
-                            <a href="shop-grid-right.html" class="btn hover-up">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            <a href="#" class="btn hover-up">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -433,36 +433,36 @@
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing & beauty</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing & beauty</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a>
                                         </li>
                                     </ul>
                                     <ul class="end">
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}" alt="" />Wines & Drinks</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}" alt="" />Wines & Drinks</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}" alt="" />Fresh Seafood</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}" alt="" />Fresh Seafood</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}" alt="" />Fast food</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}" alt="" />Fast food</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}" alt="" />Vegetables</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}" alt="" />Vegetables</a>
                                         </li>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}" alt="" />Bread and Juice</a>
+                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}" alt="" />Bread and Juice</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -470,18 +470,18 @@
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul>
                                             <li>
-                                                <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}" alt="" />Milks and Dairies</a>
+                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}" alt="" />Milks and Dairies</a>
                                             </li>
                                             <li>
-                                                <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}" alt="" />Clothing & beauty</a>
+                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}" alt="" />Clothing & beauty</a>
                                             </li>
                                         </ul>
                                         <ul class="end">
                                             <li>
-                                                <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}" alt="" />Wines & Drinks</a>
+                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}" alt="" />Wines & Drinks</a>
                                             </li>
                                             <li>
-                                                <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}" alt="" />Fresh Seafood</a>
+                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}" alt="" />Fresh Seafood</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -492,7 +492,7 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul>
-                                    <li class="hot-deals"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}" alt="hot deals" /><a href="shop-grid-right.html">Hot Deals</a></li>
+                                    <li class="hot-deals"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}" alt="hot deals" /><a href="#">Hot Deals</a></li>
                                     {{-- <li>
                                         <a class="active" href="{{url('/')}}">Home <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -514,9 +514,9 @@
                                         <a href="#">Shop</a>
                                     </li> --}}
                                     {{-- <li>
-                                        <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
+                                        <a href="#">Shop <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
+                                            <li><a href="#">Shop Grid – Right Sidebar</a></li>
                                             <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
                                             <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
                                             <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
@@ -760,9 +760,9 @@
                                 </ul> --}}
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="shop-grid-right.html">shop</a>
+                                <a href="#">shop</a>
                                 <ul class="dropdown">
-                                    <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
+                                    <li><a href="#">Shop Grid – Right Sidebar</a></li>
                                     <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
                                     <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
                                     <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
