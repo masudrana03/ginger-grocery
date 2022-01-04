@@ -99,7 +99,7 @@
             <span>Products</span>
         </div>
     </a>
-    <ul class="mm-collapse mm-show" style="height: 5px;">
+    <ul> 
         <li>
             <a href="{{ route('admin.products.index') }}">Products</a>
         </li>
@@ -146,7 +146,7 @@
             <span>Delivery Men</span>
         </div>
     </a>
-    <ul class="mm-collapse mm-show" style="height: 5px;">
+    <ul>
         <li>
             <a href="{{ route('admin.delivery_men.index') }}">Delivery Man Details</a>
         </li>
@@ -185,7 +185,7 @@
             <span>Settings</span>
         </div>
     </a>
-    <ul style="height: 5px;">
+    <ul>
         <li class="">
             <a href="{{ route('admin.settings.general') }}">General Settings</a>
             <a href="{{ route('admin.settings.email') }}">Email Settings</a>
@@ -215,7 +215,7 @@
             <span>About</span>
         </div>
     </a>
-    <ul class="mm-collapse mm-show" style="height: 5px;">
+    <ul>
         <li>
             <a href="{{ route('admin.abouts.index') }}">About Info</a>
         </li>
@@ -231,8 +231,8 @@
 
     </ul>
 </li>
-<li class="">
-    <a href="{{ route('admin.faqs.index') }}" aria-expanded="false">
+<li>
+    <a href="{{ route('admin.faqs.index') }}">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>
