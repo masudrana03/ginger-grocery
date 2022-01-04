@@ -5,6 +5,252 @@
 <div class="main_content_iner ">
     <div class="container-fluid p-0 sm_padding_15px">
         <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Create New Store</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <form action="{{ route('admin.stores.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Store Name</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Name : XYZ.ltd" value="{{ old('name') }}">
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" placeholder="Exp : +880 1712 112233" value="{{ old('phone') }}">
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type">Type</label>
+                                        <input type="text" name="type" class="form-control @error('type') is-invalid @enderror" id="type" aria-describedby="emailHelp" placeholder="Exp : Fruit Shop" value="{{ old('type') }}">
+                                        @error('type')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="established_at">Established At</label>
+                                        <input type="number" name="established_at" class="form-control @error('established_at') is-invalid @enderror" id="established_at" aria-describedby="emailHelp" placeholder="Exp : 1952" value="{{ old('established_at') }}">
+                                        @error('established_at')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country_id">Country</label>
+                                        <select name="country_id"
+                                        class="form-control @error('country_id') is-invalid @enderror">
+                                            {{-- <option value="">Seclect Country</option>
+                                        @foreach ( $countries as $country )
+                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                        @endforeach --}}
+                                        </select>
+                                        @error('country_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" name="state" class="form-control @error('state') is-invalid @enderror" id="state" aria-describedby="emailHelp" placeholder="Exp : Florida" value="{{ old('state') }}">
+                                        @error('state')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="facebook_link">Twitter link</label>
+                                        <input type="text" name="facebook_link" class="form-control @error('facebook_link') is-invalid @enderror" id="facebook_link" aria-describedby="emailHelp" placeholder="Exp : https://twitter.com/" value="{{ old('facebook_link') }}">
+                                        @error('facebook_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="youtube_link">Youtube link</label>
+                                        <input type="text" name="youtube_link" class="form-control @error('youtube_link') is-invalid @enderror" id="youtube_link" aria-describedby="emailHelp" placeholder="Exp : https://www.youtube.com/" value="{{ old('youtube_link') }}">
+                                        @error('youtube_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" id="city" aria-describedby="emailHelp" placeholder="Exp : Miami" value="{{ old('city') }}">
+                                        @error('city')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zip">Zip</label>
+                                        <input type="text" name="zip" class="form-control @error('zip') is-invalid @enderror" id="zip" aria-describedby="emailHelp" placeholder="Exp : 33101" value="{{ old('zip') }}">
+                                        @error('zip')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="facebook_link">Facebook link </label>
+                                        <input type="text" name="facebook_link" class="form-control @error('facebook_link') is-invalid @enderror" id="facebook_link" aria-describedby="emailHelp" placeholder="Exp : https://www.facebook.com/" value="{{ old('facebook_link') }}">
+                                        @error('facebook_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram_link">Instagram link</label>
+                                        <input type="text" name="instagram_link" class="form-control @error('instagram_link') is-invalid @enderror" id="instagram_link" aria-describedby="emailHelp" placeholder="Exp : https://www.instagram.com/" value="{{ old('instagram_link') }}">
+                                        @error('instagram_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea rows="4" name="address"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            aria-describedby="emailHelp" placeholder="Exp : 1255 Timbercrest Road"
+                                            >{{ old('address') }}</textarea>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea rows="4" name="description"
+                                            class="form-control @error('description') is-invalid @enderror"
+                                            aria-describedby="emailHelp" placeholder="Exp : Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef."
+                                            >{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="zone">Zone</label>
+                                        <select name="zone_id" id="choice_zones"
+                                        class="form-control @error('zone') is-invalid @enderror">
+                                            <option value="">Seclect Zone</option>
+                                        @foreach ( $zones as $zone )
+                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                        @endforeach
+
+                                        </select>
+                                        @error('zone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" name="latitude" id="latitude" class="form-control @error('latitude') is-invalid @enderror" id="latitude" aria-describedby="emailHelp" placeholder="Ex : -94.22213" value="{{ old('latitude') }}">
+                                        @error('latitude')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="longitude">Longitude</label>
+                                        <input type="text" name="longitude" id="longitude" class="form-control @error('longitude') is-invalid @enderror" id="longitude" aria-describedby="emailHelp" placeholder="Ex : 103.344322" value="{{ old('longitude') }}">
+                                        @error('longitude')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="name">Store Logo</label><br>
+                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
+                                            <div class="image-upload-wrap" style="display: none;">
+                                                <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image" id="image" />
+                                            </div>
+                                            <div class="file-upload-content">
+                                                <img class="file-upload-image" src="#" alt="your image" />
+                                                <div class="image-title-wrap">
+                                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-7">
+                                    <div class="card_box box_shadow mb_30">
+                                        <div class="white_box_tittle" style="padding: 20px !important">
+                                            <div class="main-title2 ">
+                                                <h5 class="mb-2 nowrap">Please Point Your Store</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 map-warper" style="height: 450px;">
+                                            <input id="pac-input" class="controls rounded" style="height: 3em; width: 230px;" type="text" placeholder="Search Your Zone"/>
+                                            <div id="map-canvas" style="height: 100%; margin:0px; padding: 0px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
             <div class="col-lg-5">
                 <div class="white_card card_height_100 mb_30">
                     <div class="white_card_header">
