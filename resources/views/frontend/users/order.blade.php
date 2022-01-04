@@ -21,10 +21,8 @@
                                 <div class="dashboard-menu">
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="dashboard-tab" data-bs-toggle="tab"
-                                                href="#dashboard" role="tab" aria-controls="dashboard"
-                                                aria-selected="false"><i
-                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                            <a class="nav-link" href="{{ route('user.dashboard') }}"
+                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="{{ route('user.orders') }}"
@@ -51,7 +49,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();"><i
+                                                            document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
