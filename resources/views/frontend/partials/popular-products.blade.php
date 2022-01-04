@@ -30,7 +30,7 @@
 
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('products', $product->id) }}">
-                                                @if ($product->images())
+                                                @if (count($product->images) > 0)
                                                     <img class="default-img"
                                                         src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
                                                         alt="" />
