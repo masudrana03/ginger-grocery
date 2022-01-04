@@ -187,7 +187,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="shop-grid-right.html">Snack</a>
+                                <a href="#">Snack</a>
                             </div>
                             <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe</a></h2>
                             <div class="product-rate-cover">
@@ -230,7 +230,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="shop-grid-right.html">Cream</a>
+                                <a href="#">Cream</a>
                             </div>
                             <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
                             <div class="product-rate-cover">
@@ -278,7 +278,7 @@
             <section class="section-padding pb-5">
                 <div class="section-title">
                     <h3 class="">Deals Of The Day</h3>
-                    <a class="show-all" href="shop-grid-right.html">
+                    <a class="show-all" href="#">
                         All Deals
                         <i class="fi-rs-angle-right"></i>
                     </a>
@@ -501,19 +501,19 @@
                 <h5 class="section-title style-1 mb-30">Category</h5>
                 <ul>
                     <li>
-                        <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks & Dairies</a><span class="count">30</span>
+                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks & Dairies</a><span class="count">30</span>
                     </li>
                     <li>
-                        <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a><span class="count">35</span>
+                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a><span class="count">35</span>
                     </li>
                     <li>
-                        <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods </a><span class="count">42</span>
+                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods </a><span class="count">42</span>
                     </li>
                     <li>
-                        <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a><span class="count">68</span>
+                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a><span class="count">68</span>
                     </li>
                     <li>
-                        <a href="shop-grid-right.html"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a><span class="count">87</span>
+                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a><span class="count">87</span>
                     </li>
                 </ul>
             </div>
@@ -554,7 +554,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
+                <a href="#" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
             </div>
 
             {{-- <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">

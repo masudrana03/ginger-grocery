@@ -19,7 +19,7 @@
                 <div class="banner-img style-2">
                     <div class="banner-text">
                         <h2 class="mb-100">Bring nature into your home</h2>
-                        <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Angie’s Boomchickapop Sweet and womnies</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -165,7 +165,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Foster Farms Takeout Crispy Classic </a></h2>
                                         <div class="product-rate d-inline-block">
@@ -204,7 +204,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Blue Diamond Almonds Lightly Salted</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -251,7 +251,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Canada Dry Ginger Ale – 2 L Bottle</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -290,7 +290,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Encore Seafoods Stuffed Alaskan</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -329,7 +329,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Gorton’s Beer Battered Fish </a></h2>
                                         <div class="product-rate d-inline-block">
@@ -368,7 +368,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -407,7 +407,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Italian-Style Chicken Meatball</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -453,7 +453,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Perdue Simply Smart Organics Gluten Free</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -492,7 +492,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -531,7 +531,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Signature Wood-Fired Mushroom</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -570,7 +570,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Simply Lemonade with Raspberry Juice</a></h2>
                                         <div class="product-rate d-inline-block">
@@ -609,7 +609,7 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Hodo Foods</a>
+                                            <a href="#">Hodo Foods</a>
                                         </div>
                                         <h2><a href="shop-product-right.html">Organic Quinoa, Brown, & Red Rice</a></h2>
                                         <div class="product-rate d-inline-block">

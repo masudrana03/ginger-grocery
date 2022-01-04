@@ -156,7 +156,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="shop-grid-right.html">Snack</a>
+                                <a href="#">Snack</a>
                             </div>
                             <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe Naturel</a></h2>
                             <div class="product-rate-cover">
@@ -201,7 +201,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="shop-grid-right.html">Hodo Foods</a>
+                                <a href="#">Hodo Foods</a>
                             </div>
                             <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
                             <div class="product-rate-cover">
@@ -243,7 +243,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="shop-grid-right.html">Cream</a>
+                                <a href="#">Cream</a>
                             </div>
                             <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
                             <div class="product-rate-cover">
@@ -294,7 +294,7 @@
             <section class="section-padding pb-5">
                 <div class="section-title">
                     <h3 class="">Deals Of The Day</h3>
-                    <a class="show-all" href="shop-grid-right.html">
+                    <a class="show-all" href="#">
                         All Deals
                         <i class="fi-rs-angle-right"></i>
                     </a>

@@ -21,7 +21,7 @@
                             <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
-                                <figure class="border-radius-10">
+                                {{-- <figure class="border-radius-10">
                                     <img src="{{ asset('assets/frontend/imgs/shop/product-16-2.jpg') }}" alt="product image" />
                                 </figure>
                                 <figure class="border-radius-10">
@@ -38,20 +38,29 @@
                                 </figure>
                                 <figure class="border-radius-10">
                                     <img src="{{ asset('assets/frontend/imgs/shop/product-16-6.jpg') }}" alt="product image" />
-                                </figure>
+                                </figure> --}}
+
+                                @foreach ($product->images as $item)
                                 <figure class="border-radius-10">
-                                    <img src="{{ asset('assets/frontend/imgs/shop/product-16-7.jpg') }}" alt="product image" />
+                                    <img src="{{ asset('assets/img/uploads/products/'.$item ->image) }}" alt="product image" />
                                 </figure>
+                                @endforeach
+
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails">
-                                <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" alt="product image" /></div>
+                                {{-- <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" alt="product image" /></div>
                                 <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" alt="product image" /></div>
                                 <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-5.jpg') }}" alt="product image" /></div>
                                 <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-6.jpg') }}" alt="product image" /></div>
                                 <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-7.jpg') }}" alt="product image" /></div>
                                 <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-8.jpg') }}" alt="product image" /></div>
-                                <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-9.jpg') }}" alt="product image" /></div>
+                                <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-9.jpg') }}" alt="product image" /></div> --}}
+                                @foreach ($product->images as $item)
+                                <figure class="border-radius-10">
+                                    <div><img src="{{ asset('assets/img/uploads/products/'.$item ->image) }}" alt="product image" /></div>
+                                </figure>
+                                @endforeach
                             </div>
                         </div>
                         <!-- End Gallery -->
