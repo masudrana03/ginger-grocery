@@ -6,7 +6,7 @@
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+            <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
             <span></span> Shop
             <span></span> Cart
         </div>
@@ -84,11 +84,11 @@
                         @endphp
                         @empty
                         <li>
-                            
+
                             <div class="shopping-cart-title">
                                 <h4>No Items</h4>
                             </div>
-                            
+
                         </li>
                         @endforelse
                     </tbody>

@@ -5,7 +5,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Checkout
                 <span></span> save cards
             </div>
@@ -23,7 +23,7 @@
                             <li>
                                 <input class="payment" type="radio" id="cardHolder-{{$paymentMethod->id}}"  name="fav_language" value="{{ $paymentMethod->id }}">
                                 <label for="cardHolder-{{$paymentMethod->id}}">{{ $paymentMethod->billing_details->name}} {{ $paymentMethod->card->last4}}</label>
-                               
+
                             </li>
                             @endforeach
                         </ul>
@@ -47,20 +47,20 @@ document.getElementById("pay").onclick = function () {
     var invoiceId = document.getElementById("invoiceId").value;
     var paymentMethodId = $("input:radio.payment:checked").val();
     var url = "{{ route('payment_from_saved_card', [":invoiceId", ":paymentMethodId"]) }}";
-    
+
     url = url.replace(':invoiceId', invoiceId);
     url = url.replace(':paymentMethodId', paymentMethodId);
-    
+
     window.location.href=url;
 };
 
 document.getElementById("new").onclick = function () {
     var invoiceId = document.getElementById("invoiceId").value;
     var url = "{{ route('payment_from_card', ":invoiceId") }}";
-    
+
     url = url.replace(':invoiceId', invoiceId);
 
     window.location.href=url;
 };
-    
+
 </script>

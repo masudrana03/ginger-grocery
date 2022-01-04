@@ -7,7 +7,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Pages <span></span> My Account
                 </div>
             </div>
@@ -21,10 +21,8 @@
                                 <div class="dashboard-menu">
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab"
-                                                href="#dashboard" role="tab" aria-controls="dashboard"
-                                                aria-selected="false"><i
-                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                            <a class="nav-link active" href="{{ route('user.dashboard') }}"
+                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.orders') }}"
@@ -51,7 +49,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();"><i
+                                                            document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -72,9 +70,9 @@
                                             <div class="card-body">
                                                 <p>
                                                     From your account dashboard. you can easily check &amp; view your <a
-                                                        href="#">recent orders</a>,<br />
-                                                    manage your <a href="#">shipping and billing addresses</a> and <a
-                                                        href="#">edit your password and account details.</a>
+                                                        href="{{ route('user.orders') }}">recent orders</a>,<br />
+                                                    manage your <a href="{{ route('user.address') }}">shipping and billing addresses</a> and <a
+                                                        href="{{ route('user.change.password') }}">edit your password and account details.</a>
                                                 </p>
                                             </div>
                                         </div>

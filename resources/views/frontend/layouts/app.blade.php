@@ -138,7 +138,7 @@
                         <div class="col">
                             <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                                 <div class="logo mb-30">
-                                    <a href="index.html" class="mb-15"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                                    <a href="{{url('/')}}" class="mb-15"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
                                     <p class="font-lg text-heading">Awesome grocery store website template</p>
                                 </div>
                                 <ul class="contact-infor">
@@ -276,6 +276,8 @@
         <!-- Template  JS -->
         <script src="{{ asset('assets/frontend/js/main.js?v=3.2') }}"></script>
         <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
+
+        
         @if (session()->has('success'))
         <script>
             $( document ).ready(function(){

@@ -203,7 +203,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
 });
 
-Route::get('/user', [FrontendUserController::class, 'index'])->name('index');
+Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
 Route::get('/user/orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
 Route::get('/user/track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
 Route::get('/user/address', [FrontendUserController::class, 'getAddress'])->name('user.address');

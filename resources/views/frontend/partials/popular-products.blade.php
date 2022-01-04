@@ -25,8 +25,8 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="{{route('products', $product->id)}}">
-                                        <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
-                                        <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
+                                        <img class="default-img" src="{{ asset('assets/img/uploads/products/'.$product->image) }}" alt="" />
+                                        <img class="hover-img" src="{{ asset('assets/img/uploads/products/'.$product->image) }}" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-action-1">
@@ -82,8 +82,8 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="{{route('products', $product->id)}}">
-                                        <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
-                                        <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
+                                        <img class="default-img" src="{{ asset('assets/img/uploads/products/'.$product->image) }}" alt="" />
+                                        <img class="hover-img" src="{{ asset('assets/img/uploads/products/'.$product->image) }}" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-action-1">
