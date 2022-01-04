@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
@@ -11,8 +12,8 @@
         <meta property="og:url" content="" />
         <meta property="og:image" content="" />
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
-        <link rel="stylesheet" href="assets/css/main.css?v=4.0" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/frontend/imgs/theme/favicon.svg') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/frontend/invoice/main.css?v=4.1') }}" />
     </head>
 
     <body>
@@ -36,7 +37,7 @@
                                         <div class="col-sm-6">
                                             <div class="invoice-name text-end">
                                                 <div class="logo">
-                                                    <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo" /></a>
+                                                    <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
                                                     <p class="text-sm text-mutted">205 North Michigan Avenue, Suite 810 <br> Chicago, 60601, USA</p>
                                                 </div>
                                             </div>
@@ -168,11 +169,11 @@
                                                 <p><strong>AliThemes JSC</strong></p>
                                                 <div class="mobile-social-icon mt-50 print-hide">
                                                     <h6>Follow Us</h6>
-                                                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook-white.svg" alt="" /></a>
-                                                    <a href="#"><img src="assets/imgs/theme/icons/icon-twitter-white.svg" alt="" /></a>
-                                                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
-                                                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest-white.svg" alt="" /></a>
-                                                    <a href="#"><img src="assets/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}" alt="" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-pinterest-white.svg') }}" alt="" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-youtube-white.svg') }}" alt="" /></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,8 +181,8 @@
                                 </div>
                             </div>
                             <div class="invoice-btn-section clearfix d-print-none">
-                                <a href="javascript:window.print()" class="btn btn-lg btn-custom btn-print hover-up"> <img src="assets/imgs/theme/icons/icon-print.svg" alt="" /> Print </a>
-                                <a id="invoice_download_btn" class="btn btn-lg btn-custom btn-download hover-up"> <img src="assets/imgs/theme/icons/icon-download.svg" alt="" /> Download </a>
+                                <a href="javascript:window.print()" class="btn btn-lg btn-custom btn-print hover-up"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-print.svg') }}" alt="" /> Print </a>
+                                <a id="invoice_download_btn" class="btn btn-lg btn-custom btn-download hover-up"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-download.svg') }}" alt="" /> Download </a>
                             </div>
                         </div>
                     </div>
@@ -189,11 +190,11 @@
             </div>
         </div>
         <!-- Vendor JS-->
-        <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js') }}"></script>
+        <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
         <!-- Invoice JS -->
-        <script src="assets/js/invoice/jspdf.min.js"></script>
-        <script src="assets/js/invoice/invoice.js"></script>
+        <script src="{{ asset('assets/frontend/invoice/jspdf.min.js') }}"></script>
+        <script src="{{ asset('assets/frontend/invoice/invoice.js') }}"></script>
     </body>
 </html>

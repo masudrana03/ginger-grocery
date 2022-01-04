@@ -107,7 +107,7 @@
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                 </div>
                                 <div>
-                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product->store->name}}</a></span>
+                                    <span class="font-small text-muted">By <a href="{{ route('vendor.details', $product->store->id ) }}">{{$product->store->name}}</a></span>
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">

@@ -80,7 +80,7 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="{{route('products', $product->id)}}">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
                                 </a>
@@ -98,7 +98,7 @@
                             <div class="product-category">
                                 <a href="{{ route('categories', $product->category->id )}}">{{ $product->category->name }}</a>
                             </div>
-                            <h2><a href="shop-product-right.html">{{ $product->name }}</a></h2>
+                            <h2><a href="{{route('products', $product->id)}}">{{ $product->name }}</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 90%"></div>
