@@ -39,59 +39,79 @@
                             <th scope="col" class="end">Remove</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @php
-                            $total = 0;
-                            $currency_symbol = '$';
-                        @endphp
-                        @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                        <tr class="pt-30">
-                            <td class="custome-checkbox pl-30">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                <label class="form-check-label" for="exampleCheckbox1"></label>
-                            </td>
-                            <td class="image product-thumbnail pt-40"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"></td>
-                            <td class="product-des product-name">
-                                <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">{{$product->name}}</a></h6>
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width:90%">
+
+                    <form  method="POST" action="{{ route('cart.update') }}">
+                        @csrf
+                        <tbody>
+                            @php
+                                $total = 0;
+                                $currency_symbol = '$';
+                            @endphp
+                            @forelse ((auth()->user()->cart->products) ?? [] as $product)
+                            <tr class="pt-30">
+                                <td class="custome-checkbox pl-30">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+                                    <label class="form-check-label" for="exampleCheckbox1"></label>
+                                </td>
+                                <td class="image product-thumbnail pt-40"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"></td>
+                                <td class="product-des product-name">
+                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="#">{{$product->name}}</a></h6>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width:90%">
+                                            </div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+                                </td>
+                                <td class="price" data-title="Price">
+                                    <h4 class="text-body">{{$product->currency->symbol}}{{$product->price}}</h4>
+                                </td>
+
+                                <td class="text-center detail-info" data-title="Stock">
+                                    <div class="detail-extralink mr-15">
+                                        <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down" onclick="decrementCartValue()" ><i class="fi-rs-angle-small-down"></i></a>
+                                            <input class="quty" name="quantity" min="1" value="{{$product->quantity}}" >
+                                            {{-- <span class="qty-val">{{$product->quantity}}</span> --}}
+                                            <a href="#" class="qty-up" onclick="incrementCartValue()"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-body">{{$product->currency->symbol}}{{$product->price}}</h4>
-                            </td>
-                            <td class="text-center detail-info" data-title="Stock">
-                                <div class="detail-extralink mr-15">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span class="qty-val">{{$product->quantity}}</span>
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                </td>
+
+                                {{-- <td class="text-center detail-info" data-title="Stock">
+                                    <div class="detail-extralink mr-15">
+                                        <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                            <input class="quty" name="quantity" value="{{$product->quantity}}" >
+                                            <span class="qty-val">{{$product->quantity}}</span>
+                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                        </div>
                                     </div>
+                                </td> --}}
+
+                                <td class="price" data-title="Price">
+                                    <h4 class="text-brand">{{$product->quantity * $product->price}} </h4>
+                                </td>
+                                <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                            </tr>
+                            @php
+                                $total += $product->quantity * $product->price;
+                                $currency_symbol = $product->currency->symbol;
+                            @endphp
+                            @empty
+                            <li>
+
+                                <div class="shopping-cart-title">
+                                    <h4>No Items</h4>
                                 </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-brand">{{$product->quantity * $product->price}} </h4>
-                            </td>
-                            <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
-                        </tr>
-                        @php
-                            $total += $product->quantity * $product->price;
-                            $currency_symbol = $product->currency->symbol;
-                        @endphp
-                        @empty
-                        <li>
 
-                            <div class="shopping-cart-title">
-                                <h4>No Items</h4>
-                            </div>
+                            </li>
+                            @endforelse
+                        </tbody>
+                    </form>
 
-                        </li>
-                        @endforelse
-                    </tbody>
+
                 </table>
             </div>
             <div class="divider-2 mb-30"></div>
@@ -434,3 +454,22 @@
 </div>
 
 @endsection
+
+@push('script')
+<script type="text/javascript">
+
+function incrementCartValue(){
+    alert('sdfsdf');
+    //
+    console.log("inc");
+}
+
+function decrementCartValue(){
+    // document.getElementsByClassName('quty').stepDown();
+    console.log("dec");
+}
+</script>
+
+@endpush
+
+

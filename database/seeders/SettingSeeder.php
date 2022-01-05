@@ -12,8 +12,8 @@ class SettingSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        Setting::create( ['key' => 'company_name', 'value' => 'My company'] );
-        Setting::create( ['key' => 'company_address', 'value' => 'Dhaka'] );
+        Setting::create( ['key' => 'company_name', 'value' => 'Grocery Binary-fusion.com'] );
+        Setting::create( ['key' => 'company_address', 'value' => '205 North Michigan Avenue, Suite 810'] );
         Setting::create( ['key' => 'email', 'value' => 'admin@gmail.com'] );
         Setting::create( ['key' => 'phone', 'value' => '01820937110'] );
         Setting::create( ['key' => 'logo', 'value' => ''] );
@@ -29,5 +29,8 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'loyalty_cart_status', 'value' => 'No'] );
         Setting::create( ['key' => 'loyalty_points', 'value' => 100] );
         Setting::create( ['key' => 'loyalty_points_value', 'value' => 1] );
+        Setting::create( ['key' => 'city', 'value' => 'Chicago'] );
+        Setting::create( ['key' => 'zip', 'value' => '60601'] );
+        Setting::create( ['key' => 'country', 'value' => 'USA'] );
     }
 }

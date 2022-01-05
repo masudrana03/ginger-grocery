@@ -30,18 +30,19 @@ class UserController extends Controller
         return view('frontend.users.order', compact('user', 'orders'));
     }
 
-    // public function getInvoice( $OrderId )
-    // {
-    //     $order = Order::with('details', 'product', 'user', 'store')->find($OrderId);
-
-    //     return view('frontend.invoice', compact('order'));
-    // }
-
-    public function getInvoice(  )
+    public function getInvoice( $OrderId )
     {
+        $order = Order::with('details.product', 'user', 'store')->find($OrderId);
 
-        return view('frontend.invoice');
+        // return $order;
+        return view('frontend.invoice', compact('order'));
     }
+
+    // public function getInvoice(  )
+    // {
+
+    //     return view('frontend.invoice');
+    // }
 
     public function getTrackOrders()
     {

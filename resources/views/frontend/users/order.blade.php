@@ -85,7 +85,7 @@
                                                                     <td>{{ $item->created_at->format('F j, Y') }}</td>
                                                                     <td>{{ $item->status->name }}</td>
                                                                     <td>${{ $item->total }}</td>
-                                                                    <td><a href="#" class="btn-small d-block">View</a></td>
+                                                                    <td><a href="{{ route('user.invoice',$item->id )}}" class="btn-small d-block">View</a></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

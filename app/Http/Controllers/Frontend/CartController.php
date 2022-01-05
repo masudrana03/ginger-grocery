@@ -59,4 +59,9 @@ class CartController extends Controller {
         $compareProduct = Product::find($productIds) ?? [];
         return view('frontend.cart', compact( 'compareProduct' ) );
     }
+
+    public function cartUpdate(Request $request)
+    {
+       return $request;
+    }
 }

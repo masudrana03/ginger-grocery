@@ -80,9 +80,19 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{route('products', $product->id)}}">
-                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
+                                <a href="{{ route('products', $product->id) }}">
+                                    @if (count($product->images) > 0)
+                                        <img class="default-img"
+                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                            alt="" />
+                                        <img class="hover-img"
+                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                            alt="" />
+                                    @else
+                                        <img class="hover-img"
+                                            src="{{ asset('assets/img/uploads/products/' . $product->image) }}"
+                                            alt="" />
+                                    @endif
                                 </a>
                             </div>
                             <div class="product-action-1">
