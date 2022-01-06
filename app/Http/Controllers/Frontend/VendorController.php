@@ -16,6 +16,12 @@ class VendorController extends Controller
         return view('frontend.vendor', compact('stores'));
     }
 
+    /**
+     * Find product by name
+     *
+     * @param $productId as $id
+     * @param $request
+     */
     public function vendorDetails(Request $request, $id )
     {
         $store = Store::with('products')->findOrFail($id);

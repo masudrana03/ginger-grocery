@@ -231,22 +231,17 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">
-                                    <form action="#">
+                                    <form action="#" id="zone" method="POST">
                                         <select class="select-active">
                                             <option>Your Location</option>
-                                            <option>Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>Arizona</option>
-                                            <option>Delaware</option>
-                                            <option>Florida</option>
-                                            <option>Georgia</option>
-                                            <option>Hawaii</option>
-                                            <option>Indiana</option>
-                                            <option>Maryland</option>
-                                            <option>Nevada</option>
-                                            <option>New Jersey</option>
-                                            <option>New Mexico</option>
-                                            <option>New York</option>
+
+                                            @foreach ( $zones as $zone )
+                                                <option onclick="getZone()" value="{{$zone->id}}">{{$zone->name}}</option>
+                                            @endforeach
+
+                                            {{-- <option> {{$zones->name}}</option> --}}
+
+
                                         </select>
                                     </form>
                                 </div>
@@ -893,4 +888,10 @@
             </div>
         </div>
     </div>
-    <!--End header-->
+
+
+<script>
+   function getZone() {
+        document.getElementById('zone').submit();
+    }
+</script>

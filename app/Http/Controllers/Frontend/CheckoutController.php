@@ -71,6 +71,11 @@ class CheckoutController extends Controller
         return back()->with('success', 'Coupon applied');
     }
 
+    /**
+     * Payment method 
+     *
+     * @param $request
+     */
     public function placeOrder(Request $request)
     {
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();

@@ -6,10 +6,14 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\CallToAction;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Zone;
 
-class HomeController extends Controller {
-    public function index() {
+class HomeController extends Controller
+{
+    public function index()
+    {
         // if (! session('start_time')) {
         //     session()->put('start_time', time());
         // } else if (time() - session('start_time') > 1800) {
@@ -20,11 +24,17 @@ class HomeController extends Controller {
         $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
         $sliders = Banner::where( 'status', 1 )->get() ?? [];
         $callToActions = CallToAction::all();
-        // return $callToActions;
-        return view( 'frontend.index', compact( 'categories','compareProduct','sliders','callToActions' ) );
+        $zones = Zone::all();
+        // $zones = Zone::find(1);
+
+        // return $zones;
+
+        return view( 'frontend.index', compact( 'categories', 'compareProduct', 'sliders', 'callToActions', 'zones' ) );
     }
 
     /**
+     *
+     *
      * @param $id
      */
     public function productDetails( $id ) {
@@ -33,6 +43,7 @@ class HomeController extends Controller {
     }
 
     /**
+     *
      * @param $id
      */
     public function categoryDetails( $id ) {
@@ -53,4 +64,11 @@ class HomeController extends Controller {
 
         return view( 'frontend.search', compact( 'products', 'query' ) );
     }
+
+
+    public function getZone(Request $request)
+    {
+       return $request;
+    }
+
 }

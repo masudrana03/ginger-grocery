@@ -10,6 +10,8 @@ use App\Models\Store;
 class StoreController extends Controller
 {
     /**
+     * Product wise store
+     *
      * @param $storeId
     */
     public function storeById( $storeId )

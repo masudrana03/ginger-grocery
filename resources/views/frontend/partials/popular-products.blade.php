@@ -30,18 +30,22 @@
 
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('products', $product->id) }}">
-                                                @if (count($product->images) > 0)
-                                                    <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                        alt="" />
-                                                    <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                        alt="" />
-                                                @else
-                                                    <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->image) }}"
-                                                        alt="" />
-                                                @endif
+                                                    @if (count($product->images) > 0)
+                                                        <img class="default-img"
+                                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                            alt="" />
+                                                        <img class="hover-img"
+                                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                            alt="" />
+                                                    @else
+                                                        <img class="default-img"
+                                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                            alt="" />
+                                                        <img class="hover-img"
+                                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                            alt="" />
+                                                    @endif
+
                                             </a>
                                         </div>
                                         <div class="product-action-1">
@@ -109,12 +113,21 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('products', $product->id) }}">
+                                                @if (count($product->images) > 0)
                                                 <img class="default-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->image) }}"
+                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
                                                     alt="" />
                                                 <img class="hover-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->image) }}"
+                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
                                                     alt="" />
+                                                @else
+                                                    <img class="default-img"
+                                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                        alt="" />
+                                                    <img class="hover-img"
+                                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                        alt="" />
+                                                @endif
                                             </a>
                                         </div>
                                         <div class="product-action-1">

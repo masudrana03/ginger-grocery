@@ -30,6 +30,12 @@ class UserController extends Controller
         return view('frontend.users.order', compact('user', 'orders'));
     }
 
+
+    /**
+     *
+     *
+     * @param $id
+     */
     public function getInvoice( $OrderId )
     {
         $order = Order::with('details.product', 'user', 'store')->find($OrderId);
@@ -38,11 +44,6 @@ class UserController extends Controller
         return view('frontend.invoice', compact('order'));
     }
 
-    // public function getInvoice(  )
-    // {
-
-    //     return view('frontend.invoice');
-    // }
 
     public function getTrackOrders()
     {
@@ -68,6 +69,9 @@ class UserController extends Controller
         return view('frontend.users.profile', compact('user'));
     }
 
+    /**
+     * @param $request
+     */
     public function updateProfile(Request $request)
     {
         $this->validate($request, [
@@ -88,7 +92,10 @@ class UserController extends Controller
 
         return view('frontend.users.change-password', compact('user'));
     }
-
+    
+    /**
+     * @param $request
+     */
     public function updatePassword(Request $request)
     {
         //return $request->all();

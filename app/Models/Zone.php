@@ -22,6 +22,14 @@ class Zone extends Model
         'coordinates',
     ];
 
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function store() {
+        return $this->hasMany( Store::class );
+    }
 
 
     public function getStatusAttribute()
