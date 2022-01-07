@@ -194,6 +194,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/products/{id}', [HomeController::class, 'productDetails'])->name('products');
 Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name('categories');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::post('/location', [HomeController::class, 'getZone'])->name('location');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
