@@ -235,8 +235,8 @@
                                         <select class="select-active">
                                             <option>Your Location</option>
 
-                                            @foreach ( $zones as $zone )
-                                                <option onclick="getZone()" value="{{$zone->id}}">{{$zone->name}}</option>
+                                            @foreach ( \App\Models\Zone::all() as $zone )
+                                                <option onclick="" value="{{$zone->id}}">{{$zone->name}}</option>
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
