@@ -17,14 +17,13 @@ class VendorController extends Controller
     }
 
     /**
-     * Find product by name
+     * Find product by name & flitter by low_to_high, high_to_low, release
      *
      * @param $productId as $id
      * @param $request
      */
     public function vendorDetails(Request $request, $id )
     {
-        // return 'bnhbk';
         $store = Store::with('products')->findOrFail($id);
 
         $vendorWise = $store->products();

@@ -64,7 +64,7 @@
                         </div>
                         <div class="sort-by-dropdown">
                             <ul>
-                                <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li>
+                                {{-- <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li> --}}
                                 <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=low_to_high',[$store->id]) }}">Price: Low to High</a></li>
                                 <li><a class="{{ request()->get('sort') == 'high_to_low' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=high_to_low',[$store->id]) }}">Price: High to Low</a></li>
                                 <li><a class="{{ request()->get('sort') == 'release' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=release',[$store->id]) }}">Release Date</a></li>

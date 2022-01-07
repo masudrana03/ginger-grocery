@@ -61,7 +61,7 @@
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                    href="#">{{ $product->name }}</a></h6>
+                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a></h6>
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width:90%">
