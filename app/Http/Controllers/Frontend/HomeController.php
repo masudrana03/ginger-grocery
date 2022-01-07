@@ -24,7 +24,7 @@ class HomeController extends Controller
         $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
         $sliders = Banner::where( 'status', 1 )->get() ?? [];
         $callToActions = CallToAction::all();
-        $zones = Zone::all();
+        $zones = Zone::all() ?? [];
         // $zones = Zone::find(1);
 
         // return $zones;
