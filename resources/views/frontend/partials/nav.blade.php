@@ -42,7 +42,8 @@
     </div> --}}
 
     <!-- Quick view -->
-    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -54,36 +55,50 @@
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-2.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-2.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-1.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-1.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-3.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-3.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-4.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-4.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-5.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-5.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-6.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-6.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-7.jpg') }}" alt="product image" />
+                                        <img src="{{ asset('assets/frontend/imgs/shop/product-16-7.jpg') }}"
+                                            alt="product image" />
                                     </figure>
                                 </div>
                                 <!-- THUMBNAILS -->
                                 <div class="slider-nav-thumbnails">
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-5.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-6.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-7.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-8.jpg') }}" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-9.jpg') }}" alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-5.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-6.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-7.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-8.jpg') }}"
+                                            alt="product image" /></div>
+                                    <div><img src="{{ asset('assets/frontend/imgs/shop/thumbnail-9.jpg') }}"
+                                            alt="product image" /></div>
                                 </div>
                             </div>
                             <!-- End Gallery -->
@@ -91,7 +106,8 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="detail-info pr-30 pl-30">
                                 <span class="stock-status out-stock"> Sale Off </span>
-                                <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading">Seeds of Change Organic Quinoa, Brown</a></h3>
+                                <h3 class="title-detail"><a href="shop-product-right.html"
+                                        class="text-heading">Seeds of Change Organic Quinoa, Brown</a></h3>
                                 <div class="product-detail-rating">
                                     <div class="product-rate-cover text-end">
                                         <div class="product-rate d-inline-block">
@@ -116,13 +132,15 @@
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                        <button type="submit" class="button button-add-to-cart"><i
+                                                class="fi-rs-shopping-cart"></i>Add to cart</button>
                                     </div>
                                 </div>
                                 <div class="font-xs">
                                     <ul>
                                         <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
-                                        <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span></li>
+                                        <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -176,30 +194,44 @@
                             <ul>
                                 <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
                                 <li>
-                                    <a class="language-dropdown-active" href="#">English <i class="fi-rs-angle-small-down"></i></a>
+                                    <a class="language-dropdown-active" href="#">English <i
+                                            class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-fr.png') }}" alt="" />Français</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-fr.png') }}"
+                                                    alt="" />Français</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-dt.png') }}" alt="" />Deutsch</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-dt.png') }}"
+                                                    alt="" />Deutsch</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-ru.png') }}" alt="" />Pусский</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-ru.png') }}"
+                                                    alt="" />Pусский</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a class="language-dropdown-active" href="#">USD <i class="fi-rs-angle-small-down"></i></a>
+                                    <a class="language-dropdown-active" href="#">USD <i
+                                            class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-fr.png') }}" alt="" />INR</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-fr.png') }}"
+                                                    alt="" />INR</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-dt.png') }}" alt="" />MBP</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-dt.png') }}"
+                                                    alt="" />MBP</a>
                                         </li>
                                         <li>
-                                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/flag-ru.png') }}" alt="" />EU</a>
+                                            <a href="#"><img
+                                                    src="{{ asset('assets/frontend/imgs/theme/flag-ru.png') }}"
+                                                    alt="" />EU</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -213,15 +245,16 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="{{url('/')}}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                                alt="logo" /></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form method="GET" action="{{route('search')}}">
+                            <form method="GET" action="{{ route('search') }}">
                                 <select class="select-active" name="category_id">
                                     <option>All Categories</option>
-                                    @forelse (\App\Models\Category::all() as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option> )
+                                    @forelse ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty
                                     @endforelse
                                 </select>
@@ -235,8 +268,9 @@
                                         <select class="select-active">
                                             <option>Your Location</option>
 
-                                            @foreach ( $zones as $zone )
-                                                <option onclick="getZone()" value="{{$zone->id}}">{{$zone->name}}</option>
+                                            @foreach ($zones as $zone)
+                                                <option onclick="getZone()" value="{{ $zone->id }}">
+                                                    {{ $zone->name }}</option>
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
@@ -251,86 +285,106 @@
                                 @endphp
                                 <div class="header-action-icon-2">
                                     <a href="#">
-                                        <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
-                                        <span class="pro-count blue">{{count($compareProduct)}}</span>
+                                        <img class="svgInject" alt="Nest"
+                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
+                                        <span class="pro-count blue">{{ count($compareProduct) }}</span>
                                     </a>
-                                    <a href="{{route('compare')}}"><span class="lable ml-0">Compare</span></a>
+                                    <a href="{{ route('compare') }}"><span class="lable ml-0">Compare</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             @forelse( $compareProduct as $product )
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="#"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="{{route('products', $product->id)}}">{{$product->name}}</a></h4>
-                                                    <h4>{{$product->currency->symbol}}{{$product->price}}</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="#"><img alt="Nest"
+                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4><a
+                                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                        </h4>
+                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}</h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete">
+                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                    </div>
+                                                </li>
                                             @empty
-                                            <li>
+                                                <li>
 
-                                                <div class="shopping-cart-title">
-                                                    <h4>No Items</h4>
-                                                </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4>No Items</h4>
+                                                    </div>
 
-                                            </li>
+                                                </li>
                                             @endforelse
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-button">
-                                                <a href="{{route('compare')}}" class="outline">View Compare</a>
+                                                <a href="{{ route('compare') }}" class="outline">View
+                                                    Compare</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a href="#">
-                                        <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
-                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts ? auth()->user()->savedProducts->count() : 0 }}</span>
+                                        <img class="svgInject" alt="Nest"
+                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
+                                        <span
+                                            class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
+    ? auth()->user()->savedProducts->count()
+    : 0 }}</span>
                                     </a>
-                                    <a href="{{ route('wishlist.index') }}"><span class="lable">Wishlist</span></a>
+                                    <a href="{{ route('wishlist.index') }}"><span
+                                            class="lable">Wishlist</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="#"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="{{route('products', $wishlistProduct->id)}}">{{$wishlistProduct->name}}</a></h4>
-                                                    <h4>{{$wishlistProduct->currency->symbol}}{{$wishlistProduct->price}}</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="{{route('wishlist.remove', $wishlistProduct->id)}}"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="#"><img alt="Nest"
+                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4><a
+                                                                href="{{ route('products', $wishlistProduct->id) }}">{{ $wishlistProduct->name }}</a>
+                                                        </h4>
+                                                        <h4>{{ $wishlistProduct->currency->symbol }}{{ $wishlistProduct->price }}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete">
+                                                        <a href="{{ route('wishlist.remove', $wishlistProduct->id) }}"><i
+                                                                class="fi-rs-cross-small"></i></a>
+                                                    </div>
+                                                </li>
                                             @empty
-                                            <li>
+                                                <li>
 
-                                                <div class="shopping-cart-title">
-                                                    <h4>No Items</h4>
-                                                </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4>No Items</h4>
+                                                    </div>
 
-                                            </li>
+                                                </li>
                                             @endforelse
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-button">
-                                                <a href="{{ route('wishlist.index') }}" class="outline">View Wishlist</a>
+                                                <a href="{{ route('wishlist.index') }}" class="outline">View
+                                                    Wishlist</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
-                                        <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
-                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
+                                        <img alt="Nest"
+                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
+                                        <span
+                                            class="pro-count blue">{{ auth()->user() && auth()->user()->cart
+    ? auth()->user()->cart->products()->count()
+    : 0 }}</span>
                                     </a>
-                                    <a href="{{route('cart')}}"><span class="lable">Cart</span></a>
+                                    <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             @php
@@ -338,73 +392,86 @@
                                                 $currency_symbol = '$';
                                             @endphp
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="{{route('products', $product->id)}}"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="{{route('products', $product->id)}}">{{$product->name}}</a></h4>
-                                                    <h4><span>{{$product->quantity}} × </span>{{$product->currency->symbol}}{{$product->price}}</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                            @php
-                                                $total += $product->quantity * $product->price;
-                                                $currency_symbol = $product->currency->symbol;
-                                            @endphp
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="{{ route('products', $product->id) }}"><img alt="Nest"
+                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4><a
+                                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                        </h4>
+                                                        <h4><span>{{ $product->quantity }} ×
+                                                            </span>{{ $product->currency->symbol }}{{ $product->price }}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete">
+                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                    </div>
+                                                </li>
+                                                @php
+                                                    $total += $product->quantity * $product->price;
+                                                    $currency_symbol = $product->currency->symbol;
+                                                @endphp
                                             @empty
-                                            <li>
+                                                <li>
 
-                                                <div class="shopping-cart-title">
-                                                    <h4>No Items</h4>
-                                                </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4>No Items</h4>
+                                                    </div>
 
-                                            </li>
+                                                </li>
                                             @endforelse
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>{{$currency_symbol}}{{$total}}</span></h4>
+                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
-                                                <a href="{{route('cart')}}" class="outline">View cart</a>
+                                                <a href="{{ route('cart') }}" class="outline">View cart</a>
                                                 <a href="{{ route('checkout') }}">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 @auth
-                                <div class="header-action-icon-2">
-                                    <a href="{{ route('user.dashboard') }}">
-                                        <img class="svgInject" alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
-                                    </a>
-                                    <a href="{{ route('user.dashboard') }}"><span class="lable ml-0">Account</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('user.dashboard') }}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('user.track.orders') }}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('user.orders') }}"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('wishlist.index') }}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();"><i class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </li>
-                                        </ul>
+                                    <div class="header-action-icon-2">
+                                        <a href="{{ route('user.dashboard') }}">
+                                            <img class="svgInject" alt="Nest"
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
+                                        </a>
+                                        <a href="{{ route('user.dashboard') }}"><span
+                                                class="lable ml-0">Account</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('user.dashboard') }}"><i
+                                                            class="fi fi-rs-user mr-10"></i>My Account</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('user.track.orders') }}"><i
+                                                            class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('user.orders') }}"><i
+                                                            class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('wishlist.index') }}"><i
+                                                            class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();"><i
+                                                            class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
                                 @endauth
                             </div>
                         </div>
@@ -416,48 +483,70 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{{url('/')}}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                                alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categories-button-active" href="#">
-                                <span class="fi-rs-apps"></span> <span class="et">Browse</span> All Categories
+                                <span class="fi-rs-apps"></span> <span class="et">Browse</span> All
+                                Categories
                                 <i class="fi-rs-angle-down"></i>
                             </a>
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"
+                                                    alt="" />Milks and Dairies</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing & beauty</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                    alt="" />Clothing & beauty</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}"
+                                                    alt="" />Pet Foods & Toy</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}"
+                                                    alt="" />Baking material</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}"
+                                                    alt="" />Fresh Fruit</a>
                                         </li>
                                     </ul>
                                     <ul class="end">
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}" alt="" />Wines & Drinks</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}"
+                                                    alt="" />Wines & Drinks</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}" alt="" />Fresh Seafood</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}"
+                                                    alt="" />Fresh Seafood</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}" alt="" />Fast food</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}"
+                                                    alt="" />Fast food</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}" alt="" />Vegetables</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}"
+                                                    alt="" />Vegetables</a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}" alt="" />Bread and Juice</a>
+                                            <a href="#"> <img
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}"
+                                                    alt="" />Bread and Juice</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -465,29 +554,40 @@
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul>
                                             <li>
-                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}" alt="" />Milks and Dairies</a>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}"
+                                                        alt="" />Milks and Dairies</a>
                                             </li>
                                             <li>
-                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}" alt="" />Clothing & beauty</a>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}"
+                                                        alt="" />Clothing & beauty</a>
                                             </li>
                                         </ul>
                                         <ul class="end">
                                             <li>
-                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}" alt="" />Wines & Drinks</a>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}"
+                                                        alt="" />Wines & Drinks</a>
                                             </li>
                                             <li>
-                                                <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}" alt="" />Fresh Seafood</a>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}"
+                                                        alt="" />Fresh Seafood</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
+                                <div class="more_categories"><span class="icon"></span> <span
+                                        class="heading-sm-1">Show more...</span></div>
                             </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul>
-                                    <li class="hot-deals"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}" alt="hot deals" /><a href="#">Hot Deals</a></li>
+                                    <li class="hot-deals"><img
+                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}"
+                                            alt="hot deals" /><a href="#">Hot Deals</a></li>
                                     {{-- <li>
                                         <a class="active" href="{{url('/')}}">Home <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -500,7 +600,7 @@
                                         </ul>
                                     </li> --}}
                                     <li>
-                                        <a class="active" href="{{url('/')}}">Home</a>
+                                        <a class="active" href="{{ url('/') }}">Home</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('about') }}">About</a>
@@ -640,19 +740,20 @@
                                         <a href="{{ route('contact') }}">Contact</a>
                                     </li>
                                     @if (!auth()->user())
-                                    <li>
-                                        <a href="{{ route('login') }}">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}">Register</a>
-                                    </li>
+                                        <li>
+                                            <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('register') }}">Register</a>
+                                        </li>
                                     @endif
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-flex">
-                        <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone-white.svg') }}" alt="hotline" />
+                        <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone-white.svg') }}"
+                            alt="hotline" />
                         <p>1900 - 888<span>24/7 Support Center</span></p>
                     </div>
                     <div class="header-action-icon-2 d-block d-lg-none">
@@ -666,20 +767,23 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="#">
-                                    <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
+                                    <img alt="Nest"
+                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="#">
-                                    <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
+                                    <img alt="Nest"
+                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                     <span class="pro-count white">2</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                <a href="shop-product-right.html"><img alt="Nest"
+                                                        src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
@@ -691,7 +795,8 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" /></a>
+                                                <a href="shop-product-right.html"><img alt="Nest"
+                                                        src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" /></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
@@ -723,7 +828,8 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{url('/')}}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                            alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -744,7 +850,7 @@
                     <nav>
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
-                                <a href="{{url('/')}}">Home</a>
+                                <a href="{{ url('/') }}">Home</a>
                                 {{-- <ul class="dropdown">
                                     <li><a href="{{url('/')}}">Home 1</a></li>
                                     <li><a href="index-2.html">Home 2</a></li>
@@ -878,11 +984,16 @@
                 </div>
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Follow Us</h6>
-                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-pinterest-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-youtube-white.svg') }}" alt="" /></a>
+                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-instagram-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-pinterest-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-youtube-white.svg') }}"
+                            alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright 2021 © Nest. All rights reserved. Powered by AliThemes.</div>
             </div>
@@ -890,8 +1001,8 @@
     </div>
 
 
-<script>
-   function getZone() {
-        document.getElementById('zone').submit();
-    }
-</script>
+    <script>
+        function getZone() {
+            document.getElementById('zone').submit();
+        }
+    </script>
