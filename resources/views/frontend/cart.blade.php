@@ -55,7 +55,7 @@
                                 </td>
                                 <td class="image product-thumbnail pt-40"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"></td>
                                 <td class="product-des product-name">
-                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="#">{{$product->name}}</a></h6>
+                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="{{ route('products', $product->id) }}">{{$product->name}}</a></h6>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width:90%">
@@ -116,7 +116,7 @@
             </div>
             <div class="divider-2 mb-30"></div>
             <div class="cart-action d-flex justify-content-between">
-                <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
+                <a class="btn " href="{{route('index')}}"><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
                 <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
             </div>
             <div class="row mt-50">

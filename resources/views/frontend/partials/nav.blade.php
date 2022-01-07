@@ -146,7 +146,7 @@
                                 <li><a href="{{ route('about') }}">About Us</a></li>
 
                                 @if (auth()->user())
-                                    <li><a href="{{ route('index') }}">My Account</a></li>
+                                    <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                     <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                                     <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
                                 @else
@@ -326,7 +326,7 @@
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                    <a class="mini-cart-icon" href="{{route('cart')}}">
                                         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                         <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
                                     </a>
@@ -707,7 +707,7 @@
                                             <h4>Total <span>$383.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html">View cart</a>
+                                            <a href="{{route('cart')}}">View cart</a>
                                             <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>
@@ -773,7 +773,7 @@
                                     </li>
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
                                     <li><a href="#">Shop – Wishlist</a></li>
-                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                    <li><a href="{{route('cart')}}">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
                                 </ul>
