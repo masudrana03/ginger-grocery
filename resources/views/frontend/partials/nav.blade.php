@@ -269,7 +269,7 @@
                                             <option>Your Location</option>
 
                                             @foreach ( $zones as $zone )
-                                                <option onclick="" value="{{$zone->id}}">{{$zone->name}}</option>
+                                                <option onclick="getZone()" value="{{$zone->id}}">{{$zone->name}}</option>
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
@@ -999,9 +999,25 @@
         </div>
     </div>
 
+@push('script')
 
-    <script>
-        function getZone() {
-            document.getElementById('zone').submit();
-        }
-    </script>
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+
+<script>
+
+    function getZone() {
+        alert('saasc')
+        document.getElementById('zone').submit();
+    }
+
+    $('select').on('change', function() {
+    alert( this.value );
+    });
+
+    $( ".target" ).change(function() {
+        alert( "Handler for .change() called." );
+        });
+</script>
+
+@endpush
+

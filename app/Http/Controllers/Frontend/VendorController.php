@@ -24,6 +24,7 @@ class VendorController extends Controller
      */
     public function vendorDetails(Request $request, $id )
     {
+        // return 'bnhbk';
         $store = Store::with('products')->findOrFail($id);
 
         $vendorWise = $store->products();
@@ -31,6 +32,19 @@ class VendorController extends Controller
         if ($request->query('search')) {
             $vendorWise = $store->products()->where('name', $request->query('search'));
         }
+
+        if ( $request->query('sort') == 'low_to_high' ) {
+            $vendorWise = $store->products()->orderBy('price');
+        }
+
+        if ( $request->query('sort') == 'high_to_low' ) {
+            $vendorWise = $store->products()->orderByDesc('price');
+        }
+
+        if ( $request->query('sort') == 'release' ) {
+            $vendorWise = $store->products()->orderByDesc('id');
+        }
+
 
         $vendorWise = $vendorWise->paginate(15);
 
