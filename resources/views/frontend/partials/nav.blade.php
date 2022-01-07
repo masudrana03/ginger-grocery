@@ -264,18 +264,25 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">
-                                    <form action="#" id="zone" method="POST">
-                                        <select class="select-active">
+                                    <form action="#" id="zoneForm" method="get">
+                                        <select id="id_of_field" class="select-active" onchange="getval(this);">
                                             <option>Your Location</option>
 
-                                            @foreach ( $zones as $zone )
-                                                <option onclick="" value="{{$zone->id}}">{{$zone->name}}</option>
+                                            @foreach ($zones as $zone)
+                                                <option value="{{ $zone->id }}">{{ $zone->name }}
+                                                </option>
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
 
 
                                         </select>
+
+                                        <select onchange="getval(this);">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                        </select>
+
                                     </form>
                                 </div>
                                 @php
@@ -301,7 +308,8 @@
                                                         <h4><a
                                                                 href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
                                                         </h4>
-                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}</h4>
+                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}
+                                                        </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
                                                         <a href="#"><i class="fi-rs-cross-small"></i></a>
@@ -331,8 +339,8 @@
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                         <span
                                             class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
-    ? auth()->user()->savedProducts->count()
-    : 0 }}</span>
+                                                ? auth()->user()->savedProducts->count()
+                                                : 0 }}</span>
                                     </a>
                                     <a href="{{ route('wishlist.index') }}"><span
                                             class="lable">Wishlist</span></a>
@@ -352,7 +360,8 @@
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
-                                                        <a href="{{ route('wishlist.remove', $wishlistProduct->id) }}"><i
+                                                        <a
+                                                            href="{{ route('wishlist.remove', $wishlistProduct->id) }}"><i
                                                                 class="fi-rs-cross-small"></i></a>
                                                     </div>
                                                 </li>
@@ -380,8 +389,8 @@
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                         <span
                                             class="pro-count blue">{{ auth()->user() && auth()->user()->cart
-    ? auth()->user()->cart->products()->count()
-    : 0 }}</span>
+                                                ? auth()->user()->cart->products()->count()
+                                                : 0 }}</span>
                                     </a>
                                     <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -393,7 +402,8 @@
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $product->id) }}"><img alt="Nest"
+                                                        <a href="{{ route('products', $product->id) }}"><img
+                                                                alt="Nest"
                                                                 src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
                                                     </div>
                                                     <div class="shopping-cart-title">
@@ -424,7 +434,8 @@
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span></h4>
+                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
+                                                </h4>
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="{{ route('cart') }}" class="outline">View cart</a>
@@ -460,8 +471,9 @@
                                                             class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();"><i
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                                                                document.getElementById('logout-form').submit();"><i
                                                             class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                         class="d-none">
@@ -999,9 +1011,34 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-        function getZone() {
-            document.getElementById('zone').submit();
+        $(document).ready(function() {
+            alert("ready!");
+        });
+
+        $('#id_of_field').change(function() {
+            alert('asdfdsf');
+        });
+
+        function getval(sel) {
+            alert(sel.value);
         }
+
+        $('select').on('change', function() {
+            alert(this.value);
+        });
+
+        $('#zone').on('change', function() {
+            alert($(this).find(":selected").val());
+        });
+
+        $("#zone").change(function() {
+            alert('sdafdsf');
+            $("#zoneForm").submit();
+        });
+        // function submit() {
+        //     document.getElementById('BillingForm').submit();
+        // }
     </script>
