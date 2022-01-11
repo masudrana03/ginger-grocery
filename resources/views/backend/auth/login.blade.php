@@ -28,10 +28,12 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" id="show-password">
                                                 {{-- <input type="password" class="form-control" placeholder="Password"> --}}
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-
+                                                <input id="password" type="password"  class="form-control password_with_eye" @error('password') is-invalid @enderror name="password" required autocomplete="current-password" placeholder="Password" >  
+                                                <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
+                                                
+                             
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -70,3 +72,5 @@
         </div>
     </div>
 @endsection
+
+

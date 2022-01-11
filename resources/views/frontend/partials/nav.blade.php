@@ -274,7 +274,8 @@
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
-                                        </select>
+
+                                        </select>  
                                     </form>
                                 </div>
                                 @php
@@ -1003,10 +1004,12 @@
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
+
         function getval(sel) {
             // alert(sel.value);
             $('#zoneForm').submit();
         }
+
 
         // $('select').on('change', function() {
         //     alert(this.value);
