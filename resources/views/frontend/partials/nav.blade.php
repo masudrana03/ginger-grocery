@@ -274,15 +274,7 @@
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
-
-
-                                        </select>
-
-                                        <select onchange="getval(this);">
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                        </select>
-
+                                        </select>  
                                     </form>
                                 </div>
                                 @php
@@ -1011,24 +1003,24 @@
 
     <script>
         $(document).ready(function() {
-            alert("ready!");
+           // alert("ready!");
         });
 
-        $('#id_of_field').change(function() {
-            alert('asdfdsf');
-        });
+        // $('#id_of_field').change(function() {
+        //     alert('asdfdsf');
+        // });
 
-        function getval(sel) {
-            alert(sel.value);
-        }
+        // function getval(sel) {
+        //     alert(sel.value);
+        // }
 
-        $('select').on('change', function() {
-            alert(this.value);
-        });
+        // $('select').on('change', function() {
+        //     alert(this.value);
+        // });
 
-        $('#zone').on('change', function() {
-            alert($(this).find(":selected").val());
-        });
+        // $('#zone').on('change', function() {
+        //     alert($(this).find(":selected").val());
+        // });
 
         $("#zone").change(function() {
             alert('sdafdsf');

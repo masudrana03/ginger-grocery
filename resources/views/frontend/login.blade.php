@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Login')
+@section('title','Login')
 
 @section('content')
 
@@ -37,10 +37,11 @@
                                                 </span>
                                             @enderror
                                     </div>
+                                    
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Your password *" /> --}}
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-
+                                        <input type="password" class="password" name="password" @error('password') is-invalid @enderror  autocomplete="current-password" placeholder="Password" required>
+                                        <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

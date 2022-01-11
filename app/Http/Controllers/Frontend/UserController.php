@@ -58,6 +58,7 @@ class UserController extends Controller
         $user = auth()->user();
         $billingAddresses = auth()->user()->billingAddresses;
         $shippingAddresses = auth()->user()->shippingAddress;
+        
 
         return view('frontend.users.address', compact('user', 'billingAddresses', 'shippingAddresses'));
     }

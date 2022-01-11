@@ -18,6 +18,10 @@
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/frontend/imgs/theme/favicon.svg')}}" />
 
+        {{-- font awesome cdn link  --}}
+
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
         <!-- Template CSS -->
         <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/animate.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />

@@ -39,11 +39,11 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="show-password">
                                             {{-- <input type="password" class="form-control" placeholder="Password"> --}}
 
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-
+                                            <input id="password" type="password" class="form-control password_with_eye @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                            <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -51,10 +51,12 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                                            <input id="password-confirm" type="password" class="form-control password_with_eye" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                                            {{-- <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i> --}}
                                         </div>
                                         <div class="form-group">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
+                                            <input id="name" type="text" class="form-control  @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"  autofocus>
+                                            
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

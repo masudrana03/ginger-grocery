@@ -2,6 +2,7 @@
 @section('title', 'User Account')
 
 
+
 @section('content')
     <main class="main pages">
         <div class="page-header breadcrumb-wrap">
@@ -79,17 +80,18 @@
                                                             <p>{{ $item->country->name }}</p>
                                                             <p>{{ $item->zip }}</p>
                                                         @empty
-                                                            <p>No shipping address found!</p>
+                                                            <p>No Billing address address found!</p>
+                                                            <button class="btn add-billing-address">Create New</button>
                                                         @endforelse
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6 ">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5 class="mb-0">Shipping Address</h5>
+                                                        <h3 class="mb-0">Shipping Address</h3>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body ">
                                                         @forelse ($shippingAddresses ?? [] as $item)
                                                             <address>
                                                                 {{ $item->address }}
@@ -100,6 +102,7 @@
                                                             <p>{{ $item->zip }}</p>
                                                         @empty
                                                             <p>No shipping address found!</p>
+                                                            <button class="btn add-billing-address" >Create New</button>
                                                         @endforelse
 
                                                     </div>
