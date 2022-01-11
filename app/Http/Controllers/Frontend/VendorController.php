@@ -17,7 +17,7 @@ class VendorController extends Controller
     }
 
     /**
-     * Find product by name
+     * Find product by name & flitter by low_to_high, high_to_low, release
      *
      * @param $productId as $id
      * @param $request
@@ -31,6 +31,19 @@ class VendorController extends Controller
         if ($request->query('search')) {
             $vendorWise = $store->products()->where('name', $request->query('search'));
         }
+
+        if ( $request->query('sort') == 'low_to_high' ) {
+            $vendorWise = $store->products()->orderBy('price');
+        }
+
+        if ( $request->query('sort') == 'high_to_low' ) {
+            $vendorWise = $store->products()->orderByDesc('price');
+        }
+
+        if ( $request->query('sort') == 'release' ) {
+            $vendorWise = $store->products()->orderByDesc('id');
+        }
+
 
         $vendorWise = $vendorWise->paginate(15);
 

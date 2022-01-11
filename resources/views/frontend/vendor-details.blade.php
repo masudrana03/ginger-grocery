@@ -64,11 +64,11 @@
                         </div>
                         <div class="sort-by-dropdown">
                             <ul>
-                                <li><a class="active" href="#">Featured</a></li>
-                                <li><a href="#">Price: Low to High</a></li>
-                                <li><a href="#">Price: High to Low</a></li>
-                                <li><a href="#">Release Date</a></li>
-                                <li><a href="#">Avg. Rating</a></li>
+                                {{-- <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li> --}}
+                                <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=low_to_high',[$store->id]) }}">Price: Low to High</a></li>
+                                <li><a class="{{ request()->get('sort') == 'high_to_low' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=high_to_low',[$store->id]) }}">Price: High to Low</a></li>
+                                <li><a class="{{ request()->get('sort') == 'release' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=release',[$store->id]) }}">Release Date</a></li>
+                                {{-- <li><a href="#">Avg. Rating</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -82,15 +82,18 @@
                             <div class="product-img product-img-zoom">
                                 <a href="{{ route('products', $product->id) }}">
                                     @if (count($product->images) > 0)
-                                        <img class="default-img"
-                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                            alt="" />
-                                        <img class="hover-img"
-                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                            alt="" />
+                                    <img class="default-img"
+                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                        alt="" />
+                                    <img class="hover-img"
+                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                        alt="" />
                                     @else
+                                        <img class="default-img"
+                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                            alt="" />
                                         <img class="hover-img"
-                                            src="{{ asset('assets/img/uploads/products/' . $product->image) }}"
+                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
                                             alt="" />
                                     @endif
                                 </a>
@@ -534,7 +537,9 @@
                     <div class="price-filter-inner">
                         <div id="slider-range"></div>
                         <div class="price_slider_amount">
-                            <div class="label-input"><span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price" /></div>
+                            <div class="label-input"><span>Range:</span>
+                                <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                            </div>
                         </div>
                     </div>
                 </div>

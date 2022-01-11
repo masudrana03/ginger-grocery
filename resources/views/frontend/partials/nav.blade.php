@@ -264,8 +264,8 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">
-                                    <form action="#" id="zoneForm" method="get">
-                                        <select id="id_of_field" class="select-active" onchange="getval(this);">
+                                    <form action="{{ route('index') }}" id="zoneForm" method="get">
+                                        <select name="zone_id" class="select-active" onchange="getval(this);">
                                             <option>Your Location</option>
 
                                             @foreach ($zones as $zone)
@@ -274,6 +274,7 @@
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
+
                                         </select>  
                                     </form>
                                 </div>
@@ -461,7 +462,7 @@
                                                 <li>
                                                     <a href="{{ route('logout') }}"
                                                         onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();"><i
+                                                            document.getElementById('logout-form').submit();"><i
                                                             class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                         class="d-none">
@@ -999,20 +1000,16 @@
         </div>
     </div>
 
+
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-           // alert("ready!");
-        });
 
-        // $('#id_of_field').change(function() {
-        //     alert('asdfdsf');
-        // });
+        function getval(sel) {
+            // alert(sel.value);
+            $('#zoneForm').submit();
+        }
 
-        // function getval(sel) {
-        //     alert(sel.value);
-        // }
 
         // $('select').on('change', function() {
         //     alert(this.value);
@@ -1022,11 +1019,12 @@
         //     alert($(this).find(":selected").val());
         // });
 
-        $("#zone").change(function() {
-            alert('sdafdsf');
-            $("#zoneForm").submit();
-        });
+        // $("#zone").change(function() {
+        //     alert('sdafdsf');
+        //     $("#zoneForm").submit();
+        // });
         // function submit() {
         //     document.getElementById('BillingForm').submit();
         // }
     </script>
+

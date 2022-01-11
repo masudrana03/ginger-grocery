@@ -15,6 +15,7 @@ class PaymentMethodSeeder extends Seeder {
         
         PaymentMethod::create( [
             'provider'   => 'stripe',
+            'status'     => true,
             'created_at' => now(),
         ] );
         
