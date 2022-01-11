@@ -114,7 +114,7 @@ class User extends Authenticatable {
     }
 
     /**
-     * A user has many referrals.
+     * A user has many billing address.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -123,11 +123,11 @@ class User extends Authenticatable {
     }
 
     /**
-     * A user has many referrals.
+     * A user has many shipping address.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function shippingAddresses() {
+    public function shippingAddress() {
         return $this->hasMany(Address::class)->whereType(2);
     }
 
