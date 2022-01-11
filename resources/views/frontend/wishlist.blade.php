@@ -6,7 +6,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Shop <span></span> Filleter
+            <span> Wishlist </span>
         </div>
     </div>
 </div>
@@ -41,7 +41,7 @@
                             </td>
                             <td class="image product-thumbnail pt-40"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#" /></td>
                             <td class="product-des product-name">
-                                <h6><a class="product-name mb-10" href="shop-product-right.html">{{$item->name}}</a></h6>
+                                <h6><a class="product-name mb-10" href="{{ route('products', $item->id) }}">{{$item->name}}</a></h6>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
@@ -56,7 +56,7 @@
                                 <span class="stock-status in-stock mb-0"> In Stock </span>
                             </td>
                             <td class="text-right" data-title="Cart">
-                                <button class="btn btn-sm">Add to cart</button>
+                                <a class="btn btn-sm" href="{{ route('cartById', $item->id) }}">Add to cart</a>
                             </td>
                             <td class="action text-center" data-title="Remove">
                                 <a href="{{route('wishlist.remove', $item->id)}}" class="text-body"><i class="fi-rs-trash"></i></a>

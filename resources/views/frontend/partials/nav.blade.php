@@ -164,7 +164,7 @@
                                 <li><a href="{{ route('about') }}">About Us</a></li>
 
                                 @if (auth()->user())
-                                    <li><a href="{{ route('index') }}">My Account</a></li>
+                                    <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                     <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                                     <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
                                 @else
@@ -264,8 +264,8 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">
-                                    <form action="#" id="zoneForm" method="get">
-                                        <select id="id_of_field" class="select-active" onchange="getval(this);">
+                                    <form action="{{ route('index') }}" id="zoneForm" method="get">
+                                        <select name="zone_id" class="select-active" onchange="getval(this);">
                                             <option>Your Location</option>
 
                                             @foreach ($zones as $zone)
@@ -274,15 +274,7 @@
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
-
-
                                         </select>
-
-                                        <select onchange="getval(this);">
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                        </select>
-
                                     </form>
                                 </div>
                                 @php
@@ -384,13 +376,9 @@
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="shop-cart.html">
-                                        <img alt="Nest"
-                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
-                                        <span
-                                            class="pro-count blue">{{ auth()->user() && auth()->user()->cart
-                                                ? auth()->user()->cart->products()->count()
-                                                : 0 }}</span>
+                                    <a class="mini-cart-icon" href="{{route('cart')}}">
+                                        <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
+                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
                                     </a>
                                     <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -473,7 +461,7 @@
                                                 <li>
                                                     <a href="{{ route('logout') }}"
                                                         onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();"><i
+                                                            document.getElementById('logout-form').submit();"><i
                                                             class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                         class="d-none">
@@ -823,7 +811,7 @@
                                             <h4>Total <span>$383.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html">View cart</a>
+                                            <a href="{{route('cart')}}">View cart</a>
                                             <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>
@@ -890,7 +878,7 @@
                                     </li>
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
                                     <li><a href="#">Shop – Wishlist</a></li>
-                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                    <li><a href="{{route('cart')}}">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
                                 </ul>
@@ -1011,34 +999,29 @@
         </div>
     </div>
 
+
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            alert("ready!");
-        });
-
-        $('#id_of_field').change(function() {
-            alert('asdfdsf');
-        });
-
         function getval(sel) {
-            alert(sel.value);
+            // alert(sel.value);
+            $('#zoneForm').submit();
         }
 
-        $('select').on('change', function() {
-            alert(this.value);
-        });
+        // $('select').on('change', function() {
+        //     alert(this.value);
+        // });
 
-        $('#zone').on('change', function() {
-            alert($(this).find(":selected").val());
-        });
+        // $('#zone').on('change', function() {
+        //     alert($(this).find(":selected").val());
+        // });
 
-        $("#zone").change(function() {
-            alert('sdafdsf');
-            $("#zoneForm").submit();
-        });
+        // $("#zone").change(function() {
+        //     alert('sdafdsf');
+        //     $("#zoneForm").submit();
+        // });
         // function submit() {
         //     document.getElementById('BillingForm').submit();
         // }
     </script>
+

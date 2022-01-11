@@ -12,8 +12,10 @@ use App\Models\Zone;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // return $request->zone_id;
+        // return $request->;
         // if (! session('start_time')) {
         //     session()->put('start_time', time());
         // } else if (time() - session('start_time') > 1800) {
@@ -21,7 +23,16 @@ class HomeController extends Controller
         // }
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
-        $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
+
+        if ( $request->zone_id ){
+            $categories = Category::with(['products.currency', 'products.store' =>function ($q) use ($request) {
+                $q->find($request->zone_id);
+             }])->limit( 12 )->get();
+        } else {
+            $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
+        }
+
+
         $sliders = Banner::where( 'status', 1 )->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
@@ -63,12 +74,6 @@ class HomeController extends Controller
             ->get();
 
         return view( 'frontend.search', compact( 'products', 'query' ) );
-    }
-
-
-    public function getZone(Request $request)
-    {
-       return $request;
     }
 
 }

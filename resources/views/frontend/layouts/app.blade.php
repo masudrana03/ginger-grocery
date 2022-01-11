@@ -152,11 +152,11 @@
                         <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                         <h4 class="widget-title">Company</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
                             <li><a href="#">Delivery Information</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{ route('contact') }}">Contact Us</a></li>
                             <li><a href="#">Support Center</a></li>
                             <li><a href="#">Careers</a></li>
                         </ul>
@@ -164,19 +164,42 @@
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                         <h4 class="widget-title">Account</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
+                            {{-- <li><a href="#">Sign In</a></li>
+                            <li><a href="{{route('cart')}}">View Cart</a></li>
+                            <li><a href="{{ route('wishlist.index') }}">My Wishlist</a></li>
+                            <li><a href="">Track My Order</a></li>
                             <li><a href="#">Help Ticket</a></li>
                             <li><a href="#">Shipping Details</a></li>
-                            <li><a href="#">Compare products</a></li>
+                            <li><a href="{{route('compare')}}">Compare products</a></li> --}}
+
+                            {{-- code from safin --}}
+                            
+                        @if (auth()->user())
+                                <li><a href="{{ route('user.dashboard')}} ">My Account</a></li>
+                                <li><a href="{{ route('cart')}} ">View Cart</a></li>
+                                <li><a href="{{ route('wishlist.index') }} ">Wishlist</a></li>
+                                <li><a href="{{ route('compare')}} ">Compare products</a></li>
+                                <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                <li><a href="#">Help Ticket</a></li>
+                                <li><a href="#">Shipping Details</a></li>
+                                
+                            @else
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
+                                <li><a href="{{route('cart')}}">View Cart</a></li>
+                                <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
+                                <li><a href="{{route('compare')}}">Compare products</a></li>
+                                <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                <li><a href="#">Help Ticket</a></li>
+                                <li><a href="#">Shipping Details</a></li>
+                            @endif
+
+
                         </ul>
                     </div>
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                         <h4 class="widget-title">Corporate</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Become a Vendor</a></li>
+                            <li><a href="{{ route('login') }}">Become a Vendor</a></li>
                             <li><a href="#">Affiliate Program</a></li>
                             <li><a href="#">Farm Business</a></li>
                             <li><a href="#">Farm Careers</a></li>
