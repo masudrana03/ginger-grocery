@@ -86,7 +86,7 @@
                                                             <hr>
                                                             {{-- MODAL --}}
 
-                                                            
+
                                                         @empty
                                                             <p>No Billing address address found!</p>
                                                             <button class="btn add-billing-address"  style="color: white;">Create New</button>
@@ -102,7 +102,7 @@
                                                     <div class="card-body p-4">
 
                                                         @forelse ($shippingAddresses ?? [] as $item)
-                                                            
+
                                                             <address>
                                                                 {{ $item->address }}
                                                             </address>
@@ -110,7 +110,7 @@
                                                             <p>{{ $item->city }}</p>
                                                             <p>{{ $item->country->name }}</p>
                                                             <p>{{ $item->zip }}</p>
-                                                            <a class="btn add-billing-address" style="color: white;">Edit</a>                    
+                                                            <a class="btn add-billing-address" style="color: white;">Edit</a>
                                                             <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
@@ -205,7 +205,7 @@
                                                         </div>
                                                         <hr>
                                                         <!-- Modal -->
-                                                        
+
 
                                                     </div>
                                                 </div>
@@ -220,7 +220,7 @@
             </div>
         </div>
     </main>
-   
+
 
     {{-- modal for create shipping address --}}
     <div class="modal fade" id="createShippingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -312,11 +312,11 @@
 @endsection
 
     <script>
-       
+
         let billAdd = @json($billingAddresses);
-        
+
         function openEditBillingModal(id) {
-           
+
 
             let billingAddress = billAdd.find(x => x.id == id);
 
@@ -329,7 +329,7 @@
             $('#edit-bill-city').val(billingAddress.city);
             $('#edit-bill-country').val(billingAddress.country.name);
             $('#edit-bill-zip').val(billingAddress.zip);
-            
+
                // Open modal
             $('#editBillingModal').modal('show');
 

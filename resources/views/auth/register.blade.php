@@ -85,7 +85,8 @@
 
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                        <input id="password" type="password" class="form-control password_with_eye @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                        <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
 
                                         <div id="pass_available" class="mt-1" ></div>
 
