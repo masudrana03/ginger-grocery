@@ -23,7 +23,8 @@
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
                     @forelse ($categories as $category )
-                        @forelse ($category->products->random(2) as $product)
+                        {{-- @forelse ($category->products->random(2) as $product) --}}
+                        @forelse ($category->products as $product)
                             <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
