@@ -214,6 +214,10 @@ Route::post('/user/profile-update', [FrontendUserController::class, 'updateProfi
 Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
 Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
 Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
+Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
+Route::post('/user/address-update', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
+
+
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');

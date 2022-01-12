@@ -21,7 +21,7 @@ class Address extends Model
         'phone',
         'address',
         'state',
-        'country',
+        'country_id',
         'city',
         'zip',
         'type',

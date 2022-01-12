@@ -17,7 +17,7 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                    <h6 class="text-body">There are <span class="text-brand">{{ (auth()->user()->cart->products->count()) }}</span> products in your cart</h6>
                     <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
                             Cart</a></h6>
                 </div>
@@ -61,7 +61,8 @@
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a></h6>
+                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                            </h6>
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width:90%">
@@ -70,7 +71,7 @@
                                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                                             </div>
                                         </td>
-                                        <td class="price" data-title="Price" >
+                                        <td class="price" data-title="Price">
                                             <h4 class="text-body">
                                                 {{ $product->currency->symbol }}{{ $product->price }}
                                             </h4>
@@ -78,9 +79,9 @@
 
                                         <td>
                                             <div class="col-md-10 col-xs-12 d-lg-flex ">
-                                                <input type="button"  value="-" class="qty-minus btn"  >
-                                                <input type="number"  value="1" max="10" min="1" class="qty update-qty"  >
-                                                <input type="button"  value="+" class="qty-plus btn" >
+                                                <input type="button" value="-" class="qty-minus btn">
+                                                <input type="number" value="1" max="10" min="1" class="qty update-qty">
+                                                <input type="button" value="+" class="qty-plus btn">
                                             </div>
 
                                             {{-- <div class="sub">minus</div>
@@ -88,7 +89,7 @@
                                             <div class="add">plus</div> --}}
                                         </td>
 
-                                       
+
                                         {{-- <td class="text-center detail-info" data-title="Stock">
                                             <div class="detail-extralink mr-15">
                                                 <div class="detail-qty border radius">
@@ -118,8 +119,8 @@
                                 </td> --}}
 
                                         <td class="price" data-title="Price">
-                                            <h4 class="text-brand" >{{ $product->quantity * $product->price }} </h4>
-                                            <input class="d-none unit-price" value="{{$product->price}}">
+                                            <h4 class="text-brand">{{ $product->quantity * $product->price }} </h4>
+                                            <input class="d-none unit-price" value="{{ $product->price }}">
                                         </td>
                                         <td class="action text-center" data-title="Remove"><a href="#"
                                                 class="text-body"><i class="fi-rs-trash"></i></a></td>
@@ -239,10 +240,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>                       
-                   
-                        
-                   
+                    <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
+
+
+
                 </div>
             </div>
         </div>
@@ -254,32 +255,32 @@
 
 <script>
     $(document).ready(function() {
-       // alert("ready!");
+        // alert("ready!");
     });
 
     $(document).on('click', '.qty-plus', function() {
-        var max=10;
-        
-        var prev_val =  parseInt($(this).prev().val()) ;
+        var max = 10;
 
-        if (prev_val < max){
-            
+        var prev_val = parseInt($(this).prev().val());
+
+        if (prev_val < max) {
+
             prev_val = prev_val + 1;
-            prev_val=$(this).prev().val(prev_val);
+            prev_val = $(this).prev().val(prev_val);
             // var product_unit_price = $(".unit-price").val();
             // var updated_price = prev_val * product_unit_price;
             // alert(parseInt(updated_price));
             // $('#text-brand').html(updated_price);
             //  $(this).prev().val(+$(this).prev().val() + 1);
-           
-         }
-        
-        
+
+        }
+
+
     });
 
     $(document).on('click', '.qty-minus', function() {
-        var min=1;
-        if ($(this).next().val() > min ) $(this).next().val(+$(this).next().val() - 1);
+        var min = 1;
+        if ($(this).next().val() > min) $(this).next().val(+$(this).next().val() - 1);
 
     });
 

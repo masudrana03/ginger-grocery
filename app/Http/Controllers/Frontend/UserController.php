@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Address;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -28,6 +31,44 @@ class UserController extends Controller
         $orders = Order::with('status')->where('user_id', $user->id)->get();
 
         return view('frontend.users.order', compact('user', 'orders'));
+    }
+
+    public function addAddress( Request $request )
+    {
+    //    return $request;
+
+       $this->validate($request, [
+        'name'       => 'required',
+        'phone'      => 'required',
+        'email'      => 'required',
+        'address'    => 'required',
+        'country_id' => 'required',
+        'city'       => 'required',
+        'zip'        => 'required',
+    ]);
+
+        $requestInfo = $request->all();
+
+
+        $requestInfo['user_id'] = auth()->id();
+
+        if ( $request->type == 'billing' ) {
+            $requestInfo['type'] = 1;
+        }else{
+            $requestInfo['type'] = 2;
+        }
+
+
+        Address::create($requestInfo);
+
+        Alert::toast('Address successfully created', 'success');
+
+        return back();
+    }
+
+    public function updateAddress( Request $request )
+    {
+           //    return $request;
     }
 
 
@@ -58,9 +99,11 @@ class UserController extends Controller
         $user = auth()->user();
         $billingAddresses = auth()->user()->billingAddresses;
         $shippingAddresses = auth()->user()->shippingAddress;
-        
+        $test = '';
 
-        return view('frontend.users.address', compact('user', 'billingAddresses', 'shippingAddresses'));
+        $countries = Country::all();
+
+        return view('frontend.users.address', compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
     }
 
     public function getProfile()
@@ -93,7 +136,7 @@ class UserController extends Controller
 
         return view('frontend.users.change-password', compact('user'));
     }
-    
+
     /**
      * @param $request
      */

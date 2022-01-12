@@ -15,17 +15,14 @@
         <div class="col-xl-10 col-lg-12 m-auto">
             <div class="mb-50">
                 <h1 class="heading-2 mb-10">Your Wishlist</h1>
-                <h6 class="text-body">There are <span class="text-brand">5</span> products in this list</h6>
+                <h6 class="text-body">There are <span class="text-brand">{{ $wishlistProducts->count() }}</span> products in this list</h6>
             </div>
             <div class="table-responsive shopping-summery">
                 <table class="table table-wishlist">
                     <thead>
                         <tr class="main-heading">
-                            <th class="custome-checkbox start pl-30">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
-                                <label class="form-check-label" for="exampleCheckbox11"></label>
-                            </th>
-                            <th scope="col" colspan="2">Product</th>
+                            <th class="custome-checkbox start pl-30">Image</th>
+                            <th scope="col" colspan="1">Product</th>
                             <th scope="col">Price</th>
                             <th scope="col">Stock Status</th>
                             <th scope="col">Action</th>
@@ -34,12 +31,18 @@
                     </thead>
                     <tbody>
                         @forelse ( $wishlistProducts as $item )
-                        <tr class="pt-30">
-                            <td class="custome-checkbox pl-30">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
-                                <label class="form-check-label" for="exampleCheckbox1"></label>
+                        <tr class="pt-10">
+                            <td class="image product-thumbnail pt-10">
+                                @if (count($item->images) > 0)
+                                    <img class="default-img"
+                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                        alt="" />
+                                @else
+                                    <img class="default-img"
+                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                        alt="" />
+                                @endif
                             </td>
-                            <td class="image product-thumbnail pt-40"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#" /></td>
                             <td class="product-des product-name">
                                 <h6><a class="product-name mb-10" href="{{ route('products', $item->id) }}">{{$item->name}}</a></h6>
                                 <div class="product-rate-cover">
@@ -50,16 +53,16 @@
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h3 class="text-brand">{{$item->currency->symbol}}{{$item->price}}</h3>
+                                <h3 class="text-brand">{{$item->currency->symbol}} {{$item->price}}</h3>
                             </td>
-                            <td class="text-center detail-info" data-title="Stock">
+                            <td class="text-left detail-info" data-title="Stock">
                                 <span class="stock-status in-stock mb-0"> In Stock </span>
                             </td>
-                            <td class="text-right" data-title="Cart">
+                            <td class="text-left" data-title="Cart">
                                 <a class="btn btn-sm" href="{{ route('cartById', $item->id) }}">Add to cart</a>
                             </td>
-                            <td class="action text-center" data-title="Remove">
-                                <a href="{{route('wishlist.remove', $item->id)}}" class="text-body"><i class="fi-rs-trash"></i></a>
+                            <td class="action text-left" data-title="Remove">
+                                <a style="padding-left: 20%;" href="{{route('wishlist.remove', $item->id)}}" class="text-body"><i class="fi-rs-trash"></i></a>
                             </td>
                         </tr>
                         @empty
