@@ -102,7 +102,7 @@
 
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
-                                        <input type="password" class="form-control" name="password_confirmation" id="repassword" required autocomplete="new-password" placeholder="Confirm Password">
+                                        <input type="password" class="form-control password_with_eye" name="password_confirmation" id="repassword" required autocomplete="new-password" placeholder="Confirm Password">
                                         <div id="repass_available" class="mt-1" ></div>
                                     </div>
                                     {{-- <div class="login_footer form-group">

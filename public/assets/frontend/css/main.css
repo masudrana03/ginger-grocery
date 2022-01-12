@@ -1445,6 +1445,21 @@ textarea:focus {
   width: 100%;
   
 }
+
+.form-group .password_with_eye {
+  width: 100%;
+  display: inline-flex;
+  overflow: hidden;
+ 
+}
+
+.form-group i {
+ 
+  position:absolute;
+  margin-left: -40px;
+  margin-top: 24px;
+  
+}
  
 
 

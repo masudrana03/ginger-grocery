@@ -72,7 +72,7 @@
 
                                         <button type="submit" class="btn_1 full_width text-center"> Sign Up</button>
 
-                                        <p>Need an account? <a href="{{ route('login') }}">Log in</a></p>
+                                        <p>Need an account? <a href="{{ route('admin.login') }}">Log in</a></p>
                                     </form>
                                 </div>
                             </div>

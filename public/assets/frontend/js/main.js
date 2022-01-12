@@ -713,5 +713,22 @@
         mousePause: false,
         showItems: 1
     });
+
+    $(document).ready(function() {
+        $(".eye-icon").on('click', function(event) {
+            event.preventDefault();
+            if($('.password_with_eye').attr("type") == "text"){
+                $('.password_with_eye').attr('type','password');
+                $('.eye-icon').addClass( "fa-eye-slash" );
+                $('.eye-icon').removeClass( "fa-eye" );
+            }else if($('.password_with_eye').attr("type") == "password"){
+                $('.password_with_eye').attr('type', 'text');
+                $('.eye-icon').removeClass( "fa-eye-slash" );
+                $('.eye-icon').addClass( "fa-eye" );
+            }
+        });
+    });
+
+
 })(jQuery);
 
