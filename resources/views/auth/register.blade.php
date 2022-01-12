@@ -85,8 +85,8 @@
 
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-
+                                        <input id="password" type="password" class="form-control password_with_eye @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                        <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
                                         <div id="pass_available" class="mt-1" ></div>
 
                                         @error('password')
@@ -98,7 +98,7 @@
 
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
-                                        <input type="password" class="form-control" name="password_confirmation" id="repassword" required autocomplete="new-password" placeholder="Confirm Password">
+                                        <input type="password" class="form-control password_with_eye" name="password_confirmation" id="repassword" required autocomplete="new-password" placeholder="Confirm Password">
                                         <div id="repass_available" class="mt-1" ></div>
                                     </div>
                                     {{-- <div class="login_footer form-group">
