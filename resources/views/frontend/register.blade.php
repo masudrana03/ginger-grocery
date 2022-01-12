@@ -44,6 +44,20 @@
                                                 </span>
                                             @enderror
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
+                                                    @error('phone')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
@@ -53,6 +67,8 @@
                                                 </span>
                                             @enderror
                                     </div>
+
+
                                     <div class="form-group">
                                         {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
@@ -79,7 +95,7 @@
                                             <b class="text-best">5</b>
                                         </span>
                                     </div> --}}
-                                    <div class="payment_option mb-50">
+                                    {{-- <div class="payment_option mb-50">
                                         <div class="custome-radio">
                                             <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="" />
                                             <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">I am a customer</label>
@@ -88,7 +104,7 @@
                                             <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios4" checked="" />
                                             <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">I am a vendor</label>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="login_footer form-group mb-50">
                                         <div class="chek-form">
                                             <div class="custome-checkbox">
