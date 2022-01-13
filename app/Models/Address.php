@@ -34,7 +34,7 @@ class Address extends Model
 
     public function scopeShipping($query)
     {
-        return $query->whereType(1);
+        return $query->whereType(2);
     }
 
     /**
@@ -42,5 +42,19 @@ class Address extends Model
      */
     public function country() {
         return $this->belongsTo( Country::class );
+    }
+
+    /**
+     * Returns country model associated with the user.
+     */
+    public function shippingOrders() {
+        return $this->hasMany( Order::class , 'shipping_id');
+    }
+
+    /**
+     * Returns country model associated with the user.
+     */
+    public function billingOrders() {
+        return $this->hasMany( Order::class , 'billing_id');
     }
 }
