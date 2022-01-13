@@ -9,7 +9,6 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -33,6 +32,24 @@ class UserController extends Controller
         return view('frontend.users.order', compact('user', 'orders'));
     }
 
+
+    public function getAddress()
+    {
+        $user = auth()->user();
+        $billingAddresses = auth()->user()->billingAddresses;
+        $shippingAddresses = auth()->user()->shippingAddress;
+        $test = '';
+
+        $countries = Country::all();
+
+        return view('frontend.users.address', compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
+    }
+
+    /**
+     *  Store frontend user address information
+     *
+     * @param $request
+     */
     public function addAddress( Request $request )
     {
     //    return $request;
@@ -49,7 +66,6 @@ class UserController extends Controller
 
         $requestInfo = $request->all();
 
-
         $requestInfo['user_id'] = auth()->id();
 
         if ( $request->type == 'billing' ) {
@@ -58,14 +74,16 @@ class UserController extends Controller
             $requestInfo['type'] = 2;
         }
 
-
         Address::create($requestInfo);
-
-        Alert::toast('Address successfully created', 'success');
 
         return back();
     }
 
+    /**
+     *  Update frontend user address information
+     *
+     * @param $request
+     */
     public function updateAddress( Request $request )
     {
            //    return $request;
@@ -73,7 +91,31 @@ class UserController extends Controller
 
 
     /**
+     *  Update frontend user address information
      *
+     * @param $Id
+     */
+    public function destroyAddress($Id)
+    {
+        $address = Address::find($Id);
+
+        if( count($address->shippingOrders) > 0 ) {
+            // can't delete
+            return back()->with( 'error', 'This address have placed order');
+        }
+        if( count($address->billingOrders) > 0 ) {
+            // can't delete
+            return back()->with( 'error', 'This address have placed order');
+        }
+
+        $address->delete();
+
+        return back()->with( 'success', 'Address successfully deleted');
+    }
+
+
+    /**
+     * Invoice show by order number
      *
      * @param $id
      */
@@ -92,18 +134,6 @@ class UserController extends Controller
         $orders = Order::with('status')->where('user_id', $user->id)->get();
 
         return view('frontend.users.track-order', compact('user', 'orders'));
-    }
-
-    public function getAddress()
-    {
-        $user = auth()->user();
-        $billingAddresses = auth()->user()->billingAddresses;
-        $shippingAddresses = auth()->user()->shippingAddress;
-        $test = '';
-
-        $countries = Country::all();
-
-        return view('frontend.users.address', compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
     }
 
     public function getProfile()
@@ -130,8 +160,8 @@ class UserController extends Controller
         return back();
     }
 
-    public function changePassword()
-    {
+    public function changePassword(){
+
         $user = auth()->user();
 
         return view('frontend.users.change-password', compact('user'));
@@ -140,8 +170,8 @@ class UserController extends Controller
     /**
      * @param $request
      */
-    public function updatePassword(Request $request)
-    {
+    public function updatePassword(Request $request){
+
         //return $request->all();
         $this->validate($request, [
             'old_password' => 'required',
