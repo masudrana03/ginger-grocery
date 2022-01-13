@@ -84,9 +84,33 @@ class UserController extends Controller
      *
      * @param $request
      */
-    public function updateAddress( Request $request )
+    public function updateAddress( Request $request, $id )
     {
-           //    return $request;
+        // return $request;
+
+        $addressId = Address::find($id);
+
+        $this->validate($request, [
+            'name'       => 'required',
+            'phone'      => 'required',
+            'email'      => 'required',
+            'country_id' => 'required',
+            'address'    => 'required',
+            'city'       => 'required',
+            'zip'        => 'required',
+        ]);
+
+        $requestInfo = $request->all();
+
+        if ( $request->type == 'billing' ) {
+            $requestInfo['type'] = 1;
+        }else{
+            $requestInfo['type'] = 2;
+        }
+
+        $addressId->update($requestInfo);
+
+        return back();
     }
 
 

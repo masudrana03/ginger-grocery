@@ -184,7 +184,7 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
                                 </a>
@@ -202,7 +202,7 @@
                             <div class="product-category">
                                 <a href="#">Snack</a>
                             </div>
-                            <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe</a></h2>
+                            <h2><a href="#">Seeds of Change Organic Quinoe</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 90%"></div>
@@ -210,7 +210,7 @@
                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                                <span class="font-small text-muted">By <a href="#">NestFood</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -218,7 +218,7 @@
                                     <span class="old-price">$32.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
                                 </a>
@@ -245,7 +245,7 @@
                             <div class="product-category">
                                 <a href="#">Cream</a>
                             </div>
-                            <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
+                            <h2><a href="#">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 50%"></div>
@@ -253,7 +253,7 @@
                                 <span class="font-small ml-5 text-muted"> (2.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Tyson</a></span>
+                                <span class="font-small text-muted">By <a href="#">Tyson</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -261,7 +261,7 @@
                                     <span class="old-price">$24.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend/imgs/banner/banner-5.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -311,7 +311,7 @@
                                     <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown</a></h2>
+                                    <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -319,7 +319,7 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                                        <span class="font-small text-muted">By <a href="#">NestFood</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -327,7 +327,7 @@
                                             <span class="old-price">$33.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +338,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend/imgs/banner/banner-6.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -348,7 +348,7 @@
                                     <div class="deals-countdown" data-countdown="2026/04/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Perdue Simply Smart Organics Gluten</a></h2>
+                                    <h2><a href="#">Perdue Simply Smart Organics Gluten</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -356,7 +356,7 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Old El Paso</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Old El Paso</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -364,7 +364,7 @@
                                             <span class="old-price">$26.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -375,7 +375,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend/imgs/banner/banner-7.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -385,7 +385,7 @@
                                     <div class="deals-countdown" data-countdown="2027/03/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Signature Wood-Fired Mushroom</a></h2>
+                                    <h2><a href="#">Signature Wood-Fired Mushroom</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 80%"></div>
@@ -393,7 +393,7 @@
                                         <span class="font-small ml-5 text-muted"> (3.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Progresso</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Progresso</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -401,7 +401,7 @@
                                             <span class="old-price">$13.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -412,7 +412,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend/imgs/banner/banner-8.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -422,7 +422,7 @@
                                     <div class="deals-countdown" data-countdown="2025/02/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Simply Lemonade with Raspberry Juice</a></h2>
+                                    <h2><a href="#">Simply Lemonade with Raspberry Juice</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 80%"></div>
@@ -430,7 +430,7 @@
                                         <span class="font-small ml-5 text-muted"> (3.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Yoplait</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Yoplait</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -438,7 +438,7 @@
                                             <span class="old-price">$16.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -503,7 +503,7 @@
 
                     <div class="vendor-info">
                         <ul class="font-sm mb-20">
-                            <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: <strong>Address: </strong> <span>{{ $store->address }}, {{ $store->city }} {{ $store->zip }} ,{{ $store->country->name }}</span></li>
+                            <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: <strong>Address: </strong> <span>{{ $store->address }}, {{ $store->city }} {{ $store->zip }}, {{ $store->country->name }}</span></li>
                             <li><img class="mr-5" src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>
                         </ul>
                         <a href="tel:{{ $store->phone }}" class="btn btn-xs">Contact Seller <i class="fi-rs-arrow-small-right"></i></a>
@@ -513,10 +513,40 @@
             <div class="sidebar-widget widget-category-2 mb-30">
                 <h5 class="section-title style-1 mb-30">Category</h5>
                 <ul>
+                    @php
+                        $categoryIds = $store->products()->pluck('category_id')->unique();
+                        $categories = \App\Models\Category::find($categoryIds);
+                    @endphp
+                    @forelse ( $categories as $category )
                     <li>
-                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks & Dairies</a><span class="count">30</span>
+                        <a href="{{ route('categories', $category->id) }}">
+                             {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" /> --}}
+                             @if ( $category->image )
+                                    <a href="{{ route('categories', $category->id) }}">
+                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+                                    </a>
+                            @else
+                                    <a href="{{ route('categories', $category->id) }}">
+                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+                                    </a>
+
+                            @endif
+                             {{ $category->name }}
+                        </a>
+                        <span class="count">{{ count($category->products) }}</span>
                     </li>
+                    @empty
                     <li>
+                        <a href="#">
+                             <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a>
+                             <span class="count">35</span>
+                    </li>
+
+                    @endforelse
+
+
+
+                    {{-- <li>
                         <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a><span class="count">35</span>
                     </li>
                     <li>
@@ -527,7 +557,10 @@
                     </li>
                     <li>
                         <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                    </li>
+                    </li> --}}
+
+
+
                 </ul>
             </div>
             <!-- Fillter By Price -->
@@ -545,7 +578,7 @@
                 </div>
                 <div class="list-group">
                     <div class="list-group-item mb-10 mt-10">
-                        <label class="fw-900">Color</label>
+                        <label class="fw-900">Nutrition</label>
                         <div class="custome-checkbox">
                             <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
                             <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
@@ -556,7 +589,7 @@
                             <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="" />
                             <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
                         </div>
-                        <label class="fw-900 mt-15">Item Condition</label>
+                        <label class="fw-900 mt-15">Brand</label>
                         <div class="custome-checkbox">
                             <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
                             <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>

@@ -215,7 +215,7 @@ Route::get('/user/change-password', [FrontendUserController::class, 'changePassw
 Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
 Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
 Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
-Route::post('/user/address-update', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
+Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
 Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
 
 

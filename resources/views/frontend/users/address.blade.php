@@ -171,8 +171,8 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <form id="billingEditForm" method="POST"
-                                                                        class="form-horizontal">
+                                                                    <form id="billingEditForm" method="post" class="form-horizontal">
+                                                                    @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -346,8 +346,7 @@
                                                                             id="close" onclick="closeModal()"
                                                                             style="color: black; background-color:#fdc040;"
                                                                             data-dismiss="modal">Close</button>
-                                                                        <a type="button" href="#"
-                                                                            class="btn">Save changes</a>
+                                                                        <button type="submit" style="padding: 10px 5%; border-radius: 6px;" class="btn">Save changes</button>
                                                                     </div>
                                                                     </form>
 
@@ -374,8 +373,8 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <form id="shippingEditForm" method="POST"
-                                                                        class="form-horizontal">
+                                                                    <form id="shippingEditForm" method="post" class="form-horizontal">
+                                                                        @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -549,8 +548,7 @@
                                                                                 onclick="closeModal()"
                                                                                 style="color: black; background-color:#fdc040;"
                                                                                 data-dismiss="modal">Close</button>
-                                                                            <a type="button" href="#"
-                                                                                class="btn">Save changes</a>
+                                                                            <button type="submit" style="padding: 10px 5%; border-radius: 6px;" class="btn">Save changes</button>
                                                                         </div>
                                                                     </form>
 
@@ -819,6 +817,7 @@
 
     function openEditBillingModal(id) {
 
+        $('#addressType').val('billing')
 
 
         let billingAddress = billAdd.find(x => x.id == id);
@@ -832,7 +831,7 @@
         // $('edit-bill-country').attr('selected');
 
         // Set edit form action url
-        // $('#billingDeleteForm').attr('href',  '/user/address-delete/' + billingAddress.id);
+        $('#billingEditForm').attr('action',  '/user/address-update/' + billingAddress.id);
 
         // Set update row value
         $('#edit-bill-name').val(billingAddress.name);
@@ -863,12 +862,15 @@
 
     function openEditShippingModal(id) {
 
+        $('#addressType').val('shipping')
+
+
         //alert("dsjhsfgsj");
         let shippingAddress = shippingAdd.find(x => x.id == id);
         //alert(shippingAddress);
 
         // Set edit form action url
-        //$('#billingEditForm').attr('action', app_url + '/billing/' + billingAddress.id);
+        $('#shippingEditForm').attr('action',  '/user/address-update/' + shippingAddress.id);
 
         // Set update row value
         $('#edit-ship-name').val(shippingAddress.name);
