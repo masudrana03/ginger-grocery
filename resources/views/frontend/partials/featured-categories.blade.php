@@ -27,7 +27,7 @@
                         </a>
                         @endif
                     </figure>
-                    <h6><a href="#">{{$category->name}}</a></h6>
+                    <h6><a href="{{ route('categories', $category->id) }}">{{$category->name}}</a></h6>
                     <span>{{$category->products()->count()}} items</span>
                 </div>
                 @empty
