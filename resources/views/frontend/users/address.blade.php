@@ -1,14 +1,23 @@
 @extends('frontend.layouts.app')
 @section('title', 'User Account')
 
+<style>
+    .modal-border{
+        border:6px solid #abeecf !important; 
+        border-radius:3%;
+    }
 
+    .modal-button{
+        border-radius:13px;
+    }
+</style>
 
 @section('content')
     <main class="main pages">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Pages <span></span> My Account
                 </div>
             </div>
@@ -49,8 +58,9 @@
                                                 Password</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();"><i
+                                            <a class="nav-link" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                                                document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -72,21 +82,33 @@
                                                     </div>
                                                     <div class="card-body p-4">
                                                         @forelse ($billingAddresses ?? [] as $item)
-                                                            <address>
-                                                                {{ $item->address }}
-                                                            </address>
+                                                            <p>{{ $item->name }}</p>
                                                             <p>{{ $item->phone }}</p>
-                                                            <p>{{ $item->city }}</p>
-                                                            <p>{{ $item->country->name }}</p>
-                                                            <p>{{ $item->zip }}</p>
-                                                            <div class="billing-button" style="margin-left:80px; margin-top:-30px;">
-                                                            <button class="btn-success  edit-billing-address" onclick="openEditBillingModal({{$item->id}})" style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white" data-toggle="modal" data-target="#editCategoryModal">Edit</button>
-                                                            <button class="btn-danger"  style="color: black; background-color:#fdc040; border-radius: 5px ; border:white" data-toggle="modal" data-target="#editCategoryModal">Delete</button>
+                                                            <p>{{ $item->email }}</p>
+                                                            <address>
+                                                                {{ $item->address }},
+                                                            </address>
+                                                            <p>{{ $item->state }}, {{ $item->city }},
+                                                                {{ $item->zip }} ,</p>
+                                                            <p>{{ $item->country->name }} .</p>
+                                                            <div class="billing-button"
+                                                                style="margin-left: 60%; margin-top:-30px;">
+                                                                <button class="btn-success  edit-billing-address"
+                                                                    onclick="openEditBillingModal({{ $item->id }})"
+                                                                    style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editCategoryModal">Edit</button>
+                                                                <button class="btn-danger"
+                                                                    style="color: black; background-color:#fdc040; border-radius: 5px ; border:white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editCategoryModal">Delete</button>
                                                             </div>
-                                                            <hr> 
+                                                            <hr>
                                                         @empty
                                                             <p>No Billing address address found!</p>
-                                                            <button class="btn add-billing-address" id="billing" onclick="createModal('billing')"  style="color: white;">Create Billing Address</button>
+                                                            <button class="btn add-billing-address" id="billing"
+                                                                onclick="createModal('billing')"
+                                                                style="color: white;">Create Billing Address</button>
                                                         @endforelse
                                                     </div>
                                                 </div>
@@ -99,285 +121,567 @@
                                                     <div class="card-body p-4">
 
                                                         @forelse ($shippingAddresses ?? [] as $item)
-                                                            
-                                                            <address>
-                                                                {{ $item->address }}
-                                                            </address>
+
+                                                            <p>{{ $item->name }}</p>
                                                             <p>{{ $item->phone }}</p>
-                                                            <p>{{ $item->city }}</p>
-                                                            <p>{{ $item->country->name }}</p>
-                                                            <p>{{ $item->zip }}</p>
-                                                             
-                                                            <div class="billing-button" style="margin-left:80px; margin-top:-30px;">
-                                                                <button class="btn-success  edit-billing-address" onclick="openEditShippingModal({{$item->id}})" style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white" data-toggle="modal" >Edit</button>
-                                                                <button class="btn-danger"  style="color: black; background-color:#fdc040; border-radius: 5px ; border:white" data-toggle="modal" data-target="#editCategoryModal">Delete</button>
-                                                                </div>                   
+                                                            <p>{{ $item->email }}</p>
+                                                            <address>
+                                                                {{ $item->address }},
+                                                            </address>
+                                                            <p>{{ $item->state }}, {{ $item->city }},
+                                                                {{ $item->zip }} ,</p>
+                                                            <p>{{ $item->country->name }} .</p>
+
+                                                            <div class="billing-button"
+                                                                style="margin-left: 60%; margin-top:-30px;">
+                                                                <button class="btn-success  edit-billing-address"
+                                                                    onclick="openEditShippingModal({{ $item->id }})"
+                                                                    style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white"
+                                                                    data-toggle="modal">Edit</button>
+                                                                <button class="btn-danger"
+                                                                    style="color: black; background-color:#fdc040; border-radius: 5px ; border:white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editCategoryModal">Delete</button>
+                                                            </div>
                                                             <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
-                                                            <button class="btn add-billing-address" id="shipping" onclick="createModal('shipping')" style="color: white;">Create Shipping Address</button>
+                                                            <button class="btn add-billing-address" id="shipping"
+                                                                onclick="createModal('shipping')"
+                                                                style="color: white;">Create Shipping Address</button>
                                                         @endforelse
 
-                                                     {{-- modal --}}
+                                                        {{-- modal --}}
 
-                                                        <div class="modal fade" id="editBillingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal fade" id="editBillingModal" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Billing Address</h5>
-                                                                <button type="button" class="close" onclick="closeModal()" style="color: black; background-color:#fdc040;" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                                </div>
-                                                                <form id="billingEditForm"  method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Name <span class="required">*</span></label>
-                                                                            <input required="" id="edit-bill-address"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="addresss" type="text"
-                                                                                value="{{ old('name')}}" />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Phone <span class="required">*</span></label>
-                                                                            <input required="" id="edit-bill-phone"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="phone" type="text"
-                                                                                value="{{ old('name')}}" />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>City <span class="required">*</span></label>
-                                                                            <input required="" id="edit-bill-city"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="city" type="text"
-                                                                                value="{{ old('name')}}" />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Country <span class="required">*</span></label>
-                                                                            <input required="" id="edit-bill-country"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="country" type="text"
-                                                                                value="{{ old('name') }}" />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Zip Code <span class="required">*</span></label>
-                                                                            <input required="" id="edit-bill-zip"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="zip" type="text"
-                                                                                value="{{ old('name')}}" />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
+                                                                <div class="modal-content modal-border">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="exampleModalLongTitle">Edit Billing Address
+                                                                        </h5>
+                                                                        <button type="button" class="close modal-button"
+                                                                            onclick="closeModal()"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
                                                                     </div>
-                                                                </form>
-                                                                <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" id="close" onclick="closeModal()" style="color: black; background-color:#fdc040;" data-dismiss="modal">Close</button>
-                                                                <a type="button" href="#" class="btn">Save changes</a>
+                                                                    <form id="billingEditForm" method="POST"
+                                                                        class="form-horizontal">
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Name
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-bill-name"
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="name" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                    <input type="hidden" id="addressType"
+                                                                                        name="type">
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="form-group">
+                                                                                        {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                                                                        {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
+                                                                                        <label class="pd-10">Country Code
+                                                                                            <span
+                                                                                                class="required">*</span></label>
+                                                                                        <select name=""
+                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                            style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
+                                                                                            {{-- <option value="">Seclect Country</option> --}}
+                                                                                            @foreach ($countries as $countryName)
+                                                                                                <option
+                                                                                                    value="{{ $countryName->phonecode }}">
+                                                                                                    {{ $countryName->phonecode }}
+                                                                                                    {{ $countryName->iso }}
+                                                                                                </option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <div class="form-group">
+                                                                                        {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                                                                        <label class="pd-10">Phone
+                                                                                            <span
+                                                                                                class="required">*</span></label>
+                                                                                        <input id="edit-bill-phone" type="text"
+                                                                                            class="form-control @error('phone') is-invalid @enderror"
+                                                                                            name="phone"
+                                                                                            value="{{ old('phone') }}"
+                                                                                            required autocomplete="phone"
+                                                                                            placeholder="Phone Number"
+                                                                                            autofocus>
+                                                                                        @error('phone')
+                                                                                            <span class="invalid-feedback"
+                                                                                                role="alert">
+                                                                                                <strong>{{ $message }}</strong>
+                                                                                            </span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Email
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-bill-email"
+                                                                                        class="form-control @error('email') is-invalid @enderror"
+                                                                                        name="email" type="text" />
+                                                                                    @error('email')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <select name="country_id" id=""
+                                                                                        class="form-control @error('country_id') is-invalid @enderror"
+                                                                                        style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                                                        {{-- <option value="">Seclect Country</option> --}}
+                                                                                        <option value="">Seclect Country
+                                                                                        </option>
+                                                                                        @foreach ($countries as $country)
+                                                                                            <option
+                                                                                                value="{{ $country->id }}">
+                                                                                                {{ $country->name }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Address
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-bill-address"
+                                                                                        class="form-control @error('address') is-invalid @enderror"
+                                                                                        name="address" type="text" />
+                                                                                    @error('address')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label
+                                                                                        class="pd-10">State<span
+                                                                                            class="required"></span></label>
+                                                                                    <input required="" id="edit-ship-state"
+                                                                                        class="form-control @error('state') is-invalid @enderror"
+                                                                                        name="state" type="text" />
+                                                                                    @error('state')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label class="pd-10">City
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-bill-city"
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="city" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label class="pd-10">Zip Code
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-bill-zip"
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="zip" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            id="close" onclick="closeModal()"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <a type="button" href="#"
+                                                                            class="btn">Save changes</a>
+                                                                    </div>
+                                                                    </form>
+
                                                                 </div>
-                                                            </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <!-- Modal -->
 
                                                         {{-- modal for edit shipping address --}}
-                                                        <div class="modal fade" id="editShippingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Shipping Address</h5>
-                                                                <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" style="color: black; background-color:#fdc040;" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                                </div>
-                                                                <form id="shippingEditForm"  method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Name <span class="required">*</span></label>
-                                                                            <input required="" id="edit-ship-address"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="addresss" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Phone <span class="required">*</span></label>
-                                                                            <input required="" id="edit-ship-phone"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="phone" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>City <span class="required">*</span></label>
-                                                                            <input required="" id="edit-ship-city"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="city" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Country <span class="required">*</span></label>
-                                                                            <input required="" id="edit-ship-country"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="country" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Zip Code <span class="required">*</span></label>
-                                                                            <input required="" id="edit-ship-zip"
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="zip" type="text"
-                                                                            />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
+                                                        <div class="modal fade" id="editShippingModal" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered " role="document">
+                                                                <div class="modal-content modal-border" >
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="exampleModalLongTitle">Edit Shipping Address
+                                                                        </h5>
+                                                                        <button type="button" class="close modal-button"
+                                                                            onclick="closeModal()" data-dismiss="modal"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
                                                                     </div>
-                                                                </form>
-                                                                <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" onclick="closeModal()" style="color: black; background-color:#fdc040;" data-dismiss="modal">Close</button>
-                                                                <a type="button" href="#" class="btn">Save changes</a>
+                                                                    <form id="shippingEditForm" method="POST"
+                                                                        class="form-horizontal">
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Name
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required="" id="edit-ship-address"
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="name" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                    <input type="hidden" id="addressType"
+                                                                                        name="type">
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-md-12">
+                                                                                <label>Phone <span
+                                                                                        class="required">*</span></label>
+                                                                                <input required="" id="edit-ship-phone"
+                                                                                    class="form-control @error('name') is-invalid @enderror"
+                                                                                    name="phone" type="text" />
+                                                                                @error('name')
+                                                                                    <span class="invalid-feedback"
+                                                                                        role="alert">
+                                                                                        <strong>{{ $message }}</strong>
+                                                                                    </span>
+                                                                                @enderror
+                                                                            </div>
+
+                                                                            <div class="form-group col-md-12">
+                                                                                <label>City <span
+                                                                                        class="required">*</span></label>
+                                                                                <input required="" id="edit-ship-city"
+                                                                                    class="form-control @error('name') is-invalid @enderror"
+                                                                                    name="city" type="text" />
+                                                                                @error('name')
+                                                                                    <span class="invalid-feedback"
+                                                                                        role="alert">
+                                                                                        <strong>{{ $message }}</strong>
+                                                                                    </span>
+                                                                                @enderror
+                                                                            </div>
+
+                                                                            <div class="form-group col-md-12">
+                                                                                <label>Country <span
+                                                                                        class="required">*</span></label>
+                                                                                <input required="" id="edit-ship-country"
+                                                                                    class="form-control @error('name') is-invalid @enderror"
+                                                                                    name="country" type="text" />
+                                                                                @error('name')
+                                                                                    <span class="invalid-feedback"
+                                                                                        role="alert">
+                                                                                        <strong>{{ $message }}</strong>
+                                                                                    </span>
+                                                                                @enderror
+                                                                            </div>
+
+                                                                            <div class="form-group col-md-12">
+                                                                                <label>Zip Code <span
+                                                                                        class="required">*</span></label>
+                                                                                <input required="" id="edit-ship-zip"
+                                                                                    class="form-control @error('name') is-invalid @enderror"
+                                                                                    name="zip" type="text" />
+                                                                                @error('name')
+                                                                                    <span class="invalid-feedback"
+                                                                                        role="alert">
+                                                                                        <strong>{{ $message }}</strong>
+                                                                                    </span>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            onclick="closeModal()"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <a type="button" href="#"
+                                                                            class="btn">Save changes</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </div>
                                                         </div>
 
                                                         {{-- modal for create shipping address --}}
-                   
-                                                        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title" id="ModalTitle"></h5>
-                                                                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" style="color: black; background-color:#fdc040;" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                                </div>
-                                                                <form id="createAddressForm"  method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Name <span class="required">*</span></label>
-                                                                            <input required="" 
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="addresss" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-                                                    
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Phone <span class="required">*</span></label>
-                                                                            <input required="" 
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="phone" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-                                                    
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>City <span class="required">*</span></label>
-                                                                            <input required="" 
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="city" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-                                                    
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Country <span class="required">*</span></label>
-                                                                            <input required="" 
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="country" type="text"
-                                                                                />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
-                                                    
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Zip Code <span class="required">*</span></label>
-                                                                            <input required="" 
-                                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                                name="zip" type="text"
-                                                                            />
-                                                                            @error('name')
-                                                                                <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
-                                                                            @enderror
-                                                                        </div>
+
+                                                        @if (Session::has('errors'))
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    $('#createModal').modal({
+                                                                        show: true
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        @endif
+
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+
+                                                        <div class="modal fade" id="createModal" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                role="document">
+                                                                <div class="modal-content modal-border">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="ModalTitle"></h5>
+                                                                        <button type="button" class="close modal-button"
+                                                                            data-dismiss="modal" onclick="closeModal()"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
                                                                     </div>
-                                                                </form>
-                                                                <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" onclick="closeModal()" style="color: black; background-color:#fdc040;" data-dismiss="modal">Close</button>
-                                                                <a type="button" href="#" class="btn">Save changes</a>
+                                                                    <form id="createAddressForm"
+                                                                        action="{{ route('user.add.address') }}"
+                                                                        method="POST" class="form-horizontal">
+                                                                        @csrf
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Name
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="name" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                    <input type="hidden" id="addressType"
+                                                                                        name="type">
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="form-group">
+                                                                                        {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                                                                        {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
+                                                                                        <label class="pd-10">Country Code
+                                                                                            <span
+                                                                                                class="required">*</span></label>
+                                                                                        <select name=""
+                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                            style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
+                                                                                            {{-- <option value="">Seclect Country</option> --}}
+                                                                                            @foreach ($countries as $countryName)
+                                                                                                <option
+                                                                                                    value="{{ $countryName->phonecode }}">
+                                                                                                    {{ $countryName->phonecode }}
+                                                                                                    {{ $countryName->iso }}
+                                                                                                </option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <div class="form-group">
+                                                                                        {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                                                                        <label class="pd-10">Phone
+                                                                                            <span
+                                                                                                class="required">*</span></label>
+                                                                                        <input id="phone" type="text"
+                                                                                            class="form-control @error('phone') is-invalid @enderror"
+                                                                                            name="phone"
+                                                                                            value="{{ old('phone') }}"
+                                                                                            required autocomplete="phone"
+                                                                                            placeholder="Phone Number"
+                                                                                            autofocus>
+                                                                                        @error('phone')
+                                                                                            <span class="invalid-feedback"
+                                                                                                role="alert">
+                                                                                                <strong>{{ $message }}</strong>
+                                                                                            </span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Email
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('email') is-invalid @enderror"
+                                                                                        name="email" type="text" />
+                                                                                    @error('email')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <select name="country_id"
+                                                                                        class="form-control @error('country_id') is-invalid @enderror"
+                                                                                        style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                                                        {{-- <option value="">Seclect Country</option> --}}
+                                                                                        <option value="">Seclect Country
+                                                                                        </option>
+                                                                                        @foreach ($countries as $country)
+                                                                                            <option
+                                                                                                value="{{ $country->id }}">
+                                                                                                {{ $country->name }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label class="pd-10">Address
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('address') is-invalid @enderror"
+                                                                                        name="address" type="text" />
+                                                                                    @error('address')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label
+                                                                                        class="pd-10">State<span
+                                                                                            class="required"></span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('state') is-invalid @enderror"
+                                                                                        name="state" type="text" />
+                                                                                    @error('state')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label class="pd-10">City
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="city" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label class="pd-10">Zip Code
+                                                                                        <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input required=""
+                                                                                        class="form-control @error('name') is-invalid @enderror"
+                                                                                        name="zip" type="text" />
+                                                                                    @error('name')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                onclick="closeModal()"
+                                                                                style="color: black; background-color:#fdc040;"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn"
+                                                                                style="font-size: 14px;font-weight: 700; padding: 12px 30px; border-radius: 4px;">Save
+                                                                                changes</button>
+                                                                        </div>
+                                                                    </form>
+                                                                    {{-- <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            onclick="closeModal()"
+                                                                            style="color: black; background-color:#fdc040;"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="button" class="btn">Save changes</button>
+                                                                    </div> --}}
                                                                 </div>
                                                             </div>
-                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -389,87 +693,98 @@
                     </div>
                 </div>
             </div>
-        </div>
     </main>
-   
-    
+
+
 
 @endsection
 
-    <script>
+
+<style>
+    .pd-10 {
+        padding-left: 10px !important;
+    }
+
+</style>
+
+<script>
+    // Billing address modal
+
+    let billAdd = @json($billingAddresses);
+    // let countries = @json($countries);
+
+
+    function openEditBillingModal(id) {
+
+
+        let billingAddress = billAdd.find(x => x.id == id);
         
-        // Billing address modal
+        // Set edit form action url
+        //$('#billingEditForm').attr('action', app_url + '/billing/' + billingAddress.id);
 
-        let billAdd = @json($billingAddresses);
-        
-        
-        function openEditBillingModal(id) {
-           
+        // Set update row value
+        $('#edit-bill-name').val(billingAddress.name);
+        $('#edit-bill-phone').val(billingAddress.phone);
+        $('#edit-bill-email').val(billingAddress.email);
+        $('#edit-bill-address').val(billingAddress.address);
+        $('#edit-bill-city').val(billingAddress.city);
+        $('#edit-ship-state').val(billingAddress.state);
+        $('#edit-bill-country').val(billingAddress.country.name);
+        $('#edit-bill-zip').val(billingAddress.zip);
 
-            let billingAddress = billAdd.find(x => x.id == id);
+        // Open modal
+        $('#editBillingModal').modal('show');
 
-            // Set edit form action url
-            //$('#billingEditForm').attr('action', app_url + '/billing/' + billingAddress.id);
-
-            // Set update row value
-            $('#edit-bill-address').val(billingAddress.address);
-            $('#edit-bill-phone').val(billingAddress.phone);
-            $('#edit-bill-city').val(billingAddress.city);
-            $('#edit-bill-country').val(billingAddress.country.name);
-            $('#edit-bill-zip').val(billingAddress.zip);
-            
-               // Open modal
-            $('#editBillingModal').modal('show');
-
-        }
+    }
 
 
-        function closeModal(){
-              $('#editBillingModal').modal('hide');
-              $('#editShippingModal').modal('hide');
-              $('#createModal').modal('hide');
-        }
-
-    
-       //Shipping address modal
-
-       let shippingAdd = @json($shippingAddresses);
-       function openEditShippingModal(id) {
-           
-           //alert("dsjhsfgsj");
-           let shippingAddress = shippingAdd.find(x => x.id == id);
-           //alert(shippingAddress);
-
-           // Set edit form action url
-           //$('#billingEditForm').attr('action', app_url + '/billing/' + billingAddress.id);
-
-           // Set update row value
-           $('#edit-ship-address').val(shippingAddress.address);
-           $('#edit-ship-phone').val(shippingAddress.phone);
-           $('#edit-ship-city').val(shippingAddress.city);
-           $('#edit-ship-country').val(shippingAddress.country.name);
-           $('#edit-ship-zip').val(shippingAddress.zip);
-           
-              // Open modal
-           $('#editShippingModal').modal('show');
-
-       }
+    function closeModal() {
+        $('#editBillingModal').modal('hide');
+        $('#editShippingModal').modal('hide');
+        $('#createModal').modal('hide');
+    }
 
 
-       function createModal(type){
+    //Shipping address modal
 
-        if (type == "billing"){
+    let shippingAdd = @json($shippingAddresses);
+
+    function openEditShippingModal(id) {
+
+        //alert("dsjhsfgsj");
+        let shippingAddress = shippingAdd.find(x => x.id == id);
+        //alert(shippingAddress);
+
+        // Set edit form action url
+        //$('#billingEditForm').attr('action', app_url + '/billing/' + billingAddress.id);
+
+        // Set update row value
+        $('#edit-ship-name').val(shippingAddress.name);
+        $('#edit-ship-address').val(shippingAddress.address);
+        $('#edit-ship-phone').val(shippingAddress.phone);
+        $('#edit-ship-city').val(shippingAddress.city);
+        $('#edit-ship-country').val(shippingAddress.country.name);
+        $('#edit-ship-zip').val(shippingAddress.zip);
+
+        // Open modal
+        $('#editShippingModal').modal('show');
+
+    }
+
+
+    function createModal(type) {
+
+        if (type == "billing") {
+            $('#addressType').val('billing')
             $('#ModalTitle').text("Create Billing Address")
             $('#createModal').modal('show');
         }
-           
-        if(type == "shipping"){
-        $('#ModalTitle').text("Create Shipping Address")
-        $('#createModal').modal('show');
+
+        if (type == "shipping") {
+            $('#addressType').val('shipping')
+            $('#ModalTitle').text("Create Shipping Address")
+            $('#createModal').modal('show');
         }
-  
-       }
 
-    </script>
-
-
+    }
+</script>

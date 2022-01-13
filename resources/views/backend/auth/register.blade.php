@@ -1,6 +1,30 @@
 @extends('backend.layouts.app2')
 @section('title', 'Sign Up')
 
+
+
+@push('styles')
+<style>
+    .cs_modal .modal-body .form-group .password_with_eye {
+    width: 100%;
+    display: inline-flex;
+    overflow: hidden;
+   
+}
+
+.cs_modal .modal-body .form-group .eye-icon {
+   
+    position:absolute;
+    margin-left: -40px;
+    margin-top: 17px;
+    
+}
+</style>   
+
+@endpush
+
+
+
 @section('content')
 
 <div class="main_content_iner" style="margin-top: 3%; padding: 30px; padding-top: 4%; padding-bottom: 100px;">
@@ -72,7 +96,7 @@
 
                                         <button type="submit" class="btn_1 full_width text-center"> Sign Up</button>
 
-                                        <p>Need an account? <a href="{{ route('admin.login') }}">Log in</a></p>
+                                        <p>Need an account? <a href="{{ route('admin.login') }}">Log in </a></p>
                                     </form>
                                 </div>
                             </div>
@@ -86,3 +110,29 @@
 </div>
 
 @endsection
+
+
+@push('script')
+<script>
+
+ 
+    $(document).ready(function() {
+       $(".eye-icon").on('click', function(event) {
+           event.preventDefault();
+           if($('.password_with_eye').attr("type") == "text"){
+               $('.password_with_eye').attr('type','password');
+               $('.eye-icon').addClass( "fa-eye-slash" );
+               $('.eye-icon').removeClass( "fa-eye" );
+           }else if($('.password_with_eye').attr("type") == "password"){
+               $('.password_with_eye').attr('type', 'text');
+               $('.eye-icon').removeClass( "fa-eye-slash" );
+               $('.eye-icon').addClass( "fa-eye" );
+           }
+       });
+   });
+   
+   </script>
+@endpush
+
+
+    

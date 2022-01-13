@@ -29,7 +29,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control  password_with_eye" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,3 +71,21 @@
     </div>
 </div>
 @endsection
+
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
+    $(document).ready(function() {
+    $(".eye-icon").on('click', function(event) {
+        event.preventDefault();
+        if($('.password_with_eye').attr("type") == "text"){
+            $('.password_with_eye').attr('type','password');
+            $('.eye-icon').addClass( "fa-eye-slash" );
+            $('.eye-icon').removeClass( "fa-eye" );
+        }else if($('.password_with_eye').attr("type") == "password"){
+            $('.password_with_eye').attr('type', 'text');
+            $('.eye-icon').removeClass( "fa-eye-slash" );
+            $('.eye-icon').addClass( "fa-eye" );
+        }
+    });
+});
+</script>

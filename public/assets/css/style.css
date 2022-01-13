@@ -2205,24 +2205,6 @@ th:focus {
     
 }
 
-.cs_modal .modal-body .form-group .password_with_eye {
-    width: 100%;
-    display: inline-flex;
-    overflow: hidden;
-   
-}
-
-.cs_modal .modal-body .form-group i {
-   
-    position:absolute;
-    margin-left: -40px;
-    margin-top: 17px;
-    
-}
-
-
-
-
 /* line 1285, G:/admin_project/8 admin/Analytic/scss/_reset.scss */
 
 .cs_modal .modal-body textarea {

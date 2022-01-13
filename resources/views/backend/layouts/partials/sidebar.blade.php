@@ -118,7 +118,7 @@
     </ul>
 </li>
 <li class="">
-    <a href="{{ route('admin.carts.index') }}" aria-expanded="false">
+    <a  href="{{ route('admin.carts.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>
@@ -128,7 +128,7 @@
     </a>
 </li>
 <li class="">
-    <a href="{{ route('admin.zones.index') }}" aria-expanded="false">
+    <a  href="{{ route('admin.zones.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>
@@ -137,6 +137,7 @@
         </div>
     </a>
 </li>
+
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
@@ -155,6 +156,7 @@
         </li>
     </ul>
 </li>
+
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
@@ -164,15 +166,16 @@
             <span>Orders</span>
         </div>
     </a>
-    <ul class="mm-collapse" style="height: 5px;">
-        <li class="">
-            <a href="{{ route('admin.order_statuses.index') }}">Order Status</a>
-            <a href="{{ route('admin.orders.index') }}">All Orders</a>
-            @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-                <a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
-                    Orders</a>
-            @endforeach
+    <ul>
+        <li>
+            <a  href="{{ route('admin.order_statuses.index') }}">Order Status</a>
         </li>
+            <li><a href="{{ route('admin.orders.index') }}">All Orders</a></li>
+            @foreach (\App\Models\OrderStatus::all() as $orderStatus)
+                <li><a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+                    Orders</a></li>
+            @endforeach
+       
     </ul>
 </li>
 @if (isAdmin())
@@ -186,14 +189,14 @@
         </div>
     </a>
     <ul>
-        <li class="">
-            <a href="{{ route('admin.settings.general') }}">General Settings</a>
-            <a href="{{ route('admin.settings.email') }}">Email Settings</a>
-            <a href="{{ route('admin.email_templates.index') }}">Email Templates</a>
-            <a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a>
-            <a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a>
-            <a href="{{ route('admin.taxes.index') }}">Tax</a>
-        </li>
+        
+            <li><a href="{{ route('admin.settings.general') }}">General Settings</a></li>
+            <li><a href="{{ route('admin.settings.email') }}">Email Settings</a></li>
+            <li><a href="{{ route('admin.email_templates.index') }}">Email Templates</a></li>
+            <li><a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a></li>
+            <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
+            <li><a href="{{ route('admin.taxes.index') }}">Tax</a></li>
+        
     </ul>
 </li>
 <li class="">

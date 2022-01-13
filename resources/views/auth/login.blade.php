@@ -1,6 +1,22 @@
 @extends('frontend.layouts.app')
 @section('title', 'Login')
+<style>
+.form-group .password_with_eye {
+  width: 100%;
+  display: inline-flex;
+  overflow: hidden;
+ 
+}
 
+.form-group .eye-icon {
+ 
+  position:absolute;
+  margin-left: -40px;
+  margin-top: 24px;
+  
+}
+
+</style>
 @section('content')
 
 <div class="page-header breadcrumb-wrap">
@@ -82,3 +98,21 @@
 </div>
 
 @endsection
+
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
+$(document).ready(function() {
+    $(".eye-icon").on('click', function(event) {
+        event.preventDefault();
+        if($('.password_with_eye').attr("type") == "text"){
+            $('.password_with_eye').attr('type','password');
+            $('.eye-icon').addClass( "fa-eye-slash" );
+            $('.eye-icon').removeClass( "fa-eye" );
+        }else if($('.password_with_eye').attr("type") == "password"){
+            $('.password_with_eye').attr('type', 'text');
+            $('.eye-icon').removeClass( "fa-eye-slash" );
+            $('.eye-icon').addClass( "fa-eye" );
+        }
+    });
+});
+</script>

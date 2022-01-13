@@ -48,6 +48,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/colors/default.css') }}" id="colorSkinCSS">
+    @stack('styles')
 </head>
 
 <body class="crm_body_bg">
@@ -63,6 +64,8 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- sidebar menu  -->
     <script src="{{ asset('assets/js/metisMenu.js') }}"></script>
+
+    
     <!-- waypoints js -->
     {{-- <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script> --}}
     <!-- waypoints js -->
@@ -125,6 +128,7 @@
     <!-- custom js -->
     <script src="{{ asset('assets/js/dashboard_init.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    @stack('script')
 </body>
 
 </html>

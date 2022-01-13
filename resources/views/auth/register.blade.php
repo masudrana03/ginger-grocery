@@ -1,6 +1,24 @@
 @extends('frontend.layouts.app')
 @section('title', 'Register')
 
+<style>
+.form-group .password_with_eye {
+  width: 100%;
+  display: inline-flex;
+  overflow: hidden;
+ 
+}
+
+.form-group .eye-icon {
+ 
+  position:absolute;
+  margin-left: -40px;
+  margin-top: 24px;
+  
+}
+
+</style>
+
 @section('content')
 
 <div class="page-header breadcrumb-wrap">
@@ -23,6 +41,9 @@
                                     <h1 class="mb-5">Create an Account</h1>
                                     <p class="mb-30">Already have an account? <a href="{{ route( 'login' ) }}">Login</a></p>
                                 </div>
+                                {{-- @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach --}}
                                 <form id="reg" method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="form-group">
@@ -61,12 +82,12 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
-                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
+                                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus>
                                                 @error('phone')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -87,6 +108,7 @@
                                         {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
                                         <input id="password" type="password" class="form-control password_with_eye @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
                                         <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
+
                                         <div id="pass_available" class="mt-1" ></div>
 
                                         @error('password')
@@ -127,12 +149,13 @@
                                             <div class="custome-checkbox">
                                                 <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="" />
                                                 <label class="form-check-label" for="exampleCheckbox12"><span>I agree to terms &amp; Policy.</span></label>
-
-                                                <div id="terms"></div>
                                             </div>
+                                            <div id="terms"></div>
                                         </div>
-                                        <a href="#"><i class="fi-rs-book-alt mr-5 text-muted"></i>Terms &amp; Policy</a>
+                                        <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Terms &amp; Policy</a>
                                     </div>
+
+
                                     <div class="form-group mb-30">
                                         <button type="submit" class="btn btn-fill-out btn-block hover-up font-weight-bold" name="login">Submit &amp; Register</button>
                                     </div>
@@ -167,10 +190,6 @@
 @endsection
 
 <style>
-    .badge-danger {
-    color: #fff;
-    background-color: #fdc040;
-    }
     .badge {
         white-space: normal !important;
     }
@@ -187,18 +206,12 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
 
-    .badge-success {
-        color: #fff;
-        background-color: #3bb77e;
-    }
 </style>
 
 
-<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
 
-
-<script>
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
     // alert('dsdf');
 //    $('#repassword').on('keyup change', function(){
 //         let password = $('#password').val();
@@ -210,26 +223,42 @@
 //         }
 //       })
 
+$(document).ready(function() {
+    $(".eye-icon").on('click', function(event) {
+        event.preventDefault();
+        if($('.password_with_eye').attr("type") == "text"){
+            $('.password_with_eye').attr('type','password');
+            $('.eye-icon').addClass( "fa-eye-slash" );
+            $('.eye-icon').removeClass( "fa-eye" );
+        }else if($('.password_with_eye').attr("type") == "password"){
+            $('.password_with_eye').attr('type', 'text');
+            $('.eye-icon').removeClass( "fa-eye-slash" );
+            $('.eye-icon').addClass( "fa-eye" );
+        }
+    });
+});
+
 $( document ).ready(function() {
+
+    $('#exampleCheckbox12').click(function() {
+        $('#exampleCheckbox12').val('checked');
+    })
+
     $('#reg').on('submit', function(){
-        if($("#exampleCheckbox12").attr("checked")){
-            $('#terms').html("");
-            return true;
-        } else {
+        let hasChecked = $('#exampleCheckbox12').val();
 
-            $('#terms').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;" >You must agree to terms & Policy for sign up.</span>`)
-
-return false
+        if (hasChecked != 'checked'){
+            $('#terms').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;background-color: #fdc040;" >You must agree to terms & Policy for sign up.</span>`)
+            return false;
         }
       })
 
     $('#password').on('keyup change', function(){
-        //   alert('scas');
         let password = $('#password').val();
         if(validatePassword(password)){
-          $('#pass_available').html(`<span class="badge badge-success" style="color: #fff; font-size: 0.92em;" >Password acceptable</span>`)
+          $('#pass_available').html(`<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password acceptable</span>`)
         }else{
-          $('#pass_available').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`)
+          $('#pass_available').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`)
         }
       })
 
@@ -240,9 +269,9 @@ return false
         let password = $('#password').val();
         let repassword = $('#repassword').val();
         if(password != repassword || password == ''){
-          $('#repass_available').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;" >Password not matched</span>`)
+          $('#repass_available').html(`<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`)
         }else{
-          $('#repass_available').html(`<span class="badge badge-success" style="color: #fff; font-size: 0.92em;" >Password matched</span>`)
+          $('#repass_available').html(`<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`)
         }
       })
 
@@ -251,9 +280,6 @@ return false
         const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,}/
         return re.test(password);
       }
-
-
-
 
 });
 

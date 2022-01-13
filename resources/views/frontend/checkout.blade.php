@@ -206,8 +206,16 @@
                                 @endphp
                                 @forelse (auth()->user()->cart ? auth()->user()->cart->products : [] as $product)
                                     <tr>
-                                        <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-1.jpg"
-                                                alt="#">
+                                        <td class="image product-thumbnail">
+
+                                            @if (count( $product->images ) > 0)
+                                                <img class="default-img"
+                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                    alt="" />
+                                            @else
+                                                <img src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
+                                            @endif
+
                                         </td>
                                         <td>
                                             <h6 class="w-160 mb-5"><a href="shop-product-full.html"

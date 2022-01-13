@@ -18,8 +18,8 @@
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
-                    {{-- <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear --}}
-                            {{-- Cart</a></h6> --}}
+                    <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
+                            Cart</a></h6>
                 </div>
             </div>
         </div>
@@ -30,7 +30,9 @@
                         <thead>
                             <tr class="main-heading">
                                 <th class="custome-checkbox start pl-30">
-                                    
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11"
+                                        value="">
+                                    <label class="form-check-label" for="exampleCheckbox11"></label>
                                 </th>
                                 <th scope="col" colspan="2">Product</th>
                                 <th scope="col">Unit Price</th>
@@ -50,9 +52,11 @@
                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                     <tr class="pt-30">
                                         <td class="custome-checkbox pl-30">
-                                           
+                                            <input class="form-check-input" type="checkbox" name="checkbox"
+                                                id="exampleCheckbox1" value="">
+                                            <label class="form-check-label" for="exampleCheckbox1"></label>
                                         </td>
-                                        <td class="image product-thumbnail pt-10"><img
+                                        <td class="image product-thumbnail pt-40"><img
                                                 src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#">
                                         </td>
                                         <td class="product-des product-name">
