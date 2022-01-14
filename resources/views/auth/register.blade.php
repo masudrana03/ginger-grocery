@@ -6,15 +6,15 @@
   width: 100%;
   display: inline-flex;
   overflow: hidden;
- 
+
 }
 
 .form-group .eye-icon {
- 
+
   position:absolute;
   margin-left: -40px;
   margin-top: 24px;
-  
+
 }
 
 </style>
@@ -152,7 +152,7 @@
                                             </div>
                                             <div id="terms"></div>
                                         </div>
-                                        <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Terms &amp; Policy</a>
+                                        <a href="#"><i class="fi-rs-book-alt mr-5 text-muted"></i>Terms &amp; Policy</a>
                                     </div>
 
 

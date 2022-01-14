@@ -9,7 +9,7 @@
                             <h6 class="mb-10 text-brand-2">Deal of the Day</h6>
                         </div>
                         <div class="deal-content detail-info">
-                            <h4 class="product-title"><a href="shop-product-right.html" class="text-heading">Organic fruit for your family's health</a></h4>
+                            <h4 class="product-title"><a href="#" class="text-heading">Organic fruit for your family's health</a></h4>
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
                                     <span class="current-price text-brand">$38</span>
@@ -106,7 +106,7 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="detail-info pr-30 pl-30">
                                 <span class="stock-status out-stock"> Sale Off </span>
-                                <h3 class="title-detail"><a href="shop-product-right.html"
+                                <h3 class="title-detail"><a href="#"
                                         class="text-heading">Seeds of Change Organic Quinoa, Brown</a></h3>
                                 <div class="product-detail-rating">
                                     <div class="product-rate-cover text-end">
@@ -275,7 +275,7 @@
 
                                             {{-- <option> {{$zones->name}}</option> --}}
 
-                                        </select>  
+                                        </select>
                                     </form>
                                 </div>
                                 @php
@@ -619,17 +619,17 @@
                                             <li>
                                                 <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
                                                 <ul class="level-menu">
-                                                    <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
+                                                    <li><a href="#">Product – Right Sidebar</a></li>
                                                     <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                                    <li><a href="shop-product-full.html">Product – No sidebar</a></li>
+                                                    <li><a href="#">Product – No sidebar</a></li>
                                                     <li><a href="shop-product-vendor.html">Product – Vendor Info</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="shop-filter.html">Shop – Filter</a></li>
                                             <li><a href="#">Shop – Wishlist</a></li>
-                                            <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                            <li><a href="#">Shop – Cart</a></li>
                                             <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                            <li><a href="shop-compare.html">Shop – Compare</a></li>
+                                            <li><a href="#">Shop – Compare</a></li>
                                         </ul>
                                     </li> --}}
                                     <li>
@@ -638,7 +638,7 @@
                                             <li><a href="vendors-grid.html">Vendors Grid</a></li>
                                             <li><a href="{{ route('vendor.list') }}">Vendors List</a></li>
                                             <li><a href="#">Vendor Details</a></li>
-                                            <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
+                                            <li><a href="#">Vendor Details 02</a></li>
                                             <li><a href="#">Vendor Dashboard</a></li>
                                             <li><a href="#">Vendor Guide</a></li>
                                         </ul> --}}
@@ -649,39 +649,39 @@
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Fruit & Vegetables</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Meat & Poultry</a></li>
-                                                    <li><a href="shop-product-right.html">Fresh Vegetables</a></li>
-                                                    <li><a href="shop-product-right.html">Herbs & Seasonings</a></li>
-                                                    <li><a href="shop-product-right.html">Cuts & Sprouts</a></li>
-                                                    <li><a href="shop-product-right.html">Exotic Fruits & Veggies</a></li>
-                                                    <li><a href="shop-product-right.html">Packaged Produce</a></li>
+                                                    <li><a href="#">Meat & Poultry</a></li>
+                                                    <li><a href="#">Fresh Vegetables</a></li>
+                                                    <li><a href="#">Herbs & Seasonings</a></li>
+                                                    <li><a href="#">Cuts & Sprouts</a></li>
+                                                    <li><a href="#">Exotic Fruits & Veggies</a></li>
+                                                    <li><a href="#">Packaged Produce</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Breakfast & Dairy</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Milk & Flavoured Milk</a></li>
-                                                    <li><a href="shop-product-right.html">Butter and Margarine</a></li>
-                                                    <li><a href="shop-product-right.html">Eggs Substitutes</a></li>
-                                                    <li><a href="shop-product-right.html">Marmalades</a></li>
-                                                    <li><a href="shop-product-right.html">Sour Cream</a></li>
-                                                    <li><a href="shop-product-right.html">Cheese</a></li>
+                                                    <li><a href="#">Milk & Flavoured Milk</a></li>
+                                                    <li><a href="#">Butter and Margarine</a></li>
+                                                    <li><a href="#">Eggs Substitutes</a></li>
+                                                    <li><a href="#">Marmalades</a></li>
+                                                    <li><a href="#">Sour Cream</a></li>
+                                                    <li><a href="#">Cheese</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Meat & Seafood</a>
                                                 <ul>
-                                                    <li><a href="shop-product-right.html">Breakfast Sausage</a></li>
-                                                    <li><a href="shop-product-right.html">Dinner Sausage</a></li>
-                                                    <li><a href="shop-product-right.html">Chicken</a></li>
-                                                    <li><a href="shop-product-right.html">Sliced Deli Meat</a></li>
-                                                    <li><a href="shop-product-right.html">Wild Caught Fillets</a></li>
-                                                    <li><a href="shop-product-right.html">Crab and Shellfish</a></li>
+                                                    <li><a href="#">Breakfast Sausage</a></li>
+                                                    <li><a href="#">Dinner Sausage</a></li>
+                                                    <li><a href="#">Chicken</a></li>
+                                                    <li><a href="#">Sliced Deli Meat</a></li>
+                                                    <li><a href="#">Wild Caught Fillets</a></li>
+                                                    <li><a href="#">Crab and Shellfish</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="shop-product-right.html"><img src="{{ asset('assets/frontend/imgs/banner/banner-menu.png') }}" alt="Nest" /></a>
+                                                    <a href="#"><img src="{{ asset('assets/frontend/imgs/banner/banner-menu.png') }}" alt="Nest" /></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>
@@ -692,7 +692,7 @@
                                                             <span class="new-price text-success">Save to 50%</span>
                                                         </div>
                                                         <div class="menu-banner-btn">
-                                                            <a href="shop-product-right.html">Shop now</a>
+                                                            <a href="#">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="menu-banner-discount">
@@ -731,7 +731,7 @@
                                             <li><a href="page-login.html">Login</a></li>
                                             <li><a href="page-register.html">Register</a></li>
                                             <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                            <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
+                                            <li><a href="#">Privacy Policy</a></li>
                                             <li><a href="page-terms.html">Terms of Service</a></li>
                                             <li><a href="page-404.html">404 Page</a></li>
                                         </ul>
@@ -782,11 +782,11 @@
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
+                                                <a href="#"><img alt="Nest"
                                                         src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
+                                                <h4><a href="#">Plain Striola Shirts</a></h4>
                                                 <h3><span>1 × </span>$800.00</h3>
                                             </div>
                                             <div class="shopping-cart-delete">
@@ -795,11 +795,11 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
+                                                <a href="#"><img alt="Nest"
                                                         src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" /></a>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
+                                                <h4><a href="#">Macbook Pro 2022</a></h4>
                                                 <h3><span>1 × </span>$3500.00</h3>
                                             </div>
                                             <div class="shopping-cart-delete">
@@ -871,9 +871,9 @@
                                     <li class="menu-item-has-children">
                                         <a href="#">Single Product</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
+                                            <li><a href="#">Product – Right Sidebar</a></li>
                                             <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                            <li><a href="shop-product-full.html">Product – No sidebar</a></li>
+                                            <li><a href="#">Product – No sidebar</a></li>
                                             <li><a href="shop-product-vendor.html">Product – Vendor Infor</a></li>
                                         </ul>
                                     </li>
@@ -881,7 +881,7 @@
                                     <li><a href="#">Shop – Wishlist</a></li>
                                     <li><a href="{{route('cart')}}">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                    <li><a href="shop-compare.html">Shop – Compare</a></li>
+                                    <li><a href="#">Shop – Compare</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -889,8 +889,8 @@
                                 <ul class="dropdown">
                                     <li><a href="vendors-grid.html">Vendors Grid</a></li>
                                     <li><a href="vendors-list.html">Vendors List</a></li>
-                                    <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                    <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
+                                    <li><a href="#">Vendor Details 01</a></li>
+                                    <li><a href="#">Vendor Details 02</a></li>
                                     <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
                                     <li><a href="vendor-guide.html">Vendor Guide</a></li>
                                 </ul>
@@ -901,28 +901,28 @@
                                     <li class="menu-item-has-children">
                                         <a href="#">Women's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Dresses</a></li>
-                                            <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                            <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="shop-product-right.html">Women's Sets</a></li>
+                                            <li><a href="#">Dresses</a></li>
+                                            <li><a href="#">Blouses & Shirts</a></li>
+                                            <li><a href="#">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="#">Women's Sets</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Men's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Jackets</a></li>
-                                            <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                            <li><a href="shop-product-right.html">Genuine Leather</a></li>
+                                            <li><a href="#">Jackets</a></li>
+                                            <li><a href="#">Casual Faux Leather</a></li>
+                                            <li><a href="#">Genuine Leather</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Technology</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Tablets</a></li>
-                                            <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                            <li><a href="shop-product-right.html">Tablet Accessories</a></li>
+                                            <li><a href="#">Gaming Laptops</a></li>
+                                            <li><a href="#">Ultraslim Laptops</a></li>
+                                            <li><a href="#">Tablets</a></li>
+                                            <li><a href="#">Laptop Accessories</a></li>
+                                            <li><a href="#">Tablet Accessories</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -953,7 +953,7 @@
                                     <li><a href="page-login.html">Login</a></li>
                                     <li><a href="page-register.html">Register</a></li>
                                     <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                    <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
                                     <li><a href="page-terms.html">Terms of Service</a></li>
                                     <li><a href="page-404.html">404 Page</a></li>
                                 </ul>

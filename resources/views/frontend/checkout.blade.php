@@ -218,7 +218,7 @@
 
                                         </td>
                                         <td>
-                                            <h6 class="w-160 mb-5"><a href="shop-product-full.html"
+                                            <h6 class="w-160 mb-5"><a href="#"
                                                     class="text-heading">{{ $product->name }}</a></h6></span>
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">

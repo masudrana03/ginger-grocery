@@ -17,19 +17,19 @@
                 <div class="col-xl-9 text-end d-none d-xl-block">
                     <ul class="tags-list">
                         <li class="hover-up">
-                            <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Cabbage</a>
+                            <a href="#"><i class="fi-rs-cross mr-10"></i>Cabbage</a>
                         </li>
                         <li class="hover-up active">
-                            <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Broccoli</a>
+                            <a href="#"><i class="fi-rs-cross mr-10"></i>Broccoli</a>
                         </li>
                         <li class="hover-up">
-                            <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Artichoke</a>
+                            <a href="#"><i class="fi-rs-cross mr-10"></i>Artichoke</a>
                         </li>
                         <li class="hover-up">
-                            <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Celery</a>
+                            <a href="#"><i class="fi-rs-cross mr-10"></i>Celery</a>
                         </li>
                         <li class="hover-up mr-0">
-                            <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Spinach</a>
+                            <a href="#"><i class="fi-rs-cross mr-10"></i>Spinach</a>
                         </li>
                     </ul>
                 </div>
@@ -91,7 +91,7 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
                                 </a>
@@ -117,7 +117,7 @@
                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product->store->name}}</a></span>
+                                <span class="font-small text-muted">By <a href="#">{{$product->store->name}}</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -140,14 +140,14 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend//imgs/shop/product-1-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend//imgs/shop/product-1-2.jpg') }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
                                 <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
@@ -158,7 +158,7 @@
                             <div class="product-category">
                                 <a href="#">Snack</a>
                             </div>
-                            <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoe Naturel</a></h2>
+                            <h2><a href="#">Seeds of Change Organic Quinoe Naturel</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 90%"></div>
@@ -166,7 +166,7 @@
                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                                <span class="font-small text-muted">By <a href="#">NestFood</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -174,7 +174,7 @@
                                     <span class="old-price">$32.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -185,14 +185,14 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend//imgs/shop/product-2-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend//imgs/shop/product-2-2.jpg') }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
                                 <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
@@ -203,7 +203,7 @@
                             <div class="product-category">
                                 <a href="#">Hodo Foods</a>
                             </div>
-                            <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
+                            <h2><a href="#">All Natural Italian-Style Chicken Meatballs</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 80%"></div>
@@ -211,7 +211,7 @@
                                 <span class="font-small ml-5 text-muted"> (3.5)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Stouffer</a></span>
+                                <span class="font-small text-muted">By <a href="#">Stouffer</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -219,7 +219,7 @@
                                     <span class="old-price">$55.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -230,14 +230,14 @@
                     <div class="product-cart-wrap">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
+                                <a href="#">
                                     <img class="default-img" src="{{ asset('assets/frontend//imgs/shop/product-10-1.jpg') }}" alt="" />
                                     <img class="hover-img" src="{{ asset('assets/frontend//imgs/shop/product-10-2.jpg') }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
                                 <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                             </div>
                         </div>
@@ -245,7 +245,7 @@
                             <div class="product-category">
                                 <a href="#">Cream</a>
                             </div>
-                            <h2><a href="shop-product-right.html">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
+                            <h2><a href="#">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 50%"></div>
@@ -253,7 +253,7 @@
                                 <span class="font-small ml-5 text-muted"> (2.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">Tyson</a></span>
+                                <span class="font-small text-muted">By <a href="#">Tyson</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
@@ -261,7 +261,7 @@
                                     <span class="old-price">$24.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend//imgs/banner/banner-5.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -314,7 +314,7 @@
                                     <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown</a></h2>
+                                    <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -322,7 +322,7 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+                                        <span class="font-small text-muted">By <a href="#">NestFood</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -330,7 +330,7 @@
                                             <span class="old-price">$33.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -341,7 +341,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend//imgs/banner/banner-6.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -351,7 +351,7 @@
                                     <div class="deals-countdown" data-countdown="2026/04/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Perdue Simply Smart Organics Gluten</a></h2>
+                                    <h2><a href="#">Perdue Simply Smart Organics Gluten</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -359,7 +359,7 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Old El Paso</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Old El Paso</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -367,7 +367,7 @@
                                             <span class="old-price">$26.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend//imgs/banner/banner-7.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -388,7 +388,7 @@
                                     <div class="deals-countdown" data-countdown="2027/03/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Signature Wood-Fired Mushroom</a></h2>
+                                    <h2><a href="#">Signature Wood-Fired Mushroom</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 80%"></div>
@@ -396,7 +396,7 @@
                                         <span class="font-small ml-5 text-muted"> (3.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Progresso</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Progresso</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -404,7 +404,7 @@
                                             <span class="old-price">$13.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
@@ -415,7 +415,7 @@
                         <div class="product-cart-wrap style-2">
                             <div class="product-img-action-wrap">
                                 <div class="product-img">
-                                    <a href="shop-product-right.html">
+                                    <a href="#">
                                         <img src="{{ asset('assets/frontend//imgs/banner/banner-8.png') }}" alt="" />
                                     </a>
                                 </div>
@@ -425,7 +425,7 @@
                                     <div class="deals-countdown" data-countdown="2025/02/25 00:00:00"></div>
                                 </div>
                                 <div class="deals-content">
-                                    <h2><a href="shop-product-right.html">Simply Lemonade with Raspberry Juice</a></h2>
+                                    <h2><a href="#">Simply Lemonade with Raspberry Juice</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 80%"></div>
@@ -433,7 +433,7 @@
                                         <span class="font-small ml-5 text-muted"> (3.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">Yoplait</a></span>
+                                        <span class="font-small text-muted">By <a href="#">Yoplait</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
@@ -441,7 +441,7 @@
                                             <span class="old-price">$16.8</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>

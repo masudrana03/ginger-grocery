@@ -176,7 +176,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-7.png') }}" alt="" />
                             </a>
                         </div>
@@ -190,7 +190,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2019</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Country Crock</a></h4>
+                                <h4 class="mb-5"><a href="#">Country Crock</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -211,7 +211,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-2.png') }}" alt="" />
                             </a>
                         </div>
@@ -234,7 +234,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Hambger Hel</a></h4>
+                                <h4 class="mb-5"><a href="#">Hambger Hel</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -255,7 +255,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-8.png') }}" alt="" />
                             </a>
                         </div>
@@ -278,7 +278,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Totino's Pizza</a></h4>
+                                <h4 class="mb-5"><a href="#">Totino's Pizza</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -299,7 +299,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -309,7 +309,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-3.png') }}" alt="" />
                             </a>
                         </div>
@@ -320,7 +320,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Maruchan Ramen</a></h4>
+                                <h4 class="mb-5"><a href="#">Maruchan Ramen</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -341,7 +341,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -351,7 +351,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-9.png') }}" alt="" />
                             </a>
                         </div>
@@ -362,7 +362,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">USA Noodle Soup</a></h4>
+                                <h4 class="mb-5"><a href="#">USA Noodle Soup</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -383,7 +383,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -392,7 +392,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-4.png') }}" alt="" />
                             </a>
                         </div>
@@ -403,7 +403,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Red Baron Pizza</a></h4>
+                                <h4 class="mb-5"><a href="#">Red Baron Pizza</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -424,7 +424,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -433,7 +433,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-10.png') }}" alt="" />
                             </a>
                         </div>
@@ -444,7 +444,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Mrs. Smith's Pie</a></h4>
+                                <h4 class="mb-5"><a href="#">Mrs. Smith's Pie</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -465,7 +465,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -474,7 +474,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-5.png') }}" alt="" />
                             </a>
                         </div>
@@ -485,7 +485,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Dove Promises</a></h4>
+                                <h4 class="mb-5"><a href="#">Dove Promises</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -506,7 +506,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -515,7 +515,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-11.png') }}" alt="" />
                             </a>
                         </div>
@@ -526,7 +526,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Mrs. Dash</a></h4>
+                                <h4 class="mb-5"><a href="#">Mrs. Dash</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -547,7 +547,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -556,7 +556,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-6.png') }}" alt="" />
                             </a>
                         </div>
@@ -567,7 +567,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Lindt Grocery A1</a></h4>
+                                <h4 class="mb-5"><a href="#">Lindt Grocery A1</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -588,7 +588,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -597,7 +597,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-12.png') }}" alt="" />
                             </a>
                         </div>
@@ -608,7 +608,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Snyder's-Lance</a></h4>
+                                <h4 class="mb-5"><a href="#">Snyder's-Lance</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -629,7 +629,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -639,7 +639,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-13.png') }}" alt="" />
                             </a>
                         </div>
@@ -650,7 +650,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Dreyer's/Edy's</a></h4>
+                                <h4 class="mb-5"><a href="#">Dreyer's/Edy's</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -671,7 +671,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -680,7 +680,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-14.png') }}" alt="" />
                             </a>
                         </div>
@@ -691,7 +691,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Wonderful</a></h4>
+                                <h4 class="mb-5"><a href="#">Wonderful</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -712,7 +712,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -721,7 +721,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-15.png') }}" alt="" />
                             </a>
                         </div>
@@ -732,7 +732,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Almonds</a></h4>
+                                <h4 class="mb-5"><a href="#">Almonds</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -753,7 +753,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -762,7 +762,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="vendor-details-1.html">
+                            <a href="#">
                                 <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-1.png') }}" alt="" />
                             </a>
                         </div>
@@ -773,7 +773,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since 2012</span>
                                 </div>
-                                <h4 class="mb-5"><a href="vendor-details-1.html">Pistachios</a></h4>
+                                <h4 class="mb-5"><a href="#">Pistachios</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -794,7 +794,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
                             </ul>
                         </div>
-                        <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div> --}}

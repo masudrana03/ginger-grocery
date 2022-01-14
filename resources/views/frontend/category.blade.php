@@ -91,18 +91,31 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="shop-product-right.html">
-                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
+                                <a href="{{ route('products', $product->id) }}">
+                                    @if (count($product->images) > 0)
+                                        <img class="default-img"
+                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                            alt="" />
+                                        <img class="hover-img"
+                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                            alt="" />
+                                    @else
+                                        <img class="default-img"
+                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                            alt="" />
+                                        <img class="hover-img"
+                                            src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                            alt="" />
+                                    @endif
                                 </a>
                             </div>
                             <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                <a aria-label="Add To Wishlist" class="action-btn" href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn" href="{{ route('compareProduct', $product->id) }}"><i class="fi-rs-shuffle"></i></a>
+                                {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">Hot</span>
+                                {{-- <span class="hot">Hot</span> --}}
                             </div>
                         </div>
                         <div class="product-content-wrap">
@@ -117,7 +130,7 @@
                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product->store->name}}</a></span>
+                                <span class="font-small text-muted">By <a href="#">{{$product->store->name}}</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">

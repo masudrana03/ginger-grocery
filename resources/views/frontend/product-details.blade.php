@@ -244,7 +244,7 @@
                                     <img src="{{ asset('assets/frontend/imgs/vendor/vendor-18.svg') }}" alt="" />
                                     <div class="vendor-name ml-15">
                                         <h6>
-                                            <a href="vendor-details-2.html">{{$product->store->name}}</a>
+                                            <a href="#">{{$product->store->name}}</a>
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
@@ -430,8 +430,8 @@
                                         </div>
                                         <div class="product-action-1">
                                             <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>

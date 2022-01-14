@@ -186,7 +186,7 @@ class ProductController extends Controller
         $currencies = Currency::all();
         $types      = Type::all();
         $nutritions = Nutrition::all();
-        $product    = $product->with('types', 'nutritions');
+        $product    = $product->load('types', 'nutritions');
 
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
@@ -229,7 +229,7 @@ class ProductController extends Controller
         if ( !isShopManager( $product->store_id ) && !isAdmin() ) {
             return abort( 403 );
         }
-        
+
         foreach ($product->images as $image) {
             $imageDirectory = 'assets/img/uploads/products/';
 
