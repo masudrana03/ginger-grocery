@@ -7,7 +7,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Store <span></span> Nest Food
+            <span></span> Store <span></span> {{ $store->name }}
         </div>
     </div>
 </div>
@@ -45,11 +45,11 @@
                         </div>
                         <div class="sort-by-dropdown">
                             <ul>
-                                <li><a class="active" href="#">50</a></li>
-                                <li><a href="#">100</a></li>
-                                <li><a href="#">150</a></li>
-                                <li><a href="#">200</a></li>
-                                <li><a href="#">All</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '50' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=50',[$store->id]) }}">50</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '100' ? 'active' : '' }}" href="{{ url('/vendor-details?numeric_sort=100',[$store->id]) }}">100</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '150' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=150',[$store->id]) }}">150</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '200' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=200',[$store->id]) }}">200</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == 'all' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=all',[$store->id]) }}">All</a></li>
                             </ul>
                         </div>
                     </div>
@@ -515,33 +515,33 @@
                 <ul>
                     @php
                         $categoryIds = $store->products()->pluck('category_id')->unique();
-                        $categories = \App\Models\Category::find($categoryIds);
+                        // $categories = \App\Models\Category::find($categoryIds);
+                        $categories = $categories->whereIn('id', $categoryIds);
                     @endphp
                     @forelse ( $categories as $category )
-                    <li>
-                        <a href="{{ route('categories', $category->id) }}">
-                             {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" /> --}}
-                            @if ( $category->image )
-                                    <a href="{{ route('categories', $category->id) }}">
-                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
-                                    </a>
-                            @else
-                                    <a href="{{ route('categories', $category->id) }}">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
-                                    </a>
+                        <li>
+                            <a href="{{ route('categories', $category->id) }}">
+                                {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" /> --}}
+                                @if ( $category->image )
+                                        <a href="{{ route('categories', $category->id) }}">
+                                            <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+                                        </a>
+                                @else
+                                        <a href="{{ route('categories', $category->id) }}">
+                                            <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+                                        </a>
 
-                            @endif
-                             {{ $category->name }}
-                        </a>
-                        <span class="count">{{ count($category->products) }}</span>
-                    </li>
+                                @endif
+                                {{ $category->name }}
+                            </a>
+                            <span class="count">{{ count($category->products) }}</span>
+                        </li>
                     @empty
-                    <li>
-                        <a href="#">
-                             <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a>
-                             <span class="count">35</span>
-                    </li>
-
+                        <li>
+                            <a href="#">
+                                <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a>
+                                <span class="count">35</span>
+                        </li>
                     @endforelse
 
 
@@ -566,43 +566,61 @@
             <!-- Fillter By Price -->
             <div class="sidebar-widget price_range range mb-30">
                 <h5 class="section-title style-1 mb-30">Fill by price</h5>
-                <div class="price-filter">
-                    <div class="price-filter-inner">
-                        <div id="slider-range"></div>
-                        <div class="price_slider_amount">
-                            <div class="label-input"><span>Range:</span>
-                                <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                <form action="{{ route('vendor.details',[$store->id]) }}" method="get" class="form-horizontal">
+                    @csrf
+                    <div class="price-filter">
+                        <div class="price-filter-inner">
+                            <div id="slider-range"></div>
+                            <div class="price_slider_amount">
+                                <div class="label-input"><span>Range:</span>
+                                    <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="list-group">
-                    <div class="list-group-item mb-10 mt-10">
-                        <label class="fw-900">Nutrition</label>
-                        <div class="custome-checkbox">
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
-                            <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
-                            <br />
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="" />
-                            <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
-                            <br />
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="" />
-                            <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
-                        </div>
-                        <label class="fw-900 mt-15">Brand</label>
-                        <div class="custome-checkbox">
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
-                            <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                            <br />
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="" />
-                            <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
-                            <br />
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="" />
-                            <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label>
+                    <div class="list-group">
+                        <div class="list-group-item mb-10 mt-10">
+                            <label class="fw-900">Nutrition</label>
+                            <div class="custome-checkbox">
+
+                                {{-- {{  $store->products->nutritions }} --}}
+                                @foreach ( $nutritions  as $nutrition )
+
+                                    <input class="form-check-input" type="checkbox" name="nutrition" id="exampleCheckbox1" value="{{ $nutrition->id }}" />
+                                    <label class="form-check-label" for="exampleCheckbox1"><span>{{ $nutrition->name }} ({{ count( $nutrition->products ) }})</span></label>
+                                    <br />
+
+                                @endforeach
+                                {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
+                                <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
+                                <br />
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="" />
+                                <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
+                                <br />
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="" />
+                                <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label> --}}
+                            </div>
+                            <label class="fw-900 mt-15">Brand</label>
+                            <div class="custome-checkbox">
+                                @foreach ( $brands as $brand )
+                                    <input class="form-check-input" type="checkbox" name="brand" id="exampleCheckbox11" value="{{ $brand->id }}" />
+                                    <label class="form-check-label" for="exampleCheckbox11"><span>{{ $brand->name }} ({{ count( $brand->products ) }})</span></label>
+                                    <br />
+
+                                @endforeach
+                                {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
+                                <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
+                                <br />
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="" />
+                                <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
+                                <br />
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="" />
+                                <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label> --}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <a href="#" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
+                    <button type="submit" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</button>
+                </form>
             </div>
 
             {{-- <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">

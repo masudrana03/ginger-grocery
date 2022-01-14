@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Brand;
 use App\Models\Store;
-use App\Models\Product;
+use App\Models\Nutrition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,6 +25,13 @@ class VendorController extends Controller
      */
     public function vendorDetails(Request $request, $id )
     {
+        // return $request;
+
+        $nutritions = Nutrition::all();
+        $brands = Brand::all();
+
+        $defaultPaginate = 15;
+
         $store = Store::with('products')->findOrFail($id);
 
         $vendorWise = $store->products();
@@ -44,9 +52,17 @@ class VendorController extends Controller
             $vendorWise = $store->products()->orderByDesc('id');
         }
 
+        if ( $request->query('numeric_sort') ) {
+            $defaultPaginate = $request->query('numeric_sort');
+        }
 
-        $vendorWise = $vendorWise->paginate(15);
+        if ( $request->query('numeric_sort') == 'all' ) {
+            $defaultPaginate = count($store->products);
+        }
 
-        return view('frontend.vendor-details', compact('store', 'vendorWise'));
+
+        $vendorWise = $vendorWise->paginate($defaultPaginate);
+
+        return view('frontend.vendor-details', compact('store', 'vendorWise', 'brands', 'nutritions'));
     }
 }
