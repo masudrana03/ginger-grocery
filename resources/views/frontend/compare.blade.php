@@ -14,14 +14,25 @@
     <div class="row">
         <div class="col-xl-10 col-lg-12 m-auto">
             <h1 class="heading-2 mb-10">Products Compare</h1>
-            <h6 class="text-body mb-40">There are <span class="text-brand">3</span> products to compare</h6>
+            <h6 class="text-body mb-40">There are <span class="text-brand">{{ $compareProduct->count() }}</span> products to compare</h6>
             <div class="table-responsive">
                 <table class="table text-center table-compare">
                     <tbody>
                         <tr class="pr_image">
                             <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
-                            <td class="row_img"><img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="compare-img" /></td>
-                            <td class="row_img"><img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="compare-img" /></td>
+
+                            @foreach ($compareProduct as $product)
+                            <td class="row_img">
+                                @if (count($product->images) > 0)
+                                    <img  src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                @else
+                                    <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
+                                @endif
+                                {{-- <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="compare-img" /> --}}
+
+                            </td>
+                            @endforeach
+
                             {{-- <td class="row_img"><img src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="compare-img" /></td> --}}
                         </tr>
                         <tr class="pr_title">

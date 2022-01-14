@@ -41,7 +41,7 @@
 					&.sub-menu {
 						position: absolute;
 						left: 0;
-						top: 100%;						
+						top: 100%;
 						background-color: #ffffff;
 						min-width: 250px;
 						padding: 25px 15px;
@@ -69,7 +69,7 @@
 								&.level-menu {
 									position: absolute;
 									left: 100%;
-									top: -110px;									
+									top: -110px;
 									background-color: #ffffff;
 									width: 240px;
 									padding: 33px 0 35px;
@@ -123,7 +123,7 @@
 					&.mega-menu {
 						position: absolute;
 						left: 0;
-						top: 100%;						
+						top: 100%;
 						background-color: #ffffff;
 						width: 100%;
 						padding: 35px 25px 35px 35px;
@@ -261,7 +261,7 @@
 
 								}
 
-								&:hover {							
+								&:hover {
 
 									.menu-banner-btn {
 										a {
@@ -623,9 +623,9 @@
 	padding: 30px;
 	background: #fff;
 	border: 1px solid $border-color-2;
-	border-radius: 10px;	
+	border-radius: 10px;
 	font-size: $font-md;
-	min-width: 270px;
+    min-width: 500px;
 	-webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 	-o-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -707,7 +707,7 @@
 
 			&.has-children {
 				position: relative;
-				> a::after {					
+				> a::after {
 						content: "\f111";
 						font-family: 'uicons-regular-straight' !important;
 						position: absolute;
@@ -789,7 +789,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+
 		span.icon {
 			display: inline-block;
 			position: relative;
@@ -815,14 +815,14 @@
 				position: absolute;
 				right: 9px;
 				top: 4px;
-			}	
-			
-		}	
+			}
+
+		}
 		&.show {
 			span.icon::after {display: none;content: none;}
 		}
-		
-	}	
+
+	}
 
 	&.style-2 {
 		border: 1px solid $border-color-2;
@@ -861,8 +861,8 @@
 .pagination-area {
 	.page-item {
 		margin: 0 5px;
-		&:first-child {	
-			margin-left: 0;		
+		&:first-child {
+			margin-left: 0;
 			.page-link {
 				border-top-left-radius: 4px;
 				border-bottom-left-radius: 4px;
@@ -915,5 +915,5 @@
 			letter-spacing: 2px;
 		}
 	}
-	
+
 }

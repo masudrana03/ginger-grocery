@@ -109,6 +109,17 @@ class Product extends Model
         return $this->belongsToMany(Nutrition::class);
     }
 
+
+    /**
+     * Get the nutritions associated with the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
+
     /**
      * Get the currency associated with the product.
      *

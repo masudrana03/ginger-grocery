@@ -12,6 +12,13 @@ use App\Models\Zone;
 
 class HomeController extends Controller
 {
+
+
+    /**
+     *
+     *
+     * @param $request
+     */
     public function index(Request $request)
     {
         // return $request->zone_id;

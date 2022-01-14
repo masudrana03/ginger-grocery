@@ -7,14 +7,14 @@
     <div class="container">
         <div class="archive-header">
             <div class="row align-items-center">
-                <div class="col-xl-3">
+                <div class="col-xl-5">
                     <h1 class="mb-15">{{$category->name}}</h1>
                     <div class="breadcrumb">
                         <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                         <span></span> {{$category->name}}
                     </div>
                 </div>
-                <div class="col-xl-9 text-end d-none d-xl-block">
+                <div class="col-xl-7 text-end d-none d-xl-block">
                     {{-- <ul class="tags-list">
                         <li class="hover-up">
                             <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Cabbage</a>
@@ -130,7 +130,7 @@
                                 <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
                             <div>
-                                <span class="font-small text-muted">By <a href="#">{{$product->store->name}}</a></span>
+                                <span class="font-small text-muted">By <a href="{{ route('vendor.details', $product->store->id) }}">{{$product->store->name}}</a></span>
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">

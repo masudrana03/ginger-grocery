@@ -17,7 +17,7 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                    <h6 class="text-body">There are <span class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your cart</h6>
                     <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
                             Cart</a></h6>
                 </div>
@@ -29,11 +29,7 @@
                     <table class="table table-wishlist">
                         <thead>
                             <tr class="main-heading">
-                                <th class="custome-checkbox start pl-30">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11"
-                                        value="">
-                                    <label class="form-check-label" for="exampleCheckbox11"></label>
-                                </th>
+                                <th class=" start pl-30">Image</th>
                                 <th scope="col" colspan="2">Product</th>
                                 <th scope="col">Unit Price</th>
                                 <th scope="col">Quantity</th>
@@ -51,26 +47,37 @@
                                 @endphp
                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                     <tr class="pt-30">
-                                        <td class="custome-checkbox pl-30">
-                                            <input class="form-check-input" type="checkbox" name="checkbox"
-                                                id="exampleCheckbox1" value="">
-                                            <label class="form-check-label" for="exampleCheckbox1"></label>
-                                        </td>
-                                        <td class="image product-thumbnail pt-40"><img
-                                                src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#">
+                                        <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
+
+                                            @if (count($product->images) > 0)
+                                                <img class="default-img"
+                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                    alt="" />
+                                            @else
+                                                <img class="default-img"
+                                                    src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                    alt="" />
+                                            @endif
+
+                                            {{-- <img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"> --}}
+
+
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a></h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
+                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a></h6>
+                                                <div class="product-rate-cover">
+                                                    <div class="product-rate d-inline-block">
+                                                        <div class="product-rating" style="width:90%">
+                                                        </div>
                                                     </div>
+                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                        </td>
-                                        <td class="price" data-title="Price" >
+                                            </td>
+
+                                            <td class="custome-checkbox pl-30"></td>
+
+                                            <td class="price" data-title="Price" >
                                             <h4 class="text-body">
                                                 {{ $product->currency->symbol }}{{ $product->price }}
                                             </h4>
@@ -88,7 +95,7 @@
                                             <div class="add">plus</div> --}}
                                         </td>
 
-                                       
+
                                         {{-- <td class="text-center detail-info" data-title="Stock">
                                             <div class="detail-extralink mr-15">
                                                 <div class="detail-qty border radius">
@@ -121,7 +128,7 @@
                                             <h4 class="text-brand" >{{ $product->quantity * $product->price }} </h4>
                                             <input class="d-none unit-price" value="{{$product->price}}">
                                         </td>
-                                        <td class="action text-center" data-title="Remove"><a href="#"
+                                        <td class="action text-center" data-title="Remove"><a href="{{ route('cart.remove', $product->id) }}"
                                                 class="text-body"><i class="fi-rs-trash"></i></a></td>
                                     </tr>
                                     @php
@@ -129,13 +136,14 @@
                                         $currency_symbol = $product->currency->symbol;
                                     @endphp
                                 @empty
-                                    <li>
-
-                                        <div class="shopping-cart-title">
-                                            <h4>No Items</h4>
-                                        </div>
-
-                                    </li>
+                                <tr class="pt-30">
+                                    <td class="image product-thumbnail pt-40" style="left: 32%; text-align: center; position: relative;">
+                                    <h4 class="text-brand" style="color: #fdc040 !important;">No Product Found</h4>
+                                    </td>
+                                    <td class="action text-center" data-title="Remove">
+                                        <a href="#" class="text-body"><i class=""></i></a>
+                                    </td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </form>
@@ -147,15 +155,15 @@
                 <div class="cart-action d-flex justify-content-between mb-30">
                     <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
                     <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
-                </div> 
+                </div>
             </div>
 
-            
+
 
             <div class="col-lg-4">
 
                 <div class="row">
-                    
+
                         <div class="border p-md-4 cart-totals ml-30">
                             <div class="table-responsive">
                                 <table class="table no-border">
@@ -185,7 +193,7 @@
                                                 <h6 class="text-muted">Estimate for</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h5 class="text-heading text-end">United Kingdom</h4< /td>
+                                                <h5 class="text-heading text-end">United Kingdom</h4></td>
                                         </tr>
                                         <tr>
                                             <td scope="col" colspan="2">
@@ -203,9 +211,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>                       
+                            <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
                         </div>
-    
+
                 </div>
 
                 <div class="row">
@@ -230,7 +238,7 @@
                     </div>
 
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
 
@@ -248,11 +256,11 @@
 
     $(document).on('click', '.qty-plus', function() {
         var max=10;
-        
+
         var prev_val =  parseInt($(this).prev().val()) ;
 
         if (prev_val < max){
-            
+
             prev_val = prev_val + 1;
             prev_val=$(this).prev().val(prev_val);
             // var product_unit_price = $(".unit-price").val();
@@ -260,10 +268,10 @@
             // alert(parseInt(updated_price));
             // $('#text-brand').html(updated_price);
             //  $(this).prev().val(+$(this).prev().val() + 1);
-           
+
          }
-        
-        
+
+
     });
 
     // $(document).on('click', '.qty-minus', function() {

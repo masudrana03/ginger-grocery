@@ -5,7 +5,35 @@
                 <div class="categories-dropdown-wrap style-2 font-heading mt-30">
                     <div class="d-flex categori-dropdown-inner">
                         <ul>
+
+                            @forelse ( $categories->skip(0)->take(12) as $category )
                             <li>
+                                <a href="{{ route('categories', $category->id) }}">
+
+                                    @if ( $category->image )
+
+                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                    @else
+
+                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                    @endif
+                                    {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                    {{ $category->name }}</a>
+                            </li>
+                            @empty
+                                <li>
+                                    <a href="#"> <img
+                                            src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                            alt="" />Clothing & beauty</a>
+                                </li>
+                            @endforelse
+
+
+
+
+                            {{-- <li>
                                 <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
                             </li>
                             <li>
@@ -37,24 +65,35 @@
                             </li>
                             <li>
                                 <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="more_slide_open" style="display: none">
                         <div class="d-flex categori-dropdown-inner">
                             <ul>
+                                @forelse ( $categories->skip(12) as $category )
                                 <li>
-                                    <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}" alt="" />Milks and Dairies</a>
+                                    <a href="{{ route('categories', $category->id) }}">
+
+                                        @if ( $category->image )
+
+                                            <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                        @else
+
+                                            <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                        @endif
+                                        {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                        {{ $category->name }}</a>
                                 </li>
-                                <li>
-                                    <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}" alt="" />Clothing & beauty</a>
-                                </li>
-                                <li>
-                                    <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}" alt="" />Wines & Drinks</a>
-                                </li>
-                                <li>
-                                    <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}" alt="" />Fresh Seafood</a>
-                                </li>
+                                @empty
+                                    <li>
+                                        <a href="#"> <img
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                alt="" />Clothing & beauty</a>
+                                    </li>
+                                @endforelse
                             </ul>
                         </div>
                     </div>

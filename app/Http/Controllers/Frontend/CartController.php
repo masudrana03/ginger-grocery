@@ -61,6 +61,21 @@ class CartController extends Controller
         return view('frontend.cart', compact( 'compareProduct' ) );
     }
 
+
+
+    /**
+     * @param $id
+     */
+    public function removeToCartById( $id )
+    {
+
+        $product = Product::find( $id );
+
+        $product->carts()->detach();
+
+        return back();
+    }
+
     public function cartUpdate(Request $request)
     {
        return $request;

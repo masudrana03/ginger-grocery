@@ -521,7 +521,7 @@
                     <li>
                         <a href="{{ route('categories', $category->id) }}">
                              {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" /> --}}
-                             @if ( $category->image )
+                            @if ( $category->image )
                                     <a href="{{ route('categories', $category->id) }}">
                                         <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
                                     </a>

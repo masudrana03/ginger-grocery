@@ -41,6 +41,12 @@
         </div>
     </div> --}}
 
+    <style>
+        .categories-dropdown-active-large{
+            min-width: 192%;
+        }
+    </style>
+
     <!-- Quick view -->
     <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
         aria-hidden="true">
@@ -294,8 +300,17 @@
                                             @forelse( $compareProduct as $product )
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="#"><img alt="Nest"
-                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+
+                                                        @if (count($product->images) > 0)
+
+                                                            <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+
+                                                        @else
+
+                                                            <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+
+                                                        @endif
+
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
@@ -342,8 +357,17 @@
                                             @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="#"><img alt="Nest"
-                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                        <a href="{{ route('products', $wishlistProduct->id) }}">
+                                                            @if (count($wishlistProduct->images) > 0)
+
+                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $wishlistProduct->images()->first()->image) }}" alt="" />
+
+                                                            @else
+
+                                                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+
+                                                            @endif
+                                                        </a>
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
@@ -391,9 +415,19 @@
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $product->id) }}"><img
-                                                                alt="Nest"
-                                                                src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                        <a href="{{ route('products', $product->id) }}">
+
+                                                            @if (count($product->images) > 0)
+
+                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+
+                                                            @else
+
+                                                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+
+                                                            @endif
+
+                                                        </a>
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
@@ -404,7 +438,7 @@
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                        <a href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
                                                     </div>
                                                 </li>
                                                 @php
@@ -496,12 +530,35 @@
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"
-                                                    alt="" />Milks and Dairies</a>
-                                        </li>
-                                        <li>
+                                        @forelse ( $categories->take(5) as $category )
+                                            <li>
+                                                <a href="{{ route('categories', $category->id) }}">
+
+                                                    @if ( $category->image )
+
+                                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                                    @else
+
+                                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                                    @endif
+                                                    {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                                    {{ $category->name }}</a>
+                                            </li>
+                                        @empty
+                                            <li>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                        alt="" />Clothing & beauty</a>
+                                            </li>
+                                        @endforelse
+
+
+
+
+
+                                        {{-- <li>
                                             <a href="#"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
                                                     alt="" />Clothing & beauty</a>
@@ -520,40 +577,66 @@
                                             <a href="#"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}"
                                                     alt="" />Fresh Fruit</a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                     <ul class="end">
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}"
-                                                    alt="" />Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}"
-                                                    alt="" />Fresh Seafood</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}"
-                                                    alt="" />Fast food</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}"
-                                                    alt="" />Vegetables</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}"
-                                                    alt="" />Bread and Juice</a>
-                                        </li>
+                                        @forelse ( $categories->skip(5)->take(5) as $category )
+                                            <li>
+                                                <a href="{{ route('categories', $category->id) }}">
+
+                                                    @if ( $category->image )
+
+                                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                                    @else
+
+                                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                                    @endif
+                                                    {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                                    {{ $category->name }}</a>
+                                            </li>
+                                        @empty
+                                            <li>
+                                                <a href="#"> <img
+                                                        src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                        alt="" />Clothing & beauty</a>
+                                            </li>
+                                        @endforelse
                                     </ul>
                                 </div>
                                 <div class="more_slide_open" style="display: none">
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul>
+                                            @forelse ( $categories->skip(10)->take(3) as $category )
                                             <li>
+                                                <a href="{{ route('categories', $category->id) }}">
+
+                                                    @if ( $category->image )
+
+                                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                                    @else
+
+                                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                                    @endif
+                                                    {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                                    {{ $category->name }}</a>
+                                            </li>
+                                            @empty
+                                                <li>
+                                                    <a href="#"> <img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                            alt="" />Clothing & beauty</a>
+                                                </li>
+                                            @endforelse
+
+
+
+
+
+                                            {{-- <li>
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}"
                                                         alt="" />Milks and Dairies</a>
@@ -562,19 +645,32 @@
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}"
                                                         alt="" />Clothing & beauty</a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                         <ul class="end">
+                                            @forelse ( $categories->skip(13)->take(3) as $category )
                                             <li>
-                                                <a href="#"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}"
-                                                        alt="" />Wines & Drinks</a>
+                                                <a href="{{ route('categories', $category->id) }}">
+
+                                                    @if ( $category->image )
+
+                                                        <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+
+                                                    @else
+
+                                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
+
+                                                    @endif
+                                                    {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
+                                                    {{ $category->name }}</a>
                                             </li>
-                                            <li>
-                                                <a href="#"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}"
-                                                        alt="" />Fresh Seafood</a>
-                                            </li>
+                                            @empty
+                                                <li>
+                                                    <a href="#"> <img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                            alt="" />Clothing & beauty</a>
+                                                </li>
+                                            @endforelse
                                         </ul>
                                     </div>
                                 </div>
@@ -612,7 +708,7 @@
                                         <a href="#">Shop <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Shop Grid – Right Sidebar</a></li>
-                                            <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
+                                            <li><a href="#">Shop Grid – Left Sidebar</a></li>
                                             <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
                                             <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
                                             <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
@@ -628,7 +724,7 @@
                                             <li><a href="shop-filter.html">Shop – Filter</a></li>
                                             <li><a href="#">Shop – Wishlist</a></li>
                                             <li><a href="#">Shop – Cart</a></li>
-                                            <li><a href="shop-checkout.html">Shop – Checkout</a></li>
+                                            <li><a href="#">Shop – Checkout</a></li>
                                             <li><a href="#">Shop – Compare</a></li>
                                         </ul>
                                     </li> --}}
@@ -813,7 +909,7 @@
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{route('cart')}}">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                            <a href="#">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -864,7 +960,7 @@
                                 <a href="#">shop</a>
                                 <ul class="dropdown">
                                     <li><a href="#">Shop Grid – Right Sidebar</a></li>
-                                    <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
+                                    <li><a href="#">Shop Grid – Left Sidebar</a></li>
                                     <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
                                     <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
                                     <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
@@ -880,7 +976,7 @@
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
                                     <li><a href="#">Shop – Wishlist</a></li>
                                     <li><a href="{{route('cart')}}">Shop – Cart</a></li>
-                                    <li><a href="shop-checkout.html">Shop – Checkout</a></li>
+                                    <li><a href="#">Shop – Checkout</a></li>
                                     <li><a href="#">Shop – Compare</a></li>
                                 </ul>
                             </li>

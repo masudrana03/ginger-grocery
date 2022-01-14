@@ -23,19 +23,19 @@
                         <tr class="main-heading">
                             <th class="custome-checkbox start pl-30">Image</th>
                             <th scope="col" colspan="1">Product</th>
-                            <th scope="col">Price</th>
+                            <th scope="col" style="padding-left: 2%;">Price</th>
                             <th scope="col">Stock Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="padding-left: 2%;">Action</th>
                             <th scope="col" class="end">Remove</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ( $wishlistProducts as $item )
                         <tr class="pt-10">
-                            <td class="image product-thumbnail pt-10">
+                            <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
                                 @if (count($item->images) > 0)
                                     <img class="default-img"
-                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                        src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
                                         alt="" />
                                 @else
                                     <img class="default-img"
@@ -53,7 +53,7 @@
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h3 class="text-brand">{{$item->currency->symbol}} {{$item->price}}</h3>
+                                <h3 class="text-brand">{{$item->currency->symbol}}{{$item->price}}</h3>
                             </td>
                             <td class="text-left detail-info" data-title="Stock">
                                 <span class="stock-status in-stock mb-0"> In Stock </span>
@@ -68,7 +68,7 @@
                         @empty
                         <tr class="pt-30">
                             <td class="image product-thumbnail pt-40" style="left: 32%; text-align: center; position: relative;">
-                            <h4 >No Product Found</h4>
+                            <h4 class="text-brand" style="color: #fdc040 !important;" >No Product Found</h4>
                             </td>
                             <td class="action text-center" data-title="Remove">
                                 <a href="#" class="text-body"><i class=""></i></a>
