@@ -17,7 +17,9 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your cart</h6>
+                    <h6 class="text-body">There are <span
+                            class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your
+                        cart</h6>
                     <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
                             Cart</a></h6>
                 </div>
@@ -38,15 +40,15 @@
                             </tr>
                         </thead>
 
-                        <form method="POST" action="{{ route('cart.update') }}">
+                        <form id="cartForm" method="POST" action="{{ route('cart.update') }}">
                             @csrf
-                            <tbody>
+                            <tbody id="cartId">
                                 @php
                                     $total = 0;
                                     $currency_symbol = '$';
                                 @endphp
                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                    <tr class="pt-30">
+                                    <tr class="pt-30 product-modifiers" data-product-price="{{ $product->price }}">
                                         <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
 
                                             @if (count($product->images) > 0)
@@ -65,19 +67,20 @@
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a></h6>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width:90%">
-                                                        </div>
+                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                            </h6>
+                                            <div class="product-rate-cover">
+                                                <div class="product-rate d-inline-block">
+                                                    <div class="product-rating" style="width:90%">
                                                     </div>
-                                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
                                                 </div>
-                                            </td>
+                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                            </div>
+                                        </td>
 
-                                            <td class="custome-checkbox pl-30"></td>
+                                        <td class="custome-checkbox pl-30"></td>
 
-                                            <td class="price" data-title="Price" >
+                                        <td class="price" data-title="Price">
                                             <h4 class="text-body">
                                                 {{ $product->currency->symbol }}{{ $product->price }}
                                             </h4>
@@ -85,65 +88,40 @@
 
                                         <td>
                                             <div class="col-md-10 col-xs-12 d-lg-flex ">
-                                                <input type="button"  value="-" class="qty-minus btn"  >
-                                                <input type="number"  value="1" max="10" min="1" class="qty update-qty"  >
-                                                <input type="button"  value="+" class="qty-plus btn" >
+                                                <input type="hidden" name="productids[]" value="{{ $product->id }}">
+                                                <input type="button" value="-" class="qty-minus btn">
+                                                <input name="qty[]" readonly type="number"
+                                                    value="{{ $product->quantity }}" max="10" min="1"
+                                                    class="qty update-qty">
+                                                <input type="button" value="+" class="qty-plus btn">
                                             </div>
-
-                                            {{-- <div class="sub">minus</div>
-                                            <input type="number" value="1" min="1" max="10">
-                                            <div class="add">plus</div> --}}
                                         </td>
-
-
-                                        {{-- <td class="text-center detail-info" data-title="Stock">
-                                            <div class="detail-extralink mr-15">
-                                                <div class="detail-qty border radius">
-                                                    {{-- <a href="#" class="qty-down"><i
-                                                            class="fi-rs-angle-small-down"></i></a>
-                                                    <input class="quty" name="quantity" min="1"
-                                                        value="{{ $product->quantity }}">
-                                                    {{-- <span class="qty-val">{{$product->quantity}}</span> --}}
-                                        {{-- <a href="#" class="qty-up"><i
-                                                            class="fi-rs-angle-small-up"></i></a> --}}
-
-
-
-                                        {{-- </div>
-                                            </div>
-                                        </td> --}}
-
-                                        {{-- <td class="text-center detail-info" data-title="Stock">
-                                    <div class="detail-extralink mr-15">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <input class="quty" name="quantity" value="{{$product->quantity}}" >
-                                            <span class="qty-val">{{$product->quantity}}</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </div>
-                                </td> --}}
-
                                         <td class="price" data-title="Price">
-                                            <h4 class="text-brand" >{{ $product->quantity * $product->price }} </h4>
-                                            <input class="d-none unit-price" value="{{$product->price}}">
+                                            <h4 class="text-brand">
+                                                {{ $product->currency->symbol }}<span
+                                                    class="cart-subtotal">{{ $product->quantity * $product->price }}</span>
+                                            </h4>
+                                            <input class="d-none unit-price" value="{{ $product->price }}">
                                         </td>
-                                        <td class="action text-center" data-title="Remove"><a href="{{ route('cart.remove', $product->id) }}"
-                                                class="text-body"><i class="fi-rs-trash"></i></a></td>
+                                        <td class="action text-center" data-title="Remove"><a
+                                                href="{{ route('cart.remove', $product->id) }}" class="text-body"><i
+                                                    class="fi-rs-trash"></i></a></td>
                                     </tr>
                                     @php
                                         $total += $product->quantity * $product->price;
                                         $currency_symbol = $product->currency->symbol;
                                     @endphp
                                 @empty
-                                <tr class="pt-30">
-                                    <td class="image product-thumbnail pt-40" style="left: 32%; text-align: center; position: relative;">
-                                    <h4 class="text-brand" style="color: #fdc040 !important;">No Product Found</h4>
-                                    </td>
-                                    <td class="action text-center" data-title="Remove">
-                                        <a href="#" class="text-body"><i class=""></i></a>
-                                    </td>
-                                </tr>
+                                    <tr class="pt-30">
+                                        <td class="image product-thumbnail pt-40"
+                                            style="left: 32%; text-align: center; position: relative;">
+                                            <h4 class="text-brand" style="color: #fdc040 !important;">No Product Found
+                                            </h4>
+                                        </td>
+                                        <td class="action text-center" data-title="Remove">
+                                            <a href="#" class="text-body"><i class=""></i></a>
+                                        </td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </form>
@@ -153,8 +131,10 @@
                 </div>
                 <div class="divider-2 mb-30"></div>
                 <div class="cart-action d-flex justify-content-between mb-30">
-                    <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
-                    <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
+                    <a href="/" style="color: #fff;" class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue
+                        Shopping</a>
+                    <button onclick="submit()" class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update
+                        Cart</button>
                 </div>
             </div>
 
@@ -164,16 +144,17 @@
 
                 <div class="row">
 
-                        <div class="border p-md-4 cart-totals ml-30">
-                            <div class="table-responsive">
-                                <table class="table no-border">
-                                    <tbody>
+                    <div class="border p-md-4 cart-totals ml-30">
+                        <div class="table-responsive">
+                            <table class="table no-border">
+                                <tbody>
+                                    @if (!session('totalAfterDiscount'))
                                         <tr>
                                             <td class="cart_total_label">
                                                 <h6 class="text-muted">Subtotal</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end">$12.31</h4>
+                                                <h4 class="text-brand text-end subtotal">$12.31</h4>
                                             </td>
                                         </tr>
                                         <tr>
@@ -189,11 +170,48 @@
                                                 <h5 class="text-heading text-end">Free</h4< /td>
                                         </tr>
                                         <tr>
+                                            <td scope="col" colspan="2">
+                                                <div class="divider-2 mt-10 mb-10"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td class="cart_total_label">
-                                                <h6 class="text-muted">Estimate for</h6>
+                                                <h6 class="text-muted">Total</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h5 class="text-heading text-end">United Kingdom</h4></td>
+                                                <h4 class="text-brand text-end total">$12.31</h4>
+                                            </td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td class="cart_total_label">
+                                                <h6 class="text-muted">Subtotal</h6>
+                                            </td>
+                                            <td class="cart_total_amount">
+                                                <h4 class="text-brand text-end subtotal">$12.31</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col" colspan="2">
+                                                <div class="divider-2 mt-10 mb-10"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">
+                                                <h6 class="text-muted">Shipping</h6>
+                                            </td>
+                                            <td class="cart_total_amount">
+                                                <h5 class="text-heading text-end">Free</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">
+                                                <h6 class="text-muted">Discount</h6>
+                                            </td>
+                                            <td class="cart_total_amount">
+                                                <h6 class="text-brand text-end">{{ $currency_symbol }}
+                                                    {{ session('discountAmount') }}</h6>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td scope="col" colspan="2">
@@ -205,14 +223,17 @@
                                                 <h6 class="text-muted">Total</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end">$12.31</h4>
+                                                <h4 class="text-brand text-end total">{{ $currency_symbol }}
+                                                    {{ session('totalAfterDiscount') }}</h4>
                                             </td>
                                         </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
+                        <a href="{{ route('checkout') }}" class="btn mb-20 w-100">Proceed To CheckOut<i
+                                class="fi-rs-sign-out ml-15"></i></a>
+                    </div>
 
                 </div>
 
@@ -222,14 +243,15 @@
 
                         <h4 class="mb-10">Apply Coupon</h4>
                         <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
-                        <form method="post" action="/apply-promo" >
+                        <form method="post" action="/apply-promo">
                             @csrf
                             <div class="d-flex justify-content-between">
-                                <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code" placeholder="Enter Your Code...">
+                                <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code"
+                                    placeholder="Enter Your Code...">
                                 @error('code')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                                 <button class="btn"><i class="fi-rs-label mr-10"></i>Apply</button>
                             </div>
@@ -248,58 +270,101 @@
 
 <script>
     $(document).ready(function() {
-       // alert("ready!");
+        var products = $(".product-modifiers");
+        subtotal = 0;
+
+        for (var i = 0; i < products.length; i += 1) {
+            subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
+        }
+
+        var symbol = "{{ $product->currency->symbol }}"
+        $('.subtotal').text(symbol + subtotal);
+
+        var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
+        var discountAmount = '{{ Session::get('discountAmount') }}';
+
+        if (totalAfterDiscount) {
+            subtotal = subtotal - parseFloat(discountAmount);
+        }
+
+        $('.total').text(symbol + subtotal);
     });
-
-
-    //update cart minus
 
     $(document).on('click', '.qty-plus', function() {
-        var max=10;
+        var max = 10;
+        var prev_val = parseInt($(this).prev().val());
 
-        var prev_val =  parseInt($(this).prev().val()) ;
+        // -----------------------------------------
+        var ctr = $(this).closest(".product-modifiers");
+        productPrice = parseFloat(ctr.data("product-price")),
+            subtotalCtr = ctr.find(".cart-subtotal"),
+            quantity = prev_val + 1
+        subtotalPrice = quantity * productPrice;
+        subtotalCtr.text(subtotalPrice);
 
-        if (prev_val < max){
+        var products = $(".product-modifiers"),
+            subtotal = 0;
 
+        for (var i = 0; i < products.length; i += 1) {
+            subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
+        }
+        var symbol = "{{ $product->currency->symbol }}"
+        $('.subtotal').text(symbol + subtotal);
+
+        var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
+        var discountAmount = '{{ Session::get('discountAmount') }}';
+
+        if (totalAfterDiscount) {
+            subtotal = subtotal - parseFloat(discountAmount);
+        }
+
+        $('.total').text(symbol + subtotal);
+        // -----------------------------------------
+
+        if (prev_val < max) {
             prev_val = prev_val + 1;
-            prev_val=$(this).prev().val(prev_val);
-            // var product_unit_price = $(".unit-price").val();
-            // var updated_price = prev_val * product_unit_price;
-            // alert(parseInt(updated_price));
-            // $('#text-brand').html(updated_price);
-            //  $(this).prev().val(+$(this).prev().val() + 1);
-
-         }
-
-
+            prev_val = $(this).prev().val(prev_val);
+        }
     });
-
-    // $(document).on('click', '.qty-minus', function() {
-    //     var min=1;
-    //     if ($(this).next().val() > min ) $(this).next().val(+$(this).next().val() - 1);
-
-    // });
-
 
     $(document).on('click', '.qty-minus', function() {
-        var min=1;
-        if ($(this).next().val() > min ) $(this).next().val(+$(this).next().val() - 1);
+        var min = 1;
 
+        var prev_val = $(this).next().val();
+
+        // -----------------------------------------
+        var ctr = $(this).closest(".product-modifiers");
+        productPrice = parseFloat(ctr.data("product-price")),
+            subtotalCtr = ctr.find(".cart-subtotal"),
+            quantity = prev_val - 1
+        subtotalPrice = quantity * productPrice;
+        subtotalCtr.text(subtotalPrice);
+
+        var products = $(".product-modifiers"),
+            subtotal = 0;
+
+        for (var i = 0; i < products.length; i += 1) {
+            subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
+        }
+        var symbol = "{{ $product->currency->symbol }}"
+        $('.subtotal').text(symbol + subtotal);
+
+        var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
+        var discountAmount = '{{ Session::get('discountAmount') }}';
+
+        if (totalAfterDiscount) {
+            subtotal = subtotal - parseFloat(discountAmount);
+        }
+
+        $('.total').text(symbol + subtotal);
+        // -----------------------------------------
+
+        if ($(this).next().val() > min) {
+            $(this).next().val(+$(this).next().val() - 1);
+        }
     });
 
-    // $('.add').click(function() {
-    //     alert('add');
-    //     if ($(this).prev().val() < 3) {
-    //         $(this).prev().val(+$(this).prev().val() + 1);
-    //     }
-    // });
-    // $('.sub').click(function() {
-    //     alert('sub');
-    //     if ($(this).next().val() > 1) {
-    //         if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
-    //     }
-    // });
+    function submit() {
+        document.getElementById('cartForm').submit();
+    }
 </script>
-
-
-

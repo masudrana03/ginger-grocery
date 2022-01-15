@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Currency;
 class CurrencySeeder extends Seeder {
     /**
      * Run the database seeds.
@@ -12,10 +12,29 @@ class CurrencySeeder extends Seeder {
      * @return void
      */
     public function run() {
-        DB::table( 'currencies' )->insert( [
-            'name'       => 'USD',
-            'symbol'     => '$',
-            'created_at' => now(),
-        ] );
+        
+
+        $currencies = [
+            [
+                'name'       => 'USD',
+                'symbol'     => '$',
+                'created_at' => now(),
+            ],
+
+            [
+                'name'       => 'Rs',
+                'symbol'     => '₹',
+                'created_at' => now(),
+            ],
+
+            [
+                'name'       => 'BDT',
+                'symbol'     => '৳',
+                'created_at' => now(),
+            ]
+
+        ];
+
+        DB::table('currencies')->insert($currencies);
     }
 }

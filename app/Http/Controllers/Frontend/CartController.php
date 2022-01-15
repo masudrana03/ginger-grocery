@@ -12,72 +12,81 @@ class CartController extends Controller
     /**
      * @param $request
      */
-    public function addToCart( Request $request ) {
-        $request->validate( [
+    public function addToCart(Request $request)
+    {
+        $request->validate([
             'product_id' => 'required',
             'quantity'   => 'required',
-        ] );
+        ]);
 
-        $product = Product::find( $request->product_id );
+        $product = Product::find($request->product_id);
 
-        if ( !$product ) {
-            return back()->with( 'error', 'Product not found' );
+        if (!$product) {
+            return back()->with('error', 'Product not found');
         }
 
-        $cart = Cart::where( 'user_id', auth()->id() )->first();
+        $cart = Cart::where('user_id', auth()->id())->first();
 
-        if ( !$cart ) {
+        if (!$cart) {
             $cart          = new Cart();
             $cart->user_id = auth()->id();
             $cart->save();
         }
 
-        $cart->products()->sync( [
+        $cart->products()->sync([
             $product->id => [
                 'quantity' => $request->quantity,
-                'options'  => $request->options ? json_encode( $request->options ) : null,
+                'options'  => $request->options ? json_encode($request->options) : null,
             ],
-        ], false );
+        ], false);
 
-        return back()->with( 'success', 'Product added to cart' );
+        return back()->with('success', 'Product added to cart');
     }
 
     /**
      * @param $id
      */
-    public function addToCartById( $id ) {
+    public function addToCartById($id)
+    {
         $request = new Request([
             'product_id' => $id,
             'quantity'   => 1,
         ]);
 
-        return $this->addToCart( $request );
+        return $this->addToCart($request);
     }
 
     public function cart()
     {
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
-        return view('frontend.cart', compact( 'compareProduct' ) );
+        return view('frontend.cart', compact('compareProduct'));
     }
-
-
 
     /**
      * @param $id
      */
-    public function removeToCartById( $id )
+    public function removeToCartById($id)
     {
 
-        $product = Product::find( $id );
+        $product = Product::find($id);
 
         $product->carts()->detach();
 
-        return back();
+        return back()->with('success', 'Product removed from cart');
     }
 
     public function cartUpdate(Request $request)
     {
-       return $request;
+        foreach ($request->productids as $key => $item) {
+            auth()->user()->cart->products()->sync([
+                $item => [
+                    'quantity' => $request->qty[$key],
+                    'options'  => $request->options ? json_encode($request->options) : null,
+                ],
+            ], false);
+        }
+
+        return back()->with('success', 'Product updated to cart');
     }
 }
