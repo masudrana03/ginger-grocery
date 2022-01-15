@@ -1,3 +1,8 @@
+<style>
+    .product-cart-wrap .product-card-bottom .add-cart .add{
+        text-decoration: none;
+    }
+</style>
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
@@ -168,7 +173,7 @@
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add"
-                                                    href="{{ route('cartById', $product->id) }}"><i
+                                                    href="{{ route('cartById', $product->id) }}" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                             </div>
                                         </div>

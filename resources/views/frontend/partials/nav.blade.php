@@ -1,3 +1,13 @@
+<style>
+    .header-style-1.header-style-5 .main-menu > nav > ul > li > a,
+    .cart-dropdown-wrap ul li .shopping-cart-delete a,
+    .cart-dropdown-wrap ul li .shopping-cart-title h4 a,
+    .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button a,
+    .product-cart-wrap .product-card-bottom .add-cart .add{
+        text-decoration: none;
+    }
+</style>
+
     <!-- Modal -->
     {{-- <div class="modal fade custom-modal" id="onloadModal" tabindex="-1" aria-labelledby="onloadModalLabel" aria-hidden="true">
         <div class="modal-dialog">

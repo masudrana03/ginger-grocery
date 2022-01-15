@@ -29,7 +29,8 @@ class ProductController extends Controller
     /**
      * @param Request $request
      */
-    public function allProducts ( Request $request ) {
+    public function allProducts(Request $request)
+    {
         $columns = [
             0 => 'id',
             1 => 'title',
@@ -44,45 +45,45 @@ class ProductController extends Controller
         ];
 
         $product = Product::query();
-        if ( !isAdmin() ) {
-            $product = $product->where( 'store_id', auth()->user()->store_id );
+        if (!isAdmin()) {
+            $product = $product->where('store_id', auth()->user()->store_id);
         }
 
         $totalData = $product->count();
 
         $totalFiltered = $totalData;
 
-        $limit = $request->input( 'length' );
-        $start = $request->input( 'start' );
-        $order = $columns[$request->input( 'order.0.column' )];
-        $dir   = $request->input( 'order.0.dir' );
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir   = $request->input('order.0.dir');
 
-        if ( empty( $request->input( 'search.value' )) ) {
-            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset( $start )
-                ->limit( $limit )
-                ->orderBy( $order, $dir )
+        if (empty($request->input('search.value'))) {
+            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
                 ->get();
         } else {
-            $search = $request->input( 'search.value' );
+            $search = $request->input('search.value');
 
-            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
-                ->offset( $start )
-                ->limit( $limit )
-                ->orderBy( $order, $dir )
+            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where('id', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
                 ->get();
 
-            $totalFiltered = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
+            $totalFiltered = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where('id', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
                 ->count();
         }
 
         $data = [];
 
-        if ( !empty( $products ) ) {
-            foreach ( $products as $product ) {
-                $edit   = route('admin.products.edit', $product->id );
-                $delete = route('admin.products.destroy', $product->id );
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                $edit   = route('admin.products.edit', $product->id);
+                $delete = route('admin.products.destroy', $product->id);
                 $token  = csrf_token();
                 // $img    = asset( 'assets/img/uploads/products/thumbnail/' . $product->image );
 
@@ -107,13 +108,13 @@ class ProductController extends Controller
         }
 
         $json_data = [
-            "draw"            => intval( $request->input( 'draw' ) ),
-            "recordsTotal"    => intval( $totalData ),
-            "recordsFiltered" => intval( $totalFiltered ),
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
             "data"            => $data,
         ];
 
-        echo json_encode( $json_data );
+        echo json_encode($json_data);
     }
 
     /**
@@ -155,9 +156,9 @@ class ProductController extends Controller
         $product->types()->attach($request->types);
         $product->nutritions()->attach($request->nutritions);
 
-        toast( 'Product successfully created', 'success' );
+        toast('Product successfully created', 'success');
 
-        return redirect()->route('admin.products.index' );
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -206,6 +207,7 @@ class ProductController extends Controller
         $product->update($productData);
 
         if ($request->hasFile('image')) {
+            $product->images()->delete();
             $this->uploadProductImage($product, $request->file('image'));
         }
 
@@ -226,14 +228,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
 
-        if ( !isShopManager( $product->store_id ) && !isAdmin() ) {
-            return abort( 403 );
+        if (!isShopManager($product->store_id) && !isAdmin()) {
+            return abort(403);
         }
 
         foreach ($product->images as $image) {
             $imageDirectory = 'assets/img/uploads/products/';
 
-            deleteImage( $image->image, $imageDirectory );
+            deleteImage($image->image, $imageDirectory);
         }
 
         $product->images()->delete();
@@ -241,7 +243,7 @@ class ProductController extends Controller
         $product->nutritions()->detach();
         $product->delete();
 
-        toast( 'Product successfully deleted', 'success' );
+        toast('Product successfully deleted', 'success');
 
         return redirect()->back();
     }
@@ -258,7 +260,7 @@ class ProductController extends Controller
         foreach ($product->images as $image) {
             $imageDirectory = 'assets/img/uploads/products/';
 
-            deleteImage( $image->image, $imageDirectory );
+            deleteImage($image->image, $imageDirectory);
         }
 
         $filenames = [];

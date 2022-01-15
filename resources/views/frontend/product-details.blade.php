@@ -1,7 +1,60 @@
 @extends('frontend.layouts.app')
 @section('title', $product->name)
 
+
+
 @section('content')
+
+<style>
+    .rating-s {
+      top: -12px;
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;;
+      overflow: hidden;
+      flex-direction: row-reverse;
+      height: 40px;
+      position: relative;
+    }
+
+    .rating-0 {
+      filter: grayscale(100%);
+    }
+
+    .rating-s > input {
+      display: none;
+    }
+
+    .rating-s > label {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      margin-top: auto;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 76%;
+      transition: .3s;
+    }
+
+    .rating-s > input:checked ~ label,
+    .rating-s > input:checked ~ label ~ label {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+    }
+
+
+    #rating-1:checked ~ .emoji-wrapper > .emoji { transform: translateY(-100px); }
+    #rating-2:checked ~ .emoji-wrapper > .emoji { transform: translateY(-200px); }
+    #rating-3:checked ~ .emoji-wrapper > .emoji { transform: translateY(-300px); }
+    #rating-4:checked ~ .emoji-wrapper > .emoji { transform: translateY(-400px); }
+    #rating-5:checked ~ .emoji-wrapper > .emoji { transform: translateY(-500px); }
+
+
+    .comments-area .comment-list .single-comment:hover{
+        transform: translateY(-0px);
+        transition: 0s;
+    }
+    </style>
 
 <div class="page-header breadcrumb-wrap">
     <div class="container">
@@ -139,9 +192,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                             </li>
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
-                            </li> --}}
+                            </li>
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade show active" id="Description">
@@ -281,26 +334,34 @@
                                         <div class="col-lg-8">
                                             <h4 class="mb-30">Customer questions & answers</h4>
                                             <div class="comment-list">
-                                                <div class="single-comment justify-content-between d-flex mb-30">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="{{ asset('assets/frontend/imgs/blog/author-2.png') }}" alt="" />
-                                                            <a href="#" class="font-heading text-brand">Sienna</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2021 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 100%"></div>
-                                                                </div>
+
+                                                @forelse ( $productsRating as $rating )
+                                                    <div class="single-comment justify-content-between d-flex mb-30">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="thumb text-center">
+                                                                <img src="{{ asset('assets/frontend/imgs/blog/author-2.png') }}" alt="" />
+                                                                <a href="#" class="font-heading text-brand">{{ $rating->user->name }}</a>
                                                             </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
+                                                            <div class="desc">
+                                                                <div class="d-flex justify-content-between mb-10">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="font-xs text-muted">{{ $rating->created_at->diffForHumans() }}</span>
+                                                                    </div>
+                                                                    <div class="product-rate d-inline-block d-flex" style="position: absolute; left: 87%;">
+                                                                        <div class="product-rating" style="width: 40%"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="mb-10">{{ $rating->comment }} </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="single-comment justify-content-between d-flex mb-30 ml-30">
+                                                @empty
+
+                                                @endforelse
+
+
+
+                                                {{-- <div class="single-comment justify-content-between d-flex mb-30 ml-30">
                                                     <div class="user justify-content-between d-flex">
                                                         <div class="thumb text-center">
                                                             <img src="{{ asset('assets/frontend/imgs/blog/author-3.png') }}" alt="" />
@@ -337,7 +398,7 @@
                                                             <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -374,39 +435,38 @@
                                 </div>
                                 <!--comment form-->
                                 <div class="comment-form">
-                                    <h4 class="mb-15">Add a review</h4>
-                                    <div class="product-rate d-inline-block mb-30"></div>
-                                    <div class="row">
-                                        <div class="col-lg-8 col-md-12">
-                                            <form class="form-contact comment_form" action="#" id="commentForm">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="button button-contactForm">Submit Review</button>
-                                                </div>
-                                            </form>
+                                    <form class="form-contact comment_form"  action="{{ route('product.rating', $product->id) }}" method="post">
+                                        @csrf
+                                        <h4 class="mb-15" style ="padding-left: 10px;">Add a review</h4>
+                                        <div class="rating-s">
+                                            <input type="radio" name="rating" id="rating-5" onclick="addValue(5)">
+                                            <label for="rating-5"></label>,
+                                            <input type="radio" name="rating" id="rating-4" onclick="addValue(4)">
+                                            <label for="rating-4"></label>
+                                            <input type="radio" name="rating" id="rating-3" onclick="addValue(3)">
+                                            <label for="rating-3"></label>
+                                            <input type="radio" name="rating" id="rating-2" onclick="addValue(2)">
+                                            <label for="rating-2"></label>
+                                            <input type="radio" name="rating" id="rating-1" onclick="addValue(1)">
+                                            <label for="rating-1"></label>
                                         </div>
-                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <input type="hidden" name="rating" id="rating" >
+                                                                <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="button button-contactForm">Submit Review</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -459,4 +519,15 @@
     </div>
 </div>
 
+<script>
+    function addValue(value) {
+        $('#rating').val(value);
+    }
+</script>
+
 @endsection
+
+
+
+
+

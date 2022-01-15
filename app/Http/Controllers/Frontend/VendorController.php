@@ -23,9 +23,12 @@ class VendorController extends Controller
      * @param $productId as $id
      * @param $request
      */
-    public function vendorDetails(Request $request, $id )
+    public function vendorDetails(Request $request, $id)
     {
         // return $request;
+
+        $price = str_replace("$", "", $request->price);
+        $q = explode("-", $price);
 
         $nutritions = Nutrition::all();
         $brands = Brand::all();
@@ -36,30 +39,43 @@ class VendorController extends Controller
 
         $vendorWise = $store->products();
 
+        if ($request->price) {
+            $vendorWise = $store->products()->where('price', '>=', $q[0])->where('price', '<=', $q[1]);
+        }
+
+        if ($request->brand) {
+            $vendorWise = $store->products()->where('brand_id', $request->brand);
+        }
+
+        if ($request->nutrition) {
+            $vendorWise = $store->products()->whereHas('nutritions', function ($query) use ($request) {
+                $query->where('nutrition_id', $request->nutrition);
+            });
+        }
+
         if ($request->query('search')) {
             $vendorWise = $store->products()->where('name', $request->query('search'));
         }
 
-        if ( $request->query('sort') == 'low_to_high' ) {
+        if ($request->query('sort') == 'low_to_high') {
             $vendorWise = $store->products()->orderBy('price');
         }
 
-        if ( $request->query('sort') == 'high_to_low' ) {
+        if ($request->query('sort') == 'high_to_low') {
             $vendorWise = $store->products()->orderByDesc('price');
         }
 
-        if ( $request->query('sort') == 'release' ) {
+        if ($request->query('sort') == 'release') {
             $vendorWise = $store->products()->orderByDesc('id');
         }
 
-        if ( $request->query('numeric_sort') ) {
+        if ($request->query('numeric_sort')) {
             $defaultPaginate = $request->query('numeric_sort');
         }
 
-        if ( $request->query('numeric_sort') == 'all' ) {
+        if ($request->query('numeric_sort') == 'all') {
             $defaultPaginate = count($store->products);
         }
-
 
         $vendorWise = $vendorWise->paginate($defaultPaginate);
 

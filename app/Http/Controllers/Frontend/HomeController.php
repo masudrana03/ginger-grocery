@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Zone;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\CallToAction;
 use Illuminate\Http\Request;
+use App\Models\ProductRating;
 use App\Http\Controllers\Controller;
-use App\Models\Zone;
 
 class HomeController extends Controller
 {
@@ -31,23 +32,23 @@ class HomeController extends Controller
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
 
-        if ( $request->zone_id ){
-            $categories = Category::with(['products.currency', 'products.store' =>function ($q) use ($request) {
+        if ($request->zone_id) {
+            $categories = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
                 $q->find($request->zone_id);
-             }])->limit( 12 )->get();
+            }])->limit(12)->get();
         } else {
-            $categories = Category::with( 'products.store', 'products.currency' )->limit( 12 )->get();
+            $categories = Category::with('products.store', 'products.currency')->limit(12)->get();
         }
 
 
-        $sliders = Banner::where( 'status', 1 )->get() ?? [];
+        $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
         // $zones = Zone::find(1);
 
         // return $zones;
 
-        return view( 'frontend.index', compact( 'categories', 'compareProduct', 'sliders', 'callToActions', 'zones' ) );
+        return view('frontend.index', compact('categories', 'compareProduct', 'sliders', 'callToActions', 'zones'));
     }
 
     /**
@@ -55,32 +56,61 @@ class HomeController extends Controller
      *
      * @param $id
      */
-    public function productDetails( $id ) {
-        $product = Product::with( 'store', 'currency', 'category.products', 'brand', 'unit' )->findOrFail( $id );
-        return view( 'frontend.product-details', compact( 'product' ) );
+    public function productDetails($id)
+    {
+        $productsRating = ProductRating::all();
+
+        $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->findOrFail($id);
+        return view('frontend.product-details', compact('product','productsRating'));
+    }
+
+    public function productRating(Request $request, $id)
+    {
+        //   return  $request;
+        $request->validate([
+            'rating'     => 'required',
+        ]);
+
+        $product = $request->all();
+
+        $productRating = ProductRating::where('user_id', auth()->id())->where('product_id', $id)->first();
+
+        if ($productRating) {
+            return back()->with('error', 'You already product rated this product.');
+        }
+
+
+
+        $product['user_id'] = auth()->id();
+        $product['product_id'] = $id;
+
+        ProductRating::create($product);
+
+        return back()->with('success', 'Product rating and commented successfully');
     }
 
     /**
      *
      * @param $id
      */
-    public function categoryDetails( $id ) {
-        $category = Category::with( 'products.store', 'products.currency' )->findOrFail( $id );
-        return view( 'frontend.category', compact( 'category' ) );
+    public function categoryDetails($id)
+    {
+        $category = Category::with('products.store', 'products.currency')->findOrFail($id);
+        return view('frontend.category', compact('category'));
     }
 
-    public function search() {
-        $query = request( 'search' );
-        $category_id = request( 'category_id' );
+    public function search()
+    {
+        $query = request('search');
+        $category_id = request('category_id');
 
-        $products = Product::with( 'store', 'currency', 'category.products', 'brand', 'unit' )
-            ->where( 'name', 'like', '%' . $query . '%' )
-            ->orWhere( 'description', 'like', '%' . $query . '%' )
-            ->orWhere( 'excerpt', 'like', '%' . $query . '%' )
-            ->orWhere( 'category_id', $category_id )
+        $products = Product::with('store', 'currency', 'category.products', 'brand', 'unit')
+            ->where('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->orWhere('excerpt', 'like', '%' . $query . '%')
+            ->orWhere('category_id', $category_id)
             ->get();
 
-        return view( 'frontend.search', compact( 'products', 'query' ) );
+        return view('frontend.search', compact('products', 'query'));
     }
-
 }
