@@ -421,9 +421,9 @@
     $(function () {
         sliderrange.slider({
             range: true,
-            min: 16,
+            min: 0,
             max: 400,
-            values: [0, 300],
+            values: [65, 188],
             slide: function (event, ui) {
                 amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
             }
@@ -458,7 +458,7 @@
     }
 
     /*-----------------------
-        Shop filter active 
+        Shop filter active
     ------------------------- */
     $(".shop-filter-toogle").on("click", function (e) {
         e.preventDefault();
