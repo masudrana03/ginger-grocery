@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Unit;
 
 class UnitSeeder extends Seeder {
     /**
@@ -12,9 +13,30 @@ class UnitSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        DB::table( 'units' )->insert( [
-            'name'       => 'Kg',
-            'created_at' => now(),
-        ] );
+        
+
+        $units = [
+            [
+                'name'       => 'gm',
+                'created_at' => now(),
+            ],
+
+            [
+                'name'       => 'kg',
+                'created_at' => now(),
+            ],
+
+            [
+                'name'       => 'ml',
+                'created_at' => now(),
+            ],
+
+            [
+                'name'       => 'L',
+                'created_at' => now(),
+            ]
+        ];
+
+        DB::table('units')->insert($units);
     }
 }
