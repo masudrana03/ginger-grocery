@@ -53,6 +53,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="code">Discount</label>
+                                    <input type="number" name="discount"
+                                        class="form-control @error('discount') is-invalid @enderror" id="code"
+                                        aria-describedby="emailHelp" placeholder="Discount" value="{{ old('code') }}">
+                                    @error('discount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="limit">Limit</label>
                                     <input type="number" name="limit"
                                         class="form-control @error('limit') is-invalid @enderror" id="limit"

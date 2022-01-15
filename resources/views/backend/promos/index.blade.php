@@ -42,6 +42,7 @@
                                             <th>Title</th>
                                             <th>Type</th>
                                             <th>Code</th>
+                                            <th>Discount</th>
                                             <th>Used</th>
                                             <th>Limit</th>
                                             <th>Status</th>

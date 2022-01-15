@@ -50,6 +50,15 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="name">Discount</label>
+                                    <input type="text" name="discount" class="form-control @error('discount') is-invalid @enderror" id="code" aria-describedby="emailHelp" placeholder="Code" value="{{ old('discount') ?? $promo->discount }}">
+                                    @error('discount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="name">Limit</label>
                                     <input type="text" name="limit" class="form-control @error('limit') is-invalid @enderror" id="limit" aria-describedby="emailHelp" placeholder="Limit" value="{{ old('limit') ?? $promo->limit }}">
                                     @error('limit')
