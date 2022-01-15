@@ -199,7 +199,7 @@ Route::post('/location', [HomeController::class, 'getZone'])->name('location');
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
-    Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
+    Route::post('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);

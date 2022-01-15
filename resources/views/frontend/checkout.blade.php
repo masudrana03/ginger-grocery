@@ -36,7 +36,7 @@
                             </div>
                         @endif --}}
 
-                        <form method="post" action="/apply-promo" class="apply-coupon">
+                        {{-- <form method="post" action="/apply-promo" class="apply-coupon">
                             @csrf
                             <div class="form-group">
                                 <input class="@error('code') is-invalid @enderror" type="text" name="code"
@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                             <button class="btn  btn-md" name="login">Apply Coupon</button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
                 <div class="row">

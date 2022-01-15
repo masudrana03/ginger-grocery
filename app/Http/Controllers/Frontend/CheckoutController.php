@@ -60,7 +60,13 @@ class CheckoutController extends Controller
 
         $cart->update(['promo_id' => $promo->id]);
 
-        $total = $cart->products->sum('price');
+        $total = 0;
+
+        foreach ($cart->products as $product) {
+            $total += $product->price * $product->quantity;
+        }
+
+        //$total = $cart->products->sum('price');
 
         $discountAmount = getDiscountAmount($total, $promo->type, $promo->discount);
         $totalAfterDiscount = getAmountAfterDiscount($total, $promo->type, $promo->discount);
