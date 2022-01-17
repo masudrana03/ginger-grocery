@@ -1,5 +1,6 @@
 @extends('backend.layouts.app')
 @section('title', 'Create New Category')
+
 @push('styles')
 <style>
     .image_container {
@@ -31,6 +32,7 @@
          }
 </style>
 @endpush
+
 @section('content')
 
     <div class="main_content_iner ">

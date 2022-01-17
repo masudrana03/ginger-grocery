@@ -1,6 +1,38 @@
 @extends('backend.layouts.app')
 @section('title', 'About Image slider')
 
+@push('styles')
+<style>
+    .image_container {
+		 	height: 120px;
+		 	width: 200px;
+		 	border-radius: 6px;
+		 	overflow: hidden;
+		 	margin: 10px;
+		 }
+		 .image_container img {
+		 	height: 100%;
+		 	width: auto;
+		 	object-fit: cover;
+		 }
+		 .image_container span {
+		 	top: -6px;
+		 	right: 8px;
+		 	color: red;
+		 	font-size: 28px;
+		 	font-weight: normal;
+		 	cursor: pointer;
+		 }
+
+         .banner-image{
+             min-width: 200px;
+             min-width:100px ;
+             max-width: 980px;
+             max-height: 592px;
+         }
+</style>
+@endpush
+
 @section('content')
 <div class="main_content_iner">
     <div class="container-fluid p-0">
@@ -63,12 +95,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="image">Slider Image</label><br>
+                                <label for="image">About Slider Image</label><br>
                                 <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" name="image" class="custom-file-input" id="inputGroupFile02" required="" >
-                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                                        <input id="myid" name="id" class="form-control" hidden>
+                                    <div class="card shadow-sm w-100">
+                                        <div class="card-header d-flex justify-content-start">
+                                                <h4>Upload Images</h4>
+                                                
+                                                    <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
+                                        </div>
+                                        <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
+                                               <img class="banner-image" id="thumbnil"> 	  
+                                        </div>
                                     </div>
                                 </div>
 
@@ -107,7 +145,28 @@
     function getId(id) {
         document.getElementById("myid").value = id;
     }
+    
 
+    // image upload js code 
+    function showImage(fileInput){
+               var files = fileInput.files;
+               for (var i = 0; i< files.length ; i++){
+                   var file = files[i];
+                   var imageType = /image.*/;
+                   if (!file.type.match(imageType)) {
+                    continue;
+                    }
+                    var img=document.getElementById('thumbnil');
+                    img.file = file;
+                    var reader = new FileReader();
+                    reader.onload = (function(aImg) {
+                    return function(e) {
+                    aImg.src = e.target.result;
+                    };
+                    })(img);
+                    reader.readAsDataURL(file);
+               }
+           }
 
     // function getUrl()
     // {
@@ -115,3 +174,5 @@
     // }
 </script>
 @endpush
+
+

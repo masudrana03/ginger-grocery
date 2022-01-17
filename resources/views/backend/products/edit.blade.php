@@ -10,6 +10,27 @@
             height: 250px!important;
         }
 
+        .image_container {
+		 	height: 120px;
+		 	width: 200px;
+		 	border-radius: 6px;
+		 	overflow: hidden;
+		 	margin: 10px;
+		 }
+		 .image_container img {
+		 	height: 100%;
+		 	width: auto;
+		 	object-fit: cover;
+		 }
+		 .image_container span {
+		 	top: -6px;
+		 	right: 8px;
+		 	color: red;
+		 	font-size: 28px;
+		 	font-weight: normal;
+		 	cursor: pointer;
+		 }
+
     </style>
 @endpush
 
@@ -222,19 +243,17 @@
                                 <label>Product Image</label>
                                 <div id="inputFormRow">
                                     <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <input type="file" name="image[]" class="@error('image') is-invalid @enderror">
-                                            @error('image')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
-                                                class="fas fa-plus-circle addRow"></i>
-                                            <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
-                                                class="fas fa-minus-circle removeRow"></i>
+                                        <div class="col-sm-12">
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                        <h4>Upload Product Images</h4>
+                                                            <input type="file" name="image[]" id="image" multiple="" class="d-none " onchange="image_select()">
+                                                            <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Images</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start" id="container">
+                                                        <!-- Image will be show here-->    	  
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -295,5 +314,56 @@
                 }
             });
         });
+         
+        // image upload js code 
+        var images = [];
+        function image_select() {
+   	  	  var image = document.getElementById('image').files;
+   	  	  for (i = 0; i < image.length; i++) {
+   	  	  	  if (check_duplicate(image[i].name)) {
+                images.push({
+   	  	  	  	    "name" : image[i].name,
+   	  	  	  	    "url" : URL.createObjectURL(image[i]),
+   	  	  	  	    "file" : image[i],
+   	  	  	    })
+   	  	  	  } else 
+   	  	  	  {
+   	  	  	  	 alert(image[i].name + " is already added to the list");
+   	  	  	  }
+   	  	  }
+          
+   	  	  //document.getElementById('form').reset();
+   	  	  document.getElementById('container').innerHTML = image_show();
+   	  }
+
+         function image_show() {
+   	  	  var image = "";
+   	  	  images.forEach((i) => {
+   	  	  	 image += `<div class="image_container d-flex justify-content-center position-relative">
+   	  	  	  	  <img src="`+ i.url +`" alt="Image">
+   	  	  	  	  <span class="position-absolute" onclick="delete_image(`+ images.indexOf(i) +`)">&times;</span>
+   	  	  	  </div>`;
+   	  	  })
+   	  	  return image;
+   	  }
+     
+         function delete_image(e) {
+   	  	  images.splice(e, 1);
+   	  	  document.getElementById('container').innerHTML = image_show();
+   	}
+
+       function check_duplicate(name) {
+   	  	var image = true;
+   	  	if (images.length > 0) {
+   	  		for (e = 0; e < images.length; e++) {
+   	  			if (images[e].name == name) {
+   	  				image = false;
+   	  				break;
+   	  			}
+   	  		}
+   	  	}
+   	  	return image;
+   	  }
+
     </script>
 @endpush

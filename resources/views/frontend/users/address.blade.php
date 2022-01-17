@@ -2,10 +2,10 @@
 @section('title', 'User Account')
 
 <style>
-    .modal-border{
-        border:6px solid #abeecf !important; 
-        border-radius:3%;
-    }
+    /* .modal-border{
+        border:8px solid rgb(245, 242, 242) !important; 
+        border-radius:24%;
+    } */
 
     .modal-button{
         border-radius:13px;
@@ -586,7 +586,7 @@
                                                             aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered"
                                                                 role="document">
-                                                                <div class="modal-content modal-border">
+                                                                <div class="modal-content modal-border rounded-3">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="ModalTitle"></h5>
                                                                         <button type="button" class="close modal-button"
