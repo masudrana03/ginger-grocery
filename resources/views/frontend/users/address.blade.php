@@ -3,7 +3,7 @@
 
 <style>
     .modal-border{
-        border:6px solid #abeecf !important; 
+        border:6px solid #abeecf !important;
         border-radius:3%;
     }
 
@@ -197,8 +197,7 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressType"
-                                                                                        name="type">
+                                                                                    <input type="hidden" id="addressTypeBill" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -399,8 +398,7 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressType"
-                                                                                        name="type">
+                                                                                    <input type="hidden" id="addressTypeShip" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -826,11 +824,11 @@
 
     function openEditBillingModal(id) {
 
-        $('#addressType').val('billing')
+        $('#addressTypeBill').val('billing')
 
 
         let billingAddress = billAdd.find(x => x.id == id);
-        
+
         // Set edit form action url
         $('#billingEditForm').attr('action',  '/user/address-update/' + billingAddress.id);
 
@@ -863,7 +861,7 @@
 
     function openEditShippingModal(id) {
 
-        $('#addressType').val('shipping')
+        $('#addressTypeShip').val('shipping')
 
 
         //alert("dsjhsfgsj");

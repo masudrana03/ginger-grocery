@@ -75,10 +75,13 @@ class HomeController extends Controller
 
         $productRating = ProductRating::where('user_id', auth()->id())->where('product_id', $id)->first();
 
+        if ( !auth()->id() ) {
+            return back()->with('error', 'Please log in first.');
+        }
+
         if ($productRating) {
             return back()->with('error', 'You already product rated this product.');
         }
-
 
 
         $product['user_id'] = auth()->id();

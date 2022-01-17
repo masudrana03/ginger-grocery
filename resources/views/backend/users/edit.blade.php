@@ -63,7 +63,7 @@
                                     <select name="store_id" id="store_id" class="form-control @error('store_id') is-invalid @enderror">
                                         <option value="">Select Store</option>
                                         @foreach ($stores as $store)
-                                            <option value="{{ $store->id }}" {{ $user->store_id == $store->id ? 'selected' : '' }}>{{ $store->name }}</option>
+                                            <option value="{{ $store->id }}" {{ $user->store_id == $store->id ? 'selected' : '' }} >{{ $store->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('store_id')
