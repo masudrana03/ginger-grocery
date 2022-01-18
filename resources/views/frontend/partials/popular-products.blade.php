@@ -15,7 +15,7 @@
                 @forelse ($categories->random(6) as $category )
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
-                            data-bs-target="#tab-{{ $category->id }}" type="button" role="tab"
+                            data-bs-target="#tab-{{ $category->id }}" type="button" role="tab" style="padding-bottom: 8px; padding-left:5px;"
                             aria-controls="tab-{{ $category->id }}"
                             aria-selected="false">{{ $category->name }}</button>
                     </li>

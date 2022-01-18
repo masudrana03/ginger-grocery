@@ -209,10 +209,12 @@
                         <div class="header-info header-info-right">
                             <ul>
                                 <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
-                                <li>
-                                    <a class="language-dropdown-active" href="#">English <i
-                                            class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
+                                {{-- <li>
+                                    {{-- <a class="language-dropdown-active" href="#">English </a> --}}
+                                    
+                                    {{-- <a class="language-dropdown-active" href="#">English <i
+                                            class="fi-rs-angle-small-down"></i></a> --}}
+                                    {{-- <ul class="language-dropdown">
                                         <li>
                                             <a href="#"><img
                                                     src="{{ asset('assets/frontend/imgs/theme/flag-fr.png') }}"
@@ -228,9 +230,9 @@
                                                     src="{{ asset('assets/frontend/imgs/theme/flag-ru.png') }}"
                                                     alt="" />Pусский</a>
                                         </li>
-                                    </ul>
-                                </li>
-                                <li>
+                                    </ul> --}}
+                                {{-- </li> --}} 
+                                {{-- <li>
                                     <a class="language-dropdown-active" href="#">USD <i
                                             class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
@@ -250,7 +252,7 @@
                                                     alt="" />EU</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -971,19 +973,19 @@
                                 <ul class="dropdown">
                                     <li><a href="#">Shop Grid – Right Sidebar</a></li>
                                     <li><a href="#">Shop Grid – Left Sidebar</a></li>
-                                    <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                    <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                    <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
+                                    <li><a href="#">Shop List – Right Sidebar</a></li>
+                                    <li><a href="#">Shop List – Left Sidebar</a></li>
+                                    <li><a href="#">Shop - Wide</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Single Product</a>
                                         <ul class="dropdown">
                                             <li><a href="#">Product – Right Sidebar</a></li>
-                                            <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
+                                            <li><a href="#">Product – Left Sidebar</a></li>
                                             <li><a href="#">Product – No sidebar</a></li>
-                                            <li><a href="shop-product-vendor.html">Product – Vendor Infor</a></li>
+                                            <li><a href="#">Product – Vendor Infor</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="shop-filter.html">Shop – Filter</a></li>
+                                    <li><a href="#">Shop – Filter</a></li>
                                     <li><a href="#">Shop – Wishlist</a></li>
                                     <li><a href="{{route('cart')}}">Shop – Cart</a></li>
                                     <li><a href="#">Shop – Checkout</a></li>
@@ -993,12 +995,12 @@
                             <li class="menu-item-has-children">
                                 <a href="#">Vendors</a>
                                 <ul class="dropdown">
-                                    <li><a href="vendors-grid.html">Vendors Grid</a></li>
-                                    <li><a href="vendors-list.html">Vendors List</a></li>
+                                    <li><a href="#">Vendors Grid</a></li>
+                                    <li><a href="#">Vendors List</a></li>
                                     <li><a href="#">Vendor Details 01</a></li>
                                     <li><a href="#">Vendor Details 02</a></li>
-                                    <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
-                                    <li><a href="vendor-guide.html">Vendor Guide</a></li>
+                                    <li><a href="#">Vendor Dashboard</a></li>
+                                    <li><a href="#">Vendor Guide</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -1036,16 +1038,16 @@
                             <li class="menu-item-has-children">
                                 <a href="blog-category-fullwidth.html">Blog</a>
                                 <ul class="dropdown">
-                                    <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                    <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                    <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                    <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                    <li><a href="#">Blog Category Grid</a></li>
+                                    <li><a href="#">Blog Category List</a></li>
+                                    <li><a href="#">Blog Category Big</a></li>
+                                 #   <li><a href="#">Blog Category Wide</a></li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">Single Product Layout</a>
+                                        <a href="#">Single Product Layout</a>#
                                         <ul class="dropdown">
-                                            <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                            <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                            <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
+                                            <li><a href="#">Left Sidebar</a></li>
+                                            <li><a href="#">Right Sidebar</a></li>
+                                            <li><a href="#">No Sidebar</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -1053,15 +1055,15 @@
                             <li class="menu-item-has-children">
                                 <a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="page-about.html">About Us</a></li>
-                                    <li><a href="page-contact.html">Contact</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Contact</a></li>
                                     <li><a href="#">My Account</a></li>
-                                    <li><a href="page-login.html">Login</a></li>
-                                    <li><a href="page-register.html">Register</a></li>
-                                    <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">Register</a></li>
+                                    <li><a href="#">Purchase Guide</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="page-terms.html">Terms of Service</a></li>
-                                    <li><a href="page-404.html">404 Page</a></li>
+                                    <li><a href="#">Terms of Service</a></li>
+                                    <li><a href="#">404 Page</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -1079,10 +1081,10 @@
                 </div>
                 <div class="mobile-header-info-wrap">
                     <div class="single-mobile-header-info">
-                        <a href="page-contact.html"><i class="fi-rs-marker"></i> Our location </a>
+                        <a href="#"><i class="fi-rs-marker"></i> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login.html"><i class="fi-rs-user"></i>Log In / Sign Up </a>
+                        <a href="#"><i class="fi-rs-user"></i>Log In / Sign Up </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="#"><i class="fi-rs-headphones"></i>(+01) - 2345 - 6789 </a>
@@ -1110,27 +1112,9 @@
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-
         function getval(sel) {
             // alert(sel.value);
             $('#zoneForm').submit();
         }
-
-
-        // $('select').on('change', function() {
-        //     alert(this.value);
-        // });
-
-        // $('#zone').on('change', function() {
-        //     alert($(this).find(":selected").val());
-        // });
-
-        // $("#zone").change(function() {
-        //     alert('sdafdsf');
-        //     $("#zoneForm").submit();
-        // });
-        // function submit() {
-        //     document.getElementById('BillingForm').submit();
-        // }
     </script>
 

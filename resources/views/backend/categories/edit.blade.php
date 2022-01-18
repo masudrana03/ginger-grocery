@@ -1,6 +1,43 @@
 @extends('backend.layouts.app')
 @section('title', 'Edit Category')
 
+@push('styles')
+    <style>
+        .note-insert {
+            display: none !important;
+        }
+
+        .image_container {
+		 	height: 120px;
+		 	width: 200px;
+		 	border-radius: 6px;
+		 	overflow: hidden;
+		 	margin: 10px;
+		 }
+		 .image_container img {
+		 	height: 100%;
+		 	width: auto;
+		 	object-fit: cover;
+		 }
+		 .image_container span {
+		 	top: -6px;
+		 	right: 8px;
+		 	color: red;
+		 	font-size: 28px;
+		 	font-weight: normal;
+		 	cursor: pointer;
+		 }
+
+         .banner-image{
+             min-width: 200px;
+             min-width:100px ;
+             max-width: 980px;
+             max-height: 592px;
+         }
+
+    </style>
+@endpush
+
 @section('content')
     <div class="main_content_iner ">
         <div class="container-fluid p-0 sm_padding_15px">
@@ -28,19 +65,20 @@
                                     @enderror
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                              <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="image" id="image" />
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                        <h4>Upload Images</h4>
+                                                        
+                                                            <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
+                                                            <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
+                                                       <img class="banner-image" src="{{asset( 'assets/img/uploads/categories/thumbnail/' . $category->image );}}" id="thumbnil"> 	  
+                                                </div>
                                             </div>
-                                            <div class="file-upload-content">
-                                              <img class="file-upload-image" src="#" alt="your image" />
-                                              <div class="image-title-wrap">
-                                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                              </div>
-                                            </div>
-                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -52,3 +90,30 @@
         </div>
     </div>
 @endsection
+
+
+@push('script')
+<script type="text/javascript">
+    // image upload js code 
+       function showImage(fileInput){
+           var files = fileInput.files;
+           for (var i = 0; i< files.length ; i++){
+               var file = files[i];
+               var imageType = /image.*/;
+               if (!file.type.match(imageType)) {
+                continue;
+                }
+                var img=document.getElementById('thumbnil');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                return function(e) {
+                aImg.src = e.target.result;
+                };
+                })(img);
+                reader.readAsDataURL(file);
+           }
+       }
+</script>
+
+@endpush

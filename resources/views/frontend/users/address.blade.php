@@ -2,10 +2,12 @@
 @section('title', 'User Account')
 
 <style>
+
     .modal-border{
         border:6px solid #abeecf !important;
         border-radius:3%;
     }
+
 
     .modal-button{
         border-radius:13px;
@@ -18,7 +20,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Pages <span></span> My Account
+                    <span></span> My Account
                 </div>
             </div>
         </div>
@@ -584,7 +586,7 @@
                                                             aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered"
                                                                 role="document">
-                                                                <div class="modal-content modal-border">
+                                                                <div class="modal-content modal-border rounded-3">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="ModalTitle"></h5>
                                                                         <button type="button" class="close modal-button"
