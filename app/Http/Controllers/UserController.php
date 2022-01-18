@@ -143,7 +143,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('backend.users.edit', compact('user'));
+        $stores = \App\Models\Store::all();
+
+        return view('backend.users.edit', compact('user','stores'));
     }
 
     /**

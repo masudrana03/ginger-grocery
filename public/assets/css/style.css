@@ -2171,7 +2171,7 @@ th:focus {
     font-weight: 500;
     background-color: #fff;
     width: 100%;
-    
+
 }
 
 
@@ -2202,7 +2202,7 @@ th:focus {
 
 .cs_modal .modal-body .form-group {
     margin-bottom: 12px;
-    
+
 }
 
 /* line 1285, G:/admin_project/8 admin/Analytic/scss/_reset.scss */
@@ -5217,7 +5217,7 @@ table.dataTable {
 /* line 46, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar .logo .large_logo img {
-    width: 100px;
+    width: 150px;
 }
 
 @media (max-width: 991px) {

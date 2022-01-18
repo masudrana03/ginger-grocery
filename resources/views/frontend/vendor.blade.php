@@ -19,7 +19,7 @@
                 <div class="col-lg-5 mx-auto">
                     <div class="sidebar-widget-2 widget_search mb-50">
                         <div class="search-form">
-                            <form action="#">
+                            <form action="#"> 
                                 <input type="text" placeholder="Search vendors (by name or ID)..." />
                                 <button type="submit"><i class="fi-rs-search"></i></button>
                             </form>

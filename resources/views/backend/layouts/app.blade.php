@@ -67,7 +67,7 @@
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
             <a class="large_logo" href="{{ route('admin.dashboard') }}"><img
-                    src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+                    src="https://binary-fusion.com/frontend/assets/img/logo.png" alt=""></a>
             <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
                     src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
@@ -255,8 +255,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer_iner text-center">
-                            <p>2020 © Influence - Designed by <a href="#"> <i class="ti-heart"></i> </a><a
-                                    href="#"> DashboardPack</a></p>
+                            <p>{{ now()->format('Y') }} © Influence - Designed by <a href="#"> <i class="ti-heart"></i> </a><a
+                                    href="https://binary-fusion.com/">binary-fusion</a></p>
                         </div>
                     </div>
                 </div>
