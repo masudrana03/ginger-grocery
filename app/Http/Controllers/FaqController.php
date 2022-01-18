@@ -73,7 +73,7 @@ class FaqController extends Controller
                 $edit         = route('admin.faqs.edit', $faq->id );
                 $delete       = route('admin.faqs.destroy', $faq->id );
                 $token        = csrf_token();
-                $class        = $faq->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $class        = $faq->status == 'Active' ?  'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']         = $faq->id;
                 $nestedData['question']   = Str::limit($faq->question, 20);

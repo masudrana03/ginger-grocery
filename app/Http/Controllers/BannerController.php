@@ -72,7 +72,7 @@ class BannerController extends Controller
                 $delete       = route('admin.banners.destroy', $banner->id );
                 $token        = csrf_token();
                 $img          = asset( 'assets/img/uploads/banners/thumbnail/' . $banner->image );
-                $class        = $banner->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $class        = $banner->status == 'Active' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']         = $banner->id;
                 $nestedData['title']      = $banner->title;

@@ -73,7 +73,7 @@ class ZoneController extends Controller
                 $edit         = route('admin.zones.edit', $zone->id);
                 $delete       = route('admin.zones.destroy', $zone->id);
                 $token        = csrf_token();
-                $class        = $zone->status == 'Online' ? 'status_btn' : 'status_btn_danger';
+                $class        = $zone->status == 'Online' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']            = $zone->id;
                 $nestedData['name']          = $zone->name;

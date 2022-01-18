@@ -1,21 +1,7 @@
 @extends('backend.layouts.app')
 @section('title', 'Call To Action')
 
-@push('styles')
-<style>
-    #brands_previous {
-        padding-right: 57px!important;
-    }
-    table tbody tr td {
-        font-size: 14px!important;
-        color: #212527!important;
-    }
-    table tbody tr td a {
-        color: #884FFB;
-        font-size: 18px;
-    }
-</style>
-@endpush
+
 @section('content')
     <div class="main_content_iner">
         <div class="container-fluid p-0">
@@ -39,7 +25,7 @@
                                             <th>Action location</th>
                                             <th>Action tittle</th>
                                             <th>Action Image</th>
-                                            <th>Status</th>
+                                            {{-- <th>Status</th> --}}
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -47,8 +33,8 @@
                                     <tbody>
                                         @forelse ($callToActions as $action)
                                         @php
-                                        $class = $action->status == 'Active' ? 'status_btn' : 'status_btn_danger';
-                                        $updateStatus = route('admin.callToAction.update_status', $action->id );
+                                        $class = $action->status == 'Active' ?  'status_btn_b' : 'status_btn_danger_b';
+                                        // $updateStatus = route('admin.callToAction.update_status', $action->id );
                                         $img          = asset( 'assets/img/uploads/actions/thumbnail/' . $action->image );
                                         @endphp
 
@@ -58,9 +44,9 @@
                                             <td>{{$action->action_location}}</td>
                                             <td><img src='{{$img}}' width='60'></td>
                                             {{-- <td>{{$action->status}}</td> --}}
-                                            <td>
+                                            {{-- <td>
                                                 <a href='javascript:void(0)' data-href='{{$updateStatus}}' data-toggle='tooltip' title='Change status' class='{{$class}}' onclick='ChangeActionStatus({{$action->id}})' id='actionStatus-{{$action->id}}'>{{$action->status}}</a>
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <a href="{{ route('admin.call_to_actions.edit', $action->id) }}"><i class="fas fa-edit"></i></a>
                                             </td>

@@ -71,7 +71,7 @@ class TaxController extends Controller
                 $edit         = route('admin.taxes.edit', $tax->id);
                 $delete       = route('admin.taxes.destroy', $tax->id);
                 $token        = csrf_token();
-                $class        = $tax->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $class        = $tax->status == 'Active' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']         = $tax->id;
                 $nestedData['title']      = $tax->title;

@@ -3,18 +3,6 @@
 
 @push('styles')
 <style>
-    #brands_previous {
-        padding-right: 57px!important;
-    }
-    table tbody tr td {
-        font-size: 14px!important;
-        color: #212527!important;
-    }
-    table tbody tr td a {
-        color: #884FFB;
-        font-size: 18px;
-    }
-
     .white_btn10{
         font-weight: 700;
     }
@@ -33,9 +21,6 @@
                             <div class="box_header m-0">
                                 <div class="main-title">
                                     <h3 class="m-0">Contact Information</h3>
-                                </div>
-                                <div style="margin-left: 64%!important;" class="add_button ml-10">
-                                    <a href="#" class="btn_1">Add New</a>
                                 </div>
                                 <div class="add_button">
                                     <a class="white_btn10 btn_1" href="{{ route('admin.contact.massage') }}" >Contact Massages <img src="{{ asset('assets/img/menu-icon/comments--v1.png') }}" alt=""> ( {{$contactMassage->count()}} ) </a>
@@ -66,7 +51,7 @@
                                             <td>{{$info->name}}</td>
                                             <td>{{$info->phone}}</td>
                                             <td>{{$info->email}}</td>
-                                            <td>{{$info->country_id}}</td>
+                                            <td>{{ucwords(strtolower($info->country->name))}}</td>
                                             <td>{{$info->state}}</td>
                                             <td>{{$info->city}}</td>
                                             <td>{{$info->zip}}</td>
