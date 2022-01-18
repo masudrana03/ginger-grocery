@@ -1,6 +1,38 @@
 @extends('frontend.layouts.app')
 @section('title', 'Home')
 
+<style>
+.btn-cart{
+    background-color:#3BB77E;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+
+}
+
+.btn-cart:hover{
+    background-color: #fdc040;
+}
+
+.qty{
+    height:40px;
+    width:100%;
+    border:1px #3BB77E solid ;
+    text-align: center;
+    font-size: 13px;
+    background-color: transparent;
+    
+
+}
+
+
+
+
+
+</style>
+
 @section('content')
 
     <div class="page-header breadcrumb-wrap">
@@ -20,8 +52,8 @@
                     <h6 class="text-body">There are <span
                             class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your
                         cart</h6>
-                    <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
-                            Cart</a></h6>
+                    {{-- <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
+                            Cart</a></h6> --}}
                 </div>
             </div>
         </div>
@@ -31,11 +63,11 @@
                     <table class="table table-wishlist">
                         <thead>
                             <tr class="main-heading">
-                                <th class=" start pl-30">Image</th>
+                                <th class="start pl-20">Image</th>
                                 <th scope="col" colspan="2">Product</th>
                                 <th scope="col">Unit Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Subtotal</th>
+                                <th scope="col" style="text-align:center; padding-right:30px;">Quantity</th>
+                                <th scope="col" style="padding-right: 10px;">Subtotal</th>
                                 <th scope="col" class="end">Remove</th>
                             </tr>
                         </thead>
@@ -48,7 +80,7 @@
                                     $currency_symbol = '$';
                                 @endphp
                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                    <tr class="pt-30 product-modifiers" data-product-price="{{ $product->price }}">
+                                    <tr class="pt-30 product-modifiers " data-product-price="{{ $product->price }}">
                                         <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
 
                                             @if (count($product->images) > 0)
@@ -81,26 +113,26 @@
                                         <td class="custome-checkbox pl-30"></td>
 
                                         <td class="price" data-title="Price">
-                                            <h4 class="text-body">
+                                            <h6 class="text-body">
                                                 {{ $product->currency->symbol }}{{ $product->price }}
-                                            </h4>
+                                            </h6>
                                         </td>
 
                                         <td>
-                                            <div class="col-md-10 col-xs-12 d-lg-flex ">
+                                            <div class="col-md-10 col-xs-10 d-lg-flex ">
                                                 <input type="hidden" name="productids[]" value="{{ $product->id }}">
-                                                <input type="button" value="-" class="qty-minus btn">
-                                                <input name="qty[]" readonly type="number"
+                                                <input type="button"  value="-" class="qty-minus btn-cart">
+                                                <input type="text" name="qty[]" readonly type="number"
                                                     value="{{ $product->quantity }}" max="10" min="1"
                                                     class="qty update-qty">
-                                                <input type="button" value="+" class="qty-plus btn">
+                                                <input type="button" value="+" class="qty-plus btn-cart">
                                             </div>
                                         </td>
                                         <td class="price" data-title="Price">
-                                            <h4 class="text-brand">
+                                            <h6 class="text-brand">
                                                 {{ $product->currency->symbol }}<span
                                                     class="cart-subtotal">{{ $product->quantity * $product->price }}</span>
-                                            </h4>
+                                            </h6>
                                             <input class="d-none unit-price" value="{{ $product->price }}">
                                         </td>
                                         <td class="action text-center" data-title="Remove"><a
@@ -133,7 +165,7 @@
                 <div class="cart-action d-flex justify-content-between mb-30">
                     <a href="/" style="color: #fff;" class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue
                         Shopping</a>
-                    <button onclick="submit()" class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update
+                    <button onclick="submit()" class="btn ml-10"><i class="fi-rs-refresh ml-10"></i>Update
                         Cart</button>
                 </div>
             </div>
@@ -144,7 +176,7 @@
 
                 <div class="row">
 
-                    <div class="border p-md-4 cart-totals ml-30">
+                    <div class="border p-md-4 cart-totals ">
                         <div class="table-responsive">
                             <table class="table no-border">
                                 <tbody>
@@ -154,7 +186,7 @@
                                                 <h6 class="text-muted">Subtotal</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end subtotal">$12.31</h4>
+                                                <h6 class="text-brand text-end subtotal">$12.31</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -167,7 +199,7 @@
                                                 <h6 class="text-muted">Shipping</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h5 class="text-heading text-end">Free</h4< /td>
+                                                <h6 class="text-heading text-end">Free</h6></td>
                                         </tr>
                                         <tr>
                                             <td scope="col" colspan="2">
@@ -179,7 +211,7 @@
                                                 <h6 class="text-muted">Total</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end total">$12.31</h4>
+                                                <h6 class="text-brand text-end total">$12.31</h6>
                                             </td>
                                         </tr>
                                     @else
@@ -188,7 +220,7 @@
                                                 <h6 class="text-muted">Subtotal</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end subtotal">$12.31</h4>
+                                                <h6 class="text-brand text-end subtotal">$12.31</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -223,8 +255,8 @@
                                                 <h6 class="text-muted">Total</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h4 class="text-brand text-end total">{{ $currency_symbol }}
-                                                    {{ session('totalAfterDiscount') }}</h4>
+                                                <h6 class="text-brand text-end total">{{ $currency_symbol }}
+                                                    {{ session('totalAfterDiscount') }}</h6>
                                             </td>
                                         </tr>
                                     @endif
@@ -239,7 +271,7 @@
 
                 <div class="row">
 
-                    <div class="border p-md-4 cart-totals ml-30 mt-4">
+                    <div class="border p-md-4 cart-totals  mt-4">
 
                         <h4 class="mb-10">Apply Coupon</h4>
                         <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
@@ -310,6 +342,7 @@
 
         for (var i = 0; i < products.length; i += 1) {
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
+            //subtotal += subtotal.toFixed(2);
         }
         var symbol = "{{ $product->currency->symbol }}"
         $('.subtotal').text(symbol + subtotal);

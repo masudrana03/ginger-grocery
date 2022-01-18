@@ -5,17 +5,6 @@
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    #promos_previous {
-        padding-right: 57px!important;
-    }
-    table tbody tr td {
-        font-size: 14px!important;
-        color: #212527!important;
-    }
-    table tbody tr td a {
-        color: #884FFB;
-        font-size: 18px;
-    }
     .checked {
   color: orange;
     }

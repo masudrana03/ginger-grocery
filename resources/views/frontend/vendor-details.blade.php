@@ -7,7 +7,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Store <span></span> {{ $store->name }}
+            <span></span> {{ $store->name }}
         </div>
     </div>
 </div>

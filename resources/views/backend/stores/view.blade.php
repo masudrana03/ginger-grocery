@@ -77,7 +77,7 @@
                         </div>
                         <div class="row justify-content-center mb-30">
                             <div class="col-md-8">
-                                <div class="total-payment total-payment1 p-3" style="border-radius: 15px; background-color: #fbf6f0 !important;">
+                                <div class="total-payment total-payment1 p-3" style="border-radius: 15px; background-color: #f7fffb !important">
                                     <table class="table table-hover custom_table">
                                         <tbody>
                                             <tr>

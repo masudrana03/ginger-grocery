@@ -73,7 +73,7 @@ class PromoController extends Controller
                 $edit   =  route('admin.promos.edit',$promo->id);
                 $delete =  route('admin.promos.destroy', $promo->id);
                 $token  = csrf_token();
-                $class        = $promo->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $class        = $promo->status == 'Active' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']         = $promo->id;
                 $nestedData['title']      = $promo->title;

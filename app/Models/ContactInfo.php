@@ -33,7 +33,7 @@ class ContactInfo extends Model
      * Get the user associated with the Country.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function countries()
+    public function country()
     {
         return $this->belongsTo(Country::class);
     }

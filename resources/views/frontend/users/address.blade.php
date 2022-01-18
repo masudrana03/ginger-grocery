@@ -2,10 +2,12 @@
 @section('title', 'User Account')
 
 <style>
+
     .modal-border{
-        border:6px solid #abeecf !important; 
+        border:6px solid #abeecf !important;
         border-radius:3%;
     }
+
 
     .modal-button{
         border-radius:13px;
@@ -18,7 +20,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Pages <span></span> My Account
+                    <span></span> My Account
                 </div>
             </div>
         </div>
@@ -197,8 +199,7 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressType"
-                                                                                        name="type">
+                                                                                    <input type="hidden" id="addressTypeBill" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -399,8 +400,7 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressType"
-                                                                                        name="type">
+                                                                                    <input type="hidden" id="addressTypeShip" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -586,7 +586,7 @@
                                                             aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered"
                                                                 role="document">
-                                                                <div class="modal-content modal-border">
+                                                                <div class="modal-content modal-border rounded-3">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="ModalTitle"></h5>
                                                                         <button type="button" class="close modal-button"
@@ -826,11 +826,11 @@
 
     function openEditBillingModal(id) {
 
-        $('#addressType').val('billing')
+        $('#addressTypeBill').val('billing')
 
 
         let billingAddress = billAdd.find(x => x.id == id);
-        
+
         // Set edit form action url
         $('#billingEditForm').attr('action',  '/user/address-update/' + billingAddress.id);
 
@@ -863,7 +863,7 @@
 
     function openEditShippingModal(id) {
 
-        $('#addressType').val('shipping')
+        $('#addressTypeShip').val('shipping')
 
 
         //alert("dsjhsfgsj");

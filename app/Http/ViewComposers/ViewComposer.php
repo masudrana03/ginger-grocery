@@ -2,8 +2,9 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\Category;
 use App\Models\Zone;
+use App\Models\Country;
+use App\Models\Category;
 use Illuminate\View\View;
 
 class ViewComposer
@@ -23,9 +24,11 @@ class ViewComposer
     {
         $zones = Zone::all();
         $categories = Category::all();
+        $countrys = Country::all();
         $view->with([
             'zones' => $zones,
             'categories' => $categories,
+            'countrys' => $countrys,
         ]);
     }
 }

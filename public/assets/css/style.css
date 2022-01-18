@@ -39,7 +39,7 @@ body {
     margin: 0;
     font-size: 14px;
     position: relative;
-    background: #FBF6F0;
+    background: #f5f6f7;
 }
 
 @media (min-width: 1200px) {
@@ -1656,7 +1656,7 @@ table.dataTable tbody td {
 /* line 940, G:/admin_project/8 admin/Analytic/scss/_reset.scss */
 
 .lms_pagination_wrap ul li a.active {
-    background: #fe1724;
+    background: #3BB77E;
     color: #fff;
 }
 
@@ -1664,7 +1664,7 @@ table.dataTable tbody td {
 /* line 944, G:/admin_project/8 admin/Analytic/scss/_reset.scss */
 
 .lms_pagination_wrap ul li a:hover {
-    background: #fe1724;
+    background: #3BB77E;
     color: #fff;
 }
 
@@ -2171,7 +2171,7 @@ th:focus {
     font-weight: 500;
     background-color: #fff;
     width: 100%;
-    
+
 }
 
 
@@ -2202,7 +2202,7 @@ th:focus {
 
 .cs_modal .modal-body .form-group {
     margin-bottom: 12px;
-    
+
 }
 
 /* line 1285, G:/admin_project/8 admin/Analytic/scss/_reset.scss */
@@ -2521,8 +2521,8 @@ p a:hover {
 
 .btn-primary {
     color: #fff;
-    background-color: #884FFB;
-    border-color: #884FFB;
+    background-color: #3BB77E;
+    border-color: #3BB77E;
 }
 
 
@@ -2530,8 +2530,8 @@ p a:hover {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #884FFBe6;
-    border-color: #884FFBe6;
+    background-color: #33af75;
+    border-color: #33af75;
 }
 
 @media (max-width: 991px) {
@@ -3279,7 +3279,7 @@ p a:hover {
     right: -7px;
     border-radius: 50%;
     top: -10px;
-    background-color: #F65365;
+    background-color: #3BB77E;
     -webkit-animation: notify-pulse 1s infinite;
 }
 
@@ -3324,7 +3324,7 @@ p a:hover {
     display: block;
     color: #fff;
     line-height: 40px;
-    background: #884FFB;
+    background: #3BB77E;
     font-size: 15px;
     border-radius: 30px;
     -webkit-transition: 0.3s;
@@ -3368,8 +3368,8 @@ p a:hover {
 /* line 2, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
 .btn_1 {
-    background-color: #884FFB;
-    border: 1px solid #884FFB;
+    background-color: #3BB77E;
+    border: 1px solid #3BB77E;
     color: #fff;
     display: inline-block;
     padding: 11px 25px;
@@ -3395,7 +3395,7 @@ p a:hover {
 
 .btn_1:hover {
     color: #fff;
-    background-color: #884FFB;
+    background-color: #29A56C;
     box-shadow: 0 3px 11px rgba(136, 79, 251, 0.4);
 }
 
@@ -3522,7 +3522,7 @@ p a:hover {
 /* line 93, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
 .btn_2:hover {
-    background-color: #F65365;
+    background-color: #3BB77E;
     border: 1px solid #F65365;
     color: #fff;
 }
@@ -3826,12 +3826,50 @@ p a:hover {
 
 /* line 297, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
-.status_btn {
+.status_btn_b  {
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 14px;
+    color: #34c38f !important;
+    background-color: rgba(52, 195, 143, 0.18);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.status_btn_b:hover  {
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 14px;
+    color: #15c987 !important;
+    background-color: rgba(52, 195, 143, 0.18);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.status_btn  {
     display: inline-block;
     padding: 2px 15px;
     font-size: 11px;
     font-weight: 300;
-    color: #fff !important;
+    color: #fff!important;
     background: #05d34e;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
@@ -3840,6 +3878,46 @@ p a:hover {
     white-space: nowrap;
     min-width: 70px;
     text-align: center;
+}
+
+.status_btn_danger_b {
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 14px;
+    color: #f46a6a;
+    background-color: rgba(244, 106, 106, 0.18);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+
+}
+
+.status_btn_danger_b:hover {
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 14px;
+    color: #e64545;
+    background-color: rgba(244, 106, 106, 0.18);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+
 }
 
 .status_btn_danger {
@@ -3856,6 +3934,7 @@ p a:hover {
     white-space: nowrap;
     min-width: 70px;
     text-align: center;
+
 }
 
 
@@ -3974,7 +4053,7 @@ p a:hover {
 
 .dropdown .dropdown-menu .dropdown-item:hover {
     color: #fff;
-    background: #F64E60;
+    background: #3bb77e;
 }
 
 
@@ -4219,7 +4298,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 /* line 568, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
 .color_button {
-    background-color: #8950FC;
+    background-color: #3BB77E;
     border: 0;
     color: #fff;
     display: inline-block;
@@ -4269,7 +4348,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 /* line 596, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
 .color_button:hover {
-    background-color: #8950FC;
+    background-color: #3BB77E;
     color: #fff;
 }
 
@@ -4277,7 +4356,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 /* line 601, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
 .export_btn {
-    background: #FF7A88;
+    background: #FDC040;
     font-size: 16px;
     font-weight: 400;
     color: #fff;
@@ -4301,7 +4380,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 /* line 2, G:/admin_project/8 admin/Analytic/scss/_header.scss */
 
 .header_iner {
-    background-color: #FBF6F0;
+    background-color: #eff2f6;
     position: fixed;
     top: 0;
     z-index: 99;
@@ -4627,7 +4706,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
     border-radius: 50%;
     right: -12px;
     top: -12px;
-    background: #F64E60;
+    background: #3bb77e;
     line-height: 22px;
 }
 
@@ -5217,7 +5296,7 @@ table.dataTable {
 /* line 46, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar .logo .large_logo img {
-    width: 100px;
+    width: 150px;
 }
 
 @media (max-width: 991px) {
@@ -5606,7 +5685,7 @@ table.dataTable {
 /* line 299, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu>li a:hover {
-    color: #F65365 !important;
+    color: #fdc040 !important;
     background: #F8FAFC;
 }
 
@@ -5614,7 +5693,7 @@ table.dataTable {
 /* line 303, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu>li a.active {
-    color: #F65365;
+    color: #3BB77E;
     background: #F8FAFC;
     border-radius: 15px;
 }
@@ -5655,6 +5734,7 @@ table.dataTable {
 /* line 353, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu>li>a {
+    font-weight: 500;
     color: #144339;
 }
 
@@ -5750,7 +5830,7 @@ table.dataTable {
 /* line 421, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu>li ul li a.active {
-    color: #F65365 !important;
+    color: #3BB77E !important;
 }
 
 
@@ -5913,7 +5993,7 @@ body::-webkit-scrollbar {
 
 .sidebar::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-    background-color: #f8dbdd;
+    background-color: #aaa;
 }
 
 
@@ -6325,7 +6405,7 @@ body::-webkit-scrollbar {
     min-height: 68vh;
     transition: .5s;
     position: relative;
-    background: #FBF6F0;
+    background: #f5f6f7;
     margin: 0;
     z-index: 22;
     border-radius: 0px;
@@ -6685,7 +6765,7 @@ body::-webkit-scrollbar {
 /* line 293, G:/admin_project/8 admin/Analytic/scss/_main_content.scss */
 
 .common_bootstrap_button span {
-    background: #F64E60;
+    background: #3bb77e;
     padding: 7px 12px;
     text-transform: capitalize;
     display: inline-block;
@@ -6703,8 +6783,8 @@ body::-webkit-scrollbar {
 .page_date_button {
     padding: 7px 13px;
     text-transform: capitalize;
-    color: #F64E60;
-    border: 1px solid #F64E60;
+    color: #FDC040;
+    border: 1px solid #3BB77E;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 600;
@@ -6724,7 +6804,7 @@ body::-webkit-scrollbar {
 /* line 320, G:/admin_project/8 admin/Analytic/scss/_main_content.scss */
 
 .page_date_button:hover {
-    background: #F64E60;
+    background: #3bb77e;
     color: #fff;
 }
 
@@ -7623,7 +7703,7 @@ body::-webkit-scrollbar {
     text-align: center;
     padding-bottom: 0px;
     padding-top: 6px;
-    background: #FBF6F0;
+    background: #f5f6f7;
     padding-left: 270px;
     position: absolute;
     left: 0;
@@ -7716,7 +7796,7 @@ body::-webkit-scrollbar {
 /* line 57, G:/admin_project/8 admin/Analytic/scss/_footer.scss */
 
 .footer_part p a {
-    color: #884FFB;
+    color: #3BB77E;
 }
 
 
@@ -8183,7 +8263,7 @@ canvas#highlights {
 /* line 144, G:/admin_project/8 admin/Analytic/scss/_lms_category.scss */
 
 .Activity_timeline ul li .activity_bell {
-    background: #884FFB;
+    background: #3BB77E;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -8424,7 +8504,7 @@ canvas#highlights {
     padding: 4px 15px 8px 15px;
     margin: 0;
     border-radius: 5px 5px 0 0;
-    background-color: #F65365;
+    background-color: #3BB77E;
 }
 
 
@@ -8455,7 +8535,7 @@ canvas#highlights {
 
 .note-editor.note-frame .note-btn:hover {
     color: #fff;
-    background: #884FFB;
+    background: #FDC040;
 }
 
 
@@ -8463,7 +8543,7 @@ canvas#highlights {
 
 .note-editor.note-frame .note-btn:hover i {
     color: #fff;
-    background: #884FFB;
+    background: #3BB77E;
 }
 
 
@@ -9619,7 +9699,7 @@ canvas#highlights {
 /* line 40, G:/admin_project/8 admin/Analytic/scss/_projects.scss */
 
 .dataTables_paginate a.current {
-    background: #884FFB !important;
+    background: #3BB77E  !important;
     box-shadow: 0px 5px 10px rgba(59, 118, 239, 0.3) !important;
     border: 0 !important;
     color: #fff !important;
@@ -9629,7 +9709,7 @@ canvas#highlights {
 /* line 46, G:/admin_project/8 admin/Analytic/scss/_projects.scss */
 
 .dataTables_paginate a:hover {
-    background: #884FFB !important;
+    background: #3BB77E  !important;
     box-shadow: 0px 5px 10px rgba(59, 118, 239, 0.3);
     border: 0 !important;
     color: #fff !important;
@@ -9679,8 +9759,8 @@ canvas#highlights {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #fff !important;
-    border: 1px solid #884FFB;
-    background-color: #884FFB !important;
+    border: 1px solid #3BB77E;
+    background-color: #3BB77E !important;
     box-shadow: 0px 5px 10px rgba(136, 79, 251, 0.04) !important;
 }
 
@@ -11591,7 +11671,7 @@ canvas#highlights {
 
 .common_tab_btn a.active {
     color: #fff;
-    background-color: #884FFB;
+    background-color: #3BB77E;
 }
 
 
@@ -11610,7 +11690,7 @@ canvas#highlights {
 
 .common_tab_btn2 a.active {
     color: #fff;
-    background-color: #F64E60;
+    background-color: #3BB77E;
 }
 
 
@@ -11856,7 +11936,7 @@ canvas#highlights {
 /* line 674, G:/admin_project/8 admin/Analytic/scss/_byer_table.scss */
 
 .sales_card_wrapper {
-    background-color: #F65365;
+    background-color: #3BB77E;
     position: relative;
     background-image: url(../img/plane_thumb.svg);
     background-repeat: no-repeat;
@@ -12327,8 +12407,8 @@ canvas#highlights {
 /* line 36, G:/admin_project/8 admin/Analytic/scss/_datepicker.scss */
 
 .default-datepicker .datepicker-inline .datepicker .datepicker--content .datepicker--days .datepicker--cells .datepicker--cell-day:hover {
-    background: #884FFB;
-    border: 2px solid #884FFB;
+    background: #3BB77E;
+    border: 2px solid #3BB77E;
     color: #fff;
 }
 
@@ -12336,7 +12416,7 @@ canvas#highlights {
 /* line 42, G:/admin_project/8 admin/Analytic/scss/_datepicker.scss */
 
 .default-datepicker .datepicker-inline .datepicker .datepicker--nav-title {
-    color: #FF3000;
+    color: #FDC040;
     font-size: 18px;
     font-weight: 900;
     font-family: "Mulish", sans-serif;
@@ -12369,7 +12449,7 @@ canvas#highlights {
     font-size: 30px;
     color: #2b2b2b;
     font-family: "Mulish", sans-serif;
-    color: #884FFB;
+    color: #3BB77E;
 }
 
 
@@ -12457,16 +12537,16 @@ canvas#highlights {
     color: #fff !important;
     border-radius: 15px;
     font-weight: bold;
-    border: 2px solid #884FFB;
-    background: #884FFB;
+    border: 2px solid #3BB77E;
+    background: #3BB77E;
 }
 
 
 /* line 130, G:/admin_project/8 admin/Analytic/scss/_datepicker.scss */
 
 .default-datepicker .datepicker--cell.-focus- {
-    background: #884FFB;
-    border: 2px solid #884FFB;
+    background: #3BB77E;
+    border: 2px solid #3BB77E;
     color: #fff;
 }
 
@@ -12496,7 +12576,7 @@ canvas#highlights {
 
 .datepicker--cell.-selected- {
     border: none;
-    background: #884FFB;
+    background: #3BB77E;
     color: #fff;
 }
 
@@ -12505,7 +12585,7 @@ canvas#highlights {
 
 .datepicker--cell.-selected-.-current- {
     border: none;
-    background: #884FFB;
+    background: #3BB77E;
     color: #fff;
 }
 
@@ -12513,7 +12593,7 @@ canvas#highlights {
 /* line 163, G:/admin_project/8 admin/Analytic/scss/_datepicker.scss */
 
 .default-datepicker .datepicker-inline .datepicker .datepicker--content .datepicker--days .datepicker--cells .datepicker--cell.-selected- {
-    background: #884FFB;
+    background: #3BB77E;
     color: #fff;
     border-radius: 15px;
     position: relative;
@@ -12523,7 +12603,7 @@ canvas#highlights {
 /* line 171, G:/admin_project/8 admin/Analytic/scss/_datepicker.scss */
 
 .datepicker--cell.-focus- {
-    background: #884FFB;
+    background: #3BB77E;
     color: #fff;
 }
 
@@ -12534,7 +12614,7 @@ canvas#highlights {
     color: #000;
     border-radius: 5px;
     font-weight: bold;
-    border: 2px solid #884FFB;
+    border: 2px solid #3BB77E;
 }
 
 
@@ -13822,7 +13902,7 @@ a.pswp__share--download:hover {
 .Menu_NOtification_Wrap .notification_Header {
     padding: 15px 20px;
     border-radius: 10px 10px 0px 0px;
-    background: #8950FC;
+    background: #3BB77E;
 }
 
 
@@ -13948,7 +14028,7 @@ a.pswp__share--download:hover {
 /* line 108, G:/admin_project/8 admin/Analytic/scss/_notification_menu.scss */
 
 .CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_HEADER {
-    background: #8950FC;
+    background: #3BB77E;
     border-radius: 5px 5px 0px 0px;
     padding: 27px 20px;
     position: relative;
@@ -14168,7 +14248,7 @@ a.pswp__share--download:hover {
 /* line 239, G:/admin_project/8 admin/Analytic/scss/_notification_menu.scss */
 
 .CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER.CHATING_RECEIVEr .SEND_SMS_VIEW {
-    background: #8950FC;
+    background: #FDC040;
 }
 
 
@@ -14191,7 +14271,7 @@ a.pswp__share--download:hover {
 /* line 251, G:/admin_project/8 admin/Analytic/scss/_notification_menu.scss */
 
 .CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER .SEND_SMS_VIEW {
-    background: #4567EE;
+    background: #6c9dcf;
     border-radius: 5px;
     padding: 10px 15px;
 }
@@ -15403,6 +15483,9 @@ a.pswp__share--download:hover {
 
 /* line 52, G:/admin_project/8 admin/Analytic/scss/_predefine.scss */
 
+
+
+
 .badge_btn_1 {
     font-size: 11px;
     font-weight: 700;
@@ -15833,7 +15916,7 @@ a.pswp__share--download:hover {
     transition: .3s;
     width: 13px;
     top: 1.4px;
-    border: 3px solid #8950FC;
+    border: 3px solid #3BB77E;
 }
 
 
@@ -15882,7 +15965,7 @@ a.pswp__share--download:hover {
     right: 0;
     top: 0;
     transition: .3s;
-    border: 3px solid #8950FC;
+    border: 3px solid #3BB77E;
     background: transparent;
 }
 
@@ -16962,12 +17045,31 @@ a.pswp__share--download:hover {
   */
 
 /*
+
+
 .file-upload {
   background-color: #ffffff;
   width: 600px;
   margin: 0 auto;
   padding: 20px;
 } */
+
+
+
+#products_previous {
+    padding-right: 57px!important;
+}
+table tbody tr td {
+    font-size: 14px!important;
+    color: #212527!important;
+}
+table tbody tr td a {
+    color: #3BB77E ;
+    font-size: 18px;
+}
+table tbody tr td a:hover {
+    color: #fdc040 ;
+}
 
 .file-upload-btn {
   width: 60%;

@@ -22,4 +22,16 @@ class ContactWithUs extends Model
         'subject',
         'massage'
     ];
+
+
+
+
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function country() {
+        return $this->belongsTo( Country::class );
+    }
 }

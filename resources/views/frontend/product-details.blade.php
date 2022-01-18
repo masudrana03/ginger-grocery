@@ -339,16 +339,17 @@
                                                     <div class="single-comment justify-content-between d-flex mb-30">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
+                                                                <a class="text-center" href="#" class="font-heading text-brand">{{ $rating->user->name }}</a>
                                                                 <img src="{{ asset('assets/frontend/imgs/blog/author-2.png') }}" alt="" />
-                                                                <a href="#" class="font-heading text-brand">{{ $rating->user->name }}</a>
                                                             </div>
+
                                                             <div class="desc">
                                                                 <div class="d-flex justify-content-between mb-10">
                                                                     <div class="d-flex align-items-center">
                                                                         <span class="font-xs text-muted">{{ $rating->created_at->diffForHumans() }}</span>
                                                                     </div>
                                                                     <div class="product-rate d-inline-block d-flex" style="position: absolute; left: 87%;">
-                                                                        <div class="product-rating" style="width: 40%"></div>
+                                                                        <div class="product-rating" style="width: {{ $rating->rating*2 }}0%"></div>
                                                                     </div>
                                                                 </div>
                                                                 <p class="mb-10">{{ $rating->comment }} </p>

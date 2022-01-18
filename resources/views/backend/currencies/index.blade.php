@@ -1,21 +1,6 @@
 @extends('backend.layouts.app')
 @section('title', 'Currencies')
 
-@push('styles')
-<style>
-    #currencies_previous {
-        padding-right: 57px!important;
-    }
-    table tbody tr td {
-        font-size: 14px!important;
-        color: #212527!important;
-    }
-    table tbody tr td a {
-        color: #884FFB;
-        font-size: 18px;
-    }
-</style>
-@endpush
 @section('content')
     <div class="main_content_iner">
         <div class="container-fluid p-0">

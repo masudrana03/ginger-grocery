@@ -8,7 +8,7 @@
         }
 
         .nav-pills-custom .nav-link.active {
-            color: #884FFB;
+            color: #3BB77E;
             background: #fff;
         }
 

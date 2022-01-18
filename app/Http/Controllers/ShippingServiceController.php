@@ -70,7 +70,7 @@ class ShippingServiceController extends Controller
                 $edit         = route('admin.shipping_services.edit', $shippingService->id);
                 $delete       = route('admin.shipping_services.destroy', $shippingService->id);
                 $token        = csrf_token();
-                $class        = $shippingService->status == 'Active' ? 'status_btn' : 'status_btn_danger';
+                $class        = $shippingService->status == 'Active' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']         = $shippingService->id;
                 $nestedData['title']     = $shippingService->title;

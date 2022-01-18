@@ -69,8 +69,8 @@ class DeliveryManDetailsController extends Controller
                 $show                = route('admin.delivery_men.show', $deliveryMan->id);
                 $delete              = route('admin.delivery_men.destroy', $deliveryMan->id);
                 $token               = csrf_token();
-                $class               = $deliveryMan->status == 'Approve' ? 'status_btn' : 'status_btn_danger';
-                $class1              = $deliveryMan->online_status == 'Online' ? 'status_btn' : 'status_btn_danger';
+                $class               = $deliveryMan->status == 'Approve' ? 'status_btn_b' : 'status_btn_danger_b';
+                $class1              = $deliveryMan->online_status == 'Online' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']             = $deliveryMan->id;
                 $nestedData['name']           = $deliveryMan->user->name;

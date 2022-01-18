@@ -135,12 +135,12 @@ var options1 = {
             }
         }
     },
-    colors: [ "#F65365" , "#E5EAEE"],
-    
+    colors: [ "#3BB77E" , "#E5EAEE"],
+
     markers: {
         size: 6,
         colors: ['#fff'],
-        strokeColor: "#F65365",
+        strokeColor: "#3BB77E",
         strokeWidth: 3,
     },
     legend: {
@@ -176,7 +176,7 @@ var options1 = {
         }
     },
     grid: {
-        borderColor: "#FFCCD2",
+        borderColor: "#f5f6f7",
         strokeDashArray: 4,
         yaxis: {
             lines: {

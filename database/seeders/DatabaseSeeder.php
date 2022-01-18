@@ -44,11 +44,11 @@ class DatabaseSeeder extends Seeder {
 
         ] );
 
-        Category::factory()
-            ->has(
-                Product::factory()->count( rand( 10, 25 ) ), 'products'
-            )
-            ->count( 15 )
-            ->create();
+        // Category::factory()
+        //     ->has(
+        //         Product::factory()->count( rand( 10, 25 ) ), 'products'
+        //     )
+        //     ->count( 15 )
+        //     ->create();
     }
 }
