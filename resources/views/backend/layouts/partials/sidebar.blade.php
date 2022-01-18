@@ -9,16 +9,16 @@
     </a>
 </li>
 @if (isAdmin())
-<li class="">
-    <a href="{{ route('admin.brands.index') }}" aria-expanded="false" class="active">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>Brands</span>
-        </div>
-    </a>
-</li>
+    <li class="">
+        <a href="{{ route('admin.brands.index') }}" aria-expanded="false" class="active">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>Brands</span>
+            </div>
+        </a>
+    </li>
 @endif
 <li class="">
     <a href="{{ route('admin.promos.index') }}" aria-expanded="false">
@@ -31,28 +31,28 @@
     </a>
 </li>
 @if (isAdmin())
-<li class="">
-    <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>
-                Currencies</span>
-        </div>
-    </a>
-</li>
-<li class="">
-    <a href="{{ route('admin.users.index') }}" aria-expanded="false">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>
-                Users</span>
-        </div>
-    </a>
-</li>
+    <li class="">
+        <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>
+                    Currencies</span>
+            </div>
+        </a>
+    </li>
+    <li class="">
+        <a href="{{ route('admin.users.index') }}" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>
+                    Users</span>
+            </div>
+        </a>
+    </li>
 @endif
 <li class="">
     <a href="{{ route('admin.stores.index') }}" aria-expanded="false">
@@ -78,17 +78,17 @@
 
 @if (isAdmin())
 
-<li>
-    <a href="{{ route('admin.banners.index') }}" aria-expanded="false">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>
-                Banners</span>
-        </div>
-    </a>
-</li>
+    <li>
+        <a href="{{ route('admin.banners.index') }}" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>
+                    Banners</span>
+            </div>
+        </a>
+    </li>
 @endif
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
@@ -99,7 +99,7 @@
             <span>Products</span>
         </div>
     </a>
-    <ul> 
+    <ul>
         <li>
             <a href="{{ route('admin.products.index') }}">Products</a>
         </li>
@@ -118,7 +118,7 @@
     </ul>
 </li>
 <li class="">
-    <a  href="{{ route('admin.carts.index') }}" aria-expanded="false">
+    <a href="{{ route('admin.carts.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>
@@ -128,7 +128,7 @@
     </a>
 </li>
 <li class="">
-    <a  href="{{ route('admin.zones.index') }}" aria-expanded="false">
+    <a href="{{ route('admin.zones.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
             <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
         </div>
@@ -168,17 +168,17 @@
     </a>
     <ul>
         <li>
-            <a  href="{{ route('admin.order_statuses.index') }}">Order Status</a>
+            <a href="{{ route('admin.order_statuses.index') }}">Order Status</a>
         </li>
-            <li><a href="{{ route('admin.orders.index') }}">All Orders</a></li>
-            @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-                <li><a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+        <li><a href="{{ route('admin.orders.index') }}">All Orders</a></li>
+        @foreach (\App\Models\OrderStatus::all() as $orderStatus)
+            <li><a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
                     Orders</a></li>
-            @endforeach
-       
+        @endforeach
+
     </ul>
 </li>
-@if (isAdmin())
+@if (isShopManager(auth()->user()->store_id))
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
@@ -189,61 +189,75 @@
         </div>
     </a>
     <ul>
-        
+        <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
+    </ul>
+</li>
+@endif
+@if (isAdmin())
+    <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>Settings</span>
+            </div>
+        </a>
+        <ul>
+
             <li><a href="{{ route('admin.settings.general') }}">General Settings</a></li>
             <li><a href="{{ route('admin.settings.email') }}">Email Settings</a></li>
             <li><a href="{{ route('admin.email_templates.index') }}">Email Templates</a></li>
             <li><a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a></li>
             <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
             <li><a href="{{ route('admin.taxes.index') }}">Tax</a></li>
-        
-    </ul>
-</li>
-<li class="">
-    <a href="{{ route('admin.contacts.index') }}" aria-expanded="false">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>Contact us</span>
-        </div>
-    </a>
-</li>
-<li class="">
-    <a class="has-arrow" href="#" aria-expanded="false">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>About</span>
-        </div>
-    </a>
-    <ul>
-        <li>
-            <a href="{{ route('admin.abouts.index') }}">About Info</a>
-        </li>
-        <li>
-            <a href="{{ route('admin.about.slider.index') }}">About Image slider</a>
-        </li>
-        <li>
-            <a href="{{ route('admin.about.service.index') }}">About Service</a>
-        </li>
-        <li>
-            <a href="{{ route('admin.about.performance') }}">About Performance</a>
-        </li>
 
-    </ul>
-</li>
-<li>
-    <a href="{{ route('admin.faqs.index') }}">
-        <div class="nav_icon_small">
-            <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
-        </div>
-        <div class="nav_title">
-            <span>FAQ</span>
-        </div>
-    </a>
-</li>
+        </ul>
+    </li>
+    <li class="">
+        <a href="{{ route('admin.contacts.index') }}" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>Contact us</span>
+            </div>
+        </a>
+    </li>
+    <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/8.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>About</span>
+            </div>
+        </a>
+        <ul>
+            <li>
+                <a href="{{ route('admin.abouts.index') }}">About Info</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.about.slider.index') }}">About Image slider</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.about.service.index') }}">About Service</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.about.performance') }}">About Performance</a>
+            </li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="{{ route('admin.faqs.index') }}">
+            <div class="nav_icon_small">
+                <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
+            </div>
+            <div class="nav_title">
+                <span>FAQ</span>
+            </div>
+        </a>
+    </li>
 
 @endif
-

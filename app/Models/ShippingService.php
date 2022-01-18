@@ -13,6 +13,10 @@ class ShippingService extends Model
         'title',
         'price',
         'status',
+        'type',
+        'from',
+        'to',
+        'store_id',
     ];
 
     public function getStatusAttribute()

@@ -15,7 +15,7 @@ class ShippingServiceController extends Controller
      */
     public function index()
     {
-       return view('backend.shipping_services.index');
+        return view('backend.shipping_services.index');
     }
 
     /**
@@ -24,7 +24,6 @@ class ShippingServiceController extends Controller
      */
     public function allShippingServices(Request $request)
     {
-
         $columns =[
             0 => 'id',
             1 => 'title',
@@ -46,20 +45,20 @@ class ShippingServiceController extends Controller
         if (empty($request->input('search.value'))) {
             $shippingServices = ShippingService::offset($start)
                                                ->limit($limit)
-                                               ->orderBy($order,$dir)
+                                               ->orderBy($order, $dir)
                                                ->get();
         } else {
             $search = $request->input('search.value');
 
-            $shippingServices =  ShippingService::where('id','LIKE',"%{$search}%")
-                                                ->orWhere('title', 'LIKE',"%{$search}%")
+            $shippingServices =  ShippingService::where('id', 'LIKE', "%{$search}%")
+                                                ->orWhere('title', 'LIKE', "%{$search}%")
                                                 ->offset($start)
                                                 ->limit($limit)
-                                                ->orderBy($order,$dir)
+                                                ->orderBy($order, $dir)
                                                 ->get();
 
-            $totalFiltered = ShippingService::where('id','LIKE',"%{$search}%")
-                                            ->orWhere('title', 'LIKE',"%{$search}%")
+            $totalFiltered = ShippingService::where('id', 'LIKE', "%{$search}%")
+                                            ->orWhere('title', 'LIKE', "%{$search}%")
                                             ->count();
         }
 
@@ -67,7 +66,7 @@ class ShippingServiceController extends Controller
 
         if (!empty($shippingServices)) {
             foreach ($shippingServices as $shippingService) {
-                $updateStatus = route('admin.shipping_services.update_status', $shippingService->id );
+                $updateStatus = route('admin.shipping_services.update_status', $shippingService->id);
                 $edit         = route('admin.shipping_services.edit', $shippingService->id);
                 $delete       = route('admin.shipping_services.destroy', $shippingService->id);
                 $token        = csrf_token();
@@ -76,6 +75,9 @@ class ShippingServiceController extends Controller
                 $nestedData['id']         = $shippingService->id;
                 $nestedData['title']     = $shippingService->title;
                 $nestedData['price']      = $shippingService->price;
+                $nestedData['type']      = $shippingService->type;
+                $nestedData['from']      = $shippingService->from;
+                $nestedData['to']      = $shippingService->to;
                 $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeBannerStatus({$shippingService->id})' id='bannerStatus-{$shippingService->id}'>$shippingService->status</a>";
                 $nestedData['created_at'] = $shippingService->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
@@ -91,14 +93,13 @@ class ShippingServiceController extends Controller
         }
 
         $json_data = [
-            "draw"            => intval( $request->input( 'draw' ) ),
-            "recordsTotal"    => intval( $totalData ),
-            "recordsFiltered" => intval( $totalFiltered ),
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
             "data"            => $data,
         ];
 
-        echo json_encode( $json_data );
-
+        echo json_encode($json_data);
     }
 
     /**
@@ -119,13 +120,15 @@ class ShippingServiceController extends Controller
      */
     public function store(ShippingServiceRequest $request)
     {
-        $request = $request->all();
+        $requestData = $request->all();
 
-        ShippingService::create($request);
+        $requestData['store_id'] = auth()->id();
 
-        toast( 'Shipping service successfully created', 'success' );
+        ShippingService::create($requestData);
 
-        return redirect()->route('admin.shipping_services.index' );
+        toast('Shipping service successfully created', 'success');
+
+        return redirect()->route('admin.shipping_services.index');
     }
 
     /**
@@ -159,13 +162,15 @@ class ShippingServiceController extends Controller
      */
     public function update(ShippingServiceRequest $request, ShippingService $shippingService)
     {
-        $request = $request->all();
+        $requestData = $request->all();
 
-        $shippingService->update($request);
+        $requestData['store_id'] = auth()->id();
 
-        toast( 'Shipping service successfully updated', 'success' );
+        $shippingService->update($requestData);
 
-        return redirect()->route('admin.shipping_services.index' );
+        toast('Shipping service successfully updated', 'success');
+
+        return redirect()->route('admin.shipping_services.index');
     }
 
     /**
@@ -178,7 +183,7 @@ class ShippingServiceController extends Controller
     {
         $shippingService->delete();
 
-        toast( 'Shipping service successfully deleted', 'success' );
+        toast('Shipping service successfully deleted', 'success');
 
         return redirect()->back();
     }
@@ -191,7 +196,6 @@ class ShippingServiceController extends Controller
      */
     public function updateStatus(ShippingService $shippingService)
     {
-
         $shippingService->update([
             'status' => $shippingService->status == 'Active' ? 'Inactive' : 'Active'
         ]);
@@ -200,19 +204,16 @@ class ShippingServiceController extends Controller
             $shippingServices = ShippingService::all();
 
             foreach ($shippingServices as $item) {
-
                 if ($item->id != $shippingService->id) {
-
                     $item->update([
                         'status' => 'Inactive'
                     ]);
                 }
-
             }
         }
 
 
-        toast( 'Status successfully updated', 'success' );
+        toast('Status successfully updated', 'success');
 
         return redirect()->back();
     }

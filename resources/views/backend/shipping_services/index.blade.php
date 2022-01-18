@@ -40,7 +40,10 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Title</th>
-                                            <th>Price</th>
+                                            <th>Fee</th>
+                                            <th>Type</th>
+                                            <th>Start</th>
+                                            <th>End</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -109,6 +112,9 @@
                 { "data": "id" },
                 { "data": "title" },
                 { "data": "price" },
+                { "data": "type" },
+                { "data": "from" },
+                { "data": "to" },
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }
