@@ -1,6 +1,30 @@
 @extends('frontend.layouts.app')
 @section('title', 'Checkout')
 
+<style>
+  span.checkout-quantity{
+   position: absolute;
+   background-color:#3BB77E;
+   width: 25px;
+   border-radius: 15px;
+   text-align: center;
+   color: white;
+   top:1px;
+   right:4px;
+  
+   
+  }
+  
+
+
+ 
+
+
+
+  
+
+</style>
+
 @section('content')
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -13,7 +37,7 @@
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
-            <div class="col-lg-8 mb-40">
+            <div class="col-lg-8">
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span
@@ -190,128 +214,107 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="border p-40 cart-totals ml-30 mb-50">
-                    <div class="d-flex align-items-end justify-content-between mb-30">
-                        <h4>Your Order</h4>
-                        <h6 class="text-muted">Subtotal</h6>
-                    </div>
-                    <div class="divider-2 mb-30"></div>
-                    <div class="table-responsive order_table checkout">
-                        <table class="table no-border">
-                            <tbody>
-                                @php
-                                    $total = 0;
-                                    $currency_symbol = '$';
-                                @endphp
-                                @forelse (auth()->user()->cart ? auth()->user()->cart->products : [] as $product)
-                                    <tr>
-                                        <td class="image product-thumbnail">
 
-                                            @if (count( $product->images ) > 0)
-                                                <img class="default-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                    alt="" />
-                                            @else
-                                                <img src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
-                                            @endif
+            {{-- Checkout new page added --}}
 
-                                        </td>
-                                        <td>
-                                            <h6 class="w-160 mb-5"><a href="#"
-                                                    class="text-heading">{{ $product->name }}</a></h6></span>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
-                                                    </div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h6 class="text-muted pl-20 pr-20">{{ $product->quantity }}</h6>
-                                        </td>
-                                        <td>
-                                            <h4 class="text-brand">{{ $product->currency->symbol }}
-                                                {{ $product->quantity * $product->price }}</h4>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $total += $product->quantity * $product->price;
-                                        $currency_symbol = $product->currency->symbol;
-                                    @endphp
-                                @empty
-                                    <p>No product in your cart!</p>
-                                @endforelse
-                                @if (!session('totalAfterDiscount'))
-                                    <tr>
-                                        <td colspan="3">
-                                            <h4 class="w-160 mb-5">Total</h4>
-                                        </td>
-                                        <td colspan="1">
-                                            <h4 class="text-brand">{{ $currency_symbol }} {{ $total }}</h4>
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td colspan="3">
-                                            <h5 class="w-160 mb-5">Sub toal</h5>
-                                        </td>
-                                        <td colspan="1">
-                                            <h5 class="text-brand">{{ $currency_symbol }} {{ $total }}</h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <h6 class="w-160 mb-5">Discount</h6>
-                                        </td>
-                                        <td colspan="1">
-                                            <h6 class="text-brand">{{ $currency_symbol }}
-                                                {{ session('discountAmount') }}</h6>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <h4 class="w-160 mb-5">Total</h4>
-                                        </td>
-                                        <td colspan="1">
-                                            <h4 class="text-brand">{{ $currency_symbol }}
-                                                {{ session('totalAfterDiscount') }}</h4>
-                                        </td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
+            <div class="col-lg-5" style="margin-top:7%;">
+
+              <div class=" p-2 bg-light">
+                <p class="font-weight-bold mb-0">Product(s):</p>
+              </div>
+
+              <div class="checkout-products-marketplace" id="shipping-method-wrapper">
+                 <div class="mt-2 bg-light mb-2">
+
+                    <div class="p-2" style="background:#cdf0e0";>
+                        <img style="vertical-align: middle;" src="https://nest.botble.com/storage/stores/2.png" alt="Global Office" class="img-fluid rounded" width="30">
+                        <span>Shop Name</span>
                     </div>
-                </div>
-                <div class="payment ml-30">
-                    <h4 class="mb-30">Payment</h4>
-                    <div class="payment_option">
-                        @foreach ($paymentMethods as $paymentMethod)
-                            <div class="custome-radio">
-                                <input name="payment_method_id" class="form-check-input payment-method" required=""
-                                    type="radio" value="{{ $paymentMethod->id }}"
-                                    onclick="doit({{ $paymentMethod->id }})"
-                                    id="exampleRadios-{{ $paymentMethod->id }}"
-                                    {{ $paymentMethod->provider == 'cash' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="exampleRadios-{{ $paymentMethod->id }}"
-                                    data-bs-toggle="collapse" data-target="#bankTranfer"
-                                    aria-controls="bankTranfer">{{ ucfirst($paymentMethod->provider) }}</label>
+                           
+                    <div class="p-2">
+                        <div class="row cart-item" >
+
+                            <div class="col-3" style="width: 14%">
+                                <div class="checkout-product-img-wrapper product-details">
+                                   <img class="item-thumb img-thumbnail img-rounded" src="https://nest.botble.com/storage/products/3-150x150.jpg" alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                   <span class="checkout-quantity">1</span>
+                                </div>
                             </div>
-                        @endforeach
+
+
+                            <div class="col-5" style="margin-top:2%">
+                              <p class="mb-0">Product b</p>
+                              <p class="mb-0">
+                                 <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
+                              </p>
+                            </div>
+
+
+                            <div class="col-4 text-end " style="margin-top:2%">
+                               <p>$110.67</p>
+                            </div>
+
+                        </div>
+                        <hr> 
+
+                        <div class="row cart-item">
+
+                            <div class="col-3" style="width: 14%">
+                                <div class="checkout-product-img-wrapper product-details">
+                                   <img class="item-thumb img-thumbnail img-rounded" src="https://nest.botble.com/storage/products/3-150x150.jpg" alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                   <span class="checkout-quantity">1</span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-5" style="margin-top:2%">
+                              <p class="mb-0">Product b</p>
+                              <p class="mb-0">
+                                 <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
+                              </p>
+                            </div>
+
+
+                            <div class="col-4 text-end" style="margin-top:2%">
+                               <p>$110.67</p>
+                            </div>
+
+
+                        </div>
+                         
                     </div>
-                    <div class="payment-logo d-flex">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-paypal.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-visa.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-master.svg" alt="">
-                        <img src="assets/imgs/theme/icons/payment-zapper.svg" alt="">
+                    <hr> 
+                    
+                    <div class="row">
+                       <div class="col-3">
+                            <h6>
+                                 Subtotal:
+                            </h6>
+                       </div>
+
+                       <div class="col-3">
+                           <h6>
+                               Amount
+                           </h6>
+                       </div>
                     </div>
-                    <button onclick="submit()" class="btn btn-fill-out btn-block mt-30">Place an Order<i
-                            class="fi-rs-sign-out ml-15"></i></button>
-                </div>
-            </div>
-        </div>
+
+               </div>
+                <hr>
+
+                {{-- <div class="shipping-method-wrapper p-3">
+                   <div class="payment-checkout-form">
+                        <div class="mx-0">
+                        <h6>Shipping method:</h6>
+                        </div>   
+                   </div>
+               </div> --}}
+
+
+
+       </div>
     </div>
+</div>
 
 @endsection
 
