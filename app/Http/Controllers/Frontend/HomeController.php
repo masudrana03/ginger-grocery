@@ -33,11 +33,12 @@ class HomeController extends Controller
         $compareProduct = Product::find($productIds) ?? [];
 
         if ($request->zone_id) {
-            $categories = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
+            $categoryProducts = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
                 $q->find($request->zone_id);
-            }])->limit(12)->get();
+            }])->limit(10)->get();
         } else {
-            $categories = Category::with('products.store', 'products.currency')->limit(12)->get();
+            $categoryProducts = Category::with('products.store', 'products.currency')->limit(10)->get();
+
         }
 
 
@@ -48,7 +49,7 @@ class HomeController extends Controller
 
         // return $zones;
 
-        return view('frontend.index', compact('categories', 'compareProduct', 'sliders', 'callToActions', 'zones'));
+        return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones'));
     }
 
     /**

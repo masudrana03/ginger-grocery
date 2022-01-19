@@ -12,7 +12,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @forelse ($categories->random(6) as $category )
+                @forelse ($categoryProducts->random(6) as $category )
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
                             data-bs-target="#tab-{{ $category->id }}" type="button" role="tab" style="padding-bottom: 8px; padding-left:5px;"
@@ -27,8 +27,8 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
-                    @forelse ($categories as $category )
-                        @forelse ($category->products->shuffle() as $product)
+                    @forelse ($categoryProducts as $category )
+                        @forelse ($category->products->take(3) as $product)
                         {{-- @forelse ($category->products as $product) --}}
                             <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">

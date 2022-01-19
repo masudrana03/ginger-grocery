@@ -3,6 +3,7 @@
 use App\Models\Tax;
 use App\Models\Promo;
 use App\Models\ShippingService;
+use App\Models\Store;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
@@ -12,17 +13,19 @@ use Illuminate\Support\Facades\Validator;
  * @param string $image
  * @param string $imageDirectory
  */
-function deleteImage( $image, $imageDirectory ) {
-    deleteFile( $imageDirectory . $image );
-    deleteFile( $imageDirectory . 'thumbnail/' . $image );
+function deleteImage($image, $imageDirectory)
+{
+    deleteFile($imageDirectory . $image);
+    deleteFile($imageDirectory . 'thumbnail/' . $image);
 }
 
 /**
  * Deletes a file if it exsist
  * @param string $location
  */
-function deleteFile( $location ) {
-    File::exists( $location ) && File::delete( $location );
+function deleteFile($location)
+{
+    File::exists($location) && File::delete($location);
 }
 
 /**
@@ -31,19 +34,20 @@ function deleteFile( $location ) {
  * @param string $location
  * @param string $thumbnailLocation | optional
  */
-function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false ) {
-    $path = explode( '/', $location );
-    array_pop( $path );
-    $imageDirectory     = implode( '/', $path ) . '/';
+function saveImageWithThumbnail($image, $location, $thumbnailLocation = false)
+{
+    $path = explode('/', $location);
+    array_pop($path);
+    $imageDirectory     = implode('/', $path) . '/';
     $thumbnailDirectory = $imageDirectory . 'thumbnail/';
 
-    makeDirectory( $imageDirectory );
-    makeDirectory( $thumbnailDirectory );
+    makeDirectory($imageDirectory);
+    makeDirectory($thumbnailDirectory);
 
-    Image::make( $image )->save( $location );
-    $thumbnailLocation && Image::make( $image )->fit( 200 )->resize( 200, 200, function ( $constraint ) {
+    Image::make($image)->save($location);
+    $thumbnailLocation && Image::make($image)->fit(200)->resize(200, 200, function ($constraint) {
         $constraint->aspectRatio();
-    } )->save( $thumbnailLocation );
+    })->save($thumbnailLocation);
 }
 
 /**
@@ -52,9 +56,10 @@ function saveImageWithThumbnail( $image, $location, $thumbnailLocation = false )
  * @param  string $location
  * @return void
  */
-function makeDirectory( $location ) {
-    if ( !file_exists( $location ) ) {
-        mkdir( $location );
+function makeDirectory($location)
+{
+    if (!file_exists($location)) {
+        mkdir($location);
     }
 }
 
@@ -63,7 +68,8 @@ function makeDirectory( $location ) {
  * @param  string $extension
  * @return string unique file name
  */
-function generateUniqueFileName( $extension ) {
+function generateUniqueFileName($extension)
+{
     return now()->toDateString() . '-' . uniqid() . '.' . $extension;
 }
 
@@ -71,15 +77,17 @@ function generateUniqueFileName( $extension ) {
  * Validate with validator Make
  * @param array $rules
  */
-function validateData( $rules ) {
-    return Validator::make( request()->all(), $rules );
+function validateData($rules)
+{
+    return Validator::make(request()->all(), $rules);
 }
 
 /**
  * @param  $key
  * @return mixed
  */
-function settings( $key ) {
+function settings($key)
+{
     /**
      * @var mixed
      */
@@ -88,13 +96,13 @@ function settings( $key ) {
      */
     static $settings;
 
-    if ( is_null( $settings ) ) {
-        $settings = \Illuminate\Support\Facades\Cache::remember( 'settings', 24 * 60, function () {
-            return \App\Models\Setting::pluck( 'value', 'key' )->toArray();
-        } );
+    if (is_null($settings)) {
+        $settings = \Illuminate\Support\Facades\Cache::remember('settings', 24 * 60, function () {
+            return \App\Models\Setting::pluck('value', 'key')->toArray();
+        });
     }
 
-    return ( is_array( $key ) ) ? \Illuminate\Support\Arr::only( $settings, $key ) : $settings[$key];
+    return (is_array($key)) ? \Illuminate\Support\Arr::only($settings, $key) : $settings[$key];
 }
 
 /**
@@ -104,12 +112,13 @@ function settings( $key ) {
  * @param string           $type       discount type
  * @param integer          $discount
  */
-function getAmountAfterDiscount( $total, $type, $discount ) {
-    if ( $type == 'amount' ) {
+function getAmountAfterDiscount($total, $type, $discount)
+{
+    if ($type == 'amount') {
         return $total -= $discount;
     }
 
-    return $total -= ( $discount / 100 ) * $total;
+    return $total -= ($discount / 100) * $total;
 }
 
 /**
@@ -119,53 +128,97 @@ function getAmountAfterDiscount( $total, $type, $discount ) {
  * @param string           $type       discount type
  * @param integer          $discount
  */
-function getDiscountAmount( $total, $type, $discount ) {
-    if ( $type == 'amount' ) {
+function getDiscountAmount($total, $type, $discount)
+{
+    if ($type == 'amount') {
         return $discount;
     }
 
-    return ( $discount / 100 ) * $total;
+    return ($discount / 100) * $total;
 }
 
 /**
  * Give me tax amount
- *
- * @param \App\Models\Cart $cart
- * @param integer          $percentage
  */
-function taxCalculator( $total, $percentage ) {
-    return ( $percentage / 100 ) * $total;
+function taxCalculator($total, $storeId)
+{
+    $taxRate = Store::find($storeId)->tax;
+
+    return round(($taxRate / 100) * $total, 2) ;
+}
+
+/**
+ * Give me tax amount
+ */
+function shippingCalculator($total, $storeId)
+{
+    $shippingMethods = ShippingService::active()->whereStoreId($storeId)->get();
+
+    $shippingCharge = 0;
+
+    foreach ($shippingMethods as $shippingMethod) {
+        switch ($shippingMethod->type) {
+            case 'Free':
+                return 0;
+            break;
+            case 'Flat rate':
+                return $shippingMethod->price;
+            break;
+            case 'Condition on purchase':
+                if ($total < $shippingMethod->to) {
+                    $shippingCharge += $shippingMethod->price;
+                }
+            break;
+            case 'Condition on distance':
+                $shippingCharge = 0;
+            break;
+        }
+    }
+
+    return $shippingCharge;
 }
 
 /**
  * @param $cart
  */
-function priceCalculator( $cart ) {
-    $subtotal = $cart->products->sum( 'price' );
+function priceCalculator($cart)
+{
+    $subtotal = 0;
+    $storeId = '';
+
+    if (auth()->user()->cart && auth()->user()->cart->promo_id) {
+        $promo    = Promo::find(auth()->user()->cart->promo_id);
+        $discount = getDiscountAmount($subtotal, $promo->type, $promo->discount);
+    }
+
+    foreach ($cart as $item) {
+        $subtotal += $item->price * $item->quantity;
+        $storeId = $item->store_id;
+    }
+
+    // $subtotal = $cart->products->sum('price');
 
     $discount = 0;
 
-    if ( $cart->promo_id ) {
-        $promo    = Promo::find( $cart->promo_id );
-        $discount = getDiscountAmount( $subtotal, $promo->type, $promo->discount );
-    }
+    $shipping = shippingCalculator($subtotal, $storeId);
+    $tax      = taxCalculator($subtotal, $storeId);
 
     $shipping = ShippingService::active()->first();
     $shipping = $shipping ? $shipping->price : 0;
-    $tax      = Tax::active()->first();
-    $tax      = $tax ? $tax->percentage : 0;
+
     $adjust   = 0;
 
-    $total = $subtotal - $discount - $adjust + $shipping + taxCalculator( $subtotal, $tax );
+    $total = $subtotal - $discount - $adjust + $shipping + $tax;
 
-    return ['subtotal' => $subtotal, 'discount' => $discount, 'total' => $total, 'adjust' => $adjust];
+    return ['subtotal' => $subtotal, 'discount' => $discount, 'shipping' => $shipping, 'tax' => $tax, 'total' => $total, 'adjust' => $adjust];
 }
 
 /**
  * Check if the current loggedin user is admin
  * @return  bool
  */
-function isAdmin() {
+function isAdmin()
+{
     return auth()->user()->type == 1;
 }
 
@@ -174,7 +227,8 @@ function isAdmin() {
  *
  * @return  bool
  */
-function isShopManager( $store_id ) {
+function isShopManager($store_id)
+{
     return auth()->user()->type == 2 && auth()->user()->store_id == $store_id;
 }
 
@@ -182,8 +236,7 @@ function isShopManager( $store_id ) {
 function format_coordiantes($coordinates)
 {
     $data = [];
-    foreach($coordinates as $coord)
-    {
+    foreach ($coordinates as $coord) {
         $data[] = (object)['lat'=>$coord->getlat(), 'lng'=>$coord->getlng()];
     }
     return $data;
