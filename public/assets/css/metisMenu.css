@@ -3,7 +3,7 @@
 * A jQuery menu plugin
 * @version 3.0.6
 * @author Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
-* @license: MIT 
+* @license: MIT
 */
 .metismenu .arrow {
     float: right;
@@ -12,36 +12,36 @@
   *[dir="rtl"] .metismenu .arrow {
     float: left;
   }
-  
+
   /*
    * Require Bootstrap 3.x
    * https://github.com/twbs/bootstrap
   */
-  
+
   .metismenu .glyphicon.arrow:before {
     content: "\e079";
   }
   .metismenu .mm-active > a > .glyphicon.arrow:before {
     content: "\e114";
   }
-  
+
   /*
    * Require Font-Awesome
    * http://fortawesome.github.io/Font-Awesome/
   */
-  
+
   .metismenu .fa.arrow:before {
     content: "\f104";
   }
   .metismenu .mm-active > a > .fa.arrow:before {
     content: "\f107";
   }
-  
+
   /*
    * Require Ionicons
    * http://ionicons.com/
   */
-  
+
   .metismenu .ion.arrow:before {
     content: "\f3d2"
   }
@@ -75,7 +75,7 @@
   .metismenu .mm-collapse:not(.mm-show) {
     display: none;
   }
-  
+
   .metismenu .mm-collapsing {
     position: relative;
     height: 0;
@@ -84,11 +84,11 @@
     transition-duration: .35s;
     transition-property: height, visibility;
   }
-  
+
   .metismenu .has-arrow {
     position: relative;
   }
-  
+
   .metismenu .has-arrow::after {
     position: absolute;
     content: '';
@@ -101,7 +101,7 @@
     right: 1em; */
     transform: rotate(-90deg) translate(0, -50%);
     transform-origin: top;
-    top: 50%;
+    top: 54%;
     transition: all .3s ease-out;
     right: 40px;
      content: "\e64b";
@@ -111,21 +111,21 @@
       font-size: 14px;
 
   }
-  
+
   *[dir="rtl"] .metismenu .has-arrow::after {
     right: auto;
     left: 1em;
     transform: rotate(180deg) translate(0, -50%);
   }
-  
+
   .metismenu .mm-active > .has-arrow::after,
   .metismenu .has-arrow[aria-expanded="true"]::after {
     transform: rotate(180deg) translate(0, -50%);
   }
-  
+
   *[dir="rtl"] .metismenu .mm-active > .has-arrow::after,
   *[dir="rtl"] .metismenu .has-arrow[aria-expanded="true"]::after {
     transform: rotate(180deg) translate(0, -50%);
   }
-  
+
   /*# sourceMappingURL=metisMenu.css.map */

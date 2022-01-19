@@ -5,13 +5,13 @@
 <div class="main_content_iner" style="margin-top: 3%; padding: 30px; padding-top: 13%; padding-bottom: 150px;">
     <div class="container-fluid p-0">
             <div class="col-lg-12">
-                <div class="white_box mb_30" style="background-color: #FBF6F0;">
+                <div class="white_box mb_30" style="background-color: #eff3f7;">
                     <div class="row justify-content-center">
                         <div class="col-lg-4">
                             <!-- sign_in  -->
                             <div class="modal-content cs_modal">
-                                <div class="modal-header theme_bg_1">
-                                    <h5 class="modal-title text_white">Forget Password</h5>
+                                <div class="modal-header theme_bg_1 justify-content-center">
+                                    <h5 class="modal-title text_white ">Forget Password</h5>
                                 </div>
                                 <div class="modal-body">
                                     @if (session('status'))

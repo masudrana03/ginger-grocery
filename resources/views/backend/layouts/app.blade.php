@@ -225,8 +225,8 @@
                                         <h5>{{ auth()->user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="{{ route('admin.user.profile') }}">My Profile </a>
-                                        <a href="{{ route('admin.user.change_password') }}">Change Password</a>
+                                        <a class="dropdown-item" href="{{ route('admin.user.profile') }}">My Profile </a>
+                                        <a class="dropdown-item" href="{{ route('admin.user.change_password') }}">Change Password</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Log Out') }}

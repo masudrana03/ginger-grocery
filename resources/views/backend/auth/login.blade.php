@@ -8,17 +8,17 @@
     width: 100%;
     display: inline-flex;
     overflow: hidden;
-   
+
 }
 
 .cs_modal .modal-body .form-group .eye-icon {
-   
+
     position:absolute;
     margin-left: -40px;
     margin-top: 17px;
-    
+
 }
-</style>   
+</style>
 
 @endpush
 
@@ -28,7 +28,7 @@
         <div class="container-fluid p-0">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="white_box mb_30" style="background-color: #FBF6F0;">
+                    <div class="white_box mb_30" style="background-color: #eff3f7;">
                         <div class="row justify-content-center">
 
                             <div class="col-lg-4">
@@ -72,7 +72,7 @@
                                             </div>
 
                                             <button type="submit" class="btn_1 full_width text-center">Log in</button>
-                                            
+
                                             <p>Need an account? <a  href="{{ route('admin.register') }}"> Sign Up </a></p>
 
                                             <div class="text-center">
@@ -102,7 +102,7 @@
 @push('script')
 <script>
 
- 
+
     $(document).ready(function() {
        $(".eye-icon").on('click', function(event) {
            event.preventDefault();
@@ -117,10 +117,9 @@
            }
        });
    });
-   
+
    </script>
 @endpush
 
 
-    
-  
+

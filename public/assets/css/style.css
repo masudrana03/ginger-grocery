@@ -1313,6 +1313,19 @@ table.dataTable tbody td {
     font-size: 18px;
     font-weight: 500;
     line-height: 25px;
+    display: inline-block;
+    padding: 6px 18px;
+    color: #34c38f !important;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+
 }
 
 
@@ -2122,6 +2135,7 @@ th:focus {
 
 .cs_modal {
     background-color: #fef1f2;
+    border: 1px;
 }
 
 
@@ -4038,6 +4052,14 @@ p a:hover {
     border-radius: 0 !important;
 }
 
+.dropdown-item:hover {
+    color: #2c2b2b!important;
+    background: #daf4eb;
+    font-weight: 400!important;
+    padding-left: 6px!important;
+    border-radius: 10px!important;
+}
+
 
 /* line 378, G:/admin_project/8 admin/Analytic/scss/_button.scss */
 
@@ -4761,7 +4783,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 .profile_info .profile_info_iner {
     position: absolute;
     right: 0;
-    background-color: #fff;
+    background-color: #f5f6f7;
     text-align: left;
     width: 215px;
     padding: 0;
@@ -4787,7 +4809,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
     top: -10px;
     right: 15px;
     border-width: 0 11px 12px 11px;
-    border-color: transparent transparent #567AED transparent;
+    border-color: transparent transparent #61bd9b  transparent;
     z-index: 2;
 }
 
@@ -4796,7 +4818,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child::before {
 
 .profile_info .profile_info_iner .profile_author_name {
     padding: 20px 25px;
-    background: #567AED;
+    background: #69cba7;
     border-radius: 10px 15px 0px 0px;
 }
 
@@ -5660,7 +5682,7 @@ table.dataTable {
 /* line 278, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu>li a {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     color: #144339;
     padding: 0px 25px 0px 0px;
@@ -5670,7 +5692,6 @@ table.dataTable {
     z-index: 0;
     display: grid;
     grid-template-columns: 34px auto;
-    grid-gap: 15px;
     align-items: center;
     position: relative;
     background: transparent;
@@ -6014,7 +6035,7 @@ body::-webkit-scrollbar {
 /* line 549, G:/admin_project/8 admin/Analytic/scss/_sidebar.scss */
 
 .sidebar #sidebar_menu li a img {
-    width: 14px;
+    width: 16px;
     height: auto;
 }
 
@@ -9740,6 +9761,9 @@ canvas#highlights {
     cursor: default;
     color: #fff !important;
     border: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 60px !important;
 }
 
 
@@ -11013,7 +11037,7 @@ canvas#highlights {
 /* line 153, G:/admin_project/8 admin/Analytic/scss/_byer_table.scss */
 
 .theme_bg_1 {
-    background: #2D1967 !important;
+    background: #daf4eb !important;
 }
 
 

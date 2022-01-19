@@ -9,20 +9,18 @@
     width: 100%;
     display: inline-flex;
     overflow: hidden;
-   
+
 }
 
 .cs_modal .modal-body .form-group .eye-icon {
-   
+
     position:absolute;
     margin-left: -40px;
     margin-top: 17px;
-    
 }
-</style>   
+</style>
 
 @endpush
-
 
 
 @section('content')
@@ -31,7 +29,7 @@
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="white_box mb_30" style="background-color: #FBF6F0;">
+                <div class="white_box mb_30" style="background-color: #eff3f7;">
                     <div class="row justify-content-center">
                         <div class="col-lg-4">
                             <!-- sign_in  -->
@@ -79,8 +77,8 @@
                                             {{-- <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i> --}}
                                         </div>
                                         <div class="form-group">
-                                            <input id="name" type="text" class="form-control  @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"  autofocus>
-                                            
+                                            <input id="name" type="text" class="form-control  @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" placeholder=" +880 1711223344" required autocomplete="phone"  autofocus>
+
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -115,7 +113,7 @@
 @push('script')
 <script>
 
- 
+
     $(document).ready(function() {
        $(".eye-icon").on('click', function(event) {
            event.preventDefault();
@@ -130,9 +128,9 @@
            }
        });
    });
-   
+
    </script>
 @endpush
 
 
-    
+
