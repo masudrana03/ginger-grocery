@@ -31,7 +31,7 @@
     </a>
 </li>
 @if (isAdmin())
-    <li class="">
+    {{-- <li class="">
         <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
             <div class="nav_icon_small">
                 <img src="{{ asset('assets/img/menu-icon/6.svg') }}" alt="">
@@ -41,7 +41,7 @@
                     Currencies</span>
             </div>
         </a>
-    </li>
+    </li> --}}
     <li class="">
         <a href="{{ route('admin.users.index') }}" aria-expanded="false">
             <div class="nav_icon_small">

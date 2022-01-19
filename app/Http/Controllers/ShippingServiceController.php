@@ -24,7 +24,9 @@ class ShippingServiceController extends Controller
      */
     public function allShippingServices(Request $request)
     {
-        $columns =[
+        $storeId = auth()->user()->store_id;
+
+        $columns = [
             0 => 'id',
             1 => 'title',
             2 => 'price',
@@ -33,7 +35,7 @@ class ShippingServiceController extends Controller
             5 => 'id',
         ];
 
-        $totalData = ShippingService::count();
+        $totalData = ShippingService::where('store_id', $storeId)->count();
 
         $totalFiltered = $totalData;
 
@@ -45,6 +47,7 @@ class ShippingServiceController extends Controller
         if (empty($request->input('search.value'))) {
             $shippingServices = ShippingService::offset($start)
                                                ->limit($limit)
+                                               ->where('store_id', $storeId)
                                                ->orderBy($order, $dir)
                                                ->get();
         } else {
@@ -52,6 +55,7 @@ class ShippingServiceController extends Controller
 
             $shippingServices =  ShippingService::where('id', 'LIKE', "%{$search}%")
                                                 ->orWhere('title', 'LIKE', "%{$search}%")
+                                                ->where('store_id', $storeId)
                                                 ->offset($start)
                                                 ->limit($limit)
                                                 ->orderBy($order, $dir)
@@ -59,6 +63,7 @@ class ShippingServiceController extends Controller
 
             $totalFiltered = ShippingService::where('id', 'LIKE', "%{$search}%")
                                             ->orWhere('title', 'LIKE', "%{$search}%")
+                                            ->where('store_id', $storeId)
                                             ->count();
         }
 
@@ -122,7 +127,7 @@ class ShippingServiceController extends Controller
     {
         $requestData = $request->all();
 
-        $requestData['store_id'] = auth()->id();
+        $requestData['store_id'] = auth()->user()->store_id;
 
         ShippingService::create($requestData);
 
@@ -164,7 +169,7 @@ class ShippingServiceController extends Controller
     {
         $requestData = $request->all();
 
-        $requestData['store_id'] = auth()->id();
+        $requestData['store_id'] = auth()->user()->store_id;
 
         $shippingService->update($requestData);
 
@@ -200,17 +205,17 @@ class ShippingServiceController extends Controller
             'status' => $shippingService->status == 'Active' ? 'Inactive' : 'Active'
         ]);
 
-        if ($shippingService->status == 'Active') {
-            $shippingServices = ShippingService::all();
+        // if ($shippingService->status == 'Active') {
+        //     $shippingServices = ShippingService::all();
 
-            foreach ($shippingServices as $item) {
-                if ($item->id != $shippingService->id) {
-                    $item->update([
-                        'status' => 'Inactive'
-                    ]);
-                }
-            }
-        }
+        //     foreach ($shippingServices as $item) {
+        //         if ($item->id != $shippingService->id) {
+        //             $item->update([
+        //                 'status' => 'Inactive'
+        //             ]);
+        //         }
+        //     }
+        // }
 
 
         toast('Status successfully updated', 'success');

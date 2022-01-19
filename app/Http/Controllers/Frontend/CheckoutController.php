@@ -90,15 +90,15 @@ class CheckoutController extends Controller
             return back()->with('error', 'Your cart is empty, please add product in your cart');
         }
 
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'country_id' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'phone' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'address' => 'required',
+        //     'country_id' => 'required',
+        //     'city' => 'required',
+        //     'zip' => 'required',
+        //     'phone' => 'required',
+        // ]);
 
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
@@ -110,22 +110,30 @@ class CheckoutController extends Controller
             return back()->with('error', 'Payment method not found');
         }
 
-        $billingId = $this->createBillingAddress($request);
-        $shippingId = $billingId;
-        if ($request->shipping_address) {
-            $shippingId = $this->createShippingAddress($request);
-        }
+        // $billingId = $this->createBillingAddress($request);
+    // $shippingId = $billingId;
+        // if ($request->shipping_address) {
+        //     $shippingId = $this->createShippingAddress($request);
+        // }
 
-        $invoiceId = $this->createOrder($cart, $billingId, $shippingId);
+       // $invoiceId = $this->createOrder($cart, $billingId, $shippingId);
+
+       $carts = $cart->products->groupBy('store_id');
+
+       $invoiceIds = [];
+
+       foreach ($carts as $cart) {
+            $invoiceIds[] = $this->createOrder($cart, 1, 1);
+       }
 
         // give points if match any condition
-        $this->givePointsToCustomer($cart);
+      //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
         //$this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
-        return $this->acceptPayment($provider->provider, $invoiceId);
+       // return $this->acceptPayment($provider->provider, $invoiceId);
     }
 
     /**
@@ -210,7 +218,7 @@ class CheckoutController extends Controller
      */
     public function createOrder($cart, $billingId, $shippingId)
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         //try {
             $orderStatus = OrderStatus::whereName('Pending')->first();
@@ -252,7 +260,7 @@ class CheckoutController extends Controller
             $cart->products()->detach();
             $cart->delete();
 
-            DB::commit();
+            //DB::commit();
 
             session()->forget('totalAfterDiscount');
             session()->forget('discountAmount');

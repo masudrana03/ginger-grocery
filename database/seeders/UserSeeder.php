@@ -42,5 +42,25 @@ class UserSeeder extends Seeder {
             'store_id'   => 1, // store id (optional) only for store manager
             'created_at' => now(),
         ] );
+
+        DB::table( 'users' )->insert( [
+            'name'       => 'Store Manager',
+            'email'      => 'manager1@gmail.com',
+            'password'   => Hash::make( 'password' ),
+            'phone'      => '01718000011',
+            'type'       => 2, // 1: admin, 2: store manager, 3: customer
+            'store_id'   => 2, // store id (optional) only for store manager
+            'created_at' => now(),
+        ] );
+
+        DB::table( 'users' )->insert( [
+            'name'       => 'Store Manager',
+            'email'      => 'manager2@gmail.com',
+            'password'   => Hash::make( 'password' ),
+            'phone'      => '01718000021',
+            'type'       => 2, // 1: admin, 2: store manager, 3: customer
+            'store_id'   => 6, // store id (optional) only for store manager
+            'created_at' => now(),
+        ] );
     }
 }

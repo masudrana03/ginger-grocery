@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 
 class CartController extends Controller
 {
@@ -58,9 +59,17 @@ class CartController extends Controller
 
     public function cart()
     {
+        $carts = auth()->user()->cart->products->groupBy('store_id');
+
+        $totalTax = 0;
+
+        foreach ($carts as $cart) {
+            $totalTax += $calculatedPrice = priceCalculator($cart)['tax'];
+        }
+
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
-        return view('frontend.cart', compact('compareProduct'));
+        return view('frontend.cart', compact('compareProduct', 'totalTax'));
     }
 
     /**
@@ -68,7 +77,6 @@ class CartController extends Controller
      */
     public function removeToCartById($id)
     {
-
         $product = Product::find($id);
 
         $product->carts()->detach();
