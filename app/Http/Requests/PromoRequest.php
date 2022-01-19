@@ -24,6 +24,7 @@ class PromoRequest extends FormRequest
     public function rules()
     {
         return [
+            'title'  => 'required',
             'code'  => 'required',
             'limit' => 'required'
         ];

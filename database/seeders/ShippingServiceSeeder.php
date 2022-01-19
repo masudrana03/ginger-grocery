@@ -13,17 +13,17 @@ class ShippingServiceSeeder extends Seeder {
      */
     public function run() {
 
-        DB::table( 'shipping_services' )->insert( [
-            'title'      => 'Free delivery',
-            'price'      => '0',
-            'created_at' => now(),
-        ] );
+        // DB::table( 'shipping_services' )->insert( [
+        //     'title'      => 'Free delivery',
+        //     'price'      => '0',
+        //     'created_at' => now(),
+        // ] );
 
-        DB::table( 'shipping_services' )->insert( [
-            'title'      => 'Delivery charge',
-            'price'      => '50',
-            'created_at' => now(),
-        ] );
+        // DB::table( 'shipping_services' )->insert( [
+        //     'title'      => 'Delivery charge',
+        //     'price'      => '50',
+        //     'created_at' => now(),
+        // ] );
         
     }
 }

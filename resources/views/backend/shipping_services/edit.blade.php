@@ -15,23 +15,57 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('admin.shipping_services.update', $shippingService->id) }}" method="POST">
+                            <form action="{{ route('admin.shipping_services.update', $shippingService->id) }}"
+                                method="POST">
                                 @csrf
                                 @method('patch')
                                 <div class="form-group">
                                     <label for="name">Title</label>
-                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="emailHelp" placeholder="title" value="{{ old('title') ?? $shippingService->title }}">
+                                    <input type="text" name="title"
+                                        class="form-control @error('title') is-invalid @enderror" id="title"
+                                        aria-describedby="emailHelp" placeholder="title"
+                                        value="{{ old('title') ?? $shippingService->title }}">
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label for="title">Shipping Type</label>
+                                        <select class="form-control" name="type">
+                                            <option {{ $shippingService->type == 'Free' ? 'selected' : '' }} value="Free">
+                                                Free</option>
+                                            <option {{ $shippingService->type == 'Flat rate' ? 'selected' : '' }}
+                                                value="Flat rate">Flat rate</option>
+                                            <option
+                                                {{ $shippingService->type == 'Condition on purchase' ? 'selected' : '' }}
+                                                value="Condition on purchase">Condition on purchase</option>
+                                            <option
+                                                {{ $shippingService->type == 'Condition on distance' ? 'selected' : '' }}
+                                                value="Condition on distance">Condition on distance</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="title">Condition Start</label>
+                                        <input type="number" name="from" class="form-control" id="price"
+                                            aria-describedby="emailHelp" placeholder="Start"
+                                            value="{{ old('from') ?? $shippingService->from }}">
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="title">Condition End</label>
+                                        <input type="number" name="to" class="form-control" id="price"
+                                            aria-describedby="emailHelp" placeholder="End"
+                                            value="{{ old('to') ?? $shippingService->to }}">
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price">Fee</label>
                                     <input type="number" name="price"
                                         class="form-control @error('price') is-invalid @enderror" id="price"
-                                        aria-describedby="emailHelp" placeholder="price" value="{{ old('price') ?? $shippingService->price }}">
+                                        aria-describedby="emailHelp" placeholder="Fee"
+                                        value="{{ old('price') ?? $shippingService->price }}">
                                     @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -41,11 +75,14 @@
                                 <div class="form-group">
                                     <label for="body">Status</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input {{ $shippingService->status == 'Active' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio1" value="Active">
+                                        <input {{ $shippingService->status == 'Active' ? 'checked' : '' }} name="status"
+                                            class="form-check-input" type="radio" id="inlineRadio1" value="Active">
                                         <label class="form-check-label" for="inlineRadio1">Active</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input {{ $shippingService->status == 'Inactive' ? 'checked' : '' }} name="status" class="form-check-input" type="radio" id="inlineRadio2" value="Inactive">
+                                        <input {{ $shippingService->status == 'Inactive' ? 'checked' : '' }}
+                                            name="status" class="form-check-input" type="radio" id="inlineRadio2"
+                                            value="Inactive">
                                         <label class="form-check-label" for="inlineRadio2">Inactive</label>
                                     </div>
                                 </div>

@@ -34,6 +34,8 @@ class Store extends Model {
         'zone_id',
         'latitude',
         'longitude',
+        'tax',
+        'currency_id',
     ];
 
     /**

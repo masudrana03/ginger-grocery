@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use GeoIO\WKB\Parser\Parser;
+use Grimzy\LaravelMysqlSpatial\Types\Factory;
+
 
 class Zone extends Model
 {
@@ -27,8 +30,9 @@ class Zone extends Model
      *
      * @return Relationship
      */
-    public function store() {
-        return $this->hasMany( Store::class );
+    public function store()
+    {
+        return $this->hasMany(Store::class);
     }
 
 

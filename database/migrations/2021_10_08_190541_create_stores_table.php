@@ -21,6 +21,7 @@ class CreateStoresTable extends Migration
             $table->string('phone');
             $table->string('established_at');
             $table->foreignId('country_id')->constrained()->onDelete('restrict');
+            $table->foreignId('currency_id');
             $table->string('state')->nullable();
             $table->string('city');
             $table->string('zip');
@@ -31,6 +32,7 @@ class CreateStoresTable extends Migration
             $table->string('twitter_link')->nullable();
             $table->string('youtube_link')->nullable();
             $table->string('pinterest_link')->nullable();
+            $table->string('tax')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

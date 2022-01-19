@@ -15,8 +15,12 @@ class CreateShippingServicesTable extends Migration
     {
         Schema::create('shipping_services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('store_id');
             $table->string('title');
             $table->double('price')->default(0);
+            $table->string('type')->nullable();
+            $table->integer('from')->nullable();
+            $table->integer('to')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
@@ -32,3 +36,4 @@ class CreateShippingServicesTable extends Migration
         Schema::dropIfExists('shipping_services');
     }
 }
+ 

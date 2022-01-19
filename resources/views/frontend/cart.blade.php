@@ -323,8 +323,11 @@
     });
 
     $(document).on('click', '.qty-plus', function() {
+        alert($(this).prev());
         var max = 10;
         var prev_val = parseInt($(this).prev().val());
+
+        alert(prev_val);
 
         // -----------------------------------------
         var ctr = $(this).closest(".product-modifiers");

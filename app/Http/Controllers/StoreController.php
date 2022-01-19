@@ -8,6 +8,7 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\StoreUpdateRequest;
+use App\Models\Currency;
 
 class StoreController extends Controller {
     /**
@@ -119,8 +120,9 @@ class StoreController extends Controller {
 
         $zones = Zone::all();
         $countries = Country::all();
+        $currencies = Currency::all();
 
-        return view('backend.stores.create', compact('zones', 'countries'));
+        return view('backend.stores.create', compact('zones', 'countries', 'currencies'));
     }
 
     /**
@@ -182,9 +184,11 @@ class StoreController extends Controller {
             return abort( 403 );
         }
 
+        $currencies = Currency::all();
+
         $zones = Zone::all();
 
-        return view('backend.stores.edit', compact( 'store','zones' ) );
+        return view('backend.stores.edit', compact( 'store','zones', 'currencies'));
     }
 
     /**
