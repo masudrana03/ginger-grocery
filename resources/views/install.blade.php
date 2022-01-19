@@ -6,7 +6,7 @@
         <div class="container-fluid p-0">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="white_box mb_30" style="background-color: #FBF6F0;">
+                    <div class="white_box mb_30" style="background-color: #eff3f7;">
                         <div class="row justify-content-center">
 
                             <div class="col-lg-4">
