@@ -19,7 +19,7 @@
                         @if ( $category->image )
                         <figure class="img-hover-scale overflow-hidden">
                             <a href="{{ route('categories', $category->id) }}">
-                                <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+                                <img src="{{ asset( 'assets/img/uploads/categories/thumbnail/' . $category->image ) }}" alt="" />
                             </a>
                         </figure>
                         @else
@@ -29,7 +29,7 @@
                             </a>
                         </figure>
                         @endif
-                    <h6><a href="{{ route('categories', $category->id) }}">{{$category->name}}</a></h6>
+                    <h6><a href="{{ route('categories', $category->id) }}">{{ Str::limit($category->name, 12 ) }}</a></h6>
                     <span>{{$category->products()->count()}} items</span>
                 </div>
                 @empty

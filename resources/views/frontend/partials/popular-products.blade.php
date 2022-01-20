@@ -74,7 +74,7 @@
                                                 href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
                                         </div>
                                         <h2><a
-                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>
                                         </h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>{{ $product->currency->symbol }}{{ $product->price }}</span>
+                                                <span>{{ $product->store->currency->symbol }}{{ $product->price }}</span>
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
