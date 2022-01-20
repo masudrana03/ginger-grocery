@@ -125,14 +125,23 @@
                             <div class="product-detail-rating">
                                 <div class="product-rate-cover text-end">
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        @php
+                                           $productRatingCount = $productsRating->whereIn('product_id' ,$product->id)->sum('rating');
+                                           $productRatingUser = $product->rating->count();
+                                           $productRatingAll = $product->rating;
+                                           $productRatingTotal = $productsRating->whereIn('product_id' ,$product->id)->count();
+
+
+                                        @endphp
+
+                                        <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                    <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }} reviews)</span>
                                 </div>
                             </div>
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand">{{$product->currency->symbol}}{{$product->price}}</span>
+                                    <span class="current-price text-brand">{{ $product->store->currency->symbol }}{{$product->price}}</span>
                                     {{-- <span>
                                         <span class="save-price font-md color3 ml-15">26% Off</span>
                                         <span class="old-price font-md ml-15">$52</span>
@@ -193,7 +202,7 @@
                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews ({{ $productRatingTotal }})</a>
                             </li>
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
@@ -294,22 +303,22 @@
                             </div>
                             <div class="tab-pane fade" id="Vendor-info">
                                 <div class="vendor-logo d-flex mb-30">
-                                    <img src="{{ asset('assets/frontend/imgs/vendor/vendor-18.svg') }}" alt="" />
+                                    <img src="{{ asset('assets/img/uploads/stores/'.$product->store->image) }}" alt="" style="max-width:40px;" />
                                     <div class="vendor-name ml-15">
                                         <h6>
-                                            <a href="#">{{$product->store->name}}</a>
+                                            <a href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a>
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                            <span class="font-small ml-5 text-muted"> ( {{ $productRatingTotal }} reviews )</span>
                                         </div>
                                     </div>
                                 </div>
                                 <ul class="contact-infor mb-50">
-                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
+                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>{{ $product->store->address }}, {{ $product->store->state }}, {{ $product->store->city }}, {{ $product->store->zip }}, {{ ucwords(strtolower($product->store->country->name )) }}</span></li>
+                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Contact Seller:</strong><span> {{ $product->store->phone }}</span></li>
                                 </ul>
                                 <div class="d-flex mb-55">
                                     <div class="mr-30">
@@ -325,7 +334,7 @@
                                         <h4 class="mb-0">89%</h4>
                                     </div>
                                 </div>
-                                <p>Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.</p>
+                                <p>{{ $product->store->description }}</p>
                             </div>
                             <div class="tab-pane fade" id="Reviews">
                                 <!--Comments-->
@@ -335,12 +344,12 @@
                                             <h4 class="mb-30">Customer questions & answers</h4>
                                             <div class="comment-list">
 
-                                                @forelse ( $productsRating as $rating )
+                                                @forelse ( $productsRating->whereIn('product_id' ,$product->id) as $rating )
                                                     <div class="single-comment justify-content-between d-flex mb-30">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
-                                                                <a class="text-center" href="#" class="font-heading text-brand">{{ $rating->user->name }}</a>
                                                                 <img src="{{ asset('assets/frontend/imgs/blog/author-2.png') }}" alt="" />
+                                                                <a class="text-center" href="#" class="font-heading text-brand" >{{ $rating->user->name }}</a>
                                                             </div>
 
                                                             <div class="desc">
@@ -406,29 +415,30 @@
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
-                                                    <div class="product-rating" style="width: 90%"></div>
+                                                    <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
                                                 </div>
-                                                <h6>4.8 out of 5</h6>
+                                                <h6>{{ round($productRatingCount/$productRatingUser, 1) }} out of 5</h6>
                                             </div>
                                             <div class="progress">
                                                 <span>5 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ ($productRatingAll->where('rating','=',5)->count())*10 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{ ($productRatingAll->where('rating','=',5)->count())*10 }}%</div>
                                             </div>
+
                                             <div class="progress">
                                                 <span>4 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ ($productRatingAll->where('rating','=',4)->count())*10 }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ ($productRatingAll->where('rating','=',4)->count())*10 }}%</div>
                                             </div>
                                             <div class="progress">
                                                 <span>3 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ ($productRatingAll->where('rating','=',3)->count())*10 }}%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">{{ ($productRatingAll->where('rating','=',3)->count())*10 }}%</div>
                                             </div>
                                             <div class="progress">
                                                 <span>2 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ ($productRatingAll->where('rating','=',2)->count())*10 }}%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">{{ ($productRatingAll->where('rating','=',2)->count())*10 }}%</div>
                                             </div>
                                             <div class="progress mb-30">
                                                 <span>1 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ ($productRatingAll->where('rating','=',1)->count())*10 }}%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">{{ ($productRatingAll->where('rating','=',1)->count())*10 }}%</div>
                                             </div>
                                             <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
                                         </div>
@@ -500,11 +510,11 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <h2><a href="{{route('products', $product->id)}}" tabindex="0">{{$product->name}}</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 50%"></div>
                                         </div>
                                         <div class="product-price">
-                                            <span>{{$product->currency->symbol}}{{$product->price}} </span>
+                                            <span>{{ $product->store->currency->symbol }} {{$product->price}} </span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                     </div>
