@@ -182,7 +182,7 @@
                                                 <h6 class="text-muted">Subtotal</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h6 class="text-brand text-end subtotal">$12.31</h6>
+                                                <h6 class="text-brand text-end subtotal">0</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -311,7 +311,7 @@
         }
 
         var symbol = "{{ $product->currency->symbol }}"
-        $('.subtotal').text(symbol + subtotal);
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
         var discountAmount = '{{ Session::get('discountAmount') }}';
@@ -323,7 +323,7 @@
         subtotal += parseFloat(tax);
 
         $('.tax').text(symbol + tax);
-        $('.total').text(symbol + subtotal);
+        $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
     });
 
     $(document).on('click', '.qty-plus', function() {
@@ -347,7 +347,8 @@
             //subtotal += subtotal.toFixed(2);
         }
         var symbol = "{{ $product->currency->symbol }}"
-        $('.subtotal').text(symbol + subtotal);
+
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
         $('.tax').text(symbol + tax);
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
@@ -357,9 +358,10 @@
             subtotal = subtotal - parseFloat(discountAmount);
         }
 
-        subtotal += tax;
+        subtotal += parseFloat(tax);
+        // subtotal.toFixed(2);
 
-        $('.total').text(symbol + subtotal);
+        $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
 
         if (prev_val < max) {
@@ -389,7 +391,7 @@
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
         }
         var symbol = "{{ $product->currency->symbol }}"
-        $('.subtotal').text(symbol + subtotal);
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
         var discountAmount = '{{ Session::get('discountAmount') }}';
@@ -398,10 +400,11 @@
             subtotal = subtotal - parseFloat(discountAmount);
         }
 
-        subtotal += tax;
+        subtotal += parseFloat(tax);
+        // subtotal.toFixed(2);
 
         $('.tax').text(symbol + tax);
-        $('.total').text(symbol + subtotal);
+        $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
 
         if ($(this).next().val() > min) {

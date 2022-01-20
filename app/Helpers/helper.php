@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\Tax;
 use App\Models\Promo;
 use App\Models\ShippingService;
@@ -150,11 +151,17 @@ function taxCalculator($total, $storeId)
 /**
  * Give me tax amount
  */
-function shippingCalculator($total, $storeId)
+function shippingCalculator($total, $storeId, $shippingAddress)
 {
+    $shippingCharge = 0;
+
     $shippingMethods = ShippingService::active()->whereStoreId($storeId)->get();
 
-    $shippingCharge = 0;
+    if (empty($shippingMethods)) {
+        return $shippingCharge;
+    }
+
+    $store = Store::find($storeId);
 
     foreach ($shippingMethods as $shippingMethod) {
         switch ($shippingMethod->type) {
@@ -170,7 +177,10 @@ function shippingCalculator($total, $storeId)
                 }
             break;
             case 'Condition on distance':
-                $shippingCharge = 0;
+                $distance = getDistance($store->address, $shippingAddress);
+                if ($distance > $shippingMethod->to) {
+                    $shippingCharge += $shippingMethod->price;
+                }
             break;
         }
     }
@@ -181,10 +191,13 @@ function shippingCalculator($total, $storeId)
 /**
  * @param $cart
  */
-function priceCalculator($cart)
+function priceCalculator($cart, $shippingId = null)
 {
+    $shippingAddress = Address::find($shippingId);
     $subtotal = 0;
     $storeId = '';
+    $discount = 0;
+    $shipping = 0;
 
     if (auth()->user()->cart && auth()->user()->cart->promo_id) {
         $promo    = Promo::find(auth()->user()->cart->promo_id);
@@ -196,21 +209,18 @@ function priceCalculator($cart)
         $storeId = $item->store_id;
     }
 
-    // $subtotal = $cart->products->sum('price');
+    if ($shippingAddress) {
+        $address = "$shippingAddress->address $shippingAddress->state $shippingAddress->city $shippingAddress->country";
+        $shipping = shippingCalculator($subtotal, $storeId, $address);
+    }
 
-    $discount = 0;
-
-    $shipping = shippingCalculator($subtotal, $storeId);
     $tax      = taxCalculator($subtotal, $storeId);
-
-    $shipping = ShippingService::active()->first();
-    $shipping = $shipping ? $shipping->price : 0;
-
     $adjust   = 0;
 
     $total = $subtotal - $discount - $adjust + $shipping + $tax;
 
-    return ['subtotal' => $subtotal, 'discount' => $discount, 'shipping' => $shipping, 'tax' => $tax, 'total' => $total, 'adjust' => $adjust];
+    // return ['subtotal' => $subtotal, 'discount' => $discount, 'shipping' => $shipping, 'tax' => $tax, 'total' => $total, 'adjust' => $adjust];
+    return ['subtotal' => round($subtotal, 2), 'discount' => round($discount, 2), 'shipping' => round($shipping, 2), 'tax' => round($tax, 2), 'total' => round($total, 2), 'adjust' => round($adjust, 2)];
 }
 
 /**
@@ -240,4 +250,59 @@ function format_coordiantes($coordinates)
         $data[] = (object)['lat'=>$coord->getlat(), 'lng'=>$coord->getlng()];
     }
     return $data;
+}
+
+ /**
+  * Calculates the distance between two address
+  *
+  * @param string $addressFrom
+  * @param string $addressTo
+  * @param string $unit
+  * @return void
+  */
+function getDistance($addressFrom, $addressTo, $unit = '')
+{
+    // Google API key
+    $apiKey = 'AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries';
+    
+    // Change address format
+    $formattedAddrFrom    = str_replace(' ', '+', $addressFrom);
+    $formattedAddrTo     = str_replace(' ', '+', $addressTo);
+    
+    // Geocoding API request with start address
+    $geocodeFrom = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrFrom.'&mode=driving&sensor=true&key='.$apiKey);
+    $outputFrom = json_decode($geocodeFrom);
+    if (!empty($outputFrom->error_message)) {
+        return $outputFrom->error_message;
+    }
+    
+    // Geocoding API request with end address
+    $geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrTo.'&mode=driving&sensor=true&key='.$apiKey);
+    $outputTo = json_decode($geocodeTo);
+    if (!empty($outputTo->error_message)) {
+        return $outputTo->error_message;
+    }
+    
+    // Get latitude and longitude from the geodata
+    $latitudeFrom    = $outputFrom->results[0]->geometry->location->lat;
+    $longitudeFrom    = $outputFrom->results[0]->geometry->location->lng;
+    $latitudeTo        = $outputTo->results[0]->geometry->location->lat;
+    $longitudeTo    = $outputTo->results[0]->geometry->location->lng;
+
+    // return $this->GetDrivingDistance($lat1, $lat2, $long1, $long2);
+
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$latitudeFrom.",".$longitudeFrom."&destinations=".$latitudeTo.",".$longitudeTo."&mode=driving&language=pl-PL&key=" . $apiKey;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $response_a = json_decode($response, true);
+    $dist = $response_a['rows'][0]['elements'][0]['distance']['value'];
+    // $time = $response_a['rows'][0]['elements'][0]['duration']['text'];
+
+    return round($dist/1000, 2);
 }

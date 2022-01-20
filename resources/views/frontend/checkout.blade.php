@@ -1,11 +1,90 @@
 @extends('frontend.layouts.app')
 @section('title', 'Checkout')
 
+<style>
+    span.checkout-quantity {
+        position: absolute;
+        background-color: #3BB77E;
+        width: 25px;
+        border-radius: 15px;
+        text-align: center;
+        color: white;
+        top: 1px;
+        right: 4px;
+
+
+    }
+
+    .calculate-total {
+        left: 20px;
+    }
+
+    .calculate-total p {
+        padding-bottom: 7px;
+    }
+
+    /* .checkout-total{
+     display: flex;
+     justify-content: flex-end;
+ } */
+
+
+    .calculate {
+        left: 27%;
+    }
+
+    .calculate p {
+        padding-bottom: 7px;
+    }
+
+    .product-name p {
+        font-size: 1em;
+    }
+
+    /* .form-group{
+    height: 2%;
+    padding-bottom:60px;
+} */
+
+    .form-group input {
+        background: #fff;
+        border: 1px solid #ececec;
+        height: 50px !important;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding-left: 10px;
+        font-size: 13px !important;
+        width: 100%;
+    }
+
+    .custom-select {
+        font-size: 13px !important;
+    }
+
+    .form-group textarea {
+        font-size: 13px !important;
+    }
+
+    .checkout-button {
+        padding-bottom: 20px;
+    }
+
+    .form-check {
+        margin-left: 30px;
+
+    }
+
+    .checkout-products-marketplace {
+        margin-bottom: -2.2%;
+    }
+
+</style>
+
 @section('content')
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Shop
                 <span></span> Checkout
             </div>
@@ -13,11 +92,14 @@
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
-            <div class="col-lg-8 mb-40">
+            <div class="col-lg-8">
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span
-                            class="text-brand">{{ auth()->user()->cart ? auth()->user()->cart->products->count() : 0 }}</span> products in your
+                            class="text-brand">{{ auth()->user()->cart
+                                ? auth()->user()->cart->products->count()
+                                : 0 }}</span>
+                        products in your
                         cart</h6>
                 </div>
             </div>
@@ -25,34 +107,9 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="row mb-50">
-                    <div class="col-lg-6">
-                        {{-- @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif --}}
-
-                        {{-- <form method="post" action="/apply-promo" class="apply-coupon">
-                            @csrf
-                            <div class="form-group">
-                                <input class="@error('code') is-invalid @enderror" type="text" name="code"
-                                    placeholder="Enter Coupon Code...">
-                                @error('code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <button class="btn  btn-md" name="login">Apply Coupon</button>
-                        </form> --}}
-                    </div>
                 </div>
-                <div class="row">
-                    <h4 class="mb-30">Billing Details</h4>
+                <div class="row mb-80">
+                    <h4 class="mb-30">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
                         <input id="paymentMethod" type="hidden" name="payment_method_id">
@@ -96,7 +153,8 @@
                                     <input required="" type="text" name="state" placeholder="State / County *">
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <input required="" type="text" name="city" placeholder="City / Town *" class="@error('city') is-invalid @enderror">
+                                    <input required="" type="text" name="city" placeholder="City / Town *"
+                                        class="@error('city') is-invalid @enderror">
                                     @error('city')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -107,7 +165,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="zip" placeholder="Postcode / ZIP *" class="@error('zip') is-invalid @enderror">
+                                <input required="" type="text" name="zip" placeholder="Postcode / ZIP *"
+                                    class="@error('zip') is-invalid @enderror">
                                 @error('zip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -115,17 +174,19 @@
                                 @enderror
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="phone" placeholder="Phone *" class="@error('phone') is-invalid @enderror">
+                                <input required="" type="text" name="phone" placeholder="Phone *"
+                                    class="@error('phone') is-invalid @enderror">
                                 @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input required="" type="text" name="email" placeholder="Email address *" class="@error('email') is-invalid @enderror">
+                            <input required="" type="text" name="email" placeholder="Email address *"
+                                class="@error('email') is-invalid @enderror">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -133,186 +194,386 @@
                             @enderror
                         </div>
 
-                        <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Additional information"></textarea>
+                        <div class="form-group">
+                            <textarea style="min-height: 80px" rows="3" placeholder="Additional information"></textarea>
                         </div>
-                        <div class="ship_detail">
-                            <div class="form-group">
-                                <div class="chek-form">
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="differentaddress">
-                                        <label class="form-check-label label_info" data-bs-toggle="collapse"
-                                            data-target="#collapseAddress" href="#collapseAddress"
-                                            aria-controls="collapseAddress" for="differentaddress"><span>Ship to a different
-                                                address?</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="collapseAddress" class="different_address collapse in">
-                                <div class="form-group">
-                                    <input type="text" required="" name="shipping_name" placeholder="Name *">
-                                </div>
 
-                                <div class="row shipping_calculator">
-                                    <div class="form-group col-lg-12">
-                                        <div class="custom_select w-100">
-                                            <select class="form-control select-active" name="shipping_country_id">
-                                                <option value="">Select a country...</option>
-                                                @foreach ($countries as $country)
-                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                @endforeach
-                                            </select>
+                        <div>
+                            <h5 class="mb-30 pl-2">Payment Method:</h5>
+                        </div>
+
+                        <div class="checkout-products-marketplace"
+                            style="border: 1px solid rgb(218, 214, 214); border-radius:5px; height:8%; padding-top:3px; margin-bottom:1%;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="method" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Strip
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="method" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Card
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="checkout-button" style="float: right; padding-top:15px;">
+                            <button class="btn">Checkout</button>
+                        </div>
+
+                        {{-- <div class="ship_detail">
+                                <div class="form-group">
+                                    <div class="chek-form">
+                                        <div class="custome-checkbox">
+                                            <input class="form-check-input" type="checkbox" name="checkbox"
+                                                id="differentaddress">
+                                            <label class="form-check-label label_info" data-bs-toggle="collapse"
+                                                data-target="#collapseAddress" href="#collapseAddress"
+                                                aria-controls="collapseAddress" for="differentaddress"><span>Ship to a different
+                                                    address?</span></label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" name="shipping_address" required="" placeholder="Address *">
+
+                                <div id="collapseAddress" class="different_address collapse in">
+                                    <div class="form-group">
+                                        <input type="text" required="" name="shipping_name" placeholder="Name *">
+                                    </div>
+
+                                    <div class="row shipping_calculator">
+                                        <div class="form-group col-lg-12">
+                                            <div class="custom_select w-100">
+                                                <select class="form-control select-active" name="shipping_country_id">
+                                                    <option value="">Select a country...</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="shipping_address" required="" placeholder="Address *">
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <input required="" type="text" name="shipping_state" placeholder="State / County *">
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input required="" type="text" name="shipping_city" placeholder="City / Town *">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <input required="" type="text" name="shipping_zip" placeholder="Postcode / ZIP *">
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input required="" type="text" name="shipping_phone" placeholder="Phone *">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="shipping_state" placeholder="State / County *">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="shipping_city" placeholder="City / Town *">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="shipping_zip" placeholder="Postcode / ZIP *">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="shipping_phone" placeholder="Phone *">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </div> --}}
                     </form>
                 </div>
+
+
             </div>
-            <div class="col-lg-5">
-                <div class="border p-40 cart-totals ml-30 mb-50">
-                    <div class="d-flex align-items-end justify-content-between mb-30">
-                        <h4>Your Order</h4>
-                        <h6 class="text-muted">Subtotal</h6>
-                    </div>
-                    <div class="divider-2 mb-30"></div>
-                    <div class="table-responsive order_table checkout">
-                        <table class="table no-border">
-                            <tbody>
-                                @php
-                                    $total = 0;
-                                    $currency_symbol = '$';
-                                @endphp
-                                @forelse (auth()->user()->cart ? auth()->user()->cart->products : [] as $product)
-                                    <tr>
-                                        <td class="image product-thumbnail">
 
-                                            @if (count( $product->images ) > 0)
-                                                <img class="default-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                    alt="" />
-                                            @else
-                                                <img src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
-                                            @endif
+            {{-- Checkout new page added --}}
 
-                                        </td>
-                                        <td>
-                                            <h6 class="w-160 mb-5"><a href="#"
-                                                    class="text-heading">{{ $product->name }}</a></h6></span>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
-                                                    </div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h6 class="text-muted pl-20 pr-20">{{ $product->quantity }}</h6>
-                                        </td>
-                                        <td>
-                                            <h4 class="text-brand">{{ $product->currency->symbol }}
-                                                {{ $product->quantity * $product->price }}</h4>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $total += $product->quantity * $product->price;
-                                        $currency_symbol = $product->currency->symbol;
-                                    @endphp
-                                @empty
-                                    <p>No product in your cart!</p>
-                                @endforelse
-                                @if (!session('totalAfterDiscount'))
-                                    <tr>
-                                        <td colspan="3">
-                                            <h4 class="w-160 mb-5">Total</h4>
-                                        </td>
-                                        <td colspan="1">
-                                            <h4 class="text-brand">{{ $currency_symbol }} {{ $total }}</h4>
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td colspan="3">
-                                            <h5 class="w-160 mb-5">Sub toal</h5>
-                                        </td>
-                                        <td colspan="1">
-                                            <h5 class="text-brand">{{ $currency_symbol }} {{ $total }}</h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <h6 class="w-160 mb-5">Discount</h6>
-                                        </td>
-                                        <td colspan="1">
-                                            <h6 class="text-brand">{{ $currency_symbol }}
-                                                {{ session('discountAmount') }}</h6>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">
-                                            <h4 class="w-160 mb-5">Total</h4>
-                                        </td>
-                                        <td colspan="1">
-                                            <h4 class="text-brand">{{ $currency_symbol }}
-                                                {{ session('totalAfterDiscount') }}</h4>
-                                        </td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+
+            <div class="col-lg-5 mb-100" style="margin-top:7%;">
+
+                <div class=" p-2 bg-light">
+                    <p class="font-weight-bold mb-0">Product(s):</p>
                 </div>
-                <div class="payment ml-30">
-                    <h4 class="mb-30">Payment</h4>
-                    <div class="payment_option">
-                        @foreach ($paymentMethods as $paymentMethod)
-                            <div class="custome-radio">
-                                <input name="payment_method_id" class="form-check-input payment-method" required=""
-                                    type="radio" value="{{ $paymentMethod->id }}"
-                                    onclick="doit({{ $paymentMethod->id }})"
-                                    id="exampleRadios-{{ $paymentMethod->id }}"
-                                    {{ $paymentMethod->provider == 'cash' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="exampleRadios-{{ $paymentMethod->id }}"
-                                    data-bs-toggle="collapse" data-target="#bankTranfer"
-                                    aria-controls="bankTranfer">{{ ucfirst($paymentMethod->provider) }}</label>
+
+                @forelse (auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [] as $key => $product)
+                    <div class="checkout-products-marketplace" id="shipping-method-wrapper">
+                        <div class="mt-2 bg-light mb-2">
+                            @php
+                                $store = \App\Models\Store::find($key);
+                            @endphp
+                            <div class="p-2" style="background:#cdf0e0" ;>
+                                <img style="vertical-align: middle;"
+                                    src="{{ asset('assets/img/uploads/stores/' . $store->image) }}" alt="Global Office"
+                                    class="img-fluid rounded" width="30">
+                                <span>{{ $store->name }}</span>
                             </div>
-                        @endforeach
+
+                            @php
+                                $subtotal = 0;
+                                $total = 0;
+                                $tax = priceCalculator($product)['tax'] ?? 0;
+                                $shipping = 0;
+                            @endphp
+                            <div class="p-2">
+
+                                @foreach ($product as $item)
+                                @php
+                                    $subtotal += $item->price;
+                                @endphp
+                                    <div class="row cart-item mb-3">
+                                        <div class="col-3" style="width: 14%">
+                                            <div class="checkout-product-img-wrapper product-details">
+                                                @if (count($item->images) > 0)
+                                                    <img class="item-thumb img-thumbnail img-rounded"
+                                                        src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
+                                                        alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                                @else
+                                                    <img src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                        alt="" />
+                                                @endif
+                                                <span class="checkout-quantity">{{ $item->quantity }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-5 product-name" style="margin-top:2%">
+                                            <p class="mb-0">{{ $item->name }}</p>
+                                            {{-- <p class="mb-0">
+                                                (Boxes: 4 Boxes, Weight: 4KG)
+                                            </p> --}}
+                                        </div>
+
+                                        <div class="col-4 text-end product-name price " style="margin-top:2%;">
+                                            <p>{{ $item->currency->symbol }} {{ $item->price }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <hr>
+                            @php
+                                 $shipping = shippingCalculator($subtotal, $store->id, 'aftab nagar dhaka bangladesh');
+                            @endphp
+                            <div class="row checkout-total ">
+                                <div class="col-6 calculate-total">
+                                    <p class="">Subtotal:</p>
+                                    <p class="">Shipping Fee:</p>
+                                    <p class="">Tex:</p>
+                                    <h5 class="">Total:</h5>
+                                </div>
+
+                                <div class="col-6 calculate">
+                                    <p class=""> {{ $store->currency->symbol }}{{ $subtotal }} </p>
+                                    <p class=""> {{ $store->currency->symbol }}{{ $shipping }} </p>
+                                    <p class=""> {{ $store->currency->symbol }}{{ $tax }} </p>
+                                    <h5 class=""> $6752</h5>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                        </div>
                     </div>
-                    <div class="payment-logo d-flex">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-paypal.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-visa.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-master.svg" alt="">
-                        <img src="assets/imgs/theme/icons/payment-zapper.svg" alt="">
+                @empty
+                    <p>No product in your cart!</p>
+                @endforelse
+
+                {{-- product2 --}}
+
+                {{-- <div class="checkout-products-marketplace" id="shipping-method-wrapper">
+                    <div class="mt-2 bg-light mb-2">
+
+                        <div class="p-2" style="background:#cdf0e0" ;>
+                            <img style="vertical-align: middle;" src="https://nest.botble.com/storage/stores/2.png"
+                                alt="Global Office" class="img-fluid rounded" width="30">
+                            <span>Shop Name</span>
+                        </div>
+
+                        <div class="p-2">
+                            <div class="row cart-item">
+
+                                <div class="col-3" style="width: 14%">
+                                    <div class="checkout-product-img-wrapper product-details">
+                                        <img class="item-thumb img-thumbnail img-rounded"
+                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
+                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                        <span class="checkout-quantity">1</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-5 product-name" style="margin-top:2%">
+                                    <p class="mb-0">Product b</p>
+                                    <p class="mb-0">
+                                        (Boxes: 4 Boxes, Weight: 4KG)
+                                    </p>
+                                </div>
+
+
+                                <div class="col-4 text-end product-name price " style="margin-top:2%;">
+                                    <p>$110.67</p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row cart-item mt-3">
+
+                                <div class="col-3" style="width: 14%">
+                                    <div class="checkout-product-img-wrapper product-details">
+                                        <img class="item-thumb img-thumbnail img-rounded"
+                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
+                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                        <span class="checkout-quantity">1</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-5 product-name" style="margin-top:2%">
+                                    <p class="mb-0">Product b</p>
+                                    <p class="mb-0">
+                                        <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
+                                    </p>
+                                </div>
+
+
+                                <div class="col-4 text-end product-name price" style="margin-top:2%; ">
+                                    <p>$110.67</p>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <hr>
+
+                        <div class="row checkout-total ">
+
+                            <div class="col-6 calculate-total">
+                                <p class="">Subtotal:</p>
+                                <p class="">Shipping Fee:</p>
+                                <p class="">Tex:</p>
+                                <h5 class="">Total:</h5>
+                            </div>
+
+                            <div class="col-6 calculate">
+                                <p class=""> $4785 </p>
+                                <p class=""> $524 </p>
+                                <p class=""> $758 </p>
+                                <h5 class=""> $12453</h5>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
                     </div>
-                    <button onclick="submit()" class="btn btn-fill-out btn-block mt-30">Place an Order<i
-                            class="fi-rs-sign-out ml-15"></i></button>
+                </div> --}}
+
+                {{-- product-3 --}}
+
+
+                {{-- <div class="checkout-products-marketplace" id="shipping-method-wrapper">
+                    <div class="mt-2 bg-light mb-2">
+
+                        <div class="p-2" style="background:#cdf0e0" ;>
+                            <img style="vertical-align: middle;" src="https://nest.botble.com/storage/stores/2.png"
+                                alt="Global Office" class="img-fluid rounded" width="30">
+                            <span>Shop Name</span>
+                        </div>
+
+                        <div class="p-2">
+                            <div class="row cart-item">
+
+                                <div class="col-3" style="width: 14%">
+                                    <div class="checkout-product-img-wrapper product-details">
+                                        <img class="item-thumb img-thumbnail img-rounded"
+                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
+                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                        <span class="checkout-quantity">1</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-5 product-name" style="margin-top:2%">
+                                    <p class="mb-0">Product b</p>
+                                    <p class="mb-0">
+                                        (Boxes: 4 Boxes, Weight: 4KG)
+                                    </p>
+                                </div>
+
+
+                                <div class="col-4 text-end product-name price " style="margin-top:2%;">
+                                    <p>$110.67</p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row cart-item mt-3">
+
+                                <div class="col-3" style="width: 14%">
+                                    <div class="checkout-product-img-wrapper product-details">
+                                        <img class="item-thumb img-thumbnail img-rounded"
+                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
+                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
+                                        <span class="checkout-quantity">1</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-5 product-name" style="margin-top:2%">
+                                    <p class="mb-0">Product b</p>
+                                    <p class="mb-0">
+                                        <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
+                                    </p>
+                                </div>
+
+
+                                <div class="col-4 text-end product-name price" style="margin-top:2%; ">
+                                    <p>$110.67</p>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <hr>
+
+                        <div class="row checkout-total ">
+                            <div class="col-6 calculate-total">
+                                <p class="">Subtotal:</p>
+                                <p class="">Shipping Fee:</p>
+                                <p class="">Tex:</p>
+                                <h5 class="">Total:</h5>
+                            </div>
+
+                            <div class="col-6 calculate">
+                                <p class=""> $4785 </p>
+                                <p class=""> $524 </p>
+                                <p class=""> $758 </p>
+                                <h5 class=""> $6752</h5>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                    </div>
+                </div> --}}
+
+
+                {{-- Total calculation for All shopping --}}
+                {{-- <div>
+                    <h5 class="mb-30 pl-2">Total Amount:</h5>
                 </div>
+                <div class="row checkout-total ">
+
+                    <div class="col-6 calculate-total">
+                        <p class="">Subtotal:</p>
+                        <p class="">Shipping Fee:</p>
+                        <p class="">Tex:</p>
+                        <h5 class="">Total:</h5>
+                    </div>
+
+                    <div class="col-6 calculate">
+                        <p class=""> $4785 </p>
+                        <p class=""> $524 </p>
+                        <p class=""> $758 </p>
+                        <h5 class=""> $6752</h5>
+                    </div>
+                </div> --}}
+
             </div>
         </div>
     </div>
-
 @endsection
 
 <script>
