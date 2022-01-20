@@ -2,34 +2,30 @@
 @section('title', 'Home')
 
 <style>
-.btn-cart{
-    background-color:#3BB77E;
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    color: #fff;
-    border-radius: 5px;
+    .btn-cart {
+        background-color: #3BB77E;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
 
-}
+    }
 
-.btn-cart:hover{
-    background-color: #fdc040;
-}
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
 
-.qty{
-    height:40px;
-    width:100%;
-    border:1px #3BB77E solid ;
-    text-align: center;
-    font-size: 13px;
-    background-color: transparent;
-    
-
-}
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
 
 
-
-
+    }
 
 </style>
 
@@ -121,7 +117,7 @@
                                         <td>
                                             <div class="col-md-10 col-xs-10 d-lg-flex ">
                                                 <input type="hidden" name="productids[]" value="{{ $product->id }}">
-                                                <input type="button"  value="-" class="qty-minus btn-cart">
+                                                <input type="button" value="-" class="qty-minus btn-cart">
                                                 <input type="text" name="qty[]" readonly type="number"
                                                     value="{{ $product->quantity }}" max="10" min="1"
                                                     class="qty update-qty">
@@ -196,10 +192,12 @@
                                         </tr>
                                         <tr>
                                             <td class="cart_total_label">
-                                                <h6 class="text-muted">Shipping</h6>
+                                                <h6 class="text-muted">Tax</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h6 class="text-heading text-end">Free</h6></td>
+                                                <h6 class="text-heading text-end tax">
+                                                    {{ $currency_symbol }}{{ $totalTax }}</h6>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td scope="col" colspan="2">
@@ -209,6 +207,7 @@
                                         <tr>
                                             <td class="cart_total_label">
                                                 <h6 class="text-muted">Total</h6>
+                                                <small>(Shipping fees not included)</small>
                                             </td>
                                             <td class="cart_total_amount">
                                                 <h6 class="text-brand text-end total">$12.31</h6>
@@ -230,10 +229,10 @@
                                         </tr>
                                         <tr>
                                             <td class="cart_total_label">
-                                                <h6 class="text-muted">Shipping</h6>
+                                                <h6 class="text-muted">Tax</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h5 class="text-heading text-end">Free</h5>
+                                                <h5 class="text-heading text-end tax">{{ $totalTax }}</h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -253,6 +252,7 @@
                                         <tr>
                                             <td class="cart_total_label">
                                                 <h6 class="text-muted">Total</h6>
+                                                <small>(Shipping fees not included)</small>
                                             </td>
                                             <td class="cart_total_amount">
                                                 <h6 class="text-brand text-end total">{{ $currency_symbol }}
@@ -303,7 +303,8 @@
 <script>
     $(document).ready(function() {
         var products = $(".product-modifiers");
-        subtotal = 0;
+        var subtotal = 0;
+        var tax = "{{ $totalTax }}";
 
         for (var i = 0; i < products.length; i += 1) {
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
@@ -319,15 +320,16 @@
             subtotal = subtotal - parseFloat(discountAmount);
         }
 
+        subtotal += parseFloat(tax);
+
+        $('.tax').text(symbol + tax);
         $('.total').text(symbol + subtotal);
     });
 
     $(document).on('click', '.qty-plus', function() {
-        alert($(this).prev());
+        var tax = "{{ $totalTax }}";
         var max = 10;
         var prev_val = parseInt($(this).prev().val());
-
-        alert(prev_val);
 
         // -----------------------------------------
         var ctr = $(this).closest(".product-modifiers");
@@ -346,6 +348,7 @@
         }
         var symbol = "{{ $product->currency->symbol }}"
         $('.subtotal').text(symbol + subtotal);
+        $('.tax').text(symbol + tax);
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
         var discountAmount = '{{ Session::get('discountAmount') }}';
@@ -353,6 +356,8 @@
         if (totalAfterDiscount) {
             subtotal = subtotal - parseFloat(discountAmount);
         }
+
+        subtotal += tax;
 
         $('.total').text(symbol + subtotal);
         // -----------------------------------------
@@ -364,6 +369,7 @@
     });
 
     $(document).on('click', '.qty-minus', function() {
+        var tax = "{{ $totalTax }}";
         var min = 1;
 
         var prev_val = $(this).next().val();
@@ -392,6 +398,9 @@
             subtotal = subtotal - parseFloat(discountAmount);
         }
 
+        subtotal += tax;
+
+        $('.tax').text(symbol + tax);
         $('.total').text(symbol + subtotal);
         // -----------------------------------------
 

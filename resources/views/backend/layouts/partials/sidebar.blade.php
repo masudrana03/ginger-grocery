@@ -26,7 +26,6 @@
             <li><a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
                     Orders</a></li>
         @endforeach
-
     </ul>
 </li>
 <li class="">
@@ -101,7 +100,6 @@
         </li>
     </ul>
 </li>
-
 {{-- <li class="">
     <a href="{{ route('admin.carts.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
@@ -112,7 +110,6 @@
         </div>
     </a>
 </li> --}}
-
 <h4 class="menu-text"><span>DELIVERY MAN SECTION</span> <i class="fas fa-ellipsis-h"></i> </h4>
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
@@ -139,8 +136,6 @@
         </div>
     </a>
 </li>
-
-
 @if (isShopManager(auth()->user()->store_id))
     <li class="">
         <a class="has-arrow" href="#" aria-expanded="false">
@@ -208,7 +203,6 @@
             <li>
                 <a href="{{ route('admin.about.performance') }}">About Performance</a>
             </li>
-
         </ul>
     </li>
     <li>
@@ -221,8 +215,6 @@
             </div>
         </a>
     </li>
-
-
     <li class="">
         <a class="has-arrow" href="#" aria-expanded="false">
             <div class="nav_icon_small">
@@ -244,5 +236,4 @@
             </li>
         </ul>
     </li>
-
 @endif

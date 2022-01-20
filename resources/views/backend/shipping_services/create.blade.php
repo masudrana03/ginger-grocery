@@ -54,7 +54,7 @@
                                     <label for="price">Fee</label>
                                     <input type="number" name="price"
                                         class="form-control @error('price') is-invalid @enderror" id="price"
-                                        aria-describedby="emailHelp" placeholder="Fee" value="{{ old('price') }}">
+                                        aria-describedby="emailHelp" placeholder="Fee" value="{{ old('price') ?? 0 }}">
                                     @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
