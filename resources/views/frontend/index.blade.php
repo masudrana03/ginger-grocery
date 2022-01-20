@@ -18,7 +18,7 @@
    let loading = `<section class="product-tabs section-padding position-relative">
 <div class="container">
 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-<h2>Search Result</h2>
+<h3>Search Result . . .</h3>
 <p>loading . . .</p>
 </div>
 </div>
