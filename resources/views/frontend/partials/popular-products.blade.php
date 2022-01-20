@@ -6,12 +6,17 @@
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
+            @if (($search ?? false) == false)
             <h3>Popular Products</h3>
+            @else
+            <h3>Search Result</h3>
+            @endif
             <ul class="nav nav-tabs links" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
+                @if (($search ?? false) == false)    
                 @forelse ($categoryProducts->random(6) as $category )
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -21,6 +26,7 @@
                     </li>
                 @empty
                 @endforelse
+                @endif
             </ul>
         </div>
         <!--End nav-tabs-->

@@ -45,11 +45,38 @@ class HomeController extends Controller
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
-        // $zones = Zone::find(1);
-
-        // return $zones;
 
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones'));
+    }
+
+    public function ajax(Request $request){
+        $query = request('search');
+        $category_id = request('category_id');
+        $productIds = session('compare');
+        $compareProduct = Product::find($productIds) ?? [];
+
+        if ($request->zone_id) {
+            $categoryProducts = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
+                $q->find($request->zone_id);
+            }]);
+        } else {
+            $categoryProducts = Category::with('products.store', 'products.currency');
+        }
+
+        $categoryProducts = $categoryProducts->whereHas('products', function ($q) use ($query, $category_id) {
+                $q->where('name', 'like', '%' . $query . '%')
+                ->orWhere('description', 'like', '%' . $query . '%')
+                ->orWhere('excerpt', 'like', '%' . $query . '%')
+                ->orWhere('category_id', $category_id);
+            })
+            ->limit(10)->get();
+
+
+        $sliders = Banner::where('status', 1)->get() ?? [];
+        $callToActions = CallToAction::all();
+        $zones = Zone::all() ?? [];
+        $search = true;
+        return view('frontend.home.home', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones', 'search'));
     }
 
     /**

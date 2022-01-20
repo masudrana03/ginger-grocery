@@ -39,8 +39,8 @@
     <body>
         @include('frontend.partials.nav')
 
+        @yield('content')
         <footer class="main">
-            @yield('content')
             <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
                 <div class="container">
 
@@ -307,7 +307,7 @@
         <script src="{{ asset('assets/frontend/js/plugins/jquery.elevatezoom.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
         <!-- Template  JS -->
-        <script src="{{ asset('assets/frontend/js/main.js?v=3.2') }}"></script>
+        <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
         <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
 
         
@@ -325,5 +325,6 @@
             })
         </script>
         @endif
+        @yield('script')
     </body>
 </html>

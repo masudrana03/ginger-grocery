@@ -191,6 +191,7 @@ Route::get('/terms', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::post('/', [HomeController::class, 'ajax'])->name('index.part.ajax');
 Route::get('/products/{id}', [HomeController::class, 'productDetails'])->name('products');
 Route::post('/products-rating/{id}', [HomeController::class, 'productRating'])->name('product.rating');
 Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name('categories');
