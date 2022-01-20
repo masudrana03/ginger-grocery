@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>{{ $product->store->currency->symbol ?? '' }}{{ $product->price }}</span>
+                                                <span>{{ $product->currency->symbol }}{{ $product->price }}</span>
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">

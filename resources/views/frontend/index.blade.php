@@ -20,6 +20,18 @@
             let search = $('#search-input').val();
             if(search.length > 2){
                 loadHome(search);
+                let loading = `
+                <section class="product-tabs section-padding position-relative">
+    <div class="container">
+        <div class="section-title style-2 wow animate__animated animate__fadeIn">
+            <h2>Search Result</h2>
+            <p>loading . . .</p>
+        </div>
+        </div>
+        </section>
+
+                `;
+                $('#app').html(loading);
             }else{
                 $('#app').html(old_data);
             }
@@ -36,7 +48,6 @@
             },
             success: function(html) {
                 $('#app').html(html);
-                console.log(html);
 
                 paginationClickEvent(search);
 
