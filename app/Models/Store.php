@@ -73,4 +73,13 @@ class Store extends Model {
     {
         return $this->hasMany(Product::class);
     }
+
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function currency() {
+        return $this->belongsTo( Currency::class );
+    }
 }
