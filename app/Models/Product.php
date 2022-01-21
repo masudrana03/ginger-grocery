@@ -129,4 +129,14 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    /**
+     * Get the currency associated with the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rating()
+    {
+        return $this->hasMany(ProductRating::class);
+    }
 }

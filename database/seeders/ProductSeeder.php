@@ -19,12 +19,12 @@ class ProductSeeder extends Seeder {
      * @return void
      */
     public function run() {
-    
+
 
        $products = [
-        
+
         // Shop name: Better Bites Deli(1)
-         
+
         [
             'name'        => 'Milk Bread',
             'description' => 'This is product description.',
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-        
+
         [
             'name'        => 'Muffin Cake',
             'description' => 'This is product description.',
@@ -151,7 +151,7 @@ class ProductSeeder extends Seeder {
         ],
 
         // shop name(2): Food Festive
-    
+
         [
             'name'        => 'CHEESE CRACKERS',
             'description' => 'This is product description.',
@@ -293,7 +293,7 @@ class ProductSeeder extends Seeder {
         ],
 
 
-        //shop name(3) : 
+        //shop name(3) :
 
         [
             'name'        => 'CHEEZA CHEESE CRACKERS ',
@@ -451,7 +451,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-        
+
         [
             'name'        => 'Fresh Pomegranate',
             'description' => 'With ruby color and an intense floral, sweet-tart flavor, the pomegranate delivers both taste and beauty.
@@ -602,7 +602,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-        
+
         [
             'name'        => 'Fresho Carrot - Orange',
             'description' => 'A popular sweet-tasting root vegetable, Carrots are narrow and cone shaped.
@@ -736,11 +736,13 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-  
-       //store 6         
+
+       //store 6
         [
+
             'name'        => 'Chilli Chicken Pieces - Boneless',
             'description' => 'Chicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart. 
+
             Now making chilli chicken at home is a hassle-free process. This chicken is perfectly cut and boneless. ',
             'excerpt'     => 'Antibiotic Residue-Free, 250 g',
             'price'       => 2,
@@ -754,6 +756,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
+
             'name'        => 'Chicken Mince',
             'description' => 'hicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart. 
             Looking for a little cooking adventure? This minced chicken from Fresho will surely take out the chef in you. Get creative with your culinary talent with this perfectly chopped boneless chicken pieces. From your favourite subs to Indian keema, enjoy delicious dishes with Fresho minced Chicken. The quantity is perfect for 2-3 people. ',
@@ -770,7 +773,7 @@ class ProductSeeder extends Seeder {
 
         [
             'name'        => 'Chicken Leg',
-            'description' => 'Chicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart. 
+            'description' => 'Chicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart.
             This whole chicken leg without skin comes 2-3 pieces that are sufficient for 2-3 people. This super tender, succulent, and very flavorful pieces are an excellent source of iron and zinc. This is perfect for curries, biriyanis and barbeque. ',
             'excerpt'     => 'Without Skin, Antibiotic Residue-Free',
             'price'       => 12,
@@ -884,7 +887,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-        
+
     //    store 7
 
         [
@@ -1001,9 +1004,9 @@ class ProductSeeder extends Seeder {
         ],
         [
             'name'        => 'Pink Perch Fish',
-            'description' => 'Pink Perch fish has got tender meat and packed with DHA. It holds a mild taste once cooked. With a really less body fat, this one can be categorized as lean fish. So, it is perfect if you are watching your weight. 
-            This whole cleaned pink perch comes with the head. It is cleaned and gutted. This comes in 3-4 pcs which are perfect for 3-4 people. It is preservative-free. 
-            
+            'description' => 'Pink Perch fish has got tender meat and packed with DHA. It holds a mild taste once cooked. With a really less body fat, this one can be categorized as lean fish. So, it is perfect if you are watching your weight.
+            This whole cleaned pink perch comes with the head. It is cleaned and gutted. This comes in 3-4 pcs which are perfect for 3-4 people. It is preservative-free.
+
             Fresho is our in-house brand of fresh meat, poultry, and seafood. We take utmost care in selecting the best suppliers to provide you with high quality and succulent products. Every product is stored in our cold storage right until your doorstep ensuring freshness and utmost hygiene. The product weighed before cleaning and cutting. Net weight will be lower at the time of delivery because of cleaning and Processing weight loss.',
             'excerpt'     => 'Pink Perch Fish - Whole Cleaned, Preservative Free',
             'price'       => 44,
@@ -1029,7 +1032,7 @@ class ProductSeeder extends Seeder {
             'created_at'  => now(),
         ],
 
-      
+
         [
             'name'        => 'Squid - Medium',
             'description' => 'Fresho Meats is our in house brand of fresh meat, poultry and seafood. We take utmost care in selecting the best suppliers to provide you with high quality and succulent products. Every product is stored in our cold storage right until your doorstep ensuring freshness and utmost hygiene. Additionally, every product is packed using food grade plastic which provides a nourishing and wholesome environment.',
@@ -1043,7 +1046,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
-        
+
         // shop 8
 
         [
@@ -1185,7 +1188,7 @@ class ProductSeeder extends Seeder {
             'user_id'     => 1,
             'created_at'  => now(),
         ],
- 
+
        ];
 
        DB::table('products')->insert($products);

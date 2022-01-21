@@ -33,4 +33,14 @@ class ShippingService extends Model
     {
         return $query->whereStatus(true);
     }
+
+    /**
+     * Return the store's manager
+     *
+     * @return Relationship
+     */
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
 }

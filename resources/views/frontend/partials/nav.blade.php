@@ -280,7 +280,7 @@
                                     @empty
                                     @endforelse
                                 </select>
-                                <input name="search" type="text" placeholder="Search for items..." />
+                                <input name="search" id="search-input" type="text" placeholder="Search for items..." />
                             </form>
                         </div>
                         <div class="header-action-right">

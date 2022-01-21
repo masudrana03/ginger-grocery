@@ -123,7 +123,8 @@ class CheckoutController extends Controller
        $invoiceIds = [];
 
        foreach ($carts as $cart) {
-            $invoiceIds[] = $this->createOrder($cart, 1, 1);
+            return $this->createOrder($cart, 1, 1);
+            //$invoiceIds[] = $this->createOrder($cart, 1, 1);
        }
 
         // give points if match any condition
@@ -227,7 +228,8 @@ class CheckoutController extends Controller
                 return back()->with('error', 'Order status not found');
             }
 
-            $calculatedPrice = priceCalculator($cart);
+            $calculatedPrice = priceCalculator($cart, $shippingId);
+
 
             if ($cart->promo_id) {
                 $this->updatePromo($cart->promo_id);
