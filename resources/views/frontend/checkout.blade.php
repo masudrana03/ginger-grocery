@@ -354,8 +354,6 @@ li.list-group-item {
                                     <span class="checkout-quantity">1</span>
                                     </div>
                                 </div>
-
-
                                 <div class="col-4 product-name" style="margin-top:2%">
                                 <p class="mb-0">Product b</p>
                                 <p class="mb-0">
@@ -365,9 +363,6 @@ li.list-group-item {
                                 <div class="col">
                                     <p class="pri">$110.67</p>
                                 </div>
-                                
-                               
-  
                             </div>
                         
 

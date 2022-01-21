@@ -266,6 +266,8 @@
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
                         <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                            
+                            
                                 alt="logo" /></a>
                     </div>
                     <div class="header-right">

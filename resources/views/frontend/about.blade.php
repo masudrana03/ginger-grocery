@@ -165,8 +165,8 @@
                                     <div class="team-card">
                                         <img src="{{ asset('assets/frontend/imgs/page/about-6.png') }}" alt="" />
                                         <div class="content text-center">
-                                            <h4 class="mb-5">H. Merinda</h4>
-                                            <span>CEO & Co-Founder</span>
+                                            <h4 class="mb-5">Bulbul Ahmed</h4>
+                                            <span>CEO & Founder</span>
                                             <div class="social-network mt-20">
                                                 <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-brand.svg') }}" alt="" /></a>
                                                 <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-brand.svg') }}" alt="" /></a>
@@ -180,8 +180,8 @@
                                     <div class="team-card">
                                         <img src="{{ asset('assets/frontend/imgs/page/about-8.png') }}" alt="" />
                                         <div class="content text-center">
-                                            <h4 class="mb-5">Dilan Specter</h4>
-                                            <span>Head Engineer</span>
+                                            <h4 class="mb-5">Christofar Nolan</h4>
+                                            <span>Lead Engineer</span>
                                             <div class="social-network mt-20">
                                                 <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-brand.svg') }}" alt="" /></a>
                                                 <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-brand.svg') }}" alt="" /></a>

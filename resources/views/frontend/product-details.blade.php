@@ -485,14 +485,14 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{route('products', $product->id)}}" tabindex="0">
-                                                <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
-                                                <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
+                                                <img class="default-img" src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                <img class="hover-img" src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                            {{-- <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a> --}}
+                                            <a aria-label="Add To Wishlist" href="{{ route('wishlist', $product->id) }}" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" href="{{ route('compare', $product->id) }}" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
@@ -503,10 +503,22 @@
                                         <div class="rating-result" title="90%">
                                             <span> </span>
                                         </div>
-                                        <div class="product-price">
-                                            <span>{{$product->currency->symbol}}{{$product->price}} </span>
-                                            {{-- <span class="old-price">$245.8</span> --}}
+                                        <div>
+                                            <span class="font-small text-muted">By <a
+                                                    href="{{route('vendor.details',$product->store->id) }}" >{{ $product->store->name }}</a></span>
                                         </div>
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>{{ $product->currency->symbol }}{{ $product->price }}</span>
+                                                {{-- <span class="old-price">$32.8</span> --}}
+                                            </div>
+                                            <div class="add-cart">
+                                                <a class="add"
+                                                    href="{{ route('cartById', $product->id) }}" style=""><i
+                                                        class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
