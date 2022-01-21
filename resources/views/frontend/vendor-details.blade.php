@@ -101,7 +101,7 @@
                             <div class="product-action-1">
                                 <a aria-label="Add To Wishlist" class="action-btn" href="{{route('wishlist', $product->id)}}"><i class="fi-rs-heart"></i></a>
                                 <a aria-label="Compare" class="action-btn" href="{{route('compareProduct', $product->id)}}"><i class="fi-rs-shuffle"></i></a>
-                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                <!--<a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> -->
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
                                 {{-- <span class="hot">Hot</span> --}}
@@ -111,12 +111,12 @@
                             <div class="product-category">
                                 <a href="{{ route('categories', $product->category->id )}}">{{ $product->category->name }}</a>
                             </div>
-                            <h2><a href="{{route('products', $product->id)}}">{{ $product->name }}</a></h2>
+                            <h2><a href="{{route('products', $product->id)}}">{{ ucwords(strtolower(Str::limit($product->name, 20 ))) }}</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
+                                    <div class="product-rating" style="width: {{ ($product->rating)*20 }}%"></div>
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                <span class="font-small ml-5 text-muted"> ({{ round($product->rating , 1) }})</span>
                             </div>
                             <div>
                                 <span class="font-small text-muted">By <a href="{{route('shop.product', $product->id)}}">{{ $product->store->name }}</a></span>
@@ -288,7 +288,7 @@
                 </nav> --}}
                 {{ $vendorWise->links() }}
             </div>
-            <section class="section-padding pb-5">
+            {{-- <section class="section-padding pb-5">
                 <div class="section-title">
                     <h3 class="">Deals Of The Day</h3>
                     <a class="show-all" href="#">
@@ -446,7 +446,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
             <!--End Deals-->
         </div>
         <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
@@ -462,9 +462,9 @@
 
                     <div class="product-rate-cover mb-15">
                         <div class="product-rate d-inline-block">
-                            <div class="product-rating" style="width: 90%"></div>
+                            <div class="product-rating" style="width: {{ ($store->rating)*20 }}%"></div>
                         </div>
-                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                        <span class="font-small ml-5 text-muted"> ({{ round($store->rating , 1) }})</span>
                     </div>
 
                     <div class="vendor-des mb-30">

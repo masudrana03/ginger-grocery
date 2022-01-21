@@ -4,7 +4,7 @@
 <style>
 
     .modal-border{
-        border:6px solid #abeecf !important;
+        /* border:6px solid #abeecf !important; */
         border-radius:3%;
     }
 

@@ -19,7 +19,7 @@
                 <div class="col-lg-5 mx-auto">
                     <div class="sidebar-widget-2 widget_search mb-50">
                         <div class="search-form">
-                            <form action="#"> 
+                            <form action="#">
                                 <input type="text" placeholder="Search vendors (by name or ID)..." />
                                 <button type="submit"><i class="fi-rs-search"></i></button>
                             </form>
@@ -32,7 +32,7 @@
             <div class="col-12 col-lg-8 mx-auto">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-                        <p>We have <strong class="text-brand">{{$stores->count()}}</strong> vendors now</p>
+                        <p>We have <strong class="text-brand">{{ $stores->count() }}</strong> vendors now</p>
                     </div>
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
@@ -102,9 +102,9 @@
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        <div class="product-rating" style="width: {{ ($store->rating)*20 }}%"></div>
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    <span class="font-small ml-5 text-muted"> ({{ round($store->rating , 1) }})</span>
                                 </div>
                             </div>
 

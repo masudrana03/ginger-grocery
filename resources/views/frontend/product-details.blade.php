@@ -127,14 +127,13 @@
                                     <div class="product-rate d-inline-block">
                                         @php
                                            $productRatingCount = $productsRating->whereIn('product_id' ,$product->id)->sum('rating');
-                                           $productRatingUser = $product->rating->count();
-                                           $productRatingAll = $product->rating;
+                                           $productRatingUser = $product->ratings->count();
+                                           $productRatingAll = $product->ratings;
                                            $productRatingTotal = $productsRating->whereIn('product_id' ,$product->id)->count();
-
-
+                                           $productRatingGrandTotal = $productRatingUser == 0 ? 0 : $productRatingCount/$productRatingUser;
                                         @endphp
 
-                                        <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
+                                        <div class="product-rating" style="width: {{ $productRatingGrandTotal*20 }}%"></div>
                                     </div>
                                     <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }} reviews)</span>
                                 </div>
@@ -307,12 +306,17 @@
                                     <div class="vendor-name ml-15">
                                         <h6>
                                             <a href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a>
+                                            @php
+                                              $vendorRating      =  $product->store->rating;
+                                              $vendorToralRating =  $product->store->totalRating;
+
+                                            @endphp
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating" style="width: {{ $vendorToralRating*20 }}%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> ( {{ $productRatingTotal }} reviews )</span>
+                                            <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }} reviews )</span>
                                         </div>
                                     </div>
                                 </div>
@@ -415,9 +419,9 @@
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
-                                                    <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
+                                                    <div class="product-rating" style="width: {{ $productRatingGrandTotal*20 }}%"></div>
                                                 </div>
-                                                <h6>{{ round($productRatingCount/$productRatingUser, 1) }} out of 5</h6>
+                                                <h6>{{ round($productRatingGrandTotal, 1) }} out of 5</h6>
                                             </div>
                                             <div class="progress">
                                                 <span>5 star</span>
@@ -495,14 +499,14 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{route('products', $product->id)}}" tabindex="0">
-                                                <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
-                                                <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />
+                                                <img class="default-img" src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                <img class="hover-img" src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                            {{-- <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a> --}}
+                                            <a aria-label="Add To Wishlist" href="{{ route('wishlist', $product->id) }}" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" href="{{ route('compare', $product->id) }}" class="action-btn small hover-up" href="#" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
@@ -513,10 +517,23 @@
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 50%"></div>
                                         </div>
-                                        <div class="product-price">
-                                            <span>{{ $product->store->currency->symbol }} {{$product->price}} </span>
-                                            {{-- <span class="old-price">$245.8</span> --}}
+
+                                        <div>
+                                            <span class="font-small text-muted">By <a
+                                                    href="{{route('vendor.details',$product->store->id) }}" >{{ $product->store->name }}</a></span>
                                         </div>
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>{{ $product->currency->symbol }}{{ $product->price }}</span>
+                                                {{-- <span class="old-price">$32.8</span> --}}
+                                            </div>
+                                            <div class="add-cart">
+                                                <a class="add"
+                                                    href="{{ route('cartById', $product->id) }}" style=""><i
+                                                        class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

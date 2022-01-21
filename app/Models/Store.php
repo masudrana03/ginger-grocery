@@ -82,4 +82,49 @@ class Store extends Model {
     public function currency() {
         return $this->belongsTo( Currency::class );
     }
+
+    /**
+     * Return the store's or vendor's total rating
+     *
+     * @return Integer
+     */
+    public function getTotalRatingAttribute()
+    {
+        $count = 0;
+
+        foreach ($this->products as $product) {
+
+            $count += $product->ratings->count();
+        }
+
+        return $count;
+    }
+
+    /**
+     * Return the store's or vendor's rating avg
+     *
+     * @return Integer
+     */
+    public function getRatingAttribute()
+    {
+        $count = 0;
+        $totalrating = 0;
+
+        foreach ($this->products as $product) {
+
+            $count  += $product->ratings->count();
+
+            foreach ($product->ratings as $item) {
+                $totalrating += $item->rating;
+            }
+
+        }
+
+        if ($count != 0) {
+            return $totalrating/$count;
+        }
+
+        return 0;
+    }
+
 }

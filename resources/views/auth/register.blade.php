@@ -14,7 +14,6 @@
   position:absolute;
   margin-left: -40px;
   margin-top: 24px;
-
 }
 
 </style>
@@ -25,7 +24,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Pages <span></span> My Account
+             <span></span> My Account
         </div>
     </div>
 </div>
@@ -152,7 +151,7 @@
                                             </div>
                                             <div id="terms"></div>
                                         </div>
-                                        <a href="#"><i class="fi-rs-book-alt mr-5 text-muted"></i>Terms &amp; Policy</a>
+                                        <a href="#"><i class="fi-rs-book-alt mr-5 text-muted" id="terms-icon"></i>Terms &amp; Policy</a>
                                     </div>
 
 

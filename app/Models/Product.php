@@ -135,8 +135,41 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function rating()
+    public function ratings()
     {
         return $this->hasMany(ProductRating::class);
+    }
+
+
+
+    /**
+     * Return the store's or vendor's total rating
+     *
+     * @return Integer
+     */
+    public function getTotalRatingAttribute()
+    {
+        return  $this->ratings->count();
+    }
+
+    /**
+     * Return the store's or vendor's rating avg
+     *
+     * @return Integer
+     */
+    public function getRatingAttribute()
+    {
+        $count = $this->ratings->count();
+        $totalrating = 0;
+
+        foreach ($this->ratings as $item) {
+            $totalrating += $item->rating;
+        }
+
+        if ($count != 0) {
+            return $totalrating / $count;
+        }
+
+        return 0;
     }
 }
