@@ -127,14 +127,13 @@
                                     <div class="product-rate d-inline-block">
                                         @php
                                            $productRatingCount = $productsRating->whereIn('product_id' ,$product->id)->sum('rating');
-                                           $productRatingUser = $product->rating->count();
-                                           $productRatingAll = $product->rating;
+                                           $productRatingUser = $product->ratings->count();
+                                           $productRatingAll = $product->ratings;
                                            $productRatingTotal = $productsRating->whereIn('product_id' ,$product->id)->count();
-
-
+                                           $productRatingGrandTotal = $productRatingUser == 0 ? 0 : $productRatingCount/$productRatingUser;
                                         @endphp
 
-                                        <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
+                                        <div class="product-rating" style="width: {{ $productRatingGrandTotal*20 }}%"></div>
                                     </div>
                                     <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }} reviews)</span>
                                 </div>
@@ -307,12 +306,17 @@
                                     <div class="vendor-name ml-15">
                                         <h6>
                                             <a href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a>
+                                            @php
+                                              $vendorRating      =  $product->store->rating;
+                                              $vendorToralRating =  $product->store->totalRating;
+
+                                            @endphp
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating" style="width: {{ $vendorToralRating*20 }}%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> ( {{ $productRatingTotal }} reviews )</span>
+                                            <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }} reviews )</span>
                                         </div>
                                     </div>
                                 </div>
@@ -415,9 +419,9 @@
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
-                                                    <div class="product-rating" style="width: {{ ($productRatingCount/$productRatingUser)*20 }}0%"></div>
+                                                    <div class="product-rating" style="width: {{ $productRatingGrandTotal*20 }}%"></div>
                                                 </div>
-                                                <h6>{{ round($productRatingCount/$productRatingUser, 1) }} out of 5</h6>
+                                                <h6>{{ round($productRatingGrandTotal, 1) }} out of 5</h6>
                                             </div>
                                             <div class="progress">
                                                 <span>5 star</span>

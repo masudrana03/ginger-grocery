@@ -16,7 +16,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @if (($search ?? false) == false)    
+                @if (($search ?? false) == false)
                 @forelse ($categoryProducts->random(6) as $category )
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -34,7 +34,7 @@
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
                     @forelse ($categoryProducts as $category )
-                        @forelse ($category->products->take(3) as $product)
+                        @forelse ($category->products->take(5) as $product)
                         {{-- @forelse ($category->products as $product) --}}
                             <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
@@ -84,9 +84,9 @@
                                         </h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating" style="width: {{ ($product->rating)*20 }}%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                            <span class="font-small ml-5 text-muted"> ({{ round($product->rating , 1) }})</span>
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a
@@ -160,13 +160,13 @@
                                                 href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
                                         </div>
                                         <h2><a
-                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>
                                         </h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating" style="width: {{ ($product->rating)*20 }}%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                            <span class="font-small ml-5 text-muted"> ({{ round($product->rating , 1) }})</span>
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a

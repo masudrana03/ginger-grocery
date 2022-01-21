@@ -16,7 +16,7 @@
         <meta property="og:url" content="" />
         <meta property="og:image" content="" />
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/frontend/imgs/theme/favicon.svg')}}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/uploads/settings/favicon/'.settings('favicon')) }}" />
         <link rel="stylesheet" href="{{ asset('assets/vendors/font_awesome/css/all.min.css') }}" />
 
         {{-- bootstrap cdn link  --}}
@@ -25,10 +25,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-      
+
 
         <!-- Template CSS -->
-        
+
         <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/animate.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
@@ -148,13 +148,13 @@
                         <div class="col">
                             <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                                 <div class="logo mb-30">
-                                    <a href="{{url('/')}}" class="mb-15"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                                    <a href="{{url('/')}}" class="mb-15" ><img style="width: 215px;" src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}" alt="logo" /></a>
                                     <p class="font-lg text-heading">Awesome grocery store website template</p>
                                 </div>
                                 <ul class="contact-infor">
-                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-email-2.svg') }}" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
+                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>{{ settings('company_address') }}, {{ settings('city') }}, {{ settings('zip') }}, {{ settings('country') }}</span></li>
+                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+88) - {{ settings('phone') }}</span></li>
+                                    <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-email-2.svg') }}" alt="" /><strong>Email:</strong><span> {{ settings('email') }}</span></li>
                                     <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-clock.svg') }}" alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li>
                                 </ul>
                             </div>
@@ -183,7 +183,7 @@
                             <li><a href="{{route('compare')}}">Compare products</a></li> --}}
 
                             {{-- code from safin --}}
-                            
+
                         @if (auth()->user())
                                 <li><a href="{{ route('user.dashboard')}} ">My Account</a></li>
                                 <li><a href="{{ route('cart')}} ">View Cart</a></li>
@@ -192,7 +192,7 @@
                                 <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
-                                
+
                             @else
                                 <li><a href="{{ route('login') }}">Sign In</a></li>
                                 <li><a href="{{route('cart')}}">View Cart</a></li>
@@ -263,7 +263,7 @@
                     <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
                         <div class="mobile-social-icon">
                             <h6>Follow Us</h6>
-                            <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
+                            <a href="https://www.facebook.com/binaryfusion"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
                             <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}" alt="" /></a>
                             <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
                             <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-pinterest-white.svg') }}" alt="" /></a>
@@ -310,7 +310,7 @@
         <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
         <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
 
-        
+
         @if (session()->has('success'))
         <script>
             $( document ).ready(function(){

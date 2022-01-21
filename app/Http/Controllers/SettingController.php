@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use App\Components\Email\Email;
 use Illuminate\Support\Facades\Cache;
+use App\Components\Email\EmailFactory;
 use Illuminate\Support\Facades\Artisan;
 
 class SettingController extends Controller
@@ -146,7 +147,7 @@ class SettingController extends Controller
                 'body'    => $message,
             ];
 
-            new Email($emailDetails);
+            new EmailFactory($emailDetails);
 
             toast('You will receive a test email soon', 'success');
 

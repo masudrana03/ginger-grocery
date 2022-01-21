@@ -95,14 +95,14 @@
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                    href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                    href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 28 ))) }}</a>
                                             </h6>
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width:90%">
+                                                    <div class="product-rating" style="width:{{ ($product->rating)*20 }}%">
                                                     </div>
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                                <span class="font-small ml-5 text-muted"> ({{ round($product->rating , 1) }})</span>
                                             </div>
                                         </td>
 

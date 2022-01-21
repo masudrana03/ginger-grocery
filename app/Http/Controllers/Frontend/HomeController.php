@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Zone;
 use App\Models\Banner;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\Category;
 use App\Models\CallToAction;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class HomeController extends Controller
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
 
-        return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones'));
+        return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }
 
     public function ajax(Request $request){

@@ -211,7 +211,7 @@
                                 <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
                                 {{-- <li>
                                     {{-- <a class="language-dropdown-active" href="#">English </a> --}}
-                                    
+
                                     {{-- <a class="language-dropdown-active" href="#">English <i
                                             class="fi-rs-angle-small-down"></i></a> --}}
                                     {{-- <ul class="language-dropdown">
@@ -231,7 +231,7 @@
                                                     alt="" />Pусский</a>
                                         </li>
                                     </ul> --}}
-                                {{-- </li> --}} 
+                                {{-- </li> --}}
                                 {{-- <li>
                                     <a class="language-dropdown-active" href="#">USD <i
                                             class="fi-rs-angle-small-down"></i></a>
@@ -263,7 +263,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                        <a href="{{ url('/') }}"><img src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}"
                                 alt="logo" /></a>
                     </div>
                     <div class="header-right">
@@ -326,7 +326,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4>{{ $product->currency->symbol }}{{ $product->price }}
                                                         </h4>
@@ -383,7 +383,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $wishlistProduct->id) }}">{{ $wishlistProduct->name }}</a>
+                                                                href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4>{{ $wishlistProduct->currency->symbol }}{{ $wishlistProduct->price }}
                                                         </h4>
@@ -443,7 +443,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
+                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
                                                             </span>{{ $product->currency->symbol }}{{ $product->price }}
@@ -479,6 +479,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if ( auth()->user() )
                                 @auth
                                     <div class="header-action-icon-2">
                                         <a href="{{ route('user.dashboard') }}">
@@ -519,6 +520,24 @@
                                         </div>
                                     </div>
                                 @endauth
+                                @else
+                                <div class="header-action-icon-2">
+									<a href="{{ route('login') }}">
+										<img class="svgInject rounded-circle" alt="Account"
+											src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
+									</a>
+									<a href="{{ route('login') }}"><span
+											class="lable ml-0">Account</span></a>
+									<div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+										<ul>
+											<li><a href="{{ route('login') }}"><i
+														class="fi fi-rs-user mr-10"></i>Login</a></li>
+											<li><a href="{{ route('register') }}"><i
+														class="fi fi-rs-user-add mr-10"></i>Register</a></li>
+										</ul>
+									</div>
+								</div>
+                                @endif
                             </div>
                         </div>
                     </div>
