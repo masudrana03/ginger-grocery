@@ -271,8 +271,8 @@
                     <div class="header-right">
                         <div class="search-style-2">
                             <form method="GET" action="{{ route('search') }}">
-                                <select class="select-active" name="category_id">
-                                    <option>All Categories</option>
+                                <select class="select-active" name="category_id" id="search-category-id">
+                                    <option value="">All Categories</option>
                                     @forelse ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty

@@ -51,8 +51,9 @@
 
 <body>
     @include('frontend.partials.nav')
-
+    <div id="app">
     @yield('content')
+    </div>
     <footer class="main">
         <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
             <div class="container">
@@ -368,6 +369,66 @@
             })
         </script>
     @endif
+    <script>
+        let old_data = $('#app').html();
+        let loading = `<section class="product-tabs section-padding position-relative">
+     <div class="container">
+     <div class="section-title style-2 wow animate__animated animate__fadeIn">
+     <h3>Search Result . . .</h3>
+     <p>loading . . .</p>
+     </div>
+     </div>
+     </section>`;
+         let category_id;
+         $(function (){
+             $('select').on('change', function() {
+                 category_id = $('#search-category-id').val();
+             });
+     
+             $('#search-input').on('keyup', function () {
+                 let search = $('#search-input').val();
+                 if(search.length > 2){
+                     category_id = $('#search-category-id').val();
+                     loadHome(search);
+                     $('#app').html(loading);
+                 }else{
+                     $('#app').html(old_data);
+                 }
+             });
+         });
+     
+         function loadHome(search, page = 1) {
+             $.ajax({
+                 method: 'POST',
+                 url: "{!! route('index.part.ajax') !!}",
+                 data: {
+                     search: search,
+                     category_id: category_id,
+                     page: page,
+                 },
+                 success: function(html) {
+                     $('#app').html(html);
+     
+                     paginationClickEvent(search);
+     
+                     $('html, body').animate({
+                         scrollTop: $("body").offset().top
+                     }, 2000);
+                 },
+                 error: function(error) {
+                     console.log(error);
+                 }
+             });
+         }
+     
+         function paginationClickEvent(search) {
+             $('.page-link').on('click', function (e) {
+                 e.preventDefault();
+                 let page = $(this).text();
+                 loadHome(search, page);
+             });
+         }
+     </script>
     @yield('script')
 </body>
 

@@ -52,7 +52,7 @@ class HomeController extends Controller
 
     public function ajax(Request $request){
         $query = request('search');
-        $category_id = request('category_id');
+        $category_id = request('category_id') ?? null;
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
 
@@ -67,8 +67,10 @@ class HomeController extends Controller
         $categoryProducts = $categoryProducts->whereHas('products', function ($q) use ($query, $category_id) {
                 $q->where('name', 'like', '%' . $query . '%')
                 ->orWhere('description', 'like', '%' . $query . '%')
-                ->orWhere('excerpt', 'like', '%' . $query . '%')
-                ->orWhere('category_id', $category_id);
+                ->orWhere('excerpt', 'like', '%' . $query . '%');
+            })
+            ->when($category_id, function ($q) use ($category_id) {
+                return $q->where('id', $category_id);
             })
             ->limit(10)->get();
 
