@@ -218,9 +218,9 @@
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
-                                                                                                    value="{{ $countryName->phonecode }}">
-                                                                                                    {{ $countryName->phonecode }}
-                                                                                                    {{ $countryName->iso }}
+                                                                                                    value="{{ $countryName->phone_code }}">
+                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->iso2 }}
                                                                                                 </option>
                                                                                             @endforeach
                                                                                         </select>
@@ -419,9 +419,9 @@
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
-                                                                                                    value="{{ $countryName->phonecode }}">
-                                                                                                    {{ $countryName->phonecode }}
-                                                                                                    {{ $countryName->iso }}
+                                                                                                    value="{{ $countryName->phone_code }}">
+                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->iso2 }}
                                                                                                 </option>
                                                                                             @endforeach
                                                                                         </select>
@@ -467,12 +467,11 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="row">
+                                                                            {{-- <div class="row">
                                                                                 <div class="form-group col-md-12">
                                                                                     <select name="country_id" id=""
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
-                                                                                        {{-- <option value="">Seclect Country</option> --}}
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
@@ -483,7 +482,7 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> --}}
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -634,9 +633,9 @@
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
-                                                                                                    value="{{ $countryName->phonecode }}">
-                                                                                                    {{ $countryName->phonecode }}
-                                                                                                    {{ $countryName->iso }}
+                                                                                                    value="{{ $countryName->phone_code }}">
+                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->iso2 }}
                                                                                                 </option>
                                                                                             @endforeach
                                                                                         </select>
@@ -680,12 +679,11 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
+                                                                            {{-- <div class="row">
                                                                                 <div class="form-group col-md-12">
                                                                                     <select name="country_id"
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
-                                                                                        {{-- <option value="">Seclect Country</option> --}}
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
@@ -696,7 +694,7 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> --}}
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">

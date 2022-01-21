@@ -73,7 +73,7 @@
                             <tbody id="cartId">
                                 @php
                                     $total = 0;
-                                    $currency_symbol = '$';
+                                    $currency_symbol = settings('currency');
                                 @endphp
                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                     <tr class="pt-30 product-modifiers " data-product-price="{{ $product->price }}">
@@ -110,7 +110,7 @@
 
                                         <td class="price" data-title="Price">
                                             <h6 class="text-body">
-                                                {{ $product->currency->symbol }}{{ $product->price }}
+                                                {{ settings('currency') }}{{ $product->price }}
                                             </h6>
                                         </td>
 
@@ -126,7 +126,7 @@
                                         </td>
                                         <td class="price" data-title="Price">
                                             <h6 class="text-brand">
-                                                {{ $product->currency->symbol }}<span
+                                                {{ settings('currency') }}<span
                                                     class="cart-subtotal">{{ $product->quantity * $product->price }}</span>
                                             </h6>
                                             <input class="d-none unit-price" value="{{ $product->price }}">
@@ -137,7 +137,7 @@
                                     </tr>
                                     @php
                                         $total += $product->quantity * $product->price;
-                                        $currency_symbol = $product->currency->symbol;
+                                        $currency_symbol = settings('currency');
                                     @endphp
                                 @empty
                                     <tr class="pt-30">
@@ -196,7 +196,7 @@
                                             </td>
                                             <td class="cart_total_amount">
                                                 <h6 class="text-heading text-end tax">
-                                                    {{ $currency_symbol }}{{ $totalTax }}</h6>
+                                                    {{ settings('currency') }}{{ $totalTax }}</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -240,7 +240,7 @@
                                                 <h6 class="text-muted">Discount</h6>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h6 class="text-brand text-end">{{ $currency_symbol }}
+                                                <h6 class="text-brand text-end">{{ settings('currency') }}
                                                     {{ session('discountAmount') }}</h6>
                                             </td>
                                         </tr>
@@ -255,7 +255,7 @@
                                                 <small>(Shipping fees not included)</small>
                                             </td>
                                             <td class="cart_total_amount">
-                                                <h6 class="text-brand text-end total">{{ $currency_symbol }}
+                                                <h6 class="text-brand text-end total">{{ settings('currency') }}
                                                     {{ session('totalAfterDiscount') }}</h6>
                                             </td>
                                         </tr>
@@ -310,7 +310,7 @@
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
         }
 
-        var symbol = "{{ $product->currency->symbol }}"
+        var symbol = "{{ settings('currency') }}";
         $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
@@ -346,7 +346,7 @@
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
             //subtotal += subtotal.toFixed(2);
         }
-        var symbol = "{{ $product->currency->symbol }}"
+        var symbol = "{{ settings('currency') }}"
 
         $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
         $('.tax').text(symbol + tax);
@@ -390,7 +390,7 @@
         for (var i = 0; i < products.length; i += 1) {
             subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
         }
-        var symbol = "{{ $product->currency->symbol }}"
+        var symbol = "{{ settings('currency') }}"
         $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';

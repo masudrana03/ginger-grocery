@@ -185,10 +185,11 @@ class StoreController extends Controller {
         }
 
         $currencies = Currency::all();
+        $countries = Country::all();
 
         $zones = Zone::all();
 
-        return view('backend.stores.edit', compact( 'store','zones', 'currencies'));
+        return view('backend.stores.edit', compact( 'store','zones', 'currencies', 'countries'));
     }
 
     /**

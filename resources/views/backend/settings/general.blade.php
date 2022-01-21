@@ -2,35 +2,38 @@
 @section('title', 'General Settings')
 
 @push('styles')
-<style>
-    .image_container {
-		 	height: 120px;
-		 	width: 200px;
-		 	border-radius: 6px;
-		 	overflow: hidden;
-		 	margin: 10px;
-		 }
-		 .image_container img {
-		 	height: 100%;
-		 	width: auto;
-		 	object-fit: cover;
-		 }
-		 .image_container span {
-		 	top: -6px;
-		 	right: 8px;
-		 	color: red;
-		 	font-size: 28px;
-		 	font-weight: normal;
-		 	cursor: pointer;
-		 }
+    <style>
+        .image_container {
+            height: 120px;
+            width: 200px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px;
+        }
 
-         .banner-image{
-             min-width: 200px;
-             min-width:100px ;
-             max-width: 980px;
-             max-height: 592px;
-         }
-</style>
+        .image_container img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .image_container span {
+            top: -6px;
+            right: 8px;
+            color: red;
+            font-size: 28px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .banner-image {
+            min-width: 200px;
+            min-width: 100px;
+            max-width: 980px;
+            max-height: 592px;
+        }
+
+    </style>
 @endpush
 
 
@@ -76,6 +79,47 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" name="state"
+                                        class="form-control @error('state') is-invalid @enderror" id="state"
+                                        aria-describedby="emailHelp" placeholder="Company Name"
+                                        value="{{ old('state') ?? settings('state') }}">
+                                    @error('state')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" class="form-control @error('city') is-invalid @enderror"
+                                        id="city" aria-describedby="emailHelp" placeholder="Company Name"
+                                        value="{{ old('city') ?? settings('city') }}">
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <input type="hidden" name="currency" id="currency">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select name="country"
+                                        class="country form-control @error('country') is-invalid @enderror">
+                                        <option value="">Seclect Country</option>
+                                        @foreach ($countries as $country)
+                                            <option data-id="{{ $country->currency_symbol }}"
+                                                {{ settings('country') == $country->name ? 'selected' : '' }}
+                                                value="{{ $country->name }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('country')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input type="text" name="phone"
                                         class="form-control @error('phone') is-invalid @enderror" id="phone"
@@ -104,13 +148,17 @@
                                         <div class="form-group">
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
-                                                        <h4>Upload Logo Images</h4>
-                                                        
-                                                            <input type="file" name="logo" id="logo" accept="image/*" class="d-none " onchange="showLogo(this)">
-                                                            <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('logo').click()">Select Image</button>
+                                                    <h4>Upload Logo Images</h4>
+
+                                                    <input type="file" name="logo" id="logo" accept="image/*"
+                                                        class="d-none " onchange="showLogo(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('logo').click()">Select
+                                                        Image</button>
                                                 </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                       <img class="banner-image" id="thumbnil"> 	  
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="thumbnil">
                                                 </div>
                                             </div>
                                         </div>
@@ -145,13 +193,17 @@
                                         <div class="form-group">
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
-                                                        <h4>Upload Favicon</h4>
-                                                        
-                                                            <input type="file" name="favicon" id="favicon" accept="image/*" class="d-none " onchange="showFavicon(this)">
-                                                            <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('favicon').click()">Select Image</button>
+                                                    <h4>Upload Favicon</h4>
+
+                                                    <input type="file" name="favicon" id="favicon" accept="image/*"
+                                                        class="d-none " onchange="showFavicon(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('favicon').click()">Select
+                                                        Image</button>
                                                 </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                       <img class="banner-image" id="favicons"> 	  
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="favicons">
                                                 </div>
                                             </div>
                                         </div>
@@ -219,46 +271,50 @@
 
 @push('script')
     <script type="text/javascript">
+        $(".country").change(function() {
+            var symbol = $(this).find(':selected').attr('data-id');
+            $("#currency").val(symbol);
+        });
         // image upload js code 
-           function showLogo(fileInput){
-               var files = fileInput.files;
-               for (var i = 0; i< files.length ; i++){
-                   var file = files[i];
-                   var imageType = /image.*/;
-                   if (!file.type.match(imageType)) {
+        function showLogo(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
                     continue;
-                    }
-                    var img=document.getElementById('thumbnil');
-                    img.file = file;
-                    var reader = new FileReader();
-                    reader.onload = (function(aImg) {
+                }
+                var img = document.getElementById('thumbnil');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
                     return function(e) {
-                    aImg.src = e.target.result;
+                        aImg.src = e.target.result;
                     };
-                    })(img);
-                    reader.readAsDataURL(file);
-               }
-           }
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
 
 
-           function showFavicon(fileInput){
-               var files = fileInput.files;
-               for (var i = 0; i< files.length ; i++){
-                   var file = files[i];
-                   var imageType = /image.*/;
-                   if (!file.type.match(imageType)) {
+        function showFavicon(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
                     continue;
-                    }
-                    var img=document.getElementById('favicons');
-                    img.file = file;
-                    var reader = new FileReader();
-                    reader.onload = (function(aImg) {
+                }
+                var img = document.getElementById('favicons');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
                     return function(e) {
-                    aImg.src = e.target.result;
+                        aImg.src = e.target.result;
                     };
-                    })(img);
-                    reader.readAsDataURL(file);
-               }
-           }
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
     </script>
 @endpush

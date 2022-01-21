@@ -21,7 +21,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone');
             $table->text('address');
             $table->string('state')->nullable();
-            $table->foreignId('country_id')->constrained()->onDelete('restrict');
+            $table->foreignId('country_id')->nullable()->constrained()->onDelete('restrict');
             $table->string('city');
             $table->string('zip');
             $table->tinyInteger('type')->comment('1 for billing, 2 for shipping');

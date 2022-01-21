@@ -328,7 +328,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
                                                         </h4>
-                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}
+                                                        <h4>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -385,7 +385,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $wishlistProduct->id) }}">{{ $wishlistProduct->name }}</a>
                                                         </h4>
-                                                        <h4>{{ $wishlistProduct->currency->symbol }}{{ $wishlistProduct->price }}
+                                                        <h4>{{ settings('currency') }}{{ $wishlistProduct->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -422,7 +422,7 @@
                                         <ul>
                                             @php
                                                 $total = 0;
-                                                $currency_symbol = '$';
+                                                $currency_symbol = settings('currency');
                                             @endphp
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
@@ -446,7 +446,7 @@
                                                                 href="{{ route('products', $product->id) }}">{{ $product->name }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
-                                                            </span>{{ $product->currency->symbol }}{{ $product->price }}
+                                                            </span>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -455,7 +455,7 @@
                                                 </li>
                                                 @php
                                                     $total += $product->quantity * $product->price;
-                                                    $currency_symbol = $product->currency->symbol;
+                                                    $currency_symbol = settings('currency');
                                                 @endphp
                                             @empty
                                                 <li>
@@ -469,7 +469,7 @@
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
+                                                <h4>Total <span>{{ settings('currency') }}{{ $total }}</span>
                                                 </h4>
                                             </div>
                                             <div class="shopping-cart-button">

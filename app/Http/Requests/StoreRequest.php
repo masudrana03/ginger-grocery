@@ -29,7 +29,6 @@ class StoreRequest extends FormRequest
             'image'          => 'required|image',
             'phone'          => 'required',
             'established_at' => 'required',
-            'country_id'     => 'required',
             'state'          => 'required',
             'city'           => 'required',
             'zip'            => 'required|numeric',

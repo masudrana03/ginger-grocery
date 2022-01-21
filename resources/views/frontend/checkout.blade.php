@@ -2,83 +2,99 @@
 @section('title', 'Checkout')
 
 <style>
-    span.checkout-quantity {
-        position: absolute;
-        background-color: #3BB77E;
-        width: 25px;
-        border-radius: 15px;
-        text-align: center;
-        color: white;
-        top: 1px;
-        right: 4px;
-
-
+    span.checkout-quantity{
+     position: absolute;
+     background-color:#3BB77E;
+     width: 25px;
+     border-radius: 15px;
+     text-align: center;
+     color: white;
+     top:1px;
+     right:4px; 
     }
-
-    .calculate-total {
-        left: 20px;
-    }
-
-    .calculate-total p {
-        padding-bottom: 7px;
-    }
-
-    /* .checkout-total{
-     display: flex;
-     justify-content: flex-end;
- } */
-
-
-    .calculate {
-        left: 27%;
-    }
-
-    .calculate p {
-        padding-bottom: 7px;
-    }
-
-    .product-name p {
-        font-size: 1em;
-    }
-
-    /* .form-group{
-    height: 2%;
-    padding-bottom:60px;
-} */
-
-    .form-group input {
-        background: #fff;
-        border: 1px solid #ececec;
-        height: 50px !important;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        padding-left: 10px;
-        font-size: 13px !important;
-        width: 100%;
-    }
-
-    .custom-select {
-        font-size: 13px !important;
-    }
-
-    .form-group textarea {
-        font-size: 13px !important;
-    }
-
-    .checkout-button {
-        padding-bottom: 20px;
-    }
-
-    .form-check {
-        margin-left: 30px;
-
-    }
-
-    .checkout-products-marketplace {
-        margin-bottom: -2.2%;
-    }
-
-</style>
+   .calculate-total{
+       left:20px;
+   }
+  
+   .calculate-total p{
+       padding-bottom:3px;
+   }
+  
+   /* .checkout-total{
+       display: flex;
+       justify-content: flex-end;
+   } */
+  
+  
+   .calculate{
+      text-align: right;
+      padding-left:50px;
+   }
+  
+   
+  
+   .calculate p{
+      padding-bottom:3px;
+   }
+  
+   .product-name p{
+      font-size: 1em;
+      
+   }
+  
+  /* .form-group{
+      height: 2%;
+      padding-bottom:60px;
+  } */
+  
+  .form-group input {
+      background: #fff;
+      border: 1px solid #ececec;
+      height:  50px !important;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      padding-left: 10px;
+      font-size: 13px !important;
+      width: 100%;
+  }
+  
+  .custom-select{
+      font-size: 13px !important;
+  }
+  
+  .form-group textarea{
+      font-size: 13px !important;
+  }
+  
+  .checkout-button{
+      padding-bottom:20px;
+  }
+  
+  .form-check{
+      margin-left:30px;
+      
+  }
+  
+  .checkout-products-marketplace{
+      margin-bottom: -2.2%;
+  }
+  
+  textarea { 
+      min-height: 138px !important;
+  }
+  
+  li.list-group-item {
+     padding:2px;
+  }
+  
+  .pri{
+      text-align: right;
+      margin-top: 19px;
+     
+  }
+  
+   
+  </style>
 
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -134,11 +150,11 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-12">
                                 <div class="custom_select">
-                                    <select class="form-control select-active @error('country_id') is-invalid @enderror"
+                                    <select disabled class="form-control select-active @error('country_id') is-invalid @enderror"
                                         name="country_id">
                                         <option value="">Select a country...</option>
                                         @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            <option {{ settings('country') == $country->name ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('country_id')
@@ -202,20 +218,20 @@
                             <h5 class="mb-30 pl-2">Payment Method:</h5>
                         </div>
 
-                        <div class="checkout-products-marketplace"
-                            style="border: 1px solid rgb(218, 214, 214); border-radius:5px; height:8%; padding-top:3px; margin-bottom:1%;">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="method" id="flexRadioDefault1" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Strip
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="method" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Card
-                                </label>
-                            </div>
+                        <div class="checkout-products-marketplace" style="margin-bottom:1%;">
+                            <ul class="list-group">
+                                @foreach ($paymentMethods as $paymentMethod)
+                                    <li class="list-group-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="{{ $paymentMethod->id }}"
+                                                name="payment_method_id" id="flexRadioDefault1" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' :  'Cash on Delivery (COD)' }}
+                                            </label>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
 
                         <div class="checkout-button" style="float: right; padding-top:15px;">
@@ -288,7 +304,13 @@
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s):</p>
                 </div>
-
+                @php
+                    $grandSubtotal = 0;
+                    $grandTotal = 0;
+                    $grandTax = 0;
+                    $grandShipping = 0;
+                    $currency = settings('currency');
+                @endphp
                 @forelse (auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [] as $key => $product)
                     <div class="checkout-products-marketplace" id="shipping-method-wrapper">
                         <div class="mt-2 bg-light mb-2">
@@ -301,7 +323,6 @@
                                     class="img-fluid rounded" width="30">
                                 <span>{{ $store->name }}</span>
                             </div>
-
                             @php
                                 $subtotal = 0;
                                 $total = 0;
@@ -309,11 +330,11 @@
                                 $shipping = 0;
                             @endphp
                             <div class="p-2">
-
                                 @foreach ($product as $item)
-                                @php
-                                    $subtotal += $item->price;
-                                @endphp
+                                    @php
+                                        $subtotal += $item->price;
+                                        $grandSubtotal += $item->price;
+                                    @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
                                             <div class="checkout-product-img-wrapper product-details">
@@ -336,15 +357,17 @@
                                             </p> --}}
                                         </div>
 
-                                        <div class="col-4 text-end product-name price " style="margin-top:2%;">
-                                            <p>{{ $item->currency->symbol }} {{ $item->price }}</p>
+                                        <div class="col">
+                                            <p class="pri">{{ $currency }} {{ $item->price }}</p>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                             <hr>
                             @php
-                                 $shipping = shippingCalculator($subtotal, $store->id, 'aftab nagar dhaka bangladesh');
+                                $shipping = shippingCalculator($subtotal, $store->id);
+                                $grandShipping += $shipping;
+                                $grandTax += $tax;
                             @endphp
                             <div class="row checkout-total ">
                                 <div class="col-6 calculate-total">
@@ -355,10 +378,11 @@
                                 </div>
 
                                 <div class="col-6 calculate">
-                                    <p class=""> {{ $store->currency->symbol }}{{ $subtotal }} </p>
-                                    <p class=""> {{ $store->currency->symbol }}{{ $shipping }} </p>
-                                    <p class=""> {{ $store->currency->symbol }}{{ $tax }} </p>
-                                    <h5 class=""> $6752</h5>
+                                    <p class=""> {{ $currency }}{{ $subtotal }} </p>
+                                    <p class=""> {{ $currency }}{{ $shipping }} </p>
+                                    <p class=""> {{ $currency }}{{ $tax }} </p>
+                                    <h5 class=""> {{ $currency }}{{ $subtotal + $shipping + $tax }}
+                                    </h5>
                                 </div>
                             </div>
                             <br>
@@ -551,7 +575,7 @@
 
 
                 {{-- Total calculation for All shopping --}}
-                {{-- <div>
+                <div>
                     <h5 class="mb-30 pl-2">Total Amount:</h5>
                 </div>
                 <div class="row checkout-total ">
@@ -564,12 +588,13 @@
                     </div>
 
                     <div class="col-6 calculate">
-                        <p class=""> $4785 </p>
-                        <p class=""> $524 </p>
-                        <p class=""> $758 </p>
-                        <h5 class=""> $6752</h5>
+                        <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
+                        <p class=""> {{ $currency }}{{ $grandShipping }} </p>
+                        <p class=""> {{ $currency }}{{ $grandTax }} </p>
+                        <h5 class="">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
+                        </h5>
                     </div>
-                </div> --}}
+                </div>
 
             </div>
         </div>

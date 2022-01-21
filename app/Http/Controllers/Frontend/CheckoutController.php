@@ -25,8 +25,6 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
-        // session()->flush();
-        // return;
         $countries = Country::all();
         $paymentMethods = PaymentMethod::active()->get();
 
@@ -66,8 +64,6 @@ class CheckoutController extends Controller
             $total += $product->price * $product->quantity;
         }
 
-        //$total = $cart->products->sum('price');
-
         $discountAmount = getDiscountAmount($total, $promo->type, $promo->discount);
         $totalAfterDiscount = getAmountAfterDiscount($total, $promo->type, $promo->discount);
 
@@ -78,7 +74,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Payment method 
+     * Payment method
      *
      * @param $request
      */
@@ -90,15 +86,14 @@ class CheckoutController extends Controller
             return back()->with('error', 'Your cart is empty, please add product in your cart');
         }
 
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     'address' => 'required',
-        //     'country_id' => 'required',
-        //     'city' => 'required',
-        //     'zip' => 'required',
-        //     'phone' => 'required',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'phone' => 'required',
+        ]);
 
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
@@ -111,30 +106,32 @@ class CheckoutController extends Controller
         }
 
         // $billingId = $this->createBillingAddress($request);
-    // $shippingId = $billingId;
+        // $shippingId = $billingId;
         // if ($request->shipping_address) {
-        //     $shippingId = $this->createShippingAddress($request);
+        $shippingId = $this->createShippingAddress($request);
         // }
 
-       // $invoiceId = $this->createOrder($cart, $billingId, $shippingId);
+        // $invoiceId = $this->createOrder($cart, $shippingId, $shippingId);
 
-       $carts = $cart->products->groupBy('store_id');
+        $carts = $cart->products->groupBy('store_id');
 
-       $invoiceIds = [];
+        // $invoiceIds = [];
 
-       foreach ($carts as $cart) {
-            return $this->createOrder($cart, 1, 1);
-            //$invoiceIds[] = $this->createOrder($cart, 1, 1);
-       }
+        $orderReference = Str::random(12);
+
+        foreach ($carts as $cart) {
+            $invoiceId = $this->createOrder($cart, $shippingId, $shippingId, $orderReference);
+            $this->sendOrderConfirmationEmail($invoiceId);
+        }
 
         // give points if match any condition
-      //  $this->givePointsToCustomer($cart);
+        //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
-        //$this->sendOrderConfirmationEmail($invoiceId);
+        //  $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
-       // return $this->acceptPayment($provider->provider, $invoiceId);
+        return $this->acceptPayment($provider->provider, $orderReference);
     }
 
     /**
@@ -189,8 +186,6 @@ class CheckoutController extends Controller
 
     /**
      * give points to customer
-     *
-     * @param Cart $cart
      */
     public function givePointsToCustomer($cart)
     {
@@ -212,62 +207,62 @@ class CheckoutController extends Controller
 
     /**
      * Create order
-     *
-     * @param Cart $cart
-     * @param integer $billingId
-     * @param integer $shippingId
      */
-    public function createOrder($cart, $billingId, $shippingId)
+    public function createOrder($cart, $billingId, $shippingId, $orderReference)
     {
         // DB::beginTransaction();
 
         //try {
-            $orderStatus = OrderStatus::whereName('Pending')->first();
+        $orderStatus = OrderStatus::whereName('Pending')->first();
 
-            if (!$orderStatus) {
-                return back()->with('error', 'Order status not found');
-            }
+        if (!$orderStatus) {
+            return back()->with('error', 'Order status not found');
+        }
 
-            $calculatedPrice = priceCalculator($cart, $shippingId);
+        $calculatedPrice = priceCalculator($cart, $shippingId);
 
+        $checkPromo = Cart::whereUserId(auth()->id())->first();
 
-            if ($cart->promo_id) {
-                $this->updatePromo($cart->promo_id);
-            }
+        if ($checkPromo && $checkPromo->promo_id) {
+            $this->updatePromo($cart->promo_id);
+        }
 
-            $order                  = new Order();
-            $order->invoice_id      = Str::random(10);
-            $order->order_status_id = $orderStatus->id;
-            $order->subtotal        = $calculatedPrice['subtotal'];
-            $order->discount        = $calculatedPrice['discount'];
-            $order->adjust          = $calculatedPrice['adjust'];;
-            $order->total           = $calculatedPrice['total'];
-            $order->user_id         = auth()->id();
-            $order->store_id        = $cart->products->first()->id;
-            $order->billing_id      = $billingId;
-            $order->shipping_id     = $shippingId;
-            $order->payment_status  = false;
-            $order->delivery_otp    = rand(1000, 3999);
+        $order                  = new Order();
+        $order->invoice_id      = Str::random(10);
+        $order->order_reference  = $orderReference;
+        $order->order_status_id = $orderStatus->id;
+        $order->subtotal        = $calculatedPrice['subtotal'];
+        $order->discount        = $calculatedPrice['discount'];
+        $order->adjust          = $calculatedPrice['adjust'];
+        $order->total           = $calculatedPrice['total'];
+        $order->user_id         = auth()->id();
+        $order->store_id        = $cart->first()->store_id;
+        $order->billing_id      = $billingId;
+        $order->shipping_id     = $shippingId;
+        $order->payment_status  = false;
+        $order->delivery_otp    = rand(1000, 3999);
 
-            $order->save();
+        $order->save();
 
-            foreach ($cart->products as $item) {
-                $orderDetails             = new OrderDetails();
-                $orderDetails->order_id   = $order->id;
-                $orderDetails->product_id = $item->id;
-                $orderDetails->quantity   = $item->quantity;
-                $orderDetails->save();
-            }
+        foreach ($cart as $item) {
+            $orderDetails             = new OrderDetails();
+            $orderDetails->order_id   = $order->id;
+            $orderDetails->product_id = $item->id;
+            $orderDetails->quantity   = $item->quantity;
+            $orderDetails->save();
+        }
 
-            $cart->products()->detach();
-            $cart->delete();
+        // return $checkPromo;
+        $cart = Cart::whereUserId(auth()->id())->first();
+        $cart->products()->detach();
+        $cart->delete();
 
-            //DB::commit();
+        //DB::commit();
 
-            session()->forget('totalAfterDiscount');
-            session()->forget('discountAmount');
+        session()->forget('totalAfterDiscount');
+        session()->forget('discountAmount');
 
-            return $order->invoice_id;
+        return $order->invoice_id;
         //} catch (Exception $e) {
            // DB::rollback();
             //logger($e->getMessage());

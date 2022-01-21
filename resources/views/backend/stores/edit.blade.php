@@ -15,7 +15,8 @@
                             </div>
                         </div>
                         <div class="white_card_body">
-                            <form action="{{ route('admin.stores.update', $store->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.stores.update', $store->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 <div class="row">
@@ -77,13 +78,31 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="country_id">Country</label>
                                             <select name="country_id"
                                                 class="form-control @error('country_id') is-invalid @enderror">
                                                 <option value="">Seclect Country</option>
                                                 @foreach ($countrys as $country)
-                                                    <option value="{{ $country->id }}"{{ $country->id == $store->country_id ? 'selected' : '' }}>{{ $country->name }}</option>
+                                                    <option value="{{ $country->id }}"
+                                                        {{ $country->id == $store->country_id ? 'selected' : '' }}>
+                                                        {{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('country_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="country_id">Country</label>
+                                            <select disabled name="country_id"
+                                                class="form-control @error('country_id') is-invalid @enderror">
+                                                <option value="">Seclect Country</option>
+                                                @foreach ($countries as $country)
+                                                    <option {{ settings('country') == $country->name ? 'selected' : '' }}
+                                                        value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('country_id')
@@ -258,11 +277,23 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="tax">Tax</label>
-                                            <input type="number" name="tax" id="tax" class="form-control"
-                                                id="tax" aria-describedby="emailHelp" placeholder="10"  value="{{ old('tax') ?? $store->tax }}" >
+                                            <input type="number" name="tax" id="tax" class="form-control" id="tax"
+                                                aria-describedby="emailHelp" placeholder="10"
+                                                value="{{ old('tax') ?? $store->tax }}">
                                         </div>
 
                                         <div class="">
+                                            <label for="longitude">Currency</label>
+                                            <select disabled class="form-control" name="currency_id">
+                                                @foreach ($countries as $country)
+                                                    <option {{ settings('country') == $country->name ? 'selected' : '' }}
+                                                        value="{{ $country->id }}">{{ $country->currency }}
+                                                        {{ $country->currency_symbol }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- <div class="">
                                             <label for="longitude">Currency</label>
                                             <select class="form-control" name="currency_id">
                                                 @foreach ($currencies as $currency)
@@ -272,7 +303,7 @@
 
                                                 @endforeach
                                             </select>
-                                        </div>
+                                        </div> --}}
                                         {{-- image container --}}
 
                                         <label>Store Logo</label>
@@ -594,9 +625,9 @@
 
         });
 
-                // image upload js code
+        // image upload js code
 
-                function showImage(fileInput) {
+        function showImage(fileInput) {
             var files = fileInput.files;
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];

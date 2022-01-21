@@ -221,20 +221,6 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label>Currency</label>
-                                    <select name="currency_id"
-                                        class="single2 form-control @error('currency_id') is-invalid @enderror">
-                                        @foreach ($currencies as $currency)
-                                            <option value="{{ $currency->id }}">{{ $currency->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('currency_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
 
                                 {{-- new code for image upload --}}
                                 <label>Product Image</label>

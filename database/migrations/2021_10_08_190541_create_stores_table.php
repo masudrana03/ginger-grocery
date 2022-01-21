@@ -20,8 +20,7 @@ class CreateStoresTable extends Migration
             $table->string('image');
             $table->string('phone');
             $table->string('established_at');
-            $table->foreignId('country_id')->constrained()->onDelete('restrict');
-            $table->foreignId('currency_id');
+            $table->foreignId('country_id')->nullable()->constrained()->onDelete('restrict');
             $table->string('state')->nullable();
             $table->string('city');
             $table->string('zip');

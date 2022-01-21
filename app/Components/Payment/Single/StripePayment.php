@@ -61,19 +61,19 @@ class StripePayment implements PayableInterface
 
     public function paymentFromSavedCard($invoiceId, $paymentMethodId)
     {
-        $order = Order::whereInvoiceId($invoiceId)->first();
-       // $userId = Order::whereInvoiceId($invoiceId)->user_id;
+        $order = Order::whereOrderReference($invoiceId)->first();
+        // $userId = Order::whereOrderReference($invoiceId)->user_id;
 
         //$stripeCustomer = StripeCustomer::whereUserId($userId)->first();
         // $stripeCustomer = StripeCustomer::whereUserId(auth()->id())->first();
         $user = auth()->user();
 
-       // \Stripe\Stripe::setApiKey($config['api_key']);
+        // \Stripe\Stripe::setApiKey($config['api_key']);
         \Stripe\Stripe::setApiKey('sk_test_51JwbCaKPFuTVnOHlK5v0C2Cs5Jg9nTqaTHLVwF8OjQUWr2KTOPSINl1rGrz10l0ZGcKfhlygra545iMdeeEw3ehy00wyx3AllM');
 
 
-       // try {
-            \Stripe\PaymentIntent::create([
+        // try {
+        \Stripe\PaymentIntent::create([
                 'amount' => $order->total * 100,
                 'currency' => 'usd',
                 'customer' => $user->stripe_customer_id,
@@ -82,11 +82,11 @@ class StripePayment implements PayableInterface
                 'confirm' => true,
             ]);
 
-            $order->payment_status = 'Paid';
-            $order->save();
+        $order->payment_status = 'Paid';
+        $order->save();
 
-            return redirect()->route('payment_success', [$invoiceId, 'No']);
-       // } catch (\Stripe\Exception\CardException $e) {
+        return redirect()->route('payment_success', [$invoiceId, 'No']);
+        // } catch (\Stripe\Exception\CardException $e) {
            // return response()->json('Something went wrong, please try again', 500);
             // Error code will be authentication_required if authentication is needed
             // return 'Error code is:' . $e->getError()->code;
@@ -97,7 +97,7 @@ class StripePayment implements PayableInterface
 
     public function paymentFromCard($invoiceId)
     {
-        $amount = Order::whereInvoiceId($invoiceId)->first()->total;
+        $amount = Order::whereOrderReference($invoiceId)->first()->total;
 
         $user = auth()->user();
 
@@ -134,7 +134,7 @@ class StripePayment implements PayableInterface
 
     public function paymentSuccess($invoiceId, $paymentMethodId)
     {
-        $order = Order::whereInvoiceId($invoiceId)->first();
+        $order = Order::whereOrderReference($invoiceId)->first();
         $order->payment_status = true;
         $order->save();
 

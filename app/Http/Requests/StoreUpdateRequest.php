@@ -27,7 +27,6 @@ class StoreUpdateRequest extends FormRequest
             'name'           => 'required',
             'type'           => 'required',
             'phone'          => 'required',
-            'country_id'     => 'required',
             'city'           => 'required',
             'zip'            => 'required|numeric',
             'address'        => 'required',

@@ -31,6 +31,8 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'loyalty_points_value', 'value' => 1] );
         Setting::create( ['key' => 'city', 'value' => 'Chicago'] );
         Setting::create( ['key' => 'zip', 'value' => '60601'] );
-        Setting::create( ['key' => 'country', 'value' => 'USA'] );
+        Setting::create( ['key' => 'country', 'value' => 'United States'] );
+        Setting::create( ['key' => 'state', 'value' => 'CA'] );
+        Setting::create( ['key' => 'currency', 'value' => '$'] );
     }
 }

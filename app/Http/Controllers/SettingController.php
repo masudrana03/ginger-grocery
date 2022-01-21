@@ -7,6 +7,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use App\Components\Email\Email;
+use App\Models\Country;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 
@@ -20,8 +21,9 @@ class SettingController extends Controller
     public function generalSetting()
     {
         $settings = $this->getSettings();
+        $countries = Country::all();
 
-        return view('backend.settings.general', compact('settings'));
+        return view('backend.settings.general', compact('settings', 'countries'));
     }
 
     /**

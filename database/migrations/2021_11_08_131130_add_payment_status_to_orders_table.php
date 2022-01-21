@@ -15,6 +15,7 @@ class AddPaymentStatusToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->boolean('payment_status')->default(false)->after('total');
+            $table->string('order_reference')->default(false)->after('invoice_id');
         });
     }
 
@@ -27,6 +28,7 @@ class AddPaymentStatusToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('payment_status');
+            $table->dropColumn('order_reference');
         });
     }
 }

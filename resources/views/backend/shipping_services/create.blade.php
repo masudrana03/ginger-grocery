@@ -36,7 +36,7 @@
                                             <option value="Free">Free</option>
                                             <option value="Flat rate">Flat rate</option>
                                             <option value="Condition on purchase">Condition on purchase</option>
-                                            <option value="Condition on distance">Condition on distance (km)</option>
+                                            {{-- <option value="Condition on distance">Condition on distance (km)</option> --}}
                                         </select>
                                     </div>
                                     <div class="col-3">

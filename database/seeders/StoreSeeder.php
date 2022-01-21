@@ -4,17 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Store;
 
-class StoreSeeder extends Seeder {
+class StoreSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
-
-
+    public function run()
+    {
         $stores = [
             [
                 'name'            => "Better Bites Deli",
@@ -22,8 +21,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 4,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -44,8 +42,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 4,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -66,8 +63,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -88,8 +84,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-7.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -110,8 +105,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -132,8 +126,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-5.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -154,8 +147,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-3.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -176,8 +168,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-4.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -198,8 +189,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-1.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -213,7 +203,6 @@ class StoreSeeder extends Seeder {
                 // 'zone_id'    => '1',
                 'created_at' => now(),
             ],
-
 
             [
                 'name'            => "Organic Orchard",
@@ -221,8 +210,7 @@ class StoreSeeder extends Seeder {
                 'image'           => 'vendor-2.png',
                 'phone'           => '+880 1712 112233',
                 'established_at'  => '1952',
-                'country_id'      => 3,
-                'currency_id'     => 4,
+                'country_id'      => 236,
                 'state'           => 'Florida',
                 'city'            => 'Miami',
                 'zip'             => '33101',
@@ -236,8 +224,6 @@ class StoreSeeder extends Seeder {
                 // 'zone_id'    => '1',
                 'created_at' => now(),
             ],
-
-
         ];
 
 

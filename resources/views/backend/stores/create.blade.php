@@ -126,11 +126,11 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="country_id">Country</label>
-                                            <select name="country_id"
+                                            <select disabled name="country_id"
                                                 class="form-control @error('country_id') is-invalid @enderror">
                                                 <option value="">Seclect Country</option>
                                                 @foreach ($countries as $country)
-                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    <option {{ settings('country') == $country->name ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('country_id')
@@ -309,9 +309,9 @@
 
                                         <div class="">
                                             <label for="longitude">Currency</label>
-                                            <select class="form-control" name="currency_id">
-                                                @foreach ($currencies as $currency)
-                                                <option value="{{ $currency->id }}">{{ $currency->code }} {{ $currency->symbol }}</option>
+                                            <select disabled class="form-control" name="currency_id">
+                                                @foreach ($countries as $country)
+                                                <option {{ settings('country') == $country->name ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->currency }} {{ $country->currency_symbol }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

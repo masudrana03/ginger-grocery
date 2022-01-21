@@ -15,12 +15,13 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('iso');
             $table->string('name');
-            $table->string('nicename');
+            $table->string('phone_code');
+            $table->string('currency');
+            $table->string('currency_name');
+            $table->string('currency_symbol');
+            $table->string('iso2')->nullable();
             $table->string('iso3')->nullable();
-            $table->string('numcode')->nullable();
-            $table->string('phonecode');
             $table->timestamps();
         });
     }

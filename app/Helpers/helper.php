@@ -151,7 +151,7 @@ function taxCalculator($total, $storeId)
 /**
  * Give me tax amount
  */
-function shippingCalculator($total, $storeId, $shippingAddress)
+function shippingCalculator($total, $storeId, $shippingAddress = null)
 {
     $shippingCharge = 0;
 
@@ -177,7 +177,12 @@ function shippingCalculator($total, $storeId, $shippingAddress)
                 }
             break;
             case 'Condition on distance':
-                $distance = getDistance($store->address, $shippingAddress);
+                if (! $shippingAddress) {
+                    return 0;
+                }
+                
+                $storeAddress = "$store->address $store->state $store->city $store->country->name";
+                $distance = getDistance($storeAddress, $shippingAddress);
                 if ($distance > $shippingMethod->to) {
                     $shippingCharge += $shippingMethod->price;
                 }
@@ -212,6 +217,8 @@ function priceCalculator($cart, $shippingId = null)
     if ($shippingAddress) {
         $address = "$shippingAddress->address $shippingAddress->state $shippingAddress->city $shippingAddress->country";
         $shipping = shippingCalculator($subtotal, $storeId, $address);
+    } else {
+        $shipping = shippingCalculator($subtotal, $storeId);
     }
 
     $tax      = taxCalculator($subtotal, $storeId);
@@ -257,10 +264,9 @@ function format_coordiantes($coordinates)
   *
   * @param string $addressFrom
   * @param string $addressTo
-  * @param string $unit
   * @return void
   */
-function getDistance($addressFrom, $addressTo, $unit = '')
+function getDistance($addressFrom, $addressTo)
 {
     // Google API key
     $apiKey = 'AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries';

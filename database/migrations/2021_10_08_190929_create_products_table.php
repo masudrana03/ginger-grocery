@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->double('calories_per_serving')->nullable();
             $table->double('fat_calories_per_serving')->nullable();
-            $table->foreignId('currency_id')->constrained()->onDelete('restrict');
             $table->foreignId('unit_id')->constrained()->onDelete('restrict');
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->foreignId('brand_id')->constrained()->onDelete('restrict');
