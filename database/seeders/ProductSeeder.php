@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder {
             'price'       => 2,
             'category_id' => 2,
             'unit_id'     => 1,
-            'brand_id'    => 2,
+            'brand_id'    => 1,
             'store_id'    => 1,
             'currency_id' => 1,
             'user_id'     => 1,
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder {
             'price'       => 1,
             'category_id' => 2,
             'unit_id'     => 1,
-            'brand_id'    => 1,
+            'brand_id'    => 2,
             'store_id'    => 1,
             'currency_id' => 1,
             'user_id'     => 1,
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'Buttermilk Alif Bakers Alif Diet Wheat Rusk',
+            'name'        => 'Diet Wheat Rusk',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 4,
@@ -153,7 +153,7 @@ class ProductSeeder extends Seeder {
         // shop name(2): Food Festive
 
         [
-            'name'        => 'CHEEZA CHEESE CRACKERS CHEDDAR FLAVOR',
+            'name'        => 'CHEESE CRACKERS',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
@@ -167,7 +167,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'JAGABEE SHOYU BUTTER POTATO STICKS',
+            'name'        => 'BUTTER POTATO STICKS',
             'description' => 'Jagabee Shoyu Butter Potato Sticks are a tasty snack that can be enjoyed any time of the day. These thin crisps are made from potatoes and shaped into thin sticks to make them easier for you to hold. They are flavored with shoyu, a traditional Japanese soy sauce used as a flavoring agent, and rich melted butter to make them taste delicious. They also come packaged in a resealable bag so you can keep fresh and crunchy. ',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
@@ -251,7 +251,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'CRATZ - PEPPER BACON FLAVOR',
+            'name'        => 'Hi Mountain Seasoning for Bacon',
             'description' => 'This snack is made with corn grown in Hokkaido. Its roasted at a high temperature, making it crunchy and tasty. Almonds are also added to the mix for a change in texture and taste. Glico created this snack to be eaten with a nice beer, but we think these taste great with all drinks',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.09,
@@ -296,7 +296,7 @@ class ProductSeeder extends Seeder {
         //shop name(3) :
 
         [
-            'name'        => 'CHEEZA CHEESE CRACKERS CHEDDAR FLAVOR',
+            'name'        => 'CHEEZA CHEESE CRACKERS ',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
@@ -310,7 +310,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'JAGABEE SHOYU BUTTER POTATO STICKS',
+            'name'        => 'Utz Potato Stix',
             'description' => 'Jagabee Shoyu Butter Potato Sticks are a tasty snack that can be enjoyed any time of the day. These thin crisps are made from potatoes and shaped into thin sticks to make them easier for you to hold. They are flavored with shoyu, a traditional Japanese soy sauce used as a flavoring agent, and rich melted butter to make them taste delicious. They also come packaged in a resealable bag so you can keep fresh and crunchy. ',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
@@ -324,8 +324,8 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'Meltykiss Tahiti Vanilla',
-            'description' => 'This is a luxurious, limited edition Meltykiss chocolate. It is made with high-quality chocolate and a familiar Tahiti vanilla. Filling the heart with a snowy texture and richness, this is a recognizable but high-quality classic winter chocolate that will bring happiness to "me" and "my loved ones.',
+            'name'        => 'Vanilla Keto Cake ',
+            'description' => 'This is a luxurious, limited edition Meltykiss chocolate cake. It is made with high-quality chocolate and a familiar Tahiti vanilla. Filling the heart with a snowy texture and richness, this is a recognizable but high-quality classic winter chocolate that will bring happiness to "me" and "my loved ones.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
             'category_id' => 1,
@@ -338,7 +338,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'Pringles Napoli Flavor',
+            'name'        => 'Pringles Paprika',
             'description' => 'In pursuit of the pizza flavor that has become a standard at restaurants and take-out restaurants, we have combined several herbs to create a pizza-like flavor. We fused it with four types of cheese: cheddar, cream, mozzarella, and parmesan. The combination of herbs and cheeses creates a satisfying taste that is so abundant you can almost smell the aroma of mozzarella.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 4.99,
@@ -352,7 +352,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'SLIM UP DIET CHOCOLATE SHAKE',
+            'name'        => 'DIET CHOCOLATE SHAKE',
             'description' => 'Have you ever thought that beauty can be eaten? Slim Up Slim is a diet and beauty meal alternative shake with beauty ingredients. Just drink one serving in place of a regular meal, or along with your usual meals, and you can lose weight and enhance your beauty just by drinking. The Slim Up Slim Diet Chocolate Shake contains 60g of carbohydrates, only 9g of sugar. A full days intake of beauty ingredients such as collagen, vitamin C, and vitamin E helps to improve the skin and care for it. Rich chocolate flavor with a nutritional balance is a good meal alternative shake and a breakfast capable of setting up your whole day!',
             'excerpt'     => 'This is product excerpt',
             'price'       => 19.12,
@@ -366,7 +366,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'JAPAN FLAVORS HI CHEW SOFT CANDY',
+            'name'        => 'Morinaga Hi-Chew Soft candy',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 2.12,
@@ -380,8 +380,8 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'JAGABEE SHOYU BUTTER POTATO STICKS',
-            'description' => 'Jagabee Shoyu Butter Potato Sticks are a tasty snack that can be enjoyed any time of the day. These thin crisps are made from potatoes and shaped into thin sticks to make them easier for you to hold. They are flavored with shoyu, a traditional Japanese soy sauce used as a flavoring agent, and rich melted butter to make them taste delicious. They also come packaged in a resealable bag so you can keep fresh and crunchy. .',
+            'name'        => 'Puffworks Baby Organic Peanut Butter Puffs',
+            'description' => 'Puffworks Baby Organic Peanut Butter Puffs are a tasty snack that can be enjoyed any time of the day. These thin crisps are made from potatoes and shaped into thin sticks to make them easier for you to hold. They are flavored with shoyu, a traditional Japanese soy sauce used as a flavoring agent, and rich melted butter to make them taste delicious. They also come packaged in a resealable bag so you can keep fresh and crunchy. .',
             'excerpt'     => 'This is product excerpt',
             'price'       => 6.30,
             'category_id' => 1,
@@ -394,7 +394,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'CRATZ - PEPPER BACON FLAVOR',
+            'name'        => 'Mills Gourmet Original Bacon Pepper Jelly',
             'description' => 'This snack is made with corn grown in Hokkaido. Its roasted at a high temperature, making it crunchy and tasty. Almonds are also added to the mix for a change in texture and taste. Glico created this snack to be eaten with a nice beer, but we think these taste great with all drinks',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.09,
@@ -408,7 +408,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'KIT KAT - PATISSIER APPLE PIE FLAVOR',
+            'name'        => 'Kit kat chocolate strawberry',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.12,
@@ -422,7 +422,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'PRETZ SWEET ROAST FLAVOR PRETZEL STICKS',
+            'name'        => 'Happy Belly Pretzel Sticks',
             'description' => 'This is product description.',
             'excerpt'     => 'This is product excerpt',
             'price'       => 3.39,
@@ -739,8 +739,10 @@ class ProductSeeder extends Seeder {
 
        //store 6
         [
-            'name'        => 'Fresho Chilli Chicken Pieces - Boneless, Antibiotic Residue-Free, 250 g',
-            'description' => 'Chicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart.
+
+            'name'        => 'Chilli Chicken Pieces - Boneless',
+            'description' => 'Chicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart. 
+
             Now making chilli chicken at home is a hassle-free process. This chicken is perfectly cut and boneless. ',
             'excerpt'     => 'Antibiotic Residue-Free, 250 g',
             'price'       => 2,
@@ -754,9 +756,9 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => ' Chicken Mince ',
-            'description' => 'hicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart.
 
+            'name'        => 'Chicken Mince',
+            'description' => 'hicken is a lean meat with various health benefits. Packed with nutritional values, chicken is supremely advantageous for your body. Filled with vitamin, mineral and protein, chicken promotes brain development, strengthens your bones, aids in weight loss, builds muscle and helps in a healthy heart. 
             Looking for a little cooking adventure? This minced chicken from Fresho will surely take out the chef in you. Get creative with your culinary talent with this perfectly chopped boneless chicken pieces. From your favourite subs to Indian keema, enjoy delicious dishes with Fresho minced Chicken. The quantity is perfect for 2-3 people. ',
             'excerpt'     => 'Antibiotic Residue Free',
             'price'       => 22,
@@ -844,7 +846,7 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'Mix Party Plater',
+            'name'        => 'Tandori Chicken Platter',
             'description' => 'Tandoori chicken is a chicken dish prepared by roasting chicken marinated in spices in a tandoor, a cylindrical clay oven. The dish originated from North India. subcontinent and is popular in many other parts of the world. (Serving 1-2 People) (Preparation Time 14-20 Min) (Whole Chicken Curry Cut Without Skin  40 g per Piece Comes with  5-6 pcs)
             Fresho Peri-Peri Chicken Wings - Juicy & Fresh 1 Kg',
             'excerpt'     => 'Fresho Tandoori Chicken - Juicy 250 g',
@@ -859,9 +861,9 @@ class ProductSeeder extends Seeder {
         ],
 
         [
-            'name'        => 'Tandoori Chicken - Juicy',
-            'description' => 'Tandoori chicken is a chicken dish prepared by roasting chicken marinated in spices in a tandoor, a cylindrical clay oven. The dish originated from North India. subcontinent and is popular in many other parts of the world. (Serving 4-6 People) (Preparation Time 14- 20 min) (Whole Chicken Curry Cut Without Skin 40 gm per Piece Comes with  20-24 pcs)',
-            'excerpt'     => 'Tandoori Chicken - Juicy',
+            'name'        => 'Fresho Tandoori Chicken Drumstick',
+            'description' => 'Fresho Tandoori Chicken Drumstick is a chicken dish prepared by roasting chicken marinated in spices in a tandoor, a cylindrical clay oven. The dish originated from North India. subcontinent and is popular in many other parts of the world. (Serving 4-6 People) (Preparation Time 14- 20 min) (Whole Chicken Curry Cut Without Skin 40 gm per Piece Comes with  20-24 pcs)',
+            'excerpt'     => 'Fresho Tandoori Chicken Drumstick',
             'price'       => 11,
             'category_id' => 5,
             'unit_id'     => 2,
@@ -889,7 +891,7 @@ class ProductSeeder extends Seeder {
     //    store 7
 
         [
-            'name'        => ' White Prawns',
+            'name'        => 'White Prawns',
             'description' => 'Prawns are full of nutrients. They are packed with protein and low in carbohydrate. It helps to build muscle and aids in weight-loss.The Fresho seawater prawns can be used instantly to cook a variety of delicious dishes without going through the pain of cleaning and deveining them. These seawater prawns are unpeeled. Their firm meat is easy to cook whether you are preparing curries, fried snacks, or grilled items. This comes in 50-60 pieces which are perfect for 6-8 people.Fresho is our in-house brand of fresh meat, poultry, and seafood. We take utmost care in selecting the best suppliers to provide you with high quality and succulent products. Every product is stored in our cold storage right until your doorstep ensuring freshness and utmost hygiene.',
             'excerpt'     => ' White Prawns - Medium, Unpeeled, 30-40 pcs',
             'price'       => 34,

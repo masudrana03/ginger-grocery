@@ -6,6 +6,15 @@
     .product-cart-wrap .product-card-bottom .add-cart .add{
         text-decoration: none;
     }
+
+    .ul-categori-dropdown{
+        width: 87%;
+
+    }
+
+ .categories-dropdown-active-large{
+            min-width: 192%;
+        }
 </style>
 
     <!-- Modal -->
@@ -50,13 +59,6 @@
             </div>
         </div>
     </div> --}}
-
-    <style>
-        .categories-dropdown-active-large{
-            min-width: 192%;
-        }
-    </style>
-
     <!-- Quick view -->
     <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel"
         aria-hidden="true">
@@ -552,12 +554,15 @@
                                 alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
-                        <div class="main-categori-wrap d-none d-lg-block">
+                        <div class="main-categori-wrap  d-none d-lg-block" style=" ">
                             <a class="categories-button-active" href="#">
                                 <span class="fi-rs-apps"></span> <span class="et">Browse</span> All
                                 Categories
                                 <i class="fi-rs-angle-down"></i>
                             </a>
+
+                            {{-- Working on this --}}
+
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
@@ -636,9 +641,9 @@
                                         @endforelse
                                     </ul>
                                 </div>
-                                <div class="more_slide_open" style="display: none">
+                                <div class="more_slide_open" style="display: none" id="more-category">
                                     <div class="d-flex categori-dropdown-inner">
-                                        <ul>
+                                        <ul class="ul-categori-dropdown">
                                             @forelse ( $categories->skip(10)->take(3) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->id) }}">
@@ -1136,4 +1141,3 @@
             $('#zoneForm').submit();
         }
     </script>
-

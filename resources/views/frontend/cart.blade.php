@@ -10,11 +10,36 @@
         color: #fff;
         border-radius: 5px;
 
+
     }
 
-    .btn-cart:hover {
-        background-color: #fdc040;
+.btn-cart:hover{
+    background-color: #fdc040;
+ }
+
+.qty{
+    height:40px;
+    width:100%;
+    border:1px #3BB77E solid ;
+    text-align: center;
+    font-size: 13px;
+    background-color: transparent;
     }
+
+#td-padding-top{
+    padding-top:4%;
+    padding-left:1.5%;
+
+  }
+
+.product-name a:hover{
+    text-decoration: none;
+
+  }
+
+ .btn-cart:hover {
+    background-color: #fdc040;
+  }
 
     .qty {
         height: 40px;
@@ -23,7 +48,6 @@
         text-align: center;
         font-size: 13px;
         background-color: transparent;
-
 
     }
 
@@ -35,7 +59,6 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Shop
                 <span></span> Cart
             </div>
         </div>
@@ -90,8 +113,6 @@
                                             @endif
 
                                             {{-- <img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"> --}}
-
-
                                         </td>
                                         <td class="product-des product-name">
                                             <h6 class="mb-5"><a class="product-name mb-10 text-heading"
@@ -108,14 +129,18 @@
 
                                         <td class="custome-checkbox pl-30"></td>
 
-                                        <td class="price" data-title="Price">
+
+
+                                        <td class="price" data-title="Price" id="td-padding-top">
                                             <h6 class="text-body">
                                                 {{ $product->currency->symbol }}{{ $product->price }}
                                             </h6>
                                         </td>
 
+
+
                                         <td>
-                                            <div class="col-md-10 col-xs-10 d-lg-flex ">
+                                            <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
                                                 <input type="hidden" name="productids[]" value="{{ $product->id }}">
                                                 <input type="button" value="-" class="qty-minus btn-cart">
                                                 <input type="text" name="qty[]" readonly type="number"
@@ -124,14 +149,14 @@
                                                 <input type="button" value="+" class="qty-plus btn-cart">
                                             </div>
                                         </td>
-                                        <td class="price" data-title="Price">
+                                        <td class="price" data-title="Price" id="td-padding-top">
                                             <h6 class="text-brand">
                                                 {{ $product->currency->symbol }}<span
                                                     class="cart-subtotal">{{ $product->quantity * $product->price }}</span>
                                             </h6>
                                             <input class="d-none unit-price" value="{{ $product->price }}">
                                         </td>
-                                        <td class="action text-center" data-title="Remove"><a
+                                        <td class="action text-center" data-title="Remove" id="td-padding-top"><a
                                                 href="{{ route('cart.remove', $product->id) }}" class="text-body"><i
                                                     class="fi-rs-trash"></i></a></td>
                                     </tr>
@@ -327,12 +352,12 @@
     });
 
     $(document).on('click', '.qty-plus', function() {
+
         var tax = "{{ $totalTax }}";
         var max = 10;
         var prev_val = parseInt($(this).prev().val());
-
-        // -----------------------------------------
         var ctr = $(this).closest(".product-modifiers");
+
         productPrice = parseFloat(ctr.data("product-price")),
             subtotalCtr = ctr.find(".cart-subtotal"),
             quantity = prev_val + 1

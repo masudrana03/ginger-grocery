@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder {
             AboutSeeder::class,
             AboutImageSeeder::class,
             AboutServicesSeeder::class,
-
+            ProductImageSeeder::class,
         ] );
 
         // Category::factory()
