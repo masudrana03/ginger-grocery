@@ -330,7 +330,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
-                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}
+                                                        <h4>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -387,7 +387,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
                                                         </h4>
-                                                        <h4>{{ $wishlistProduct->currency->symbol }}{{ $wishlistProduct->price }}
+                                                        <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -448,7 +448,7 @@
                                                                 href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
-                                                            </span>{{ $product->currency->symbol }}{{ $product->price }}
+                                                            </span>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -457,7 +457,7 @@
                                                 </li>
                                                 @php
                                                     $total += $product->quantity * $product->price;
-                                                    $currency_symbol = $product->currency->symbol;
+                                                    $currency_symbol = settings('currency');
                                                 @endphp
                                             @empty
                                                 <li>
@@ -580,7 +580,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{  ucwords(strtolower($category->name))  }} </a>
                                             </li>
                                         @empty
                                             <li>
@@ -630,7 +630,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                         @empty
                                             <li>
@@ -658,7 +658,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                             @empty
                                                 <li>
@@ -698,7 +698,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                             @empty
                                                 <li>

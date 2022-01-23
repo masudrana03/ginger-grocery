@@ -1,5 +1,80 @@
 {{-- @extends('frontend.layouts.app') --}}
 @section('title', 'Order Placed')
+<style>
+    .mb-50 {
+        margin-bottom: 50px;
+    }
+
+    .mt-50 {
+        margin-top: 50px;
+    }
+
+    .card {
+        margin: auto;
+        width: 22%;
+        padding: 3rem 3.5rem;
+        box-shadow: 0 6px 20px 0 rgb(0 0 0 / 19%);
+        background-color: #D8F1E5;
+    }
+
+    #card-header {
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+
+    input {
+        font-size: 13px;
+        font-weight: 600;
+        color: #000;
+        width: 100%;
+        min-width: unset;
+        background-color: transparent;
+        border-color: transparent;
+        margin: 0
+    }
+
+    .btn {
+        width: 100%;
+        background-color: rgb(65, 202, 127);
+        border-color: rgb(65, 202, 127);
+        color: white;
+        justify-content: center;
+        padding: 2vh 0;
+        margin-top: 1vh
+    }
+
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        -webkit-user-select: none;
+        transition: none
+    }
+
+    .btn:hover {
+        color: white
+    }
+
+    input:focus::-webkit-input-placeholder {
+        color: transparent
+    }
+
+    input:focus:-moz-placeholder {
+        color: transparent
+    }
+
+    input:focus::-moz-placeholder {
+        color: transparent
+    }
+
+    input:focus:-ms-input-placeholder {
+        color: transparent
+    }
+
+</style>
 <script src="https://js.stripe.com/v3/"></script>
 
 {{-- @section('content') --}}
@@ -13,9 +88,11 @@
         </div>
     </div> --}}
 
-<div>
+<div class="card mb-50 mt-50">
     <!--<h3>Payment</h3>-->
-    <br><br>
+    <br>
+    <span id="card-header" style="" >Add new card:</span>
+    <br>
     <input type="text" id="cardHolder" placeholder="Card holder name">
     <div class="cvc" id="card-element">
 
