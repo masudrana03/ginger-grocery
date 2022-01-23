@@ -8,12 +8,17 @@
     }
 
      ul.lineup {
-          width: 232px !important;
-          margin-right: 15px !important;
+          /* width: 220px !important; */
+          margin-right: 2px !important;
     }
 
     li.linelist{
-        width: 232px !important;
+        width: 244px !important;
+        max-height:100%;
+    }
+
+    li.linelist2{
+        width: 172px !important;
         max-height:100%;
     }
 
@@ -161,7 +166,7 @@
                                 </div>
                                 <div class="font-xs">
                                     <ul>
-                                        <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
+                                        <li class="mb-5">Vendor: <span class="text-brand">Ginger Grocery</span></li>
                                         <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span>
                                         </li>
                                     </ul>
@@ -651,7 +656,7 @@
                                         <ul class="lineup">
                                             @forelse ( $categories->skip(10)->take(3) as $category )
                                             <li class="linelist">
-                                                <a href="{{ route('categories', $category->id) }}">
+                                                <a href="{{ route('categories', $category->id) }}" style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 
@@ -667,7 +672,7 @@
                                             </li>
                                             @empty
                                                 <li>
-                                                    <a href="#"> <img
+                                                    <a href="#"  style="line-height: 1.1;"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
                                                             alt="" />Clothing & beauty</a>
                                                 </li>
@@ -688,10 +693,10 @@
                                                         alt="" />Clothing & beauty</a>
                                             </li> --}}
                                         </ul>
-                                        <ul>
+                                        <ul class="lineup">
                                             @forelse ( $categories->skip(13)->take(3) as $category )
-                                            <li>
-                                                <a href="{{ route('categories', $category->id) }}">
+                                            <li class="linelist2">
+                                                <a href="{{ route('categories', $category->id) }}"  style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 
@@ -721,7 +726,7 @@
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
-                                <ul>
+                                <ul >
                                     <li class="hot-deals"><img
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}"
                                             alt="hot deals" /><a href="#">Hot Deals</a></li>

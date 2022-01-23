@@ -15,7 +15,7 @@ class AboutSeeder extends Seeder
     public function run()
     {
         About::create( [
-            'main_section_tittle'      => 'Welcome to Nest',
+            'main_section_tittle'      => 'Welcome to Ginger Grocery',
             'main_section_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate id est laborum. ',
             'main_section_image'       => 'About-main.png',
             'section2_tittle'          => 'Your Partner for e-commerce grocery solution',

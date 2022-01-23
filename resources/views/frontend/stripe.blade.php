@@ -1,6 +1,7 @@
 {{-- @extends('frontend.layouts.app') --}}
 @section('title', 'Order Placed')
 <script src="https://js.stripe.com/v3/"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 {{-- @section('content') --}}
 {{-- <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -11,7 +12,7 @@
             </div>
         </div>
     </div> --}}
-<div style="width: 400px; margin: 0 auto;">
+{{-- <div>
     <!--<h3>Payment</h3>-->
     <br><br>
     <input type="text" id="cardHolder" placeholder="Card holder name">
@@ -25,7 +26,137 @@
     <br><br>
     <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
     <br><br>
+</div> --}}
+
+
+{{-- safin code here  --}}
+<style>
+
+  .container{
+     margin-top:110px;
+     width: 40%; 
+     min-width: 500px;
+  }
+
+   .card-title-name{
+       /* background-color: blue; */
+       text-align: center;
+       color: #38c172;
+   }
+
+   .form-control{
+       border-radius: 10px !important;
+       margin-bottom: 15px;
+   }
+
+
+   .card{
+       min-width: 100%;
+       border: 1px transparent;
+   }
+
+   .main-row{
+       width:100%;
+       height: auto;
+       box-shadow: 3px 3px 11px 8px #9de6bb !important;
+       
+       
+   }
+
+.pay-btn{
+    background-color: #38c172;
+    color:white;
+    font-size: 16px;
+    padding: 8px 65px 12px 59px;
+    text-decoration: none;
+    border-radius: 15px;
+    text-align: center;
+   
+    
+}
+
+.pay-btn:hover{
+    background-color: #d5d84d;
+    color:rgb(12, 3, 3);
+    font-size: 16px;
+    padding: 8px 65px 12px 59px;
+    text-decoration: none;
+    border-radius: 15px;
+    text-align: center;
+    transition: 1.2s;
+}
+
+
+
+.btn{
+    margin-left: 12vw;
+}
+  
+</style>
+  
+<div class="container">
+  <form action="#" method="post">
+    <div class="row shadow-lg p-3 mb-5 bg-white rounded main-row">
+        <div class="card" >
+            <div class="card-body">
+              <h3 class="card-title card-title-name">Payment Information</h5>
+
+               <div class="row">
+                <div class="form-group">
+                    <label for="input" class="form-label">Card Holder Name</label>
+                    <input type="text" id="cardHolder" name="card-holder-name" class="form-control" placeholder="ex: Jhon Doe" >
+                </div>
+               </div>
+
+               <div class="row">
+                <div class="form-group">
+                    <label for="input" class="form-label">Card Number</label>
+                    <input type="text" id="input" name="card-holder-name" class="form-control" placeholder=":1245-5528-6587-9654" >
+                </div>
+               </div>
+
+               <div class="row">
+                    <div class=" col-6">
+                        <div class="form-group">
+                            <label for="input" class="form-label">Expire Date</label>
+                            <input type="text" id="input" class="form-control" name="expire-date" placeholder="MM/YY" >
+                        </div>
+                    </div>
+
+                    <div class=" col-6">
+                        <div class="form-group">
+                            <label for="input" class="form-label">CVC</label>
+                            <input type="text" id="input" class="form-control" name="cvc" placeholder=":1234" >
+                        </div>
+                    </div>
+               </div>
+
+               <div class="row">
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="Save_card" >
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Save card information for future.
+                        </label>
+                      </div>
+                </div>
+               </div>
+
+               <div class="row mt-3 btn ">
+                   <div class="col-12">
+                    <a class="pay-btn" href="#">Pay</a>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+  </form>   
 </div>
+
+
+{{-- safin code here  --}}
+
+
 {{-- <div class="page-content pt-150 pb-150">
         <div class="container">
             <div class="row">

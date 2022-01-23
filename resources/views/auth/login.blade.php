@@ -23,7 +23,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Pages <span></span> My Account
+            <span></span> Login
         </div>
     </div>
 </div>
