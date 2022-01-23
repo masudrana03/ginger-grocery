@@ -215,7 +215,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
+                                <li>Need help? Call Us: <strong class="text-brand"> {{ settings('hot_number') }}</strong></li>
                                 {{-- <li>
                                     {{-- <a class="language-dropdown-active" href="#">English </a> --}}
 
@@ -276,8 +276,8 @@
                     <div class="header-right">
                         <div class="search-style-2">
                             <form method="GET" action="{{ route('search') }}">
-                                <select class="select-active" name="category_id" id="search-category-id">
-                                    <option value="">All Categories</option>
+                                <select class="select-active" name="category_id">
+                                    <option>All Categories</option>
                                     @forelse ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty
@@ -304,10 +304,10 @@
                                     </form>
                                 </div>
                                 @php
-                                    $productIds = session('compare');
-                                    $compareProduct = App\Models\Product::find($productIds) ?? [];
+                                    // $productIds = session('compare');
+                                    // $compareProduct = App\Models\Product::find($productIds) ?? [];
                                 @endphp
-                                <div class="header-action-icon-2">
+                                {{-- <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
@@ -359,7 +359,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
@@ -392,7 +392,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
                                                         </h4>
-                                                        <h4>{{ settings('currency') }}{{ $wishlistProduct->price }}
+                                                        <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -429,7 +429,7 @@
                                         <ul>
                                             @php
                                                 $total = 0;
-                                                $currency_symbol = settings('currency');
+                                                $currency_symbol = '$';
                                             @endphp
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
@@ -476,7 +476,7 @@
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>{{ settings('currency') }}{{ $total }}</span>
+                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
                                                 </h4>
                                             </div>
                                             <div class="shopping-cart-button">
@@ -585,7 +585,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{  ucwords(strtolower($category->name))  }} </a>
                                             </li>
                                         @empty
                                             <li>
@@ -635,7 +635,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                         @empty
                                             <li>
@@ -663,7 +663,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                             @empty
                                                 <li>
@@ -703,7 +703,7 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ $category->name }}</a>
+                                                    {{ ucwords(strtolower($category->name)) }}</a>
                                             </li>
                                             @empty
                                                 <li>

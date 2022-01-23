@@ -118,7 +118,7 @@ class CheckoutController extends Controller
         $orderReference = Str::random(12);
 
         foreach ($carts as $storeWiseitems) {
-            $invoiceId = $this->createOrder($storeWiseitems, $shippingId, $shippingId, $orderReference, $request->payment_method_id);
+            $invoiceId = $this->createOrder($storeWiseitems, $shippingId, $shippingId, $orderReference, $request->payment_method_id, $request->note);
             // $this->sendOrderConfirmationEmail($invoiceId);
         }
 
@@ -209,7 +209,7 @@ class CheckoutController extends Controller
     /**
      * Create order
      */
-    public function createOrder($cart, $billingId, $shippingId, $orderReference, $paymentMethodId)
+    public function createOrder($cart, $billingId, $shippingId, $orderReference, $paymentMethodId, $note = null)
     {
         // DB::beginTransaction();
 
@@ -244,6 +244,7 @@ class CheckoutController extends Controller
         $order->shipping_id     = $shippingId;
         $order->payment_status  = false;
         $order->payment_method_id  = $paymentMethodId;
+        $order->note  = $note;
         $order->delivery_otp    = rand(1000, 3999);
 
         $order->save();

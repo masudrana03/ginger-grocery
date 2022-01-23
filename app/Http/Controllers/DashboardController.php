@@ -1,6 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Brand;
+use App\Models\User;
+use App\Models\Zone;
+use App\Models\Order;
+use App\Models\Store;
+use App\Models\Product;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +20,29 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard');
+        $orders = Order::count();
+        $pendingOrders = OrderStatus::whereName('Pending')->count();
+        $processingOrders = OrderStatus::whereName('Processing')->count();
+        $canceledOrders = OrderStatus::whereName('canceled')->count();
+        $customers = User::whereType(3)->count();
+        $vendors = Store::count();
+        $products = Product::count();
+        // $zones = empty(Zone::count()) ? 0 : Zone::count();
+        $deliveryMans = User::whereType(4)->count();
+        $brands = Brand::count();
+
+        return view('backend.dashboard', compact(
+            'orders',
+            'pendingOrders',
+            'processingOrders',
+            'canceledOrders',
+            'customers',
+            'vendors',
+            'products',
+            // 'zones',
+            'deliveryMans',
+            'brands'
+        ));
     }
 
     /**

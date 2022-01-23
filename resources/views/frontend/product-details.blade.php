@@ -169,7 +169,7 @@
                             </div>
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand">{{ $product->store->currency->symbol ?? '$' }}{{$product->price}}</span>
+                                    <span class="current-price text-brand">{{ settings('currency') }}{{$product->price}}</span>
                                     {{-- <span>
                                         <span class="save-price font-md color3 ml-15">26% Off</span>
                                         <span class="old-price font-md ml-15">$52</span>
@@ -553,7 +553,7 @@
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>{{ $product->store->currency->symbol ?? '$' }}{{ $product->price }}</span>
+                                                <span>{{ settings('currency') }}{{ $product->price }}</span>
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
