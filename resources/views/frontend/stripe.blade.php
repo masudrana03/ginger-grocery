@@ -12,20 +12,46 @@
             </div>
         </div>
     </div> --}}
-{{-- <div>
-    <!--<h3>Payment</h3>-->
-    <br><br>
-    <input type="text" id="cardHolder" placeholder="Card holder name">
-    <div class="cvc" id="card-element">
-        <!-- Elements will create input elements here -->
+
+{{-- <style>
+    .main-row{
+       width: 50%;
+       height: auto;
+       box-shadow: 3px 3px 11px 8px #9de6bb !important;
+
+    }
+
+    .card-title-name{
+       /* background-color: blue; */
+       text-align: center;
+       color: #38c172;
+       margin-bottom: 15px;
+   }
+</style>
+<div class="row  shadow-lg p-3 mb-5 bg-white rounded main-row">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title card-title-name ">
+                <h3>Payment</h3>
+            </div>
+    
+            <div class="row">
+                <input type="text" id="cardHolder" class="form-control" placeholder="Card holder name">
+                <div class="cvc" id="card-element">
+                    <!-- Elements will create input elements here -->
+                </div>
+                <!-- We'll put the error messages in this element -->
+                <div id="card-errors" role="alert"></div>
+                <input type="checkbox" id="Save_card">
+                <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
+                <br><br>
+                <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
+                <br><br>
+            </div>
+        </div>
     </div>
-    <!-- We'll put the error messages in this element -->
-    <div id="card-errors" role="alert"></div>
-    <input type="checkbox" id="Save_card">
-    <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
-    <br><br>
-    <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
-    <br><br>
+    
+    
 </div> --}}
 
 
@@ -63,33 +89,50 @@
        
    }
 
-.pay-btn{
+.btn-design{
     background-color: #38c172;
     color:white;
     font-size: 16px;
-    padding: 8px 65px 12px 59px;
+   
     text-decoration: none;
     border-radius: 15px;
     text-align: center;
+    width: 50%;
+    
    
     
 }
 
-.pay-btn:hover{
+.btn-design:hover{
     background-color: #d5d84d;
     color:rgb(12, 3, 3);
     font-size: 16px;
-    padding: 8px 65px 12px 59px;
+   
     text-decoration: none;
     border-radius: 15px;
     text-align: center;
     transition: 1.2s;
+    width: 50%;
 }
 
 
 
 .btn{
-    margin-left: 12vw;
+    margin-left: 8vw;
+}
+
+.cvc{
+    border: rgb(213 207 207) 1px solid;
+    border-radius: 10px;
+    height: 40px;
+    align-items: baseline;
+    padding-top: 10px;
+    padding-left: 15px;
+    
+}
+
+.row {
+    --bs-gutter-x: 0.5rem !important;
 }
   
 </style>
@@ -108,14 +151,27 @@
                 </div>
                </div>
 
-               <div class="row">
+               {{-- <div class="row">
                 <div class="form-group">
                     <label for="input" class="form-label">Card Number</label>
                     <input type="text" id="input" name="card-holder-name" class="form-control" placeholder=":1245-5528-6587-9654" >
                 </div>
+               </div> --}}
+
+               <div class="row ">
+                  <div class="col-12">
+                    <label for="input" class="form-label">Card Information</label>
+                    <div class="cvc" id="card-element">
+                        <!-- Elements will create input elements here -->
+                    </div>
+                  </div>
                </div>
 
                <div class="row">
+                <div id="card-errors" style="color:crimson"  role="alert"></div>
+               </div>
+
+                {{-- <div class="row " id="card-element">
                     <div class=" col-6">
                         <div class="form-group">
                             <label for="input" class="form-label">Expire Date</label>
@@ -129,23 +185,21 @@
                             <input type="text" id="input" class="form-control" name="cvc" placeholder=":1234" >
                         </div>
                     </div>
-               </div>
+               </div> --}}
 
-               <div class="row">
+               <div class="row mt-4 mb-3">
                 <div class="col-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Save_card" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                          Save card information for future.
-                        </label>
+                        <input type="checkbox" class="form-check-input" id="Save_card">
+                        <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
                       </div>
                 </div>
                </div>
 
-               <div class="row mt-3 btn ">
-                   <div class="col-12">
-                    <a class="pay-btn" href="#">Pay</a>
-                   </div>
+               <div class="row ">
+                 <div class="col-12">
+                    <button class="btn success btn-design " id="submit" onClick="submit()">Pay</button>
+                 </div>
                </div>
             </div>
         </div>
