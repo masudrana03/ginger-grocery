@@ -2721,7 +2721,10 @@ label {
   display: flex;
   border-bottom: 2px solid #cce7d0;
   margin-bottom: 20px;
+ 
 }
+
+
 
 .tab-header .view-more i {
   margin-left: 5px;
@@ -6200,7 +6203,7 @@ h6.post-title {
     padding-right: 15px !important;
   }
   .invoice-top .col-sm-9, .invoice-top .col-sm-3 {
-    width: 50%;
+    width: 100%;
   }
   .col-sm-12 {
     width: 100%;
@@ -6246,7 +6249,7 @@ h6.post-title {
     background: #fff;
   }
   .invoice-1 .invoice-inner {
-    background: #f8f8f8;
+    background: white;
   }
   .invoice-1 .container {
     padding: 0px;

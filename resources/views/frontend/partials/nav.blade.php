@@ -7,14 +7,19 @@
         text-decoration: none;
     }
 
-    .ul-categori-dropdown{
-        width: 87%;
-
+     ul.lineup {
+          width: 232px !important;
+          margin-right: 15px !important;
     }
 
- .categories-dropdown-active-large{
-            min-width: 192%;
-        }
+    li.linelist{
+        width: 232px !important;
+        max-height:100%;
+    }
+
+
+
+    
 </style>
 
     <!-- Modal -->
@@ -615,7 +620,7 @@
                                                     alt="" />Fresh Fruit</a>
                                         </li> --}}
                                     </ul>
-                                    <ul class="end">
+                                    <ul>
                                         @forelse ( $categories->skip(5)->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->id) }}">
@@ -643,9 +648,9 @@
                                 </div>
                                 <div class="more_slide_open" style="display: none" id="more-category">
                                     <div class="d-flex categori-dropdown-inner">
-                                        <ul class="ul-categori-dropdown">
+                                        <ul class="lineup">
                                             @forelse ( $categories->skip(10)->take(3) as $category )
-                                            <li>
+                                            <li class="linelist">
                                                 <a href="{{ route('categories', $category->id) }}">
 
                                                     @if ( $category->image )
@@ -683,7 +688,7 @@
                                                         alt="" />Clothing & beauty</a>
                                             </li> --}}
                                         </ul>
-                                        <ul class="end">
+                                        <ul>
                                             @forelse ( $categories->skip(13)->take(3) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->id) }}">

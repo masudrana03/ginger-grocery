@@ -24,11 +24,11 @@
         <div class="container" style="max-width: 100%;">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="invoice-inner">
+                    <div class="invoice-inner" style="background-color: white">
                         <div class="invoice-info" id="invoice_wrapper">
-                            <div class="invoice-header">
-                                <div class="row">
-                                    <div class="col-sm-6">
+                            <div class="invoice-header"  >
+                                <div class="row" style="display: inline-flex; width:80%; ">
+                                    <div class="col-sm-6" style="width:65%; text-align:left;">
                                         <div class="invoice-numb">
                                             <h4 class="invoice-header-1 mb-10 mt-20">Invoice No: <span
                                                     class="text-brand">#{{ $order->invoice_id }}</span></h4>
@@ -36,9 +36,9 @@
                                             </h6>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="invoice-name text-end">
-                                            <div class="logo" style="position: absolute;left: 75%;top: 36%;">
+                                    <div class="col-sm-6" style="width:40%;" >
+                                        <div class="invoice-name text-end" style="text-align:left;">
+                                            <div class="logo" style="left: 75%;top: 36%;">
                                                 <a href="{{ url('/') }}"><img
                                                         src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}"
                                                         alt="logo" /></a>
@@ -53,9 +53,8 @@
                                 </div>
                             </div>
                             <div class="invoice-top">
-                                <div class="row">
-
-                                    <div class="col-lg-9 col-md-6">
+                                <div class="row" style="display: inline-flex; width:100%;" >
+                                    <div class="col-sm-2 " style="width:50%;">
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Order Information</h4>
                                             <p class="invoice-addr-1">
@@ -75,7 +74,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6" style="position: absolute; left: 67%;top: 41%;">
+                                    <div class="col-sm-2" style="width:50%; text-align:left;>
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Shipping Information</h4>
                                             <p class="invoice-addr-1">
@@ -88,9 +87,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="invoice-center">
-                                <h3>Order Details</h3>
-                                <div class="table-responsive">
+                            <div class="invoice-center" style="background-color: white">
+                                <h3 style="margin-bottom: 15px;">Order Details</h3>
+                                <div class="table-responsive" style="margin-bottom: 50px;">
                                     <table class="table table-striped invoice-table">
                                         <thead class="bg-active">
                                             <tr>
