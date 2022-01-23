@@ -15,13 +15,13 @@ class ProductImageSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $productImage = [
           [
              'image' => 'MilkBread.png',
              'product_id' => 1,
           ],
-          
+
           [
             'image' => 'MuffinCake.png',
             'product_id' =>2,
@@ -106,7 +106,7 @@ class ProductImageSeeder extends Seeder
          ],
 
          [
-            'image'      => 'KIT KAT - PATISSIER APPLE PIE FLAVOR.png',
+            'image'      => 'KITKATPATISSIER APPLE PIE FLAVO.png',
             'product_id' => 18,
          ],
 
@@ -188,7 +188,7 @@ class ProductImageSeeder extends Seeder
             'image'      => 'Fresho Sapota - Organically Grown.png',
             'product_id' => 34,
          ],
-        
+
          [
             'image'      => 'Fresho Dragon Fruit.png',
             'product_id' => 35,
@@ -364,7 +364,7 @@ class ProductImageSeeder extends Seeder
             'image'      => 'ChilliGunturwithStem.png',
             'product_id' => 75,
          ],
-        
+
          [
             'image'      => 'FenugreekMethiMenthya.png',
             'product_id' => 76,
@@ -388,7 +388,7 @@ class ProductImageSeeder extends Seeder
 
         ];
 
-        
+
         // ProductImage::create($productImage);
         DB::table('product_images')->insert($productImage);
 

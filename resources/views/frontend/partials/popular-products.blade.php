@@ -108,10 +108,10 @@
                             </div>
                             <!--end product card-->
                         @empty
-                            <h2>No Products found</h2>
+                            {{-- <h2>No Products found</h2> --}}
                         @endforelse
                     @empty
-                    <h2>No Products found</h2>
+                    {{-- <h2>No Products found</h2> --}}
                     @endforelse
                 </div>
                 <!--End product-grid-4-->

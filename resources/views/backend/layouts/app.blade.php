@@ -67,7 +67,7 @@
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
             <a class="large_logo" href="{{ route('admin.dashboard') }}"><img
-                    src="https://binary-fusion.com/frontend/assets/img/logo.png" alt=""></a>
+                    src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}" alt=""></a>
             <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
                     src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">

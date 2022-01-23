@@ -16,31 +16,31 @@ class AboutImageSeeder extends Seeder
     {
         AboutsliderImage::create( [
             'about_id'   => '1',
-            'image'      => '2021-12-30-61cd9a69abdd7.png',
+            'image'      => 'About-slider1.png',
             'created_at' => now(),
         ] );
 
         AboutsliderImage::create( [
             'about_id'   => '1',
-            'image'      => '2021-12-30-61cd9a757d338.png',
+            'image'      => 'About-slider2.png',
             'created_at' => now(),
         ] );
 
         AboutsliderImage::create( [
             'about_id'   => '1',
-            'image'      => '2021-12-30-61cd9a801f7f7.png',
+            'image'      => 'About-slider3.png',
             'created_at' => now(),
         ] );
 
         AboutsliderImage::create( [
             'about_id'   => '1',
-            'image'      => '2021-12-30-61cd9a8bb1577.png',
+            'image'      => 'About-slider4.png',
             'created_at' => now(),
         ] );
 
         AboutsliderImage::create( [
             'about_id'   => '1',
-            'image'      => '2021-12-30-61cd9a979c57c.png',
+            'image'      => 'About-slider5.png',
             'created_at' => now(),
         ] );
     }
