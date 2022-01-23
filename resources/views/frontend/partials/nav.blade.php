@@ -271,8 +271,8 @@
                     <div class="header-right">
                         <div class="search-style-2">
                             <form method="GET" action="{{ route('search') }}">
-                                <select class="select-active" name="category_id" id="search-category-id">
-                                    <option value="">All Categories</option>
+                                <select class="select-active" name="category_id">
+                                    <option>All Categories</option>
                                     @forelse ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty
@@ -330,7 +330,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
-                                                        <h4>{{ settings('currency') }}{{ $product->price }}
+                                                        <h4>{{ $product->currency->symbol }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -387,7 +387,7 @@
                                                         <h4><a
                                                                 href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
                                                         </h4>
-                                                        <h4>{{ settings('currency') }}{{ $wishlistProduct->price }}
+                                                        <h4>{{ $wishlistProduct->currency->symbol }}{{ $wishlistProduct->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -424,7 +424,7 @@
                                         <ul>
                                             @php
                                                 $total = 0;
-                                                $currency_symbol = settings('currency');
+                                                $currency_symbol = '$';
                                             @endphp
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
@@ -448,7 +448,7 @@
                                                                 href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
-                                                            </span>{{ settings('currency') }}{{ $product->price }}
+                                                            </span>{{ $product->currency->symbol }}{{ $product->price }}
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
@@ -457,7 +457,7 @@
                                                 </li>
                                                 @php
                                                     $total += $product->quantity * $product->price;
-                                                    $currency_symbol = settings('currency');
+                                                    $currency_symbol = $product->currency->symbol;
                                                 @endphp
                                             @empty
                                                 <li>
@@ -471,7 +471,7 @@
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>{{ settings('currency') }}{{ $total }}</span>
+                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
                                                 </h4>
                                             </div>
                                             <div class="shopping-cart-button">
