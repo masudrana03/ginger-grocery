@@ -319,7 +319,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="store-logo" id="thumbnil">
+                                                    <img class="store-logo" src="{{asset( 'assets/img/uploads/stores/thumbnail/'.$store->image );}}"id="thumbnil">
                                                 </div>
                                             </div>
                                         </div>
