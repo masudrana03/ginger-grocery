@@ -28,6 +28,15 @@ class Order extends Model
     }
 
     /**
+     * Get the order status associated with the product.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    /**
      * Get the user associated with the product.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

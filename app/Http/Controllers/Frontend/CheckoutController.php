@@ -115,14 +115,15 @@ class CheckoutController extends Controller
 
         $carts = $cart->products->groupBy('store_id');
 
-        // $invoiceIds = [];
-
         $orderReference = Str::random(12);
 
-        foreach ($carts as $cart) {
-            $invoiceId = $this->createOrder($cart, $shippingId, $shippingId, $orderReference);
-            $this->sendOrderConfirmationEmail($invoiceId);
+        foreach ($carts as $storeWiseitems) {
+            $invoiceId = $this->createOrder($storeWiseitems, $shippingId, $shippingId, $orderReference, $request->payment_method_id);
+            // $this->sendOrderConfirmationEmail($invoiceId);
         }
+
+        $cart->products()->detach();
+        $cart->delete();
 
         // give points if match any condition
         //  $this->givePointsToCustomer($cart);
@@ -208,7 +209,7 @@ class CheckoutController extends Controller
     /**
      * Create order
      */
-    public function createOrder($cart, $billingId, $shippingId, $orderReference)
+    public function createOrder($cart, $billingId, $shippingId, $orderReference, $paymentMethodId)
     {
         // DB::beginTransaction();
 
@@ -235,11 +236,14 @@ class CheckoutController extends Controller
         $order->discount        = $calculatedPrice['discount'];
         $order->adjust          = $calculatedPrice['adjust'];
         $order->total           = $calculatedPrice['total'];
+        $order->shipping_cost   = $calculatedPrice['shipping'];
+        $order->tax             = $calculatedPrice['tax'];
         $order->user_id         = auth()->id();
         $order->store_id        = $cart->first()->store_id;
         $order->billing_id      = $billingId;
         $order->shipping_id     = $shippingId;
         $order->payment_status  = false;
+        $order->payment_method_id  = $paymentMethodId;
         $order->delivery_otp    = rand(1000, 3999);
 
         $order->save();
@@ -251,11 +255,6 @@ class CheckoutController extends Controller
             $orderDetails->quantity   = $item->quantity;
             $orderDetails->save();
         }
-
-        // return $checkPromo;
-        $cart = Cart::whereUserId(auth()->id())->first();
-        $cart->products()->detach();
-        $cart->delete();
 
         //DB::commit();
 

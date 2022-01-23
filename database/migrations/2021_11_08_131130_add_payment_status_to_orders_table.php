@@ -15,7 +15,10 @@ class AddPaymentStatusToOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->boolean('payment_status')->default(false)->after('total');
-            $table->string('order_reference')->default(false)->after('invoice_id');
+            $table->string('order_reference')->after('invoice_id');
+            $table->foreignId('payment_method_id')->after('payment_status');
+            $table->double('shipping_cost')->after('discount');
+            $table->double('tax')->after('shipping_cost');
         });
     }
 
