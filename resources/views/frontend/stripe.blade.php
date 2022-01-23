@@ -151,12 +151,7 @@
                 </div>
                </div>
 
-               {{-- <div class="row">
-                <div class="form-group">
-                    <label for="input" class="form-label">Card Number</label>
-                    <input type="text" id="input" name="card-holder-name" class="form-control" placeholder=":1245-5528-6587-9654" >
-                </div>
-               </div> --}}
+               
 
                <div class="row ">
                   <div class="col-12">
@@ -171,21 +166,7 @@
                 <div id="card-errors" style="color:crimson"  role="alert"></div>
                </div>
 
-                {{-- <div class="row " id="card-element">
-                    <div class=" col-6">
-                        <div class="form-group">
-                            <label for="input" class="form-label">Expire Date</label>
-                            <input type="text" id="input" class="form-control" name="expire-date" placeholder="MM/YY" >
-                        </div>
-                    </div>
-
-                    <div class=" col-6">
-                        <div class="form-group">
-                            <label for="input" class="form-label">CVC</label>
-                            <input type="text" id="input" class="form-control" name="cvc" placeholder=":1234" >
-                        </div>
-                    </div>
-               </div> --}}
+               
 
                <div class="row mt-4 mb-3">
                 <div class="col-12">
