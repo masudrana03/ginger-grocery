@@ -30,12 +30,16 @@ class StripePayment implements PayableInterface
      */
     public function acceptPayment($invoiceId)
     {
+        if (! $this->client_key && $this->client_secret) {
+            return back()->with('Payment failed!');
+        }
+
         if (!auth()->user()->stripe_customer_id) {
             return redirect()->route('payment_from_card', $invoiceId);
         }
 
         //$stripe = new \Stripe\StripeClient($this->client_secret);
-        $stripe = new \Stripe\StripeClient('sk_test_51JwbCaKPFuTVnOHlK5v0C2Cs5Jg9nTqaTHLVwF8OjQUWr2KTOPSINl1rGrz10l0ZGcKfhlygra545iMdeeEw3ehy00wyx3AllM');
+        $stripe = new \Stripe\StripeClient($this->client_secret);
 
         $paymentMethods = [];
 
@@ -69,7 +73,7 @@ class StripePayment implements PayableInterface
         $user = auth()->user();
 
         // \Stripe\Stripe::setApiKey($config['api_key']);
-        \Stripe\Stripe::setApiKey('sk_test_51JwbCaKPFuTVnOHlK5v0C2Cs5Jg9nTqaTHLVwF8OjQUWr2KTOPSINl1rGrz10l0ZGcKfhlygra545iMdeeEw3ehy00wyx3AllM');
+        \Stripe\Stripe::setApiKey($this->client_secret);
 
 
         // try {
@@ -102,7 +106,7 @@ class StripePayment implements PayableInterface
         $user = auth()->user();
 
         if (!$user->stripe_customer_id) {
-            $stripe = new \Stripe\StripeClient('sk_test_51JwbCaKPFuTVnOHlK5v0C2Cs5Jg9nTqaTHLVwF8OjQUWr2KTOPSINl1rGrz10l0ZGcKfhlygra545iMdeeEw3ehy00wyx3AllM');
+            $stripe = new \Stripe\StripeClient($this->client_secret);
 
             $stripeCustomer = $stripe->customers->create([
                 'description' => 'A new customer created',
@@ -112,7 +116,7 @@ class StripePayment implements PayableInterface
             $user->save();
         }
 
-        \Stripe\Stripe::setApiKey('sk_test_51JwbCaKPFuTVnOHlK5v0C2Cs5Jg9nTqaTHLVwF8OjQUWr2KTOPSINl1rGrz10l0ZGcKfhlygra545iMdeeEw3ehy00wyx3AllM');
+        \Stripe\Stripe::setApiKey($this->client_secret);
 
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $amount * 100,
@@ -121,7 +125,7 @@ class StripePayment implements PayableInterface
         ]);
 
         $clientSecret = $intent->client_secret;
-        $publishKey   = 'pk_test_51JwbCaKPFuTVnOHlhR1SKo4lu2EC2lexmwFpEhUihKqXydW5iZ2BKdpwKoFD7A1bGGAU9BppwuKZH6XXpbc0z4Kd00mf16pHvG';
+        $publishKey   = $this->client_key;
 
         $route = Route::current()->uri;
 

@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                 </li> --}}
-                                <li>
+                                {{-- <li>
                                     <a class="bell_notification_clicker" href="#"> <img
                                             src="{{ asset('assets/img/icon/bell.svg') }}" alt="">
                                         <span>2</span>
@@ -210,13 +210,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--/ Menu_NOtification_Wrap  -->
                                 </li>
                                 <li>
                                     <a class="CHATBOX_open" href="#"> <img
                                             src="{{ asset('assets/img/icon/msg.svg') }}" alt="">
                                         <span>2</span> </a>
-                                </li>
+                                </li> --}}
                             </div>
                             <div class="profile_info">
                                 <img src="{{ asset('assets/img/client_img.png') }}" alt="#">

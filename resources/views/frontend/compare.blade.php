@@ -48,7 +48,7 @@
                             @foreach ($compareProduct as $product)
 
                             <td class="product_price">
-                                <h4 class="price text-brand">{{$product->currency->symbol}}{{$product->price}}</h4>
+                                <h4 class="price text-brand">{{ settings('currency') }}{{ $product->price }}</h4>
                             </td>
                             @endforeach
                         </tr>

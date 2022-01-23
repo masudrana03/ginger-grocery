@@ -80,6 +80,7 @@
                                             <h4 class="invoice-title-1 mb-10">Shipping Information</h4>
                                             <p class="invoice-addr-1">
                                                 <strong>{{ $order->shipping->name }}</strong> <br />
+                                            <p>{{ $order->shipping->email }}</p>
                                             <p>{{ $order->shipping->phone }}</p>
                                             {{ $order->shipping->address }}, <br />{{ $order->shipping->city }},
                                             {{ $order->shipping->zip }}, {{ settings('country') }}
