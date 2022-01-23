@@ -54,6 +54,35 @@
         transform: translateY(-0px);
         transition: 0s;
     }
+
+    .cart{
+        width: 20% !important;
+        
+     }
+
+   .detail-extralink > div {
+    display: initial !important;
+    vertical-align: text-top !important;
+    top: 12px !important;
+
+    
+   }
+
+  a.cart {
+       background-color: #3BB77e !important;
+       color: white;
+       font-weight:700;
+       /* vertical-align: text-top !important; */
+
+   }
+
+  
+
+
+
+
+
+    
     </style>
 
 <div class="page-header breadcrumb-wrap">
@@ -167,7 +196,7 @@
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
                                 <div class="product-extra-link2">
-                                    <button  class="button button-add-to-cart" href="{{ route('cartById', $product->id) }}" ><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                    <a class="action-btn hover-up cart"  href="{{route('cartById',$product->id) }}">Add To Cart</a>
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="{{ route('compare', $product->id) }}"><i class="fi-rs-shuffle"></i></a>
                                 </div>

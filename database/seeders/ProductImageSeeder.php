@@ -106,7 +106,7 @@ class ProductImageSeeder extends Seeder
          ],
 
          [
-            'image'      => 'KIT KAT - PATISSIER APPLE PIE FLAVOR.png',
+            'image'      => 'KITKATPATISSIER APPLE PIE FLAVO.png',
             'product_id' => 18,
          ],
 
