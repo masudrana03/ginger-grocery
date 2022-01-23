@@ -22,13 +22,15 @@ class ViewComposer
      */
     public function compose(View $view)
     {
-        $zones = Zone::all();
-        $categories = Category::all();
-        $countrys = Country::all();
-        $view->with([
-            'zones' => $zones,
-            'categories' => $categories,
-            'countrys' => $countrys,
-        ]);
+        if (env('APP_NAME') != '') {
+            $zones = Zone::all();
+            $categories = Category::all();
+            $countrys = Country::all();
+            $view->with([
+                'zones' => $zones,
+                'categories' => $categories,
+                'countrys' => $countrys,
+            ]);
+        }
     }
 }
