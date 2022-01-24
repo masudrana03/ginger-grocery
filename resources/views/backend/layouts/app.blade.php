@@ -69,7 +69,7 @@
             <a class="large_logo" href="{{ route('admin.dashboard') }}"><img
                     src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}" alt=""></a>
             <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
-                    src="{{ asset('assets/img/mini_logo.png') }}" alt=""></a>
+                    src="{{ asset('assets/img/uploads/settings/logo/'.settings('mini_logo')) }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>

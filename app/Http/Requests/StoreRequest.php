@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'name'           => 'required',
             'type'           => 'required',
-            'image'          => 'required|image',
+            'image'          => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=144px,min_height=144px',
             'phone'          => 'required',
             'established_at' => 'required',
             'state'          => 'required',

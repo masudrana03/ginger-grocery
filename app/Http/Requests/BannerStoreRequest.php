@@ -26,7 +26,7 @@ class BannerStoreRequest extends FormRequest
         return [
             'title' => 'required',
             'body'  => 'required',
-            'image' => 'required|image',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=916px,min_height=630px',
         ];
     }
 }

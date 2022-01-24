@@ -49,10 +49,14 @@ class SettingController extends Controller
     {
         $this->validate($request, [
             'company_name' => 'required|string|max:255',
+            // 'logo'         => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=215px,min_height=66px',
+            // 'favicon'      => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=16px,min_height=16px',
+            // 'mini_logos'   => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=32px,min_height=32px',
         ]);
 
         $logoName    = '';
         $faviconName = '';
+        $miniLogo    = '';
 
         if ($request->hasFile('logo')) {
             $imageDirectory = 'assets/img/uploads/settings/logo';
@@ -80,7 +84,20 @@ class SettingController extends Controller
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $request = $request->except('_token', 'logo', 'favicon');
+        if ($request->hasFile('mini_logo')) {
+            $imageDirectory = 'assets/img/uploads/settings/logo';
+
+            deleteImage(settings('mini_logo'), $imageDirectory);
+
+            $image             = $request->file('mini_logo');
+            $miniLogo       = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/settings/logo/' . $miniLogo);
+            $thumbnailLocation = public_path('assets/img/uploads/settings/logo/thumbnail/' . $miniLogo);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $request = $request->except('_token', 'logo', 'favicon','mini_logo');
 
         if ($logoName != '') {
             $request['logo'] = $logoName;
@@ -88,6 +105,10 @@ class SettingController extends Controller
 
         if ($faviconName != '') {
             $request['favicon'] = $faviconName;
+        }
+
+        if ($miniLogo != '') {
+            $request['mini_logo'] = $miniLogo;
         }
 
         foreach ($request as $key => $value) {

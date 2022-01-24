@@ -225,6 +225,11 @@
                                 {{-- new code for image upload --}}
                                 <label>Product Image</label>
                                 <div class="form-group">
+                                    @if ($errors->all())
+                                        <h6 class="modal-header justify-content-start"
+                                            style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                            {{ $errors->first('image') }}</h6>
+                                    @endif
                                     <div class="card shadow-sm w-100">
                                         <div class="card-header d-flex justify-content-start">
                                             <h4>Upload Product Images</h4>
@@ -289,7 +294,7 @@
             });
         });
 
-        // image upload js code 
+        // image upload js code
         var images = [];
 
         function image_select() {

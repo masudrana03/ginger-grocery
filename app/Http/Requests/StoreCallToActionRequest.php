@@ -28,7 +28,7 @@ class StoreCallToActionRequest extends FormRequest
             'action_location'  => 'required',
             'action_location'  => 'required',
             'status'           => 'required',
-            'image'            => 'required'
+            'image'            => 'required',
         ];
     }
 }
