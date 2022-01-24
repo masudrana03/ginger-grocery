@@ -7,9 +7,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="white_box mb_30" style="background-color: #eff3f7;">
-                        <div class="row justify-content-center">
-
-                            <div class="col-lg-4">
+                        <div class="row justify-content-cent                  <div class="col-lg-4">
                                 <!-- sign_in  -->
                                 <div class="modal-content cs_modal">
                                     <div class="modal-header justify-content-center theme_bg_1">
