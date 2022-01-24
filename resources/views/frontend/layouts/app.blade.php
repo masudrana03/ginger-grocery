@@ -52,6 +52,7 @@
 <body>
     @include('frontend.partials.nav')
     <div id="app">
+    
     @yield('content')
     </div>
     <footer class="main">
@@ -237,7 +238,10 @@
 
                         </ul>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
+
+                    <!-- 
+                
+                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                         <h4 class="widget-title">Corporate</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="{{ route('login') }}">Become a Vendor</a></li>
@@ -248,7 +252,10 @@
                             <li><a href="#">Accessibility</a></li>
                             <li><a href="#">Promotions</a></li>
                         </ul>
-                    </div>
+                     </div>
+                
+                    -->
+
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
                         <h4 class="widget-title">Popular</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
@@ -289,11 +296,11 @@
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
                         <img src="{{ asset('assets/frontend/imgs/theme/icons/phone-call.svg') }}" alt="hotline" />
-                        <p>1900 - 6666<span>Working 8:00 - 22:00</span></p>
+                        <p>{{ settings('hot_number') }}<span>Working 8:00 - 22:00</span></p>
                     </div>
                     <div class="hotline d-lg-inline-flex">
                         <img src="{{ asset('assets/frontend/imgs/theme/icons/phone-call.svg') }}" alt="hotline" />
-                        <p>1900 - 8888<span>24/7 Support Center</span></p>
+                        <p>{{ settings('hot_number') }}<span>24/7 Support Center</span></p>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">

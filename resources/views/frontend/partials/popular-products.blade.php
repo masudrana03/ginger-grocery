@@ -149,8 +149,8 @@
                                                 href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn" href="{{ route('compare', $product->id) }}"><i
                                                     class="fi-rs-shuffle"></i></a>
-                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                            {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                         </div>
                                         {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>

@@ -89,7 +89,7 @@
                                                             <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                        <img class="banner-image" id="thumbnil"> 	  
+                                                        <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->main_section_image) }}' id="thumbnil"> 	  
                                                 </div>
                                             </div>
                                             {{-- <label for="main_section_image">Main Image</label><br>
@@ -276,29 +276,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="white_card card_height_100 mb_30">
-                        <div class="white_card_header">
-                            <div class="box_header m-0">
-                                <div class="main-title">
-                                    <h3 class="m-0">About Image</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="white_card_body">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="main_section_image">Previous Image</label><br>
-                                    <div class="form-group">
-                                        <div class="custom-file">
-                                            <img class="custom-img" src='{{ asset('assets/img/uploads/abouts/'.$abouts->main_section_image) }}' width='380' height='380' >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -2,99 +2,99 @@
 @section('title', 'Checkout')
 
 <style>
-    span.checkout-quantity{
-     position: absolute;
-     background-color:#3BB77E;
-     width: 25px;
-     border-radius: 15px;
-     text-align: center;
-     color: white;
-     top:1px;
-     right:4px; 
+    span.checkout-quantity {
+        position: absolute;
+        background-color: #3BB77E;
+        width: 25px;
+        border-radius: 15px;
+        text-align: center;
+        color: white;
+        top: 1px;
+        right: 4px;
     }
-   .calculate-total{
-       left:20px;
-   }
-  
-   .calculate-total p{
-       padding-bottom:3px;
-   }
-  
-   /* .checkout-total{
+
+    .calculate-total {
+        left: 20px;
+    }
+
+    .calculate-total p {
+        padding-bottom: 3px;
+    }
+
+    /* .checkout-total{
        display: flex;
        justify-content: flex-end;
    } */
-  
-  
-   .calculate{
-      text-align: right;
-      padding-left:50px;
-   }
-  
-   
-  
-   .calculate p{
-      padding-bottom:3px;
-   }
-  
-   .product-name p{
-      font-size: 1em;
-      
-   }
-  
-  /* .form-group{
+
+
+    .calculate {
+        text-align: right;
+        padding-left: 50px;
+    }
+
+
+
+    .calculate p {
+        padding-bottom: 3px;
+    }
+
+    .product-name p {
+        font-size: 1em;
+
+    }
+
+    /* .form-group{
       height: 2%;
       padding-bottom:60px;
   } */
-  
-  .form-group input {
-      background: #fff;
-      border: 1px solid #ececec;
-      height:  50px !important;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      padding-left: 10px;
-      font-size: 13px !important;
-      width: 100%;
-  }
-  
-  .custom-select{
-      font-size: 13px !important;
-  }
-  
-  .form-group textarea{
-      font-size: 13px !important;
-  }
-  
-  .checkout-button{
-      padding-bottom:20px;
-  }
-  
-  .form-check{
-      margin-left:30px;
-      
-  }
-  
-  .checkout-products-marketplace{
-      margin-bottom: -2.2%;
-  }
-  
-  textarea { 
-      min-height: 138px !important;
-  }
-  
-  li.list-group-item {
-     padding:2px;
-  }
-  
-  .pri{
-      text-align: right;
-      margin-top: 19px;
-     
-  }
-  
-   
-  </style>
+
+    .form-group input {
+        background: #fff;
+        border: 1px solid #ececec;
+        height: 50px !important;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding-left: 10px;
+        font-size: 13px !important;
+        width: 100%;
+    }
+
+    .custom-select {
+        font-size: 13px !important;
+    }
+
+    .form-group textarea {
+        font-size: 13px !important;
+    }
+
+    .checkout-button {
+        padding-bottom: 20px;
+    }
+
+    .form-check {
+        margin-left: 30px;
+
+    }
+
+    .checkout-products-marketplace {
+        margin-bottom: -2.2%;
+    }
+
+    textarea {
+        min-height: 80px !important;
+    }
+
+    li.list-group-item {
+        padding: 2px;
+    }
+
+    .pri {
+        text-align: right;
+        margin-top: 19px;
+
+    }
+
+</style>
 
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -150,11 +150,13 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-12">
                                 <div class="custom_select">
-                                    <select disabled class="form-control select-active @error('country_id') is-invalid @enderror"
+                                    <select disabled
+                                        class="form-control select-active @error('country_id') is-invalid @enderror"
                                         name="country_id">
                                         <option value="">Select a country...</option>
                                         @foreach ($countries as $country)
-                                            <option {{ settings('country') == $country->name ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
+                                            <option {{ settings('country') == $country->name ? 'selected' : '' }}
+                                                value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('country_id')
@@ -211,7 +213,8 @@
                         </div>
 
                         <div class="form-group">
-                            <textarea style="min-height: 80px" rows="3" placeholder="Additional information"></textarea>
+                            <textarea name="note"
+                                placeholder="Additional information"></textarea>
                         </div>
 
                         <div>
@@ -221,12 +224,17 @@
                         <div class="checkout-products-marketplace" style="margin-bottom:1%;">
                             <ul class="list-group">
                                 @foreach ($paymentMethods as $paymentMethod)
+                                    @if ($paymentMethod->provider == 'stripe' && (!$paymentMethod->client_key || !$paymentMethod->client_secret))
+                                        @php
+                                            continue;
+                                        @endphp
+                                    @endif
                                     <li class="list-group-item">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="{{ $paymentMethod->id }}"
                                                 name="payment_method_id" id="flexRadioDefault1" checked>
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' :  'Cash on Delivery (COD)' }}
+                                                {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
                                             </label>
                                         </div>
                                     </li>

@@ -35,5 +35,6 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'country', 'value' => 'United States'] );
         Setting::create( ['key' => 'state', 'value' => 'CA'] );
         Setting::create( ['key' => 'currency', 'value' => '$'] );
+        Setting::create( ['key' => 'hot_number', 'value' => '123456'] );
     }
 }

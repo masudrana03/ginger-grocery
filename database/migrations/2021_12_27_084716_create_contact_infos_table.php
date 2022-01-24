@@ -18,7 +18,7 @@ class CreateContactInfosTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->foreignId('country_id')->constrained()->onDelete('restrict');
+            $table->foreignId('country_id')->nullable()->constrained()->onDelete('restrict');
             $table->string('state')->nullable();
             $table->string('city');
             $table->string('zip');

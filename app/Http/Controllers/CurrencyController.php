@@ -45,15 +45,15 @@ class CurrencyController extends Controller
         } else {
             $search = $request->input('search.value');
 
-            $currencies =  Currency::where('id','LIKE',"%{$search}%")
-                            ->orWhere('name', 'LIKE',"%{$search}%")
+            $currencies =  Currency::where('id', 'LIKE', "%{$search}%")
+                            ->orWhere('name', 'LIKE', "%{$search}%")
                             ->offset($start)
                             ->limit($limit)
-                            ->orderBy($order,$dir)
+                            ->orderBy($order, $dir)
                             ->get();
 
-            $totalFiltered = Currency::where('id','LIKE',"%{$search}%")
-                                ->orWhere('name', 'LIKE',"%{$search}%")
+            $totalFiltered = Currency::where('id', 'LIKE', "%{$search}%")
+                                ->orWhere('name', 'LIKE', "%{$search}%")
                                 ->count();
         }
 
@@ -61,7 +61,7 @@ class CurrencyController extends Controller
 
         if (!empty($currencies)) {
             foreach ($currencies as $currency) {
-                $edit   = route('admin.currencies.edit',$currency->id);
+                $edit   = route('admin.currencies.edit', $currency->id);
                 $delete = route('admin.currencies.destroy', $currency->id);
                 $token  = csrf_token();
 

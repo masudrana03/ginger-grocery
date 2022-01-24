@@ -7,14 +7,24 @@
         text-decoration: none;
     }
 
-    .ul-categori-dropdown{
-        width: 87%;
-
+     ul.lineup {
+          /* width: 220px !important; */
+          margin-right: 2px !important;
     }
 
- .categories-dropdown-active-large{
-            min-width: 192%;
-        }
+    li.linelist{
+        width: 244px !important;
+        max-height:100%;
+    }
+
+    li.linelist2{
+        width: 172px !important;
+        max-height:100%;
+    }
+
+
+
+    
 </style>
 
     <!-- Modal -->
@@ -156,7 +166,7 @@
                                 </div>
                                 <div class="font-xs">
                                     <ul>
-                                        <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
+                                        <li class="mb-5">Vendor: <span class="text-brand">Ginger Grocery</span></li>
                                         <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span>
                                         </li>
                                     </ul>
@@ -210,7 +220,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
+                                <li>Need help? Call Us: <strong class="text-brand"> {{ settings('hot_number') }}</strong></li>
                                 {{-- <li>
                                     {{-- <a class="language-dropdown-active" href="#">English </a> --}}
 
@@ -299,10 +309,10 @@
                                     </form>
                                 </div>
                                 @php
-                                    $productIds = session('compare');
-                                    $compareProduct = App\Models\Product::find($productIds) ?? [];
+                                    // $productIds = session('compare');
+                                    // $compareProduct = App\Models\Product::find($productIds) ?? [];
                                 @endphp
-                                <div class="header-action-icon-2">
+                                {{-- <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
@@ -354,7 +364,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
@@ -615,7 +625,7 @@
                                                     alt="" />Fresh Fruit</a>
                                         </li> --}}
                                     </ul>
-                                    <ul class="end">
+                                    <ul>
                                         @forelse ( $categories->skip(5)->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->id) }}">
@@ -643,10 +653,10 @@
                                 </div>
                                 <div class="more_slide_open" style="display: none" id="more-category">
                                     <div class="d-flex categori-dropdown-inner">
-                                        <ul class="ul-categori-dropdown">
+                                        <ul class="lineup">
                                             @forelse ( $categories->skip(10)->take(3) as $category )
-                                            <li>
-                                                <a href="{{ route('categories', $category->id) }}">
+                                            <li class="linelist">
+                                                <a href="{{ route('categories', $category->id) }}" style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 
@@ -662,7 +672,7 @@
                                             </li>
                                             @empty
                                                 <li>
-                                                    <a href="#"> <img
+                                                    <a href="#"  style="line-height: 1.1;"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
                                                             alt="" />Clothing & beauty</a>
                                                 </li>
@@ -683,10 +693,10 @@
                                                         alt="" />Clothing & beauty</a>
                                             </li> --}}
                                         </ul>
-                                        <ul class="end">
+                                        <ul class="lineup">
                                             @forelse ( $categories->skip(13)->take(3) as $category )
-                                            <li>
-                                                <a href="{{ route('categories', $category->id) }}">
+                                            <li class="linelist2">
+                                                <a href="{{ route('categories', $category->id) }}"  style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 
@@ -716,7 +726,7 @@
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
-                                <ul>
+                                <ul >
                                     <li class="hot-deals"><img
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}"
                                             alt="hot deals" /><a href="#">Hot Deals</a></li>

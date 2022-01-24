@@ -31,7 +31,8 @@
                             </div>
                             <div class="add_button ml-10">
                                 <a href="{{ route('admin.orders.index') }}" class="btn_1">Back</a>
-                                &nbsp;&nbsp;<button onclick="printDiv('printableArea')" class="white_btn3">Print</button>
+                                &nbsp;&nbsp;<button onclick="printDiv('printableArea')"
+                                    class="white_btn3">Print</button>
                             </div>
                         </div>
 
@@ -45,7 +46,7 @@
                 <div class="col-lg-12">
                     <div class="text-center">
                         <img class="img-fluid mb-5 mh-70" width="100" alt="Logo"
-                            src="http://127.0.0.1:8000/assets/img/logo.png">
+                            src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}">
                     </div>
                 </div>
             </div>
@@ -53,15 +54,12 @@
             <div class="row">
                 <div class="col-12">
                     <h5><b>Order Details :</b></h5>
-                    <span>Transaction Id : </span><br>
                     <span>Invoice Id : </span>{{ $order->invoice_id }}<br>
                     <span>Order Date : </span>{{ $order->created_at->format('d-m-Y') }}<br>
-                    <span>Payment Status : </span>
-                    <div class="badge badge-danger">
-                        Unpaid
-                    </div>
-                    <br>
-                    <span>Payment Method : </span>Paytm<br>
+                    <span>Order status : </span>{{ $order->status->name }}<br>
+                    <span>Payment Status : {{ $order->paymentStatus }}</span><br>
+                    {{-- <div class="status_btn_danger_b"> --}}
+                    <span>Payment Method : </span>{{ $order->paymentMethod->provider == 'cash' ? 'Cash In Delivery' : 'Bank Transfet' }}<br>
                     <br>
                     <br>
                 </div>
@@ -69,26 +67,23 @@
 
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <h5>Billing Address :</h5>
+                    <h5>Customer Information :</h5>
 
-                    <span>Name: </span>Alex Smith<br>
-                    <span>Email: </span>user@gmail.com<br>
-                    <span>Phone: </span>01728332009<br>
-                    <span>Address: </span>472 Clark Street, Bay Shore, New York, <br>
-                    <span>Country: </span>United States<br>
-                    <span>City: </span>New York<br>
-                    <span>Zip: </span>3444<br>
+                    <span>Name: </span>{{ $order->user->name }}<br>
+                    <span>Email: </span>{{ $order->user->email }}<br>
+                    <span>Phone: </span>{{ $order->user->phone }}<br>
+                    <span>Country: </span>{{ settings('country') }}<br>
 
                 </div>
                 <div class="col-12 col-md-6">
                     <h5>Shipping Address :</h5>
-                    <span>Name: </span>Alex Smith <br>
-                    <span>Email: </span>user@gmail.com<br>
-                    <span>Phone: </span>01728332009<br>
-                    <span>Address: </span>472 Clark Street, Bay Shore, New York, <br>
-                    <span>Country: </span>United States<br>
-                    <span>City: </span>New York<br>
-                    <span>Zip: </span>3444<br>
+                    <span>Name: </span>{{ $order->shipping->name }} <br>
+                    <span>Email: </span>{{ $order->shipping->email }}<br>
+                    <span>Phone: </span>{{ $order->shipping->phone }}<br>
+                    <span>Address: </span> {{ $order->shipping->address }}<br>
+                    <span>Country: </span>{{ settings('country') }}<br>
+                    <span>City: </span>{{ $order->shipping->city }}<br>
+                    <span>Zip: </span>{{ $order->shipping->zip }}<br>
                 </div>
             </div>
 
@@ -104,9 +99,6 @@
                                         <span class="h6">Products</span>
                                     </th>
                                     <th class="px-0 bg-transparent border-top-0">
-                                        <span class="h6">Attribute</span>
-                                    </th>
-                                    <th class="px-0 bg-transparent border-top-0">
                                         <span class="h6">Quantity</span>
                                     </th>
                                     <th class="px-0 bg-transparent border-top-0 text-right">
@@ -117,34 +109,22 @@
                             </thead>
                             <tbody>
                                 @foreach ($order->details as $item)
-                                <tr>
-                                    <td class="px-0">
-                                        {{ $item->product->name }}
-                                    </td>
-                                    <td class="px-0">
-                                        {{ $item->product->attributes }}
-                                    </td>
-                                    <td class="px-0">
-                                        {{ $item->quantity }}
-                                    </td>
+                                    <tr>
+                                        <td class="px-0">
+                                            {{ $item->product->name }} | <small> Sold By: <a
+                                            href="{{ route('vendor.details', $item->product->store->id) }}">{{ $item->product->store->name }}</a></small>
+                                        </td>
+                                        <td class="px-0">
+                                            {{ $item->quantity }}
+                                        </td>
 
-                                    <td class="px-0 text-right">
-                                        {{ $item->product->currency->symbol }}{{ $item->product->price }}
-                                    </td>
-                                </tr>
+                                        <td class="px-0 text-right">
+                                            {{ settings('currency') }}{{ $item->product->price }}
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 <tr>
                                     <td class="padding-top-2x" colspan="5">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-0 border-top border-top-2">
-                                        <span class="text-muted">Tax</span>
-                                    </td>
-                                    <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                        <span>
-                                            $1.3483
-                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -153,11 +133,32 @@
                                     </td>
                                     <td class="px-0 text-right border-top border-top-2" colspan="5">
                                         <span>
-                                            $0
-
+                                            {{ settings('currency') }}{{ $order->shipping_cost }}
                                         </span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="px-0 border-top border-top-2">
+                                        <span class="text-muted">Tax</span>
+                                    </td>
+                                    <td class="px-0 text-right border-top border-top-2" colspan="5">
+                                        <span>
+                                            {{ settings('currency') }}{{ $order->tax }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @if ($order->discount)
+                                <tr>
+                                    <td class="px-0 border-top border-top-2">
+                                        <span class="text-muted">Tax</span>
+                                    </td>
+                                    <td class="px-0 text-right border-top border-top-2" colspan="5">
+                                        <span>
+                                            {{ settings('currency') }}{{ $order->discount }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td class="px-0 border-top border-top-2">
 
@@ -165,7 +166,7 @@
                                     </td>
                                     <td class="px-0 text-right border-top border-top-2" colspan="5">
                                         <span class="h3">
-                                            {{ $item->product->currency->symbol }}{{ $order->total }}
+                                            {{ settings('currency') }}{{ $order->total }}
                                         </span>
                                     </td>
                                 </tr>

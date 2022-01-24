@@ -105,7 +105,7 @@
                                                     <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                         </div>
                                         <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                               <img class="banner-image" id="thumbnil"> 	  
+                                               <img class="banner-image"  id="thumbnil"> 	  
                                         </div>
                                     </div>
                                 </div>

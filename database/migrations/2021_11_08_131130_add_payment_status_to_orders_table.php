@@ -19,6 +19,7 @@ class AddPaymentStatusToOrdersTable extends Migration
             $table->foreignId('payment_method_id')->after('payment_status');
             $table->double('shipping_cost')->after('discount');
             $table->double('tax')->after('shipping_cost');
+            $table->text('note')->nullable()->after('tax');
         });
     }
 

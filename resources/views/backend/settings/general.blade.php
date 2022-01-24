@@ -132,6 +132,18 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="hot_number">Hot Number</label>
+                                    <input type="text" name="hot_number"
+                                        class="form-control @error('hot_number') is-invalid @enderror" id="hot_number"
+                                        aria-describedby="emailHelp" placeholder="Company hot_number"
+                                        value="{{ old('hot_number') ?? settings('hot_number') }}">
+                                    @error('hot_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" name="email"
                                         class="form-control @error('email') is-invalid @enderror" id="email"
