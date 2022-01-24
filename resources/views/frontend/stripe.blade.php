@@ -1,6 +1,7 @@
 {{-- @extends('frontend.layouts.app') --}}
 @section('title', 'Order Placed')
 <script src="https://js.stripe.com/v3/"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 {{-- @section('content') --}}
 {{-- <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -11,21 +12,186 @@
             </div>
         </div>
     </div> --}}
-<div style="width: 400px; margin: 0 auto;">
-    <!--<h3>Payment</h3>-->
-    <br><br>
-    <input type="text" id="cardHolder" placeholder="Card holder name">
-    <div class="cvc" id="card-element">
-        <!-- Elements will create input elements here -->
+
+{{-- <style>
+    .main-row{
+       width: 50%;
+       height: auto;
+       box-shadow: 3px 3px 11px 8px #9de6bb !important;
+
+    }
+
+    .card-title-name{
+       /* background-color: blue; */
+       text-align: center;
+       color: #38c172;
+       margin-bottom: 15px;
+   }
+</style>
+<div class="row  shadow-lg p-3 mb-5 bg-white rounded main-row">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title card-title-name ">
+                <h3>Payment</h3>
+            </div>
+    
+            <div class="row">
+                <input type="text" id="cardHolder" class="form-control" placeholder="Card holder name">
+                <div class="cvc" id="card-element">
+                    <!-- Elements will create input elements here -->
+                </div>
+                <!-- We'll put the error messages in this element -->
+                <div id="card-errors" role="alert"></div>
+                <input type="checkbox" id="Save_card">
+                <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
+                <br><br>
+                <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
+                <br><br>
+            </div>
+        </div>
     </div>
-    <!-- We'll put the error messages in this element -->
-    <div id="card-errors" role="alert"></div>
-    <input type="checkbox" id="Save_card">
-    <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
-    <br><br>
-    <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
-    <br><br>
+    
+    
+</div> --}}
+
+
+{{-- safin code here  --}}
+<style>
+
+  .container{
+     margin-top:110px;
+     width: 40%; 
+     min-width: 500px;
+  }
+
+   .card-title-name{
+       /* background-color: blue; */
+       text-align: center;
+       color: #38c172;
+   }
+
+   .form-control{
+       border-radius: 10px !important;
+       margin-bottom: 15px;
+   }
+
+
+   .card{
+       min-width: 100%;
+       border: 1px transparent;
+   }
+
+   .main-row{
+       width:100%;
+       height: auto;
+       box-shadow: 3px 3px 11px 8px #9de6bb !important;
+       
+       
+   }
+
+.btn-design{
+    background-color: #38c172;
+    color:white;
+    font-size: 16px;
+   
+    text-decoration: none;
+    border-radius: 15px;
+    text-align: center;
+    width: 50%;
+    
+   
+    
+}
+
+.btn-design:hover{
+    background-color: #d5d84d;
+    color:rgb(12, 3, 3);
+    font-size: 16px;
+   
+    text-decoration: none;
+    border-radius: 15px;
+    text-align: center;
+    transition: 1.2s;
+    width: 50%;
+}
+
+
+
+.btn{
+    margin-left: 8vw;
+}
+
+.cvc{
+    border: rgb(213 207 207) 1px solid;
+    border-radius: 10px;
+    height: 40px;
+    align-items: baseline;
+    padding-top: 10px;
+    padding-left: 15px;
+    
+}
+
+.row {
+    --bs-gutter-x: 0.5rem !important;
+}
+  
+</style>
+  
+<div class="container">
+  <form action="#" method="post">
+    <div class="row shadow-lg p-3 mb-5 bg-white rounded main-row">
+        <div class="card" >
+            <div class="card-body">
+              <h3 class="card-title card-title-name">Payment Information</h5>
+
+               <div class="row">
+                <div class="form-group">
+                    <label for="input" class="form-label">Card Holder Name</label>
+                    <input type="text" id="cardHolder" name="card-holder-name" class="form-control" placeholder="ex: Jhon Doe" >
+                </div>
+               </div>
+
+               
+
+               <div class="row ">
+                  <div class="col-12">
+                    <label for="input" class="form-label">Card Information</label>
+                    <div class="cvc" id="card-element">
+                        <!-- Elements will create input elements here -->
+                    </div>
+                  </div>
+               </div>
+
+               <div class="row">
+                <div id="card-errors" style="color:crimson"  role="alert"></div>
+               </div>
+
+               
+
+               <div class="row mt-4 mb-3">
+                <div class="col-12">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="Save_card">
+                        <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
+                      </div>
+                </div>
+               </div>
+
+               <div class="row ">
+                 <div class="col-12">
+                    <button class="btn success btn-design " id="submit" onClick="submit()">Pay</button>
+                 </div>
+               </div>
+            </div>
+        </div>
+    </div>
+  </form>   
 </div>
+
+
+{{-- safin code here  --}}
+
+
 {{-- <div class="page-content pt-150 pb-150">
         <div class="container">
             <div class="row">

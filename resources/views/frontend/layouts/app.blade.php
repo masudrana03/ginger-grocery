@@ -52,6 +52,7 @@
 <body>
     @include('frontend.partials.nav')
     <div id="app">
+    
     @yield('content')
     </div>
     <footer class="main">

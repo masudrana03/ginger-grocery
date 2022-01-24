@@ -319,6 +319,12 @@
 
                                         <label>Store Logo</label>
                                         <div class="form-group">
+                                            <br> <small>This image size must be upto ( 144px X 144px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 10px;  padding-bottom: 10px; font-size: 12px; max-width: 90%; border-radius: 5px;">
+                                                    {{ $errors->first() }}</h6>
+                                            @endif
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Store Logo</h4>
@@ -514,7 +520,7 @@
             });
         }
 
-        // image upload js code 
+        // image upload js code
 
         function showImage(fileInput) {
             var files = fileInput.files;
@@ -535,7 +541,7 @@
                 reader.readAsDataURL(file);
             }
         }
-        // image upload js code end 
+        // image upload js code end
 
         function auto_grow() {
             let element = document.getElementById("coordinates");

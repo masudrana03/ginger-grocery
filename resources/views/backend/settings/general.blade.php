@@ -158,6 +158,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <br> <small>This image size must be upto ( 215px X 66px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('logo') }}</h6>
+                                            @endif
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Logo Images</h4>
@@ -201,8 +207,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-
                                         <div class="form-group">
+                                            <br> <small>This image size must be upto ( 16px X 16px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('favicon') }}</h6>
+                                            @endif
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Favicon</h4>
@@ -219,56 +230,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        {{-- <div class="form-group">
-                                            <label for="logo">Favicon</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="favicon" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <br> <small>This image size must be upto ( 32px X 32px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('mini_logos') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Admin sidebar mini logo</h4>
+
+                                                    <input type="file" name="mini_logo" id="mini_logo" accept="image/*"
+                                                        class="d-none " onchange="showMini_logo(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('mini_logo').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="mini_logos">
                                                 </div>
                                             </div>
-                                        </div> --}}
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        </div>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="logo">Logo</label><br>
-                                    <input type="file" name="logo" id="logo">
-                                    @error('logo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="favicon">Favicon</label><br>
-                                    <input type="file" name="favicon" id="favicon">
-                                    @error('favicon')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> --}}
-                                {{-- <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                                    </div>
-                                </div> --}}
+
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
@@ -287,7 +279,7 @@
             var symbol = $(this).find(':selected').attr('data-id');
             $("#currency").val(symbol);
         });
-        // image upload js code 
+        // image upload js code
         function showLogo(fileInput) {
             var files = fileInput.files;
             for (var i = 0; i < files.length; i++) {
@@ -318,6 +310,26 @@
                     continue;
                 }
                 var img = document.getElementById('favicons');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function showMini_logo(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById('mini_logos');
                 img.file = file;
                 var reader = new FileReader();
                 reader.onload = (function(aImg) {

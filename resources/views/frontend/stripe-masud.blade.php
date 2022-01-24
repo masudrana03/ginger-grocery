@@ -1,80 +1,86 @@
 {{-- @extends('frontend.layouts.app') --}}
 @section('title', 'Order Placed')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
-    .mb-50 {
-        margin-bottom: 50px;
+
+    .container{
+       margin-top:110px;
+       width: 40%; 
+       min-width: 500px;
     }
-
-    .mt-50 {
-        margin-top: 50px;
-    }
-
-    .card {
-        margin: auto;
-        width: 22%;
-        padding: 3rem 3.5rem;
-        box-shadow: 0 6px 20px 0 rgb(0 0 0 / 19%);
-        background-color: #D8F1E5;
-    }
-
-    #card-header {
-        font-weight: 500;
-        font-size: 13px;
-    }
-
-
-    input {
-        font-size: 13px;
-        font-weight: 600;
-        color: #000;
-        width: 100%;
-        min-width: unset;
-        background-color: transparent;
-        border-color: transparent;
-        margin: 0
-    }
-
-    .btn {
-        width: 100%;
-        background-color: rgb(65, 202, 127);
-        border-color: rgb(65, 202, 127);
-        color: white;
-        justify-content: center;
-        padding: 2vh 0;
-        margin-top: 1vh
-    }
-
-    .btn:focus {
-        box-shadow: none;
-        outline: none;
-        box-shadow: none;
-        color: white;
-        -webkit-box-shadow: none;
-        -webkit-user-select: none;
-        transition: none
-    }
-
-    .btn:hover {
-        color: white
-    }
-
-    input:focus::-webkit-input-placeholder {
-        color: transparent
-    }
-
-    input:focus:-moz-placeholder {
-        color: transparent
-    }
-
-    input:focus::-moz-placeholder {
-        color: transparent
-    }
-
-    input:focus:-ms-input-placeholder {
-        color: transparent
-    }
-
-</style>
+  
+     .card-title-name{
+         /* background-color: blue; */
+         text-align: center;
+         color: #38c172;
+     }
+  
+     .form-control{
+         border-radius: 10px !important;
+         margin-bottom: 15px;
+     }
+  
+  
+     .card{
+         min-width: 100%;
+         border: 1px transparent;
+     }
+  
+     .main-row{
+         width:100%;
+         height: auto;
+         box-shadow: 3px 3px 11px 8px #9de6bb !important;
+         
+         
+     }
+  
+  .btn-design{
+      background-color: #38c172;
+      color:white;
+      font-size: 16px;
+     
+      text-decoration: none;
+      border-radius: 15px;
+      text-align: center;
+      width: 50%;
+      
+     
+      
+  }
+  
+  .btn-design:hover{
+      background-color: #d5d84d;
+      color:rgb(12, 3, 3);
+      font-size: 16px;
+     
+      text-decoration: none;
+      border-radius: 15px;
+      text-align: center;
+      transition: 1.2s;
+      width: 50%;
+  }
+  
+  
+  
+  .btn{
+      margin-left: 8vw;
+  }
+  
+  .cvc{
+      border: rgb(213 207 207) 1px solid;
+      border-radius: 10px;
+      height: 40px;
+      align-items: baseline;
+      padding-top: 10px;
+      padding-left: 15px;
+      
+  }
+  
+  .row {
+      --bs-gutter-x: 0.5rem !important;
+  }
+    
+  </style>
 <script src="https://js.stripe.com/v3/"></script>
 
 {{-- @section('content') --}}
@@ -88,7 +94,11 @@
         </div>
     </div> --}}
 
-<div class="card mb-50 mt-50">
+
+{{-- masud vai --}}
+
+
+{{-- <div class="card mb-50 mt-50">
     <!--<h3>Payment</h3>-->
     <br>
     <span id="card-header" style="" >Add new card:</span>
@@ -108,7 +118,84 @@
 
     <button class="btn success btn-design" id="submit" onClick="submit()">Pay</button>
     <br><br>
-</div>
+</div> --}}
+
+{{-- masud vai --}}
+
+
+<div class="container">
+    <form action="#" method="post">
+      <div class="row shadow-lg p-3 mb-5 bg-white rounded main-row">
+          <div class="card" >
+              <div class="card-body">
+                <h3 class="card-title card-title-name">Payment Information</h5>
+  
+                 <div class="row">
+                  <div class="form-group">
+                      <label for="input" class="form-label">Card Holder Name</label>
+                      <input type="text" id="cardHolder" placeholder="Card holder name">
+                  </div>
+                 </div>
+  
+                 {{-- <div class="row">
+                  <div class="form-group">
+                      <label for="input" class="form-label">Card Number</label>
+                      <input type="text" id="input" name="card-holder-name" class="form-control" placeholder=":1245-5528-6587-9654" >
+                  </div>
+                 </div> --}}
+  
+                 <div class="row ">
+                    <div class="col-12">
+                      <label for="input" class="form-label">Card Information</label>
+                      <div class="cvc" id="card-element">
+                          <!-- Elements will create input elements here -->
+                      </div>
+                    </div>
+                 </div>
+  
+                 <div class="row">
+                  <div id="card-errors" style="color:crimson"  role="alert"></div>
+                 </div>
+  
+                  {{-- <div class="row " id="card-element">
+                      <div class=" col-6">
+                          <div class="form-group">
+                              <label for="input" class="form-label">Expire Date</label>
+                              <input type="text" id="input" class="form-control" name="expire-date" placeholder="MM/YY" >
+                          </div>
+                      </div>
+  
+                      <div class=" col-6">
+                          <div class="form-group">
+                              <label for="input" class="form-label">CVC</label>
+                              <input type="text" id="input" class="form-control" name="cvc" placeholder=":1234" >
+                          </div>
+                      </div>
+                 </div> --}}
+  
+                 <div class="row mt-4 mb-3">
+                  <div class="col-12">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="Save_card">
+                          <label style="font-size: 14px;" for="Save_card"> Save card for future use</label>
+                        </div>
+                  </div>
+                 </div>
+  
+                 <div class="row ">
+                   <div class="col-12">
+                      <button class="btn success btn-design " id="submit" onClick="submit()">Pay</button>
+                   </div>
+                 </div>
+              </div>
+          </div>
+      </div>
+    </form>   
+  </div>
+
+
+
+
 
 {{-- <div class="page-content pt-150 pb-150">
         <div class="container">

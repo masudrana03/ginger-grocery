@@ -56,7 +56,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="section2_tittle">Tittle</label>
                                         <input type="text" name="section2_tittle"
@@ -82,7 +82,56 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="who_description">Who we are</label>
+                                        <textarea rows="5" name="who_description"
+                                            class="form-control @error('who_description') is-invalid @enderror"
+                                            aria-describedby="emailHelp" placeholder="who_description"
+                                            >{{ old('who_description') ?? $abouts->who_description  }}</textarea>
+                                        @error('who_description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="our_description">Our history</label>
+                                        <textarea rows="5" name="our_description"
+                                            class="form-control @error('our_description') is-invalid @enderror"
+                                            aria-describedby="emailHelp" placeholder="our_description"
+                                            >{{ old('our_description') ?? $abouts->our_description  }}</textarea>
+                                        @error('our_description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label for="mission_description">Our mission</label>
+                                        <textarea rows="5" name="mission_description"
+                                            class="form-control @error('mission_description') is-invalid @enderror"
+                                            aria-describedby="emailHelp" placeholder="mission_description"
+                                            >{{ old('mission_description') ?? $abouts->mission_description   }}</textarea>
+                                        @error('mission_description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="body">About Image</label><br>
                                         <div class="card shadow-sm w-100">
@@ -93,7 +142,7 @@
                                                         <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                             </div>
                                             <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                   <img class="banner-image"  id="thumbnil"> 	  
+                                                   <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->section2_image1) }}' id="thumbnil"> 	  
                                             </div>
                                         </div>
                                     </div>
@@ -104,75 +153,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <hr>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="who_description">Who we are</label>
-                                            <textarea rows="5" name="who_description"
-                                                class="form-control @error('who_description') is-invalid @enderror"
-                                                aria-describedby="emailHelp" placeholder="who_description"
-                                                >{{ old('who_description') ?? $abouts->who_description  }}</textarea>
-                                            @error('who_description')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="our_description">Our history</label>
-                                            <textarea rows="5" name="our_description"
-                                                class="form-control @error('our_description') is-invalid @enderror"
-                                                aria-describedby="emailHelp" placeholder="our_description"
-                                                >{{ old('our_description') ?? $abouts->our_description  }}</textarea>
-                                            @error('our_description')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
 
-                                        <div class="form-group">
-                                            <label for="mission_description">Our mission</label>
-                                            <textarea rows="5" name="mission_description"
-                                                class="form-control @error('mission_description') is-invalid @enderror"
-                                                aria-describedby="emailHelp" placeholder="mission_description"
-                                                >{{ old('mission_description') ?? $abouts->mission_description   }}</textarea>
-                                            @error('mission_description')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="white_card card_height_100 mb_30">
-                    <div class="white_card_header">
-                        <div class="box_header m-0">
-                            <div class="main-title">
-                                <h3 class="m-0">About Performance Image</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="white_card_body">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="section2_image1">Previous Image</label><br>
-                                <div class="form-group">
-                                    <img class="custom-img" src='{{ asset('assets/img/uploads/abouts/'.$abouts->section2_image1) }}' width='280' height='280' >
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
