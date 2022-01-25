@@ -94,6 +94,16 @@
 
     }
 
+    .address-checklist{
+        padding-top: 10px;
+    }
+
+    .check-link{
+        border-radius: 10px !important;
+    }
+     
+    
+
 </style>
 
 @section('content')
@@ -122,10 +132,43 @@
         </div>
         <div class="row">
             <div class="col-lg-7">
-                <div class="row mb-50">
+                <div class="row mb-20 ">
+
+                        <h4 class="mt-20 mb-10">Saved Address</h4>
+
+                         <div class="ml-20">
+                            <div class="address-checklist">
+                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox1" />
+                                <label class="form-check-label" for="exampleCheckbox1"><span>Address 1</span></label>
+                                <br />
+                              </div>
+    
+                              <div class="address-checklist">
+                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox2" />
+                                <label class="form-check-label" for="exampleCheckbox2"><span>Address 2</span></label>
+                                <br />
+                              </div>
+    
+                              <div class="address-checklist">
+                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox3" />
+                                <label class="form-check-label" for="exampleCheckbox3"><span>Address 3</span></label>
+                                <br />
+                              </div>
+                         </div>
+  
                 </div>
-                <div class="row mb-80">
-                    <h4 class="mb-30">Shipping Details</h4>
+
+                <div class="row mb-10">
+                    <div class="address-checklist ml-20">
+                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"  name="address" id="" />
+                        <label class="form-check-label" for=""><span>Ship to a different address?</span></label>
+                        <br />
+                      </div>
+                </div>
+
+
+                <div class="row mb-10 mt-20" id="shipping-form" style="display: none;" >
+                    <h4 class="mb-10">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
                         <input id="paymentMethod" type="hidden" name="payment_method_id">
@@ -147,12 +190,9 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="row shipping_calculator">
-                            <div class="form-group col-lg-12">
-                                <div class="custom_select">
-                                    <select disabled
-                                        class="form-control select-active @error('country_id') is-invalid @enderror"
-                                        name="country_id">
+                        <div class="row ">
+                            <div class="col-md-12 mb-10">
+                                   <select disabled class=" form-control  @error('country_id') is-invalid @enderror" name="country_id">
                                         <option value="">Select a country...</option>
                                         @foreach ($countries as $country)
                                             <option {{ settings('country') == $country->name ? 'selected' : '' }}
@@ -164,8 +204,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                            </div>
+                               </div>
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <input required="" type="text" name="state" placeholder="State / County *">
@@ -210,15 +249,15 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div>   
+                    </form>
+                </div>
 
-                        <div class="form-group">
-                            <textarea name="note"
-                                placeholder="Additional information"></textarea>
-                        </div>
 
+         
+                <div class="row ">
                         <div>
-                            <h5 class="mb-30 pl-2">Payment Method:</h5>
+                            <h4 class="mb-10 ">Payment Method</h4>
                         </div>
 
                         <div class="checkout-products-marketplace" style="margin-bottom:1%;">
@@ -241,66 +280,22 @@
                                 @endforeach
                             </ul>
                         </div>
-
-                        <div class="checkout-button" style="float: right; padding-top:15px;">
-                            <button class="btn">Checkout</button>
-                        </div>
-
-                        {{-- <div class="ship_detail">
-                                <div class="form-group">
-                                    <div class="chek-form">
-                                        <div class="custome-checkbox">
-                                            <input class="form-check-input" type="checkbox" name="checkbox"
-                                                id="differentaddress">
-                                            <label class="form-check-label label_info" data-bs-toggle="collapse"
-                                                data-target="#collapseAddress" href="#collapseAddress"
-                                                aria-controls="collapseAddress" for="differentaddress"><span>Ship to a different
-                                                    address?</span></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="collapseAddress" class="different_address collapse in">
-                                    <div class="form-group">
-                                        <input type="text" required="" name="shipping_name" placeholder="Name *">
-                                    </div>
-
-                                    <div class="row shipping_calculator">
-                                        <div class="form-group col-lg-12">
-                                            <div class="custom_select w-100">
-                                                <select class="form-control select-active" name="shipping_country_id">
-                                                    <option value="">Select a country...</option>
-                                                    @foreach ($countries as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="shipping_address" required="" placeholder="Address *">
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <input required="" type="text" name="shipping_state" placeholder="State / County *">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input required="" type="text" name="shipping_city" placeholder="City / Town *">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <input required="" type="text" name="shipping_zip" placeholder="Postcode / ZIP *">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input required="" type="text" name="shipping_phone" placeholder="Phone *">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                    </form>
+                </div>
+                <div class="row mb-10 mt-10">
+                    <div class="payment-logo d-flex">
+                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-paypal.svg')}}" alt="">
+                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-visa.svg')}}" alt="">
+                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-master.svg')}}" alt="">
+                        <img src="{{asset('assets/frontend/imgs/theme/icons/payment-zapper.svg')}}" alt="">
+                    </div>
                 </div>
 
+                <div class="row mb-15 mt-10">
+                    <div class="col-4"   id="checkout">
+                        {{-- <a  href="#" class="btn btn-lg check-link">Checkout</a> --}}
+                        <a href="#" class="btn btn-fill-out btn-block mt-30">Checkout<i class="fi-rs-sign-out ml-15"></i></a>
+                    </div>
+                </div>
 
             </div>
 
@@ -616,5 +611,35 @@
 
     function submit() {
         document.getElementById('BillingForm').submit();
+    }
+
+    function showDiv(check) {
+
+
+        let shipForm = document.getElementById('shipping-form');
+        if (check.checked){
+            document.getElementById('shipping-form').style.display = "block";
+            
+        }
+
+        else{
+            document.getElementById('shipping-form').style.display = "none";
+            
+        }
+
+
+
+
+        
+        
+        // document.getElementById('add-address').innerHTML="Remove Form";
+        // document.getElementById('check').style.display = "none";
+
+        // document.getElementById('shipping-form').style.display = "none";
+        // document.getElementById('add-address').innerHTML="Add new address";
+        // document.getElementById('check').style.display = "block";
+    
+       
+
     }
 </script>
