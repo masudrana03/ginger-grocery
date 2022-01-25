@@ -56,14 +56,9 @@
             height: 100vh;
             background-image: linear-gradient(rgba(0, 0, 0, 0.6),
                     rgba(0, 0, 0, 0.6)),
-                url('/assets/img/install.png')
-        }
-        }
-
-        );
-        background-size: cover;
-        background-position: top;
-        position: relative;
+                url('/assets/img/install.png') background-size: cover;
+            background-position: top;
+            position: relative;
         }
 
     </style>
