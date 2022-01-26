@@ -17,6 +17,11 @@ class ForgotPasswordController extends Controller
         return view('frontend.forget');
     }
 
+    public function resetPasswordView()
+    {
+        return view('frontend.forget-password');
+    }
+
     /**
      * Delivery Man Forgot Password Authentication.
      *
@@ -25,27 +30,65 @@ class ForgotPasswordController extends Controller
      */
     public function sendOtp(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             'email'        => 'required',
-        ] );
+        ]);
 
-        $user = User::where( 'email', $request->email )->whereType(3)->first();
+        $user = User::where('email', $request->email)->whereType(3)->first();
 
-        if( !$user ) {
+        if (!$user) {
             return back()->with('error', 'Invalid Email');
         }
 
-        $user->verify_otp = rand(100000 , 599999);
+        $user->verify_otp = rand(100000, 599999);
 
         $user->save();
 
         $this->sendConfirmationEmail($user);
 
-        Cache::put('forget_user', $user, 120000);
+        Cache::put('forget_user', $user, 120);
 
         return back()->with('success', 'Email send successfully with confirmation OTP');
     }
 
+
+    /**
+     * Reset the user's OTP checked.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function resetPasswordOtp(Request $request)
+    {
+        // return $request->all();
+
+        $validation = validateData([
+            'email'    => 'required|email',
+            'otp'      => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return back()->with('error', 'Validation failed..!');
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->with('error', 'We  find a user with that e-mail address.');
+        }
+
+        if ($user->verify_otp != $request->otp) {
+
+            return back()->with('error', 'OTP is not valid.');
+        } elseif ($user->verify_otp == $request->otp) {
+
+            return redirect()->route('user.reset.view');
+        } else {
+            return redirect()->route('login');
+        }
+
+        return back()->with('error', 'Failed ..!');
+    }
 
     /**
      * Reset the user's password.
@@ -53,57 +96,40 @@ class ForgotPasswordController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function resetPassword( Request $request )
+    public function resetPassword(Request $request)
     {
         // return $request->all();
 
-        if ( $request->email && $request->otp && $request->password ) {
+        $validation = validateData([
+            'email'    => 'required|email',
+            'otp'      => 'required',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+            ],
+        ]);
 
-            $validation = validateData( [
-                'email'    => 'required|email',
-                'otp'      => 'required',
-                'password' => [
-                    'required',
-                    'confirmed',
-                    Password::min( 8 )
-                        ->letters()
-                        ->mixedCase()
-                        ->numbers()
-                        ->symbols(),
-                ],
-            ] );
-        }else{
-            $validation = validateData( [
-                'email'    => 'required|email',
-                'otp'      => 'required',
-            ] );
+
+        if ($validation->fails()) {
+            return back()->with('error', 'Validation failed..!');
         }
 
+        $user = User::where('email', $request->email)->first();
 
-
-        if ( $validation->fails() ) {
-            return back()->with( 'error', 'Validation failed..!' );
+        if (!$user) {
+            return back()->with('error', 'We  find a user with that e-mail address.');
         }
 
-        $user = User::where( 'email', $request->email )->first();
-
-        if ( !$user ) {
-            return back()->with('error', 'We  find a user with that e-mail address.' );
-        }
-
-        if ( $user->verify_otp != $request->otp ) {
-            return back()->with( 'error', 'OTP is not valid.' );
-        }
-
-        $user->password   = bcrypt( $request->password );
+        $user->password   = bcrypt($request->password);
         $user->verify_otp = null;
         $user->save();
-
-        return back()->with( 'success', 'Password has been reset!' );
-
+        return redirect()->route('login')->with('success', 'Password has been reset!');
     }
-
-
 
     /**
      * User forgot confirmation email with OTP.
@@ -111,12 +137,14 @@ class ForgotPasswordController extends Controller
      * @param object $user
      * @return JsonResponse
      */
-    public function sendConfirmationEmail( $user )
+    public function sendConfirmationEmail($user)
     {
-        $emailTemplate = EmailTemplate::whereType('Forgot_Password')->first();
+        $emailTemplate = EmailTemplate::whereType('user_Forgot_Password')->first();
 
-        $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
-        $body = preg_replace("/{verify_otp}/", $user->verify_otp, $emailTemplate->body);
+        $changeFrom = ["{name}", "{verify_otp}"];
+        $changeTo = [$user->name, $user->verify_otp];
+
+        $body = str_replace($changeFrom, $changeTo, $emailTemplate->body);
 
         $emailDetails = [
             'email'   => $user->email,
@@ -124,7 +152,8 @@ class ForgotPasswordController extends Controller
             'body'    => $body
         ];
 
-        // (new EmailFactory())->initializeEmail($emailDetails);
+
+        (new EmailFactory())->initializeEmail($emailDetails);
 
         return $emailDetails;
     }

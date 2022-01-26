@@ -97,7 +97,7 @@ class ForgotPasswordController extends Controller
         $emailTemplate = EmailTemplate::whereType('Forgot_Password')->first();
 
         $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
-        $body = preg_replace("/{verify_otp}/", $user->verify_otp, $emailTemplate->body);
+        $body .= preg_replace("/{verify_otp}/", $user->verify_otp, $body);
 
         $emailDetails = [
             'email'   => $user->email,
