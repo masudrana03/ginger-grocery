@@ -586,8 +586,8 @@
                                 {{-- {{  $store->products->nutritions }} --}}
                                 @foreach ( $nutritions  as $nutrition )
 
-                                    <input class="form-check-input" type="checkbox" name="nutrition" id="exampleCheckbox1" value="{{ $nutrition->id }}" />
-                                    <label class="form-check-label" for="exampleCheckbox1"><span>{{ $nutrition->name }} ( {{ count( $nutrition->products ) }} )</span></label>
+                                    <input class="form-check-input" type="checkbox" name="nutrition" id="exampleCheckbox-{{ $nutrition->id  }}" value="{{ $nutrition->id }}" />
+                                    <label class="form-check-label" for="exampleCheckbox-{{ $nutrition->id  }}"><span>{{ $nutrition->name }} ( {{ count( $nutrition->products ) }} )</span></label>
                                     <br />
 
                                 @endforeach
@@ -603,8 +603,8 @@
                             <label class="fw-900 mt-15">Brand</label>
                             <div class="custome-checkbox">
                                 @foreach ( $brands as $brand )
-                                    <input class="form-check-input" type="checkbox" name="brand" id="exampleCheckbox11" value="{{ $brand->id }}" />
-                                    <label class="form-check-label" for="exampleCheckbox11"><span>{{ $brand->name }} ( {{ count( $brand->products ) }} )</span></label>
+                                    <input class="form-check-input" type="checkbox" name="brand" id="exampleCheckbo-{{  $brand->id }}" value="{{ $brand->id }}" />
+                                    <label class="form-check-label" for="exampleCheckbo-{{  $brand->id }}"><span>{{ $brand->name }} ( {{ count( $brand->products ) }} )</span></label>
                                     <br />
 
                                 @endforeach

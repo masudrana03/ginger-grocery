@@ -5,15 +5,15 @@
   width: 100%;
   display: inline-flex;
   overflow: hidden;
- 
+
 }
 
 .form-group .eye-icon {
- 
+
   position:absolute;
   margin-left: -40px;
   margin-top: 24px;
-  
+
 }
 
 </style>
@@ -82,7 +82,7 @@
                                                 <label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
                                             </div>
                                         </div>
-                                        <a class="text-muted" href="#">Forgot password?</a>
+                                        <a class="text-muted" href="{{ route('user.forget.index') }}">Forgot password?</a>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Log in</button>

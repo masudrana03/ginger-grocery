@@ -36,6 +36,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
 use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
@@ -220,6 +221,11 @@ Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoi
 Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
 Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
 Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
+
+Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
+Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
+Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.forget');
+
 
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
