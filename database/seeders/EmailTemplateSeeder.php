@@ -36,7 +36,7 @@ class EmailTemplateSeeder extends Seeder {
         EmailTemplate::create( [
             'type'       => 'user_Forgot_Password',
             'subject'    => 'Reset password OTP Verification',
-            'body'       => '<p>Hello {name},</p><p>We heard that you lost your password. Sorry about that.!<br>But don’t worry! You can use the following OTP to reset your password:<br>Your OTP Number is {verify_otp}.<br>Reset your password<br>If you don’t use this Otp within 2 minute, it will expire. To get a new password.<br>Thanks,<br>The '.env('APP_NAME').' Team</p>',
+            'body'       => '<p>Hello {name},</p><p>We heard that you lost your password. Sorry about that.!<br>But don’t worry! You can use the following OTP to reset your password:<br>Your OTP Number is {verify_otp}.<br>Reset your password<br>If you don’t use this Otp within 2 minute, it will expire. To get a new password.<br><br><br>Thanks,<br>The '.settings('company_name').' Team</p>',
             'created_at' => now(),
         ] );
     }
