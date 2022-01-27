@@ -33,9 +33,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
-
-
-
+    <!-- datepicker jquery link -->
+    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> --}}
+    {{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
+    
     <!-- Template CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/animate.min.css') }}" />
@@ -47,11 +48,15 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- datetime picker jquery --}}
+    
+    
 </head>
 
 <body>
     @include('frontend.partials.nav')
     <div id="app">
+    
     
     @yield('content')
     </div>
@@ -84,6 +89,8 @@
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </section>
         <section class="featured section-padding">
@@ -291,7 +298,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
                     <p class="font-sm mb-0">&copy;<?php echo date('Y'); ?> <strong class="text-brand">Binary
-                            Fusion</strong> - HTML Ecommerce Template <br />All rights reserved</p>
+                            Fusion</strong> - All rights reserved</p>
                 </div>
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
@@ -336,6 +343,7 @@
         </div>
     </div>
     <!-- Vendor JS-->
+    @stack('script')
     <script src="{{ asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
@@ -360,7 +368,7 @@
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
-
+    
 
     @if (session()->has('success'))
         <script>

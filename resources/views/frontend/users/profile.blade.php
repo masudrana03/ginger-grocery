@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'User Account')
+@section('title','User Account')
 
 
 @section('content')
@@ -7,7 +7,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> My Account
                 </div>
             </div>
@@ -48,9 +48,9 @@
                                                 Password</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();"><i
-                                                    class=" fi-rs-sign-out mr-10"></i>Logout</a>
+                                            <a class="nav-link" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();"><i class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -110,11 +110,12 @@
                                                             @enderror
                                                         </div>
                                                         <div class="form-group col-md-12">
+                                                            {{-- <p>Date: <input type="text" id="datepicker"></p> --}}
+
                                                             <label>Date of Birth <span
                                                                     class="required">*</span></label>
-                                                            <input required=""
-                                                                class="form-control @error('date_of_birth') is-invalid @enderror"
-                                                                name="date_of_birth" type="date"
+                                                            <input class=" @error('date_of_birth') is-invalid @enderror "name="date_of_birth" id="datepicker" type="text"
+                                                                
                                                                 value="{{ old('date_of_birth') ?? $user->date_of_birth }}" />
                                                             @error('date_of_birth')
                                                                 <span class="invalid-feedback" role="alert">
@@ -143,3 +144,19 @@
 
 
 @endsection
+
+{{-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> --}}
+ {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> --}}
+@push('script')
+<script>
+    $(function() {
+        alert('dsfdf');
+        $("#datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>  
+@endpush
+

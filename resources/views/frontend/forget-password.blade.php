@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Rest Password')
+@section('title', 'Reset Password')
 
 
 <style>
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Rest password
+                <span></span> Reset password
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                             <div class="login_wrap widget-taber-content background-white">
                                 <div class="padding_eight_all bg-white">
                                     <div class="heading_s1">
-                                        <h2 class="mb-5">Rest Account Password</h2>
+                                        <h2 class="mb-5">Reset Account Password</h2>
                                         <p class="mb-30">Already have an account? <a
                                                 href="{{ route('login') }}">login</a></p>
                                     </div>
