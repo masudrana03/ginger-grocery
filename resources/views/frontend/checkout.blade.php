@@ -137,10 +137,9 @@
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
                             <div class="address-checklist" id="radioDiv">
-                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}"
-                                    id="addressRadioBtn" />
-                                <label class="form-check-label"
-                                    for="addressRadioBtn"><span>{{ $address->address }},{{ $address->state }}</span></label>
+                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}" />
+                                <label
+                                    class="form-check-label"><span>{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
                             </div>
                         </div>
@@ -447,11 +446,20 @@
 
 
             let shipForm = document.getElementById('shipping-form');
+            let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
                 document.getElementById('shipping-form').style.display = "block";
+                for (i = 0; i <= radioBtn.length; i++) {
+
+                    radioBtn[i].checked = false;
+                }
+
             } else {
                 document.getElementById('shipping-form').style.display = "none";
+                for (i = 0; i <= radioBtn.length; i++) {
 
+                    radioBtn[i].checked = false;
+                }
             }
 
         }
@@ -486,6 +494,7 @@
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
+
                                     payHiddenId.value = payValue;
                                     billForm.submit();
                                 } else {
@@ -512,6 +521,3 @@
     </script>
 
 @endpush
-
-
-

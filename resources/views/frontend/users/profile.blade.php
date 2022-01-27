@@ -148,10 +148,11 @@
 @push('script')
 <script>
     $(function() {
-        alert('dsfdf');
+        
         $("#datepicker").datepicker({
             changeMonth: true,
-            changeYear: true
+            changeYear: true,
+            yearRange: "1971:2022"
         });
     });
 </script>  
