@@ -115,6 +115,12 @@
                 <span></span> Checkout
             </div>
         </div>
+
+        <div class="container" id="errorContainer">
+            <div class="">
+                <span>Please Enter or Select An Address!</span>
+            </div>
+        </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
@@ -139,7 +145,7 @@
                         @forelse ($savedAddress as $address)
                             <div class="ml-20">
                                 <div class="address-checklist">
-                                    <input class="form-check-input"  type="radio" name="address1" value="{{$address->id}}" id="addressRadioBtn" />
+                                    <input class="form-check-input"  type="radio" name="address1" value="{{$address->id}}" id="addressRadioBtn" checked/>
                                     <label class="form-check-label" for="addressRadioBtn"><span>{{$address->address}},{{$address->state}}</span></label>
                                     <br />
                                 </div>
@@ -152,7 +158,7 @@
 
                 <div class="row mb-10">
                     <div class="address-checklist ml-20">
-                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"id="" />
+                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"id="infoCheck" />
                         <label class="form-check-label" for=""><span>Add new address.</span></label>
                         <br />
                       </div>
@@ -163,7 +169,7 @@
                     <h4 class="mb-10">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
-                        <input id="paymentMethod" type="hidden">
+                        <input id="paymentMethod" type="hidden" name="payment_method_id">
                         <input id="addressId" type="hidden" name="address_id">
 
                         <div class="form-group">
@@ -263,7 +269,7 @@
                                     <li class="list-group-item">
                                         <div class="form-check">
                                             <input class="form-check-input"  id="payMethod" type="radio" value="{{ $paymentMethod->id }}"
-                                                name="payment_method_id" id="flexRadioDefault1" checked>
+                                                name="payment_method" id="flexRadioDefault1" checked>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
                                             </label>
@@ -279,6 +285,12 @@
                         <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-visa.svg')}}" alt="">
                         <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-master.svg')}}" alt="">
                         <img src="{{asset('assets/frontend/imgs/theme/icons/payment-zapper.svg')}}" alt="">
+                    </div>
+                </div>
+
+                <div class="row mb-10 mt-10">
+                    <div class="container" id="error" style="display:none;">
+                        <span style="color: crimson;font-size:medium;">Please Enter or Select an Address!!</span>
                     </div>
                 </div>
 
@@ -449,41 +461,45 @@
         //alert("Hello");
 
             
-            let radioBtn = document.getElementsByName('address1');
+           
             //let fromSubmitBtn = document.getElementById('checkOutBtn');
             let addressHiddenId = document.getElementById('addressId');
              
             let payHiddenId = document.getElementById('paymentMethod');
-            let valueFromPayMethod = document.getElementsByName('payment_method_id');
+            let valueFromPayMethod = document.getElementsByName('payment_method');
             // let valueFromRadio = document.getElementById('addressRadioBtn').value;
-            let submit = document.getElementById('BillingForm');
-           
-                
-                
-                for(i = 0; i < valueFromPayMethod.length; i++) {
-                    
-                    if(valueFromPayMethod[i].type="radio") {
+            let billForm = document.getElementById('BillingForm');
+            let radioBtn = document.getElementsByName('address1');
+            let check = document.getElementById('infoCheck');
 
-                        if(valueFromPayMethod[i].checked){
 
-                        for(i = 0; i < radioBtn.length; i++) {
-                        if(radioBtn[i].type="radio") {
-                            if(radioBtn[i].checked){
-                            addressHiddenId.value  = radioBtn[i].value;
-                            payHiddenId.value = valueFromPayMethod[i].value;
-                            submit.submit();
-                            
-                            }  
+            for(i=0; i<=valueFromPayMethod.length; i++){
+                if(valueFromPayMethod[i].checked){
+                    let payValue = valueFromPayMethod[i].value;
+                    for(j=0; j <= radioBtn.length ; j++){
+                        if(radioBtn[j].checked ){
+                            addressHiddenId.value  = radioBtn[j].value;
+                            payHiddenId.value = payValue;
+                            //alert(payHiddenId.value);
+                            billForm.submit();
+                        }else{
+                            if(check.checked){
+                                payHiddenId.value = payValue;
+                                billForm.submit(); 
+                            }else{
+                                document.getElementById('error').style.display="block";
+                                
+                            }
+                               
                         }
-                    }                    
-
+                    }
                 }
-     
-             }
+            }       
+            
         }
                 
          
-    }
+    
 
 
 </script>
