@@ -5,7 +5,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') | {{ config('app.name', 'Ginger Grocery') }}</title>
+    <title> @yield('title') | {{ config('app.name', 'GroceFusion') }}</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />

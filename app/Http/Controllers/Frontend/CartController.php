@@ -59,12 +59,12 @@ class CartController extends Controller
 
     public function cart()
     {
-        $carts = auth()->user()->cart->products->groupBy('store_id');
+        $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
         $totalTax = 0;
 
         foreach ($carts as $cart) {
-            $totalTax += $calculatedPrice = priceCalculator($cart)['tax'];
+            $totalTax += priceCalculator($cart)['tax'];
         }
 
         $productIds = session('compare');

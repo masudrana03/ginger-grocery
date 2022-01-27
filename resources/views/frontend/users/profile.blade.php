@@ -152,7 +152,7 @@
         $("#datepicker").datepicker({
             changeMonth: true,
             changeYear: true,
-            yearRange: "1971:2022"
+            yearRange: "1971:2012"
         });
     });
 </script>  
