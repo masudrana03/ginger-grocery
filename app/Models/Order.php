@@ -16,6 +16,7 @@ class Order extends Model
      */
     protected $fillable = [
         'order_status_id',
+        'payment_status',
     ];
 
     /**
@@ -80,7 +81,6 @@ class Order extends Model
     {
         return $this->belongsTo(Address::class, 'billing_id')->where('type', 1);
     }
-
 
     public function getPaymentStatusAttribute()
     {
