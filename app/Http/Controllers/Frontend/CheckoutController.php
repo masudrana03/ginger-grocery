@@ -25,10 +25,14 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
+        
+        $user  = auth()->user();
+
         $countries = Country::all();
         $paymentMethods = PaymentMethod::active()->get();
+        $savedAddress = Address::where('user_id', $user->id)->get();
 
-        return view('frontend.checkout', compact('paymentMethods', 'countries'));
+        return view('frontend.checkout', compact('paymentMethods', 'countries', 'savedAddress'));
     }
 
     /**
@@ -86,6 +90,48 @@ class CheckoutController extends Controller
             return back()->with('error', 'Your cart is empty, please add product in your cart');
         }
 
+        $userAddress = Address::where('id',$request->address_id)->get();
+
+        if(!$userAddress){
+
+            
+                if (!$request->payment_method_id) {
+                    $provider = PaymentMethod::whereProvider('cash')->first();
+                } else {
+                    $provider = PaymentMethod::find($request->payment_method_id);
+                }
+
+                if (!$provider) {
+                    return back()->with('error', 'Payment method not found');
+
+                
+                }
+
+                
+
+                $shippingId = Address::where('id',$request->address_id)->get();
+                // }
+
+                // $invoiceId = $this->createOrder($cart, $shippingId, $shippingId);
+
+                $carts = $cart->products->groupBy('store_id');
+
+                $orderReference = Str::random(12);
+
+                foreach ($carts as $storeWiseitems) {
+                    $invoiceId = $this->createOrder($storeWiseitems, $shippingId, $shippingId, $orderReference, $request->payment_method_id, $request->note);
+                    // $this->sendOrderConfirmationEmail($invoiceId);
+                }
+
+                $cart->products()->detach();
+                $cart->delete();
+
+                
+                return $this->acceptPayment($provider->provider, $orderReference);
+
+            
+        }
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
@@ -94,6 +140,8 @@ class CheckoutController extends Controller
             'zip' => 'required',
             'phone' => 'required',
         ]);
+
+        
 
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
@@ -181,7 +229,27 @@ class CheckoutController extends Controller
         $address->user_id = auth()->id();
         $address->type = 2;
         $address->save();
+        
+        return $address->id;
+    }
 
+
+    public function updateSavedShippingAddress(Request $request)
+    { 
+        $userAddress = Address::where('id',$request->address_id);
+        $address = new Address();
+        $address->name = $userAddress->name;
+        $address->email = $userAddress->email;
+        $address->address = $userAddress->address;
+        $address->phone = $userAddress->phone;
+        $address->country_id = $userAddress->country_id;
+        $address->state = $userAddress->state;
+        $address->city = $userAddress->city;
+        $address->zip = $userAddress->zip;
+        $address->user_id = auth()->id();
+        $address->type = 2;
+        $address->where('id',$userAddress->id)->update();
+        
         return $address->id;
     }
 
