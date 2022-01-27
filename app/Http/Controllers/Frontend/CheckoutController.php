@@ -25,10 +25,13 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
+        $user  = auth()->user();
+
         $countries = Country::all();
         $paymentMethods = PaymentMethod::active()->get();
+        $savedAddress = Address::where('user_id', $user->id)->get();
 
-        return view('frontend.checkout', compact('paymentMethods', 'countries'));
+        return view('frontend.checkout', compact('paymentMethods', 'countries', 'savedAddress'));
     }
 
     /**
@@ -80,21 +83,28 @@ class CheckoutController extends Controller
      */
     public function placeOrder(Request $request)
     {
+        
+        
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
+        
 
         if (!$cart) {
             return back()->with('error', 'Your cart is empty, please add product in your cart');
         }
 
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'phone' => 'required',
-        ]);
+        $userAddress = Address::where('id', $request->address_id)->first();
 
+        if (! $userAddress) {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'city' => 'required',
+                'zip' => 'required',
+                'phone' => 'required',
+            ]);
+        }
+            
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
         } else {
@@ -105,11 +115,11 @@ class CheckoutController extends Controller
             return back()->with('error', 'Payment method not found');
         }
 
-        // $billingId = $this->createBillingAddress($request);
-        // $shippingId = $billingId;
-        // if ($request->shipping_address) {
-        $shippingId = $this->createShippingAddress($request);
-        // }
+        $shippingId = $request->address_id;
+
+        if (! $userAddress) {
+            $shippingId = $this->createShippingAddress($request);
+        }
 
         // $invoiceId = $this->createOrder($cart, $shippingId, $shippingId);
 
@@ -181,7 +191,27 @@ class CheckoutController extends Controller
         $address->user_id = auth()->id();
         $address->type = 2;
         $address->save();
+        
+        return $address->id;
+    }
 
+
+    public function updateSavedShippingAddress(Request $request)
+    {
+        $userAddress = Address::where('id', $request->address_id);
+        $address = new Address();
+        $address->name = $userAddress->name;
+        $address->email = $userAddress->email;
+        $address->address = $userAddress->address;
+        $address->phone = $userAddress->phone;
+        $address->country_id = $userAddress->country_id;
+        $address->state = $userAddress->state;
+        $address->city = $userAddress->city;
+        $address->zip = $userAddress->zip;
+        $address->user_id = auth()->id();
+        $address->type = 2;
+        $address->where('id', $userAddress->id)->update();
+        
         return $address->id;
     }
 
@@ -292,7 +322,7 @@ class CheckoutController extends Controller
         $user = auth()->user();
 
         $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
-        $body = preg_replace("/{invoice_number}/", $invoiceId, $emailTemplate->body);
+        $body .= preg_replace("/{invoice_number}/", $invoiceId, $body);
 
         $emailDetails = [
             'email'   => auth()->user()->email,

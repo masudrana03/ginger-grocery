@@ -115,6 +115,12 @@
                 <span></span> Checkout
             </div>
         </div>
+
+        <div class="container" id="errorContainer">
+            <div class="">
+                <span>Please Enter or Select An Address!</span>
+            </div>
+        </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
@@ -136,32 +142,24 @@
 
                         <h4 class="mt-20 mb-10">Saved Address</h4>
 
-                         <div class="ml-20">
-                            <div class="address-checklist">
-                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox1" />
-                                <label class="form-check-label" for="exampleCheckbox1"><span>Address 1</span></label>
-                                <br />
-                              </div>
-    
-                              <div class="address-checklist">
-                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox2" />
-                                <label class="form-check-label" for="exampleCheckbox2"><span>Address 2</span></label>
-                                <br />
-                              </div>
-    
-                              <div class="address-checklist">
-                                <input class="form-check-input" type="radio" name="address" id="exampleCheckbox3" />
-                                <label class="form-check-label" for="exampleCheckbox3"><span>Address 3</span></label>
-                                <br />
-                              </div>
-                         </div>
-  
+                        @forelse ($savedAddress as $address)
+                            <div class="ml-20">
+                                <div class="address-checklist">
+                                    <input class="form-check-input"  type="radio" name="address1" value="{{$address->id}}" id="addressRadioBtn" checked/>
+                                    <label class="form-check-label" for="addressRadioBtn"><span>{{$address->address}},{{$address->state}}</span></label>
+                                    <br />
+                                </div>
+                            </div>
+                        @empty
+                        <label class="form-check-label" ><span>No address Found....</span></label>
+                        @endforelse
+
                 </div>
 
                 <div class="row mb-10">
                     <div class="address-checklist ml-20">
-                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"  name="address" id="" />
-                        <label class="form-check-label" for=""><span>Ship to a different address?</span></label>
+                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"id="infoCheck" />
+                        <label class="form-check-label" for=""><span>Add new address.</span></label>
                         <br />
                       </div>
                 </div>
@@ -172,6 +170,8 @@
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
                         <input id="paymentMethod" type="hidden" name="payment_method_id">
+                        <input id="addressId" type="hidden" name="address_id">
+
                         <div class="form-group">
                             <input type="text" required="" name="name" placeholder="Name *"
                                 class="@error('name') is-invalid @enderror">
@@ -253,8 +253,6 @@
                     </form>
                 </div>
 
-
-         
                 <div class="row ">
                         <div>
                             <h4 class="mb-10 ">Payment Method</h4>
@@ -270,8 +268,8 @@
                                     @endif
                                     <li class="list-group-item">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{ $paymentMethod->id }}"
-                                                name="payment_method_id" id="flexRadioDefault1" checked>
+                                            <input class="form-check-input"  id="payMethod" type="radio" value="{{ $paymentMethod->id }}"
+                                                name="payment_method" id="flexRadioDefault1" checked>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
                                             </label>
@@ -290,10 +288,16 @@
                     </div>
                 </div>
 
+                <div class="row mb-10 mt-10">
+                    <div class="container" id="error" style="display:none;">
+                        <span style="color: crimson;font-size:medium;">Please Enter or Select an Address!!</span>
+                    </div>
+                </div>
+
                 <div class="row mb-15 mt-10">
-                    <div class="col-4"   id="checkout">
+                    <div class="col-4" id="checkout">
                         {{-- <a  href="#" class="btn btn-lg check-link">Checkout</a> --}}
-                        <a href="#" class="btn btn-fill-out btn-block mt-30">Checkout<i class="fi-rs-sign-out ml-15"></i></a>
+                        <button id="checkOutBtn" onclick="submitForm()" class="btn btn-fill-out btn-block mt-30">Checkout<i class="fi-rs-sign-out ml-15"></i></button>
                     </div>
                 </div>
 
@@ -396,185 +400,6 @@
                     <p>No product in your cart!</p>
                 @endforelse
 
-                {{-- product2 --}}
-
-                {{-- <div class="checkout-products-marketplace" id="shipping-method-wrapper">
-                    <div class="mt-2 bg-light mb-2">
-
-                        <div class="p-2" style="background:#cdf0e0" ;>
-                            <img style="vertical-align: middle;" src="https://nest.botble.com/storage/stores/2.png"
-                                alt="Global Office" class="img-fluid rounded" width="30">
-                            <span>Shop Name</span>
-                        </div>
-
-                        <div class="p-2">
-                            <div class="row cart-item">
-
-                                <div class="col-3" style="width: 14%">
-                                    <div class="checkout-product-img-wrapper product-details">
-                                        <img class="item-thumb img-thumbnail img-rounded"
-                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
-                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
-                                        <span class="checkout-quantity">1</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-5 product-name" style="margin-top:2%">
-                                    <p class="mb-0">Product b</p>
-                                    <p class="mb-0">
-                                        (Boxes: 4 Boxes, Weight: 4KG)
-                                    </p>
-                                </div>
-
-
-                                <div class="col-4 text-end product-name price " style="margin-top:2%;">
-                                    <p>$110.67</p>
-                                </div>
-
-                            </div>
-
-
-                            <div class="row cart-item mt-3">
-
-                                <div class="col-3" style="width: 14%">
-                                    <div class="checkout-product-img-wrapper product-details">
-                                        <img class="item-thumb img-thumbnail img-rounded"
-                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
-                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
-                                        <span class="checkout-quantity">1</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-5 product-name" style="margin-top:2%">
-                                    <p class="mb-0">Product b</p>
-                                    <p class="mb-0">
-                                        <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
-                                    </p>
-                                </div>
-
-
-                                <div class="col-4 text-end product-name price" style="margin-top:2%; ">
-                                    <p>$110.67</p>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <hr>
-
-                        <div class="row checkout-total ">
-
-                            <div class="col-6 calculate-total">
-                                <p class="">Subtotal:</p>
-                                <p class="">Shipping Fee:</p>
-                                <p class="">Tex:</p>
-                                <h5 class="">Total:</h5>
-                            </div>
-
-                            <div class="col-6 calculate">
-                                <p class=""> $4785 </p>
-                                <p class=""> $524 </p>
-                                <p class=""> $758 </p>
-                                <h5 class=""> $12453</h5>
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
-                    </div>
-                </div> --}}
-
-                {{-- product-3 --}}
-
-
-                {{-- <div class="checkout-products-marketplace" id="shipping-method-wrapper">
-                    <div class="mt-2 bg-light mb-2">
-
-                        <div class="p-2" style="background:#cdf0e0" ;>
-                            <img style="vertical-align: middle;" src="https://nest.botble.com/storage/stores/2.png"
-                                alt="Global Office" class="img-fluid rounded" width="30">
-                            <span>Shop Name</span>
-                        </div>
-
-                        <div class="p-2">
-                            <div class="row cart-item">
-
-                                <div class="col-3" style="width: 14%">
-                                    <div class="checkout-product-img-wrapper product-details">
-                                        <img class="item-thumb img-thumbnail img-rounded"
-                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
-                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
-                                        <span class="checkout-quantity">1</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-5 product-name" style="margin-top:2%">
-                                    <p class="mb-0">Product b</p>
-                                    <p class="mb-0">
-                                        (Boxes: 4 Boxes, Weight: 4KG)
-                                    </p>
-                                </div>
-
-
-                                <div class="col-4 text-end product-name price " style="margin-top:2%;">
-                                    <p>$110.67</p>
-                                </div>
-
-                            </div>
-
-
-                            <div class="row cart-item mt-3">
-
-                                <div class="col-3" style="width: 14%">
-                                    <div class="checkout-product-img-wrapper product-details">
-                                        <img class="item-thumb img-thumbnail img-rounded"
-                                            src="https://nest.botble.com/storage/products/3-150x150.jpg"
-                                            alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
-                                        <span class="checkout-quantity">1</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-5 product-name" style="margin-top:2%">
-                                    <p class="mb-0">Product b</p>
-                                    <p class="mb-0">
-                                        <small>(Boxes: 4 Boxes, Weight: 4KG)</small>
-                                    </p>
-                                </div>
-
-
-                                <div class="col-4 text-end product-name price" style="margin-top:2%; ">
-                                    <p>$110.67</p>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <hr>
-
-                        <div class="row checkout-total ">
-                            <div class="col-6 calculate-total">
-                                <p class="">Subtotal:</p>
-                                <p class="">Shipping Fee:</p>
-                                <p class="">Tex:</p>
-                                <h5 class="">Total:</h5>
-                            </div>
-
-                            <div class="col-6 calculate">
-                                <p class=""> $4785 </p>
-                                <p class=""> $524 </p>
-                                <p class=""> $758 </p>
-                                <h5 class=""> $6752</h5>
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
-                    </div>
-                </div> --}}
 
 
                 {{-- Total calculation for All shopping --}}
@@ -605,21 +430,23 @@
 @endsection
 
 <script>
-    function doit(id) {
-        document.getElementById("paymentMethod").value = id;
-    }
+    // function doit(id) {
+    //     document.getElementById("paymentMethod").value = id;
+    // }
 
-    function submit() {
-        document.getElementById('BillingForm').submit();
-    }
+    // function submit() {
+    //     document.getElementById('BillingForm').submit();
+    // }
+
+  
+    
 
     function showDiv(check) {
 
 
         let shipForm = document.getElementById('shipping-form');
         if (check.checked){
-            document.getElementById('shipping-form').style.display = "block";
-            
+            document.getElementById('shipping-form').style.display = "block";   
         }
 
         else{
@@ -627,19 +454,52 @@
             
         }
 
-
-
-
-        
-        
-        // document.getElementById('add-address').innerHTML="Remove Form";
-        // document.getElementById('check').style.display = "none";
-
-        // document.getElementById('shipping-form').style.display = "none";
-        // document.getElementById('add-address').innerHTML="Add new address";
-        // document.getElementById('check').style.display = "block";
-    
-       
-
     }
+
+
+    function submitForm(){
+        //alert("Hello");
+
+            
+           
+            //let fromSubmitBtn = document.getElementById('checkOutBtn');
+            let addressHiddenId = document.getElementById('addressId');
+             
+            let payHiddenId = document.getElementById('paymentMethod');
+            let valueFromPayMethod = document.getElementsByName('payment_method');
+            // let valueFromRadio = document.getElementById('addressRadioBtn').value;
+            let billForm = document.getElementById('BillingForm');
+            let radioBtn = document.getElementsByName('address1');
+            let check = document.getElementById('infoCheck');
+
+
+            for(i=0; i<=valueFromPayMethod.length; i++){
+                if(valueFromPayMethod[i].checked){
+                    let payValue = valueFromPayMethod[i].value;
+                    for(j=0; j <= radioBtn.length ; j++){
+                        if(radioBtn[j].checked ){
+                            addressHiddenId.value  = radioBtn[j].value;
+                            payHiddenId.value = payValue;
+                            //alert(payHiddenId.value);
+                            billForm.submit();
+                        }else{
+                            if(check.checked){
+                                payHiddenId.value = payValue;
+                                billForm.submit(); 
+                            }else{
+                                document.getElementById('error').style.display="block";
+                                
+                            }
+                               
+                        }
+                    }
+                }
+            }       
+            
+        }
+                
+         
+    
+
+
 </script>

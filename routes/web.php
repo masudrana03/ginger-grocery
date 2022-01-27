@@ -223,8 +223,10 @@ Route::post('/user/address-update/{id}', [FrontendUserController::class, 'update
 Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
 
 Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
+Route::get('/user/reset-password-view', [FrontendForgotPasswordController::class, 'resetPasswordView'])->name('user.reset.view');
 Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
-Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.forget');
+Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
+Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 
 
 
