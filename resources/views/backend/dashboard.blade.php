@@ -171,17 +171,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript">
+        // Monthly chart
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                    'October',
-                    'November', 'December'
-                ],
+                labels: @json($totalMonths),
                 datasets: [{
-                    label: '',
-                    data: {{ $monthlySales }},
+                    label: 'Total Sales Per Month',
+                    data: @json($totalMonthlySales),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -210,14 +208,15 @@
             }
         });
 
+        // Daily chart
         const ctx2 = document.getElementById('myChart2').getContext('2d');
         const myChart2 = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: Array.from({length: daysInThisMonth()}, (_, i) => i + 1),
+                labels: @json($totalDays),
                 datasets: [{
-                        label: '',
-                        data: {{ $days }},
+                        label: 'Total Orders Per Day',
+                        data: @json($totalDailyOrders),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -237,8 +236,8 @@
                         borderWidth: 1
                     },
                     {
-                        label: '',
-                        data: {{ $dailySale }},
+                        label: 'Total Sales Per Day',
+                        data: @json($totalDailySales),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -267,10 +266,5 @@
                 }
             }
         });
-
-        function daysInThisMonth() {
-            var now = new Date();
-            return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-        }
     </script>
 @endpush

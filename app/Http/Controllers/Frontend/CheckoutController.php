@@ -360,7 +360,7 @@ class CheckoutController extends Controller
         $user = auth()->user();
 
         $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
-        $body = preg_replace("/{invoice_number}/", $invoiceId, $emailTemplate->body);
+        $body .= preg_replace("/{invoice_number}/", $invoiceId, $body);
 
         $emailDetails = [
             'email'   => auth()->user()->email,
