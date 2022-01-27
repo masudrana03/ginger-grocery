@@ -23,7 +23,7 @@
         </li>
         <li><a href="{{ route('admin.orders.index') }}">All Orders</a></li>
         @foreach (\App\Models\OrderStatus::all() as $orderStatus)
-            <li><a href="{{ url('admin/orders?status=') . $orderStatus->name }}">{{ ucfirst($orderStatus->name) }}
+            <li><a href="{{ url('admin/orders?status=') . $orderStatus->id }}">{{ ucfirst($orderStatus->name) }}
                     Orders</a></li>
         @endforeach
     </ul>
@@ -31,7 +31,7 @@
 <li class="">
     <a href="{{ route('admin.call_to_actions.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
-            <img  src="{{ asset('assets/img/menu-icon/bullhorn-solid.svg') }}" alt="" >
+            <img src="{{ asset('assets/img/menu-icon/bullhorn-solid.svg') }}" alt="">
         </div>
         <div class="nav_title">
             <span>Ads</span>
@@ -85,7 +85,7 @@
 <li class="">
     <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-            <img  src="{{ asset('assets/img/menu-icon/store-svgrepo-com.svg') }}" alt="">
+            <img src="{{ asset('assets/img/menu-icon/store-svgrepo-com.svg') }}" alt="">
         </div>
         <div class="nav_title">
             <span>Marketplace</span>

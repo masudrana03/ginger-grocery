@@ -41,7 +41,7 @@
                                                     autofocus placeholder="Enter your email">
                                             </div>
 
-                                            <div class="login_footer form-group">
+                                            <div class="form-group">
                                                 <div class="chek-form">
                                                     <input type="text" class=" @error('otp') is-invalid @enderror"
                                                         required="" name="otp" placeholder="     Code *" />

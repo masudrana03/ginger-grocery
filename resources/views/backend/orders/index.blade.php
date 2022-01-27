@@ -24,6 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
+                                            <th>Invoice Id</th>
                                             <th>User</th>
                                             <th>Store</th>
                                             <th>Subtotal</th>
@@ -40,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                  </div>
+                </div>
 
             </div>
         </div>
@@ -48,28 +49,28 @@
 @endsection
 
 @push('script')
-<script type="text/javascript">
-    function deleteBrand(id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+    <script type="text/javascript">
+        function deleteBrand(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-              if (result.value) {
-                  event.preventDefault();
-                  document.getElementById('delete-form-'+id).submit();
-              }
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-form-' + id).submit();
+                }
             })
-    }
-</script>
+        }
+    </script>
 
-<script>
-    // Banner Status Change
-    function ChangeOrderStatus(id) {
+    <script>
+        // Banner Status Change
+        function ChangeOrderStatus(id) {
             Swal.fire({
                 title: 'Are you sure to change?',
                 icon: 'warning',
@@ -83,11 +84,11 @@
                 }
             });
         }
-</script>
+    </script>
 
-<script>
-    // Banner Status Change
-    function ChangePaymentStatus(id) {
+    <script>
+        // Banner Status Change
+        function ChangePaymentStatus(id) {
             Swal.fire({
                 title: 'Are you sure to change?',
                 icon: 'warning',
@@ -101,35 +102,60 @@
                 }
             });
         }
-</script>
+    </script>
 
-<script>
-    $(document).ready(function () {
-        $('#orders').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax":{
-                     "url": "{{ $url }}",
-                     "dataType": "json",
-                     "type": "GET",
-                     "data":{ _token: "{{csrf_token()}}"}
-                   },
-            "columns": [
-                { "data": "id" },
-                { "data": "user_id" },
-                { "data": "store_id" },
-                { "data": "subtotal" },
-                { "data": "discount" },
-                { "data": "adjust" },
-                { "data": "total" },
-                { "data": "payment_status" },
-                { "data": "status" },
-                { "data": "created_at" },
-                { "data": "actions" }
-            ]
+    <script>
+        $(document).ready(function() {
+            $('#orders').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "{{ $url }}",
+                    "dataType": "json",
+                    "type": "GET",
+                    "data": {
+                        _token: "{{ csrf_token() }}"
+                    }
+                },
+                "columns": [{
+                        "data": "id"
+                    },
+                    {
+                        "data": "invoice_id"
+                    },
+                    {
+                        "data": "user_id"
+                    },
+                    {
+                        "data": "store_id"
+                    },
+                    {
+                        "data": "subtotal"
+                    },
+                    {
+                        "data": "discount"
+                    },
+                    {
+                        "data": "adjust"
+                    },
+                    {
+                        "data": "total"
+                    },
+                    {
+                        "data": "payment_status"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "created_at"
+                    },
+                    {
+                        "data": "actions"
+                    }
+                ]
 
+            });
         });
-    });
-</script>
+    </script>
 @endpush
-

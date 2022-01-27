@@ -8,6 +8,7 @@ use App\Models\EmailTemplate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use App\Components\Email\EmailFactory;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Validation\Rules\Password;
 
 class ForgotPasswordController extends Controller
@@ -46,7 +47,7 @@ class ForgotPasswordController extends Controller
 
         $this->sendConfirmationEmail($user);
 
-        Cache::put('forget_user', $user, 120);
+        Cache::put('forget_user', $user, 60);
 
         return back()->with('success', 'Email send successfully with confirmation OTP');
     }
@@ -64,12 +65,13 @@ class ForgotPasswordController extends Controller
 
         $validation = validateData([
             'email'    => 'required|email',
-            'otp'      => 'required',
+            'otp'      => 'required|numeric',
         ]);
 
         if ($validation->fails()) {
             return back()->with('error', 'Validation failed..!');
         }
+
 
         $user = User::where('email', $request->email)->first();
 
@@ -80,7 +82,7 @@ class ForgotPasswordController extends Controller
         if ($user->verify_otp != $request->otp) {
 
             return back()->with('error', 'OTP is not valid.');
-        } elseif ($user->verify_otp == $request->otp) {
+        } elseif ($user->verify_otp === intval($request->otp)) {
 
             return redirect()->route('user.reset.view');
         } else {
@@ -102,7 +104,7 @@ class ForgotPasswordController extends Controller
 
         $validation = validateData([
             'email'    => 'required|email',
-            'otp'      => 'required',
+            'otp'      => 'required|numeric',
             'password' => [
                 'required',
                 'confirmed',
@@ -128,6 +130,7 @@ class ForgotPasswordController extends Controller
         $user->password   = bcrypt($request->password);
         $user->verify_otp = null;
         $user->save();
+        Artisan::call('cache:clear');
         return redirect()->route('login')->with('success', 'Password has been reset!');
     }
 

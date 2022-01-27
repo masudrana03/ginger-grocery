@@ -33,6 +33,7 @@ class OrderController extends Controller
     {
         $columns = [
             0 => 'id',
+            2 => 'invoice_id',
             2 => 'user_id',
             3 => 'store_id',
             4 => 'subtotal',
@@ -54,37 +55,37 @@ class OrderController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
 
-        // if (isAdmin()) {
-        //     $query = Order::with('details', 'status');
-        // } else {
-        //     $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
-        // }
+        if (isAdmin()) {
+            $query = Order::with('details', 'status');
+        } else {
+            $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
+        }
 
         $query = Order::with('details', 'status');
 
         $orderStatus = $request->status;
 
         if ($orderStatus) {
-            $orderStatus = OrderStatus::whereName($orderStatus)->firstOrFail();
-            $query->where('order_status_id', $orderStatus->id);
+            //$orderStatus = OrderStatus::whereName($orderStatus)->firstOrFail();
+            $query->where('order_status_id', $orderStatus);
         }
 
         if (empty($request->input('search.value'))) {
             $orders = $query->offset($start)
                             ->limit($limit)
-                            ->orderBy($order,$dir)
+                            ->orderBy($order, $dir)
                             ->get();
         } else {
             $search = $request->input('search.value');
 
-            $query = $query->where('id','LIKE',"%{$search}%")
+            $query = $query->where('id', 'LIKE', "%{$search}%")->orWhere('invoice_id', 'LIKE', "%{$search}%")
                         ->orWhereHas('user', function ($query) use ($search) {
-                        $query->where('name', 'LIKE',"%{$search}%");
-                    });
+                            $query->where('name', 'LIKE', "%{$search}%");
+                        });
 
             $orders =  $query->offset($start)
                             ->limit($limit)
-                            ->orderBy($order,$dir)
+                            ->orderBy($order, $dir)
                             ->get();
 
             $totalFiltered = $query->count();
@@ -95,7 +96,7 @@ class OrderController extends Controller
 
         if (!empty($orders)) {
             foreach ($orders as $order) {
-                $updatePaymentStatus = route('admin.orders.updatePaymentStatus', $order->id );
+                $updatePaymentStatus = route('admin.orders.updatePaymentStatus', $order->id);
                 $show                = route('admin.orders.show', $order->id);
                 $edit                = route('admin.orders.edit', $order->id);
                 $delete              = route('admin.orders.destroy', $order->id);
@@ -103,11 +104,12 @@ class OrderController extends Controller
                 $status              = '';
 
                 foreach ($orderStatuses as $orderStatus) {
-                    $updateStatus = route('admin.orders.update_status', [$order->id, $orderStatus->id] );
+                    $updateStatus = route('admin.orders.update_status', [$order->id, $orderStatus->id]);
                     $status .= "<a class='dropdown-item' <a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' onclick='ChangeOrderStatus({$orderStatus->id})' id='orderStatus-{$orderStatus->id}'>$orderStatus->name</a>";
                 }
 
                 $nestedData['id']              = $order->id;
+                $nestedData['invoice_id']      = $order->invoice_id;
                 $nestedData['user_id']         = $order->user->name;
                 $nestedData['store_id']        = $order->store->name;
                 $nestedData['subtotal']        = $order->subtotal;
@@ -187,29 +189,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Order  $order
@@ -236,7 +215,7 @@ class OrderController extends Controller
     {
         $order->update(['order_status_id' => $orderStatus->id]);
 
-        toast( 'Status successfully updated', 'success' );
+        toast('Status successfully updated', 'success');
 
         return redirect()->back();
     }
@@ -249,15 +228,11 @@ class OrderController extends Controller
      */
     public function updatePaymentStatus(Order $order)
     {
-
         $order->update([
-            // 'payment_status' => $order->payment_status == 'Paid' ? 'Unpaid' : 'Paid'
-            'payment_status' => 'Paid'
+             'payment_status' => $order->payment_status == 'Paid' ? 'Unpaid' : 'Paid'
         ]);
 
-       // return  $order->payment_status;
-
-        toast( 'Status successfully updated', 'success' );
+        toast('Status successfully updated', 'success');
 
         return redirect()->back();
     }
