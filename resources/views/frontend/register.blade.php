@@ -3,20 +3,13 @@
 
 @section('content')
 
-<<<<<<< HEAD
+
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
             <span></span> Pages <span></span> Register
-=======
-    <div class="page-header breadcrumb-wrap">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Pages <span></span> My Account
             </div>
->>>>>>> 86aacb263da63195659110865ffa9835b0d01896
         </div>
     </div>
     <div class="page-content pt-150 pb-150">
