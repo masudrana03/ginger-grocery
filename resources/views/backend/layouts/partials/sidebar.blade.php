@@ -18,9 +18,9 @@
         </div>
     </a>
     <ul>
-        <li>
+        {{-- <li>
             <a href="{{ route('admin.order_statuses.index') }}">Order Status</a>
-        </li>
+        </li> --}}
         <li><a href="{{ route('admin.orders.index') }}">All Orders</a></li>
         @foreach (\App\Models\OrderStatus::all() as $orderStatus)
             <li><a href="{{ url('admin/orders?status=') . $orderStatus->id }}">{{ ucfirst($orderStatus->name) }}
@@ -151,8 +151,8 @@
         </ul>
     </li>
 @endif
-<h4 class="menu-text"><span>WEB & APP SETTINGS</span> <i class="fas fa-ellipsis-h"></i> </h4>
 @if (isAdmin())
+<h4 class="menu-text"><span>WEB & APP SETTINGS</span> <i class="fas fa-ellipsis-h"></i> </h4>
     <li class="">
         <a class="has-arrow" href="#" aria-expanded="false">
             <div class="nav_icon_small">
@@ -232,7 +232,7 @@
                 <a href="{{ route('admin.promos.index') }}">Promos</a>
             </li>
             <li>
-                <a href="{{ route('admin.banners.index') }}">Simpel sliders</a>
+                <a href="{{ route('admin.banners.index') }}">Banner sliders</a>
             </li>
         </ul>
     </li>

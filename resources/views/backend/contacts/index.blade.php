@@ -54,7 +54,7 @@
                                             <td>{{$info->name}}</td>
                                             <td>{{$info->phone}}</td>
                                             <td>{{$info->email}}</td>
-                                            <td>{{ucwords(strtolower($info->country->name))}}</td>
+                                            <td>{{ ucwords(strtolower(settings('country'))) }}</td>
                                             <td>{{$info->state}}</td>
                                             <td>{{$info->address}}</td>
                                             <td>{{$info->city}}</td>

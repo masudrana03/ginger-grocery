@@ -113,6 +113,12 @@
                 <span></span> Checkout
             </div>
         </div>
+
+        <div class="container" id="errorContainer">
+            <div class="">
+                <span>Please Enter or Select An Address!</span>
+            </div>
+        </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
@@ -363,7 +369,7 @@
                                             </p> --}}
                                         </div>
 
-                                        <div class="col">
+                                        <div class="col" style="width: 48%;">
                                             <p class="pri">{{ $currency }} {{ $item->price }}</p>
                                         </div>
                                     </div>
@@ -383,7 +389,7 @@
                                     <h5 class="">Total:</h5>
                                 </div>
 
-                                <div class="col-6 calculate">
+                                <div class="col-6 calculate" style="width: 48%;">
                                     <p class=""> {{ $currency }}{{ $subtotal }} </p>
                                     <p class=""> {{ $currency }}{{ $shipping }} </p>
                                     <p class=""> {{ $currency }}{{ $tax }} </p>
@@ -396,7 +402,7 @@
                         </div>
                     </div>
                 @empty
-                    <p>No product in your cart!</p>
+                    <p style="text-align: center; padding-top: 15px;">No product in your cart!</p>
                 @endforelse
 
 
@@ -414,7 +420,7 @@
                         <h5 class="">Total:</h5>
                     </div>
 
-                    <div class="col-6 calculate">
+                    <div class="col-6 calculate" style="width: 48%;">
                         <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
                         <p class=""> {{ $currency }}{{ $grandShipping }} </p>
                         <p class=""> {{ $currency }}{{ $grandTax }} </p>
@@ -427,6 +433,7 @@
         </div>
     </div>
 @endsection
+
 
 @push('script')
 
