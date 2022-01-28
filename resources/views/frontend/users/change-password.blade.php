@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'User Account')
+@section('title', 'Change Password')
 
 
 @section('content')
@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> My Account
+                    <span></span> Change Password
                 </div>
             </div>
         </div>

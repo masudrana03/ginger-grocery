@@ -727,9 +727,9 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul >
-                                    <li class="hot-deals"><img
+                                    {{-- <li class="hot-deals"><img
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}"
-                                            alt="hot deals" /><a href="#">Hot Deals</a></li>
+                                            alt="hot deals" /><a href="#">Hot Deals</a></li> --}}
                                     {{-- <li>
                                         <a class="active" href="{{url('/')}}">Home <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">

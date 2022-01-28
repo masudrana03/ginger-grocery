@@ -64,7 +64,7 @@ class CartController extends Controller
         $totalTax = 0;
 
         foreach ($carts as $cart) {
-            $totalTax += $calculatedPrice = priceCalculator($cart)['tax'];
+            $totalTax += priceCalculator($cart)['tax'];
         }
 
         $productIds = session('compare');

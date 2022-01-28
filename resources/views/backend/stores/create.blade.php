@@ -303,7 +303,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="longitude">Tax</label>
-                                            <input type="number" name="tax" id="longitude" class="form-control"
+                                            <input type="text" name="tax" id="longitude" class="form-control"
                                                 id="longitude" aria-describedby="emailHelp" placeholder="">
                                         </div>
 
