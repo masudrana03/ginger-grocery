@@ -41,15 +41,17 @@
                                                     autofocus placeholder="Enter your email">
                                             </div>
 
-                                            <div class="login_footer form-group">
+                                            <div class="form-group">
                                                 <div class="chek-form">
-                                                    <input type="text" class=" @error('otp') is-invalid @enderror"
+                                                    <input id="otp" type="text" class=" @error('otp') is-invalid @enderror"
                                                         required="" name="otp" placeholder="     Code *" />
                                                     @error('otp')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+
+                                                    <div id="otp_available" class="mt-1"></div>
                                                 </div>
                                             </div>
 
@@ -111,7 +113,8 @@
                                     </div> --}}
 
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-heading btn-block hover-up">Send OTP</button>
+                                                <button type="submit" class="btn btn-heading btn-block hover-up">Send
+                                                    OTP</button>
                                             </div>
                                         </form>
                                     </div>
@@ -127,3 +130,31 @@
 
 
 @endsection
+
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+
+        $('#otp').on('keyup change', function() {
+            let otp = $('#otp').val();
+            // var pattern = /^[0-9]{6}$/;
+            //  alert(pattern.test(otp));
+            if (validate(otp)) {
+                $('#otp_available').html(
+                    `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Please Submit Your OTP</span>`
+                    )
+            } else {
+                $('#otp_available').html(
+                    `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Your OTP Must Be 6 Digit Number</span>`
+                    )
+            }
+        })
+
+        function validate(otp) {
+            const re = /^[0-9]{6}$/;
+            return re.test(otp);
+        }
+
+    });
+</script>

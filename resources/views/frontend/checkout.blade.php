@@ -94,15 +94,13 @@
 
     }
 
-    .address-checklist{
+    .address-checklist {
         padding-top: 10px;
     }
 
-    .check-link{
+    .check-link {
         border-radius: 10px !important;
     }
-     
-    
 
 </style>
 
@@ -113,12 +111,6 @@
                 <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Shop
                 <span></span> Checkout
-            </div>
-        </div>
-
-        <div class="container" id="errorContainer">
-            <div class="">
-                <span>Please Enter or Select An Address!</span>
             </div>
         </div>
     </div>
@@ -140,32 +132,34 @@
             <div class="col-lg-7">
                 <div class="row mb-20 ">
 
-                        <h4 class="mt-20 mb-10">Saved Address</h4>
+                    <h4 class="mt-20 mb-10">Saved Address</h4>
 
-                        @forelse ($savedAddress as $address)
-                            <div class="ml-20">
-                                <div class="address-checklist">
-                                    <input class="form-check-input"  type="radio" name="address1" value="{{$address->id}}" id="addressRadioBtn" checked/>
-                                    <label class="form-check-label" for="addressRadioBtn"><span>{{$address->address}},{{$address->state}}</span></label>
-                                    <br />
-                                </div>
+                    @forelse ($savedAddress as $address)
+                        <div class="ml-20">
+                            <div class="address-checklist" id="radioDiv">
+                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}"
+                                    id="addressRadioBtn" />
+                                <label class="form-check-label"
+                                    for="addressRadioBtn"><span>{{ $address->address }},{{ $address->state }}</span></label>
+                                <br />
                             </div>
-                        @empty
-                        <label class="form-check-label" ><span>No address Found....</span></label>
-                        @endforelse
+                        </div>
+                    @empty
+                        <label class="form-check-label"><span>No address Found....</span></label>
+                    @endforelse
 
                 </div>
 
                 <div class="row mb-10">
                     <div class="address-checklist ml-20">
-                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)"id="infoCheck" />
+                        <input class="form-check-input" type="checkbox" onclick="showDiv(this)" id="infoCheck" />
                         <label class="form-check-label" for=""><span>Add new address.</span></label>
                         <br />
-                      </div>
+                    </div>
                 </div>
 
 
-                <div class="row mb-10 mt-20" id="shipping-form" style="display: none;" >
+                <div class="row mb-10 mt-20" id="shipping-form" style="display: none;">
                     <h4 class="mb-10">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
@@ -192,19 +186,20 @@
                         </div>
                         <div class="row ">
                             <div class="col-md-12 mb-10">
-                                   <select disabled class=" form-control  @error('country_id') is-invalid @enderror" name="country_id">
-                                        <option value="">Select a country...</option>
-                                        @foreach ($countries as $country)
-                                            <option {{ settings('country') == $country->name ? 'selected' : '' }}
-                                                value="{{ $country->id }}">{{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('country_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                               </div>
+                                <select disabled class=" form-control  @error('country_id') is-invalid @enderror"
+                                    name="country_id">
+                                    <option value="">Select a country...</option>
+                                    @foreach ($countries as $country)
+                                        <option {{ settings('country') == $country->name ? 'selected' : '' }}
+                                            value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('country_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <input required="" type="text" name="state" placeholder="State / County *">
@@ -249,42 +244,46 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>   
+                        </div>
                     </form>
                 </div>
 
                 <div class="row ">
-                        <div>
-                            <h4 class="mb-10 ">Payment Method</h4>
-                        </div>
+                    <div>
+                        <h4 class="mb-10 ">Payment Method</h4>
+                    </div>
 
-                        <div class="checkout-products-marketplace" style="margin-bottom:1%;">
-                            <ul class="list-group">
-                                @foreach ($paymentMethods as $paymentMethod)
-                                    @if ($paymentMethod->provider == 'stripe' && (!$paymentMethod->client_key || !$paymentMethod->client_secret))
-                                        @php
-                                            continue;
-                                        @endphp
-                                    @endif
-                                    <li class="list-group-item">
-                                        <div class="form-check">
-                                            <input class="form-check-input"  id="payMethod" type="radio" value="{{ $paymentMethod->id }}"
-                                                name="payment_method" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
-                                            </label>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="checkout-products-marketplace" style="margin-bottom:1%;">
+                        <ul class="list-group">
+                            @foreach ($paymentMethods as $paymentMethod)
+                                @if ($paymentMethod->provider == 'stripe' && (!$paymentMethod->client_key || !$paymentMethod->client_secret))
+                                    @php
+                                        continue;
+                                    @endphp
+                                @endif
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="payMethod" type="radio"
+                                            value="{{ $paymentMethod->id }}" name="payment_method" id="flexRadioDefault1"
+                                            checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
+                                        </label>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="row mb-10 mt-10">
                     <div class="payment-logo d-flex">
-                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-paypal.svg')}}" alt="">
-                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-visa.svg')}}" alt="">
-                        <img class="mr-15" src="{{asset('assets/frontend/imgs/theme/icons/payment-master.svg')}}" alt="">
-                        <img src="{{asset('assets/frontend/imgs/theme/icons/payment-zapper.svg')}}" alt="">
+                        <img class="mr-15"
+                            src="{{ asset('assets/frontend/imgs/theme/icons/payment-paypal.svg') }}" alt="">
+                        <img class="mr-15"
+                            src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}" alt="">
+                        <img class="mr-15"
+                            src="{{ asset('assets/frontend/imgs/theme/icons/payment-master.svg') }}" alt="">
+                        <img src="{{ asset('assets/frontend/imgs/theme/icons/payment-zapper.svg') }}" alt="">
                     </div>
                 </div>
 
@@ -297,7 +296,8 @@
                 <div class="row mb-15 mt-10">
                     <div class="col-4" id="checkout">
                         {{-- <a  href="#" class="btn btn-lg check-link">Checkout</a> --}}
-                        <button id="checkOutBtn" onclick="submitForm()" class="btn btn-fill-out btn-block mt-30">Checkout<i class="fi-rs-sign-out ml-15"></i></button>
+                        <button id="checkOutBtn" onclick="submitForm()" class="btn btn-fill-out btn-block mt-30">Checkout<i
+                                class="fi-rs-sign-out ml-15"></i></button>
                     </div>
                 </div>
 
@@ -429,77 +429,89 @@
     </div>
 @endsection
 
-<script>
-    // function doit(id) {
-    //     document.getElementById("paymentMethod").value = id;
-    // }
+@push('script')
 
-    // function submit() {
-    //     document.getElementById('BillingForm').submit();
-    // }
+    <script>
+        // function doit(id) {
+        //     document.getElementById("paymentMethod").value = id;
+        // }
 
-  
-    
-
-    function showDiv(check) {
+        // function submit() {
+        //     document.getElementById('BillingForm').submit();
+        // }
 
 
-        let shipForm = document.getElementById('shipping-form');
-        if (check.checked){
-            document.getElementById('shipping-form').style.display = "block";   
+
+
+        function showDiv(check) {
+
+
+            let shipForm = document.getElementById('shipping-form');
+            if (check.checked) {
+                document.getElementById('shipping-form').style.display = "block";
+            } else {
+                document.getElementById('shipping-form').style.display = "none";
+
+            }
+
         }
 
-        else{
-            document.getElementById('shipping-form').style.display = "none";
-            
-        }
 
-    }
+        function submitForm() {
+            //alert("Hello");
 
 
-    function submitForm(){
-        //alert("Hello");
 
-            
-           
             //let fromSubmitBtn = document.getElementById('checkOutBtn');
             let addressHiddenId = document.getElementById('addressId');
-             
+
             let payHiddenId = document.getElementById('paymentMethod');
             let valueFromPayMethod = document.getElementsByName('payment_method');
             // let valueFromRadio = document.getElementById('addressRadioBtn').value;
             let billForm = document.getElementById('BillingForm');
             let radioBtn = document.getElementsByName('address1');
             let check = document.getElementById('infoCheck');
+            let radioDiv = document.getElementById('radioDiv');
 
 
-            for(i=0; i<=valueFromPayMethod.length; i++){
-                if(valueFromPayMethod[i].checked){
+            for (i = 0; i <= valueFromPayMethod.length; i++) {
+                if (valueFromPayMethod[i].checked) {
                     let payValue = valueFromPayMethod[i].value;
-                    for(j=0; j <= radioBtn.length ; j++){
-                        if(radioBtn[j].checked ){
-                            addressHiddenId.value  = radioBtn[j].value;
-                            payHiddenId.value = payValue;
-                            //alert(payHiddenId.value);
-                            billForm.submit();
-                        }else{
-                            if(check.checked){
+                    if (radioDiv) {
+                        for (j = 0; j <= radioBtn.length; j++) {
+                            if (radioBtn[j].checked) {
+                                addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-                                billForm.submit(); 
-                            }else{
-                                document.getElementById('error').style.display="block";
-                                
+                                //alert(payHiddenId.value);
+                                billForm.submit();
+                            } else {
+                                if (check.checked) {
+                                    payHiddenId.value = payValue;
+                                    billForm.submit();
+                                } else {
+                                    document.getElementById('error').style.display = "block";
+                                }
+
                             }
-                               
+                        }
+
+                    } else {
+
+                        if (check.checked) {
+                            payHiddenId.value = payValue;
+                            billForm.submit();
+                        } else {
+                            document.getElementById('error').style.display = "block";
                         }
                     }
+
                 }
-            }       
-            
+            }
+
         }
-                
-         
-    
+    </script>
+
+@endpush
 
 
-</script>
+

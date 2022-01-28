@@ -97,7 +97,8 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> <a href="{{ route('categories', $product->category->id) }}">{{ $product->category->name }}</a>
+                <span></span> <a
+                    href="{{ route('categories', $product->category->id) }}">{{ $product->category->name }}</a>
                 <span></span> {{ $product->name }}
             </div>
         </div>
@@ -174,7 +175,8 @@
                                                 $productRatingGrandTotal = $productRatingUser == 0 ? 0 : $productRatingCount / $productRatingUser;
                                             @endphp
 
-                                            <div class="product-rating" style="width: {{ $productRatingGrandTotal * 20 }}%">
+                                            <div class="product-rating"
+                                                style="width: {{ $productRatingGrandTotal * 20 }}%">
                                             </div>
                                         </div>
                                         <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }}
