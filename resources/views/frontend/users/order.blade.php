@@ -75,7 +75,7 @@
                                                                 <th>Date</th>
                                                                 <th>Status</th>
                                                                 <th>Total</th>
-                                                                <th>Actions</th>
+                                                                <th>Invoice</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

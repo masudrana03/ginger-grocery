@@ -291,7 +291,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
                     <p class="font-sm mb-0">&copy;<?php echo date('Y'); ?> <strong class="text-brand">Binary
-                            Fusion</strong> - HTML Ecommerce Template <br />All rights reserved</p>
+                            Fusion</strong> - All rights reserved</p>
                 </div>
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
