@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title','User Account')
+@section('title', 'User Account')
 
 
 @section('content')
@@ -50,7 +50,8 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                            document.getElementById('logout-form').submit();"><i class=" fi-rs-sign-out mr-10"></i>Logout</a>
+                                                                                document.getElementById('logout-form').submit();"><i
+                                                    class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -114,8 +115,8 @@
 
                                                             <label>Date of Birth <span
                                                                     class="required">*</span></label>
-                                                            <input class=" @error('date_of_birth') is-invalid @enderror "name="date_of_birth" id="datepicker" type="text"
-                                                                
+                                                            <input class=" @error('date_of_birth') is-invalid @enderror "
+                                                                name="date_of_birth" id="datepicker" type="text"
                                                                 value="{{ old('date_of_birth') ?? $user->date_of_birth }}" />
                                                             @error('date_of_birth')
                                                                 <span class="invalid-feedback" role="alert">
@@ -146,14 +147,12 @@
 @endsection
 
 @push('script')
-<script>
-    $(function() {
-        alert('dsfdf');
-        $("#datepicker").datepicker({
-            changeMonth: true,
-            changeYear: true
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
         });
-    });
-</script>  
+    </script>
 @endpush
-

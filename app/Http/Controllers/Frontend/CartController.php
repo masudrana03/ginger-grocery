@@ -59,7 +59,7 @@ class CartController extends Controller
 
     public function cart()
     {
-        $carts = auth()->user()->cart->products->groupBy('store_id');
+        $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
         $totalTax = 0;
 

@@ -77,7 +77,7 @@
                                     <div class="tab-pane fade active show" id="address" role="tabpanel"
                                         aria-labelledby="address-tab">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            {{-- <div class="col-lg-6">
                                                 <div class="card mb-3 mb-lg-0">
                                                     <div class="card-header">
                                                         <h3 class="mb-0">Billing Address</h3>
@@ -119,7 +119,7 @@
                                                         @endforelse
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-lg-6 ">
                                                 <div class="card">
                                                     <div class="card-header">
