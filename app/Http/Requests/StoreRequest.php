@@ -37,6 +37,7 @@ class StoreRequest extends FormRequest
             'zone_id'        => 'required|numeric',
             'latitude'       => 'required',
             'longitude'      => 'required',
+            'tax'            => 'numeric',
         ];
     }
 }

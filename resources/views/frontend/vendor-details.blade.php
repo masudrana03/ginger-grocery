@@ -7,6 +7,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+            <span></span> <a href="{{ route('vendor.list') }}">Vendors</a>
             <span></span> {{ $store->name }}
         </div>
     </div>

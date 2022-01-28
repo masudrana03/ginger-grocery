@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="font-xs">
                                     <ul>
-                                        <li class="mb-5">Vendor: <span class="text-brand">Ginger Grocery</span></li>
+                                        <li class="mb-5">Vendor: <span class="text-brand">GroceFusion</span></li>
                                         <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span>
                                         </li>
                                     </ul>
@@ -560,7 +560,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                        <a href="{{ url('/') }}"><img src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}"
                                 alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
@@ -727,9 +727,9 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul >
-                                    <li class="hot-deals"><img
+                                    {{-- <li class="hot-deals"><img
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-hot.svg') }}"
-                                            alt="hot deals" /><a href="#">Hot Deals</a></li>
+                                            alt="hot deals" /><a href="#">Hot Deals</a></li> --}}
                                     {{-- <li>
                                         <a class="active" href="{{url('/')}}">Home <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -970,7 +970,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}"
+                    <a href="{{ url('/') }}"><img src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}"
                             alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">

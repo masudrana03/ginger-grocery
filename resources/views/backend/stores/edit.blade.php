@@ -277,7 +277,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="tax">Tax</label>
-                                            <input type="number" name="tax" id="tax" class="form-control" id="tax"
+                                            <input type="text" name="tax" id="tax" class="form-control" id="tax"
                                                 aria-describedby="emailHelp" placeholder="10"
                                                 value="{{ old('tax') ?? $store->tax }}">
                                         </div>
@@ -319,7 +319,9 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="store-logo" src="{{asset( 'assets/img/uploads/stores/thumbnail/'.$store->image );}}"id="thumbnil">
+                                                    <img class="store-logo"
+                                                        src="{{ asset('assets/img/uploads/stores/thumbnail/' . $store->image) }}"
+                                                        id="thumbnil">
                                                 </div>
                                             </div>
                                         </div>

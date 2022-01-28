@@ -25,7 +25,7 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'mail_user_name', 'value' => 'mohasin2911@gmail.com'] );
         Setting::create( ['key' => 'mail_password', 'value' => 'gmlfywasvjmjwwes'] );
         Setting::create( ['key' => 'mail_from', 'value' => 'mohasin2911@gmail.com'] );
-        Setting::create( ['key' => 'mail_from_name', 'value' => 'Ginger Grocery'] );
+        Setting::create( ['key' => 'mail_from_name', 'value' => 'GroceFusion'] );
         Setting::create( ['key' => 'encryption', 'value' => 'tls'] );
         Setting::create( ['key' => 'loyalty_cart_status', 'value' => 'No'] );
         Setting::create( ['key' => 'loyalty_points', 'value' => 100] );
