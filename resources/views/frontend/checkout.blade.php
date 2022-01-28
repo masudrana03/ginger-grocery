@@ -113,6 +113,12 @@
                 <span></span> Checkout
             </div>
         </div>
+
+        <div class="container" id="errorContainer">
+            <div class="">
+                <span>Please Enter or Select An Address!</span>
+            </div>
+        </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
@@ -136,9 +142,9 @@
 
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
-                            <div class="address-checklist" id="radioDiv">
+                            <div class="address-checklist">
                                 <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}"
-                                    id="addressRadioBtn" />
+                                    id="addressRadioBtn" checked />
                                 <label class="form-check-label"
                                     for="addressRadioBtn"><span>{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
@@ -279,8 +285,8 @@
                     <div class="payment-logo d-flex">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-paypal.svg') }}" alt="">
-                        <img class="mr-15"
-                            src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}" alt="">
+                        <img class="mr-15" src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}"
+                            alt="">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-master.svg') }}" alt="">
                         <img src="{{ asset('assets/frontend/imgs/theme/icons/payment-zapper.svg') }}" alt="">
@@ -364,7 +370,7 @@
                                             </p> --}}
                                         </div>
 
-                                        <div class="col">
+                                        <div class="col" style="width: 48%;">
                                             <p class="pri">{{ $currency }} {{ $item->price }}</p>
                                         </div>
                                     </div>
@@ -384,7 +390,7 @@
                                     <h5 class="">Total:</h5>
                                 </div>
 
-                                <div class="col-6 calculate">
+                                <div class="col-6 calculate" style="width: 48%;">
                                     <p class=""> {{ $currency }}{{ $subtotal }} </p>
                                     <p class=""> {{ $currency }}{{ $shipping }} </p>
                                     <p class=""> {{ $currency }}{{ $tax }} </p>
@@ -397,7 +403,7 @@
                         </div>
                     </div>
                 @empty
-                    <p>No product in your cart!</p>
+                    <p style="text-align: center; padding-top: 15px;">No product in your cart!</p>
                 @endforelse
 
 
@@ -415,7 +421,7 @@
                         <h5 class="">Total:</h5>
                     </div>
 
-                    <div class="col-6 calculate">
+                    <div class="col-6 calculate" style="width: 48%;">
                         <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
                         <p class=""> {{ $currency }}{{ $grandShipping }} </p>
                         <p class=""> {{ $currency }}{{ $grandTax }} </p>
@@ -429,89 +435,70 @@
     </div>
 @endsection
 
-@push('script')
+<script>
+    // function doit(id) {
+    //     document.getElementById("paymentMethod").value = id;
+    // }
 
-    <script>
-        // function doit(id) {
-        //     document.getElementById("paymentMethod").value = id;
-        // }
-
-        // function submit() {
-        //     document.getElementById('BillingForm').submit();
-        // }
+    // function submit() {
+    //     document.getElementById('BillingForm').submit();
+    // }
 
 
 
 
-        function showDiv(check) {
+    function showDiv(check) {
 
 
-            let shipForm = document.getElementById('shipping-form');
-            if (check.checked) {
-                document.getElementById('shipping-form').style.display = "block";
-            } else {
-                document.getElementById('shipping-form').style.display = "none";
-
-            }
+        let shipForm = document.getElementById('shipping-form');
+        if (check.checked) {
+            document.getElementById('shipping-form').style.display = "block";
+        } else {
+            document.getElementById('shipping-form').style.display = "none";
 
         }
 
-
-        function submitForm() {
-            //alert("Hello");
+    }
 
 
-
-            //let fromSubmitBtn = document.getElementById('checkOutBtn');
-            let addressHiddenId = document.getElementById('addressId');
-
-            let payHiddenId = document.getElementById('paymentMethod');
-            let valueFromPayMethod = document.getElementsByName('payment_method');
-            // let valueFromRadio = document.getElementById('addressRadioBtn').value;
-            let billForm = document.getElementById('BillingForm');
-            let radioBtn = document.getElementsByName('address1');
-            let check = document.getElementById('infoCheck');
-            let radioDiv = document.getElementById('radioDiv');
+    function submitForm() {
+        //alert("Hello");
 
 
-            for (i = 0; i <= valueFromPayMethod.length; i++) {
-                if (valueFromPayMethod[i].checked) {
-                    let payValue = valueFromPayMethod[i].value;
-                    if (radioDiv) {
-                        for (j = 0; j <= radioBtn.length; j++) {
-                            if (radioBtn[j].checked) {
-                                addressHiddenId.value = radioBtn[j].value;
-                                payHiddenId.value = payValue;
-                                //alert(payHiddenId.value);
-                                billForm.submit();
-                            } else {
-                                if (check.checked) {
-                                    payHiddenId.value = payValue;
-                                    billForm.submit();
-                                } else {
-                                    document.getElementById('error').style.display = "block";
-                                }
 
-                            }
-                        }
+        //let fromSubmitBtn = document.getElementById('checkOutBtn');
+        let addressHiddenId = document.getElementById('addressId');
 
+        let payHiddenId = document.getElementById('paymentMethod');
+        let valueFromPayMethod = document.getElementsByName('payment_method');
+        // let valueFromRadio = document.getElementById('addressRadioBtn').value;
+        let billForm = document.getElementById('BillingForm');
+        let radioBtn = document.getElementsByName('address1');
+        let check = document.getElementById('infoCheck');
+
+
+        for (i = 0; i <= valueFromPayMethod.length; i++) {
+            if (valueFromPayMethod[i].checked) {
+                let payValue = valueFromPayMethod[i].value;
+                for (j = 0; j <= radioBtn.length; j++) {
+                    if (radioBtn[j].checked) {
+                        addressHiddenId.value = radioBtn[j].value;
+                        payHiddenId.value = payValue;
+                        //alert(payHiddenId.value);
+                        billForm.submit();
                     } else {
-
                         if (check.checked) {
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
                             document.getElementById('error').style.display = "block";
-                        }
-                    }
 
+                        }
+
+                    }
                 }
             }
-
         }
-    </script>
 
-@endpush
-
-
-
+    }
+</script>
