@@ -142,11 +142,10 @@
 
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
-                            <div class="address-checklist">
-                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}"
-                                    id="addressRadioBtn" checked />
-                                <label class="form-check-label"
-                                    for="addressRadioBtn"><span>{{ $address->address }},{{ $address->state }}</span></label>
+                            <div class="address-checklist" id="radioDiv">
+                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}" />
+                                <label
+                                    class="form-check-label"><span>{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
                             </div>
                         </div>
@@ -285,8 +284,8 @@
                     <div class="payment-logo d-flex">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-paypal.svg') }}" alt="">
-                        <img class="mr-15" src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}"
-                            alt="">
+                        <img class="mr-15"
+                            src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}" alt="">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-master.svg') }}" alt="">
                         <img src="{{ asset('assets/frontend/imgs/theme/icons/payment-zapper.svg') }}" alt="">
@@ -435,70 +434,97 @@
     </div>
 @endsection
 
-<script>
-    // function doit(id) {
-    //     document.getElementById("paymentMethod").value = id;
-    // }
 
-    // function submit() {
-    //     document.getElementById('BillingForm').submit();
-    // }
+@push('script')
 
+    <script>
+        // function doit(id) {
+        //     document.getElementById("paymentMethod").value = id;
+        // }
 
-
-
-    function showDiv(check) {
+        // function submit() {
+        //     document.getElementById('BillingForm').submit();
+        // }
 
 
-        let shipForm = document.getElementById('shipping-form');
-        if (check.checked) {
-            document.getElementById('shipping-form').style.display = "block";
-        } else {
-            document.getElementById('shipping-form').style.display = "none";
+
+
+        function showDiv(check) {
+
+
+            let shipForm = document.getElementById('shipping-form');
+            let radioBtn = document.getElementsByName('address1');
+            if (check.checked) {
+                document.getElementById('shipping-form').style.display = "block";
+                for (i = 0; i <= radioBtn.length; i++) {
+
+                    radioBtn[i].checked = false;
+                }
+
+            } else {
+                document.getElementById('shipping-form').style.display = "none";
+                for (i = 0; i <= radioBtn.length; i++) {
+
+                    radioBtn[i].checked = false;
+                }
+            }
 
         }
 
-    }
 
-
-    function submitForm() {
-        //alert("Hello");
+        function submitForm() {
+            //alert("Hello");
 
 
 
-        //let fromSubmitBtn = document.getElementById('checkOutBtn');
-        let addressHiddenId = document.getElementById('addressId');
+            //let fromSubmitBtn = document.getElementById('checkOutBtn');
+            let addressHiddenId = document.getElementById('addressId');
 
-        let payHiddenId = document.getElementById('paymentMethod');
-        let valueFromPayMethod = document.getElementsByName('payment_method');
-        // let valueFromRadio = document.getElementById('addressRadioBtn').value;
-        let billForm = document.getElementById('BillingForm');
-        let radioBtn = document.getElementsByName('address1');
-        let check = document.getElementById('infoCheck');
+            let payHiddenId = document.getElementById('paymentMethod');
+            let valueFromPayMethod = document.getElementsByName('payment_method');
+            // let valueFromRadio = document.getElementById('addressRadioBtn').value;
+            let billForm = document.getElementById('BillingForm');
+            let radioBtn = document.getElementsByName('address1');
+            let check = document.getElementById('infoCheck');
+            let radioDiv = document.getElementById('radioDiv');
 
 
-        for (i = 0; i <= valueFromPayMethod.length; i++) {
-            if (valueFromPayMethod[i].checked) {
-                let payValue = valueFromPayMethod[i].value;
-                for (j = 0; j <= radioBtn.length; j++) {
-                    if (radioBtn[j].checked) {
-                        addressHiddenId.value = radioBtn[j].value;
-                        payHiddenId.value = payValue;
-                        //alert(payHiddenId.value);
-                        billForm.submit();
+            for (i = 0; i <= valueFromPayMethod.length; i++) {
+                if (valueFromPayMethod[i].checked) {
+                    let payValue = valueFromPayMethod[i].value;
+                    if (radioDiv) {
+                        for (j = 0; j <= radioBtn.length; j++) {
+                            if (radioBtn[j].checked) {
+                                addressHiddenId.value = radioBtn[j].value;
+                                payHiddenId.value = payValue;
+                                //alert(payHiddenId.value);
+                                billForm.submit();
+                            } else {
+                                if (check.checked) {
+
+                                    payHiddenId.value = payValue;
+                                    billForm.submit();
+                                } else {
+                                    document.getElementById('error').style.display = "block";
+                                }
+
+                            }
+                        }
+
                     } else {
+
                         if (check.checked) {
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
                             document.getElementById('error').style.display = "block";
-
                         }
-
                     }
+
                 }
             }
-        }
 
-    }
-</script>
+        }
+    </script>
+
+@endpush
