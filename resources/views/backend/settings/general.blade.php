@@ -41,7 +41,7 @@
     <div class="main_content_iner ">
         <div class="container-fluid p-0 sm_padding_15px">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="white_card card_height_100 mb_30">
                         <div class="white_card_header">
                             <div class="box_header m-0">
@@ -82,7 +82,7 @@
                                     <label for="state">State</label>
                                     <input type="text" name="state"
                                         class="form-control @error('state') is-invalid @enderror" id="state"
-                                        aria-describedby="emailHelp" placeholder="Company Name"
+                                        aria-describedby="emailHelp" placeholder="State Name"
                                         value="{{ old('state') ?? settings('state') }}">
                                     @error('state')
                                         <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <input type="text" name="city" class="form-control @error('city') is-invalid @enderror"
-                                        id="city" aria-describedby="emailHelp" placeholder="Company Name"
+                                        id="city" aria-describedby="emailHelp" placeholder="City Name"
                                         value="{{ old('city') ?? settings('city') }}">
                                     @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -123,7 +123,7 @@
                                     <label for="phone">Phone</label>
                                     <input type="text" name="phone"
                                         class="form-control @error('phone') is-invalid @enderror" id="phone"
-                                        aria-describedby="emailHelp" placeholder="Company Phone"
+                                        aria-describedby="emailHelp" placeholder="Phone Number "
                                         value="{{ old('phone') ?? settings('phone') }}">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
@@ -156,7 +156,59 @@
                                     @enderror
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="news-flash">News Flash-1</label>
+                                            <br><small>(Text must be within 60 character)</small>
+                                            <input type="text" name="news_flash_one" required minlength="10" maxlength="60"
+                                            
+                                                class="form-control @error('email') is-invalid @enderror" 
+                                                aria-describedby="news_flash_one" placeholder="News Flash-1"
+                                                value="{{ old('news_flash_one') ?? settings('news_flash_one') }}">
+                                            @error('news_flash_two')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="news-flash">News Flash-2</label>
+                                            <br><small>(Text must be within 60 character)</small>
+                                            <input type="text" name="news_flash_two"
+                                                class="form-control @error('email') is-invalid @enderror" 
+                                                aria-describedby="news_flash_two" placeholder="News Flash-2" required minlength="10" maxlength="60"
+                                                value="{{ old('news_flash_two') ?? settings('news_flash_two') }}">
+                                            @error('news_flash_two')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="news-flash">News Flash-3</label>
+                                            <br><small>(Text must be within 60 character)</small>
+                                            <input type="text" name="news_flash_three" required minlength="10" maxlength="60"
+                                                class="form-control @error('news_flash_three') is-invalid @enderror"
+                                                aria-describedby="news_flash_three" placeholder="News Flash-3"
+                                                value="{{ old('news_flash_three') ?? settings('news_flash_three') }}">
+                                            @error('news_flash_three')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <br> <small>This image size must be upto ( 215px X 66px )</small>
                                             @if ($errors->all())
@@ -204,9 +256,36 @@
                                             </span>
                                         @enderror
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <br> <small>This image size must be upto ( 500 x 600 )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('favicon') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload Down Nav Image</h4>
+
+                                                    <input type="file" name="down_nav_image" id="navImg" accept="image/*"
+                                                        class="d-none " onchange="showNavImg(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('navImg').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="navs">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <br> <small>This image size must be upto ( 16px X 16px )</small>
                                             @if ($errors->all())
@@ -231,10 +310,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
+
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <br> <small>This image size must be upto ( 32px X 32px )</small>
                                             @if ($errors->all())
@@ -260,6 +338,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                
 
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
@@ -330,6 +410,26 @@
                     continue;
                 }
                 var img = document.getElementById('mini_logos');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function showNavImg(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById('navs');
                 img.file = file;
                 var reader = new FileReader();
                 reader.onload = (function(aImg) {

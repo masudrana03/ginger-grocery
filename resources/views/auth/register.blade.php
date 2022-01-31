@@ -117,31 +117,30 @@
                                     </div> --}}
 
 
-                                            <div class="form-group">
-                                                {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
-                                                <input id="password" type="password"
-                                                    class="form-control password_with_eye @error('password') is-invalid @enderror"
-                                                    name="password" required autocomplete="new-password"
-                                                    placeholder="Password">
-                                                <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
+                                        <div class="form-group">
+                                            {{-- <input required="" type="password" name="password" placeholder="Password" /> --}}
+                                            <input id="password" type="password" class="form-control password_with_eye
+                                                @error('password') is-invalid @enderror" name="password" required
+                                                autocomplete="current-password" placeholder="Password">
+                                            <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
 
-                                                <div id="pass_available" class="mt-1"></div>
+                                            <div id="pass_available" class="mt-1"></div>
 
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
 
-                                            <div class="form-group">
-                                                {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
-                                                <input type="password" class="form-control password_with_eye"
-                                                    name="password_confirmation" id="repassword" required
-                                                    autocomplete="new-password" placeholder="Confirm Password">
-                                                <div id="repass_available" class="mt-1"></div>
-                                            </div>
-                                            {{-- <div class="login_footer form-group">
+                                        <div class="form-group">
+                                            {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
+                                            <input type="password" class="form-control password_with_eye"
+                                                name="password_confirmation" id="repassword" required
+                                                autocomplete="new-password" placeholder="Confirm Password">
+                                            <div id="repass_available" class="mt-1"></div>
+                                        </div>
+                                        {{-- <div class="login_footer form-group">
                                         <div class="chek-form">
                                             <input type="text" required="" name="email" placeholder="Security code *" />
                                         </div>
@@ -152,7 +151,7 @@
                                             <b class="text-best">5</b>
                                         </span>
                                     </div> --}}
-                                            {{-- <div class="payment_option mb-50">
+                                        {{-- <div class="payment_option mb-50">
                                         <div class="custome-radio">
                                             <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="" />
                                             <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">I am a customer</label>
@@ -162,88 +161,86 @@
                                             <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">I am a vendor</label>
                                         </div>
                                     </div> --}}
-                                            <div class="login_footer form-group mb-50">
-                                                <div class="chek-form">
-                                                    <div class="custome-checkbox">
-                                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                                            id="exampleCheckbox12" value="" />
-                                                        <label class="form-check-label" for="exampleCheckbox12"><span>I
-                                                                agree to
-                                                                terms &amp; Policy.</span></label>
-                                                    </div>
-                                                    <div id="terms"></div>
+                                        <div class="login_footer form-group mb-50">
+                                            <div class="chek-form">
+                                                <div class="custome-checkbox">
+                                                    <input class="form-check-input" type="checkbox" name="checkbox"
+                                                        id="exampleCheckbox12" value="" />
+                                                    <label class="form-check-label" for="exampleCheckbox12"><span>I
+                                                            agree to
+                                                            terms &amp; Policy.</span></label>
                                                 </div>
-                                                <a href="#"><i class="fi-rs-book-alt mr-5 text-muted"
-                                                        id="terms-icon"></i>Terms
-                                                    &amp; Policy</a>
+                                                <div id="terms"></div>
                                             </div>
+                                            <a href="#"><i class="fi-rs-book-alt mr-5 text-muted" id="terms-icon"></i>Terms
+                                                &amp; Policy</a>
+                                        </div>
 
 
-                                            <div class="form-group mb-30">
-                                                <button type="submit"
-                                                    class="btn btn-fill-out btn-block hover-up font-weight-bold"
-                                                    name="login">Submit &amp; Register</button>
-                                            </div>
-                                            <p class="font-xs text-muted"><strong>Note:</strong>Your personal data will be
-                                                used
-                                                to support your experience throughout this website, to manage access to your
-                                                account, and for other purposes described in our privacy policy</p>
-                                        </form>
-                                    </div>
+                                        <div class="form-group mb-30">
+                                            <button type="submit"
+                                                class="btn btn-fill-out btn-block hover-up font-weight-bold"
+                                                name="login">Submit &amp; Register</button>
+                                        </div>
+                                        <p class="font-xs text-muted"><strong>Note:</strong>Your personal data will be
+                                            used
+                                            to support your experience throughout this website, to manage access to your
+                                            account, and for other purposes described in our privacy policy</p>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="col-lg-6 pr-30 d-none d-lg-block">
-                                <div class="card-login mt-115">
-                                    <a href="#" class="social-login facebook-login">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-facebook.svg') }}"
-                                            alt="" />
-                                        <span>Continue with Facebook</span>
-                                    </a>
-                                    <a href="#" class="social-login google-login">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-google.svg') }}"
-                                            alt="" />
-                                        <span>Continue with Google</span>
-                                    </a>
-                                    <a href="#" class="social-login apple-login">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-apple.svg') }}"
-                                            alt="" />
-                                        <span>Continue with Apple</span>
-                                    </a>
-                                </div>
+                        </div>
+                        <div class="col-lg-6 pr-30 d-none d-lg-block">
+                            <div class="card-login mt-115">
+                                <a href="#" class="social-login facebook-login">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-facebook.svg') }}"
+                                        alt="" />
+                                    <span>Continue with Facebook</span>
+                                </a>
+                                <a href="#" class="social-login google-login">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-google.svg') }}" alt="" />
+                                    <span>Continue with Google</span>
+                                </a>
+                                <a href="#" class="social-login apple-login">
+                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-apple.svg') }}" alt="" />
+                                    <span>Continue with Apple</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-    @endsection
+@endsection
 
 
-    <style>
-        .badge {
-            white-space: normal !important;
-        }
+<style>
+    .badge {
+        white-space: normal !important;
+    }
 
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.25rem;
-            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        }
+    .badge {
+        display: inline-block;
+        padding: 0.25em 0.4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
 
-    </style>
+</style>
 
 
-    <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script>
+
+    <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
+    
         // alert('dsdf');
         //    $('#repassword').on('keyup change', function(){
         //         let password = $('#password').val();
@@ -254,21 +251,6 @@
         //           $('#repass_available').html(`<span class="badge badge-success">Password matched</span>`)
         //         }
         //       })
-
-        $(document).ready(function() {
-            $(".eye-icon").on('click', function(event) {
-                event.preventDefault();
-                if ($('.password_with_eye').attr("type") == "text") {
-                    $('.password_with_eye').attr('type', 'password');
-                    $('.eye-icon').addClass("fa-eye-slash");
-                    $('.eye-icon').removeClass("fa-eye");
-                } else if ($('.password_with_eye').attr("type") == "password") {
-                    $('.password_with_eye').attr('type', 'text');
-                    $('.eye-icon').removeClass("fa-eye-slash");
-                    $('.eye-icon').addClass("fa-eye");
-                }
-            });
-        });
 
         $(document).ready(function() {
 
@@ -326,3 +308,21 @@
         });
     </script>
 
+
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
+    $(document).ready(function() {
+        $(".eye-icon").on('click', function(event) {
+            event.preventDefault();
+            if($('.password_with_eye').attr("type") == "text"){
+                $('.password_with_eye').attr('type','password');
+                $('.eye-icon').addClass( "fa-eye-slash" );
+                $('.eye-icon').removeClass( "fa-eye" );
+            }else if($('.password_with_eye').attr("type") == "password"){
+                $('.password_with_eye').attr('type', 'text');
+                $('.eye-icon').removeClass( "fa-eye-slash" );
+                $('.eye-icon').addClass( "fa-eye" );
+            }
+        });
+    });
+</script>

@@ -36,7 +36,8 @@
                     <img src="{{ asset('assets/img/uploads/actions/' . $actonBannerThree->image) }}" alt="" />
                     <div class="banner-text">
                         <h4>{{ $actonBannerThree->action_tittle }}</h4>
-                        <a href="{{ route('vendor.details', $actonBannerThree->store_id) }}" class="btn btn-xs">Shop
+                        <a href="{{ route('vendor.details', $actonBannerThree->store_id) }}"
+                            class="btn btn-xs">Shop
                             Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>

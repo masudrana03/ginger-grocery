@@ -144,7 +144,7 @@
                             </div>
                         </div>
                     @empty
-                        <label class="form-check-label"><span>No address Found....</span></label>
+                        <label class="form-check-label" id="noAddress"><span>No address Found....</span></label>
                     @endforelse
 
                 </div>
@@ -410,7 +410,7 @@
                     <div class="col-6 calculate-total">
                         <p class="">Subtotal:</p>
                         <p class="">Shipping Fee:</p>
-                        <p class="">Tex:</p>
+                        <p class="">Tax:</p>
                         <h5 class="">Total:</h5>
                     </div>
 
@@ -439,6 +439,23 @@
         //     document.getElementById('BillingForm').submit();
         // }
 
+        // onload function to check any address found or not 
+
+        function checkAddress() {
+            let shipForm = document.getElementById('shipping-form');
+            let noAdd = document.getElementById('noAddress');
+            let check = document.getElementById('infoCheck');
+
+            if (noAdd) {
+                shipForm.style.display = "block";
+                check.checked=true;
+            } else {
+                check.checked= false;
+                shipForm.style.display = "none";
+
+            }
+        }
+
 
 
 
@@ -448,7 +465,7 @@
             let shipForm = document.getElementById('shipping-form');
             let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
-                document.getElementById('shipping-form').style.display = "block";
+                shipForm.style.display = "block";
                 for (i = 0; i <= radioBtn.length; i++) {
 
                     radioBtn[i].checked = false;
