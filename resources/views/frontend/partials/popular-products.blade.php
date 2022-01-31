@@ -80,7 +80,7 @@
                                                 href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
                                         </div>
                                         <h2><a
-                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>
+                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>
                                         </h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">

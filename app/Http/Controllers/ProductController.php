@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Nutrition;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
@@ -143,9 +144,9 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-
         $product            = $request->except('image', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
+        $product['slug']    = Str::slug($request->name);
 
         $product = Product::create($product);
 
@@ -204,6 +205,7 @@ class ProductController extends Controller
         $productData        = $request->except('image', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
 
+        $productData['slug']    = Str::slug($request->name);
         $product->update($productData);
 
         if ($request->hasFile('image')) {
