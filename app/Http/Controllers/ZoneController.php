@@ -239,7 +239,7 @@ class ZoneController extends Controller
     public function get_coordinates($id)
     {
         $zone = Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
-        $data = format_coordiantes($zone->coordinates[0]);
+        $data = formatCoordiantes($zone->coordinates[0]);
         $center = (object)['lat' => (float)trim(explode(' ', $zone->center)[1], 'POINT()'), 'lng' => (float)trim(explode(' ', $zone->center)[0], 'POINT()')];
         return response()->json(['coordinates' => $data, 'center' => $center]);
     }
@@ -263,7 +263,7 @@ class ZoneController extends Controller
         $zones = Zone::where('id', '<>', $id)->active()->get();
         $data = [];
         foreach ($zones as $zone) {
-            $data[] = format_coordiantes($zone->coordinates[0]);
+            $data[] = formatCoordiantes($zone->coordinates[0]);
         }
         return response()->json($data, 200);
     }
