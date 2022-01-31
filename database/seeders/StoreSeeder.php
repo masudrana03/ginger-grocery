@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ class StoreSeeder extends Seeder
         $stores = [
             [
                 'name'            => "Better Bites Deli",
+                'slug'            => Str::slug('Better Bites Deli'),
                 'type'            => 'Bakery Shop',
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
@@ -38,6 +40,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Food Festive",
+                'slug'            => Str::slug('Food Festive'),
                 'type'            => 'Snacks Shop',
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
@@ -59,6 +62,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Country Crock",
+                'slug'            => Str::slug('Country Crock'),
                 'type'            => 'Cake Shop',
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
@@ -80,6 +84,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Hambger Hel",
+                'slug'            => Str::slug('Hambger Hel'),
                 'type'            => 'Fruit Shop',
                 'image'           => 'vendor-7.png',
                 'phone'           => '+880 1712 112233',
@@ -101,6 +106,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Green Grocery",
+                'slug'            => Str::slug('Green Grocery'),
                 'type'            => 'Vegetable',
                 'image'           => 'vendor-6.png',
                 'phone'           => '+880 1712 112233',
@@ -122,6 +128,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Farm House",
+                'slug'            => Str::slug('Farm House'),
                 'type'            => 'Meat Shop',
                 'image'           => 'vendor-5.png',
                 'phone'           => '+880 1712 112233',
@@ -143,6 +150,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Sea House",
+                'slug'            => Str::slug('Sea House'),
                 'type'            => 'Fish & Sea Food Shop',
                 'image'           => 'vendor-3.png',
                 'phone'           => '+880 1712 112233',
@@ -164,6 +172,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Food to Fly",
+                'slug'            => Str::slug('Food to Fly'),
                 'type'            => 'Fruit Shop',
                 'image'           => 'vendor-4.png',
                 'phone'           => '+880 1712 112233',
@@ -185,6 +194,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => 'Spice House',
+                'slug'            => Str::slug('Spice House'),
                 'type'            => 'Spices Shop',
                 'image'           => 'vendor-1.png',
                 'phone'           => '+880 1712 112233',
@@ -206,6 +216,7 @@ class StoreSeeder extends Seeder
 
             [
                 'name'            => "Organic Orchard",
+                'slug'            => Str::slug('Better Bites Deli'),
                 'type'            => 'Herbs and Organic Food Shop',
                 'image'           => 'vendor-2.png',
                 'phone'           => '+880 1712 112233',
