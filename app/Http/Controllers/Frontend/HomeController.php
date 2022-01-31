@@ -84,11 +84,11 @@ class HomeController extends Controller
      *
      * @param $id
      */
-    public function productDetails($id)
+    public function productDetails($slug)
     {
         $productsRating = ProductRating::all();
 
-        $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->findOrFail($id);
+        $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
         return view('frontend.product-details', compact('product','productsRating'));
     }
 

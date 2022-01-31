@@ -44,6 +44,7 @@ use App\Http\Controllers\Frontend\CompareController as FrontendCompareController
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
+use App\Http\Controllers\Frontend\SocialiteController as FrontendSocialiteController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -250,6 +251,16 @@ Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
 Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
 Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
+
+//For Google
+Route::get('login/google', [FrontendSocialiteController::class, 'googleRedirectToProvider'])->name('login.google');
+Route::get('login/google/callback', [FrontendSocialiteController::class, 'googleHandleProviderCallback'])->name('login.google_callback');
+
+//For Facebook
+Route::get('login/facebook', [FrontendSocialiteController::class, 'facebookRedirectToProvider'])->name('login.facebook');
+Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'facebookHandleProviderCallback'])->name('login.facebook_callback');
+
+
 
 
 Auth::routes();

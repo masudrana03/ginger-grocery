@@ -215,7 +215,7 @@ class ContactWithUsController extends Controller
 
     public function getCoordinates($id){
         $zone = ContactInfo::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
-        $data = format_coordiantes($zone->coordinates[0]);
+        $data = formatCoordiantes($zone->coordinates[0]);
         $center = (object)['lat'=>(float)trim(explode(' ',$zone->center)[1], 'POINT()'), 'lng'=>(float)trim(explode(' ',$zone->center)[0], 'POINT()')];
         return response()->json(['coordinates'=>$data, 'center'=>$center]);
     }

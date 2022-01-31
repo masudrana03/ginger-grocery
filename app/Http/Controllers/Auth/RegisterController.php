@@ -102,7 +102,7 @@ class RegisterController extends Controller
         }
 
         if ( $user->type == 3 ) {
-            return redirect()->route( 'index' );
+            return redirect()->route( 'user.profile' );
         }
 
         return redirect( '/' );
