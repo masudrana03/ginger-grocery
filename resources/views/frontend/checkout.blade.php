@@ -113,12 +113,6 @@
                 <span></span> Checkout
             </div>
         </div>
-
-        <div class="container" id="errorContainer">
-            <div class="">
-                <span>Please Enter or Select An Address!</span>
-            </div>
-        </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
@@ -150,7 +144,7 @@
                             </div>
                         </div>
                     @empty
-                        <label class="form-check-label"><span>No address Found....</span></label>
+                        <label class="form-check-label" id="noAddress"><span>No address Found....</span></label>
                     @endforelse
 
                 </div>
@@ -181,7 +175,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" name="address" required="" placeholder="Address *"
+                            <input id="address" type="text" name="address" required="" placeholder="Address *"
                                 class="@error('address') is-invalid @enderror">
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -207,10 +201,10 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-6">
-                                    <input required="" type="text" name="state" placeholder="State / County *">
+                                    <input id="state" required="" type="text" name="state" placeholder="State / County *">
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <input required="" type="text" name="city" placeholder="City / Town *"
+                                    <input id="city" required="" type="text" name="city" placeholder="City / Town *"
                                         class="@error('city') is-invalid @enderror">
                                     @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -369,7 +363,7 @@
                                             </p> --}}
                                         </div>
 
-                                        <div class="col" style="width: 48%;">
+                                        <div class="col">
                                             <p class="pri">{{ $currency }} {{ $item->price }}</p>
                                         </div>
                                     </div>
@@ -389,9 +383,10 @@
                                     <h5 class="">Total:</h5>
                                 </div>
 
-                                <div class="col-6 calculate" style="width: 48%;">
+                                <div class="col-6 calculate">
                                     <p class=""> {{ $currency }}{{ $subtotal }} </p>
-                                    <p class=""> {{ $currency }}{{ $shipping }} </p>
+                                    <p class="store-shipping" id="{{ $store->id }}"> {{ $currency }}0 </p>
+                                    {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
                                     <p class=""> {{ $currency }}{{ $tax }} </p>
                                     <h5 class=""> {{ $currency }}{{ $subtotal + $shipping + $tax }}
                                     </h5>
@@ -402,7 +397,7 @@
                         </div>
                     </div>
                 @empty
-                    <p style="text-align: center; padding-top: 15px;">No product in your cart!</p>
+                    <p>No product in your cart!</p>
                 @endforelse
 
 
@@ -416,11 +411,11 @@
                     <div class="col-6 calculate-total">
                         <p class="">Subtotal:</p>
                         <p class="">Shipping Fee:</p>
-                        <p class="">Tex:</p>
+                        <p class="">Tax:</p>
                         <h5 class="">Total:</h5>
                     </div>
 
-                    <div class="col-6 calculate" style="width: 48%;">
+                    <div class="col-6 calculate">
                         <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
                         <p class=""> {{ $currency }}{{ $grandShipping }} </p>
                         <p class=""> {{ $currency }}{{ $grandTax }} </p>
@@ -434,7 +429,6 @@
     </div>
 @endsection
 
-
 @push('script')
 
     <script>
@@ -446,6 +440,23 @@
         //     document.getElementById('BillingForm').submit();
         // }
 
+        // onload function to check any address found or not 
+
+        function checkAddress() {
+            let shipForm = document.getElementById('shipping-form');
+            let noAdd = document.getElementById('noAddress');
+            let check = document.getElementById('infoCheck');
+
+            if (noAdd) {
+                shipForm.style.display = "block";
+                check.checked=true;
+            } else {
+                check.checked= false;
+                shipForm.style.display = "none";
+
+            }
+        }
+
 
 
 
@@ -455,7 +466,7 @@
             let shipForm = document.getElementById('shipping-form');
             let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
-                document.getElementById('shipping-form').style.display = "block";
+                shipForm.style.display = "block";
                 for (i = 0; i <= radioBtn.length; i++) {
 
                     radioBtn[i].checked = false;

@@ -33,7 +33,8 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('APP_URL').env('FACEBOOK_CALLBACK_ENDPOINT'),
+        // 'redirect' => env('APP_URL') . env('FACEBOOK_CALLBACK_ENDPOINT'),
+        'redirect' => 'http://localhost:8000/login/facebook/callback',
     ],
 
     'google' => [

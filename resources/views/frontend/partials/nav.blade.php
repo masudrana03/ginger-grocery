@@ -210,9 +210,10 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>100% Secure delivery without contacting the courier</li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today</li>
+                                    <li>{{ settings('news_flash_one') }}</li>
+                                    <li>{{ settings('news_flash_two') }}</li>
+                                    <li>{{ settings('news_flash_three') }}</li>
+                                   
                                 </ul>
                             </div>
                         </div>

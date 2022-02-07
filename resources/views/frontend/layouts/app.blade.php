@@ -53,7 +53,7 @@
     
 </head>
 
-<body>
+<body onload = "checkAddress()">
     @include('frontend.partials.nav')
     <div id="app">
     

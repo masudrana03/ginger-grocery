@@ -180,7 +180,7 @@ function shippingCalculator($total, $storeId, $shippingAddress = null)
                 if (! $shippingAddress) {
                     return 0;
                 }
-                
+
                 $storeAddress = "$store->address $store->state $store->city $store->country->name";
                 $distance = getDistance($storeAddress, $shippingAddress);
                 if ($distance > $shippingMethod->to) {
@@ -249,8 +249,12 @@ function isShopManager($store_id)
     return auth()->user()->type == 2 && auth()->user()->store_id == $store_id;
 }
 
-
-function format_coordiantes($coordinates)
+/**
+ * Collecting all map coordinates
+ *
+ * @return  integer
+ */
+function formatCoordiantes($coordinates)
 {
     $data = [];
     foreach ($coordinates as $coord) {
@@ -270,25 +274,25 @@ function getDistance($addressFrom, $addressTo)
 {
     // Google API key
     $apiKey = 'AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries';
-    
+
     // Change address format
     $formattedAddrFrom    = str_replace(' ', '+', $addressFrom);
     $formattedAddrTo     = str_replace(' ', '+', $addressTo);
-    
+
     // Geocoding API request with start address
     $geocodeFrom = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrFrom.'&mode=driving&sensor=true&key='.$apiKey);
     $outputFrom = json_decode($geocodeFrom);
     if (!empty($outputFrom->error_message)) {
         return $outputFrom->error_message;
     }
-    
+
     // Geocoding API request with end address
     $geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrTo.'&mode=driving&sensor=true&key='.$apiKey);
     $outputTo = json_decode($geocodeTo);
     if (!empty($outputTo->error_message)) {
         return $outputTo->error_message;
     }
-    
+
     // Get latitude and longitude from the geodata
     $latitudeFrom    = $outputFrom->results[0]->geometry->location->lat;
     $longitudeFrom    = $outputFrom->results[0]->geometry->location->lng;
