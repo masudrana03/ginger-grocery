@@ -162,9 +162,10 @@ class UserController extends Controller
 
     public function getProfile()
     {
+        $countries = Country::all();
         $user = auth()->user();
 
-        return view('frontend.users.profile', compact('user'));
+        return view('frontend.users.profile', compact('user', 'countries'));
     }
 
     /**

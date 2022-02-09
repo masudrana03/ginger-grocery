@@ -98,7 +98,7 @@
             <div class="breadcrumb">
                 <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> <a
-                    href="{{ route('categories', $product->category->id) }}">{{ $product->category->name }}</a>
+                    href="{{ route('categories', $product->category->slug) }}">{{ $product->category->name }}</a>
                 <span></span> {{ $product->name }}
             </div>
         </div>

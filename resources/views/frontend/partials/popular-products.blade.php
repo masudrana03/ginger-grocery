@@ -77,7 +77,7 @@
                                     <div class="product-content-wrap">
                                         <div class="product-category">
                                             <a
-                                                href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
+                                                href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a>
                                         </div>
                                         <h2><a
                                                 href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>
@@ -90,7 +90,7 @@
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a
-                                                    href="{{route('vendor.details',$product->store->id) }}">{{ $product->store->name }}</a></span>
+                                                    href="{{route('vendor.details',$product->store->slug) }}">{{ $product->store->name }}</a></span>
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
@@ -159,7 +159,7 @@
                                     <div class="product-content-wrap">
                                         <div class="product-category">
                                             <a
-                                                href="{{ route('categories', $category->id) }}">{{ $category->name }}</a>
+                                                href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a>
                                         </div>
                                         <h2><a
                                                 href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 ))) }}</a>

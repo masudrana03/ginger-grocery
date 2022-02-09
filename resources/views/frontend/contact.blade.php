@@ -129,7 +129,20 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
+                                        <div class="col-md-3">
+                                            <select name="phone_code"
+                                                class="select-two form-control @error('phone_code') is-invalid @enderror"
+                                                style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                @foreach ($countries as $country)
+                                                    <option
+                                                        value="{{ $country->phone_code }}">
+                                                        {{ $country->phone_code }}
+                                                        {{ $country->iso2 }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 col-md-9">
                                             <div class="input-style mb-20">
                                                 <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" aria-describedby="emailHelp" placeholder="phone" value="{{ old('phone') }}">
                                                 @error('phone')
@@ -139,7 +152,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
+                                        <div class="col-12-6 col-md-12">
                                             <div class="input-style mb-20">
                                                 <input name="subject" placeholder="Subject" type="text" value="{{ old('subject') }}">
                                             </div>

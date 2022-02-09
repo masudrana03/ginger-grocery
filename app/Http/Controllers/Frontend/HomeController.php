@@ -124,9 +124,9 @@ class HomeController extends Controller
      *
      * @param $id
      */
-    public function categoryDetails($id)
+    public function categoryDetails($slug)
     {
-        $category = Category::with('products.store', 'products.currency')->findOrFail($id);
+        $category = Category::with('products.store', 'products.currency')->whereSlug($slug)->firstOrFail();
         return view('frontend.category', compact('category'));
     }
 
