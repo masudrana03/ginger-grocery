@@ -26,7 +26,7 @@ class HomeController extends Controller
         if (env('APP_NAME') == '') {
             return view('start');
         }
-        
+
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
 

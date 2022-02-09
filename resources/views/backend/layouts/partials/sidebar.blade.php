@@ -28,6 +28,7 @@
         @endforeach
     </ul>
 </li>
+@if (isAdmin())
 <li class="">
     <a href="{{ route('admin.call_to_actions.index') }}" aria-expanded="false">
         <div class="nav_icon_small">
@@ -38,6 +39,7 @@
         </div>
     </a>
 </li>
+@endif
 {{-- @if (isAdmin())
     <li class="">
         <a href="{{ route('admin.currencies.index') }}" aria-expanded="false">
@@ -167,6 +169,7 @@
             <li><a href="{{ route('admin.settings.email') }}">Email Settings</a></li>
             <li><a href="{{ route('admin.email_templates.index') }}">Email Templates</a></li>
             <li><a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a></li>
+            <li><a href="{{ route('admin.settings.social.index') }}">Social Login</a></li>
             {{-- <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
             <li><a href="{{ route('admin.taxes.index') }}">Tax</a></li> --}}
         </ul>
