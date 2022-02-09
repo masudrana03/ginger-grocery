@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Address;
 use App\Models\Tax;
 use App\Models\Promo;
-use App\Models\ShippingService;
 use App\Models\Store;
+use App\Models\Social;
+use App\Models\Address;
+use App\Models\ShippingService;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
@@ -104,6 +105,14 @@ function settings($key)
     }
 
     return (is_array($key)) ? \Illuminate\Support\Arr::only($settings, $key) : $settings[$key];
+}
+
+function socialMediaSettings($provider, $key)
+{
+    // dd(Social::where('provider', $provider)->first()->$key);
+    $d = Social::where('provider', $provider)->first()->$key;
+
+    dd($d);
 }
 
 /**
