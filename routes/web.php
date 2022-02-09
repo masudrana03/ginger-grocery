@@ -114,6 +114,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
+    
+    Route::get('/social-setting', [PointController::class, 'settingsUpdate'])->name('points.settings.update');
+
     Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
     Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
     Route::get('/allShippingServices', [ShippingServiceController::class, 'allShippingServices'])->name('allShippingServices');
