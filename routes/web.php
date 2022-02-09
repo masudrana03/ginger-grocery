@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\PromoController;
@@ -25,18 +26,17 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
+use App\Http\Controllers\SocialLoginController;
 use App\Components\Payment\Single\StripePayment;
 use App\Http\Controllers\CallToActionController;
 use App\Http\Controllers\ContactWithUsController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
-use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
 use App\Http\Controllers\Frontend\AboutController as FrontendAboutController;
 use App\Http\Controllers\Frontend\StoreController as FrontendStoreController;
 use App\Http\Controllers\Frontend\VendorController as FrontendVendorController;
@@ -45,6 +45,7 @@ use App\Http\Controllers\Frontend\ContactController as FrontendContactController
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 use App\Http\Controllers\Frontend\SocialiteController as FrontendSocialiteController;
+use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -114,8 +115,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
-    
-    Route::get('/social-setting', [PointController::class, 'settingsUpdate'])->name('points.settings.update');
+
+    Route::get('/social-setting-index', [SocialLoginController::class, 'socialIndex'])->name('settings.social.index');
+    Route::post('/update/social-setting-update', [SocialLoginController::class, 'socialUpdate'])->name('settings.social.update');
 
     Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
     Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
