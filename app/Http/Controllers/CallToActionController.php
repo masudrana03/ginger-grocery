@@ -76,6 +76,8 @@ class CallToActionController extends Controller
      */
     public function update(UpdateCallToActionRequest $request, CallToAction $callToAction)
     {
+        
+        
 
         $filename = '';
 
