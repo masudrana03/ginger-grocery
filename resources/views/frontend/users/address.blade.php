@@ -62,7 +62,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                                        document.getElementById('logout-form').submit();"><i
+                                                                                                        document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -136,7 +136,7 @@
                                                             </address>
                                                             <p>{{ $address->state }}, {{ $address->city }},
                                                                 {{ $address->zip }} ,</p>
-                                                            <p>{{ $address->country->name }} .</p>
+                                                            <p>{{ settings('country') }} .</p>
 
                                                             <div class="billing-button"
                                                                 style="margin-left: 60%; margin-top:-30px;">
@@ -212,11 +212,11 @@
                                                                                         {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
                                                                                         <label
                                                                                             class="pd-10">Country
-                                                                                            Codee
+                                                                                            Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
-                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                        <select name="phone_code"
+                                                                                            class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
@@ -425,16 +425,17 @@
                                                                                             Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
+                                                                                        <select id="phoneCode"
+                                                                                            name="phone_code"
                                                                                             class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
-                                                                                            @foreach ($countries as $countryName)
+                                                                                            {{-- @foreach ($countries as $countryName)
                                                                                                 <option
                                                                                                     value="{{ $countryName->phone_code }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
-                                                                                            @endforeach
+                                                                                            @endforeach --}}
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -479,22 +480,23 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            {{-- <div class="row">
+                                                                            <div class="row">
                                                                                 <div class="form-group col-md-12">
-                                                                                    <select name="country_id" id=""
+                                                                                    <select disabled name="country_id" id=""
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
                                                                                             <option
+                                                                                                {{ settings('country') == $country->name ? 'selected' : '' }}
                                                                                                 value="{{ $country->id }}">
                                                                                                 {{ $country->name }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -645,7 +647,7 @@
                                                                                             Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
+                                                                                        <select name="phone_code"
                                                                                             class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
@@ -697,22 +699,23 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            {{-- <div class="row">
+                                                                            <div class="row">
                                                                                 <div class="form-group col-md-12">
-                                                                                    <select name="country_id"
+                                                                                    <select disabled name="country_id"
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
                                                                                             <option
+                                                                                                {{ settings('country') == $country->name ? 'selected' : '' }}
                                                                                                 value="{{ $country->id }}">
                                                                                                 {{ $country->name }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -811,9 +814,6 @@
                 </div>
             </div>
     </main>
-
-
-
 @endsection
 
 
@@ -828,6 +828,7 @@
     // Billing address modal
 
     let billAdd = @json($billingAddresses);
+    let countries = @json($countries);
     // let countries = @json($countries);
     // function del(id) {
     //     alert('dscdcsd')
@@ -837,8 +838,6 @@
     function deleteAddress(id) {
         document.getElementById('delete-form-' + id).submit();
     }
-
-
 
     function openEditBillingModal(id) {
 
@@ -872,7 +871,6 @@
         $('#createModal').modal('hide');
     }
 
-
     //Shipping address modal
 
     let shippingAdd = @json($shippingAddresses);
@@ -881,10 +879,15 @@
 
         $('#addressTypeShip').val('shipping')
 
-
-        //alert("dsjhsfgsj");
         let shippingAddress = shippingAdd.find(x => x.id == id);
-        //alert(shippingAddress);
+
+        $('#phoneCode').empty();
+        $.each(countries, function(index, country) {
+            $('#phoneCode').append('<option value="' + country.phone_code + '">' + country.phone_code + country
+                .iso2 + '</option>');
+        });
+
+        $("#phoneCode option[value='" + shippingAddress.phone_code + "']").attr('selected', true);
 
         // Set edit form action url
         $('#shippingEditForm').attr('action', '/user/address-update/' + shippingAddress.id);
@@ -896,7 +899,7 @@
         $('#edit-ship-address').val(shippingAddress.address);
         $('#edit-ship-city').val(shippingAddress.city);
         $('#edit-ship-state').val(shippingAddress.state);
-        $('#edit-ship-country').val(shippingAddress.country.name);
+        // $('#edit-ship-country').val(shippingAddress.country.name);
         $('#edit-ship-zip').val(shippingAddress.zip);
 
         // Open modal

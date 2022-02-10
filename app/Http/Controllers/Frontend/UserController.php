@@ -59,7 +59,6 @@ class UserController extends Controller
         'phone'      => 'required',
         'email'      => 'required',
         'address'    => 'required',
-        'country_id' => 'required',
         'city'       => 'required',
         'zip'        => 'required',
     ]);
@@ -94,7 +93,6 @@ class UserController extends Controller
             'name'       => 'required',
             'phone'      => 'required',
             'email'      => 'required',
-            'country_id' => 'required',
             'address'    => 'required',
             'city'       => 'required',
             'zip'        => 'required',
