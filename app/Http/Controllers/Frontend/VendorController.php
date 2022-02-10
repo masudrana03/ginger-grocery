@@ -23,7 +23,7 @@ class VendorController extends Controller
      * @param $productId as $id
      * @param $request
      */
-    public function vendorDetails(Request $request, $id)
+    public function vendorDetails(Request $request, $slug)
     {
         // return $request;
 
@@ -35,7 +35,7 @@ class VendorController extends Controller
 
         $defaultPaginate = 15;
 
-        $store = Store::with('products')->findOrFail($id);
+        $store = Store::with('products')->whereSlug($slug)->firstOrFail();
 
         $vendorWise = $store->products();
 

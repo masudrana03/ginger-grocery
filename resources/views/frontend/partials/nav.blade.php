@@ -579,7 +579,7 @@
                                     <ul>
                                         @forelse ( $categories->take(5) as $category )
                                             <li>
-                                                <a href="{{ route('categories', $category->id) }}">
+                                                <a href="{{ route('categories', $category->slug) }}">
 
                                                     @if ( $category->image )
 
@@ -629,7 +629,7 @@
                                     <ul>
                                         @forelse ( $categories->skip(5)->take(5) as $category )
                                             <li>
-                                                <a href="{{ route('categories', $category->id) }}">
+                                                <a href="{{ route('categories', $category->slug) }}">
 
                                                     @if ( $category->image )
 
@@ -657,7 +657,7 @@
                                         <ul class="lineup">
                                             @forelse ( $categories->skip(10)->take(3) as $category )
                                             <li class="linelist">
-                                                <a href="{{ route('categories', $category->id) }}" style="line-height: 1.1;">
+                                                <a href="{{ route('categories', $category->slug) }}" style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 
@@ -697,7 +697,7 @@
                                         <ul class="lineup">
                                             @forelse ( $categories->skip(13)->take(3) as $category )
                                             <li class="linelist2">
-                                                <a href="{{ route('categories', $category->id) }}"  style="line-height: 1.1;">
+                                                <a href="{{ route('categories', $category->slug) }}"  style="line-height: 1.1;">
 
                                                     @if ( $category->image )
 

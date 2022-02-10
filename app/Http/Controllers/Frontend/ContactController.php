@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Country;
 use App\Models\ContactInfo;
 use Illuminate\Http\Request;
 use App\Models\ContactWithUs;
@@ -17,7 +18,7 @@ class ContactController extends Controller
      */
     public function contactMassage(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             'name'    => 'required',
             'email'   => 'required',
             'phone'   => 'required',
@@ -28,19 +29,19 @@ class ContactController extends Controller
         $ContactMassage = new ContactWithUs();
         $ContactMassage->name    = $request->name;
         $ContactMassage->email   = $request->email;
+        $ContactMassage->phone_code   = $request->phone_code;
         $ContactMassage->phone   = $request->phone;
         $ContactMassage->subject = $request->subject;
         $ContactMassage->massage = $request->massage;
         $ContactMassage->save();
 
-        if( !$request->email ){
-            return back()->with( 'error', 'Please input your mail address' );
+        if (!$request->email) {
+            return back()->with('error', 'Please input your mail address');
         }
 
-        $this->sendConfirmationEmail( $request );
+        $this->sendConfirmationEmail($request);
 
-        return back()->with( 'success', 'Message sent successfully' );
-
+        return back()->with('success', 'Message sent successfully');
     }
 
     /**
@@ -48,7 +49,7 @@ class ContactController extends Controller
      *
      * @param object $request
      */
-    public function sendConfirmationEmail( $request )
+    public function sendConfirmationEmail($request)
     {
         $emailTemplate = EmailTemplate::whereType('contact_message')->first();
 
@@ -69,7 +70,7 @@ class ContactController extends Controller
     public function contact()
     {
         $contacts = ContactInfo::all();
-        return view('frontend.contact', compact('contacts'));
+        $countries = Country::all();
+        return view('frontend.contact', compact('contacts', 'countries'));
     }
-
 }

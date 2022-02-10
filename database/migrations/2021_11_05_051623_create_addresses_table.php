@@ -18,6 +18,7 @@ class CreateAddressesTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->string('name');
             $table->string('email');
+            $table->string('phone_code');
             $table->string('phone');
             $table->text('address');
             $table->string('state')->nullable();

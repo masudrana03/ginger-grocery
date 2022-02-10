@@ -18,6 +18,7 @@ class Address extends Model
         'user_id',
         'name',
         'email',
+        'phone_code',
         'phone',
         'address',
         'state',

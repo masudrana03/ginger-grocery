@@ -2,16 +2,16 @@
 @section('title', 'Address')
 
 <style>
-
-    .modal-border{
+    .modal-border {
         /* border:6px solid #abeecf !important; */
-        border-radius:3%;
+        border-radius: 3%;
     }
 
 
-    .modal-button{
-        border-radius:13px;
+    .modal-button {
+        border-radius: 13px;
     }
+
 </style>
 
 @section('content')
@@ -62,7 +62,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                                document.getElementById('logout-form').submit();"><i
+                                                                                                        document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -128,7 +128,6 @@
                                                     <div class="card-body p-4">
 
                                                         @forelse ($shippingAddresses ?? [] as $address)
-
                                                             <p>{{ $address->name }}</p>
                                                             <p>{{ $address->phone }}</p>
                                                             <p>{{ $address->email }}</p>
@@ -137,7 +136,7 @@
                                                             </address>
                                                             <p>{{ $address->state }}, {{ $address->city }},
                                                                 {{ $address->zip }} ,</p>
-                                                            <p>{{ $address->country->name }} .</p>
+                                                            <p>{{ settings('country') }} .</p>
 
                                                             <div class="billing-button"
                                                                 style="margin-left: 60%; margin-top:-30px;">
@@ -151,8 +150,8 @@
                                                             </div>
 
                                                             <form id="delete-form-{{ $address->id }}"
-                                                                action="{{ route('user.delete.address', $address->id) }}" method="POST"
-                                                                style="display: none;">
+                                                                action="{{ route('user.delete.address', $address->id) }}"
+                                                                method="POST" style="display: none;">
                                                                 @csrf
                                                             </form>
 
@@ -182,8 +181,9 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <form id="billingEditForm" method="post" class="form-horizontal">
-                                                                    @csrf
+                                                                    <form id="billingEditForm" method="post"
+                                                                        class="form-horizontal">
+                                                                        @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -199,7 +199,8 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressTypeBill" name="type">
+                                                                                    <input type="hidden"
+                                                                                        id="addressTypeBill" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -209,17 +210,19 @@
                                                                                     <div class="form-group">
                                                                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                         {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                        <label class="pd-10">Country Code
+                                                                                        <label
+                                                                                            class="pd-10">Country
+                                                                                            Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
-                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                        <select name="phone_code"
+                                                                                            class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
                                                                                                     value="{{ $countryName->phone_code }}">
-                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
                                                                                             @endforeach
@@ -232,7 +235,8 @@
                                                                                         <label class="pd-10">Phone
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <input id="edit-bill-phone" type="text"
+                                                                                        <input id="edit-bill-phone"
+                                                                                            type="text"
                                                                                             class="form-control @error('phone') is-invalid @enderror"
                                                                                             name="phone"
                                                                                             value="{{ old('phone') }}"
@@ -289,7 +293,8 @@
                                                                                     <label class="pd-10">Address
                                                                                         <span
                                                                                             class="required">*</span></label>
-                                                                                    <input required="" id="edit-bill-address"
+                                                                                    <input required=""
+                                                                                        id="edit-bill-address"
                                                                                         class="form-control @error('address') is-invalid @enderror"
                                                                                         name="address" type="text" />
                                                                                     @error('address')
@@ -303,8 +308,7 @@
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
-                                                                                    <label
-                                                                                        class="pd-10">State<span
+                                                                                    <label class="pd-10">State<span
                                                                                             class="required"></span></label>
                                                                                     <input required="" id="edit-bill-state"
                                                                                         class="form-control @error('state') is-invalid @enderror"
@@ -351,13 +355,16 @@
                                                                             </div>
 
                                                                         </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            id="close" onclick="closeModal()"
-                                                                            style="color: black; background-color:#fdc040;"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="submit" style="padding: 10px 5%; border-radius: 6px;" class="btn">Save changes</button>
-                                                                    </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                id="close" onclick="closeModal()"
+                                                                                style="color: black; background-color:#fdc040;"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="submit"
+                                                                                style="padding: 10px 5%; border-radius: 6px;"
+                                                                                class="btn">Save
+                                                                                changes</button>
+                                                                        </div>
                                                                     </form>
 
                                                                 </div>
@@ -370,8 +377,9 @@
                                                         <div class="modal fade" id="editShippingModal" tabindex="-1"
                                                             role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                             aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered " role="document">
-                                                                <div class="modal-content modal-border" >
+                                                            <div class="modal-dialog modal-dialog-centered "
+                                                                role="document">
+                                                                <div class="modal-content modal-border">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title"
                                                                             id="exampleModalLongTitle">Edit Shipping Address
@@ -383,7 +391,8 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <form id="shippingEditForm" method="post" class="form-horizontal">
+                                                                    <form id="shippingEditForm" method="post"
+                                                                        class="form-horizontal">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="row">
@@ -400,7 +409,8 @@
                                                                                             <strong>{{ $message }}</strong>
                                                                                         </span>
                                                                                     @enderror
-                                                                                    <input type="hidden" id="addressTypeShip" name="type">
+                                                                                    <input type="hidden"
+                                                                                        id="addressTypeShip" name="type">
 
                                                                                 </div>
                                                                             </div>
@@ -410,20 +420,22 @@
                                                                                     <div class="form-group">
                                                                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                         {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                        <label class="pd-10">Country Code
+                                                                                        <label
+                                                                                            class="pd-10">Country
+                                                                                            Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
-                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                        <select id="phoneCode"
+                                                                                            name="phone_code"
+                                                                                            class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
-                                                                                            {{-- <option value="">Seclect Country</option> --}}
-                                                                                            @foreach ($countries as $countryName)
+                                                                                            {{-- @foreach ($countries as $countryName)
                                                                                                 <option
                                                                                                     value="{{ $countryName->phone_code }}">
-                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
-                                                                                            @endforeach
+                                                                                            @endforeach --}}
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -433,7 +445,8 @@
                                                                                         <label class="pd-10">Phone
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <input id="edit-ship-phone" type="text"
+                                                                                        <input id="edit-ship-phone"
+                                                                                            type="text"
                                                                                             class="form-control @error('phone') is-invalid @enderror"
                                                                                             name="phone"
                                                                                             value="{{ old('phone') }}"
@@ -467,29 +480,31 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            {{-- <div class="row">
+                                                                            <div class="row">
                                                                                 <div class="form-group col-md-12">
-                                                                                    <select name="country_id" id=""
+                                                                                    <select disabled name="country_id" id=""
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
                                                                                             <option
+                                                                                                {{ settings('country') == $country->name ? 'selected' : '' }}
                                                                                                 value="{{ $country->id }}">
                                                                                                 {{ $country->name }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
                                                                                     <label class="pd-10">Address
                                                                                         <span
                                                                                             class="required">*</span></label>
-                                                                                    <input required="" id="edit-ship-address"
+                                                                                    <input required=""
+                                                                                        id="edit-ship-address"
                                                                                         class="form-control @error('address') is-invalid @enderror"
                                                                                         name="address" type="text" />
                                                                                     @error('address')
@@ -556,7 +571,10 @@
                                                                                 onclick="closeModal()"
                                                                                 style="color: black; background-color:#fdc040;"
                                                                                 data-dismiss="modal">Close</button>
-                                                                            <button type="submit" style="padding: 10px 5%; border-radius: 6px;" class="btn">Save changes</button>
+                                                                            <button type="submit"
+                                                                                style="padding: 10px 5%; border-radius: 6px;"
+                                                                                class="btn">Save
+                                                                                changes</button>
                                                                         </div>
                                                                     </form>
 
@@ -624,17 +642,19 @@
                                                                                     <div class="form-group">
                                                                                         {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                         {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                        <label class="pd-10">Country Code
+                                                                                        <label
+                                                                                            class="pd-10">Country
+                                                                                            Code
                                                                                             <span
                                                                                                 class="required">*</span></label>
-                                                                                        <select name=""
-                                                                                            class="form-control @error('') is-invalid @enderror"
+                                                                                        <select name="phone_code"
+                                                                                            class="select-two form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
                                                                                                     value="{{ $countryName->phone_code }}">
-                                                                                                    +{{ $countryName->phone_code }}
+                                                                                                    {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
                                                                                             @endforeach
@@ -679,22 +699,23 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            {{-- <div class="row">
+                                                                            <div class="row">
                                                                                 <div class="form-group col-md-12">
-                                                                                    <select name="country_id"
+                                                                                    <select disabled name="country_id"
                                                                                         class="form-control @error('country_id') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                                         <option value="">Seclect Country
                                                                                         </option>
                                                                                         @foreach ($countries as $country)
                                                                                             <option
+                                                                                                {{ settings('country') == $country->name ? 'selected' : '' }}
                                                                                                 value="{{ $country->id }}">
                                                                                                 {{ $country->name }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
 
                                                                             <div class="row">
                                                                                 <div class="form-group col-md-12">
@@ -793,9 +814,6 @@
                 </div>
             </div>
     </main>
-
-
-
 @endsection
 
 
@@ -810,6 +828,7 @@
     // Billing address modal
 
     let billAdd = @json($billingAddresses);
+    let countries = @json($countries);
     // let countries = @json($countries);
     // function del(id) {
     //     alert('dscdcsd')
@@ -820,8 +839,6 @@
         document.getElementById('delete-form-' + id).submit();
     }
 
-
-
     function openEditBillingModal(id) {
 
         $('#addressTypeBill').val('billing')
@@ -830,7 +847,7 @@
         let billingAddress = billAdd.find(x => x.id == id);
 
         // Set edit form action url
-        $('#billingEditForm').attr('action',  '/user/address-update/' + billingAddress.id);
+        $('#billingEditForm').attr('action', '/user/address-update/' + billingAddress.id);
 
         // Set update row value
         $('#edit-bill-name').val(billingAddress.name);
@@ -854,7 +871,6 @@
         $('#createModal').modal('hide');
     }
 
-
     //Shipping address modal
 
     let shippingAdd = @json($shippingAddresses);
@@ -863,13 +879,18 @@
 
         $('#addressTypeShip').val('shipping')
 
-
-        //alert("dsjhsfgsj");
         let shippingAddress = shippingAdd.find(x => x.id == id);
-        //alert(shippingAddress);
+
+        $('#phoneCode').empty();
+        $.each(countries, function(index, country) {
+            $('#phoneCode').append('<option value="' + country.phone_code + '">' + country.phone_code + country
+                .iso2 + '</option>');
+        });
+
+        $("#phoneCode option[value='" + shippingAddress.phone_code + "']").attr('selected', true);
 
         // Set edit form action url
-        $('#shippingEditForm').attr('action',  '/user/address-update/' + shippingAddress.id);
+        $('#shippingEditForm').attr('action', '/user/address-update/' + shippingAddress.id);
 
         // Set update row value
         $('#edit-ship-name').val(shippingAddress.name);
@@ -878,7 +899,7 @@
         $('#edit-ship-address').val(shippingAddress.address);
         $('#edit-ship-city').val(shippingAddress.city);
         $('#edit-ship-state').val(shippingAddress.state);
-        $('#edit-ship-country').val(shippingAddress.country.name);
+        // $('#edit-ship-country').val(shippingAddress.country.name);
         $('#edit-ship-zip').val(shippingAddress.zip);
 
         // Open modal
