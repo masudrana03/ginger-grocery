@@ -16,7 +16,7 @@ class Social extends Model
      */
     protected $fillable = [
         'provider',
-        'client_key',
+        'client_id',
         'client_secret',
         'redirect_url',
         'status',

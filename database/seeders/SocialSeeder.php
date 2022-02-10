@@ -15,15 +15,17 @@ class SocialSeeder extends Seeder
     public function run()
     {
         Social::create([
-            'provider'   => 'google',
-            'status'     => false,
-            'created_at' => now(),
+            'provider'     => 'google',
+            'status'       => false,
+            'redirect_url' => env('APP_URL').'/login/google/callback',
+            'created_at'   => now(),
         ]);
 
         Social::create([
-            'provider'   => 'facebook',
-            'status'     => false,
-            'created_at' => now(),
+            'provider'     => 'facebook',
+            'status'       => false,
+            'redirect_url' => env('APP_URL').'/login/facebook/callback',
+            'created_at'   => now(),
         ]);
     }
 }

@@ -107,13 +107,23 @@ function settings($key)
     return (is_array($key)) ? \Illuminate\Support\Arr::only($settings, $key) : $settings[$key];
 }
 
-function socialMediaSettings($provider, $key)
-{
-    // dd(Social::where('provider', $provider)->first()->$key);
-    $d = Social::where('provider', $provider)->first()->$key;
+/**
+ * @param  $key as client_id, client_secret, redirect_url
+ * @param  $value
+ * @return mixed
+ */
+function updateEnv($key, $value)
+    {
+        $path = app()->environmentFilePath();
 
-    dd($d);
-}
+        $escaped = preg_quote('='.env($key), '/');
+
+        file_put_contents($path, preg_replace(
+            "/^{$key}{$escaped}/m",
+           "{$key}={$value}",
+           file_get_contents($path)
+        ));
+    }
 
 /**
  * Give me discount of given promo
