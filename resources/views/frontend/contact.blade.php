@@ -129,12 +129,12 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 " >
                                             <select name="phone_code"
-                                                class="select-two form-control @error('phone_code') is-invalid @enderror"
-                                                style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                class="form-control @error('phone_code') is-invalid @enderror"
+                                                style="height: 48px; font-size: 14px; font-weight: 600; color: #777777;">
                                                 @foreach ($countries as $country)
-                                                    <option
+                                                    <option class="form-control"
                                                         value="{{ $country->phone_code }}">
                                                         {{ $country->phone_code }}
                                                         {{ $country->iso2 }}
@@ -168,8 +168,8 @@
                                 <p class="form-messege"></p>
                             </div>
                         </div>
-                        <div class="col-lg-4 pl-50 d-lg-block d-none">
-                            <img class="border-radius-15 mt-50" src="{{ asset('assets/frontend/imgs/page/contact-2.png') }}" alt="" />
+                        <div class="col-lg-4 pl-50 d-lg-block d-none" style="margin-top: 11%;">
+                            <img class="border-radius-15" src="{{ asset('assets/img/uploads/settings/contactImage/'.settings('contact_image')) }}" alt="" />
                         </div>
                     </div>
                 </section>
