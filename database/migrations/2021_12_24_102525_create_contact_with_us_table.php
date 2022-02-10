@@ -17,6 +17,7 @@ class CreateContactWithUsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('phone_code');
             $table->string('phone');
             $table->text('subject')->nullable();
             $table->mediumText('massage');

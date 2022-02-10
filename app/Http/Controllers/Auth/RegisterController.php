@@ -83,6 +83,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone_code' => $data['phone_code'],
             'phone' => $data['phone'],
             'type' => isset($data['type']) && $data['type'] ? $data['type'] : 3,
         ]);
@@ -97,14 +98,14 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        if ( $user->type == 1 || $user->type == 2 ) {
-            return redirect()->route( 'admin.dashboard' );
+        if ($user->type == 1 || $user->type == 2) {
+            return redirect()->route('admin.dashboard');
         }
 
-        if ( $user->type == 3 ) {
-            return redirect()->route( 'user.profile' );
+        if ($user->type == 3) {
+            return redirect()->route('user.profile');
         }
 
-        return redirect( '/' );
+        return redirect('/');
     }
 }

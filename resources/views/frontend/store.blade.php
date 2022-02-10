@@ -107,7 +107,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="{{route('categories', $product->category->id)}}">{{$product->category->name}}</a>
+                                <a href="{{route('categories', $product->category->slug)}}">{{$product->category->name}}</a>
                             </div>
                             <h2><a href="{{route('products', $product->id)}}">{{$product->name}}</a></h2>
                             <div class="product-rate-cover">

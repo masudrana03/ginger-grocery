@@ -36,7 +36,7 @@
     <!-- datepicker jquery link -->
     {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> --}}
     {{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
-    
+
     <!-- Template CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/animate.min.css') }}" />
@@ -49,16 +49,18 @@
         crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- datetime picker jquery --}}
-    
-    
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
 </head>
 
-<body onload = "checkAddress()">
+<body onload="checkAddress()">
     @include('frontend.partials.nav')
     <div id="app">
-    
-    
-    @yield('content')
+
+
+        @yield('content')
     </div>
     <footer class="main">
         <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
@@ -93,7 +95,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </section>
         <section class="featured section-padding">
@@ -371,7 +373,13 @@
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select-two').select2();
+        });
+    </script>
 
     @if (session()->has('success'))
         <script>
@@ -397,56 +405,56 @@
      </div>
      </div>
      </section>`;
-         let category_id;
-         $(function (){
-             $('select').on('change', function() {
-                 category_id = $('#search-category-id').val();
-             });
-     
-             $('#search-input').on('keyup', function () {
-                 let search = $('#search-input').val();
-                 if(search.length > 2){
-                     category_id = $('#search-category-id').val();
-                     loadHome(search);
-                     $('#app').html(loading);
-                 }else{
-                     $('#app').html(old_data);
-                 }
-             });
-         });
-     
-         function loadHome(search, page = 1) {
-             $.ajax({
-                 method: 'POST',
-                 url: "{!! route('index.part.ajax') !!}",
-                 data: {
-                     search: search,
-                     category_id: category_id,
-                     page: page,
-                 },
-                 success: function(html) {
-                     $('#app').html(html);
-     
-                     paginationClickEvent(search);
-     
-                     $('html, body').animate({
-                         scrollTop: $("body").offset().top
-                     }, 2000);
-                 },
-                 error: function(error) {
-                     console.log(error);
-                 }
-             });
-         }
-     
-         function paginationClickEvent(search) {
-             $('.page-link').on('click', function (e) {
-                 e.preventDefault();
-                 let page = $(this).text();
-                 loadHome(search, page);
-             });
-         }
-     </script>
+        let category_id;
+        $(function() {
+            $('select').on('change', function() {
+                category_id = $('#search-category-id').val();
+            });
+
+            $('#search-input').on('keyup', function() {
+                let search = $('#search-input').val();
+                if (search.length > 2) {
+                    category_id = $('#search-category-id').val();
+                    loadHome(search);
+                    $('#app').html(loading);
+                } else {
+                    $('#app').html(old_data);
+                }
+            });
+        });
+
+        function loadHome(search, page = 1) {
+            $.ajax({
+                method: 'POST',
+                url: "{!! route('index.part.ajax') !!}",
+                data: {
+                    search: search,
+                    category_id: category_id,
+                    page: page,
+                },
+                success: function(html) {
+                    $('#app').html(html);
+
+                    paginationClickEvent(search);
+
+                    $('html, body').animate({
+                        scrollTop: $("body").offset().top
+                    }, 2000);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function paginationClickEvent(search) {
+            $('.page-link').on('click', function(e) {
+                e.preventDefault();
+                let page = $(this).text();
+                loadHome(search, page);
+            });
+        }
+    </script>
     @yield('script')
 </body>
 

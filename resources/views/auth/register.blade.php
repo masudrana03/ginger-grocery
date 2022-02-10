@@ -7,11 +7,13 @@ namespace App;
         display: inline-flex;
         overflow: hidden;
     }
+
     .form-group .eye-icon {
         position: absolute;
         margin-left: -40px;
         margin-top: 24px;
     }
+
 </style>
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -69,13 +71,12 @@ namespace App;
                                                 <div class="form-group">
                                                     {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                     {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                    <select name="country_id"
-                                                        class="form-control @error('country_id') is-invalid @enderror"
+                                                    <select name="phone_code"
+                                                        class="select-two form-control @error('phone_code') is-invalid @enderror"
                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
-                                                        {{-- <option value="">Seclect Country</option> --}}
                                                         @foreach ($countries as $country)
-                                                            <option value="{{ $country->phonecode }}">
-                                                                +{{ $country->phone_code }} {{ $country->iso2 }}
+                                                            <option value="{{ $country->phone_code }}">
+                                                                {{ $country->phone_code }} {{ $country->iso2 }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -200,6 +201,7 @@ namespace App;
     .badge {
         white-space: normal !important;
     }
+
     .badge {
         display: inline-block;
         padding: 0.25em 0.4em;
@@ -212,66 +214,70 @@ namespace App;
         border-radius: 0.25rem;
         transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     }
+
 </style>
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('#exampleCheckbox12').click(function() {
-            $('#exampleCheckbox12').val('checked');
-        })
-        $('#reg').on('submit', function() {
-            let hasChecked = $('#exampleCheckbox12').val();
-            if (hasChecked != 'checked') {
-                $('#terms').html(
-                    `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;background-color: #fdc040;" >You must agree to terms & Policy for sign up.</span>`
-                )
-                return false;
-            }
-        })
-        $('#password').on('keyup change', function() {
-            let password = $('#password').val();
-            if (validatePassword(password)) {
-                $('#pass_available').html(
-                    `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password acceptable</span>`
-                )
-            } else {
-                $('#pass_available').html(
-                    `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
-                )
-            }
-        })
-        $('#repassword').on('keyup change', function() {
-            let password = $('#password').val();
-            let repassword = $('#repassword').val();
-            if (password != repassword || password == '') {
-                $('#repass_available').html(
-                    `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`
-                )
-            } else {
-                $('#repass_available').html(
-                    `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`
-                )
-            }
-        })
-        function validatePassword(password) {
-            const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,}/
-            return re.test(password);
-        }
-    });
-</script>
-<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
-    $(document).ready(function() {
-        $(".eye-icon").on('click', function(event) {
-            event.preventDefault();
-            if ($('.password_with_eye').attr("type") == "text") {
-                $('.password_with_eye').attr('type', 'password');
-                $('.eye-icon').addClass("fa-eye-slash");
-                $('.eye-icon').removeClass("fa-eye");
-            } else if ($('.password_with_eye').attr("type") == "password") {
-                $('.password_with_eye').attr('type', 'text');
-                $('.eye-icon').removeClass("fa-eye-slash");
-                $('.eye-icon').addClass("fa-eye");
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#exampleCheckbox12').click(function() {
+                $('#exampleCheckbox12').val('checked');
+            })
+            $('#reg').on('submit', function() {
+                let hasChecked = $('#exampleCheckbox12').val();
+                if (hasChecked != 'checked') {
+                    $('#terms').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em;background-color: #fdc040;" >You must agree to terms & Policy for sign up.</span>`
+                    )
+                    return false;
+                }
+            })
+            $('#password').on('keyup change', function() {
+                let password = $('#password').val();
+                if (validatePassword(password)) {
+                    $('#pass_available').html(
+                        `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password acceptable</span>`
+                    )
+                } else {
+                    $('#pass_available').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
+                    )
+                }
+            })
+            $('#repassword').on('keyup change', function() {
+                let password = $('#password').val();
+                let repassword = $('#repassword').val();
+                if (password != repassword || password == '') {
+                    $('#repass_available').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`
+                    )
+                } else {
+                    $('#repass_available').html(
+                        `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`
+                    )
+                }
+            })
+
+            function validatePassword(password) {
+                const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,}/
+                return re.test(password);
             }
         });
-    });
-</script>
+    </script>
+    <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}">
+        $(document).ready(function() {
+            $(".eye-icon").on('click', function(event) {
+                event.preventDefault();
+                if ($('.password_with_eye').attr("type") == "text") {
+                    $('.password_with_eye').attr('type', 'password');
+                    $('.eye-icon').addClass("fa-eye-slash");
+                    $('.eye-icon').removeClass("fa-eye");
+                } else if ($('.password_with_eye').attr("type") == "password") {
+                    $('.password_with_eye').attr('type', 'text');
+                    $('.eye-icon').removeClass("fa-eye-slash");
+                    $('.eye-icon').addClass("fa-eye");
+                }
+            });
+        });
+    </script>
+@endpush

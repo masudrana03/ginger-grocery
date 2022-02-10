@@ -110,7 +110,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="{{ route('categories', $product->category->id )}}">{{ $product->category->name }}</a>
+                                <a href="{{ route('categories', $product->category->slug )}}">{{ $product->category->name }}</a>
                             </div>
                             <h2><a href="{{route('products', $product->id)}}">{{ ucwords(strtolower(Str::limit($product->name, 20 ))) }}</a></h2>
                             <div class="product-rate-cover">
@@ -521,14 +521,14 @@
                     @endphp
                     @forelse ( $categories as $category )
                         <li>
-                            <a href="{{ route('categories', $category->id) }}">
+                            <a href="{{ route('categories', $category->slug) }}">
                                 {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" /> --}}
                                 @if ( $category->image )
-                                        <a href="{{ route('categories', $category->id) }}">
+                                        <a href="{{ route('categories', $category->slug) }}">
                                             <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
                                         </a>
                                 @else
-                                        <a href="{{ route('categories', $category->id) }}">
+                                        <a href="{{ route('categories', $category->slug) }}">
                                             <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />
                                         </a>
 

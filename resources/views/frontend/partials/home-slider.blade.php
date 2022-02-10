@@ -8,7 +8,7 @@
 
                             @forelse ( $categories->skip(0)->take(12) as $category )
                                 <li>
-                                    <a href="{{ route('categories', $category->id) }}">
+                                    <a href="{{ route('categories', $category->slug) }}">
 
                                         @if ($category->image)
 
@@ -76,7 +76,7 @@
                             <ul>
                                 @forelse ( $categories->skip(12) as $category )
                                     <li>
-                                        <a href="{{ route('categories', $category->id) }}">
+                                        <a href="{{ route('categories', $category->slug) }}">
 
                                             @if ($category->image)
 

@@ -120,7 +120,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="{{route('categories', $category->id)}}">{{$category->name}}</a>
+                                <a href="{{route('categories', $category->slug)}}">{{$category->name}}</a>
                             </div>
                             <h2><a href="{{route('products', $product->id)}}">{{ ucwords(strtolower(Str::limit($product->name, 25 )))  }}</a></h2>
                             <div class="product-rate-cover">

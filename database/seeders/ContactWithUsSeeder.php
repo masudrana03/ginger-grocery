@@ -17,7 +17,8 @@ class ContactWithUsSeeder extends Seeder
         ContactWithUs::create( [
             'name'       => 'John Doe',
             'email'      => 'john@gmail.com',
-            'phone'      => '01800000000',
+            'phone_code' => '+880',
+            'phone'      => '1800000000',
             'subject'    => 'Test subject',
             'massage'    => 'This world is beautiful and it have many life form.',
             'created_at' => now(),

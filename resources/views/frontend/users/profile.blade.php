@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title','User Account')
+@section('title', 'User Account')
 
 
 @section('content')
@@ -50,7 +50,8 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                            document.getElementById('logout-form').submit();"><i class=" fi-rs-sign-out mr-10"></i>Logout</a>
+                                                                                    document.getElementById('logout-form').submit();"><i
+                                                    class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -97,7 +98,22 @@
                                                                 </span>
                                                             @enderror
                                                         </div>
-                                                        <div class="form-group col-md-12">
+                                                        <div class="form-group col-md-3">
+                                                            <label>Phone Code<span class="required">*</span></label>
+                                                            <select name="phone_code"
+                                                                class="select-two form-control @error('phone_code') is-invalid @enderror"
+                                                                style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                                @foreach ($countries as $country)
+                                                                    <option
+                                                                        {{ $country->phone_code == $user->phone_code ? 'selected' : '' }}
+                                                                        value="{{ $country->phone_code }}">
+                                                                        {{ $country->phone_code }}
+                                                                        {{ $country->iso2 }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-9">
                                                             <label>Phone <span class="required">*</span></label>
                                                             <input required=""
                                                                 class="form-control @error('phone') is-invalid @enderror"
@@ -114,8 +130,8 @@
 
                                                             <label>Date of Birth <span
                                                                     class="required">*</span></label>
-                                                            <input class=" @error('date_of_birth') is-invalid @enderror "name="date_of_birth" id="datepicker" type="text"
-                                                                
+                                                            <input class=" @error('date_of_birth') is-invalid @enderror "
+                                                                name="date_of_birth" id="datepicker" type="text"
                                                                 value="{{ old('date_of_birth') ?? $user->date_of_birth }}" />
                                                             @error('date_of_birth')
                                                                 <span class="invalid-feedback" role="alert">
@@ -146,15 +162,14 @@
 @endsection
 
 @push('script')
-<script>
-    $(function() {
-        
-        $("#datepicker").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "1971:2012"
-        });
-    });
-</script>  
-@endpush
+    <script>
+        $(function() {
 
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1971:2012"
+            });
+        });
+    </script>
+@endpush
