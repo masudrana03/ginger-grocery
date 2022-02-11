@@ -65,7 +65,7 @@
                                         aria-labelledby="account-detail-tab">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Chnage Password</h5>
+                                                <h5>Change Password</h5>
                                             </div>
                                             <div class="card-body">
                                                 <form method="post" action="{{ route('user.update.password') }}">

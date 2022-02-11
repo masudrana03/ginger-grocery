@@ -12,6 +12,11 @@
         border-radius: 13px;
     }
 
+    .add-icon{
+        font-size: 18px;
+        
+    }
+
 </style>
 
 @section('content')
@@ -122,8 +127,12 @@
                                             </div> --}}
                                             <div class="col-lg-6 ">
                                                 <div class="card">
-                                                    <div class="card-header">
+                                                    <div class="card-header d-flex">
                                                         <h3 class="mb-0">Shipping Address</h3>
+                                                        <button class="btn add-billing-address p-1 " style="margin-left:40px; border-radius:35px; width:36px;" id="shipping"
+                                                                onclick="createModal('shipping')"
+                                                                ><i  class="fas fa-plus add-icon"></i></button>
+                                                        
                                                     </div>
                                                     <div class="card-body p-4">
 
@@ -384,6 +393,7 @@
                                                                         <h5 class="modal-title"
                                                                             id="exampleModalLongTitle">Edit Shipping Address
                                                                         </h5>
+                                                                        
                                                                         <button type="button" class="close modal-button"
                                                                             onclick="closeModal()" data-dismiss="modal"
                                                                             style="color: black; background-color:#fdc040;"

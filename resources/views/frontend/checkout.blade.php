@@ -449,9 +449,9 @@
 
             if (noAdd) {
                 shipForm.style.display = "block";
-                check.checked=true;
+                check.checked = true;
             } else {
-                check.checked= false;
+                check.checked = false;
                 shipForm.style.display = "none";
 
             }
@@ -537,5 +537,22 @@
 
         }
     </script>
+
+    {{-- <script>
+        let get_old_data = $('#app').html();
+        let address_id;
+        let radioDiv = $('#radioDiv');
+
+        //if there is any radio div
+
+        if (radioDiv) {
+            //alert("got it");
+            $('.address1').each(function() {
+                if ($(this).is(':checked')) {
+                  
+                }
+            });
+        }
+    </script> --}}
 
 @endpush

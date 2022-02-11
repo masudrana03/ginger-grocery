@@ -1286,8 +1286,8 @@ textarea:focus {
   border: 1px solid #BCE3C9;
 }
 
-.select2-container--default .select2-selection--single {
-  background-color: #fff;
+/* .select2-container--default .select2-selection--single {
+  background-color: rgba(255, 255, 255, 0.938);
   border-bottom: 3px solid #414648;
   border-radius: 0;
   border-right: 0;
@@ -1296,6 +1296,20 @@ textarea:focus {
   border-top: 0;
   border-left: 0;
   font-weight: bold;
+} */
+
+.select2-container--default .select2-selection--single {
+  background-color: #fffdfd;
+  /* border-bottom: 3px solid #414648; */
+  border-radius: 11px;
+  /* border-right: 0; */
+  height: 50px;
+  width: 120%;
+  padding-left: 0;
+  /* border-top: 0;
+  border-left: 0; */
+  font-weight: bold;
+  border: 1px solid #a8b5b95e;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {

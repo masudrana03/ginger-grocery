@@ -332,4 +332,9 @@ class CheckoutController extends Controller
 
         (new EmailFactory())->initializeEmail($emailDetails);
     }
+
+    public function ajaxShippingCalculation(Request $request){
+        
+
+    }
 }
