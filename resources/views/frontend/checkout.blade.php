@@ -137,9 +137,9 @@
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
                             <div class="address-checklist" id="radioDiv">
-                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}" />
+                                <input class="form-check-input checkaddress" type="radio" name="address1" value="{{ $address->id }}" />
                                 <label
-                                    class="form-check-label"><span>{{ $address->address }},{{ $address->state }}</span></label>
+                                    class="form-check-label "><span class="addName">{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
                             </div>
                         </div>
@@ -538,21 +538,50 @@
         }
     </script>
 
-    {{-- <script>
-        let get_old_data = $('#app').html();
-        let address_id;
-        let radioDiv = $('#radioDiv');
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-        //if there is any radio div
+        });
 
-        if (radioDiv) {
-            //alert("got it");
-            $('.address1').each(function() {
-                if ($(this).is(':checked')) {
-                  
-                }
+        $(function() {
+
+            $('.checkaddress').each(function() {
+                var $this = $(this);
+                $this.on('click', function() {
+                    
+                    //var addName = $('.addName');
+                    // var address = $this.children(".addName").html();
+                    // alert(address);
+                
+                    var address_id = $this.val();
+                   ajaxLoadingStoreId(address_id);
+
+
+                });
             });
+
+        });
+
+        function ajaxLoadingStoreId(address_id){
+            $.ajax({
+            method: 'GET',
+            url: "{!! route('ajax.shipping.calculation') !!}",
+            type: 'get',
+            data: {
+                address_id: address_id,
+            },
+            success: function(response) {
+                //console.log(response);
+                $('#app').html(response);
+            }
+        });
         }
-    </script> --}}
+
+
+
+    </script>
+
+  
+
 
 @endpush

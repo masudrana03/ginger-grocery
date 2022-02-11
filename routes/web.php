@@ -28,6 +28,7 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\SocialLoginController;
 use App\Components\Payment\Single\StripePayment;
+use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\CallToActionController;
 use App\Http\Controllers\ContactWithUsController;
 use App\Http\Controllers\EmailTemplateController;
@@ -213,6 +214,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
+    Route::get('shipping-fee-calculation',[CheckoutController::class,'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
 });
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
