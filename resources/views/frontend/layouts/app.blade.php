@@ -40,6 +40,7 @@
     <!-- Template CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/animate.min.css') }}" />
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/select2.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -77,8 +78,7 @@
                                     <div class="col-5">
                                         <h2 class="mb-20">
                                             {{$actonFooter->action_tittle}}
-                                            {{-- {!!nl2br($actonFooter->action_tittle)!!}
-                                            {!! nl2br(e($actonFooter->action_tittle))!!}. --}}
+                                            
                                         </h2>
                                     </div>
                                 </div>
