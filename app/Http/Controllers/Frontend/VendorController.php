@@ -33,7 +33,7 @@ class VendorController extends Controller
         $nutritions = Nutrition::all();
         $brands = Brand::all();
 
-        $defaultPaginate = 15;
+        $defaultPaginate = 5;
 
         $store = Store::with('products')->whereSlug($slug)->firstOrFail();
 
@@ -79,11 +79,12 @@ class VendorController extends Controller
 
         $vendorWise = $vendorWise->paginate($defaultPaginate);
 
+        if ($request->ajax()) {
+            // return $request;
+            return view('frontend.ajax.vendor-sort', compact('store', 'vendorWise', 'brands', 'nutritions'));
+        }
+
         return view('frontend.vendor-details', compact('store', 'vendorWise', 'brands', 'nutritions'));
     }
 
-    public function ajaxSort()
-    {
-        
-    }
 }

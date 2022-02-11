@@ -158,6 +158,10 @@ class CheckoutController extends Controller
         return $payment->acceptPayment($invoiceId);
     }
 
+    /**
+     * Create shipping address
+     * @param Request $request
+     */
     public function createBillingAddress(Request $request)
     {
         $address = new Address();
@@ -176,6 +180,12 @@ class CheckoutController extends Controller
         return $address->id;
     }
 
+    /**
+     * Create shipping address
+     *
+     * @param Request $request
+     * @return void
+     */
     public function createShippingAddress(Request $request)
     {
         $address = new Address();
