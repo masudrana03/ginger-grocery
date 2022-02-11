@@ -84,7 +84,7 @@
                 <div class="vendor-wrap mb-40">
                     <div class="vendor-img-action-wrap">
                         <div class="vendor-img">
-                            <a href="{{ route('vendor.details', $store->id) }}">
+                            <a href="{{ route('vendor.details', $store->slug) }}">
                                 <img class="default-img" src="{{ asset('assets/img/uploads/stores/'.$store ->image) }}" alt="" />
                             </a>
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="product-category">
                                     <span class="text-muted">Since {{ $store->established_at }}</span>
                                 </div>
-                                <h4 class="mb-5"><a href="{{ route('vendor.details', $store->id) }}">{{ $store->name }}</a></h4>
+                                <h4 class="mb-5"><a href="{{ route('vendor.details', $store->slug) }}">{{ $store->name }}</a></h4>
 
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
@@ -119,7 +119,7 @@
                                 <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>
                             </ul>
                         </div>
-                        <a href="{{ route('vendor.details', $store->id) }}" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                        <a href="{{ route('vendor.details', $store->slug) }}" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
             </div>

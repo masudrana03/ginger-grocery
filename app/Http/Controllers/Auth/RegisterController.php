@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Social;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,7 +53,12 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $countries = Country::all();
-        return view('auth.register', compact('countries'));
+
+        $google = Social::whereProvider('google')->first();
+
+        $facebook = Social::whereProvider('facebook')->first();
+
+        return view('auth.register', compact('countries', 'google', 'facebook'));
     }
 
     /**

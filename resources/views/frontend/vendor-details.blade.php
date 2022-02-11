@@ -46,11 +46,17 @@
                         </div>
                         <div class="sort-by-dropdown">
                             <ul>
-                                <li><a class="{{ request()->get('numeric_sort') == '50' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=50',[$store->id]) }}">50</a></li>
-                                <li><a class="{{ request()->get('numeric_sort') == '100' ? 'active' : '' }}" href="{{ url('/vendor-details?numeric_sort=100',[$store->id]) }}">100</a></li>
-                                <li><a class="{{ request()->get('numeric_sort') == '150' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=150',[$store->id]) }}">150</a></li>
-                                <li><a class="{{ request()->get('numeric_sort') == '200' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=200',[$store->id]) }}">200</a></li>
-                                <li><a class="{{ request()->get('numeric_sort') == 'all' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=all',[$store->id]) }}">All</a></li>
+                                <li><a class="sortById"  href="">50</a></li>
+                                <li><a class="sortById1"  href="">100</a></li>
+                                <li><a class="sortById2"  href="">150</a></li>
+                                <li><a class="sortById3"  href="">200</a></li>
+
+
+                                {{-- <li><a class="{{ request()->get('numeric_sort') == '50' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=50',[$store->slug]) }}">50</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '100' ? 'active' : '' }}" href="{{ url('/vendor-details?numeric_sort=100',[$store->slug]) }}">100</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '150' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=150',[$store->slug]) }}">150</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == '200' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=200',[$store->slug]) }}">200</a></li>
+                                <li><a class="{{ request()->get('numeric_sort') == 'all' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=all',[$store->slug]) }}">All</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -66,9 +72,9 @@
                         <div class="sort-by-dropdown">
                             <ul>
                                 {{-- <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li> --}}
-                                <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=low_to_high',[$store->id]) }}">Price: Low to High</a></li>
-                                <li><a class="{{ request()->get('sort') == 'high_to_low' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=high_to_low',[$store->id]) }}">Price: High to Low</a></li>
-                                <li><a class="{{ request()->get('sort') == 'release' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=release',[$store->id]) }}">Release Date</a></li>
+                                <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=low_to_high',[$store->slug]) }}">Price: Low to High</a></li>
+                                <li><a class="{{ request()->get('sort') == 'high_to_low' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=high_to_low',[$store->slug]) }}">Price: High to Low</a></li>
+                                <li><a class="{{ request()->get('sort') == 'release' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=release',[$store->slug]) }}">Release Date</a></li>
                                 {{-- <li><a href="#">Avg. Rating</a></li> --}}
                             </ul>
                         </div>
@@ -640,3 +646,31 @@
 </div>
 
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function() {
+            $('.sortById').on('click', function() {
+                let x = $('.sortById').text();
+                alert(x);
+            });
+
+            // $('#search-input').on('keyup', function() {
+            //     let search = $('#search-input').val();
+            //     if (search.length > 2) {
+            //         category_id = $('#search-category-id').val();
+            //         loadHome(search);
+            //         $('#app').html(loading);
+            //     } else {
+            //         $('#app').html(old_data);
+            //     }
+            // });
+        });
+
+    });
+
+
+</script>
+
+@endpush

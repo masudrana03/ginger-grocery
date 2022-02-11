@@ -24,7 +24,7 @@
 
 
 
-    
+
 </style>
 
     <!-- Modal -->
@@ -213,7 +213,7 @@
                                     <li>{{ settings('news_flash_one') }}</li>
                                     <li>{{ settings('news_flash_two') }}</li>
                                     <li>{{ settings('news_flash_three') }}</li>
-                                   
+
                                 </ul>
                             </div>
                         </div>
