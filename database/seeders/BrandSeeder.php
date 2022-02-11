@@ -13,7 +13,7 @@ class BrandSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        
+
         $brands = [
             [
                 'name'       => 'DAVID Seeds',
@@ -31,7 +31,7 @@ class BrandSeeder extends Seeder {
             ],
 
             [
-                'name'       => 'Maruchan Ramen Noodle Soup',
+                'name'       => 'Ramen Noodle Soup',
                 'created_at' => now(),
             ],
 
@@ -45,7 +45,7 @@ class BrandSeeder extends Seeder {
                 'name'       => 'Lindt',
                 'created_at' => now(),
             ],
-            
+
             [
                 'name'       => 'Snyders-Lance',
                 'created_at' => now(),

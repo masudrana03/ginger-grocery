@@ -18,7 +18,6 @@ class HomeController extends Controller
 
     /**
      *
-     *
      * @param $request
      */
     public function index(Request $request)
