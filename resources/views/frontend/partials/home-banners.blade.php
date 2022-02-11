@@ -4,6 +4,7 @@
             $actonBannerOne = $callToActions->find(3);
             $actonBannerTwo = $callToActions->find(4);
             $actonBannerThree = $callToActions->find(5);
+            
         @endphp
 
         <div class="row">

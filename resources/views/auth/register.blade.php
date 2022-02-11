@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+namespace App;
 @section('title', 'Register')
 <style>
     .form-group .password_with_eye {

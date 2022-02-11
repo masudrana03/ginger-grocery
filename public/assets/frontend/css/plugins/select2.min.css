@@ -167,17 +167,17 @@
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
 	color: $color-heading;
-	line-height: 28px
+	line-height: 28px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__clear {
 	cursor: pointer;
 	float: right;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
-	color: #999
+	color: #999;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {

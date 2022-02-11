@@ -52,11 +52,16 @@ class SettingController extends Controller
             // 'logo'         => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=215px,min_height=66px',
             // 'favicon'      => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=16px,min_height=16px',
             // 'mini_logos'   => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=32px,min_height=32px',
+            //'login_image'   => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=600px,min_height=650px',
+            //'contact_image' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=600px,min_height=650px',
         ]);
 
         $logoName    = '';
         $faviconName = '';
         $miniLogo    = '';
+        $loginImage  = '';
+        $contactImage= '';
+
 
         if ($request->hasFile('logo')) {
             $imageDirectory = 'assets/img/uploads/settings/logo';
@@ -97,7 +102,34 @@ class SettingController extends Controller
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $request = $request->except('_token', 'logo', 'favicon','mini_logo');
+        if ($request->hasFile('login_image')) {
+            $imageDirectory = 'assets/img/uploads/settings/loginImage';
+
+            deleteImage(settings('login_image'), $imageDirectory);
+
+            $image             = $request->file('login_image');
+            $loginImage       = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/settings/loginImage/' . $loginImage);
+            $thumbnailLocation = public_path('assets/img/uploads/settings/loginImage/thumbnail/' . $loginImage);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+
+        if ($request->hasFile('contact_image')) {
+            $imageDirectory = 'assets/img/uploads/settings/contactImage';
+
+            deleteImage(settings('contact_image'), $imageDirectory);
+
+            $image             = $request->file('contact_image');
+            $contactImage       = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/settings/contactImage/' . $contactImage);
+            $thumbnailLocation = public_path('assets/img/uploads/settings/contactImage/thumbnail/' . $contactImage);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $request = $request->except('_token', 'logo', 'favicon','mini_logo','login_image','contact_image');
 
         if ($logoName != '') {
             $request['logo'] = $logoName;
@@ -109,6 +141,15 @@ class SettingController extends Controller
 
         if ($miniLogo != '') {
             $request['mini_logo'] = $miniLogo;
+        }
+
+        if ($loginImage != '') {
+            $request['login_image'] = $loginImage;
+        }
+
+        
+        if ($contactImage != '') {
+            $request['contact_image'] = $contactImage;
         }
 
         foreach ($request as $key => $value) {
