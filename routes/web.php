@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\TaxController;
@@ -47,6 +48,7 @@ use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutControll
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 use App\Http\Controllers\Frontend\SocialiteController as FrontendSocialiteController;
 use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -148,7 +150,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     // Route::get('/call-to-action/edit', [CallToActionController::class, 'editn'])->name('');
     Route::get('/call-to-action/{callToAction}/update_status', [CallToActionController::class, 'updateStatus'])->name('callToAction.update_status');
 
-
     Route::get('/contact-us', [ContactWithUsController::class, 'allContactsMassage'])->name('all_contacts');
     Route::get('/contact-massage', [ContactWithUsController::class, 'contactMassage'])->name('contact.massage');
 
@@ -159,7 +160,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('/about-service-edit', [AboutController::class, 'serviceEdit'])->name('about.service.edit');
     Route::post('/about-service-update', [AboutController::class, 'serviceUpdate'])->name('about.service.update');
     Route::get('/about-our-performance', [AboutController::class, 'aboutPerformance'])->name('about.performance');
-
 
     // Resource routes
     Route::resource('brands', BrandController::class);
@@ -187,7 +187,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::resource('contacts', ContactWithUsController::class);
     Route::resource('abouts', AboutController::class);
 });
-
 
 //Frontend Route
 Route::get('/privacy-policy', function () {
@@ -236,8 +235,6 @@ Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::clas
 Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
 Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 
-
-
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
 
@@ -267,7 +264,51 @@ Route::get('login/google/callback', [FrontendSocialiteController::class, 'google
 Route::get('login/facebook', [FrontendSocialiteController::class, 'facebookRedirectToProvider'])->name('login.facebook');
 Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'facebookHandleProviderCallback'])->name('login.facebook_callback');
 
+Route::get('c/{id}', function ($id) {
 
+    $wishListProducts = Cache::get('products');
 
+    if (! $wishListProducts) {
+        Cache::put('products', [$id], 30);
+        return Cache::get('products');
+    }
+
+    if (in_array($id, $wishListProducts)) {
+        return Cache::get('products');
+    }
+    
+    if (count($wishListProducts) >= 3) {
+        array_shift($wishListProducts);
+        array_push($wishListProducts, $id);
+        Cache::put('products', $wishListProducts, 30);
+        return Cache::get('products');
+    }
+
+    array_push($wishListProducts, $id);
+    Cache::put('products', $wishListProducts, 30);
+    return Cache::get('products');
+
+    // $wishListProducts = Session::get('products');
+
+    // if (! $wishListProducts) {
+    //     Session::put('products', [$id], 30);
+    //     return Session::get('products');
+    // }
+
+    // if (in_array($id, $wishListProducts)) {
+    //     return Session::get('products');
+    // }
+    
+    // if (count($wishListProducts) >= 3) {
+    //     array_shift($wishListProducts);
+    //     array_push($wishListProducts, $id);
+    //     Session::put('products', $wishListProducts, 30);
+    //     return Session::get('products');
+    // }
+
+    // array_push($wishListProducts, $id);
+    // Session::put('products', $wishListProducts, 30);
+    // return Session::get('products');
+});
 
 Auth::routes();

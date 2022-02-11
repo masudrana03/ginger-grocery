@@ -48,6 +48,9 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/colors/default.css') }}" id="colorSkinCSS">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     @stack('styles')
 </head>
 
@@ -55,6 +58,13 @@
 
     @yield('content')
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select-two').select2();
+        });
+    </script>
 
     <!-- footer  -->
     <script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
@@ -65,7 +75,7 @@
     <!-- sidebar menu  -->
     <script src="{{ asset('assets/js/metisMenu.js') }}"></script>
 
-    
+
     <!-- waypoints js -->
     {{-- <script src="{{ asset('assets/vendors/count_up/jquery.waypoints.min.js') }}"></script> --}}
     <!-- waypoints js -->
@@ -119,8 +129,7 @@
 
     <script src="{{ asset('assets/vendors/echart/echarts.min.js') }}"></script> --}}
 
-{{-- 
-    <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendors/chart_am/core.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/charts.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/animated.js') }}"></script>
     <script src="{{ asset('assets/vendors/chart_am/kelly.js') }}"></script>

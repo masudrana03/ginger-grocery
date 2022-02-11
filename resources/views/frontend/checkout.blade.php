@@ -224,7 +224,17 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-2">
+                                <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
+                                    @foreach ($countries as $countryName)
+                                        <option value="{{ $countryName->id }}">
+                                            {{ $countryName->phone_code }}
+                                            {{ $countryName->iso2 }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')

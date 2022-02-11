@@ -54,6 +54,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     {{-- ajax link for file upload --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     @stack('styles')
 </head>
 
@@ -67,9 +70,9 @@
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
             <a class="large_logo" href="{{ route('admin.dashboard') }}"><img
-                    src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}" alt=""></a>
+                    src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}" alt=""></a>
             <a class="small_logo" href="{{ route('admin.dashboard') }}"><img
-                    src="{{ asset('assets/img/uploads/settings/logo/'.settings('mini_logo')) }}" alt=""></a>
+                    src="{{ asset('assets/img/uploads/settings/logo/' . settings('mini_logo')) }}" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
@@ -224,8 +227,10 @@
                                         <h5>{{ auth()->user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a class="dropdown-item" href="{{ route('admin.user.profile') }}">My Profile </a>
-                                        <a class="dropdown-item" href="{{ route('admin.user.change_password') }}">Change Password</a>
+                                        <a class="dropdown-item" href="{{ route('admin.user.profile') }}">My Profile
+                                        </a>
+                                        <a class="dropdown-item"
+                                            href="{{ route('admin.user.change_password') }}">Change Password</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             {{ __('Log Out') }}
@@ -254,7 +259,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer_iner text-center">
-                            <p>{{ now()->format('Y') }} © Influence - Designed by <a href="#"> <i class="ti-heart"></i> </a><a
+                            <p>{{ now()->format('Y') }} © Influence - Designed by <a href="#"> <i
+                                        class="ti-heart"></i> </a><a
                                     href="https://binary-fusion.com/">binary-fusion</a></p>
                         </div>
                     </div>
@@ -396,6 +402,13 @@
     </div>
 
     <!-- footer  -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select-two').select2();
+        });
+    </script>
     <script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
     <!-- popper js -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>

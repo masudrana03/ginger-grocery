@@ -169,7 +169,7 @@
                                                    >
                                                     @foreach ($countries as $country)
                                                         <option class="phone-code"
-                                                            value="{{ $country->phone_code }}">
+                                                            value="{{ $country->id }}">
                                                             {{ $country->phone_code }}
                                                             {{ $country->iso2 }}
                                                         </option>
