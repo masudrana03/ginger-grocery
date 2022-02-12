@@ -20,6 +20,8 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'logo', 'value' => '2022-01-23-61ed177284a02.png'] );
         Setting::create( ['key' => 'favicon', 'value' => '2022-01-23-61ed16cdacc56.png'] );
         Setting::create( ['key' => 'mini_logo', 'value' => '2022-01-24-61eeacce30a4a.png'] );
+        Setting::create( ['key' => 'login_image', 'value' => '2022-02-10-6204f9869465d.png'] );
+        Setting::create( ['key' => 'contact_image', 'value' => '2022-02-10-6204f986c6ab6.png'] );
         Setting::create( ['key' => 'mail_driver', 'value' => 'smtp'] );
         Setting::create( ['key' => 'mail_host', 'value' => 'smtp.gmail.com'] );
         Setting::create( ['key' => 'mail_port', 'value' => '587'] );

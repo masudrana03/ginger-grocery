@@ -15,25 +15,51 @@ class SocialLoginController extends Controller
         return view('backend.settings.socialite', compact('google', 'facebook'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function socialUpdate(Request $request)
     {
 
-        // return $request;
         $this->validate($request, [
-            'client_key'     => 'required',
-            'client_secret'  => 'required',
-            'redirect_url'   => 'required',
+            'client_id'     => 'required',
+            'client_secret' => 'required',
+            'redirect_url'  => 'required',
         ]);
-
 
         $socialLogin = Social::whereProvider($request->provider)->firstOrFail();
 
-        // return $socialLogin;
-
         $socialLogin->update($request->all());
 
-        toast('Payment method successfully updated', 'success');
+        $this->setEnv($request->provider);
+
+        toast('Social Media Settings successfully updated', 'success');
 
         return back();
+    }
+
+    /**
+     * @param $provider
+     */
+    public function setEnv($provider)
+    {
+        $provider = Social::where('provider', $provider)->first();
+
+        if ($provider->provider == 'google') {
+
+            updateEnv('GOOGLE_CLIENT_ID', $provider->client_id);
+            updateEnv('GOOGLE_CLIENT_SECRET', $provider->client_secret);
+            updateEnv('GOOGLE_CALLBACK_ENDPOINT', $provider->redirect_url);
+
+        }
+
+        if ($provider->provider == 'facebook') {
+
+            updateEnv('FACEBOOK_CLIENT_ID', $provider->client_id);
+            updateEnv('FACEBOOK_CLIENT_SECRET', $provider->client_secret);
+            updateEnv('FACEBOOK_CALLBACK_ENDPOINT', $provider->redirect_url);
+
+        }
     }
 }

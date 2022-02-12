@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers;
 use App\Models\Zone;
 use App\Models\Country;
 use App\Models\Category;
+use App\Models\CallToAction;
 use Illuminate\View\View;
 
 class ViewComposer
@@ -26,10 +27,12 @@ class ViewComposer
             $zones = Zone::all();
             $categories = Category::all();
             $countrys = Country::all();
+            $callToActions = CallToAction::all();
             $view->with([
                 'zones' => $zones,
                 'categories' => $categories,
                 'countrys' => $countrys,
+                'callToActions' => $callToActions,
             ]);
         }
     }

@@ -128,7 +128,9 @@
                                         <select name="phone_code"
                                             class="select-two form-control @error('') is-invalid @enderror">
                                             @foreach ($countries as $countryName)
-                                                <option {{ $countryName->id == settings('phone_code') ? 'selected' : '' }} value="{{ $countryName->id }}">
+                                                <option
+                                                    {{ $countryName->id == settings('phone_code') ? 'selected' : '' }}
+                                                    value="{{ $countryName->id }}">
                                                     {{ $countryName->phone_code }}
                                                     {{ $countryName->iso2 }}
                                                 </option>
@@ -223,8 +225,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -356,9 +356,95 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <br> <small>This image size must be upto ( 600px X 500px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('favicon') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload Contact Page Image</h4>
+
+                                                    <input type="file" name="contact_image" id="contact_image"
+                                                        accept="image/*" class="d-none "
+                                                        onchange="showContactImage(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('contact_image').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="contact_images">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <br> <small>This image size must be upto ( 600 x 500 )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('mini_logos') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload login page Image</h4>
 
+                                                    <input type="file" name="login_image" id="login_image" accept="image/*"
+                                                        class="d-none " onchange="showLoginImage(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('login_image').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="login_images">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <br> <small>This image size must be upto ( 215px X 66px )</small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('logo') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload Logo Images</h4>
+
+                                                    <input type="file" name="logo" id="logo" accept="image/*"
+                                                        class="d-none " onchange="showLogo(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('logo').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image" id="thumbnil">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @error('logo')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
@@ -397,7 +483,6 @@
                 reader.readAsDataURL(file);
             }
         }
-
 
         function showFavicon(fileInput) {
             var files = fileInput.files;
@@ -439,7 +524,7 @@
             }
         }
 
-        function showNavImg(fileInput) {
+        function showLoginImage(fileInput) {
             var files = fileInput.files;
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -447,7 +532,27 @@
                 if (!file.type.match(imageType)) {
                     continue;
                 }
-                var img = document.getElementById('navs');
+                var img = document.getElementById('login_images');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function showContactImage(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById('contact_images');
                 img.file = file;
                 var reader = new FileReader();
                 reader.onload = (function(aImg) {

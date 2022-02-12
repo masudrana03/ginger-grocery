@@ -98,12 +98,12 @@
                                                         @csrf
                                                         <div class="form-group">
                                                             <input type="hidden" name="provider" value="google">
-                                                            <label for="client_key">Google Client Key</label>
-                                                            <input type="text" name="client_key"
-                                                                class="form-control @error('client_key') is-invalid @enderror"
-                                                                id="client_key" aria-describedby="emailHelp"
-                                                                placeholder="Client Key" value="{{ old('client_key') ?? $google->client_key }}">
-                                                            @error('client_key')
+                                                            <label for="client_id">Google Client Id</label>
+                                                            <input type="text" name="client_id"
+                                                                class="form-control @error('client_id') is-invalid @enderror"
+                                                                id="client_id" aria-describedby="emailHelp"
+                                                                placeholder="Client Id" value="{{ old('client_id') ?? $google->client_id }}">
+                                                            @error('client_id')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -126,7 +126,7 @@
                                                             <label for="redirect_url">Google Redirect Url</label>
                                                             <input type="text" name="redirect_url"
                                                                 class="form-control @error('redirect_url') is-invalid @enderror"
-                                                                id="redirect_url" aria-describedby="emailHelp"
+                                                                id="redirect_url" aria-describedby="emailHelp" readonly
                                                                 placeholder="Client Secret"
                                                                 value="{{ old('redirect_url') ?? $google->redirect_url  }}">
                                                             @error('redirect_url')
@@ -224,12 +224,12 @@
                                                         @csrf
                                                         <div class="form-group">
                                                             <input type="hidden" name="provider" value="facebook">
-                                                            <label for="client_key">Facebook Client Key</label>
-                                                            <input type="text" name="client_key"
-                                                                class="form-control @error('client_key') is-invalid @enderror"
-                                                                id="client_key" aria-describedby="emailHelp"
-                                                                placeholder="Client Key" value="{{ old('client_key') ?? $facebook->client_key }}">
-                                                            @error('client_key')
+                                                            <label for="client_id">Facebook Client Id</label>
+                                                            <input type="text" name="client_id"
+                                                                class="form-control @error('client_id') is-invalid @enderror"
+                                                                id="client_id" aria-describedby="emailHelp"
+                                                                placeholder="Client Id" value="{{ old('client_id') ?? $facebook->client_id }}">
+                                                            @error('client_id')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -252,7 +252,7 @@
                                                             <label for="redirect_url">Facebook Redirect Url</label>
                                                             <input type="text" name="redirect_url"
                                                                 class="form-control @error('redirect_url') is-invalid @enderror"
-                                                                id="redirect_url" aria-describedby="emailHelp"
+                                                                id="redirect_url" aria-describedby="emailHelp" readonly
                                                                 placeholder="Client Secret"
                                                                 value="{{ old('redirect_url') ?? $facebook->redirect_url }}">
                                                             @error('redirect_url')

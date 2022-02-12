@@ -81,4 +81,9 @@ class VendorController extends Controller
 
         return view('frontend.vendor-details', compact('store', 'vendorWise', 'brands', 'nutritions'));
     }
+
+    public function ajaxSort()
+    {
+        
+    }
 }
