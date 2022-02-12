@@ -119,17 +119,34 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" name="phone"
-                                        class="form-control @error('phone') is-invalid @enderror" id="phone"
-                                        aria-describedby="emailHelp" placeholder="Phone Number "
-                                        value="{{ old('phone') ?? settings('phone') }}">
-                                    @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label>Country
+                                            Code
+                                            <span class="required"></span></label>
+                                        <select name="phone_code"
+                                            class="select-two form-control @error('') is-invalid @enderror">
+                                            @foreach ($countries as $countryName)
+                                                <option {{ $countryName->id == settings('phone_code') ? 'selected' : '' }} value="{{ $countryName->id }}">
+                                                    {{ $countryName->phone_code }}
+                                                    {{ $countryName->iso2 }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="phone"
+                                            class="form-control @error('phone') is-invalid @enderror" id="phone"
+                                            aria-describedby="emailHelp" placeholder="Phone Number "
+                                            value="{{ old('phone') ?? settings('phone') }}">
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="hot_number">Hot Number</label>
@@ -161,8 +178,7 @@
                                             <label for="news-flash">News Flash-1</label>
                                             <br><small>(Text must be within 60 character)</small>
                                             <input type="text" name="news_flash_one" required minlength="10" maxlength="60"
-                                            
-                                                class="form-control @error('email') is-invalid @enderror" 
+                                                class="form-control @error('email') is-invalid @enderror"
                                                 aria-describedby="news_flash_one" placeholder="News Flash-1"
                                                 value="{{ old('news_flash_one') ?? settings('news_flash_one') }}">
                                             @error('news_flash_two')
@@ -178,8 +194,9 @@
                                             <label for="news-flash">News Flash-2</label>
                                             <br><small>(Text must be within 60 character)</small>
                                             <input type="text" name="news_flash_two"
-                                                class="form-control @error('email') is-invalid @enderror" 
-                                                aria-describedby="news_flash_two" placeholder="News Flash-2" required minlength="10" maxlength="60"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                aria-describedby="news_flash_two" placeholder="News Flash-2" required
+                                                minlength="10" maxlength="60"
                                                 value="{{ old('news_flash_two') ?? settings('news_flash_two') }}">
                                             @error('news_flash_two')
                                                 <span class="invalid-feedback" role="alert">
@@ -193,7 +210,8 @@
                                         <div class="form-group">
                                             <label for="news-flash">News Flash-3</label>
                                             <br><small>(Text must be within 60 character)</small>
-                                            <input type="text" name="news_flash_three" required minlength="10" maxlength="60"
+                                            <input type="text" name="news_flash_three" required minlength="10"
+                                                maxlength="60"
                                                 class="form-control @error('news_flash_three') is-invalid @enderror"
                                                 aria-describedby="news_flash_three" placeholder="News Flash-3"
                                                 value="{{ old('news_flash_three') ?? settings('news_flash_three') }}">
@@ -205,7 +223,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -339,7 +357,7 @@
                                     </div>
                                 </div>
 
-                                
+
 
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>

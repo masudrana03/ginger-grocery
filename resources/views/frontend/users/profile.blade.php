@@ -106,7 +106,7 @@
                                                                 @foreach ($countries as $country)
                                                                     <option
                                                                         {{ $country->phone_code == $user->phone_code ? 'selected' : '' }}
-                                                                        value="{{ $country->phone_code }}">
+                                                                        value="{{ $country->id }}">
                                                                         {{ $country->phone_code }}
                                                                         {{ $country->iso2 }}
                                                                     </option>

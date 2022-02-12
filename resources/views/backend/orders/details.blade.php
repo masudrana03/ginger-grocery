@@ -71,7 +71,7 @@
 
                     <span>Name: </span>{{ $order->user->name }}<br>
                     <span>Email: </span>{{ $order->user->email }}<br>
-                    <span>Phone: </span>{{ $order->user->phone }}<br>
+                    <span>Phone: </span>{{ $order->user->country->phone_code }}{{ $order->user->phone }}<br>
                     <span>Country: </span>{{ settings('country') }}<br>
 
                 </div>
@@ -79,7 +79,7 @@
                     <h5>Shipping Address :</h5>
                     <span>Name: </span>{{ $order->shipping->name }} <br>
                     <span>Email: </span>{{ $order->shipping->email }}<br>
-                    <span>Phone: </span>{{ $order->shipping->phone }}<br>
+                    <span>Phone: </span>{{ $order->shipping->country->phone_code }}{{ $order->shipping->phone }}<br>
                     <span>Address: </span> {{ $order->shipping->address }}<br>
                     <span>Country: </span>{{ settings('country') }}<br>
                     <span>City: </span>{{ $order->shipping->city }}<br>

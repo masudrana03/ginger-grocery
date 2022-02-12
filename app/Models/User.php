@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
@@ -48,11 +49,11 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-     /**
-     * Specifies the user's FCM token
-     *
-     * @return string|array
-     */
+    /**
+    * Specifies the user's FCM token
+    *
+    * @return string|array
+    */
     public function routeNotificationForFcm()
     {
         return $this->fcm_token;
@@ -62,7 +63,8 @@ class User extends Authenticatable {
      * @param  Request $request
      * @return User    $user
      */
-    public function updateProfile( $request ) {
+    public function updateProfile($request)
+    {
         $this->name  = $request->name;
         $this->phone = $request->phone ?: $this->phone;
         $this->save();
@@ -74,8 +76,9 @@ class User extends Authenticatable {
      * Get the cart associated with the user.
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
-    public function cart() {
-        return $this->hasOne( Cart::class );
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
     /**
      * @return mixed
@@ -84,15 +87,16 @@ class User extends Authenticatable {
     {
         return $this->belongsToMany(Product::class, 'saved_product')
                     ->with(
-                          'brand',
-                          'category',
-                          'unit',
-                          'user:id,name',
-                          'store',
-                          'currency',
-                          'types',
-                          'nutritions',
-                          'images')
+                        'brand',
+                        'category',
+                        'unit',
+                        'user:id,name',
+                        'store',
+                        'currency',
+                        'types',
+                        'nutritions',
+                        'images'
+                    )
                     ->withTimestamps();
     }
 
@@ -101,8 +105,9 @@ class User extends Authenticatable {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function referrer() {
-        return $this->belongsTo( User::class, 'referrer_id', 'id' );
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
     }
 
     /**
@@ -110,8 +115,9 @@ class User extends Authenticatable {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function referrals() {
-        return $this->hasMany( User::class, 'referrer_id', 'id' );
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
     }
 
     /**
@@ -119,7 +125,8 @@ class User extends Authenticatable {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function billingAddresses() {
+    public function billingAddresses()
+    {
         return $this->hasMany(Address::class)->whereType(1);
     }
 
@@ -128,7 +135,8 @@ class User extends Authenticatable {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function shippingAddress() {
+    public function shippingAddress()
+    {
         return $this->hasMany(Address::class)->whereType(2);
     }
 
@@ -137,8 +145,9 @@ class User extends Authenticatable {
      *
      * @return Relationship
      */
-    public function store() {
-        return $this->belongsTo( Store::class )->withDefault();
+    public function store()
+    {
+        return $this->belongsTo(Store::class)->withDefault();
     }
 
     /**
@@ -149,5 +158,13 @@ class User extends Authenticatable {
     public function stripeCards()
     {
         return $this->hasMany(StripeCustomerCard::class);
+    }
+
+    /**
+     * Returns country model associated with the user.
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'phone_code');
     }
 }

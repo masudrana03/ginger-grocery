@@ -129,7 +129,7 @@
 
                                                         @forelse ($shippingAddresses ?? [] as $address)
                                                             <p>{{ $address->name }}</p>
-                                                            <p>{{ $address->phone }}</p>
+                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}</p>
                                                             <p>{{ $address->email }}</p>
                                                             <address>
                                                                 {{ $address->address }},
@@ -221,7 +221,7 @@
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
-                                                                                                    value="{{ $countryName->phone_code }}">
+                                                                                                    value="{{ $countryName->id }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
@@ -653,7 +653,7 @@
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
-                                                                                                    value="{{ $countryName->phone_code }}">
+                                                                                                    value="{{ $countryName->id }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
@@ -883,7 +883,7 @@
 
         $('#phoneCode').empty();
         $.each(countries, function(index, country) {
-            $('#phoneCode').append('<option value="' + country.phone_code + '">' + country.phone_code + country
+            $('#phoneCode').append('<option value="' + country.id + '">' + country.phone_code + country
                 .iso2 + '</option>');
         });
 

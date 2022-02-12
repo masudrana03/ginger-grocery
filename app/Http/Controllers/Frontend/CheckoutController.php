@@ -83,8 +83,6 @@ class CheckoutController extends Controller
      */
     public function placeOrder(Request $request)
     {
-        
-        
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
         
 
@@ -101,6 +99,7 @@ class CheckoutController extends Controller
                 'address' => 'required',
                 'city' => 'required',
                 'zip' => 'required',
+                'phone_code' => 'required',
                 'phone' => 'required',
             ]);
         }
@@ -183,6 +182,7 @@ class CheckoutController extends Controller
         $address->name = $request->name;
         $address->email = $request->email;
         $address->address = $request->address;
+        $address->phone_code = $request->phone_code;
         $address->phone = $request->phone;
         $address->country_id = $request->country_id;
         $address->state = $request->state;
