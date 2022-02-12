@@ -49,9 +49,9 @@
         crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- datetime picker jquery --}}
-
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link src="{{ asset('assets/tata_toster/index.js') }}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/select2.min.css')}}">
 
     <style>
         .tata-title,

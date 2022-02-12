@@ -41,7 +41,7 @@
                                     <div class="product-img-action-wrap">
 
                                         <div class="product-img product-img-zoom">
-                                            <a href="{{ route('products', $product->id) }}">
+                                            <a href="{{route('vendor.details',$product->store->slug) }}">
                                                     @if (count($product->images) > 0)
                                                         <img class="default-img"
                                                             src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
