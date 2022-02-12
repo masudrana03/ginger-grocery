@@ -1,20 +1,20 @@
 @extends('frontend.layouts.app')
 @section('title', 'Contact')
 <style>
-    /* .phone-code::placeholder {
-        font-weight: 300 !important;
-        color: #999999 !important;
-        color: #777777 !important;
-    }
+    /* .select2-container .select2-selection--single {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 46px;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
-    .phone-code {
-        border: 1px solid  #f0e9ff !important;
-        border-radius: 10px !important;
-        height: 48px !important;
-        padding-left: 18px !important;
-        font-size: 16px !important;
-        background: transparent !important;
-    } */
+.select2-container--default .select2-selection--single {
+  background-color: #fff;
+  border: 1px solid #d6dcdf8a;
+  border-radius: 8px;
+} */
 
 </style>
 @section('content')
@@ -166,17 +166,17 @@
                                             <div class="col-md-3 ">
                                                 <select name="phone_code"
                                                     class="select-two phone-code @error('phone_code') is-invalid @enderror"
-                                                    style="height: 48px; font-size: 14px; font-weight: 600; color: #777777;">
+                                                   >
                                                     @foreach ($countries as $country)
                                                         <option class="phone-code"
-                                                            value="{{ $country->phone_code }}">
+                                                            value="{{ $country->id }}">
                                                             {{ $country->phone_code }}
                                                             {{ $country->iso2 }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-lg-6 col-md-9">
+                                            <div class=" col-md-9">
                                                 <div class="input-style mb-20">
                                                     <input type="text" name="phone"
                                                         class="form-control @error('phone') is-invalid @enderror" id="phone"

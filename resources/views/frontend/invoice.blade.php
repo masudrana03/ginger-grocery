@@ -69,7 +69,7 @@
                                             <h4 class="invoice-title-1 mb-10">Customer Information</h4>
                                             <p class="text-sm text-mutted">
                                                 <strong>{{ $order->user->name }}</strong>
-                                                <br>{{ $order->user->phone }}<br>
+                                                <br>{{ $order->user->country->phone_code }}{{ $order->user->phone }}<br>
                                                 {{ settings('country') }}
                                             </p>
                                         </div>
@@ -80,7 +80,7 @@
                                             <p class="invoice-addr-1">
                                                 <strong>{{ $order->shipping->name }}</strong> <br />
                                             <p>{{ $order->shipping->email }}</p>
-                                            <p>{{ $order->shipping->phone }}</p>
+                                            <p>{{ $order->shipping->country->phone_code }}{{ $order->shipping->phone }}</p>
                                             {{ $order->shipping->address }}, <br />{{ $order->shipping->city }},
                                             {{ $order->shipping->zip }}, {{ settings('country') }}
                                             </p>

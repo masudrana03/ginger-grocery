@@ -49,9 +49,25 @@
         crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- datetime picker jquery --}}
-
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link src="{{ asset('assets/tata_toster/index.js') }}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/select2.min.css')}}">
 
+    <style>
+        .tata-title,
+        .tata-text {
+            color: #fff !important;
+        }
+
+        .tata.success {
+            background: #29A56C !important;
+        }
+
+        /* .material-icons{
+            color: #FDC040!important;
+        } */
+
+    </style>
 
 </head>
 
@@ -66,7 +82,7 @@
         <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
             <div class="container">
                 @php
-                    $actonFooter=$callToActions->find(6);
+                    $actonFooter = $callToActions->find(6);
                 @endphp
                 <div class="row">
                     <div class="col-lg-12">
@@ -75,7 +91,7 @@
                                 <div class="row">
                                     <div class="col-5">
                                         <h2 class="mb-20">
-                                            {{$actonFooter->action_tittle}}
+                                            {{ $actonFooter->action_tittle }}
                                             {{-- {!!nl2br($actonFooter->action_tittle)!!}
                                             {!! nl2br(e($actonFooter->action_tittle))!!}. --}}
                                         </h2>
@@ -90,7 +106,8 @@
                                 </form>
                             </div>
                             {{-- <img src="{{ asset('assets/frontend/imgs/banner/banner-9.png') }}" alt="newsletter" /> --}}
-                            <img src="{{ asset( 'assets/img/uploads/actions/' .$actonFooter->image ) }}" alt="newsletter" />
+                            <img src="{{ asset('assets/img/uploads/actions/' . $actonFooter->image) }}"
+                                alt="newsletter" />
                         </div>
                     </div>
                 </div>
@@ -374,9 +391,11 @@
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/tata_toster/tata.js') }}"></script>
 
     <script>
         $(document).ready(function() {
+            tata.success('Success!', 'Product added to your wishlist.');
             $('.select-two').select2();
         });
     </script>

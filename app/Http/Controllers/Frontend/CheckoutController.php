@@ -83,8 +83,6 @@ class CheckoutController extends Controller
      */
     public function placeOrder(Request $request)
     {
-        
-        
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
         
 
@@ -101,6 +99,7 @@ class CheckoutController extends Controller
                 'address' => 'required',
                 'city' => 'required',
                 'zip' => 'required',
+                'phone_code' => 'required',
                 'phone' => 'required',
             ]);
         }
@@ -159,6 +158,10 @@ class CheckoutController extends Controller
         return $payment->acceptPayment($invoiceId);
     }
 
+    /**
+     * Create shipping address
+     * @param Request $request
+     */
     public function createBillingAddress(Request $request)
     {
         $address = new Address();
@@ -177,12 +180,19 @@ class CheckoutController extends Controller
         return $address->id;
     }
 
+    /**
+     * Create shipping address
+     *
+     * @param Request $request
+     * @return void
+     */
     public function createShippingAddress(Request $request)
     {
         $address = new Address();
         $address->name = $request->name;
         $address->email = $request->email;
         $address->address = $request->address;
+        $address->phone_code = $request->phone_code;
         $address->phone = $request->phone;
         $address->country_id = $request->country_id;
         $address->state = $request->state;
@@ -331,5 +341,9 @@ class CheckoutController extends Controller
         ];
 
         (new EmailFactory())->initializeEmail($emailDetails);
+    }
+
+    public function ajaxShippingCalculation(Request $request){
+        $address_id = request('address_id');  
     }
 }

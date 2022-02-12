@@ -42,7 +42,7 @@ class Address extends Model
      * Returns country model associated with the user.
      */
     public function country() {
-        return $this->belongsTo( Country::class );
+        return $this->belongsTo( Country::class, 'phone_code');
     }
 
     /**

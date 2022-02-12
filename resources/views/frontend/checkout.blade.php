@@ -137,9 +137,9 @@
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
                             <div class="address-checklist" id="radioDiv">
-                                <input class="form-check-input" type="radio" name="address1" value="{{ $address->id }}" />
+                                <input class="form-check-input checkaddress" type="radio" name="address1" value="{{ $address->id }}" />
                                 <label
-                                    class="form-check-label"><span>{{ $address->address }},{{ $address->state }}</span></label>
+                                    class="form-check-label "><span class="addName">{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
                             </div>
                         </div>
@@ -224,7 +224,17 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-2">
+                                <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
+                                    @foreach ($countries as $countryName)
+                                        <option value="{{ $countryName->id }}">
+                                            {{ $countryName->phone_code }}
+                                            {{ $countryName->iso2 }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')
@@ -449,9 +459,9 @@
 
             if (noAdd) {
                 shipForm.style.display = "block";
-                check.checked=true;
+                check.checked = true;
             } else {
-                check.checked= false;
+                check.checked = false;
                 shipForm.style.display = "none";
 
             }
@@ -537,5 +547,51 @@
 
         }
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+        });
+
+        $(function() {
+
+            $('.checkaddress').each(function() {
+                var $this = $(this);
+                $this.on('click', function() {
+                    
+                    //var addName = $('.addName');
+                    // var address = $this.children(".addName").html();
+                    // alert(address);
+                
+                    var address_id = $this.val();
+                   ajaxLoadingStoreId(address_id);
+
+
+                });
+            });
+
+        });
+
+        function ajaxLoadingStoreId(address_id){
+            $.ajax({
+            method: 'GET',
+            url: "{!! route('ajax.shipping.calculation') !!}",
+            type: 'get',
+            data: {
+                address_id: address_id,
+            },
+            success: function(response) {
+                //console.log(response);
+                $('#app').html(response);
+            }
+        });
+        }
+
+
+
+    </script>
+
+  
+
 
 @endpush
