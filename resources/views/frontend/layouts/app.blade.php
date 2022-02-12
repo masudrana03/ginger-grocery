@@ -81,7 +81,7 @@
                                         </h2>
                                     </div>
                                 </div>
-                                
+
                                 <p class="mb-45">Start You'r Daily Shopping with <span
                                         class="text-brand">Binary Fusion</span></p>
                                 <form class="form-subcriber d-flex">
@@ -251,8 +251,8 @@
                         </ul>
                     </div>
 
-                    <!-- 
-                
+                    <!--
+
                      <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                         <h4 class="widget-title">Corporate</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
@@ -265,7 +265,7 @@
                             <li><a href="#">Promotions</a></li>
                         </ul>
                      </div>
-                
+
                     -->
 
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">

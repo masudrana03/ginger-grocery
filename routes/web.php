@@ -256,6 +256,7 @@ Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
 Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
 Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
+Route::get('/sort/{slug}', [FrontendVendorController::class, 'ajaxSort'])->name('vendor.sort');
 
 //For Google
 Route::get('login/google', [FrontendSocialiteController::class, 'googleRedirectToProvider'])->name('login.google');
