@@ -255,7 +255,7 @@ Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
 Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
 Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
-Route::get('/sort/{slug}', [FrontendVendorController::class, 'ajaxSort'])->name('vendor.sort');
+// Route::get('/sort/{slug}', [FrontendVendorController::class, 'ajaxSort'])->name('vendor.sort');
 
 //For Google
 Route::get('login/google', [FrontendSocialiteController::class, 'googleRedirectToProvider'])->name('login.google');
@@ -277,7 +277,7 @@ Route::get('c/{id}', function ($id) {
     if (in_array($id, $wishListProducts)) {
         return Cache::get('products');
     }
-    
+
     if (count($wishListProducts) >= 3) {
         array_shift($wishListProducts);
         array_push($wishListProducts, $id);
@@ -299,7 +299,7 @@ Route::get('c/{id}', function ($id) {
     // if (in_array($id, $wishListProducts)) {
     //     return Session::get('products');
     // }
-    
+
     // if (count($wishListProducts) >= 3) {
     //     array_shift($wishListProducts);
     //     array_push($wishListProducts, $id);

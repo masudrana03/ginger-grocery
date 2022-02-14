@@ -51,7 +51,7 @@
     {{-- datetime picker jquery --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link src="{{ asset('assets/tata_toster/index.js') }}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
 
     <style>
         .tata-title,
@@ -391,14 +391,14 @@
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('assets/tata_toster/tata.js') }}"></script>
+    {{-- <script src="{{ asset('assets/tata_toster/tata.js') }}"></script> --}}
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             tata.success('Success!', 'Product added to your wishlist.');
             $('.select-two').select2();
         });
-    </script>
+    </script> --}}
 
     @if (session()->has('success'))
         <script>
