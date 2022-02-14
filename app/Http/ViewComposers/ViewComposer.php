@@ -24,10 +24,10 @@ class ViewComposer
     public function compose(View $view)
     {
         if (env('APP_NAME') != '') {
-            $zones = Zone::all();
-            $categories = Category::all();
-            $countrys = Country::all();
-            $callToActions = CallToAction::all();
+            $zones = Zone::get();
+            $categories = Category::get();
+            $countrys = Country::get();
+            $callToActions = CallToAction::get();
             $view->with([
                 'zones' => $zones,
                 'categories' => $categories,

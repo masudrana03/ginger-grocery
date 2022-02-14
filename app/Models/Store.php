@@ -83,6 +83,11 @@ class Store extends Model {
         return $this->belongsTo( Currency::class );
     }
 
+    public function brand()
+    {
+        return $this->hasMany(Brand::class);
+    }
+
     /**
      * Return the store's or vendor's total rating
      *

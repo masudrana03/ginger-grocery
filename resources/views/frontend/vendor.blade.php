@@ -124,681 +124,12 @@
                 </div>
             </div>
             @empty
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
+            <div class="col-lg-12 col-md-6 col-12 col-sm-6">
                 <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-1.png') }}" alt="" />
-                            </a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            {{-- <span class="hot">Mall</span> --}}
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Nature Food</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
+                    <h1>No Vendor Found</h1>
                 </div>
             </div>
             @endforelse
-
-
-
-            <!--end vendor card-->
-            {{-- <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-7.png') }}" alt="" />
-                            </a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="best">Preferred</span>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2019</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Country Crock</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">18 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-2.png') }}" alt="" />
-                            </a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="hot">Mall</span>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Hambger Hel</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">63 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-8.png') }}" alt="" />
-                            </a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg">
-                            <span class="hot">Mall</span>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Totino's Pizza</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-3.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Maruchan Ramen</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-9.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">USA Noodle Soup</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-4.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Red Baron Pizza</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-10.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Mrs. Smith's Pie</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-5.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Dove Promises</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-11.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Mrs. Dash</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-6.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Lindt Grocery A1</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-12.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Snyder's-Lance</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-13.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Dreyer's/Edy's</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-14.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Wonderful</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-15.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Almonds</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--end vendor card-->
-            <div class="col-lg-3 col-md-6 col-12 col-sm-6">
-                <div class="vendor-wrap mb-40">
-                    <div class="vendor-img-action-wrap">
-                        <div class="vendor-img">
-                            <a href="#">
-                                <img class="default-img" src="{{ asset('assets/frontend/imgs/vendor/vendor-1.png') }}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="vendor-content-wrap">
-                        <div class="d-flex justify-content-between align-items-end mb-30">
-                            <div>
-                                <div class="product-category">
-                                    <span class="text-muted">Since 2012</span>
-                                </div>
-                                <h4 class="mb-5"><a href="#">Pistachios</a></h4>
-
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-10">
-                                <span class="font-small total-product">380 products</span>
-                            </div>
-                        </div>
-
-                        <div class="vendor-info mb-30">
-                            <ul class="contact-infor text-muted">
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-xs">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
-                    </div>
-                </div>
-            </div> --}}
-            <!--end vendor card-->
         </div>
 
         <div class="pagination-area mt-20 mb-20">
@@ -824,3 +155,67 @@
 
 
 @endsection
+
+
+@push('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.sortById').each(function() {
+                var $this = $(this);
+                $this.on('click', function() {
+                    event.preventDefault();
+
+                    var slug = "{{ $store->slug }}"
+                    var url = $this.attr('href');
+                    $('.sortById').removeClass('active');
+                    $this.addClass('active');
+
+                    fireAjax(url, slug);
+                });
+
+            });
+
+            function fireAjax(url, slug) {
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    type: 'get',
+                    success: function(response) {
+                        $('#oldSortDiv').empty();
+                        $('#newSortDiv').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // alert('hello Masud');
+
+            $(document).on('click', '.page-item a', function(event) {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                var url = "{{ url('/vendor-details?page=', [$store->slug]) }}" + page;
+
+                $.ajax({
+                    url: url,
+                    success: function(response) {
+                        $('#oldSortDiv').empty();
+                        $('#newSortDiv').html(response);
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    {{-- <script type="text/javascript">
+    $(document).ready(function() {
+             alert('hello Masud');
+
+
+
+        });
+    </script> --}}
+@endpush

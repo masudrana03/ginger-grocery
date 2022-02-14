@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         return view('backend.categories.index');
     }
 
     /**
      * @param Request $request
      */
-    public function allCategories( Request $request ) {
+    public function allCategories(Request $request)
+    {
         $columns = [
             0 => 'id',
             1 => 'name',
@@ -31,39 +35,39 @@ class CategoryController extends Controller {
 
         $totalFiltered = $totalData;
 
-        $limit = $request->input( 'length' );
-        $start = $request->input( 'start' );
-        $order = $columns[$request->input( 'order.0.column' )];
-        $dir   = $request->input( 'order.0.dir' );
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir   = $request->input('order.0.dir');
 
-        if ( empty( $request->input( 'search.value' )) ) {
-            $categories = Category::offset( $start )
-                ->limit( $limit )
-                ->orderBy( $order, $dir )
+        if (empty($request->input('search.value'))) {
+            $categories = Category::offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
                 ->get();
         } else {
-            $search = $request->input( 'search.value' );
+            $search = $request->input('search.value');
 
-            $categories = Category::where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
-                ->offset( $start )
-                ->limit( $limit )
-                ->orderBy( $order, $dir )
+            $categories = Category::where('id', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
                 ->get();
 
-            $totalFiltered = Category::where( 'id', 'LIKE', "%{$search}%" )
-                ->orWhere( 'name', 'LIKE', "%{$search}%" )
+            $totalFiltered = Category::where('id', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
                 ->count();
         }
 
         $data = [];
 
-        if ( !empty( $categories ) ) {
-            foreach ( $categories as $category ) {
-                $edit   = route('admin.categories.edit', $category->id );
-                $delete = route('admin.categories.destroy', $category->id );
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                $edit   = route('admin.categories.edit', $category->id);
+                $delete = route('admin.categories.destroy', $category->id);
                 $token  = csrf_token();
-                $img    = asset( 'assets/img/uploads/categories/thumbnail/' . $category->image );
+                $img    = asset('assets/img/uploads/categories/thumbnail/' . $category->image);
 
                 $nestedData['id']         = $category->id;
                 $nestedData['name']       = $category->name;
@@ -82,13 +86,13 @@ class CategoryController extends Controller {
         }
 
         $json_data = [
-            "draw"            => intval( $request->input( 'draw' ) ),
-            "recordsTotal"    => intval( $totalData ),
-            "recordsFiltered" => intval( $totalFiltered ),
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
             "data"            => $data,
         ];
 
-        echo json_encode( $json_data );
+        echo json_encode($json_data);
     }
 
     /**
@@ -96,7 +100,8 @@ class CategoryController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('backend.categories.create');
     }
 
@@ -106,29 +111,31 @@ class CategoryController extends Controller {
      * @param  \Illuminate\Http\Request    $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request ) {
-        $this->validate( $request, [
+    public function store(Request $request)
+    {
+        $this->validate($request, [
             'name'  => 'required|unique:categories',
             'image' => 'required|image',
-        ] );
+        ]);
 
-        if ( $request->hasFile( 'image' ) ) {
-            $image             = $request->file( 'image' );
+        if ($request->hasFile('image')) {
+            $image             = $request->file('image');
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-            $location          = public_path( 'assets/img/uploads/categories/' . $filename );
-            $thumbnailLocation = public_path( 'assets/img/uploads/categories/thumbnail/' . $filename );
+            $location          = public_path('assets/img/uploads/categories/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/categories/thumbnail/' . $filename);
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $category        = new Category();
-        $category->name  = $request->name;
-        $category->image = $filename;
+        $category         = new Category();
+        $category->name   = $request->name;
+        $category->image  = $filename;
+        $category['slug'] = Str::slug($request->name);
         $category->save();
 
-        toast( 'Category successfully created', 'success' );
+        toast('Category successfully created', 'success');
 
-        return redirect()->route('admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -137,7 +144,8 @@ class CategoryController extends Controller {
      * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show( Category $category ) {
+    public function show(Category $category)
+    {
         //
     }
 
@@ -147,8 +155,9 @@ class CategoryController extends Controller {
      * @param  \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit( Category $category ) {
-        return view('backend.categories.edit', compact( 'category' ) );
+    public function edit(Category $category)
+    {
+        return view('backend.categories.edit', compact('category'));
     }
 
     /**
@@ -158,21 +167,22 @@ class CategoryController extends Controller {
      * @param  \App\Models\Category        $category
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, Category $category ) {
-        $this->validate( $request, [
+    public function update(Request $request, Category $category)
+    {
+        $this->validate($request, [
             'name'  => 'required|unique:categories,name,' . $category->id,
             'image' => 'image',
-        ] );
+        ]);
 
-        if ( $request->hasFile( 'image' ) ) {
+        if ($request->hasFile('image')) {
             $imageDirectory = 'assets/img/uploads/categories/';
 
-            deleteImage( $category->image, $imageDirectory );
+            deleteImage($category->image, $imageDirectory);
 
-            $image             = $request->file( 'image' );
+            $image             = $request->file('image');
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-            $location          = public_path( 'assets/img/uploads/categories/' . $filename );
-            $thumbnailLocation = public_path( 'assets/img/uploads/categories/thumbnail/' . $filename );
+            $location          = public_path('assets/img/uploads/categories/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/categories/thumbnail/' . $filename);
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
 
@@ -182,9 +192,9 @@ class CategoryController extends Controller {
         $category->name = $request->name;
         $category->save();
 
-        toast( 'Category successfully updated', 'success' );
+        toast('Category successfully updated', 'success');
 
-        return redirect()->route('admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -193,7 +203,8 @@ class CategoryController extends Controller {
      * @param  \App\Models\Categories      $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Category $category ) {
+    public function destroy(Category $category)
+    {
 
         if ($category->products) {
             toast('Category could not deleted as it already used', 'error');
@@ -203,11 +214,11 @@ class CategoryController extends Controller {
 
         $imageDirectory = 'assets/img/uploads/categories/';
 
-        deleteImage( $category->image, $imageDirectory );
+        deleteImage($category->image, $imageDirectory);
 
         $category->delete();
 
-        toast( 'Category successfully deleted', 'success' );
+        toast('Category successfully deleted', 'success');
 
         return back();
     }

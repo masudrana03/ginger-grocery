@@ -29,11 +29,11 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\SocialLoginController;
 use App\Components\Payment\Single\StripePayment;
-use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\CallToActionController;
 use App\Http\Controllers\ContactWithUsController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
@@ -48,7 +48,6 @@ use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutControll
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 use App\Http\Controllers\Frontend\SocialiteController as FrontendSocialiteController;
 use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
-use Illuminate\Support\Facades\Session;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -254,7 +253,7 @@ Route::post('/contact-massage-from', [FrontendContactController::class, 'contact
 
 Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
-Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
+Route::get('/vendor-list', [FrontendVendorController::class, 'vendorIndex'])->name('vendor.list');
 Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
 // Route::get('/sort/{slug}', [FrontendVendorController::class, 'ajaxSort'])->name('vendor.sort');
 

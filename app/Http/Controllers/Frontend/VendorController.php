@@ -10,9 +10,42 @@ use App\Http\Controllers\Controller;
 
 class VendorController extends Controller
 {
-    public function vendors()
+    public function vendorIndex(Request $request)
     {
-        $stores = Store::with('products')->paginate(12);
+        // $defaultPaginate = 5;
+
+        // $store = Store::with('products')->get();
+
+        // $vendorWise = $store->products();
+
+        // if ($request->query('sort') == 'low_to_high') {
+        //     $vendorWise = $store->products()->orderBy('price');
+        // }
+
+        // if ($request->query('sort') == 'high_to_low') {
+        //     $vendorWise = $store->products()->orderByDesc('price');
+        // }
+
+        // if ($request->query('sort') == 'release') {
+        //     $vendorWise = $store->products()->orderByDesc('id');
+        // }
+
+        // if ($request->query('numeric_sort')) {
+        //     $defaultPaginate = $request->query('numeric_sort');
+        // }
+
+        // if ($request->query('numeric_sort') == 'all') {
+        //     $defaultPaginate = count($store->products);
+        // }
+
+        // $vendorWise = $vendorWise->paginate($defaultPaginate);
+
+        if ($request->ajax()) {
+            return $request;
+            // return view('frontend.vendor', compact('stores'));
+        }
+
+        $stores = Store::with('products')->paginate(2);
 
         return view('frontend.vendor', compact('stores'));
     }
@@ -31,11 +64,28 @@ class VendorController extends Controller
         $q = explode("-", $price);
 
         $nutritions = Nutrition::all();
-        $brands = Brand::all();
 
         $defaultPaginate = 5;
 
         $store = Store::with('products')->whereSlug($slug)->firstOrFail();
+
+        $storeBrands = $store->products->pluck('brand_id')->unique();
+        $brands = Brand::find($storeBrands);
+
+        // return  $store->products()->each(function ($product) {
+        //     $product->where('nutrition_product.product_id', '=', 'products.id');
+        // })->get();
+
+        // return  $store->with(['products', 'products.nutritions' => function ($query) {
+        //     $query->where('products.id', '=', 'nutrition_product.product_id');
+        // }])->get();
+
+       // $nutritions = $store->with('products.nutritions')->get();
+        // return $nutritions;
+
+
+        //return $storeBrands;
+
 
         $vendorWise = $store->products();
 
