@@ -584,6 +584,7 @@
                                                     @if ( $category->image )
 
                                                         <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+                                                        
 
                                                     @else
 
@@ -591,13 +592,13 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{  ucwords(strtolower($category->name))  }} </a>
+                                                    {{ucwords(strtolower($category->name))}}</a>
                                             </li>
                                         @empty
                                             <li>
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                        alt="" />Clothing & beauty</a>
+                                                        alt="" />No Category Found</a>
                                             </li>
                                         @endforelse
 
@@ -642,12 +643,13 @@
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
                                                     {{ ucwords(strtolower($category->name)) }}</a>
+                                                    {{-- {{ ucwords(strtolower('AAA BBB')) }}</a> --}}
                                             </li>
                                         @empty
                                             <li>
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                        alt="" />Clothing & beauty</a>
+                                                        alt="" />No Category Found</a>
                                             </li>
                                         @endforelse
                                     </ul>
@@ -670,12 +672,13 @@
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
                                                     {{ ucwords(strtolower($category->name)) }}</a>
+                                                    {{-- {{ ucwords(strtolower('AAA BBB')) }}</a> --}}
                                             </li>
                                             @empty
                                                 <li>
                                                     <a href="#"  style="line-height: 1.1;"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                            alt="" />Clothing & beauty</a>
+                                                            alt="" />No Category Found</a>
                                                 </li>
                                             @endforelse
 
@@ -715,7 +718,7 @@
                                                 <li>
                                                     <a href="#"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                            alt="" />Clothing & beauty</a>
+                                                            alt="" />No Category Found</a>
                                                 </li>
                                             @endforelse
                                         </ul>

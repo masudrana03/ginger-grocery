@@ -189,7 +189,9 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-
+        
+        
+        //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
@@ -202,6 +204,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
+        return $request;
         $productData        = $request->except('image', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
 

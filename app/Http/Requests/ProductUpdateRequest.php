@@ -27,18 +27,19 @@ class ProductUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            'name'         => 'required',
-            'description'  => 'required',
-            'excerpt'      => 'required',
-            'price'        => 'required',
-            'brand_id'     => 'required',
-            'category_id'  => 'required',
-            'unit_id'      => 'required',
-            'types'        => 'required',
-            'nutritions'   => 'required',
-            'store_id'     => 'required',
-            'currency_id'  => 'required',
+            // 'name'         => 'required',
+            // 'description'  => 'required',
+            // 'excerpt'      => 'required',
+            // 'price'        => 'required',
+            // 'brand_id'     => 'required',
+            // 'category_id'  => 'required',
+            // 'unit_id'      => 'required',
+            // 'types'        => 'required',
+            // 'nutritions'   => 'required',
+            // 'store_id'     => 'required',
+            // 'currency_id'  => 'required',
         ];
     }
 }
