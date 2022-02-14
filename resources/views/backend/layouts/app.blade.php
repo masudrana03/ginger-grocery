@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="icon" href="img/mini_logo.png') }}" type="image/png">
+    <link rel="icon" href="img/mini_logo.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <!-- themefy CSS -->
@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/material_icon/material-icons.css') }}" />
     <!-- map css  -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/mapJs/mapsjs-ui.css') }}" />
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/plugins/select2.min.css')}}">
 
     <!-- menu css  -->
     <link rel="stylesheet" href="{{ asset('assets/css/metisMenu.css') }}">
@@ -51,11 +52,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/colors/default.css') }}" id="colorSkinCSS">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     {{-- ajax link for file upload --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
 
     @stack('styles')
 </head>
@@ -487,6 +489,7 @@
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/frontend/js/plugins/select2.min.js') }}"></script>
     @stack('script')
 </body>
 

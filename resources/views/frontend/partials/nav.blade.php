@@ -294,7 +294,7 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="search-location">
+                                {{-- <div class="search-location">
                                     <form action="{{ route('index') }}" id="zoneForm" method="get">
                                         <select name="zone_id" class="select-active" onchange="getval(this);">
                                             <option>Your Location</option>
@@ -306,9 +306,9 @@
 
                                             {{-- <option> {{$zones->name}}</option> --}}
 
-                                        </select>
+                                        {{-- </select>
                                     </form>
-                                </div>
+                                </div> --}}
                                 @php
                                     // $productIds = session('compare');
                                     // $compareProduct = App\Models\Product::find($productIds) ?? [];
