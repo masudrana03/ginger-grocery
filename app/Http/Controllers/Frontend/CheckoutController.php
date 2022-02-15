@@ -344,6 +344,10 @@ class CheckoutController extends Controller
     }
 
     public function ajaxShippingCalculation(Request $request){
-        $address_id = request('address_id');  
+        $address_id = request('address_id');
+        
+        
+
+        
     }
 }

@@ -165,7 +165,7 @@
                                             </div>
                                             <div class="col-md-3 ">
                                                 <select name="phone_code"
-                                                    class="select-two phone-code @error('phone_code') is-invalid @enderror"
+                                                    class="select-two phone-code  @error('phone_code') is-invalid @enderror"
                                                    >
                                                     @foreach ($countries as $country)
                                                         <option class="phone-code"

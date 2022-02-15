@@ -57,6 +57,16 @@ class CartController extends Controller
         return $this->addToCart($request);
     }
 
+    public function ajaxAddToCartById($id){
+        $request = new Request([
+            'product_id' => $id,
+            'quantity'   => 1,
+        ]);
+        
+        return $this->addToCart($request);
+        
+    }
+
     public function cart()
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];

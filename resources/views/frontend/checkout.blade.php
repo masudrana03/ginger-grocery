@@ -215,7 +215,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <input required="" type="text" name="zip" placeholder="Postcode / ZIP *"
                                     class="@error('zip') is-invalid @enderror">
                                 @error('zip')
@@ -224,7 +224,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-2">
+                            <div class="form-group  col-lg-2 ">
                                 <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
                                     @foreach ($countries as $countryName)
                                         <option value="{{ $countryName->id }}">
@@ -234,7 +234,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')
@@ -564,7 +564,9 @@
                     // alert(address);
                 
                     var address_id = $this.val();
+                    alert(address_id);
                    ajaxLoadingStoreId(address_id);
+
 
 
                 });

@@ -3294,7 +3294,7 @@ p a:hover {
     border-radius: 50%;
     top: -10px;
     background-color: #3BB77E;
-    -webkit-animation: notify-pulse 1s infinite;
+     -webkit-animation: notify-pulse 1s infinite;
 }
 
 @-webkit-keyframes notify-pulse {
