@@ -417,7 +417,7 @@
                                             id="exampleCheckbo-{{ $brand->id }}" value="{{ $brand->id }}" />
                                         <label class="form-check-label"
                                             for="exampleCheckbo-{{ $brand->id }}"><span>{{ $brand->name }} (
-                                                {{ count($brand->products) }} )</span></label>
+                                                {{ $brand->ProductsByStore($store->id) }} )</span></label>
                                         <br />
                                     @endforeach
 
@@ -484,6 +484,15 @@
                     }
                 });
             });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+             alert('hello Masud');
+
+
 
         });
     </script>

@@ -19,4 +19,23 @@ class Nutrition extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    /**
+     * Get the product associated with the nutritions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function nutritionsByStore($storeId)
+    {
+        return $this->hasMany(Product::class)->where('store_id', $storeId)->where('brand_id', $this->id)->count();
+    }
+
+    // Booking model
+    // public function meta()
+    // {
+    // return $this->belongsToMany('MetaType', 'meta', 'booking_id', 'metatype_id')
+    //         ->withPivot([ ARRAY OF FIELDS YOU NEED FROM meta TABLE ]);
+    // }
+
+
 }
