@@ -76,7 +76,7 @@ class VendorController extends Controller
             $product->where('store_id', $store->id);
         })->get();
 
-        return $nutritions;
+        // return $nutritions;
 
         $storeBrands = $store->products->pluck('brand_id')->unique();
         $brands = Brand::find($storeBrands);
