@@ -246,7 +246,7 @@
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Product Images</h4>
-                                                    <input type="file" name="image[]" id="image" multiple=""
+                                                    <input type="file"  id="image" name="image[]" multiple=""
                                                         class="d-none " onchange="image_select()">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button"
                                                         onclick="document.getElementById('image').click()">Select
@@ -254,6 +254,11 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="container">
+
+                                                    {{-- <div class="image_container d-flex justify-content-center position-relative">
+                                                        <img src="{{ asset('assets/img/uploads/products/'.$) }}" alt="Image">
+                                                        <span class="position-absolute" onclick="delete_image(this)">&times;</span>
+                                                    </div>` --}}
                                                     <!-- Image will be show here-->
                                                 </div>
                                             </div>
@@ -269,7 +274,7 @@
         </div>
     </div>
 
-    <div id="action-button-row" style="display: none;">
+    {{-- <div id="action-button-row" style="display: none;">
         <div class="form-group row">
             <div class="col-sm-3">
                 <input type="file" name="image[]">
@@ -279,9 +284,11 @@
                     class="fas fa-plus-circle addRow"></i>
                 <i style="vertical-align: -webkit-baseline-middle; font-size: 22px; color: #884FFB"
                     class="fas fa-minus-circle removeRow"></i>
+                     <input type="file"  id="image" name="image[]" multiple="" style="display:none">
+
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('script')
@@ -336,6 +343,7 @@
             }
 
             //document.getElementById('form').reset();
+            
             document.getElementById('container').innerHTML = image_show();
         }
 
@@ -343,12 +351,18 @@
             var image = "";
             images.forEach((i) => {
                 image += `<div class="image_container d-flex justify-content-center position-relative">
-   	  	  	  	  <img src="` + i.url + `" alt="Image">
+   	  	  	  	  <img  src="` + i.url + `" alt="Image">
+                  
    	  	  	  	  <span class="position-absolute" onclick="delete_image(` + images.indexOf(i) + `)">&times;</span>
-   	  	  	  </div>`;
+   	  	  	    </div>`;
+                
             })
             return image;
         }
+
+        // function setValueToImageNameAttr(){
+        //     let imageName = document.getElementByTag();
+        // }
 
         function delete_image(e) {
             images.splice(e, 1);
