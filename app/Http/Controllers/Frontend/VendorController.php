@@ -12,40 +12,45 @@ class VendorController extends Controller
 {
     public function vendorIndex(Request $request)
     {
-        // $defaultPaginate = 5;
+        $defaultPaginate = 5;
+        $vendorWise = '';
 
-        // $store = Store::with('products')->get();
-
-        // $vendorWise = $store->products();
+        $allStore = Store::query();
 
         // if ($request->query('sort') == 'low_to_high') {
-        //     $vendorWise = $store->products()->orderBy('price');
+        //     $vendorWise = $store->orderBy('price');
         // }
 
         // if ($request->query('sort') == 'high_to_low') {
-        //     $vendorWise = $store->products()->orderByDesc('price');
+        //     $vendorWise = $store->orderByDesc('price');
         // }
 
         // if ($request->query('sort') == 'release') {
-        //     $vendorWise = $store->products()->orderByDesc('id');
+        //     $vendorWise = $store->orderByDesc('id');
         // }
 
-        // if ($request->query('numeric_sort')) {
-        //     $defaultPaginate = $request->query('numeric_sort');
-        // }
+        // return $defaultPaginate;
 
-        // if ($request->query('numeric_sort') == 'all') {
-        //     $defaultPaginate = count($store->products);
-        // }
-
-        // $vendorWise = $vendorWise->paginate($defaultPaginate);
-
-        if ($request->ajax()) {
-            return $request;
-            // return view('frontend.vendor', compact('stores'));
+        if ($request->query('numeric_sort')) {
+            $defaultPaginate = $request->query('numeric_sort');
         }
 
-        $stores = Store::with('products')->paginate(2);
+        if ($request->query('numeric_sort') == 'all') {
+            $defaultPaginate = count($allStore->get('id'));
+        }
+
+        // return $defaultPaginate;
+
+        $stores = $allStore->paginate($defaultPaginate);
+
+        // return $stores;
+
+        if ($request->ajax()) {
+            // return $request;
+            return view('frontend.ajax.vendor-store-sort', compact('stores'));
+        }
+
+        // $stores = Store::with('products')->paginate(2);
 
         return view('frontend.vendor', compact('stores'));
     }
@@ -63,11 +68,15 @@ class VendorController extends Controller
         $price = str_replace("$", "", $request->price);
         $q = explode("-", $price);
 
-        $nutritions = Nutrition::all();
-
         $defaultPaginate = 5;
 
         $store = Store::with('products')->whereSlug($slug)->firstOrFail();
+
+        $nutritions = Nutrition::withCount('products')->whereHas('products', function ($product) use ($store) {
+            $product->where('store_id', $store->id);
+        })->get();
+
+        return $nutritions;
 
         $storeBrands = $store->products->pluck('brand_id')->unique();
         $brands = Brand::find($storeBrands);
@@ -131,7 +140,7 @@ class VendorController extends Controller
 
         if ($request->ajax()) {
             // return $request;
-            return view('frontend.ajax.vendor-sort', compact('store', 'vendorWise', 'brands', 'nutritions'));
+            return view('frontend.ajax.vendor-product-sort', compact('store', 'vendorWise', 'brands', 'nutritions'));
         }
 
         return view('frontend.vendor-details', compact('store', 'vendorWise', 'brands', 'nutritions'));

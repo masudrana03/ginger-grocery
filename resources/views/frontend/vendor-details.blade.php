@@ -47,7 +47,7 @@
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul class="sorting">
-                                    <li><a class="sortById {{ request()->get('numeric_sort') == '2' ? 'active' : '' }}"
+                                    <li><a class="sortById"
                                             href="{{ url('/vendor-details?numeric_sort=2', [$store->slug]) }}">50</a></li>
                                     <li><a class="sortById"
                                             href="{{ url('/vendor-details?numeric_sort=3', [$store->slug]) }}">100</a>
@@ -459,6 +459,7 @@
                     url: url,
                     type: 'get',
                     success: function(response) {
+                        console.log(response);
                         $('#oldSortDiv').empty();
                         $('#newSortDiv').html(response);
                     }
@@ -490,7 +491,7 @@
 
     <script type="text/javascript">
     $(document).ready(function() {
-             alert('hello Masud');
+            //  alert('hello Masud');
 
 
 
