@@ -177,10 +177,9 @@
                                     <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($types as $type)
-                                            <option @foreach ($product->types as $productType)
-                                                {{ $productType->id == $type->id ? 'selected' : '' }}
-                                        @endforeach
-                                        value="{{ $type->id }}">{{ $type->name }}</option>
+                                            <option
+                                                @foreach ($product->types as $productType) {{ $productType->id == $type->id ? 'selected' : '' }} @endforeach
+                                                value="{{ $type->id }}">{{ $type->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('types')
@@ -211,10 +210,9 @@
                                         class="single2 form-control @error('nutritions') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($nutritions as $nutrition)
-                                            <option @foreach ($product->nutritions as $productNutrition)
-                                                {{ $productNutrition->id == $nutrition->id ? 'selected' : '' }}
-                                        @endforeach
-                                        value="{{ $nutrition->id }}">{{ $nutrition->name }}</option>
+                                            <option
+                                                @foreach ($product->nutritions as $productNutrition) {{ $productNutrition->id == $nutrition->id ? 'selected' : '' }} @endforeach
+                                                value="{{ $nutrition->id }}">{{ $nutrition->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('nutritions')
@@ -246,19 +244,25 @@
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Product Images</h4>
-                                                    <input type="file"  id="image" name="image[]" multiple=""
+                                                    <input type="file"  id="image" name="files[]"  multiple
                                                         class="d-none " onchange="image_select()">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button"
                                                         onclick="document.getElementById('image').click()">Select
                                                         Images</button>
+
+                                                    {{-- <input type="file" name="images[]" id="images"
+                                                        placeholder="Choose images" multiple> --}}
                                                 </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                <div class="card-body d-flex flex-wrap justify-content-start images-preview-div"
                                                     id="container">
 
-                                                    {{-- <div class="image_container d-flex justify-content-center position-relative">
-                                                        <img src="{{ asset('assets/img/uploads/products/'.$) }}" alt="Image">
+                                                    @foreach ($product->images as $productImg)
+                                                    <div class="image_container d-flex justify-content-center position-relative">
+                                                        <img src="{{ asset('assets/img/uploads/products/' .$productImg->image) }}" alt="Image">
+                                                        
                                                         <span class="position-absolute" onclick="delete_image(this)">&times;</span>
-                                                    </div>` --}}
+                                                    </div>
+                                                    @endforeach
                                                     <!-- Image will be show here-->
                                                 </div>
                                             </div>
@@ -325,7 +329,7 @@
             });
         });
 
-        // image upload js code 
+      
         var images = [];
 
         function image_select() {
@@ -337,32 +341,31 @@
                         "url": URL.createObjectURL(image[i]),
                         "file": image[i],
                     })
+                  //setValueToImageNameAttr(image[i].name);
                 } else {
                     alert(image[i].name + " is already added to the list");
                 }
             }
 
             //document.getElementById('form').reset();
-            
             document.getElementById('container').innerHTML = image_show();
         }
+
 
         function image_show() {
             var image = "";
             images.forEach((i) => {
                 image += `<div class="image_container d-flex justify-content-center position-relative">
-   	  	  	  	  <img  src="` + i.url + `" alt="Image">
-                  
-   	  	  	  	  <span class="position-absolute" onclick="delete_image(` + images.indexOf(i) + `)">&times;</span>
-   	  	  	    </div>`;
-                
+      	  	  <img  src="` + i.url + `" alt="Image">
+
+      	  	  <span class="position-absolute" onclick="delete_image(` + images.indexOf(i) + `)">&times;</span>
+      	    </div>`;
+
             })
             return image;
         }
 
-        // function setValueToImageNameAttr(){
-        //     let imageName = document.getElementByTag();
-        // }
+       
 
         function delete_image(e) {
             images.splice(e, 1);

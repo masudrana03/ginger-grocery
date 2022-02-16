@@ -225,83 +225,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br> <small>This image size must be upto ( 215px X 66px )</small>
-                                            @if ($errors->all())
-                                                <h6 class="modal-header justify-content-start"
-                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
-                                                    {{ $errors->first('logo') }}</h6>
-                                            @endif
-                                            <div class="card shadow-sm w-100">
-                                                <div class="card-header d-flex justify-content-start">
-                                                    <h4>Upload Logo Images</h4>
+                                
 
-                                                    <input type="file" name="logo" id="logo" accept="image/*"
-                                                        class="d-none " onchange="showLogo(this)">
-                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
-                                                        onclick="document.getElementById('logo').click()">Select
-                                                        Image</button>
-                                                </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start"
-                                                    id="image-container">
-                                                    <img class="banner-image" id="thumbnil">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="form-group">
-                                            <label for="logo">Logo</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="logo" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br> <small>This image size must be upto ( 500 x 600 )</small>
-                                            @if ($errors->all())
-                                                <h6 class="modal-header justify-content-start"
-                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
-                                                    {{ $errors->first('favicon') }}</h6>
-                                            @endif
-                                            <div class="card shadow-sm w-100">
-                                                <div class="card-header d-flex justify-content-start">
-                                                    <h4>Upload Down Nav Image</h4>
-
-                                                    <input type="file" name="down_nav_image" id="navImg" accept="image/*"
-                                                        class="d-none " onchange="showNavImg(this)">
-                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
-                                                        onclick="document.getElementById('navImg').click()">Select
-                                                        Image</button>
-                                                </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start"
-                                                    id="image-container">
-                                                    <img class="banner-image" id="navs">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                              
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -323,7 +249,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="banner-image" id="favicons">
+                                                    <img class="banner-image" src="{{ asset('assets/img/uploads/settings/favicon/'.settings('favicon'))}}" id="favicons">
                                                 </div>
                                             </div>
                                         </div>
@@ -350,7 +276,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="banner-image" id="mini_logos">
+                                                    <img class="banner-image" src="{{ asset('assets/img/uploads/settings/logo/'.settings('mini_logo'))}}" id="mini_logos">
                                                 </div>
                                             </div>
                                         </div>
@@ -378,7 +304,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="banner-image" id="contact_images">
+                                                    <img class="banner-image" src="{{ asset('assets/img/uploads/settings/contactImage/'.settings('contact_image'))}}" id="contact_images">
                                                 </div>
                                             </div>
                                         </div>
@@ -405,7 +331,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="banner-image" id="login_images">
+                                                    <img class="banner-image" src="{{ asset('assets/img/uploads/settings/loginImage/'.settings('login_image'))}}" id="login_images">
                                                 </div>
                                             </div>
                                         </div>
@@ -433,7 +359,7 @@
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start"
                                                     id="image-container">
-                                                    <img class="banner-image" id="thumbnil">
+                                                    <img class="banner-image" src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo'))}}" id="thumbnil">
                                                 </div>
                                             </div>
                                         </div>
