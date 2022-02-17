@@ -43,6 +43,8 @@ class HomeController extends Controller
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
 
+        
+
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }
 

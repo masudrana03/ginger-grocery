@@ -442,6 +442,7 @@
                     $('#app').html(old_data);
                 }
             });
+            
         });
 
         function loadHome(search, page = 1) {
@@ -460,7 +461,7 @@
 
                     $('html, body').animate({
                         scrollTop: $("body").offset().top
-                    }, 2000);
+                    },2000);
                 },
                 error: function(error) {
                     console.log(error);

@@ -39,7 +39,9 @@ class ProductUpdateRequest extends FormRequest
             'types'        => 'required',
             'nutritions'   => 'required',
             'store_id'     => 'required',
-            'currency_id'  => 'required',
+            'files'        => 'required',
+            // 'currency_id'  => 'required',
+            // 'files'        => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=1100px,min_height=1100px',
         ];
     }
 }

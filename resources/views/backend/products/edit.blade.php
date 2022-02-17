@@ -244,8 +244,8 @@
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Product Images</h4>
-                                                    <input type="file"  id="image" name="files[]"  multiple
-                                                        class="d-none " onchange="image_select()">
+                                                    <input type="file"  id="image" name="files[]" accept="image/*"   multiple
+                                                        class="d-none @error('files') is-invalid @enderror"" onchange="image_select()">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button"
                                                         onclick="document.getElementById('image').click()">Select
                                                         Images</button>
