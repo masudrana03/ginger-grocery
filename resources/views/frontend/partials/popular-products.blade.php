@@ -18,7 +18,7 @@
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
                 @if (($search ?? false) == false)
-                    @forelse ($categoryProducts->random(6) as $category )
+                    @forelse ($categoryProducts->random(6) as $category)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
                                 data-bs-target="#tab-{{ $category->id }}" type="button" role="tab"
@@ -89,7 +89,8 @@
                                                     style="width: {{ $product->rating * 20 }}%"></div>
                                             </div>
                                             <span class="font-small ml-5 text-muted">
-                                                ({{ round($product->rating, 1) }})</span>
+                                                ({{ round($product->rating, 1) }})
+                                            </span>
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a
@@ -102,7 +103,7 @@
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add"
-                                                    href="{{ route('ajaxCartById', $product->id) }}"><i
+                                                    href="{{ route('cartById', $product->id) }}"><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -126,7 +127,7 @@
                 <div class="tab-pane fade" id="tab-{{ $category->id }}" role="tabpanel"
                     aria-labelledby="tab-{{ $category->id }}">
                     <div class="row product-grid-4">
-                        @forelse ( $category->products()->take(10)->get() as $product )
+                        @forelse ($category->products()->take(10)->get() as $product)
                             <div class="col-lg-1-5 col-md-4 col-12 col-sm-6  product-indiv">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
@@ -177,7 +178,8 @@
                                                     style="width: {{ $product->rating * 20 }}%"></div>
                                             </div>
                                             <span class="font-small ml-5 text-muted">
-                                                ({{ round($product->rating, 1) }})</span>
+                                                ({{ round($product->rating, 1) }})
+                                            </span>
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a
@@ -189,11 +191,14 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <a class="add"
-                                                    href="{{ route('ajaxCartById', $product->id) }}" style=""><i
+                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" > 
+                                                <a class="add" id="cart-btn"
+                                                    href="{{ route('cartById', $product->id) }}" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
+                                                <input style="display: none;" name="product_id"
+                                                    value="{{ $product->id }}">
 
                                             </div>
                                         </div>
@@ -217,8 +222,20 @@
 <!--Products Tabs-->
 @push('script')
     <script>
+        // $(document).ready(function() {
+        //  $('#cart-btn').on('click', function () {
+        //       var pro_id = $('#product-id').val();
+        //       alert(pro_id);
+        //   });
+
+        // });
+
+
+        var old_data = #('#app').html();
+
         $(document).ready(function() {
             $(".add-cart .add").on('click', function(event) {
+                $('#app').html(old_data);
                 addCart(event.target);
             });
         });
@@ -226,32 +243,49 @@
         function addCart(node) {
             var closest_div = $(node).closest('.add-cart');
             var id = closest_div.find('.product-id').text();
-            alert(id);
-
-            addToCartById(id);
-
-
-        }
-
-        function addToCartById(id) {
+            //alert(id);
+            //addToCartById(id);
+            var pid = id;
+            var url = '{{ route('cartById', ':id') }}';
+            url = url.replace(':id', pid);
             $.ajax({
                 method: 'GET',
-                url: "{{ url('/add-to-cart-ajax/', [$product->id]) }}",
+                url: url,
                 data: {
-                    id: id,
+                    id: pid,
 
                 },
                 success: function(html) {
-                    alert("successfully done !");
+                    //console.table(html);
+                    $('#old-cart').empty();
+                    $('#new-cart').html(html);
                 },
                 error: function(error) {
                     console.log(error);
                 }
             });
+        }
 
+        function addToCartById(id) {
+            var pid = id;
+            var url = '{{ route('cartById', ':id') }}';
+            url = url.replace(':id', pid);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: pid,
 
+                },
+                success: function(html) {
+                    //console.table(html);
+                    $('#old-cart').empty();
+                    $('#new-cart').html(html);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         }
     </script>
-
-
 @endpush

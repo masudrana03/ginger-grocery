@@ -488,12 +488,5 @@
         });
     </script>
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-            //  alert('hello Masud');
 
-
-
-        });
-    </script>
 @endpush

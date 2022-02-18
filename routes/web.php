@@ -206,7 +206,7 @@ Route::post('/location', [HomeController::class, 'getZone'])->name('location');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
-    Route::get('/add-to-cart-ajax/{id}', [FrontendCartController::class, 'ajaxAddToCartById'])->name('ajaxCartById');
+    // Route::post('/add-to-cart-ajax', [FrontendCartController::class, 'ajaxAddToCartById'])->name('ajaxCartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
     Route::post('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
