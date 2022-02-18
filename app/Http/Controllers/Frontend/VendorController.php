@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Brand;
 use App\Models\Store;
+use App\Models\Product;
 use App\Models\Nutrition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,19 +18,13 @@ class VendorController extends Controller
 
         $allStore = Store::query();
 
-        // if ($request->query('sort') == 'low_to_high') {
-        //     $vendorWise = $store->orderBy('price');
-        // }
+        if ($request->query('sort') == 'total_items') {
+            $vendorWise = $allStore->withCount('products')->orderBy('products_count', 'desc');
+        }
 
-        // if ($request->query('sort') == 'high_to_low') {
-        //     $vendorWise = $store->orderByDesc('price');
-        // }
-
-        // if ($request->query('sort') == 'release') {
-        //     $vendorWise = $store->orderByDesc('id');
-        // }
-
-        // return $defaultPaginate;
+        if ($request->query('sort') == 'avg_rating') {
+            $vendorWise = $allStore->withCount('productRating')->orderBy('product_rating_count', 'desc');
+        }
 
         if ($request->query('numeric_sort')) {
             $defaultPaginate = $request->query('numeric_sort');
@@ -42,8 +37,6 @@ class VendorController extends Controller
         // return $defaultPaginate;
 
         $stores = $allStore->paginate($defaultPaginate);
-
-        // return $stores;
 
         if ($request->ajax()) {
             // return $request;
@@ -65,10 +58,9 @@ class VendorController extends Controller
     {
         // return $request;
 
+        $defaultPaginate = 5;
         $price = str_replace("$", "", $request->price);
         $q = explode("-", $price);
-
-        $defaultPaginate = 5;
 
         $store = Store::with('products')->whereSlug($slug)->firstOrFail();
 
@@ -78,23 +70,9 @@ class VendorController extends Controller
 
         // return $nutritions;
 
+
         $storeBrands = $store->products->pluck('brand_id')->unique();
         $brands = Brand::find($storeBrands);
-
-        // return  $store->products()->each(function ($product) {
-        //     $product->where('nutrition_product.product_id', '=', 'products.id');
-        // })->get();
-
-        // return  $store->with(['products', 'products.nutritions' => function ($query) {
-        //     $query->where('products.id', '=', 'nutrition_product.product_id');
-        // }])->get();
-
-       // $nutritions = $store->with('products.nutritions')->get();
-        // return $nutritions;
-
-
-        //return $storeBrands;
-
 
         $vendorWise = $store->products();
 
@@ -106,11 +84,29 @@ class VendorController extends Controller
             $vendorWise = $store->products()->where('brand_id', $request->brand);
         }
 
+        // if ($request->nutrition) {
+        //     $vendorWise = Nutrition::with('products')->whereHas('products', function ($product) use ($store) {
+        //         $product->where('store_id', $store->id);
+        //     });
+
+        //     // return $vendorWise;
+        // }
+
         if ($request->nutrition) {
-            $vendorWise = $store->products()->whereHas('nutritions', function ($query) use ($request) {
-                $query->where('nutrition_id', $request->nutrition);
+            $vendorWise = Product::whereHas('nutritions', function ($nutrition) use ($store, $request) {
+                $nutrition->where('store_id', $store->id)->whereIn('nutrition_id', $request->nutrition);
             });
+
+            // return $vendorWise;
         }
+
+        // if ($request->nutrition) {
+        //     $vendorWise = $store->products()->whereHas('nutritions', function ($query) use ($request) {
+        //         $query->where('nutrition_id', $request->nutrition);
+        //     });
+
+        //     return $vendorWise;
+        // }
 
         if ($request->query('search')) {
             $vendorWise = $store->products()->where('name', $request->query('search'));
@@ -137,6 +133,7 @@ class VendorController extends Controller
         }
 
         $vendorWise = $vendorWise->paginate($defaultPaginate);
+        // return $vendorWise;
 
         if ($request->ajax()) {
             // return $request;
@@ -145,5 +142,4 @@ class VendorController extends Controller
 
         return view('frontend.vendor-details', compact('store', 'vendorWise', 'brands', 'nutritions'));
     }
-
 }
