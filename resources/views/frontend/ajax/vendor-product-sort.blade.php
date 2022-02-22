@@ -67,52 +67,10 @@
         </div>
     @empty
         <!--end product card-->
-        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+
+        <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <div class="product-cart-wrap mb-30">
-                <div class="product-img-action-wrap">
-                    <div class="product-img product-img-zoom">
-                        <a href="#">
-                            <img class="default-img"
-                                src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="" />
-                            <img class="hover-img"
-                                src="{{ asset('assets/frontend/imgs/shop/product-3-2.jpg') }}" alt="" />
-                        </a>
-                    </div>
-                    <div class="product-action-1">
-                        <a aria-label="Add To Wishlist" class="action-btn" href="#"><i
-                                class="fi-rs-heart"></i></a>
-                        <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
-                        {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
-                    </div>
-                    <div class="product-badges product-badges-position product-badges-mrg">
-                        <span class="new">New</span>
-                    </div>
-                </div>
-                <div class="product-content-wrap">
-                    <div class="product-category">
-                        <a href="#">Snack</a>
-                    </div>
-                    <h2><a href="#">Angie’s Boomchickapop Sweet & Salty</a></h2>
-                    <div class="product-rate-cover">
-                        <div class="product-rate d-inline-block">
-                            <div class="product-rating" style="width: 85%"></div>
-                        </div>
-                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                    </div>
-                    <div>
-                        <span class="font-small text-muted">By <a href="#">StarKist</a></span>
-                    </div>
-                    <div class="product-card-bottom">
-                        <div class="product-price">
-                            <span>$48.85</span>
-                            <span class="old-price">$52.8</span>
-                        </div>
-                        <div class="add-cart">
-                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <h2 style="text-align: center; padding-top: 10%; padding-bottom: 10%;">No Products Found....</h2>
             </div>
         </div>
     @endforelse

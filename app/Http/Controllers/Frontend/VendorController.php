@@ -45,7 +45,6 @@ class VendorController extends Controller
         if ($request->ajax()) {
             // return $request->name;
             if ($request->name) {
-                // return view('frontend.ajax.vendor-search', compact('stores'));
                 return view('frontend.ajax.vendor-store-sort', compact('stores'));
             }
             return view('frontend.ajax.vendor-store-sort', compact('stores'));
@@ -116,9 +115,12 @@ class VendorController extends Controller
         //     return $vendorWise;
         // }
 
-        if ($request->query('search')) {
-            $vendorWise = $store->products()->where('name', $request->query('search'));
+        if ($request->query('name')) {
+            $vendorWise = $store->products()->where('name', 'like', '%' . $request->query('name') . '%');
+
         }
+
+
 
         if ($request->query('sort') == 'low_to_high') {
             $vendorWise = $store->products()->orderBy('price');
@@ -144,7 +146,7 @@ class VendorController extends Controller
         // return $vendorWise;
 
         if ($request->ajax()) {
-            // return $request;
+            // return $request->name;
             return view('frontend.ajax.vendor-product-sort', compact('store', 'vendorWise', 'brands', 'nutritions'));
         }
 
