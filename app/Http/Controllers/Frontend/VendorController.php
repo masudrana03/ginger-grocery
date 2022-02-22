@@ -34,12 +34,20 @@ class VendorController extends Controller
             $defaultPaginate = count($allStore->get('id'));
         }
 
+        if ($request->query('name')) {
+            $vendorWise = $allStore->where('name', 'like', '%' . $request->query('name') . '%', );
+        }
+
         // return $defaultPaginate;
 
         $stores = $allStore->paginate($defaultPaginate);
 
         if ($request->ajax()) {
-            // return $request;
+            // return $request->name;
+            if ($request->name) {
+                // return view('frontend.ajax.vendor-search', compact('stores'));
+                return view('frontend.ajax.vendor-store-sort', compact('stores'));
+            }
             return view('frontend.ajax.vendor-store-sort', compact('stores'));
         }
 

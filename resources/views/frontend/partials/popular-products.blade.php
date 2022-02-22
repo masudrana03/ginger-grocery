@@ -17,7 +17,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @if (($search ?? false) == false)
+                @if (($search ?? false) == false) 
                     @forelse ($categoryProducts->random(6) as $category)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -191,7 +191,7 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" > 
+                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
                                                 <a class="add" id="cart-btn"
                                                     href="{{ route('cartById', $product->id) }}" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
