@@ -266,49 +266,27 @@ Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'face
 
 Route::get('c/{id}', function ($id) {
 
-    $wishListProducts = Cache::get('products');
+    $compareProducts = Cache::get('products');
 
-    if (! $wishListProducts) {
+    if (! $compareProducts) {
         Cache::put('products', [$id], 30);
         return Cache::get('products');
     }
 
-    if (in_array($id, $wishListProducts)) {
+    if (in_array($id, $compareProducts)) {
         return Cache::get('products');
     }
     
-    if (count($wishListProducts) >= 3) {
-        array_shift($wishListProducts);
-        array_push($wishListProducts, $id);
-        Cache::put('products', $wishListProducts, 30);
+    if (count($compareProducts) >= 3) {
+        array_shift($compareProducts);
+        array_push($compareProducts, $id);
+        Cache::put('products', $compareProducts, 30);
         return Cache::get('products');
     }
 
-    array_push($wishListProducts, $id);
-    Cache::put('products', $wishListProducts, 30);
+    array_push($compareProducts, $id);
+    Cache::put('products', $compareProducts, 30);
     return Cache::get('products');
-
-    // $wishListProducts = Session::get('products');
-
-    // if (! $wishListProducts) {
-    //     Session::put('products', [$id], 30);
-    //     return Session::get('products');
-    // }
-
-    // if (in_array($id, $wishListProducts)) {
-    //     return Session::get('products');
-    // }
-    
-    // if (count($wishListProducts) >= 3) {
-    //     array_shift($wishListProducts);
-    //     array_push($wishListProducts, $id);
-    //     Session::put('products', $wishListProducts, 30);
-    //     return Session::get('products');
-    // }
-
-    // array_push($wishListProducts, $id);
-    // Session::put('products', $wishListProducts, 30);
-    // return Session::get('products');
 });
 
 Auth::routes();
