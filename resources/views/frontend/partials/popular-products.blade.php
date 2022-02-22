@@ -65,7 +65,7 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn"
+                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
                                                 href="{{ route('compareProduct', $product->id) }}"><i
                                                     class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"

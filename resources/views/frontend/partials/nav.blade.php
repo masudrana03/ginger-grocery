@@ -1159,6 +1159,16 @@
         }
     </script>
 
+    <script>
+        $(document).ready(function() {
+        $(".compare-btn").click(function(event) {
+            event.preventDefault();
+        var myClass = $(this).attr("data-id");
+        alert(myClass);
+        });
+    });
+    </script>
+
 <script>
     $(document).ready(function() {
         $(".add-cart .add").on('click', function(event) {
