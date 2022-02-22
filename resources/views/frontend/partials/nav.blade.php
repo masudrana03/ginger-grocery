@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
-                            <div id="news-flash" class="d-inline-block">
+                            <div id="news-flash" class="d-inline-block" >
                                 <ul>
                                     <li>{{ settings('news_flash_one') }}</li>
                                     <li>{{ settings('news_flash_two') }}</li>
@@ -425,84 +425,76 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="old-cart">
-                                    <div class="header-action-icon-2" id="old-cart">
-                                        <a class="mini-cart-icon" href="{{route('cart')}}">
-                                            <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
-                                            <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
-                                        </a>
-                                        <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
-                                        <div class="cart-dropdown-wrap cart-dropdown-hm2"  >
-                                            <ul>
+                                <div class="header-action-icon-2" id="old-cart">
+                                    <a class="mini-cart-icon" href="{{route('cart')}}">
+                                        <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
+                                        <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
+                                    </a>
+                                    <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <ul>
+                                            @php
+                                                $total = 0;
+                                                $currency_symbol = '$';
+                                            @endphp
+                                            @forelse ((auth()->user()->cart->products) ?? [] as $product)
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="{{ route('products', $product->id) }}">
+
+                                                            @if (count($product->images) > 0)
+
+                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+
+                                                            @else
+
+                                                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+
+                                                            @endif
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4><a
+                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                                        </h4>
+                                                        <h4><span>{{ $product->quantity }} ×
+                                                            </span>{{ settings('currency') }}{{ $product->price }}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete del-cart">
+                                                        <a class="d-cart" href="{{ route('cart.remove', $product->id) }}"><i
+                                                                class="fi-rs-cross-small"></i></a>
+                                                        <small class="del-product-id" style="display: none;">{{ $product->id }}</small>
+                                                    </div>
+                                                </li>
                                                 @php
-                                                    $total = 0;
-                                                    $currency_symbol = '$';
+                                                    $total += $product->quantity * $product->price;
+                                                    $currency_symbol = settings('currency');
                                                 @endphp
-                                                @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                                    <li id="old-del-cart">
-                                                        <div class="shopping-cart-img">
-                                                            <a href="{{ route('products', $product->id) }}">
-    
-                                                                @if (count($product->images) > 0)
-    
-                                                                    <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
-    
-                                                                @else
-    
-                                                                    <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
-    
-                                                                @endif
-    
-                                                            </a>
-                                                        </div>
-                                                        <div class="shopping-cart-title">
-                                                            <h4><a
-                                                                    href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
-                                                            </h4>
-                                                            <h4><span>{{ $product->quantity }} ×
-                                                                </span>{{ settings('currency') }}{{ $product->price }}
-                                                            </h4>
-                                                        </div>
-                                                        <div class="shopping-cart-delete del-cart">
-                                                            <a class="d-cart" href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
-                                                            <small class="del-product-id" style="display: none;">{{ $product->id }}</small>
-                                                        </div>
-                                                    </li>
+                                            @empty
+                                                <li>
 
-                                                    <li id="new-del-cart">
+                                                    <div class="shopping-cart-title">
+                                                        <h4>No Items</h4>
+                                                    </div>
 
-                                                    </li>
-                                                    @php
-                                                        $total += $product->quantity * $product->price;
-                                                        $currency_symbol = settings('currency');
-                                                    @endphp
-                                                @empty
-                                                    <li>
-    
-                                                        <div class="shopping-cart-title">
-                                                            <h4>No Items</h4>
-                                                        </div>
-    
-                                                    </li>
-                                                @endforelse
-                                            </ul>
-                                            <div class="shopping-cart-footer">
-                                                <div class="shopping-cart-total">
-                                                    <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
-                                                    </h4>
-                                                </div>
-                                                <div class="shopping-cart-button">
-                                                    <a href="{{ route('cart') }}" class="outline">View cart</a>
-                                                    <a href="{{ route('checkout') }}">Checkout</a>
-                                                </div>
+                                                </li>
+                                            @endforelse
+                                        </ul>
+                                        <div class="shopping-cart-footer">
+                                            <div class="shopping-cart-total">
+                                                <h4>Total <span>{{ $currency_symbol }}{{ $total }}</span>
+                                                </h4>
+                                            </div>
+                                            <div class="shopping-cart-button">
+                                                <a href="{{ route('cart') }}" class="outline">View cart</a>
+                                                <a href="{{ route('checkout') }}">Checkout</a>
                                             </div>
                                         </div>
-                                        <div class=" "></div>
                                     </div>
                                 </div>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2" id="new-del-cart"> 
-
-                                </div>
+                                <div id="new-cart"></div>
                                 @if ( auth()->user() )
                                 @auth
                                     <div class="header-action-icon-2">
@@ -595,7 +587,6 @@
                                                     @if ( $category->image )
 
                                                         <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
-                                                        
 
                                                     @else
 
@@ -603,13 +594,13 @@
 
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
-                                                    {{ucwords(strtolower($category->name))}}</a>
+                                                    {{  ucwords(strtolower($category->name))  }} </a>
                                             </li>
                                         @empty
                                             <li>
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                        alt="" />No Category Found</a>
+                                                        alt="" />Clothing & beauty</a>
                                             </li>
                                         @endforelse
 
@@ -654,13 +645,12 @@
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
                                                     {{ ucwords(strtolower($category->name)) }}</a>
-                                                    {{-- {{ ucwords(strtolower('AAA BBB')) }}</a> --}}
                                             </li>
                                         @empty
                                             <li>
                                                 <a href="#"> <img
                                                         src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                        alt="" />No Category Found</a>
+                                                        alt="" />Clothing & beauty</a>
                                             </li>
                                         @endforelse
                                     </ul>
@@ -683,13 +673,12 @@
                                                     @endif
                                                     {{-- <img src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"alt="" /> --}}
                                                     {{ ucwords(strtolower($category->name)) }}</a>
-                                                    {{-- {{ ucwords(strtolower('AAA BBB')) }}</a> --}}
                                             </li>
                                             @empty
                                                 <li>
                                                     <a href="#"  style="line-height: 1.1;"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                            alt="" />No Category Found</a>
+                                                            alt="" />Clothing & beauty</a>
                                                 </li>
                                             @endforelse
 
@@ -729,7 +718,7 @@
                                                 <li>
                                                     <a href="#"> <img
                                                             src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                            alt="" />No Category Found</a>
+                                                            alt="" />Clothing & beauty</a>
                                                 </li>
                                             @endforelse
                                         </ul>
@@ -929,7 +918,7 @@
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
-                            <div class="header-action-icon-2">
+                            <div class="header-action-icon-2" id="old-cart">
                                 <a class="mini-cart-icon" href="#">
                                     <img alt="Nest"
                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -974,6 +963,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="new-cart" >
+
                             </div>
                         </div>
                     </div>
@@ -1169,6 +1161,44 @@
 
 <script>
     $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Adding!!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
             event.preventDefault();
             deleteCart(event.target);
@@ -1193,10 +1223,10 @@
 
             },
             success: function(result) {
-            console.log(result);
-              $('#old-del-cart').empty();
-              $('#new-del-cart').html(result);
-            tata.success('Error!', 'Product Deleted Form your cart.');
+                //console.log(result);
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.error('Error!', 'Product Deleted Form your cart.');
             },
             error: function(error) {
                 console.log(error);

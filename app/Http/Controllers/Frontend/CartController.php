@@ -81,11 +81,12 @@ class CartController extends Controller
     public function removeToCartById($id)
     {
         $product = Product::find($id);
-
+        
         $product->carts()->detach();
 
+        //$cart = Cart::where('user_id', auth()->id())->first();
 
-        return view('frontend.ajax.deleteCart');
+        return view('frontend.ajax.cart');
     }
 
     public function cartUpdate(Request $request)
