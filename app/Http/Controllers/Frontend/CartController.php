@@ -15,8 +15,6 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
-        
-       
             $request->validate([
                 'product_id' => 'required',
                 'quantity'   => 'required',
@@ -44,13 +42,8 @@ class CartController extends Controller
                     'options'  => $request->options ? json_encode($request->options) : null,
                 ],
             ], false);
-            // return view('frontend.ajax.cart', compact('cart'))->with('success', 'Product added to cart');
             
-            // if ($request->ajax()) {
-            //     return view('frontend.ajax.cart', compact('cart'))->with('success', 'Product added to cart');
-            
-            // }
-                return back()->with('success', 'Product added to cart');
+            return view('frontend.ajax.cart');
     }
     
 
@@ -88,10 +81,12 @@ class CartController extends Controller
     public function removeToCartById($id)
     {
         $product = Product::find($id);
-
+        
         $product->carts()->detach();
 
-        return back()->with('success', 'Product removed from cart');
+        //$cart = Cart::where('user_id', auth()->id())->first();
+
+        return view('frontend.ajax.cart');
     }
 
     public function cartUpdate(Request $request)

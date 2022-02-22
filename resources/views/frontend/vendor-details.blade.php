@@ -511,7 +511,6 @@
                 let search = $('#search-product').val();
 
                 if (search.length > 2) {
-
                     $('#oldProductSearch').html(loading);
 
                     var url = "{{ url('/vendor-details?name=', [$store->slug]) }}" + search;
@@ -527,8 +526,6 @@
                             }
                         });
                     }, 1500);
-
-
                     // loadHome(search);
                     // $('#app').html(loading);
                 } else {

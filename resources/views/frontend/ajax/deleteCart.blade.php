@@ -1,8 +1,7 @@
 <div class="header-action-icon-2">
-    <a class="mini-cart-icon" href="{{ route('cart') }}">
+    <a class="mini-cart-icon" href="{{route('cart')}}">
         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
-        <span
-            class="pro-count blue">{{ auth()->user() && auth()->user()->cart? auth()->user()->cart->products()->count(): 0 }}</span>
+        <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
     </a>
     <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
     <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -17,28 +16,27 @@
                         <a href="{{ route('products', $product->id) }}">
 
                             @if (count($product->images) > 0)
-                                <img src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                    alt="" />
+
+                                <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
 
                             @else
 
                                 <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+
                             @endif
 
                         </a>
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a
-                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18))) }}</a>
+                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                         </h4>
                         <h4><span>{{ $product->quantity }} ×
                             </span>{{ settings('currency') }}{{ $product->price }}
                         </h4>
                     </div>
-                    <div class="shopping-cart-delete del-cart">
-                        <a class="d-cart" href="{{ route('cart.remove', $product->id) }}"><i
-                                class="fi-rs-cross-small"></i></a>
-                        <small class="del-product-id" style="display: none;">{{ $product->id }}</small>
+                    <div class="shopping-cart-delete">
+                        <a href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
                     </div>
                 </li>
                 @php
@@ -67,40 +65,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $(".del-cart .d-cart").on('click', function(event) {
-            event.preventDefault();
-            deleteCart(event.target);
-        });
-    });
-
-    function deleteCart(node) {
-        var closest_div = $(node).closest('.del-cart');
-        var id = closest_div.find('.del-product-id').text();
-        deleteFromCartById(id);
-    }
-
-    function deleteFromCartById(id) {
-        var pid = id;
-        var url = "{!! route('cart.remove', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-
-            },
-            success: function(result) {
-                //console.log(result);
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-                tata.error('Deleting!', 'Product Deleted Form your cart.');
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
-</script>

@@ -65,7 +65,7 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn"
+                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
                                                 href="{{ route('compareProduct', $product->id) }}"><i
                                                     class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add"
-                                                    href="{{ route('cartById', $product->id) }}"><i
+                                                    href="#"><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -193,7 +193,7 @@
                                             <div class="add-cart">
                                                 <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
                                                 <a class="add" id="cart-btn"
-                                                    href="{{ route('cartById', $product->id) }}" style=""><i
+                                                    href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -221,71 +221,5 @@
 </section>
 <!--Products Tabs-->
 @push('script')
-    <script>
-        // $(document).ready(function() {
-        //  $('#cart-btn').on('click', function () {
-        //       var pro_id = $('#product-id').val();
-        //       alert(pro_id);
-        //   });
 
-        // });
-
-
-        var old_data = #('#app').html();
-
-        $(document).ready(function() {
-            $(".add-cart .add").on('click', function(event) {
-                $('#app').html(old_data);
-                addCart(event.target);
-            });
-        });
-
-        function addCart(node) {
-            var closest_div = $(node).closest('.add-cart');
-            var id = closest_div.find('.product-id').text();
-            //alert(id);
-            //addToCartById(id);
-            var pid = id;
-            var url = '{{ route('cartById', ':id') }}';
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-
-                },
-                success: function(html) {
-                    //console.table(html);
-                    $('#old-cart').empty();
-                    $('#new-cart').html(html);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function addToCartById(id) {
-            var pid = id;
-            var url = '{{ route('cartById', ':id') }}';
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-
-                },
-                success: function(html) {
-                    //console.table(html);
-                    $('#old-cart').empty();
-                    $('#new-cart').html(html);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-    </script>
 @endpush
