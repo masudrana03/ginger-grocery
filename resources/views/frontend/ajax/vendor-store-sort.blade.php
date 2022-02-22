@@ -62,7 +62,7 @@
     @empty
         <div class="col-lg-12 col-md-6 col-12 col-sm-6">
             <div class="vendor-wrap mb-40">
-                <h1>No Vendor Found</h1>
+                <h2 style="text-align: center; padding-top: 10%;padding-bottom: 10%;">No Vendor Found</h2>
             </div>
         </div>
     @endforelse
