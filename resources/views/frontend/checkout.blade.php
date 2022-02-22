@@ -102,6 +102,10 @@
         border-radius: 10px !important;
     }
 
+    .total-amount{
+        padding-right:8%;
+    }
+
 </style>
 
 @section('content')
@@ -345,7 +349,7 @@
                                 $tax = priceCalculator($product)['tax'] ?? 0;
                                 $shipping = 0;
                             @endphp
-                            <div class="p-2">
+                            <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
                                     @php
                                         $subtotal += $item->price;
@@ -389,16 +393,16 @@
                                 <div class="col-6 calculate-total">
                                     <p class="">Subtotal:</p>
                                     <p class="">Shipping Fee:</p>
-                                    <p class="">Tex:</p>
-                                    <h5 class="">Total:</h5>
+                                    <p class="">Tax:</p>
+                                    <h5 class="" >Total:</h5>
                                 </div>
 
                                 <div class="col-6 calculate">
-                                    <p class=""> {{ $currency }}{{ $subtotal }} </p>
-                                    <p class="store-shipping" id="{{ $store->id }}"> {{ $currency }}0 </p>
+                                    <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
+                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0 </p>
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
-                                    <p class=""> {{ $currency }}{{ $tax }} </p>
-                                    <h5 class=""> {{ $currency }}{{ $subtotal + $shipping + $tax }}
+                                    <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
+                                    <h5 class="total-amount"> {{ $currency }}{{ $subtotal + $shipping + $tax }}
                                     </h5>
                                 </div>
                             </div>
@@ -426,10 +430,10 @@
                     </div>
 
                     <div class="col-6 calculate">
-                        <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
-                        <p class=""> {{ $currency }}{{ $grandShipping }} </p>
-                        <p class=""> {{ $currency }}{{ $grandTax }} </p>
-                        <h5 class="">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
+                        <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
+                        <p class="total-amount"> {{ $currency }}{{ $grandShipping }} </p>
+                        <p class="total-amount"> {{ $currency }}{{ $grandTax }} </p>
+                        <h5 class="total-amount">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
                         </h5>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        
         if (env('APP_NAME') == '') {
             return view('start');
         }

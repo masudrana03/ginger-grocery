@@ -432,14 +432,14 @@
                                             <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
                                         </a>
                                         <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
-                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2"  >
                                             <ul>
                                                 @php
                                                     $total = 0;
                                                     $currency_symbol = '$';
                                                 @endphp
                                                 @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                                    <li>
+                                                    <li id="old-del-cart">
                                                         <div class="shopping-cart-img">
                                                             <a href="{{ route('products', $product->id) }}">
     
@@ -463,9 +463,14 @@
                                                                 </span>{{ settings('currency') }}{{ $product->price }}
                                                             </h4>
                                                         </div>
-                                                        <div class="shopping-cart-delete">
-                                                            <a href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
+                                                        <div class="shopping-cart-delete del-cart">
+                                                            <a class="d-cart" href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
+                                                            <small class="del-product-id" style="display: none;">{{ $product->id }}</small>
                                                         </div>
+                                                    </li>
+
+                                                    <li id="new-del-cart">
+
                                                     </li>
                                                     @php
                                                         $total += $product->quantity * $product->price;
@@ -492,9 +497,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class=" "></div>
                                     </div>
                                 </div>
-                                <div id="new-cart"> 
+                                <div class="cart-dropdown-wrap cart-dropdown-hm2" id="new-del-cart"> 
 
                                 </div>
                                 @if ( auth()->user() )
@@ -1160,3 +1166,41 @@
             $('#zoneForm').submit();
         }
     </script>
+
+<script>
+    $(document).ready(function() {
+        $(".del-cart .d-cart").on('click', function(event) {
+            event.preventDefault();
+            deleteCart(event.target);
+        });
+    });
+
+    function deleteCart(node) {
+        var closest_div = $(node).closest('.del-cart');
+        var id = closest_div.find('.del-product-id').text();
+        deleteFromCartById(id);
+    }
+
+    function deleteFromCartById(id) {
+        var pid = id;
+        var url = "{!! route('cart.remove', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+            console.log(result);
+              $('#old-del-cart').empty();
+              $('#new-del-cart').html(result);
+            tata.success('Error!', 'Product Deleted Form your cart.');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
