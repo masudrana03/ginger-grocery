@@ -20,7 +20,8 @@
                         <div class="sidebar-widget-2 widget_search mb-50">
                             <div class="search-form">
                                 <form action="#">
-                                    <input type="text" placeholder="Search vendors (by name or ID)..." />
+                                    {{-- <input type="text" placeholder="Search vendors (by name or ID)..." /> --}}
+                                    <input name="search" id="search-vendor" type="text" placeholder="Search vendors (by name or ID)..." />
                                     <button type="submit"><i class="fi-rs-search"></i></button>
                                 </form>
                             </div>
@@ -82,12 +83,21 @@
                                     </div>
                                 </div>
                                 <div class="sort-by-dropdown">
-                                    <ul>
-                                        <li><a class="active" href="#">Mall</a></li>
+                                    <ul class="sorting">
+                                        {{-- <li><a class="sortById" href="{{ url('/vendor-list?sort=featured') }}"
+                                                data="featured">Featured</a></li> --}}
+                                        <li><a class="sortById" href="{{ url('/vendor-list?sort=total_items') }}"
+                                                data="total_items">Total items</a></li>
+                                        <li><a class="sortById" href="{{ url('/vendor-list?sort=avg_rating') }}"
+                                                data="avg_rating">Avg. Rating</a></li>
+
+
+
+                                        {{-- <li><a class="active" href="#">Mall</a></li>
                                         <li><a href="#">Featured</a></li>
                                         <li><a href="#">Preferred</a></li>
                                         <li><a href="#">Total items</a></li>
-                                        <li><a href="#">Avg. Rating</a></li>
+                                        <li><a href="#">Avg. Rating</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -249,12 +259,23 @@
         });
     </script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function() {
-             alert('hello Masud');
 
+        $('#search-vendor').on('keyup', function() {
+                let search = $('#search-vendor').val();
+
+                if (search.length > 2) {
+                    // alert(search);
+
+                    // loadHome(search);
+                   // $('#app').html(loading);
+                } else {
+                   // $('#app').html(old_data);
+                }
+            });
 
 
         });
-    </script> --}}
+    </script>
 @endpush

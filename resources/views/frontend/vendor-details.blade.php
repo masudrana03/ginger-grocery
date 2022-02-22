@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
-                                <ul class="sorting">
+                                <ul class="sorting" >
                                     {{-- <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li> --}}
                                     <li><a class="sortById"
                                             href="{{ url('/vendor-details?sort=low_to_high', [$store->slug]) }}"
@@ -382,7 +382,7 @@
                 <!-- Fillter By Price -->
                 <div class="sidebar-widget price_range range mb-30">
                     <h5 class="section-title style-1 mb-30">Fill by price</h5>
-                    <form action="{{ route('vendor.details', [$store->id]) }}" method="get" class="form-horizontal">
+                    <form action="{{ route('vendor.details', [$store->slug]) }}" method="get" class="form-horizontal">
                         @csrf
                         <div class="price-filter">
                             <div class="price-filter-inner">
@@ -401,7 +401,7 @@
 
                                     {{-- {{  $store->products->nutritions }} --}}
                                     @foreach ($nutritions as $nutrition)
-                                        <input class="form-check-input" type="checkbox" name="nutrition"
+                                        <input class="form-check-input" type="checkbox" name="nutrition[]"
                                             id="exampleCheckbox-{{ $nutrition->id }}" value="{{ $nutrition->id }}" />
                                         <label class="form-check-label"
                                             for="exampleCheckbox-{{ $nutrition->id }}"><span>{{ $nutrition->name }} (
@@ -459,7 +459,6 @@
                     url: url,
                     type: 'get',
                     success: function(response) {
-                        console.log(response);
                         $('#oldSortDiv').empty();
                         $('#newSortDiv').html(response);
                     }
