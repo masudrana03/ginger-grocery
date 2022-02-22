@@ -144,14 +144,14 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $product            = $request->except('image', 'types', 'nutritions');
+        $product            = $request->except('files', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
         $product['slug']    = Str::slug($request->name);
 
         $product = Product::create($product);
 
-        if ($request->hasFile('image')) {
-            $this->uploadProductImage($product, $request->file('image'));
+        if ($request->hasFile('files')) {
+            $this->uploadProductImage($product, $request->file('files'));
         }
 
         $product->types()->attach($request->types);
@@ -189,7 +189,9 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-
+        
+        
+        //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
 
@@ -202,15 +204,16 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-        $productData        = $request->except('image', 'types', 'nutritions');
+       // return [$request->files[0]->getClientOriginalExtension()];
+        $productData        = $request->except('files', 'types', 'nutritions');
         $product['user_id'] = auth()->id();
 
         $productData['slug']    = Str::slug($request->name);
         $product->update($productData);
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('files')) {
             $product->images()->delete();
-            $this->uploadProductImage($product, $request->file('image'));
+            $this->uploadProductImage($product, $request->file('files'));
         }
 
         $product->types()->sync($request->types);

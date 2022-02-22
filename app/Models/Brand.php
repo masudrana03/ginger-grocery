@@ -18,4 +18,9 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function productsByStore($storeId)
+    {
+        return $this->hasMany(Product::class)->where('store_id', $storeId)->where('brand_id', $this->id)->count();
+    }
 }

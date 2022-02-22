@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
-                            <div id="news-flash" class="d-inline-block">
+                            <div id="news-flash" class="d-inline-block" >
                                 <ul>
                                     <li>{{ settings('news_flash_one') }}</li>
                                     <li>{{ settings('news_flash_two') }}</li>
@@ -294,7 +294,7 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="search-location">
+                                {{-- <div class="search-location">
                                     <form action="{{ route('index') }}" id="zoneForm" method="get">
                                         <select name="zone_id" class="select-active" onchange="getval(this);">
                                             <option>Your Location</option>
@@ -306,9 +306,9 @@
 
                                             {{-- <option> {{$zones->name}}</option> --}}
 
-                                        </select>
+                                        {{-- </select>
                                     </form>
-                                </div>
+                                </div> --}}
                                 @php
                                     // $productIds = session('compare');
                                     // $compareProduct = App\Models\Product::find($productIds) ?? [];
@@ -425,7 +425,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="header-action-icon-2">
+                                <div class="header-action-icon-2" id="old-cart">
                                     <a class="mini-cart-icon" href="{{route('cart')}}">
                                         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                         <span class="pro-count blue">{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products()->count() : 0 }}</span>
@@ -462,8 +462,10 @@
                                                             </span>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
                                                     </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="{{ route('cart.remove', $product->id) }}"><i class="fi-rs-cross-small"></i></a>
+                                                    <div class="shopping-cart-delete del-cart">
+                                                        <a class="d-cart" href="{{ route('cart.remove', $product->id) }}"><i
+                                                                class="fi-rs-cross-small"></i></a>
+                                                        <small class="del-product-id" style="display: none;">{{ $product->id }}</small>
                                                     </div>
                                                 </li>
                                                 @php
@@ -492,6 +494,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="new-cart"></div>
                                 @if ( auth()->user() )
                                 @auth
                                     <div class="header-action-icon-2">
@@ -915,7 +918,7 @@
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
-                            <div class="header-action-icon-2">
+                            <div class="header-action-icon-2" id="old-cart">
                                 <a class="mini-cart-icon" href="#">
                                     <img alt="Nest"
                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -960,6 +963,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="new-cart" >
+
                             </div>
                         </div>
                     </div>
@@ -1152,3 +1158,79 @@
             $('#zoneForm').submit();
         }
     </script>
+
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Adding!!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $(".del-cart .d-cart").on('click', function(event) {
+            event.preventDefault();
+            deleteCart(event.target);
+        });
+    });
+
+    function deleteCart(node) {
+        var closest_div = $(node).closest('.del-cart');
+        var id = closest_div.find('.del-product-id').text();
+        deleteFromCartById(id);
+    }
+
+    function deleteFromCartById(id) {
+        var pid = id;
+        var url = "{!! route('cart.remove', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.error('Error!', 'Product Deleted Form your cart.');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>

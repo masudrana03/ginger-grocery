@@ -15,34 +15,37 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required',
-            'quantity'   => 'required',
-        ]);
+            $request->validate([
+                'product_id' => 'required',
+                'quantity'   => 'required',
+            ]);
 
-        $product = Product::find($request->product_id);
+            $product = Product::find($request->product_id);
 
-        if (!$product) {
-            return back()->with('error', 'Product not found');
-        }
-
-        $cart = Cart::where('user_id', auth()->id())->first();
-
-        if (!$cart) {
-            $cart          = new Cart();
-            $cart->user_id = auth()->id();
-            $cart->save();
-        }
-
-        $cart->products()->sync([
-            $product->id => [
-                'quantity' => $request->quantity,
-                'options'  => $request->options ? json_encode($request->options) : null,
-            ],
-        ], false);
-
-        return back()->with('success', 'Product added to cart');
+            //return $product;
+    
+            if (!$product) {
+                return back()->with('error', 'Product not found');
+            }
+    
+            $cart = Cart::where('user_id', auth()->id())->first();
+    
+            if (!$cart) {
+                $cart          = new Cart();
+                $cart->user_id = auth()->id();
+                $cart->save();
+            }
+    
+            $cart->products()->sync([
+                $product->id => [
+                    'quantity' => $request->quantity,
+                    'options'  => $request->options ? json_encode($request->options) : null,
+                ],
+            ], false);
+            
+            return view('frontend.ajax.cart');
     }
+    
 
     /**
      * @param $id
@@ -78,10 +81,12 @@ class CartController extends Controller
     public function removeToCartById($id)
     {
         $product = Product::find($id);
-
+        
         $product->carts()->detach();
 
-        return back()->with('success', 'Product removed from cart');
+        //$cart = Cart::where('user_id', auth()->id())->first();
+
+        return view('frontend.ajax.cart');
     }
 
     public function cartUpdate(Request $request)

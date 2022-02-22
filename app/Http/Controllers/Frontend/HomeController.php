@@ -22,6 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        
         if (env('APP_NAME') == '') {
             return view('start');
         }
@@ -42,6 +43,8 @@ class HomeController extends Controller
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
+
+        
 
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }

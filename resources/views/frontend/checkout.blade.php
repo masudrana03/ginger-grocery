@@ -102,6 +102,10 @@
         border-radius: 10px !important;
     }
 
+    .total-amount{
+        padding-right:8%;
+    }
+
 </style>
 
 @section('content')
@@ -215,7 +219,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <input required="" type="text" name="zip" placeholder="Postcode / ZIP *"
                                     class="@error('zip') is-invalid @enderror">
                                 @error('zip')
@@ -224,7 +228,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-2">
+                            <div class="form-group  col-lg-2 ">
                                 <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
                                     @foreach ($countries as $countryName)
                                         <option value="{{ $countryName->id }}">
@@ -234,7 +238,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')
@@ -345,7 +349,7 @@
                                 $tax = priceCalculator($product)['tax'] ?? 0;
                                 $shipping = 0;
                             @endphp
-                            <div class="p-2">
+                            <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
                                     @php
                                         $subtotal += $item->price;
@@ -389,16 +393,16 @@
                                 <div class="col-6 calculate-total">
                                     <p class="">Subtotal:</p>
                                     <p class="">Shipping Fee:</p>
-                                    <p class="">Tex:</p>
-                                    <h5 class="">Total:</h5>
+                                    <p class="">Tax:</p>
+                                    <h5 class="" >Total:</h5>
                                 </div>
 
                                 <div class="col-6 calculate">
-                                    <p class=""> {{ $currency }}{{ $subtotal }} </p>
-                                    <p class="store-shipping" id="{{ $store->id }}"> {{ $currency }}0 </p>
+                                    <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
+                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0 </p>
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
-                                    <p class=""> {{ $currency }}{{ $tax }} </p>
-                                    <h5 class=""> {{ $currency }}{{ $subtotal + $shipping + $tax }}
+                                    <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
+                                    <h5 class="total-amount"> {{ $currency }}{{ $subtotal + $shipping + $tax }}
                                     </h5>
                                 </div>
                             </div>
@@ -426,10 +430,10 @@
                     </div>
 
                     <div class="col-6 calculate">
-                        <p class=""> {{ $currency }}{{ $grandSubtotal }} </p>
-                        <p class=""> {{ $currency }}{{ $grandShipping }} </p>
-                        <p class=""> {{ $currency }}{{ $grandTax }} </p>
-                        <h5 class="">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
+                        <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
+                        <p class="total-amount"> {{ $currency }}{{ $grandShipping }} </p>
+                        <p class="total-amount"> {{ $currency }}{{ $grandTax }} </p>
+                        <h5 class="total-amount">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
                         </h5>
                     </div>
                 </div>
@@ -564,7 +568,9 @@
                     // alert(address);
                 
                     var address_id = $this.val();
+                    alert(address_id);
                    ajaxLoadingStoreId(address_id);
+
 
 
                 });

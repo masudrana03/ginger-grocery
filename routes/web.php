@@ -29,11 +29,11 @@ use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\SocialLoginController;
 use App\Components\Payment\Single\StripePayment;
-use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\CallToActionController;
 use App\Http\Controllers\ContactWithUsController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\ShippingServiceController;
 use App\Http\Controllers\DeliveryManReviewController;
 use App\Http\Controllers\DeliveryManDetailsController;
@@ -48,7 +48,6 @@ use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutControll
 use App\Http\Controllers\Frontend\WishlistController as FrontendWishlistController;
 use App\Http\Controllers\Frontend\SocialiteController as FrontendSocialiteController;
 use App\Http\Controllers\Frontend\ForgotPasswordController as FrontendForgotPasswordController;
-use Illuminate\Support\Facades\Session;
 
 Route::get('/installcheck', function () {
     return view('auth.login');
@@ -207,6 +206,7 @@ Route::post('/location', [HomeController::class, 'getZone'])->name('location');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
+    // Route::post('/add-to-cart-ajax', [FrontendCartController::class, 'ajaxAddToCartById'])->name('ajaxCartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
     Route::post('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
@@ -253,8 +253,9 @@ Route::post('/contact-massage-from', [FrontendContactController::class, 'contact
 
 Route::get('/about', [FrontendAboutController::class, 'about'])->name('about');
 
-Route::get('/vendor-list', [FrontendVendorController::class, 'vendors'])->name('vendor.list');
+Route::get('/vendor-list', [FrontendVendorController::class, 'vendorIndex'])->name('vendor.list');
 Route::get('/vendor-details/{id}', [FrontendVendorController::class, 'vendorDetails'])->name('vendor.details');
+// Route::get('/sort/{slug}', [FrontendVendorController::class, 'ajaxSort'])->name('vendor.sort');
 
 //For Google
 Route::get('login/google', [FrontendSocialiteController::class, 'googleRedirectToProvider'])->name('login.google');
@@ -265,7 +266,6 @@ Route::get('login/facebook', [FrontendSocialiteController::class, 'facebookRedir
 Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'facebookHandleProviderCallback'])->name('login.facebook_callback');
 
 Route::get('c/{id}', function ($id) {
-
     $compareProducts = Cache::get('products');
 
     if (! $compareProducts) {
@@ -281,12 +281,10 @@ Route::get('c/{id}', function ($id) {
         array_shift($compareProducts);
         array_push($compareProducts, $id);
         Cache::put('products', $compareProducts, 30);
-        return Cache::get('products');
     }
 
     array_push($compareProducts, $id);
     Cache::put('products', $compareProducts, 30);
-    return Cache::get('products');
 });
 
 Auth::routes();

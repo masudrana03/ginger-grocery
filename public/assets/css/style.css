@@ -3294,7 +3294,7 @@ p a:hover {
     border-radius: 50%;
     top: -10px;
     background-color: #3BB77E;
-    -webkit-animation: notify-pulse 1s infinite;
+     -webkit-animation: notify-pulse 1s infinite;
 }
 
 @-webkit-keyframes notify-pulse {
@@ -17149,6 +17149,18 @@ table tbody tr td a:hover {
   padding-bottom: 0px;
 }
 
+.select2-container--default .select2-selection--single {
+    background-color: #fffdfd;
+    height: 39px;
+    width: 100%;
+    padding-left: 0;
+    border-top: 0;
+    border-left: 0;
+    font-weight: bold;
+    border: 1px solid #a8b5b9c4;
+    border-radius: 4px;
+  }
+
 .remove-image {
   display: none;
   /* width: 200px;
@@ -17177,5 +17189,3 @@ table tbody tr td a:hover {
   border: 0;
   transition: all .2s ease;
 } */
-
-

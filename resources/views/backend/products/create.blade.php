@@ -233,7 +233,7 @@
                                     <div class="card shadow-sm w-100">
                                         <div class="card-header d-flex justify-content-start">
                                             <h4>Upload Product Images</h4>
-                                            <input type="file" name="image[]" id="image" multiple="" class="d-none "
+                                            <input type="file" name="files[]" id="image" multiple class="d-none" accept="image/*"
                                                 onchange="image_select()">
                                             <button class="btn btn-sm btn-primary ml-4" type="button"
                                                 onclick="document.getElementById('image').click()">Select Images</button>
@@ -248,6 +248,11 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
+
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
                         </div>
                     </div>
                 </div>

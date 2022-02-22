@@ -20,7 +20,7 @@
                     <div class="sidebar-widget-2 widget_search mb-50">
                         <div class="search-form">
                             <form action="{{ route('vendor.details', $store->id) }}" method="get">
-                                <input type="text" name="search" placeholder="Search in this store..." />
+                                <input id="search-store" type="text" name="search" placeholder="Search in this store..." />
                                 <button type="submit"><i class="fi-rs-search"></i></button>
                             </form>
                         </div>
@@ -46,11 +46,21 @@
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
-                                <ul>
-                                    <li><a class="sortById" href="">50</a></li>
-                                    <li><a class="sortById1" href="">100</a></li>
-                                    <li><a class="sortById2" href="">150</a></li>
-                                    <li><a class="sortById3" href="">200</a></li>
+                                <ul class="sorting">
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?numeric_sort=2', [$store->slug]) }}">50</a></li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?numeric_sort=3', [$store->slug]) }}">100</a>
+                                    </li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?numeric_sort=4', [$store->slug]) }}">150</a>
+                                    </li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?numeric_sort=6', [$store->slug]) }}">200</a>
+                                    </li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?numeric_sort=all', [$store->slug]) }}">All</a>
+                                    </li>
 
 
                                     {{-- <li><a class="{{ request()->get('numeric_sort') == '50' ? 'active' : '' }}"  href="{{ url('/vendor-details?numeric_sort=50',[$store->slug]) }}">50</a></li>
@@ -71,236 +81,171 @@
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
-                                <ul>
+                                <ul class="sorting" >
                                     {{-- <li><a class="{{ request()->get('sort') == 'featured' ? 'active' : '' }}" href="{{ url('/vendor-details?sort=featured',[$store->id]) }}">Featured</a></li> --}}
-                                    <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}"
-                                            href="{{ url('/vendor-details?sort=low_to_high', [$store->slug]) }}">Price: Low
-                                            to High</a></li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?sort=low_to_high', [$store->slug]) }}"
+                                            data="low_to_high">Price:
+                                            Low to High</a></li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?sort=high_to_low', [$store->slug]) }}"
+                                            data="high_to_low">Price:
+                                            High to Low</a></li>
+                                    <li><a class="sortById"
+                                            href="{{ url('/vendor-details?sort=release', [$store->slug]) }}"
+                                            data="release">Release
+                                            Date</a></li>
+
+
+                                    {{-- <li><a class="{{ request()->get('sort') == 'low_to_high' ? 'active' : '' }}"
+                                            href="{{ url('/vendor-details?sort=low_to_high', [$store->slug]) }}">Price:
+                                            Lowto High</a></li>
                                     <li><a class="{{ request()->get('sort') == 'high_to_low' ? 'active' : '' }}"
                                             href="{{ url('/vendor-details?sort=high_to_low', [$store->slug]) }}">Price:
                                             High to Low</a></li>
                                     <li><a class="{{ request()->get('sort') == 'release' ? 'active' : '' }}"
                                             href="{{ url('/vendor-details?sort=release', [$store->slug]) }}">Release
-                                            Date</a></li>
+                                            Date</a></li> --}}
                                     {{-- <li><a href="#">Avg. Rating</a></li> --}}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row product-grid">
-                    @forelse ($vendorWise as $product)
-                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap mb-30">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="{{ route('products', $product->id) }}">
-                                            @if (count($product->images) > 0)
-                                                <img class="default-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                    alt="" />
-                                                <img class="hover-img"
-                                                    src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
-                                                    alt="" />
-                                            @else
-                                                <img class="default-img"
-                                                    src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
-                                                    alt="" />
-                                                <img class="hover-img"
-                                                    src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
-                                                    alt="" />
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn"
-                                            href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn"
-                                            href="{{ route('compareProduct', $product->id) }}"><i
-                                                class="fi-rs-shuffle"></i></a>
-                                        <!--<a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> -->
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        {{-- <span class="hot">Hot</span> --}}
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="product-category">
-                                        <a
-                                            href="{{ route('categories', $product->category->slug) }}">{{ $product->category->name }}</a>
-                                    </div>
-                                    <h2><a
-                                            href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 20))) }}</a>
-                                    </h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: {{ $product->rating * 20 }}%">
-                                            </div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted">
-                                            ({{ round($product->rating, 1) }})</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a
-                                                href="{{ route('shop.product', $product->id) }}">{{ $product->store->name }}</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                            <span class="old-price">$32.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="{{ route('cartById', $product->id) }}"><i
-                                                    class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <!--end product card-->
-                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap mb-30">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="#">
-                                            <img class="default-img"
-                                                src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="" />
-                                            <img class="hover-img"
-                                                src="{{ asset('assets/frontend/imgs/shop/product-3-2.jpg') }}" alt="" />
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn" href="#"><i
-                                                class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn" href="#"><i
-                                                class="fi-rs-shuffle"></i></a>
-                                        {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="new">New</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="product-category">
-                                        <a href="#">Snack</a>
-                                    </div>
-                                    <h2><a href="#">Angie’s Boomchickapop Sweet & Salty</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 85%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="#">StarKist</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>$48.85</span>
-                                            <span class="old-price">$52.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add
+
+                <div id="oldSortDiv">
+                    <div class="row product-grid">
+                        @forelse ($vendorWise as $product)
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="{{ route('products', $product->id) }}">
+                                                @if (count($product->images) > 0)
+                                                    <img class="default-img"
+                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        alt="" />
+                                                    <img class="hover-img"
+                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        alt="" />
+                                                @else
+                                                    <img class="default-img"
+                                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                        alt="" />
+                                                    <img class="hover-img"
+                                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
+                                                        alt="" />
+                                                @endif
                                             </a>
                                         </div>
+                                        <div class="product-action-1">
+                                            <a aria-label="Add To Wishlist" class="action-btn"
+                                                href="{{ route('wishlist', $product->id) }}"><i
+                                                    class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" class="action-btn"
+                                                href="{{ route('compareProduct', $product->id) }}"><i
+                                                    class="fi-rs-shuffle"></i></a>
+                                            <!--<a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> -->
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            {{-- <span class="hot">Hot</span> --}}
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a
+                                                href="{{ route('categories', $product->category->slug) }}">{{ $product->category->name }}</a>
+                                        </div>
+                                        <h2><a
+                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 20))) }}</a>
+                                        </h2>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: {{ $product->rating * 20 }}%">
+                                                </div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted">
+                                                ({{ round($product->rating, 1) }})
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="font-small text-muted">By <a
+                                                    href="{{ route('shop.product', $product->id) }}">{{ $product->store->name }}</a></span>
+                                        </div>
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>{{ settings('currency') }}{{ $product->price }}</span>
+                                                <span class="old-price">$32.8</span>
+                                            </div>
+                                            <div class="add-cart">
+                                                <a class="add" href="{{ route('cartById', $product->id) }}"><i
+                                                        class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforelse
-                    {{-- <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                    <div class="product-cart-wrap mb-30">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="#">
-                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
-                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">Hot</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <div class="product-category">
-                                <a href="#">Snack</a>
-                            </div>
-                            <h2><a href="#">Seeds of Change Organic Quinoe</a></h2>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
+                        @empty
+                            <!--end product card-->
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="#">
+                                                <img class="default-img"
+                                                    src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}"
+                                                    alt="" />
+                                                <img class="hover-img"
+                                                    src="{{ asset('assets/frontend/imgs/shop/product-3-2.jpg') }}"
+                                                    alt="" />
+                                            </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                            <a aria-label="Add To Wishlist" class="action-btn" href="#"><i
+                                                    class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" class="action-btn" href="#"><i
+                                                    class="fi-rs-shuffle"></i></a>
+                                            {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="new">New</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a href="#">Snack</a>
+                                        </div>
+                                        <h2><a href="#">Angie’s Boomchickapop Sweet & Salty</a></h2>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: 85%"></div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        </div>
+                                        <div>
+                                            <span class="font-small text-muted">By <a href="#">StarKist</a></span>
+                                        </div>
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>$48.85</span>
+                                                <span class="old-price">$52.8</span>
+                                            </div>
+                                            <div class="add-cart">
+                                                <a class="add" href="#"><i
+                                                        class="fi-rs-shopping-cart mr-5"></i>Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
                             </div>
-                            <div>
-                                <span class="font-small text-muted">By <a href="#">NestFood</a></span>
-                            </div>
-                            <div class="product-card-bottom">
-                                <div class="product-price">
-                                    <span>$28.85</span>
-                                    <span class="old-price">$32.8</span>
-                                </div>
-                                <div class="add-cart">
-                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
+                        <!--end product card-->
                     </div>
-                </div>
 
-                <!--end product card-->
-                <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
-                    <div class="product-cart-wrap mb-30">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="#">
-                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-10-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-10-2.jpg') }}" alt="" />
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
-                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <div class="product-category">
-                                <a href="#">Cream</a>
-                            </div>
-                            <h2><a href="#">Haagen-Dazs Caramel Cone Ice Cream</a></h2>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 50%"></div>
-                                </div>
-                                <span class="font-small ml-5 text-muted"> (2.0)</span>
-                            </div>
-                            <div>
-                                <span class="font-small text-muted">By <a href="#">Tyson</a></span>
-                            </div>
-                            <div class="product-card-bottom">
-                                <div class="product-price">
-                                    <span>$22.85</span>
-                                    <span class="old-price">$24.8</span>
-                                </div>
-                                <div class="add-cart">
-                                    <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                    <!--end product card-->
-                </div>
-                <!--product grid-->
-                <div class="pagination-area mt-20 mb-20">
-                    {{-- <nav aria-label="Page navigation example">
+                    <!--product grid-->
+                    <div id="pagination" class="pagination-area mt-20 mb-20">
+                        {{-- <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-start">
                         <li class="page-item">
                             <a class="page-link" href="#"><i class="fi-rs-arrow-small-left"></i></a>
@@ -315,167 +260,10 @@
                         </li>
                     </ul>
                 </nav> --}}
-                    {{ $vendorWise->links() }}
-                </div>
-                {{-- <section class="section-padding pb-5">
-                <div class="section-title">
-                    <h3 class="">Deals Of The Day</h3>
-                    <a class="show-all" href="#">
-                        All Deals
-                        <i class="fi-rs-angle-right"></i>
-                    </a>
-                </div>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="product-cart-wrap style-2">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/banner/banner-5.png') }}" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <div class="deals-countdown-wrap">
-                                    <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
-                                </div>
-                                <div class="deals-content">
-                                    <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="#">NestFood</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>$32.85</span>
-                                            <span class="old-price">$33.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="product-cart-wrap style-2">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/banner/banner-6.png') }}" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <div class="deals-countdown-wrap">
-                                    <div class="deals-countdown" data-countdown="2026/04/25 00:00:00"></div>
-                                </div>
-                                <div class="deals-content">
-                                    <h2><a href="#">Perdue Simply Smart Organics Gluten</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="#">Old El Paso</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>$24.85</span>
-                                            <span class="old-price">$26.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 d-none d-lg-block">
-                        <div class="product-cart-wrap style-2">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/banner/banner-7.png') }}" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <div class="deals-countdown-wrap">
-                                    <div class="deals-countdown" data-countdown="2027/03/25 00:00:00"></div>
-                                </div>
-                                <div class="deals-content">
-                                    <h2><a href="#">Signature Wood-Fired Mushroom</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 80%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="#">Progresso</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>$12.85</span>
-                                            <span class="old-price">$13.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 d-none d-xl-block">
-                        <div class="product-cart-wrap style-2">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/frontend/imgs/banner/banner-8.png') }}" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <div class="deals-countdown-wrap">
-                                    <div class="deals-countdown" data-countdown="2025/02/25 00:00:00"></div>
-                                </div>
-                                <div class="deals-content">
-                                    <h2><a href="#">Simply Lemonade with Raspberry Juice</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 80%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="#">Yoplait</a></span>
-                                    </div>
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span>$15.85</span>
-                                            <span class="old-price">$16.8</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{ $vendorWise->links() }}
                     </div>
                 </div>
-            </section> --}}
+                <div id="newSortDiv"> </div>
                 <!--End Deals-->
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
@@ -589,30 +377,12 @@
                                 <span class="count">35</span>
                             </li>
                         @endforelse
-
-
-
-                        {{-- <li>
-                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing</a><span class="count">35</span>
-                    </li>
-                    <li>
-                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods </a><span class="count">42</span>
-                    </li>
-                    <li>
-                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a><span class="count">68</span>
-                    </li>
-                    <li>
-                        <a href="#"> <img src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                    </li> --}}
-
-
-
                     </ul>
                 </div>
                 <!-- Fillter By Price -->
                 <div class="sidebar-widget price_range range mb-30">
                     <h5 class="section-title style-1 mb-30">Fill by price</h5>
-                    <form action="{{ route('vendor.details', [$store->id]) }}" method="get" class="form-horizontal">
+                    <form action="{{ route('vendor.details', [$store->slug]) }}" method="get" class="form-horizontal">
                         @csrf
                         <div class="price-filter">
                             <div class="price-filter-inner">
@@ -631,21 +401,14 @@
 
                                     {{-- {{  $store->products->nutritions }} --}}
                                     @foreach ($nutritions as $nutrition)
-                                        <input class="form-check-input" type="checkbox" name="nutrition"
+                                        <input class="form-check-input" type="checkbox" name="nutrition[]"
                                             id="exampleCheckbox-{{ $nutrition->id }}" value="{{ $nutrition->id }}" />
                                         <label class="form-check-label"
                                             for="exampleCheckbox-{{ $nutrition->id }}"><span>{{ $nutrition->name }} (
                                                 {{ count($nutrition->products) }} )</span></label>
                                         <br />
                                     @endforeach
-                                    {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
-                                <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="" />
-                                <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="" />
-                                <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label> --}}
+
                                 </div>
                                 <label class="fw-900 mt-15">Brand</label>
                                 <div class="custome-checkbox">
@@ -654,17 +417,10 @@
                                             id="exampleCheckbo-{{ $brand->id }}" value="{{ $brand->id }}" />
                                         <label class="form-check-label"
                                             for="exampleCheckbo-{{ $brand->id }}"><span>{{ $brand->name }} (
-                                                {{ count($brand->products) }} )</span></label>
+                                                {{ $brand->ProductsByStore($store->id) }} )</span></label>
                                         <br />
                                     @endforeach
-                                    {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
-                                <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="" />
-                                <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="" />
-                                <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label> --}}
+
                                 </div>
                             </div>
                         </div>
@@ -672,18 +428,7 @@
                             Fillter</button>
                     </form>
                 </div>
-
-                {{-- <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
-                <img src="{{ asset('assets/frontend/imgs/banner/banner-11.png') }}" alt="" />
-                <div class="banner-text">
-                    <span>Oganic</span>
-                    <h4>
-                        Save 17% <br />
-                        on <span class="text-brand">Oganic</span><br />
-                        Juice
-                    </h4>
-                </div>
-            </div> --}}
+                <!-- End Fillter By Price -->
             </div>
         </div>
     </div>
@@ -693,24 +438,55 @@
 @push('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $(function() {
-                $('.sortById').on('click', function() {
-                    let x = $('.sortById').text();
-                    alert(x);
+            $('.sortById').each(function() {
+                var $this = $(this);
+                $this.on('click', function() {
+                    event.preventDefault();
+
+                    var slug = "{{ $store->slug }}"
+                    var url = $this.attr('href');
+                    $('.sortById').removeClass('active');
+                    $this.addClass('active');
+
+                    fireAjax(url, slug);
                 });
 
-                // $('#search-input').on('keyup', function() {
-                //     let search = $('#search-input').val();
-                //     if (search.length > 2) {
-                //         category_id = $('#search-category-id').val();
-                //         loadHome(search);
-                //         $('#app').html(loading);
-                //     } else {
-                //         $('#app').html(old_data);
-                //     }
-                // });
+            });
+
+            function fireAjax(url, slug) {
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    type: 'get',
+                    success: function(response) {
+                        $('#oldSortDiv').empty();
+                        $('#newSortDiv').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // alert('hello Masud');
+
+            $(document).on('click', '.page-item a', function(event) {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                var url = "{{ url('/vendor-details?page=', [$store->slug]) }}" + page;
+
+                $.ajax({
+                    url: url,
+                    success: function(response) {
+                        $('#oldSortDiv').empty();
+                        $('#newSortDiv').html(response);
+                    }
+                });
             });
 
         });
     </script>
+
+
 @endpush
