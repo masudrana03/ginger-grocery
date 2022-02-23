@@ -8,7 +8,6 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
- 
 
 class CartController extends Controller
 {
@@ -17,35 +16,35 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
-            $request->validate([
+        $request->validate([
                 'product_id' => 'required',
                 'quantity'   => 'required',
             ]);
 
-            $product = Product::find($request->product_id);
+        $product = Product::find($request->product_id);
 
-            //return $product;
+        //return $product;
     
-            if (!$product) {
-                return back()->with('error', 'Product not found');
-            }
+        if (!$product) {
+            return back()->with('error', 'Product not found');
+        }
     
-            $cart = Cart::where('user_id', auth()->id())->first();
+        $cart = Cart::where('user_id', auth()->id())->first();
     
-            if (!$cart) {
-                $cart          = new Cart();
-                $cart->user_id = auth()->id();
-                $cart->save();
-            }
+        if (!$cart) {
+            $cart          = new Cart();
+            $cart->user_id = auth()->id();
+            $cart->save();
+        }
     
-            $cart->products()->sync([
+        $cart->products()->sync([
                 $product->id => [
                     'quantity' => $request->quantity,
                     'options'  => $request->options ? json_encode($request->options) : null,
                 ],
             ], false);
             
-            return view('frontend.ajax.cart');
+        return view('frontend.ajax.cart');
     }
     
 
@@ -62,7 +61,7 @@ class CartController extends Controller
         return $this->addToCart($request);
     }
 
-    public function cart($ajaxRequest = null)
+    public function cart()
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
@@ -75,52 +74,62 @@ class CartController extends Controller
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
         return view('frontend.cart', compact('compareProduct', 'totalTax'));
-
-        if ($ajaxRequest) {
-            return view('frontend.ajax.updateCart', compact('compareProduct', 'totalTax'));
-        }
     }
 
-    /**
-     * @param $id
-     */
-    public function removeToCartById($id)
-    {   
-        $url = url()->previous(); //getting previous url
-        // return app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-
-        if ($url == 'cart') { 
-             //checking url is in update cart page 
-            $this->cart($ajaxRequest = true); //if in cart then it willl go to the cart() function in this page 
-        }
-
-        $product = Product::find($id);
-        
-        $product->carts()->detach();
-
-        return view('frontend.ajax.cart'); 
-    }
+    
+    
 
     public function cartUpdate(Request $request)
     {
         $cartId = auth()->user()->cart->id;
         $product_id = request('id');
         $quantity = request('quantity');
-        if($quantity <= 10 || $quantity >=1){
+        if ($quantity <= 10 || $quantity >=1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
     }
 
+    /**
+    * @param $id
+    */
 
     public function ajaxUpdateCart($id)
-    {   
-        $product = Product::find($id);
-        return view('frontend.ajax.cart'); 
+    {
+        //$product = Product::find($id);
+        return view('frontend.ajax.cart');
     }
 
+    /**
+     * @param $id
+     */
 
+    public function removeToCartById($id)
+    {
+        $pro_id = $id;
+        $url = url()->previous(); //getting previous url
+        $url = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+        //return $url;
+    
+        $product = Product::find($pro_id);
+        $product->carts()->detach();
 
-    
-    
-   
+        return view('frontend.ajax.cart');
+    }
+
+    /**
+     * @param $id
+     */
+
+    public function removeItemFromDiv($id)
+    {
+        // return ("dgsdsdfsdgsd");
+        $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
+        $totalTax = 0;
+        foreach ($carts as $cart) {
+            $totalTax += priceCalculator($cart)['tax'];
+        }
+        $product = Product::find($id);
+        $product->carts()->detach();
+        return view('frontend.ajax.update-cart-div', compact('totalTax'));
+    }
 }

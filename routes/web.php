@@ -210,6 +210,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
+    Route::get('/cart-product-remove-div/{id}', [FrontendCartController::class, 'removeItemFromDiv'])->name('cart.remove.div');
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);

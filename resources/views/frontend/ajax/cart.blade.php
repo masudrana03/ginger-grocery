@@ -1,3 +1,57 @@
+
+
+<style>
+    .btn-cart {
+        background-color: #3BB77E;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
+
+
+    }
+
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
+
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
+    }
+
+    #td-padding-top {
+        padding-top: 4%;
+        padding-left: 1.5%;
+
+    }
+
+    .product-name a:hover {
+        text-decoration: none;
+
+    }
+
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
+
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
+
+    }
+
+</style>
+
 <div class="header-action-icon-2">
     <a class="mini-cart-icon" href="{{ route('cart') }}">
         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -67,6 +121,8 @@
         </div>
     </div>
 </div>
+
+
 <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
