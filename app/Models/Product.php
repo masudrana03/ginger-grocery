@@ -16,13 +16,14 @@ class Product extends Model
      * The attributes that are mass assignable.
      *
      * @var string[]
-     */ 
+     */
     protected $fillable = [
         'name',
         'slug',
         'description',
         'excerpt',
         'attributes',
+        'featured_image',
         'price',
         'calories_per_serving',
         'fat_calories_per_serving',

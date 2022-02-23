@@ -147,7 +147,7 @@ class SettingController extends Controller
             $request['login_image'] = $loginImage;
         }
 
-        
+
         if ($contactImage != '') {
             $request['contact_image'] = $contactImage;
         }

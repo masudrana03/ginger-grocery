@@ -270,7 +270,7 @@
     </script>
 
     <script type="text/javascript">
-    let old_data =  $('#oldSearchVendor').html();
+        let old_data = $('#oldSearchVendor').html();
         let loading = `<section class="product-tabs section-padding position-relative">
      <div class="container">
      <div class="section-title style-2 wow animate__animated animate__fadeIn">
