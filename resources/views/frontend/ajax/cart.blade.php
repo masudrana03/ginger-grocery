@@ -158,5 +158,29 @@
                 console.log(error);
             }
         });
+
+        var url2 = "{!! route('cart.remove.div', ':id') !!}";
+        url2 = url2.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url2,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                //tata.error('Success!', 'Product removed form your cart.');
+                $('#old-div').empty();
+                $('#new-div').html(result);
+               
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });
     }
+
+    
+    
 </script>

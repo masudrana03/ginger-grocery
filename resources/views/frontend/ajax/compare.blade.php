@@ -81,7 +81,7 @@
                     console.log(error);
                 }
             });
-    
+            
                 $.ajax({
                         method: 'GET',
                         url: "{!! route('removeCompareProduct2') !!}",

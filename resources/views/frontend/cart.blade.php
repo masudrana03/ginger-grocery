@@ -527,7 +527,7 @@
 
             },
             success: function(result) {
-                //console.log(result);
+                
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
               
@@ -554,7 +554,7 @@
             },
             success: function(result) {
                 //console.log(result);
-                tata.error('Success!', 'Product removed form your cart.');
+                //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
                

@@ -106,10 +106,6 @@ class CartController extends Controller
     public function removeToCartById($id)
     {
         $pro_id = $id;
-        $url = url()->previous(); //getting previous url
-        $url = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-        //return $url;
-    
         $product = Product::find($pro_id);
         $product->carts()->detach();
 
@@ -121,15 +117,19 @@ class CartController extends Controller
      */
 
     public function removeItemFromDiv($id)
-    {
-        // return ("dgsdsdfsdgsd");
+    {   
+       
+        $pid  = $id;
+        //return $pid;
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;
         foreach ($carts as $cart) {
+
             $totalTax += priceCalculator($cart)['tax'];
         }
-        $product = Product::find($id);
-        $product->carts()->detach();
-        return view('frontend.ajax.update-cart-div', compact('totalTax'));
+        //$product = Product::find($id);
+        $compareProduct = Product::find($id) ?? [];
+        $compareProduct->carts()->detach();
+        return view('frontend.ajax.update-cart-div', compact('totalTax','compareProduct'));
     }
 }
