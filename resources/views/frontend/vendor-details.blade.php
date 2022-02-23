@@ -408,8 +408,8 @@
                                                 value="{{ $nutrition->id }}" />
                                             <label class="form-check-label"
                                                 for="exampleCheckbox-{{ $nutrition->id }}"><span>{{ $nutrition->name }}
-                                                    (
-                                                    {{ count($nutrition->products) }} )</span></label>
+                                                    ({{ count($nutrition->products) }})
+                                                </span></label>
                                             <br />
                                         @endforeach
 
@@ -469,6 +469,9 @@
                     success: function(response) {
                         $('#oldSortDiv').empty();
                         $('#newSortDiv').html(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
                 });
             }
@@ -489,6 +492,9 @@
                     success: function(response) {
                         $('#oldSortDiv').empty();
                         $('#newSortDiv').html(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
                 });
             });
@@ -497,6 +503,7 @@
     </script>
 
     <script type="text/javascript">
+    let old_data =  $('#oldProductSearch').html();
         let loading = `<section class="product-tabs section-padding position-relative">
  <div class="container">
  <div class="section-title style-2 wow animate__animated animate__fadeIn">
@@ -523,13 +530,18 @@
                                 $('#oldProductSearch').empty();
                                 $('#newSortDiv').empty();
                                 $('#newProductSearch').html(response);
+                            },
+                            error: function(error) {
+                                console.log(error);
                             }
                         });
                     }, 1500);
                     // loadHome(search);
                     // $('#app').html(loading);
                 } else {
-                    // $('#app').html(old_data);
+                    $('#newSortDiv').empty();
+                    $('#newProductSearch').empty();
+                    $('#oldProductSearch').html(old_data);
                 }
             });
 

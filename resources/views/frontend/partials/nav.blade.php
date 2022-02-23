@@ -1280,13 +1280,14 @@
 
             },
             success: function(result) {
-                //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
                 tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
-                console.log(error);
+                if (error.status == 401){
+                    window.location.href = "/login";
+                }
             }
         });
     }
