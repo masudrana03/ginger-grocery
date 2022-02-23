@@ -1,0 +1,171 @@
+<div class="col-xl-10 col-lg-12 m-auto">
+    <h1 class="heading-2 mb-10">Products Compare</h1>
+    <h6 class="text-body mb-40">There are <span class="text-brand">{{ $compareProducts->count() }}</span> products to compare</h6>
+    <div class="table-responsive">
+        <table class="table text-center table-compare">
+            <tbody>
+                <tr class="pr_image">
+                    <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
+
+                    @foreach ($compareProducts as $product)
+                    <td class="row_img">
+                        @if (count($product->images) > 0)
+                            <img  src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                        @else
+                            <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
+                        @endif
+                        {{-- <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="compare-img" /> --}}
+
+                    </td>
+                    @endforeach
+
+                    {{-- <td class="row_img"><img src="{{ asset('assets/frontend/imgs/shop/product-3-1.jpg') }}" alt="compare-img" /></td> --}}
+                </tr>
+                <tr class="pr_title">
+                    <td class="text-muted font-sm fw-600 font-heading">Name</td>
+                    @foreach ($compareProducts as $product)
+                    <td class="product_name">
+                        <h6><a href="{{route('products', $product->id)}}" class="text-heading">{{$product->name}} - {{$product->store->name}}</a></h6>
+                    </td>
+                    @endforeach
+                </tr>
+                <tr class="pr_price">
+                    <td class="text-muted font-sm fw-600 font-heading">Price</td>
+                    @foreach ($compareProducts as $product)
+
+                    <td class="product_price">
+                        <h4 class="price text-brand">{{ settings('currency') }}{{ $product->price }}</h4>
+                    </td>
+                    @endforeach
+                </tr>
+                <tr class="description">
+                    <td class="text-muted font-sm fw-600 font-heading">Excerpt</td>
+                    @foreach ($compareProducts as $product)
+                    <td class="row_text font-xs">
+                        <p class="font-sm text-muted">{{$product->excerpt}}</p>
+                    </td>
+                    @endforeach
+                </tr>
+                {{-- <tr class="pr_stock">
+                    <td class="text-muted font-sm fw-600 font-heading">Stock status</td>
+                    <td class="row_stock"><span class="stock-status in-stock mb-0">In Stock</span></td>
+                    <td class="row_stock"><span class="stock-status out-stock mb-0">Out of stock</span></td>
+                    <td class="row_stock"><span class="stock-status in-stock mb-0">In Stock</span></td>
+                </tr> --}}
+                <tr class="pr_weight">
+                    <td class="text-muted font-sm fw-600 font-heading">Calories Per Serving</td>
+                    @foreach ($compareProducts as $product)
+                    <td class="row_weight">{{($product->calories_per_serving) ?? '0'}} Cal</td>
+                    @endforeach
+                </tr>
+                <tr class="pr_weight">
+                    <td class="text-muted font-sm fw-600 font-heading">Fat Calories Per Serving</td>
+                    @foreach ($compareProducts as $product)
+                    <td class="row_weight">{{($product->fat_calories_per_serving) ?? '0'}} Cal</td>
+                    @endforeach
+                </tr>
+                <tr class="pr_dimensions">
+                    <td class="text-muted font-sm fw-600 font-heading">Nutrition</td>
+                    @foreach ($compareProducts as $product)
+                    <td class="row_dimensions">
+                        @foreach ($product->nutritions as $p )
+                        <span>{{$p->name}}</span>,
+                        @endforeach
+                    </td>
+                    @endforeach
+                </tr>
+                {{-- <tr class="pr_add_to_cart">
+                    <td class="text-muted font-sm fw-600 font-heading">Buy now</td>
+                    <td class="row_btn">
+                        <button class="btn btn-sm"><i class="fi-rs-shopping-bag mr-5"></i>Add to cart</button>
+                    </td>
+                    <td class="row_btn">
+                        <button class="btn btn-sm btn-secondary"><i class="fi-rs-headset mr-5"></i>Contact Us</button>
+                    </td>
+                    <td class="row_btn">
+                        <button class="btn btn-sm"><i class="fi-rs-shopping-bag mr-5"></i>Add to cart</button>
+                    </td>
+                </tr> --}}
+                <tr class="pr_remove text-muted">
+                    <td class="text-muted font-md fw-600"></td>
+                    @foreach ($compareProducts as $product)
+                    <td class="row_remove">
+                        <a href="#" data-id="{{ $product->id }}" class="text-muted compare-btn-delete"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
+                    </td>
+                    @endforeach 
+                    {{-- <td class="row_remove">
+                        <a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
+                    </td>
+                    <td class="row_remove">
+                        <a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
+                    </td> --}}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $(".compare-btn-delete").click(function(event) {
+        event.preventDefault();
+
+    var route = "{{ request()->route()->getName() }}";
+
+    if (route == 'compare') {
+        var id = $(this).attr("data-id");
+    var url = "{!! route('removeCompareProduct', ':id') !!}";
+    url = url.replace(':id', id);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: id,
+            },
+            success: function(result) {
+                $('#compareProductOld').empty();
+                $('#compareProductNew').html(result);
+                tata.success('Success!', 'Product removed from compare list.');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            method: 'GET',
+            url: "{!! route('removeCompareProduct2') !!}",
+            success: function(result) {
+                if (result == false) {
+                        window.location.href = "/";
+                    }
+                $('#compareProductsOld').empty();
+                $('#compareProductsNew').html(result);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    } else {
+        var id = $(this).attr("data-id");
+        var url = "{!! route('removeCompareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product removed from compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+});
+</script>

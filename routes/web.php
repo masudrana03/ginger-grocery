@@ -237,6 +237,8 @@ Route::post('reset-password-submit', [FrontendForgotPasswordController::class, '
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
+Route::get('/remove-compare-product/{id}', [FrontendCompareController::class, 'removeCompareProduct'])->name('removeCompareProduct');
+Route::get('/remove-compare-product', [FrontendCompareController::class, 'removeCompareProduct2'])->name('removeCompareProduct2');
 
 Route::get('/wishlist', [FrontendWishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/wishlist-product/{id}', [FrontendWishlistController::class, 'addToWishlistById'])->name('wishlist');

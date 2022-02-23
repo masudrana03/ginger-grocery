@@ -6,20 +6,21 @@ use App\Models\Product;
 use App\Models\CallToAction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
 
 class CompareController extends Controller
 {
     public function compare()
     {
-        $productIds = session('compare');
-        $compareProduct = Product::find($productIds) ?? [];
-        if ($productIds < 1) {
-            $compareProduct = Product::find($productIds) ?? [];
-            return back();
+        $compareProducts = Cache::get('compareProducts');
+        $compareProducts = Product::find($compareProducts) ?? [];
+
+        if (count($compareProducts) <= 1) {
+            return back()->with('error', 'No products to compare');
         }
-        $callToActions = CallToAction::all();
-        return view('frontend.compare', compact('compareProduct', 'callToActions'));
+
+        return view('frontend.compare', compact('compareProducts'));
     }
 
     /**
@@ -29,45 +30,64 @@ class CompareController extends Controller
      */
     public function compareProduct($id)
     {
-        $compareProducts = Cache::get('products');
+        $compareProducts = Cache::get('compareProducts');
 
         if (! $compareProducts) {
-            Cache::put('products', [$id], 120);
-            return Cache::get('products');
+            Cache::put('compareProducts', [$id], 1800);
+            // return Cache::get('compareProducts');
+            return view('frontend.ajax.compare');
         }
 
         if (in_array($id, $compareProducts)) {
-            return Cache::get('products');
+            // return Cache::get('compareProducts');
+            return view('frontend.ajax.compare');
         }
     
         if (count($compareProducts) >= 3) {
             array_shift($compareProducts);
             array_push($compareProducts, $id);
-            Cache::put('products', $compareProducts, 30);
-            return Cache::get('products');
+            Cache::put('compareProducts', $compareProducts, 1800);
+            // return Cache::get('compareProducts');
+            return view('frontend.ajax.compare');
         }
 
         array_push($compareProducts, $id);
-        Cache::put('products', $compareProducts, 30);
-        //return Cache::get('products');
+        Cache::put('compareProducts', $compareProducts, 1800);
         
-        return response()->json(['success' => 'Product added to compare list.']);
+        return view('frontend.ajax.compare');
+    }
 
-        //return session()->flush();
+    /**
+     * remove compare product
+     * 
+     * @param $id
+     */
+    public function removeCompareProduct($id)
+    {
+        $compareProducts = Cache::get('compareProducts');
 
-        // if (!session('compare')) {
-        //     session()->put('compare', [$id]);
-        //     return back();
-        // }
+        $compareProducts = array_diff($compareProducts, [$id]);
 
-        // $compare = session('compare');
+        Cache::put('compareProducts', $compareProducts, 1800);
 
-        // if (count($compare) >= 3) {
-        //     unset($compare[0]);
-        // }
+        return view('frontend.ajax.compare');
+    }  
 
-        // session()->push('compare', $id);
+    /**
+     * remove compare product from compare page
+     * 
+     * @param $id
+     */
+    public function removeCompareProduct2()
+    {
+        $compareProducts = Cache::get('compareProducts');
+        $compareProducts = Product::find($compareProducts) ?? [];
 
-        // return back();
+        if (count($compareProducts) <= 1) {
+            session()->flash('error', 'No products to compare');
+            return false;
+        }
+
+        return view('frontend.ajax.compare-products', compact('compareProducts'));
     }
 }
