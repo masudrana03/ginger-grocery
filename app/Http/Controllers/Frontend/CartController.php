@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Cart;
+use App\Models\Store;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Store;
+ 
 
 class CartController extends Controller
 {
@@ -60,7 +62,7 @@ class CartController extends Controller
         return $this->addToCart($request);
     }
 
-    public function cart()
+    public function cart($ajaxRequest = null)
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
@@ -73,33 +75,52 @@ class CartController extends Controller
         $productIds = session('compare');
         $compareProduct = Product::find($productIds) ?? [];
         return view('frontend.cart', compact('compareProduct', 'totalTax'));
+
+        if ($ajaxRequest) {
+            return view('frontend.ajax.updateCart', compact('compareProduct', 'totalTax'));
+        }
     }
 
     /**
      * @param $id
      */
     public function removeToCartById($id)
-    {
+    {   
+        $url = url()->previous(); //getting previous url
+        // return app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($url == 'cart') { 
+             //checking url is in update cart page 
+            $this->cart($ajaxRequest = true); //if in cart then it willl go to the cart() function in this page 
+        }
+
         $product = Product::find($id);
         
         $product->carts()->detach();
 
-        //$cart = Cart::where('user_id', auth()->id())->first();
-
-        return view('frontend.ajax.cart');
+        return view('frontend.ajax.cart'); 
     }
 
     public function cartUpdate(Request $request)
     {
-        foreach ($request->productids as $key => $item) {
-            auth()->user()->cart->products()->sync([
-                $item => [
-                    'quantity' => $request->qty[$key],
-                    'options'  => $request->options ? json_encode($request->options) : null,
-                ],
-            ], false);
+        $cartId = auth()->user()->cart->id;
+        $product_id = request('id');
+        $quantity = request('quantity');
+        if($quantity <= 10 || $quantity >=1){
+            $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
-
-        return back()->with('success', 'Product updated to cart');
     }
+
+
+    public function ajaxUpdateCart($id)
+    {   
+        $product = Product::find($id);
+        return view('frontend.ajax.cart'); 
+    }
+
+
+
+    
+    
+   
 }
