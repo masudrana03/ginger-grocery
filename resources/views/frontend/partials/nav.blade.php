@@ -1199,7 +1199,7 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Adding!!', 'Product added to your cart.');
+                tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 console.log(error);
