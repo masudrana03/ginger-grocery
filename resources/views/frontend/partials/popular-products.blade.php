@@ -17,7 +17,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @if (($search ?? false) == false)
+                @if (($search ?? false) == false) 
                     @forelse ($categoryProducts->random(6) as $category)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -65,7 +65,7 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn"
+                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
                                                 href="{{ route('compareProduct', $product->id) }}"><i
                                                     class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
@@ -191,7 +191,7 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" > 
+                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
                                                 <a class="add" id="cart-btn"
                                                     href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
