@@ -44,9 +44,9 @@ class VendorController extends Controller
 
         if ($request->ajax()) {
             // return $request->name;
-            if ($request->name) {
-                return view('frontend.ajax.vendor-store-sort', compact('stores'));
-            }
+            // if ($request->name) {
+            //     return view('frontend.ajax.vendor-store-sort', compact('stores'));
+            // }
             return view('frontend.ajax.vendor-store-sort', compact('stores'));
         }
 

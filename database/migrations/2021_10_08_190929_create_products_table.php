@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->longText('description');
             $table->text('excerpt');
             $table->text('attributes')->nullable();
+            $table->string('featured_image')->nullable();
             $table->double('price');
             $table->double('calories_per_serving')->nullable();
             $table->double('fat_calories_per_serving')->nullable();

@@ -1457,7 +1457,7 @@ textarea:focus {
   padding-left: 20px;
   font-size: 16px;
   width: 100%;
-  
+
 }
 
 .form-group input:focus {
@@ -6816,7 +6816,7 @@ h6.post-title {
   right: 0;
   top: calc(100% + 20px);
   z-index: 99;
-  width: 320px;
+  width: 330px;
   background-color: #fff;
   -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
           box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
@@ -9970,7 +9970,7 @@ footer .hotline img {
 }
 
 /***************************
-    Page section margin 
+    Page section margin
 ****************************/
 .mtb-0 {
   margin: 0;
