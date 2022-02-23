@@ -122,7 +122,7 @@
                             <div class="product-category">
                                 <a href="{{route('categories', $category->slug)}}">{{$category->name}}</a>
                             </div>
-                            <h2><a href="{{route('products', $product->id)}}">{{ ucwords(strtolower(Str::limit($product->name, 25 )))  }}</a></h2>
+                            <h2> <a href="{{ route('vendor.details', $product->store->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 25 )))  }}</a></h2>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: {{ ($product->rating)*20 }}%"></div>
@@ -138,8 +138,21 @@
                                     {{-- <span class="old-price">$32.8</span> --}}
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="{{route('cartById', $product->id)}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" > 
+                                    <a class="add" id="cart-btn"
+                                        href="#" style=""><i
+                                            class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <small class="product-id"
+                                        style="display: none;">{{ $product->id }}</small>
+                                    <input style="display: none;" name="product_id"
+                                        value="{{ $product->id }}">
+
                                 </div>
+                                
+                                {{-- <div class="add-cart">
+                                    <a class="add" href="{{route('cartById', $product->id)}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+
+                                </div> --}}
                             </div>
                         </div>
                     </div>
