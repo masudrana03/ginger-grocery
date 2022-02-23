@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         if (env('APP_NAME') == '') {
             return view('start');
         }
@@ -36,7 +36,6 @@ class HomeController extends Controller
             }])->limit(10)->get();
         } else {
             $categoryProducts = Category::with('products.store', 'products.currency')->limit(10)->get();
-
         }
 
 
@@ -44,12 +43,13 @@ class HomeController extends Controller
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
 
-        
+
 
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }
 
-    public function ajax(Request $request){
+    public function ajax(Request $request)
+    {
         $query = request('search');
         $category_id = request('category_id') ?? null;
         $productIds = session('compare');
@@ -64,10 +64,10 @@ class HomeController extends Controller
         }
 
         $categoryProducts = $categoryProducts->whereHas('products', function ($q) use ($query, $category_id) {
-                $q->where('name', 'like', '%' . $query . '%')
+            $q->where('name', 'like', '%' . $query . '%')
                 ->orWhere('description', 'like', '%' . $query . '%')
                 ->orWhere('excerpt', 'like', '%' . $query . '%');
-            })
+        })
             ->when($category_id, function ($q) use ($category_id) {
                 return $q->where('id', $category_id);
             })
@@ -84,14 +84,14 @@ class HomeController extends Controller
     /**
      *
      *
-     * @param $id
+     * @param $slug
      */
     public function productDetails($slug)
     {
         $productsRating = ProductRating::all();
 
         $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
-        return view('frontend.product-details', compact('product','productsRating'));
+        return view('frontend.product-details', compact('product', 'productsRating'));
     }
 
     public function productRating(Request $request, $id)
@@ -105,7 +105,7 @@ class HomeController extends Controller
 
         $productRating = ProductRating::where('user_id', auth()->id())->where('product_id', $id)->first();
 
-        if ( !auth()->id() ) {
+        if (!auth()->id()) {
             return back()->with('error', 'Please log in first.');
         }
 
@@ -123,13 +123,54 @@ class HomeController extends Controller
     }
 
     /**
+     *  Get all the products by category
      *
-     * @param $id
+     * @param $slug
+     * @param $request
      */
-    public function categoryDetails($slug)
+    public function categoryDetails(Request $request, $slug)
     {
+
+        $defaultPaginate = 10;
+        $price = str_replace("$", "", $request->price);
+        $q = explode("-", $price);
+
         $category = Category::with('products.store', 'products.currency')->whereSlug($slug)->firstOrFail();
-        return view('frontend.category', compact('category'));
+
+        $categoryWise = $category->products();
+
+        if ($request->price) {
+            $categoryWise = $category->products()->where('price', '>=', $q[0])->where('price', '<=', $q[1]);
+        }
+
+        if ($request->query('sort') == 'low_to_high') {
+            $categoryWise = $category->products()->orderBy('price');
+        }
+
+        if ($request->query('sort') == 'high_to_low') {
+            $categoryWise = $category->products()->orderByDesc('price');
+        }
+
+        if ($request->query('sort') == 'release') {
+            $categoryWise = $category->products()->orderByDesc('id');
+        }
+
+        if ($request->query('numeric_sort')) {
+            $defaultPaginate = $request->query('numeric_sort');
+        }
+
+        if ($request->query('numeric_sort') == 'all') {
+            $defaultPaginate = count($category->products);
+        }
+
+        $categoryWise = $categoryWise->paginate($defaultPaginate);
+
+        if ($request->ajax()) {
+            // return $request;
+            return view('frontend.ajax.category-product-sort', compact('category', 'categoryWise'));
+        }
+
+        return view('frontend.category', compact('category', 'categoryWise'));
     }
 
     public function search()
