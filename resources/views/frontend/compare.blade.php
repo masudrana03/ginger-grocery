@@ -15,6 +15,7 @@
         <div class="col-xl-10 col-lg-12 m-auto">
             <h1 class="heading-2 mb-10">Products Compare</h1>
             <h6 class="text-body mb-40">There are <span class="text-brand">{{ $compareProducts->count() }}</span> products to compare</h6>
+            @if($compareProducts->count() > 0)
             <div class="table-responsive">
                 <table class="table text-center table-compare">
                     <tbody>
@@ -117,81 +118,23 @@
                     </tbody>
                 </table>
             </div>
+            @else
+            <div class="table-responsive">
+                <table class="table text-center table-compare">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted font-md fw-600">
+                                <h4>No Products to compare</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @endif
         </div>
     </div>
     <div class="row" id="compareProductsNew">
 
     </div>
 </div>
-
-
 @endsection
-
-@push('script')
-<script>
-    $(document).ready(function() {
-        $(".compare-btn-delete").click(function(event) {
-            event.preventDefault();
-    
-        var route = "{{ request()->route()->getName() }}";
-    
-        if (route == 'compare') {
-            var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
-        url = url.replace(':id', id);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product removed from compare list.');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-    
-            $.ajax({
-                method: 'GET',
-                url: "{!! route('removeCompareProduct2') !!}",
-                success: function(result) {
-                    if (result == false) {
-                        window.location.href = "/";
-                    }
-                    $('#compareProductsOld').empty();
-                    $('#compareProductsNew').html(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        } else {
-            var id = $(this).attr("data-id");
-            var url = "{!! route('removeCompareProduct', ':id') !!}";
-            url = url.replace(':id', id);
-                $.ajax({
-                    method: 'GET',
-                    url: url,
-                    data: {
-                        id: id,
-                    },
-                    success: function(result) {
-                        $('#compareProductOld').empty();
-                        $('#compareProductNew').html(result);
-                        tata.success('Success!', 'Product removed from compare list.');
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
-        });
-    });
-    </script> 
-@endpush
- 
-

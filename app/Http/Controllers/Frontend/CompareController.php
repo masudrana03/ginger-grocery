@@ -16,9 +16,9 @@ class CompareController extends Controller
         $compareProducts = Cache::get('compareProducts');
         $compareProducts = Product::find($compareProducts) ?? [];
 
-        if (count($compareProducts) <= 1) {
-            return back()->with('error', 'No products to compare');
-        }
+        // if (count($compareProducts) <= 1) {
+        //     return back()->with('error', 'Add more products to compare');
+        // }
 
         return view('frontend.compare', compact('compareProducts'));
     }
@@ -83,10 +83,11 @@ class CompareController extends Controller
         $compareProducts = Cache::get('compareProducts');
         $compareProducts = Product::find($compareProducts) ?? [];
 
-        if (count($compareProducts) <= 1) {
-            session()->flash('error', 'No products to compare');
-            return false;
-        }
+       // if (count($compareProducts) <= 1) {
+            //return back()->with('error', 'Add more products to compare');
+            //session()->put('error', 'Add more products to compare');
+        //    return false;
+       // }
 
         return view('frontend.ajax.compare-products', compact('compareProducts'));
     }
