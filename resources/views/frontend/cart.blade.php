@@ -13,33 +13,33 @@
 
     }
 
-.btn-cart:hover{
-    background-color: #fdc040;
- }
-
-.qty{
-    height:40px;
-    width:100%;
-    border:1px #3BB77E solid ;
-    text-align: center;
-    font-size: 13px;
-    background-color: transparent;
+    .btn-cart:hover {
+        background-color: #fdc040;
     }
 
-#td-padding-top{
-    padding-top:4%;
-    padding-left:1.5%;
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
+    }
 
-  }
+    #td-padding-top {
+        padding-top: 4%;
+        padding-left: 1.5%;
 
-.product-name a:hover{
-    text-decoration: none;
+    }
 
-  }
+    .product-name a:hover {
+        text-decoration: none;
 
- .btn-cart:hover {
-    background-color: #fdc040;
-  }
+    }
+
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
 
     .qty {
         height: 40px;
@@ -55,8 +55,8 @@
 
 @section('content')
 
-    <div id="old-cart">
-        <div class="page-header breadcrumb-wrap"  >
+    <div id="old-div">
+        <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
                     <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
@@ -70,7 +70,8 @@
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
                         <h6 class="text-body">There are <span
-                                class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in your
+                                class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in
+                            your
                             cart</h6>
                         {{-- <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
                                 Cart</a></h6> --}}
@@ -91,7 +92,7 @@
                                     <th scope="col" class="end">Remove</th>
                                 </tr>
                             </thead>
-    
+
                             <form id="cartForm">
                                 @csrf
                                 <tbody id="cartId">
@@ -102,7 +103,7 @@
                                     @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                         <tr class="pt-30 product-modifiers " data-product-price="{{ $product->price }}">
                                             <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
-    
+
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
                                                         src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
@@ -112,37 +113,40 @@
                                                         src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}"
                                                         alt="" />
                                                 @endif
-    
+
                                                 {{-- <img src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="#"> --}}
                                             </td>
                                             <td class="product-des product-name">
                                                 <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                        href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 28 ))) }}</a>
+                                                        href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 28))) }}</a>
                                                 </h6>
                                                 <div class="product-rate-cover">
                                                     <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width:{{ ($product->rating)*20 }}%">
+                                                        <div class="product-rating"
+                                                            style="width:{{ $product->rating * 20 }}%">
                                                         </div>
                                                     </div>
-                                                    <span class="font-small ml-5 text-muted"> ({{ round($product->rating , 1) }})</span>
+                                                    <span class="font-small ml-5 text-muted">
+                                                        ({{ round($product->rating, 1) }})</span>
                                                 </div>
                                             </td>
-    
+
                                             <td class="custome-checkbox pl-30"></td>
-    
-    
-    
+
+
+
                                             <td class="price" data-title="Price" id="td-padding-top">
                                                 <h6 class="text-body">
                                                     {{ settings('currency') }}{{ $product->price }}
                                                 </h6>
                                             </td>
-    
-    
-    
+
+
+
                                             <td>
                                                 <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
-                                                    <input type="hidden" class="product-id" name="productids[]" value="{{ $product->id }}">
+                                                    <input type="hidden" class="product-id" name="productids[]"
+                                                        value="{{ $product->id }}">
                                                     <input type="button" value="-" class="qty-minus btn-cart">
                                                     <input type="text" name="qty[]" readonly type="number"
                                                         value="{{ $product->quantity }}" max="10" min="1"
@@ -157,9 +161,10 @@
                                                 </h6>
                                                 <input class="d-none unit-price" value="{{ $product->price }}">
                                             </td>
-                                            <td class="action text-center" data-title="Remove" id="td-padding-top"><a
-                                                    href="{{ route('cart.remove', $product->id) }}" class="text-body"><i
-                                                        class="fi-rs-trash"></i></a></td>
+                                            <td class="action text-center ajax-product-remove " data-title="Remove"
+                                                id="td-padding-top"><i class="fi-rs-trash ajax-product-remove "></i>
+                                              <input type="hidden" class="pro-id" value="{{$product->id}}" >
+                                            </td>
                                         </tr>
                                         @php
                                             $total += $product->quantity * $product->price;
@@ -169,7 +174,8 @@
                                         <tr class="pt-30">
                                             <td class="image product-thumbnail pt-40"
                                                 style="left: 32%; text-align: center; position: relative;">
-                                                <h4 class="text-brand" style="color: #fdc040 !important;">No Product Found
+                                                <h4 class="text-brand" style="color: #fdc040 !important;">No Product
+                                                    Found
                                                 </h4>
                                             </td>
                                             <td class="action text-center" data-title="Remove">
@@ -179,25 +185,26 @@
                                     @endforelse
                                 </tbody>
                             </form>
-    
-    
+
+
                         </table>
                     </div>
                     <div class="divider-2 mb-30"></div>
                     <div class="cart-action d-flex justify-content-between mb-30">
-                        <a href="/" style="color: #fff;" class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue
+                        <a href="/" style="color: #fff;" class="btn "><i
+                                class="fi-rs-arrow-left mr-10"></i>Continue
                             Shopping</a>
                         {{-- <button onclick="submit()" class="btn ml-10"><i class="fi-rs-refresh ml-10"></i>Update
                             Cart</button> --}}
                     </div>
                 </div>
-    
-    
-    
+
+
+
                 <div class="col-lg-4">
-    
+
                     <div class="row">
-    
+
                         <div class="border p-md-4 cart-totals ">
                             <div class="table-responsive">
                                 <table class="table no-border">
@@ -292,13 +299,13 @@
                             <a href="{{ route('checkout') }}" class="btn mb-20 w-100">Proceed To CheckOut<i
                                     class="fi-rs-sign-out ml-15"></i></a>
                         </div>
-    
+
                     </div>
-    
+
                     <div class="row">
-    
+
                         <div class="border p-md-4 cart-totals  mt-4">
-    
+
                             <h4 class="mb-10">Apply Coupon</h4>
                             <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
                             <form method="post" action="/apply-promo">
@@ -314,16 +321,16 @@
                                     <button class="btn"><i class="fi-rs-label mr-10"></i>Apply</button>
                                 </div>
                             </form>
-    
+
                         </div>
-    
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="new-cart">
+    <div id="new-div">
 
     </div>
 
@@ -355,10 +362,10 @@
 
         $('.tax').text(symbol + tax);
         $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
-      
+
     });
 
-    
+
 
     $(document).on('click', '.qty-plus', function() {
 
@@ -367,15 +374,15 @@
         var prev_val = parseInt($(this).prev().val());
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
-        //alert(product_id);
+        
         var productPrice = parseFloat(ctr.data("product-price"));
         var subtotalCtr = ctr.find(".cart-subtotal");
-        if(prev_val <= 9){
+        if (prev_val <= 9) {
             var quantity = prev_val + 1;
-        }else{
+        } else {
             tata.error('Reached Quantity 10 !!', 'Maximum product added in cart.');
         }
-       
+
         var subtotalPrice = quantity * productPrice;
         subtotalCtr.text(subtotalPrice);
 
@@ -404,13 +411,13 @@
         $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
 
-        if (prev_val <= 9) {
+        if (prev_val < max) {
             prev_val = prev_val + 1;
             prev_val = $(this).prev().val(prev_val);
         }
 
-       ajaxUpdateCart(product_id , quantity);
-       ajaxUpdateNavCart(ajaxUpdateNavCart);
+        ajaxUpdateCart(product_id, quantity);
+        ajaxUpdateNavCart(ajaxUpdateNavCart);
 
 
     });
@@ -419,18 +426,16 @@
         var tax = "{{ $totalTax }}";
         var min = 1;
         var prev_val = $(this).next().val();
-      
 
-        // -----------------------------------------
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
-        //alert(product_id);
+        
         var productPrice = parseFloat(ctr.data("product-price"));
         var subtotalCtr = ctr.find(".cart-subtotal");
-        if( prev_val >=2 ){
+        if (prev_val > min) {
             var quantity = prev_val - 1;
         }
-       
+
         var subtotalPrice = quantity * productPrice;
         subtotalCtr.text(subtotalPrice);
 
@@ -461,11 +466,11 @@
             $(this).next().val(+$(this).next().val() - 1);
         }
 
-        ajaxUpdateCart(product_id,quantity);
+        ajaxUpdateCart(product_id, quantity);
         ajaxUpdateNavCart(product_id);
     });
 
-    function ajaxUpdateCart(product_id,quantity){
+    function ajaxUpdateCart(product_id, quantity) {
         var pid = product_id;
         var quantity = quantity;
         var url = "{!! route('cart.update') !!}";
@@ -474,19 +479,19 @@
             url: url,
             data: {
                 id: pid,
-                quantity:quantity,
+                quantity: quantity,
             },
             success: function(result) {
-                console.log(result);
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
+                //console.log(result);
+                
                 tata.success('Success!!', 'Product updated successfully.');
             },
             error: function(error) {
-                //console.log(error);
+                console.log(error);
             }
         });
     }
+    
 
     function ajaxUpdateNavCart(product_id) {
         var pid = product_id;
@@ -503,11 +508,62 @@
                 $('#new-cart').html(result);
             },
             error: function(error) {
-                if (error.status == 401){
+                if (error.status == 401) {
                     window.location.href = "/login";
                 }
             }
         });
     }
-</script>
 
+    function deleteFromCartById(id) {
+        var pid = id;
+        var url = "{!! route('cart.remove', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+              
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    $(document).on('click','.ajax-product-remove', function() {
+        var pro_div = $(this).closest(".product-modifiers");
+        var pro_id = pro_div.find(".pro-id").val();
+        var pd = pro_id;
+        var url = "{!! route('cart.remove.div', ':id') !!}";
+        url = url.replace(':id', pd);
+        deleteFromCartById(pd);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pd,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                //tata.error('Success!', 'Product removed form your cart.');
+                $('#old-div').empty();
+                $('#new-div').html(result);
+               
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });
+        
+    });
+
+</script>

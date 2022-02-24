@@ -56,15 +56,14 @@
     </div>
 </div>
 
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
     
-        var route = "{{ request()->route()->getName() }}";
-    
-        if (route == 'compare') {
-            var id = $(this).attr("data-id");
+        var id = $(this).attr("data-id");
         var url = "{!! route('removeCompareProduct', ':id') !!}";
         url = url.replace(':id', id);
             $.ajax({
@@ -82,38 +81,20 @@
                     console.log(error);
                 }
             });
-    
-            $.ajax({
-                method: 'GET',
-                url: "{!! route('removeCompareProduct2') !!}",
-                success: function(result) {
-                    $('#compareProductsOld').empty();
-                    $('#compareProductsNew').html(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        } else {
-            var id = $(this).attr("data-id");
-            var url = "{!! route('removeCompareProduct', ':id') !!}";
-            url = url.replace(':id', id);
+            
                 $.ajax({
-                    method: 'GET',
-                    url: url,
-                    data: {
-                        id: id,
-                    },
-                    success: function(result) {
-                        $('#compareProductOld').empty();
-                        $('#compareProductNew').html(result);
-                        tata.success('Success!', 'Product removed from compare list.');
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
+                        method: 'GET',
+                        url: "{!! route('removeCompareProduct2') !!}",
+                        success: function(result) {   
+                            console.log(result);         
+                            $('#compareProductsOld').empty();
+                            $('#compareProductsNew').html(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+            
         });
     });
-    </script>
+</script>
