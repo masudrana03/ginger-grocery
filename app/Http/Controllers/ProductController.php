@@ -144,10 +144,22 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $product            = $request->except('files', 'types', 'nutritions');
-        $product['user_id'] = auth()->id();
-        $product['slug']    = Str::slug($request->name);
+        // dd($request->);
+        $filename = '';
 
+        if ($request->hasFile('featured_image')) {
+            $image             = $request->file('featured_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/products/featured/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $product                    = $request->except('files', 'types', 'nutritions');
+        $product['user_id']         = auth()->id();
+        $product['slug']            = Str::slug($request->name);
+        $product['featured_image']  = $filename;
         $product = Product::create($product);
 
         if ($request->hasFile('files')) {
@@ -189,8 +201,8 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-        
-        
+
+
         //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
@@ -204,11 +216,28 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-       // return [$request->files[0]->getClientOriginalExtension()];
-        $productData        = $request->except('files', 'types', 'nutritions');
-        $product['user_id'] = auth()->id();
+        // return dd($request->all());
+        // return [$request->files[0]->getClientOriginalExtension()];
 
-        $productData['slug']    = Str::slug($request->name);
+        if ($request->hasFile('featured_image')) {
+            $imageDirectory = 'assets/img/uploads/products/featured/';
+
+            deleteImage($product->featured_image, $imageDirectory);
+
+            $image             = $request->file('featured_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/products/featured/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+
+            $product->featured_image = $filename;
+        }
+
+        $productData                   = $request->except('files', 'types', 'nutritions');
+        $product['user_id']            = auth()->id();
+        $productData['slug']           = Str::slug($request->name);
+        $productData['featured_image'] = $filename;
         $product->update($productData);
 
         if ($request->hasFile('files')) {

@@ -28,17 +28,18 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => 'required',
-            'description'  => 'required',
-            'excerpt'      => 'required',
-            'price'        => 'required',
-            'brand_id'     => 'required',
-            'category_id'  => 'required',
-            'unit_id'      => 'required',
-            'types'        => 'required',
-            'nutritions'   => 'required',
-            'store_id'     => 'required',
-            'files'        => 'required',
+            'name'            => 'required',
+            'description'     => 'required',
+            'excerpt'         => 'required',
+            'price'           => 'required',
+            'brand_id'        => 'required',
+            'category_id'     => 'required',
+            'unit_id'         => 'required',
+            'types'           => 'required',
+            'nutritions'      => 'required',
+            'store_id'        => 'required',
+            'files'           => 'required',
+            'featured_image'  => 'required',
             // 'files'        => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=1100px,min_height=1100px',
         ];
     }
