@@ -59,7 +59,20 @@
                                 <span class="stock-status in-stock mb-0"> In Stock </span>
                             </td>
                             <td class="text-left" data-title="Cart">
-                                <a class="btn btn-sm" href="{{ route('cartById', $item->id) }}">Add to cart</a>
+                                {{-- <a class="btn btn-sm" href="{{ route('cartById', $item->id) }}">Add to cart</a> --}}
+
+                                <div class="add-cart">
+                                    <input type="hidden" id="product-id" name="product_id" value="{{$item->id}}" >
+                                    <a class="add btn btn-sm" id="cart-btn"
+                                        href="#" style=""><i
+                                            class="fi-rs-shopping-cart mr-5"></i>Add to cart </a>
+                                    <small class="product-id"
+                                        style="display: none;">{{ $item->id }}</small>
+                                    <input style="display: none;" name="product_id"
+                                        value="{{ $item->id }}">
+
+                                </div>
+
                             </td>
                             <td class="action text-left" data-title="Remove">
                                 <a style="padding-left: 20%;" href="{{route('wishlist.remove', $item->id)}}" class="text-body"><i class="fi-rs-trash"></i></a>

@@ -186,9 +186,15 @@
                                                     <span class="old-price">$32.8</span>
                                                 </div>
                                                 <div class="add-cart">
-                                                    <a class="add"
-                                                        href="{{ route('cartById', $product->id) }}"><i
+                                                    <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
+                                                    <a class="add" id="cart-btn"
+                                                        href="#" style=""><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                    <small class="product-id"
+                                                        style="display: none;">{{ $product->id }}</small>
+                                                    <input style="display: none;" name="product_id"
+                                                        value="{{ $product->id }}">
+
                                                 </div>
                                             </div>
                                         </div>

@@ -24,29 +24,29 @@ class CartController extends Controller
         $product = Product::find($request->product_id);
 
         //return $product;
-    
+
         if (!$product) {
             return back()->with('error', 'Product not found');
         }
-    
+
         $cart = Cart::where('user_id', auth()->id())->first();
-    
+
         if (!$cart) {
             $cart          = new Cart();
             $cart->user_id = auth()->id();
             $cart->save();
         }
-    
+
         $cart->products()->sync([
                 $product->id => [
                     'quantity' => $request->quantity,
                     'options'  => $request->options ? json_encode($request->options) : null,
                 ],
             ], false);
-            
+
         return view('frontend.ajax.cart');
     }
-    
+
 
     /**
      * @param $id
@@ -76,8 +76,8 @@ class CartController extends Controller
         return view('frontend.cart', compact('compareProduct', 'totalTax'));
     }
 
-    
-    
+
+
 
     public function cartUpdate(Request $request)
     {
@@ -87,6 +87,7 @@ class CartController extends Controller
         if ($quantity <= 10 || $quantity >=1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
+
     }
 
     /**
@@ -116,20 +117,18 @@ class CartController extends Controller
      * @param $id
      */
 
-    public function removeItemFromDiv($id)
-    {   
-       
+    public function removeItemFromDiv(Request $request ,$id)
+    {
+
         $pid  = $id;
+        
         //return $pid;
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;
         foreach ($carts as $cart) {
-
             $totalTax += priceCalculator($cart)['tax'];
         }
-        //$product = Product::find($id);
         $compareProduct = Product::find($id) ?? [];
-        $compareProduct->carts()->detach();
-        return view('frontend.ajax.update-cart-div', compact('totalTax','compareProduct'));
+        return view('frontend.ajax.update-cart-div', compact('totalTax', 'compareProduct'));
     }
 }

@@ -152,9 +152,9 @@ class StripePayment implements PayableInterface
         $route = Route::current()->uri;
 
         if (strpos($route, 'api') !== false) {
-            view('frontend.order-placed');
+            return back()->with('success','Order placed Successfully !! ');
         }
 
-        return view('frontend.order-placed');
+        return back()->with('success', 'Order placed Successfully !! ');
     }
 }

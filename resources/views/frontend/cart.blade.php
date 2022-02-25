@@ -374,7 +374,7 @@
         var prev_val = parseInt($(this).prev().val());
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
-        
+
         var productPrice = parseFloat(ctr.data("product-price"));
         var subtotalCtr = ctr.find(".cart-subtotal");
         if (prev_val <= 9) {
@@ -429,7 +429,7 @@
 
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
-        
+
         var productPrice = parseFloat(ctr.data("product-price"));
         var subtotalCtr = ctr.find(".cart-subtotal");
         if (prev_val > min) {
@@ -483,7 +483,7 @@
             },
             success: function(result) {
                 //console.log(result);
-                
+
                 tata.success('Success!!', 'Product updated successfully.');
             },
             error: function(error) {
@@ -491,7 +491,7 @@
             }
         });
     }
-    
+
 
     function ajaxUpdateNavCart(product_id) {
         var pid = product_id;
@@ -527,10 +527,10 @@
 
             },
             success: function(result) {
-                
+
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-              
+
             },
             error: function(error) {
                 console.log(error);
@@ -557,13 +557,13 @@
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-               
+
             },
             error: function(error) {
               console.log(error);
             }
         });
-        
+
     });
 
 </script>

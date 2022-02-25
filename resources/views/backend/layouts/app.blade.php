@@ -57,7 +57,7 @@
     {{-- ajax link for file upload --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    
+
 
     @stack('styles')
 </head>
@@ -222,6 +222,13 @@
                                         <span>2</span> </a>
                                 </li> --}}
                             </div>
+
+                            {{-- view website button  --}}
+
+                            <div class="profile_info">
+                                <a class="btn_1" href="{{ route('index') }}">View Site</a>
+                            </div>
+
                             <div class="profile_info">
                                 <img src="{{ asset('assets/img/client_img.png') }}" alt="#">
                                 <div class="profile_info_iner">

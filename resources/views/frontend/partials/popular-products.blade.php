@@ -17,7 +17,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @if (($search ?? false) == false) 
+                @if (($search ?? false) == false)
                     @forelse ($categoryProducts->random(6) as $category)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -220,6 +220,43 @@
     </div>
 </section>
 <!--Products Tabs-->
-@push('script')
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
 
-@endpush
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401){
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>

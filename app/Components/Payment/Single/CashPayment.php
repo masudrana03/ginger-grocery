@@ -17,9 +17,9 @@ class CashPayment implements PayableInterface
         $route = Route::current()->uri;
 
         if (strpos($route, 'api') !== false) {
-            return view('api.order-placed');
+            return back()->with('success', 'Order Placed Successfully!');
         }
 
-        return view('frontend.order-placed');
+        return back()->with('success', 'Order Placed Successfully!');
     }
 }
