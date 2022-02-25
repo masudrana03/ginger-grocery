@@ -71,7 +71,7 @@
                         <a href="{{ route('products', $product->id) }}">
 
                             @if (count($product->images) > 0)
-                                <img src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                     alt="" />
 
                             @else
@@ -173,7 +173,7 @@
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-               
+
             },
             error: function(error) {
               console.log(error);
@@ -181,6 +181,6 @@
         });
     }
 
-    
-    
+
+
 </script>

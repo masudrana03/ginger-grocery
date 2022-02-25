@@ -12,7 +12,7 @@
                         @foreach ($compareProducts as $product)
                         <td class="row_img">
                             @if (count($product->images) > 0)
-                                <img  src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                <img  src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}" alt="" />
                             @else
                                 <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
                             @endif
@@ -94,7 +94,7 @@
                         <td class="row_remove">
                             <a href="#" data-id="{{ $product->id }}" class="text-muted compare-btn-delete"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
                         </td>
-                        @endforeach 
+                        @endforeach
                         {{-- <td class="row_remove">
                             <a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
                         </td>
@@ -117,7 +117,7 @@
                 </tbody>
             </table>
 
-            
+
         </div>
         @endif
     </div>
@@ -132,7 +132,7 @@
     $(document).ready(function() {
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
-    
+
         var id = $(this).attr("data-id");
         var url = "{!! route('removeCompareProduct', ':id') !!}";
         url = url.replace(':id', id);
@@ -164,7 +164,7 @@
                             console.log(error);
                         }
                     });
-            
+
         });
     });
 </script>

@@ -17,7 +17,7 @@
                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one"
                         type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                 </li>
-                @if (($search ?? false) == false) 
+                @if (($search ?? false) == false)
                     @forelse ($categoryProducts->random(6) as $category)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
@@ -45,10 +45,10 @@
                                             <a href="{{ route('vendor.details', $product->store->slug) }}">
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -135,10 +135,10 @@
                                             <a href="{{ route('products', $product->id) }}">
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
