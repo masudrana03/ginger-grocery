@@ -45,10 +45,10 @@
                                             <a href="{{ route('vendor.details', $product->store->slug) }}">
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -135,10 +135,10 @@
                                             <a href="{{ route('products', $product->id) }}">
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"

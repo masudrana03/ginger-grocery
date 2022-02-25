@@ -19,7 +19,6 @@
 
     .qty {
         height: 40px;
-        width: 100%;
         border: 1px #3BB77E solid;
         text-align: center;
         font-size: 13px;
@@ -43,7 +42,6 @@
 
     .qty {
         height: 40px;
-        width: 100%;
         border: 1px #3BB77E solid;
         text-align: center;
         font-size: 13px;
@@ -70,7 +68,8 @@
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
                         <h6 class="text-body">There are <span
-                                class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in
+                                class="text-brand">{{ auth()->user()->cart &&auth()->user()->cart->products->count() }}</span>
+                            products in
                             your
                             cart</h6>
                         {{-- <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
@@ -106,7 +105,7 @@
 
                                                 @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -127,7 +126,8 @@
                                                         </div>
                                                     </div>
                                                     <span class="font-small ml-5 text-muted">
-                                                        ({{ round($product->rating, 1) }})</span>
+                                                        ({{ round($product->rating, 1) }})
+                                                    </span>
                                                 </div>
                                             </td>
 
@@ -147,11 +147,13 @@
                                                 <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
                                                     <input type="hidden" class="product-id" name="productids[]"
                                                         value="{{ $product->id }}">
-                                                    <input type="button" value="-" class="qty-minus btn-cart">
+                                                    <input type="button" value="-" class="qty-minus btn-cart"
+                                                        style="padding-left: 0px; padding-right: 0px; margin-right: 4px;">
                                                     <input type="text" name="qty[]" readonly type="number"
                                                         value="{{ $product->quantity }}" max="10" min="1"
-                                                        class="qty update-qty">
-                                                    <input type="button" value="+" class="qty-plus btn-cart">
+                                                        class="qty update-qty" style="width: 70%;">
+                                                    <input type="button" value="+" class="qty-plus btn-cart"
+                                                        style="padding-left: 0px; padding-right: 0px; margin-left: 4px;">
                                                 </div>
                                             </td>
                                             <td class="price" data-title="Price" id="td-padding-top">
@@ -163,7 +165,7 @@
                                             </td>
                                             <td class="action text-center ajax-product-remove " data-title="Remove"
                                                 id="td-padding-top"><i class="fi-rs-trash ajax-product-remove "></i>
-                                              <input type="hidden" class="pro-id" value="{{$product->id}}" >
+                                                <input type="hidden" class="pro-id" value="{{ $product->id }}">
                                             </td>
                                         </tr>
                                         @php
@@ -538,7 +540,7 @@
         });
     }
 
-    $(document).on('click','.ajax-product-remove', function() {
+    $(document).on('click', '.ajax-product-remove', function() {
         var pro_div = $(this).closest(".product-modifiers");
         var pro_id = pro_div.find(".pro-id").val();
         var pd = pro_id;
@@ -560,7 +562,7 @@
 
             },
             error: function(error) {
-              console.log(error);
+                console.log(error);
             }
         });
 

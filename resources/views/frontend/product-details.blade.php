@@ -255,10 +255,10 @@
                                     <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
                                         href="#Description">Description</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab"
                                         href="#Additional-info">Additional info</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab"
                                         href="#Vendor-info">Vendor</a>
@@ -606,10 +606,10 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{{ route('products', $product->id) }}" tabindex="0">
                                                         <img class="default-img"
-                                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                             alt="" />
                                                         <img class="hover-img"
-                                                            src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                             alt="" />
                                                     </a>
                                                 </div>
@@ -628,7 +628,7 @@
                                         </div> --}}
                                             </div>
                                             <div class="product-content-wrap">
-                                                <h2><a href="{{ route('products', $product->id) }}"
+                                                <h2><a href="{{ route('products', $product->slug) }}"
                                                         tabindex="0">{{ $product->name }}</a></h2>
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width: 50%"></div>

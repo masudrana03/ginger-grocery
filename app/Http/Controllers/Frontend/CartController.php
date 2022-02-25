@@ -117,11 +117,9 @@ class CartController extends Controller
      * @param $id
      */
 
-    public function removeItemFromDiv(Request $request ,$id)
-    {
 
+    public function removeItemFromDiv(Request $request ,$id){
         $pid  = $id;
-        
         //return $pid;
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;

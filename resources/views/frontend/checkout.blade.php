@@ -320,7 +320,6 @@
 
 
             <div class="col-lg-5 mb-100" style="margin-top:7%;">
-
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s):</p>
                 </div>
@@ -357,7 +356,7 @@
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
-                                            <div class="checkout-product-img-wrapper product-details">
+                                            <div class="checkout-product-img-wrapper product-details" style="padding-top: 5px;">
                                                 @if (count($item->images) > 0)
                                                     <img class="item-thumb img-thumbnail img-rounded"
                                                         src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
@@ -411,7 +410,7 @@
                         </div>
                     </div>
                 @empty
-                    <p>No product in your cart!</p>
+                    <p style="text-align: center; padding-top: 10px; padding-bottom: 10px; color: #fdc040; border: 20px;">No product in your cart!</p>
                 @endforelse
 
 
@@ -454,7 +453,7 @@
         //     document.getElementById('BillingForm').submit();
         // }
 
-        // onload function to check any address found or not 
+        // onload function to check any address found or not
 
         function checkAddress() {
             let shipForm = document.getElementById('shipping-form');
@@ -562,11 +561,11 @@
             $('.checkaddress').each(function() {
                 var $this = $(this);
                 $this.on('click', function() {
-                    
+
                     //var addName = $('.addName');
                     // var address = $this.children(".addName").html();
                     // alert(address);
-                
+
                     var address_id = $this.val();
                     alert(address_id);
                    ajaxLoadingStoreId(address_id);
@@ -597,7 +596,7 @@
 
     </script>
 
-  
+
 
 
 @endpush
