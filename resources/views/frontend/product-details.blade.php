@@ -227,9 +227,9 @@
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                             href="{{ route('wishlist', $product->id) }}"><i
                                                 class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up"
-                                            href="{{ route('compare', $product->id) }}"><i
-                                                class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                    href="{{ route('compareProduct', $product->id) }}"><i
+                                                        class="fi-rs-shuffle"></i></a>
                                     </div>
                                 </div>
                                 {{-- <div class="font-xs">
@@ -619,9 +619,9 @@
                                                         href="{{ route('wishlist', $product->id) }}"
                                                         class="action-btn small hover-up" href="#" tabindex="0"><i
                                                             class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" href="{{ route('compare', $product->id) }}"
-                                                        class="action-btn small hover-up" href="#" tabindex="0"><i
-                                                            class="fi-rs-shuffle"></i></a>
+                                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                                href="{{ route('compareProduct', $product->id) }}"><i
+                                                                    class="fi-rs-shuffle"></i></a>
                                                 </div>
                                                 {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>

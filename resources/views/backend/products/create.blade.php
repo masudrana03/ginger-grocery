@@ -235,7 +235,7 @@
                                             @endif
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
-                                                    <h4>Upload Product Images</h4>
+                                                    <h4>Upload Featured Product Images</h4>
 
                                                     <input type="file" name="featured_image" id="featured_image"
                                                         accept="image/*" class="d-none " onchange="showImage(this)">

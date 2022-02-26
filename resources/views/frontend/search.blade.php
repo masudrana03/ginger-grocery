@@ -92,14 +92,16 @@
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="#">
-                                    <img class="default-img" src="{{ asset('assets/frontend/imgs/shop/product-1-1.jpg') }}" alt="" />
-                                    <img class="hover-img" src="{{ asset('assets/frontend/imgs/shop/product-1-2.jpg') }}" alt="" />
+                                    <img class="default-img"  src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}" alt="" />
+                                    <img class="hover-img"  src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}" alt="" />
                                 </a>
                             </div>
                             <div class="product-action-1">
                                 <a aria-label="Add To Wishlist" class="action-btn" href="#"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn" href="#"><i class="fi-rs-shuffle"></i></a>
-                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                    href="#"><i
+                                        class="fi-rs-shuffle"></i></a>
+                                {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
                                 <span class="hot">Hot</span>
@@ -165,4 +167,72 @@
 </div>
 
 @endsection
+@push('script')
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $(".compare-btn").click(function(event) {
+            event.preventDefault();
+        var id = $(this).attr("data-id");
+        var url = "{!! route('compareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product added to compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
 
+<script>
+    $(document).ready(function() {
+        $(".compare-btn-delete").click(function(event) {
+            event.preventDefault();
+
+        var id = $(this).attr("data-id");
+        var url = "{!! route('removeCompareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product removed from compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+                $.ajax({
+                        method: 'GET',
+                        url: "{!! route('removeCompareProduct2') !!}",
+                        success: function(result) {
+                            console.log(result);
+                            $('#compareProductsOld').empty();
+                            $('#compareProductsNew').html(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+
+        });
+    });
+</script>
+
+@endpush

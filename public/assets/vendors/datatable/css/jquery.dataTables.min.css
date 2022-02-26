@@ -422,6 +422,7 @@ table.dataTable td {
 }
 .dataTables_wrapper .dataTables_scroll {
   clear: both;
+
 }
 .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
   *margin-top: -1px;
