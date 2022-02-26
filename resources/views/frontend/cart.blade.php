@@ -133,15 +133,11 @@
 
                                             <td class="custome-checkbox pl-30"></td>
 
-
-
                                             <td class="price" data-title="Price" id="td-padding-top">
                                                 <h6 class="text-body">
                                                     {{ settings('currency') }}{{ $product->price }}
                                                 </h6>
                                             </td>
-
-
 
                                             <td>
                                                 <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">

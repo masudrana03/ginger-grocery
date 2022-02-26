@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Zone;
+use App\Models\Store;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Setting;
@@ -31,19 +32,17 @@ class HomeController extends Controller
         $compareProduct = Product::find($productIds) ?? [];
 
         if ($request->zone_id) {
-            $categoryProducts = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
-                $q->find($request->zone_id);
-            }])->limit(10)->get();
+            $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id')->toArray();
+            $categoryProducts = Category::with('products.store', 'products.currency', 'products.images', 'products.ratings')->whereHas('products', function ($product) use ($vendor_ids) {
+                $product->whereIn('store_id', $vendor_ids);
+            })->limit(10)->get();
         } else {
-            $categoryProducts = Category::with('products.store', 'products.currency')->limit(10)->get();
+            $categoryProducts = Category::with('products.store', 'products.currency', 'products.images', 'products.ratings')->limit(10)->get();
         }
-
 
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
-
-
 
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }
@@ -72,7 +71,6 @@ class HomeController extends Controller
                 return $q->where('id', $category_id);
             })
             ->limit(10)->get();
-
 
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
