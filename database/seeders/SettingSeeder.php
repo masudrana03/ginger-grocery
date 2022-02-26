@@ -42,5 +42,11 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'news_flash_one', 'value' => 'Welcome to Groce-Fusion'] );
         Setting::create( ['key' => 'news_flash_two', 'value' => 'Get 30% discount on your first order'] );
         Setting::create( ['key' => 'news_flash_three', 'value' => 'We are giving 10% discount on online payment'] );
+        Setting::create( ['key' => 'facebook_link', 'value' => '#'] );
+        Setting::create( ['key' => 'twitter_link', 'value' => '#'] );
+        Setting::create( ['key' => 'instagram_link', 'value' => '#'] );
+        Setting::create( ['key' => 'linkedin_link', 'value' => '#'] );
+        Setting::create( ['key' => 'youtube_link', 'value' => '#'] );
+
     }
 }

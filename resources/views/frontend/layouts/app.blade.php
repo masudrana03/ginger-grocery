@@ -507,7 +507,7 @@
     $(document).ready(function() {
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
-    
+
         var id = $(this).attr("data-id");
         var url = "{!! route('removeCompareProduct', ':id') !!}";
         url = url.replace(':id', id);
@@ -538,11 +538,11 @@
                             console.log(error);
                         }
                     });
-            
+
         });
     });
 </script>
-    @yield('script')
+@yield('script')
 </body>
 
 </html>

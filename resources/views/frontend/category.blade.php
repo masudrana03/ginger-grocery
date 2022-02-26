@@ -155,9 +155,9 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn"
-                                                href="{{ route('compareProduct', $product->id) }}"><i
-                                                    class="fi-rs-shuffle"></i></a>
+                                                    <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                        href="{{ route('compareProduct', $product->id) }}"><i
+                                                            class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
@@ -191,8 +191,15 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <a class="add" href="{{ route('cartById', $product->id) }}"><i
+                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
+                                                <a class="add" id="cart-btn"
+                                                    href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                <small class="product-id"
+                                                    style="display: none;">{{ $product->id }}</small>
+                                                <input style="display: none;" name="product_id"
+                                                    value="{{ $product->id }}">
+
                                             </div>
                                         </div>
                                     </div>

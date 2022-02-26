@@ -87,6 +87,7 @@ class CartController extends Controller
         if ($quantity <= 10 || $quantity >=1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
+
     }
 
     /**
@@ -116,20 +117,16 @@ class CartController extends Controller
      * @param $id
      */
 
-    public function removeItemFromDiv($id)
-    {
 
+    public function removeItemFromDiv(Request $request ,$id){
         $pid  = $id;
         //return $pid;
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;
         foreach ($carts as $cart) {
-
             $totalTax += priceCalculator($cart)['tax'];
         }
-        //$product = Product::find($id);
         $compareProduct = Product::find($id) ?? [];
-        $compareProduct->carts()->detach();
-        return view('frontend.ajax.update-cart-div', compact('totalTax','compareProduct'));
+        return view('frontend.ajax.update-cart-div', compact('totalTax', 'compareProduct'));
     }
 }

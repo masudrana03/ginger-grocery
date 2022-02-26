@@ -117,9 +117,15 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
+    Route::get('/social-media-setting-index', [SettingController::class, 'socialMediaLink'])->name('settings.social.media.index');
+    Route::post('/social-media-setting-update', [SettingController::class, 'socialMediaLinkUpdate'])->name('settings.social.link.update');
+
 
     Route::get('/social-setting-index', [SocialLoginController::class, 'socialIndex'])->name('settings.social.index');
     Route::post('/update/social-setting-update', [SocialLoginController::class, 'socialUpdate'])->name('settings.social.update');
+
+
+
 
     Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
     Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
@@ -279,7 +285,7 @@ Route::get('c/{id}', function ($id) {
     if (in_array($id, $compareProducts)) {
         return Cache::get('products');
     }
-    
+
     if (count($compareProducts) >= 3) {
         array_shift($compareProducts);
         array_push($compareProducts, $id);

@@ -212,15 +212,24 @@
                                         <span class="qty-val">1</span>
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div> --}}
-                                    <div class="product-extra-link2">
-                                        <a class="action-btn hover-up cart"
-                                            href="{{ route('cartById', $product->id) }}">Add To Cart</a>
+                                    <div class="product-extra-link2 add-cart">
+                                        {{-- <a class="action-btn hover-up cart"
+                                            href="{{ route('cartById', $product->id) }}">Add To Cart</a> --}}
+                                        <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
+                                        <a class="add action-btn hover-up cart" id="cart-btn"
+                                            href="#" style=""><i
+                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        <small class="product-id"
+                                            style="display: none;">{{ $product->id }}</small>
+                                        <input style="display: none;" name="product_id"
+                                            value="{{ $product->id }}">
+
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                             href="{{ route('wishlist', $product->id) }}"><i
                                                 class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up"
-                                            href="{{ route('compare', $product->id) }}"><i
-                                                class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                    href="{{ route('compareProduct', $product->id) }}"><i
+                                                        class="fi-rs-shuffle"></i></a>
                                     </div>
                                 </div>
                                 {{-- <div class="font-xs">
@@ -610,9 +619,9 @@
                                                         href="{{ route('wishlist', $product->id) }}"
                                                         class="action-btn small hover-up" href="#" tabindex="0"><i
                                                             class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" href="{{ route('compare', $product->id) }}"
-                                                        class="action-btn small hover-up" href="#" tabindex="0"><i
-                                                            class="fi-rs-shuffle"></i></a>
+                                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                                href="{{ route('compareProduct', $product->id) }}"><i
+                                                                    class="fi-rs-shuffle"></i></a>
                                                 </div>
                                                 {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
@@ -635,10 +644,17 @@
                                                         {{-- <span class="old-price">$32.8</span> --}}
                                                     </div>
                                                     <div class="add-cart">
-                                                        <a class="add"
-                                                            href="{{ route('cartById', $product->id) }}" style=""><i
+                                                        <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
+                                                        <a class="add" id="cart-btn"
+                                                            href="#" style=""><i
                                                                 class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                        <small class="product-id"
+                                                            style="display: none;">{{ $product->id }}</small>
+                                                        <input style="display: none;" name="product_id"
+                                                            value="{{ $product->id }}">
+
                                                     </div>
+
                                                 </div>
 
                                             </div>

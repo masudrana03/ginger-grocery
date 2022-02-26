@@ -43,12 +43,12 @@
 
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('vendor.details', $product->store->slug) }}">
-                                                @if ($product->featured_image)
+                                                @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -65,10 +65,9 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" data-id="{{ $product->id }}"
-                                                class="action-btn compare-btn"
-                                                href="{{ route('compareProduct', $product->id) }}"><i
-                                                    class="fi-rs-shuffle"></i></a>
+                                                    <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                        href="{{ route('compareProduct', $product->id) }}"><i
+                                                            class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                 data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                         </div>
@@ -103,7 +102,8 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <a class="add" href="#"><i
+                                                <a class="add"
+                                                    href="#"><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -133,12 +133,12 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('products', $product->id) }}">
-                                                @if ($product->featured_image)
+                                                @if (count($product->images) > 0)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -154,9 +154,9 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn"
-                                                href="{{ route('compare', $product->id) }}"><i
-                                                    class="fi-rs-shuffle"></i></a>
+                                                    <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                                        href="#"><i
+                                                            class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                 data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                         </div>
@@ -191,9 +191,9 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <input type="hidden" id="product-id" name="product_id"
-                                                    value="{{ $product->id }}">
-                                                <a class="add" id="cart-btn" href="#" style=""><i
+                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
+                                                <a class="add" id="cart-btn"
+                                                    href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -220,5 +220,108 @@
     </div>
 </section>
 <!--Products Tabs-->
-@push('script')
-@endpush
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401){
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $(".compare-btn").click(function(event) {
+            event.preventDefault();
+        var id = $(this).attr("data-id");
+        var url = "{!! route('compareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product added to compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".compare-btn-delete").click(function(event) {
+            event.preventDefault();
+
+        var id = $(this).attr("data-id");
+        var url = "{!! route('removeCompareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product removed from compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+                $.ajax({
+                        method: 'GET',
+                        url: "{!! route('removeCompareProduct2') !!}",
+                        success: function(result) {
+                            console.log(result);
+                            $('#compareProductsOld').empty();
+                            $('#compareProductsNew').html(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+
+        });
+    });
+</script>
