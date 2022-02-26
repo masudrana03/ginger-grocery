@@ -119,14 +119,14 @@ class CartController extends Controller
 
 
     public function removeItemFromDiv(Request $request ,$id){
-        $pid  = $id;
-        //return $pid;
+
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;
+
         foreach ($carts as $cart) {
-            $totalTax += priceCalculator($cart)['tax'];
+           $totalTax += priceCalculator($cart)['tax'];
         }
-        $compareProduct = Product::find($id) ?? [];
-        return view('frontend.ajax.update-cart-div', compact('totalTax', 'compareProduct'));
+
+        return view('frontend.ajax.update-cart-div', compact('totalTax'));
     }
 }
