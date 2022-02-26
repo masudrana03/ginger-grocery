@@ -17,14 +17,14 @@ class SocialSeeder extends Seeder
         Social::create([
             'provider'     => 'google',
             'status'       => false,
-            'redirect_url' => env('APP_URL').'/login/google/callback',
+            'redirect_url' => '/login/google/callback',
             'created_at'   => now(),
         ]);
 
         Social::create([
             'provider'     => 'facebook',
             'status'       => false,
-            'redirect_url' => env('APP_URL').'/login/facebook/callback',
+            'redirect_url' => '/login/facebook/callback',
             'created_at'   => now(),
         ]);
     }

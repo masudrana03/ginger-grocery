@@ -89,11 +89,13 @@
                                         <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
                                             <input type="hidden" class="product-id" name="productids[]"
                                                 value="{{ $product->id }}">
-                                            <input type="button" value="-" class="qty-minus btn-cart">
+                                                <input type="button" value="-" class="qty-minus btn-cart"
+                                                style="padding-left: 0px; padding-right: 0px; margin-right: 4px;">
                                             <input type="text" name="qty[]" readonly type="number"
                                                 value="{{ $product->quantity }}" max="10" min="1"
-                                                class="qty update-qty">
-                                            <input type="button" value="+" class="qty-plus btn-cart">
+                                                class="qty update-qty" style="width: 70%;">
+                                                <input type="button" value="+" class="qty-plus btn-cart"
+                                                style="padding-left: 0px; padding-right: 0px; margin-left: 4px;">
                                         </div>
                                     </td>
                                     <td class="price" data-title="Price" id="td-padding-top">

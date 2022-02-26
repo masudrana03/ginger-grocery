@@ -43,12 +43,12 @@
 
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('vendor.details', $product->store->slug) }}">
-                                                @if (count($product->images) > 0)
+                                                @if ($product->featured_image)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -65,7 +65,8 @@
                                             <a aria-label="Add To Wishlist" class="action-btn"
                                                 href="{{ route('wishlist', $product->id) }}"><i
                                                     class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                                            <a aria-label="Compare" data-id="{{ $product->id }}"
+                                                class="action-btn compare-btn"
                                                 href="{{ route('compareProduct', $product->id) }}"><i
                                                     class="fi-rs-shuffle"></i></a>
                                             {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
@@ -102,8 +103,7 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <a class="add"
-                                                    href="#"><i
+                                                <a class="add" href="#"><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -133,12 +133,12 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('products', $product->id) }}">
-                                                @if (count($product->images) > 0)
+                                                @if ($product->featured_image)
                                                     <img class="default-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                         alt="" />
                                                     <img class="hover-img"
-                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                         alt="" />
                                                 @else
                                                     <img class="default-img"
@@ -191,9 +191,9 @@
                                                 {{-- <span class="old-price">$32.8</span> --}}
                                             </div>
                                             <div class="add-cart">
-                                                <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
-                                                <a class="add" id="cart-btn"
-                                                    href="#" style=""><i
+                                                <input type="hidden" id="product-id" name="product_id"
+                                                    value="{{ $product->id }}">
+                                                <a class="add" id="cart-btn" href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -221,5 +221,4 @@
 </section>
 <!--Products Tabs-->
 @push('script')
-
 @endpush
