@@ -305,7 +305,7 @@
                                             <option>Your Location</option>
 
                                             @foreach ($zones as $zone)
-                                                <option value="{{ $zone->id }}">{{ $zone->name }}
+                                                <option class="zoneId" value="{{ $zone->id }}">{{ $zone->name }}
                                                 </option>
                                             @endforeach
 
@@ -1161,10 +1161,13 @@
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-        function getval(sel) {
-            // alert(sel.value);
-            $('#zoneForm').submit();
+        $(document).ready(function () {
+            function getval(sel) {
+            alert(sel.value);
+            // $('#zoneForm').submit();
         }
+        });
+
     </script>
 
     <script>
@@ -1241,9 +1244,6 @@
                 console.log(error);
             }
         });
-
-
-
 
     }
 </script>

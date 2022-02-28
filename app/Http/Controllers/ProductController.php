@@ -224,6 +224,7 @@ class ProductController extends Controller
     {
         // return dd($request->all());
         // return [$request->files[0]->getClientOriginalExtension()];
+        $filename = $product->featured_image;
 
         $discount_type   = $request->discount_type;
         $discount_amount = $request->discount_amount;
