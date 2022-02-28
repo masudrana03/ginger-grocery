@@ -178,12 +178,12 @@
                                             </div>
                                             <div>
                                                 <span class="font-small text-muted">By <a
-                                                        href="{{ route('shop.product', $product->id) }}">{{ $product->store->name }}</a></span>
+                                                        href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a></span>
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
                                                     <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                                    <span class="old-price">$32.8</span>
+                                                    {{-- <span class="old-price">$32.8</span> --}}
                                                 </div>
                                                 <div class="add-cart">
                                                     <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >

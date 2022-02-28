@@ -301,7 +301,7 @@
                             <div class="header-action-2">
                                 <div class="search-location">
                                     <form action="{{ route('index') }}" id="zoneForm" method="get">
-                                        <select name="zone_id" class="select-active" onchange="getval(this);">
+                                        <select name="zone_id" class="select-active zone-id">
                                             <option>Your Location</option>
 
                                             @foreach ($zones as $zone)
@@ -1162,10 +1162,29 @@
 
     <script>
         $(document).ready(function () {
-            function getval(sel) {
-            alert(sel.value);
-            // $('#zoneForm').submit();
-        }
+
+            $( ".zone-id" ).change(function() {
+                var zoneId = this.value;
+                var url = "{!! route('zone.filter', ':zoneId') !!}";
+                url = url.replace(':zoneId', zoneId);
+
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                zone_id: zoneId,
+
+            },
+            success: function(result) {
+                // console.log(result);
+                $('#oldZoneWiseProduct').empty();
+                $('#newZoneWiseProduct').html(result);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+            });
         });
 
     </script>

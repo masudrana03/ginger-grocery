@@ -190,6 +190,7 @@ class CategoryController extends Controller
         }
 
         $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
         $category->save();
 
         toast('Category successfully updated', 'success');

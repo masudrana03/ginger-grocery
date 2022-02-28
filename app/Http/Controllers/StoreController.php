@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Zone;
 use App\Models\Store;
 use App\Models\Country;
+use App\Models\Currency;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\StoreUpdateRequest;
-use App\Models\Currency;
 
 class StoreController extends Controller {
     /**
@@ -147,6 +148,7 @@ class StoreController extends Controller {
             saveImageWithThumbnail( $image, $location, $thumbnailLocation );
         }
 
+        $request['slug']  = Str::slug($request->name);
         $request          = $request->all();
         $request['image'] = $filename;
 
@@ -216,13 +218,14 @@ class StoreController extends Controller {
             saveImageWithThumbnail( $image, $location, $thumbnailLocation );
         }
 
-        $request = $request->all();
+        $requestData = $request->all();
+        $requestData['slug']  = Str::slug($request->name);
 
         if ( $filename != '' ) {
-            $request['image'] = $filename;
+            $requestData['image'] = $filename;
         }
 
-        $store->update( $request );
+        $store->update( $requestData );
 
         toast( 'Store successfully updated', 'success' );
 

@@ -4,7 +4,7 @@
             $actonBannerOne = $callToActions->find(3);
             $actonBannerTwo = $callToActions->find(4);
             $actonBannerThree = $callToActions->find(5);
-            
+
         @endphp
 
         <div class="row">
@@ -15,7 +15,7 @@
                         <h4>
                             {{ $actonBannerOne->action_tittle }}
                         </h4>
-                        <a href="#" class="btn btn-xs">Shop
+                        <a href="{{ route('vendor.details', $actonBannerOne->store->slug) }}" class="btn btn-xs">Shop
                             Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                         <h4>
                             {{ $actonBannerTwo->action_tittle }}
                         </h4>
-                        <a href="#" class="btn btn-xs">Shop
+                        <a href="{{ route('vendor.details', $actonBannerTwo->store->slug) }}" class="btn btn-xs">Shop
                             Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <img src="{{ asset('assets/img/uploads/actions/' . $actonBannerThree->image) }}" alt="" />
                     <div class="banner-text">
                         <h4>{{ $actonBannerThree->action_tittle }}</h4>
-                        <a href="#"
+                        <a href="{{ route('vendor.details', $actonBannerThree->store->slug) }}"
                             class="btn btn-xs">Shop
                             Now <i class="fi-rs-arrow-small-right"></i></a>
                     </div>

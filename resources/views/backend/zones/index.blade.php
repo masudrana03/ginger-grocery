@@ -25,8 +25,8 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Zone Name</th>
-                                            <th>Store</th>
-                                            <th>Delivery Men</th>
+                                            <th>Total Store</th>
+                                            {{-- <th>Total Delivery Men</th> --}}
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -95,6 +95,7 @@
                 { "data": "id" },
                 { "data": "name" },
                 { "data": "coordinates" },
+                // { "data": "delivery_man" },
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "actions" }

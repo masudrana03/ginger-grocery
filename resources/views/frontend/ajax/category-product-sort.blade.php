@@ -4,7 +4,7 @@
             <div class="product-cart-wrap mb-30">
                 <div class="product-img-action-wrap">
                     <div class="product-img product-img-zoom">
-                        <a href="{{ route('products', $product->id) }}">
+                        <a href="{{ route('products', $product->slug) }}">
                             @if (count($product->images) > 0)
                                 <img class="default-img"
                                     src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
@@ -38,7 +38,7 @@
                         <a href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a>
                     </div>
                     <h2><a
-                            href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 25))) }}</a>
+                            href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 25))) }}</a>
                     </h2>
                     <div class="product-rate-cover">
                         <div class="product-rate d-inline-block">
@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <span class="font-small text-muted">By <a
-                                href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a></span>
+                                href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a></span>
                     </div>
                     <div class="product-card-bottom">
                         <div class="product-price">

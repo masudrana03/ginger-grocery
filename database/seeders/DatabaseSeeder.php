@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder {
             AboutImageSeeder::class,
             AboutServicesSeeder::class,
             ProductImageSeeder::class,
+            TypeSeeder::class,
             SocialSeeder::class,
         ] );
 

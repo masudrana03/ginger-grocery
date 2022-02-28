@@ -60,7 +60,7 @@
                                     </td>
                                     <td class="product-des product-name">
                                         <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 28))) }}</a>
+                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 28))) }}</a>
                                         </h6>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
@@ -83,19 +83,17 @@
                                         </h6>
                                     </td>
 
-
-
                                     <td>
                                         <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
                                             <input type="hidden" class="product-id" name="product_ids[]"
                                                 value="{{ $product->id }}">
                                                 <input type="button" value="-" class="qty-minus btn-cart"
-                                                style="padding-left: 0px; padding-right: 0px; margin-right: 4px;">
+                                                style="padding-left: 0px; padding-right: 0px; margin-right: 4px; background-color: #3BB77E;">
                                             <input type="text" name="qty[]" readonly type="number"
                                                 value="{{ $product->quantity }}" max="10" min="1"
                                                 class="qty update-qty" style="width: 70%;">
                                                 <input type="button" value="+" class="qty-plus btn-cart"
-                                                style="padding-left: 0px; padding-right: 0px; margin-left: 4px;">
+                                                style="padding-left: 0px; padding-right: 0px; margin-left: 4px; background-color: #3BB77E;">
                                         </div>
                                     </td>
                                     <td class="price" data-title="Price" id="td-padding-top">
