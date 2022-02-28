@@ -218,6 +218,7 @@ class ProductController extends Controller
     {
         // return dd($request->all());
         // return [$request->files[0]->getClientOriginalExtension()];
+        $filename = $product->featured_image;
 
         if ($request->hasFile('featured_image')) {
             $imageDirectory = 'assets/img/uploads/products/featured/';
