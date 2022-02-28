@@ -240,7 +240,7 @@ class ProductController extends Controller
             $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
-            
+
             $product->featured_image = $filename;
         }
 
@@ -248,6 +248,8 @@ class ProductController extends Controller
         $product['user_id']            = auth()->id();
         $productData['slug']           = Str::slug($request->name);
         $productData['featured_image'] = $filename;
+        $product['discount_type']   = $discount_type;
+        $product['discount_amount'] = $discount_amount;
 
         $product->update($productData);
 

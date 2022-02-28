@@ -177,4 +177,21 @@ class Product extends Model
 
         return 0;
     }
+
+    public function getDiscountType2Attribute() {
+
+        return $this->discount_type === '1' ? 'percentage' : 'amount';
+    }
+
+    public function getDiscountableAttribute() {
+        return $this->discount_amount > 0 ? true : false;
+    }
+
+    public function getDiscountPriceAttribute() {
+        if ($this->discountable) {
+            return getAmountAfterDiscount($this->price, $this->discount_type2, $this->discount_amount);
+        }
+
+        return $this->price;
+    }
 }
