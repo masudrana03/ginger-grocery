@@ -580,7 +580,7 @@ class ProductSeeder extends Seeder
             Do not forget to check our delicious fruit recipe - https://www.bigbasket.com/cookbook/recipes/2205/chatpate-green-noodles/
             Ripe Avocados turn dark brown or Black in colour. Any small black spots on the fruit is due to abrasion during harvesting or handling and does not affect the quality of the fruit',
                 'excerpt'     => 'This is product excerpt',
-                'featured_image' => 'Fresho Avocado .png',
+                'featured_image' => 'Fresho Avocado.png',
                 'price'       => 6.30,
                 'category_id' => 8,
                 'unit_id'     => 2,

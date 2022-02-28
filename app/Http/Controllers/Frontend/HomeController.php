@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // return $request;
 
         if (env('APP_NAME') == '') {
             return view('start');
@@ -32,10 +33,14 @@ class HomeController extends Controller
         $compareProduct = Product::find($productIds) ?? [];
 
         if ($request->zone_id) {
-            $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id')->toArray();
-            $categoryProducts = Category::with('products.store', 'products.currency', 'products.images', 'products.ratings')->whereHas('products', function ($product) use ($vendor_ids) {
-                $product->whereIn('store_id', $vendor_ids);
-            })->limit(10)->get();
+            $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id');
+
+            $categoryProducts = Category::with(['products.store', 'products.currency', 'products.images', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
+                $query->whereIn('store_id', $vendor_ids);
+            }
+            ])->limit(10)->get();
+
+            // return $categoryProducts;
         } else {
             $categoryProducts = Category::with('products.store', 'products.currency', 'products.images', 'products.ratings')->limit(10)->get();
         }
@@ -43,6 +48,11 @@ class HomeController extends Controller
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
+
+        if ($request->ajax()) {
+            // return $request;
+            return view('frontend.ajax.popular-product', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
+        }
 
         return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
     }

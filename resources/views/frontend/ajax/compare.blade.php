@@ -28,7 +28,7 @@
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a
-                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                         </h4>
                         <h4>{{ settings('currency') }}{{ $product->price }}
                         </h4>
@@ -62,7 +62,7 @@
     $(document).ready(function() {
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
-    
+
         var id = $(this).attr("data-id");
         var url = "{!! route('removeCompareProduct', ':id') !!}";
         url = url.replace(':id', id);
@@ -81,12 +81,12 @@
                     console.log(error);
                 }
             });
-            
+
                 $.ajax({
                         method: 'GET',
                         url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {   
-                            console.log(result);         
+                        success: function(result) {
+                            console.log(result);
                             $('#compareProductsOld').empty();
                             $('#compareProductsNew').html(result);
                         },
@@ -94,7 +94,7 @@
                             console.log(error);
                         }
                     });
-            
+
         });
     });
 </script>

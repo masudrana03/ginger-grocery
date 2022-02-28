@@ -208,7 +208,7 @@ Route::get('/products/{id}', [HomeController::class, 'productDetails'])->name('p
 Route::post('/products-rating/{id}', [HomeController::class, 'productRating'])->name('product.rating');
 Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name('categories');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
-Route::post('/location', [HomeController::class, 'getZone'])->name('location');
+Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
