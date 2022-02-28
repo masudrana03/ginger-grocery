@@ -147,6 +147,10 @@ class ProductController extends Controller
         // dd($request->);
         $filename = '';
 
+        $discount_type   = $request->discount_type;
+        $discount_amount = $request->discount_amount;
+
+
         if ($request->hasFile('featured_image')) {
             $image             = $request->file('featured_image');
             $filename          = generateUniqueFileName($image->getClientOriginalExtension());
@@ -160,6 +164,8 @@ class ProductController extends Controller
         $product['user_id']         = auth()->id();
         $product['slug']            = Str::slug($request->name);
         $product['featured_image']  = $filename;
+        $product['discount_type']   = $discount_type;
+        $product['discount_amount'] = $discount_amount;
         $product = Product::create($product);
 
         if ($request->hasFile('files')) {
@@ -219,6 +225,9 @@ class ProductController extends Controller
         // return dd($request->all());
         // return [$request->files[0]->getClientOriginalExtension()];
 
+        $discount_type   = $request->discount_type;
+        $discount_amount = $request->discount_amount;
+
         if ($request->hasFile('featured_image')) {
             $imageDirectory = 'assets/img/uploads/products/featured/';
 
@@ -230,7 +239,7 @@ class ProductController extends Controller
             $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
 
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
-
+            
             $product->featured_image = $filename;
         }
 
@@ -238,6 +247,7 @@ class ProductController extends Controller
         $product['user_id']            = auth()->id();
         $productData['slug']           = Str::slug($request->name);
         $productData['featured_image'] = $filename;
+
         $product->update($productData);
 
         if ($request->hasFile('files')) {

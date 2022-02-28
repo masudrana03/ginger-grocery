@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->text('attributes')->nullable();
             $table->string('featured_image')->nullable();
             $table->double('price');
+            $table->tinyInteger('discount_type')->nullable()->comment('1 = Percentage, 2 = Fixed Amount');
+            $table->double('discount_amount')->nullable();
             $table->double('calories_per_serving')->nullable();
             $table->double('fat_calories_per_serving')->nullable();
             $table->foreignId('unit_id')->constrained()->onDelete('restrict');

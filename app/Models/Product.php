@@ -33,6 +33,9 @@ class Product extends Model
         'store_id',
         'category_id',
         'user_id',
+        'discount_type',
+        'discount_amount',
+
     ];
 
     /**

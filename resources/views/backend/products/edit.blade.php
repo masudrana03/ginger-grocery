@@ -114,6 +114,45 @@
                                         </span>
                                     @enderror
                                 </div>
+
+
+                                {{-- Discount Price type --}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Type</label>
+                                    <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
+                                        @if ($product->discount_type == 1){
+                                            <option value="1" checked>Percentage(%)</option>
+                                            <option value="2">Fixed Amount</option>
+                                            }
+                                        @elseif ($product->discount_type == 2){
+                                            <option value="2" checked>Fixed Amount</option>
+                                            <option value="1">Percentage(%)</option>
+                                            }
+                                        @endif
+                                    </select>
+                                    @error('types')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                {{-- Discount Price amount --}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Price</label>
+                                    <input type="number" name="discount_amount"
+                                        class="form-control @error('price') is-invalid @enderror" id="price"
+                                        aria-describedby="emailHelp" placeholder=" Discount Price"
+                                        value="{{ old('discount_price') ?? $product->discount_amount }}">
+                                    @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="calories_per_serving">Calories Per Serving</label>
                                     <input type="number" name="calories_per_serving"
@@ -174,7 +213,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Type</label>
-                                    <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror"
+                                    <select name="types[]"
+                                        class="single2 form-control @error('types') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($types as $type)
                                             <option
@@ -450,5 +490,4 @@
             }
         }
     </script>
-
 @endpush

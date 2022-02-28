@@ -111,6 +111,39 @@
                                         </span>
                                     @enderror
                                 </div>
+
+                               {{--Discount Price type--}}
+
+
+                                <div class="form-group">
+                                    <label for="price">Discount Type</label>
+                                    <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
+                                            <option value="1" checked>Percentage(%)</option>
+                                            <option value="2">Fixed Amount</option>
+                                    </select>
+                                    @error('types')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                {{--Discount Price amount--}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Price</label>
+                                    <input type="number" name="discount_amount"
+                                        class="form-control @error('price') is-invalid @enderror" id="price"
+                                        aria-describedby="emailHelp" placeholder=" Discount Price" value="{{ old('price') }}">
+                                    @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+
+
                                 <div class="form-group">
                                     <label for="calories_per_serving">Calories Per Serving</label>
                                     <input type="number" name="calories_per_serving"
@@ -332,7 +365,7 @@
                 }
             });
         });
-
+1
         // image upload js code
         var images = [];
 
