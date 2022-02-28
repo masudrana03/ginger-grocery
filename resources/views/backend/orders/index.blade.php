@@ -1,9 +1,9 @@
 @extends('backend.layouts.app')
 @section('title', 'Orders')
 <style>
-    /* .dataTables_wrapper .no{
-         position: absolute !important;
-    } */
+    .dataTables_wrapper{
+         height: 100vh !important;
+    }
 
 </style>
 

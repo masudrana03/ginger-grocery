@@ -141,7 +141,7 @@
 
                                             <td>
                                                 <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
-                                                    <input type="hidden" class="product-id" name="productids[]"
+                                                    <input type="hidden" class="product-id" name="product_ids[]"
                                                         value="{{ $product->id }}">
                                                     <input type="button" value="-" class="qty-minus btn-cart"
                                                         style="padding-left: 0px; padding-right: 0px; margin-right: 4px;">
@@ -160,7 +160,7 @@
                                                 <input class="d-none unit-price" value="{{ $product->price }}">
                                             </td>
                                             <td class="action text-center ajax-product-remove " data-title="Remove"
-                                                id="td-padding-top"><i class="fi-rs-trash ajax-product-remove "></i>
+                                                id="td-padding-top"><i class="fi-rs-trash"></i>
                                                 <input type="hidden" class="pro-id" value="{{ $product->id }}">
                                             </td>
                                         </tr>
@@ -537,6 +537,7 @@
     }
 
     $(document).on('click', '.ajax-product-remove', function() {
+        alert('asdfsdf');
         var pro_div = $(this).closest(".product-modifiers");
         var pro_id = pro_div.find(".pro-id").val();
         var pd = pro_id;
@@ -548,10 +549,9 @@
             url: url,
             data: {
                 id: pd,
-
             },
             success: function(result) {
-                //console.log(result);
+                console.log(result);
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);

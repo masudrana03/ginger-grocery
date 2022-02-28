@@ -87,7 +87,7 @@
 
                                     <td>
                                         <div class="col-md-10 col-xs-10 d-lg-flex " id="td-padding-top">
-                                            <input type="hidden" class="product-id" name="productids[]"
+                                            <input type="hidden" class="product-id" name="product_ids[]"
                                                 value="{{ $product->id }}">
                                                 <input type="button" value="-" class="qty-minus btn-cart"
                                                 style="padding-left: 0px; padding-right: 0px; margin-right: 4px;">
