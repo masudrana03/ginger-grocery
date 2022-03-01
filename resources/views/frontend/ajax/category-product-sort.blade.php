@@ -7,10 +7,10 @@
                         <a href="{{ route('products', $product->slug) }}">
                             @if (count($product->images) > 0)
                                 <img class="default-img"
-                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                     alt="" />
                                 <img class="hover-img"
-                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                     alt="" />
                             @else
                                 <img class="default-img"
@@ -22,11 +22,9 @@
                     </div>
                     <div class="product-action-1">
                         <a aria-label="Add To Wishlist" class="action-btn"
-                            href="{{ route('wishlist', $product->id) }}"><i
-                                class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
-                                    href="{{ route('compareProduct', $product->id) }}"><i
-                                        class="fi-rs-shuffle"></i></a>
+                            href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
+                        <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
+                            href="{{ route('compareProduct', $product->id) }}"><i class="fi-rs-shuffle"></i></a>
                         {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                     </div>
                     <div class="product-badges product-badges-position product-badges-mrg">
@@ -52,21 +50,25 @@
                     <div>
                         <span class="font-small text-muted">By <a
                                 href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a></span>
+                        {{-- <span class="font-small text-muted">By <a
+                                    href="{{ route('shop.product', $product->id) }}">{{ $product->store->name }}</a></span> --}}
+
                     </div>
                     <div class="product-card-bottom">
                         <div class="product-price">
-                            <span>{{ settings('currency') }}{{ $product->price }}</span>
-                            {{-- <span class="old-price">$32.8</span> --}}
+                            <span class="">{{ settings('currency') }}{{ $product->discount_price }}
+                            </span>
+                            @if ($product->discountable)
+                                <span
+                                    class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                            @endif
                         </div>
                         <div class="add-cart">
-                            <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
-                            <a class="add" id="cart-btn"
-                                href="#" style=""><i
+                            <input type="hidden" id="product-id" name="product_id" value="{{ $product->id }}">
+                            <a class="add" id="cart-btn" href="#" style=""><i
                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                            <small class="product-id"
-                                style="display: none;">{{ $product->id }}</small>
-                            <input style="display: none;" name="product_id"
-                                value="{{ $product->id }}">
+                            <small class="product-id" style="display: none;">{{ $product->id }}</small>
+                            <input style="display: none;" name="product_id" value="{{ $product->id }}">
 
                         </div>
                     </div>
@@ -118,7 +120,7 @@
                 tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
-                if (error.status == 401){
+                if (error.status == 401) {
                     window.location.href = "/login";
                 }
             }
@@ -129,9 +131,9 @@
     $(document).ready(function() {
         $(".compare-btn").click(function(event) {
             event.preventDefault();
-        var id = $(this).attr("data-id");
-        var url = "{!! route('compareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+            var id = $(this).attr("data-id");
+            var url = "{!! route('compareProduct', ':id') !!}";
+            url = url.replace(':id', id);
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -156,9 +158,9 @@
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
 
-        var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+            var id = $(this).attr("data-id");
+            var url = "{!! route('removeCompareProduct', ':id') !!}";
+            url = url.replace(':id', id);
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -174,18 +176,18 @@
                     console.log(error);
                 }
             });
-                $.ajax({
-                        method: 'GET',
-                        url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {
-                            console.log(result);
-                            $('#compareProductsOld').empty();
-                            $('#compareProductsNew').html(result);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
+            $.ajax({
+                method: 'GET',
+                url: "{!! route('removeCompareProduct2') !!}",
+                success: function(result) {
+                    console.log(result);
+                    $('#compareProductsOld').empty();
+                    $('#compareProductsNew').html(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
 
         });
     });

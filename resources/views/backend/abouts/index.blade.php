@@ -84,31 +84,15 @@
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
                                                         <h4>Upload Images</h4>
-                                                        
-                                                            <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
+
+                                                            <input type="file" name="main_section_image" id="image" class="d-none " onchange="showImage(this)">
                                                             <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                                 </div>
                                                 <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                        <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->main_section_image) }}' id="thumbnil"> 	  
+                                                        <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->main_section_image) }}' id="thumbnil">
                                                 </div>
                                             </div>
-                                            {{-- <label for="main_section_image">Main Image</label><br>
-                                            <div class="form-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="main_section_image" class="custom-file-input" id="inputGroupFile02" >
-                                                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                              <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="main_section_image" id="main_section_image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                              <img class="file-upload-image" src="#" alt="your image" />
-                                              <div class="image-title-wrap">
-                                                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                              </div>
-                                            </div> --}}
+
                                           </div>
                                         @error('logo')
                                             <span class="invalid-feedback" role="alert">
@@ -117,166 +101,12 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="logo">Slider Image one</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="logo" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="logo">Slider Image two</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="logo" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="logo">Slider Image three</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="logo" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="logo">Slider Image four</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="logo" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="logo">Favicon</label><br>
-                                            <button type="button" class="file-upload-btn btn btn-secondary rounded-pill"
-                                                onclick="$('.file-upload-input').trigger( 'click' )"><i
-                                                    class="fas fa-cloud-upload-alt"></i> upload</button>
-                                            <div class="image-upload-wrap" style="display: none;">
-                                                <input class="file-upload-input " type='file' onchange="readURL(this);"
-                                                    accept="image/*" name="favicon" id="image" />
-                                            </div>
-                                            <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
-                                                <div class="image-title-wrap">
-                                                    <button type="button" onclick="removeUpload()"
-                                                        class="remove-image">Remove <span class="image-title">Uploaded
-                                                            Image</span></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="form-group">
-                                    <label for="logo">Logo</label><br>
-                                    <input type="file" name="logo" id="logo">
-                                    @error('logo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="favicon">Favicon</label><br>
-                                    <input type="file" name="favicon" id="favicon">
-                                    @error('favicon')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> --}}
-                                {{-- <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                                    </div>
-                                </div> --}}
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -284,7 +114,6 @@
 
 @push('script')
     <script type="text/javascript">
-        // image upload js code 
            function showImage(fileInput){
                var files = fileInput.files;
                for (var i = 0; i< files.length ; i++){

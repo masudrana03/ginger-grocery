@@ -137,12 +137,12 @@
                                         <div class="card shadow-sm w-100">
                                             <div class="card-header d-flex justify-content-start">
                                                     <h4>Upload Images</h4>
-                                                    
-                                                        <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
+
+                                                        <input type="file" name="section2_image1" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
                                                         <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                             </div>
                                             <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                                   <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->section2_image1) }}' id="thumbnil"> 	  
+                                                   <img class="banner-image" src='{{ asset('assets/img/uploads/abouts/'.$abouts->section2_image1) }}' id="thumbnil">
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
 
 @push('script')
 <script type="text/javascript">
-    // image upload js code 
+    // image upload js code
        function showImage(fileInput){
            var files = fileInput.files;
            for (var i = 0; i< files.length ; i++){

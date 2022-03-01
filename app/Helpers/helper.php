@@ -128,8 +128,8 @@ function updateEnv($key, $value)
 /**
  * Give me discount of given promo
  *
- * @param \App\Models\Cart $cart
- * @param string           $type       discount type
+ * @param string           $total
+ * @param string           $type
  * @param integer          $discount
  */
 function getAmountAfterDiscount($total, $type, $discount)

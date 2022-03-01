@@ -253,7 +253,6 @@
                                 <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
-
                             @else
                                 <li><a href="{{ route('login') }}">Sign In</a></li>
                                 <li><a href="{{ route('cart') }}">View Cart</a></li>
@@ -432,6 +431,7 @@
             });
 
             $('#search-input').on('keyup', function() {
+                event.preventDefault();
                 let search = $('#search-input').val();
                 if (search.length > 2) {
                     category_id = $('#search-category-id').val();
@@ -477,72 +477,72 @@
         }
     </script>
 
-<script>
-    $(document).ready(function() {
-        $(".compare-btn").click(function(event) {
-            event.preventDefault();
-        var id = $(this).attr("data-id");
-        var url = "{!! route('compareProduct', ':id') !!}";
-        url = url.replace(':id', id);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product added to compare list.');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $(".compare-btn-delete").click(function(event) {
-            event.preventDefault();
-
-        var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
-        url = url.replace(':id', id);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product removed from compare list.');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+    <script>
+        $(document).ready(function() {
+            $(".compare-btn").click(function(event) {
+                event.preventDefault();
+                var id = $(this).attr("data-id");
+                var url = "{!! route('compareProduct', ':id') !!}";
+                url = url.replace(':id', id);
                 $.ajax({
-                        method: 'GET',
-                        url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {
-                            console.log(result);
-                            $('#compareProductsOld').empty();
-                            $('#compareProductsNew').html(result);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#compareProductOld').empty();
+                        $('#compareProductNew').html(result);
+                        tata.success('Success!', 'Product added to compare list.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
         });
-    });
-</script>
-@yield('script')
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".compare-btn-delete").click(function(event) {
+                event.preventDefault();
+
+                var id = $(this).attr("data-id");
+                var url = "{!! route('removeCompareProduct', ':id') !!}";
+                url = url.replace(':id', id);
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#compareProductOld').empty();
+                        $('#compareProductNew').html(result);
+                        tata.success('Success!', 'Product removed from compare list.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                $.ajax({
+                    method: 'GET',
+                    url: "{!! route('removeCompareProduct2') !!}",
+                    success: function(result) {
+                        console.log(result);
+                        $('#compareProductsOld').empty();
+                        $('#compareProductsNew').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+        });
+    </script>
+    @yield('script')
 </body>
 
 </html>

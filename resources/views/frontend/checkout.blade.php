@@ -102,8 +102,8 @@
         border-radius: 10px !important;
     }
 
-    .total-amount{
-        padding-right:8%;
+    .total-amount {
+        padding-right: 8%;
     }
 
 </style>
@@ -141,9 +141,10 @@
                     @forelse ($savedAddress as $address)
                         <div class="ml-20">
                             <div class="address-checklist" id="radioDiv">
-                                <input class="form-check-input checkaddress" type="radio" name="address1" value="{{ $address->id }}" />
-                                <label
-                                    class="form-check-label "><span class="addName">{{ $address->address }},{{ $address->state }}</span></label>
+                                <input class="form-check-input checkaddress" type="radio" name="address1"
+                                    value="{{ $address->id }}" />
+                                <label class="form-check-label "><span
+                                        class="addName">{{ $address->address }},{{ $address->state }}</span></label>
                                 <br />
                             </div>
                         </div>
@@ -356,7 +357,8 @@
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
-                                            <div class="checkout-product-img-wrapper product-details" style="padding-top: 5px;">
+                                            <div class="checkout-product-img-wrapper product-details"
+                                                style="padding-top: 5px;">
                                                 @if (count($item->images) > 0)
                                                     <img class="item-thumb img-thumbnail img-rounded"
                                                         src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
@@ -393,12 +395,13 @@
                                     <p class="">Subtotal:</p>
                                     <p class="">Shipping Fee:</p>
                                     <p class="">Tax:</p>
-                                    <h5 class="" >Total:</h5>
+                                    <h5 class="">Total:</h5>
                                 </div>
 
                                 <div class="col-6 calculate">
                                     <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
-                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0 </p>
+                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
+                                    </p>
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
                                     <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
                                     <h5 class="total-amount"> {{ $currency }}{{ $subtotal + $shipping + $tax }}
@@ -410,7 +413,8 @@
                         </div>
                     </div>
                 @empty
-                    <p style="text-align: center; padding-top: 10px; padding-bottom: 10px; color: #fdc040; border: 20px;">No product in your cart!</p>
+                    <p style="text-align: center; padding-top: 10px; padding-bottom: 10px; color: #fdc040; border: 20px;">No
+                        product in your cart!</p>
                 @endforelse
 
 
@@ -443,7 +447,6 @@
 @endsection
 
 @push('script')
-
     <script>
         // function doit(id) {
         //     document.getElementById("paymentMethod").value = id;
@@ -497,7 +500,7 @@
 
 
         function submitForm() {
-            //alert("Hello");
+
 
 
 
@@ -521,7 +524,7 @@
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-                                //alert(payHiddenId.value);
+
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
@@ -564,11 +567,10 @@
 
                     //var addName = $('.addName');
                     // var address = $this.children(".addName").html();
-                    // alert(address);
 
                     var address_id = $this.val();
-                    alert(address_id);
-                   ajaxLoadingStoreId(address_id);
+
+                    ajaxLoadingStoreId(address_id);
 
 
 
@@ -577,26 +579,19 @@
 
         });
 
-        function ajaxLoadingStoreId(address_id){
+        function ajaxLoadingStoreId(address_id) {
             $.ajax({
-            method: 'GET',
-            url: "{!! route('ajax.shipping.calculation') !!}",
-            type: 'get',
-            data: {
-                address_id: address_id,
-            },
-            success: function(response) {
-                //console.log(response);
-                $('#app').html(response);
-            }
-        });
+                method: 'GET',
+                url: "{!! route('ajax.shipping.calculation') !!}",
+                type: 'get',
+                data: {
+                    address_id: address_id,
+                },
+                success: function(response) {
+                    //console.log(response);
+                    $('#app').html(response);
+                }
+            });
         }
-
-
-
     </script>
-
-
-
-
 @endpush

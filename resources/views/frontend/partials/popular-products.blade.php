@@ -99,8 +99,12 @@
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
-                                                    <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                                    {{-- <span class="old-price">$32.8</span> --}}
+                                                    <span class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                                    </span>
+                                                    @if ($product->discountable)
+                                                        <span
+                                                            class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                                                    @endif
                                                 </div>
                                                 <div class="add-cart">
                                                     <a class="add"
@@ -188,8 +192,12 @@
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
-                                                    <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                                    {{-- <span class="old-price">$32.8</span> --}}
+                                                    <span class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                                    </span>
+                                                    @if ($product->discountable)
+                                                        <span
+                                                            class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                                                    @endif
                                                 </div>
                                                 <div class="add-cart">
                                                     <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >

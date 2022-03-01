@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\AboutsliderImage;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
+use App\Http\Requests;
 
 class AboutController extends Controller
 {
@@ -157,35 +158,58 @@ class AboutController extends Controller
      */
     public function update(UpdateAboutRequest $request)
     {
-        // dd($request->all());
-        // return $request ;
 
+        // return $request->all();
+
+        // dd($request->all());
         $about = About::first();
 
         $filename = '';
         $filename2 = '';
 
         if ($request->hasFile('main_section_image')) {
+
             $filename = $this->uploadImage($about->main_section_image, $request->file('main_section_image'));
+
+
+
         }
         if ($request->hasFile('section2_image1')) {
             $filename2 = $this->uploadImage($about->section2_image1, $request->file('section2_image1'));
         }
 
-        $request = $request->all();
-
         if ($filename != '') {
-            $request['main_section_image'] = $filename;
+
+         $request = $request->all();
+         $request['main_section_image'] = $filename;
+         $about->update($request);
+
+         toast( 'About successfully updated', 'success' );
+
+         return back();
+
         }
+        
         if ($filename2 != '') {
+            $request = $request->all();
             $request['section2_image1'] = $filename2;
+            $about->update($request);
+
+            toast( 'About successfully updated', 'success' );
+
+            return back();
         }
 
-        $about->update($request);
 
-        toast( 'About successfully updated', 'success' );
+        // $request = $request->all();
+        // $request['main_section_image'] = $filename;
+        // $request['section2_image1'] = $filename2;
 
-        return back();
+        // $about->update($request);
+
+        // toast( 'About successfully updated', 'success' );
+
+        // return back();
 
     }
 
@@ -214,13 +238,12 @@ class AboutController extends Controller
         $imageDirectory = 'assets/img/uploads/abouts/';
 
         deleteImage( $oldImage, $imageDirectory );
-
-
         $filename          = generateUniqueFileName($image->getClientOriginalExtension());
-        $location          = public_path('assets/img/uploads/abouts/' . $filename);
-        $thumbnailLocation = public_path('assets/img/uploads/abouts/thumbnail/' . $filename);
+        $location          = public_path('assets/img/uploads/abouts/'.$filename);
+        $thumbnailLocation = public_path('assets/img/uploads/abouts/thumbnail/'.$filename);
 
-        $filenames['image'] = $filename;
+        $filenames['main_section_image'] = $filename;
+        //dd($filenames);
 
         saveImageWithThumbnail($image, $location, $thumbnailLocation);
 

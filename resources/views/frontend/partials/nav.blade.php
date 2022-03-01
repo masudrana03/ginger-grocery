@@ -281,7 +281,7 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form method="GET" action="{{ route('search') }}">
+                            <form method="GET" action="#">
                                 <select class="select-active" name="category_id">
                                     <option>All Categories</option>
                                     @forelse ($categories as $category)
@@ -300,7 +300,7 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">
-                                    <form action="{{ route('index') }}" id="zoneForm" method="get">
+                                    <form action="#" id="zoneForm" method="get">
                                         <select name="zone_id" class="select-active zone-id">
                                             <option>Your Location</option>
 

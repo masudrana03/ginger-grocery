@@ -26,9 +26,9 @@ class UpdateAboutRequest extends FormRequest
         return [
             // 'main_section_tittle'      => 'required',
             // 'main_section_description' => 'required',
+
             // 'main_section_image'       => 'required',
-            // 'about_id'                 => 'required',
-            // 'image'                    => 'required'
+
         ];
     }
 }

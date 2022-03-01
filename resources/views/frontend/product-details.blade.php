@@ -137,6 +137,109 @@
                                                 </figure>
                                             @endforeach
                                         </div>
+
+                                        <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }}
+                                            reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix product-price-cover">
+                                    <div class="product-price primary-color float-left">
+                                        <span
+                                            class="current-price text-brand">{{ settings('currency') }}{{ $product->discount_price }}
+                                        </span>
+                                        @if ($product->discountable)
+                                            <span
+                                                class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}
+                                            </span>
+                                        @endif
+
+
+
+                                        {{-- <span --}}
+                                        {{-- class="current-price text-brand">{{ settings('currency') }}{{ $product->price }}</span> --}}
+                                        {{-- <span>
+                                        <span class="save-price font-md color3 ml-15">26% Off</span>
+                                        <span class="old-price font-md ml-15">$52</span>
+                                    </span> --}}
+                                    </div>
+                                </div>
+                                <div class="short-desc mb-30">
+                                    <p class="font-lg">{{ $product->excerpt }}</p>
+                                </div>
+                                {{-- <div class="attr-detail attr-size mb-30">
+                                <strong class="mr-10">Size / Weight: </strong>
+                                <ul class="list-filter size-filter font-small">
+                                    <li><a href="#">50g</a></li>
+                                    <li class="active"><a href="#">60g</a></li>
+                                    <li><a href="#">80g</a></li>
+                                    <li><a href="#">100g</a></li>
+                                    <li><a href="#">150g</a></li>
+                                </ul>
+                            </div> --}}
+                                <div class="detail-extralink mb-50">
+                                    {{-- <div class="detail-qty border radius">
+                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                        <span class="qty-val">1</span>
+                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                    </div> --}}
+                                    <div class="product-extra-link2 add-cart">
+                                        {{-- <a class="action-btn hover-up cart"
+                                            href="{{ route('cartById', $product->id) }}">Add To Cart</a> --}}
+                                        <input type="hidden" id="product-id" name="product_id" value="{{ $product->id }}">
+                                        <a class="add action-btn hover-up cart" id="cart-btn" href="#" style=""><i
+                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        <small class="product-id" style="display: none;">{{ $product->id }}</small>
+                                        <input style="display: none;" name="product_id" value="{{ $product->id }}">
+
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                            href="{{ route('wishlist', $product->id) }}"><i
+                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" data-id="{{ $product->id }}"
+                                            class="action-btn compare-btn"
+                                            href="{{ route('compareProduct', $product->id) }}"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                </div>
+                                {{-- <div class="font-xs">
+                                <ul class="mr-50 float-start">
+                                    <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
+                                    <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span></li>
+                                    <li>LIFE: <span class="text-brand">70 days</span></li>
+                                </ul>
+                                <ul class="float-start">
+                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                    <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
+                                    <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
+                                </ul>
+                            </div> --}}
+                            </div>
+                            <!-- Detail Info -->
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="tab-style3">
+                            <ul class="nav nav-tabs text-uppercase">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
+                                        href="#Description">Description</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab"
+                                        href="#Additional-info">Additional info</a>
+                                </li> --}}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab"
+                                        href="#Vendor-info">Vendor</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews
+                                        ({{ $productRatingTotal }})</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content shop_info_tab entry-main-content">
+                                <div class="tab-pane fade show active" id="Description">
+                                    <div class="">
+                                        {{ $product->description }}
                                     </div>
                                     <!-- End Gallery -->
                                 </div>
@@ -202,9 +305,11 @@
                                             <div class="product-extra-link2">
                                                 <button type="submit" class="button button-add-to-cart"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" style="vertical-align: -4px;" href="#"><i
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
+                                                    style="vertical-align: -4px;" href="#"><i
                                                         class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up" style="vertical-align: -4px;" href="#"><i
+                                                <a aria-label="Compare" class="action-btn hover-up"
+                                                    style="vertical-align: -4px;" href="#"><i
                                                         class="fi-rs-shuffle"></i></a>
                                             </div>
                                         </div>
@@ -718,7 +823,8 @@
                                                         </h2>
 
                                                         <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: {{ $product->rating * 20 }}%"></div>
+                                                            <div class="product-rating"
+                                                                style="width: {{ $product->rating * 20 }}%"></div>
                                                         </div>
 
                                                         <div>
@@ -904,6 +1010,7 @@
                                 </li>
                             </ul>
                         </div>
+
                         <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
                             <h5 class="section-title style-3 mb-20">Vendor</h5>
                             <div class="vendor-logo d-flex mb-30">
@@ -915,6 +1022,7 @@
                                     <div class="product-rate-cover text-end">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
+
                                         </div>
                                         <span class="font-small ml-5 text-muted"> (32 reviews)</span>
                                     </div>
