@@ -88,9 +88,7 @@
         </div>
         <div class="modal-body">
             <div class="white_card_body">
-                <form action="{{ route('admin.about.slider.update') }}" method="POST"
-                {{-- <form id="myForm" method="POST" --}}
-                    enctype="multipart/form-data">
+                <form action="{{ route('admin.about.slider.update') }}" id="about-slider" method="POST"enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
@@ -100,26 +98,15 @@
                                     <div class="card shadow-sm w-100">
                                         <div class="card-header d-flex justify-content-start">
                                                 <h4>Upload Images</h4>
-                                                
+
                                                     <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                         </div>
                                         <div class="card-body d-flex flex-wrap justify-content-start" id="image-container">
-                                               <img class="banner-image"  id="thumbnil"> 	  
+                                               <img class="banner-image"  id="thumbnil">
                                         </div>
                                     </div>
                                 </div>
-
-                                {{-- <button type="button" class="file-upload-btn btn btn-secondary rounded-pill" onclick="$('.file-upload-input').trigger( 'click' )"><i class="fas fa-cloud-upload-alt"></i> upload</button>
-                                <div class="image-upload-wrap" style="display: none;">
-                                    <input class="file-upload-input " type='file' onchange="readURL(this);" accept="image/*" name="main_section_image" id="main_section_image" />
-                                </div>
-                                <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
-                                    <div class="image-title-wrap">
-                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                    </div>
-                                </div> --}}
                                 </div>
                             @error('logo')
                                 <span class="invalid-feedback" role="alert">
@@ -145,9 +132,9 @@
     function getId(id) {
         document.getElementById("myid").value = id;
     }
-    
 
-    // image upload js code 
+
+    // image upload js code
     function showImage(fileInput){
                var files = fileInput.files;
                for (var i = 0; i< files.length ; i++){

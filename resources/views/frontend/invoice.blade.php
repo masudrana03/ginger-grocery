@@ -69,7 +69,7 @@
                                             <h4 class="invoice-title-1 mb-10">Customer Information</h4>
                                             <p class="text-sm text-mutted">
                                                 <strong>{{ $order->user->name }}</strong>
-                                                <br>{{ $order->user->country->phone_code }}{{ $order->user->phone }}<br>
+                                                <br>{{ $order->user->phone_code }}{{ $order->user->phone }}<br>
                                                 {{ settings('country') }}
                                             </p>
                                         </div>
