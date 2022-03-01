@@ -90,7 +90,7 @@ class HomeController extends Controller
     }
 
     /**
-     *
+     * Product Details BY SLUG
      *
      * @param $slug
      */
@@ -101,6 +101,11 @@ class HomeController extends Controller
         $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
         return view('frontend.product-details', compact('product', 'productsRating'));
     }
+
+    // public function productDetailsTH()
+    // {
+    //     return view('frontend.product-detailsth');
+    // }
 
     public function productRating(Request $request, $id)
     {

@@ -344,7 +344,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
@@ -448,7 +448,7 @@
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $product->id) }}">
+                                                        <a href="{{ route('products', $product->slug) }}">
 
                                                             @if (count($product->images) > 0)
 
@@ -464,7 +464,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
                                                             </span>{{ settings('currency') }}{{ $product->price }}
