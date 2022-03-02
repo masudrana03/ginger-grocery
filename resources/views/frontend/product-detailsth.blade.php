@@ -374,7 +374,7 @@
                                                     href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a>
                                                 @php
                                                     $vendorRating = $product->store->rating;
-                                                    $vendorToralRating = $product->store->totalRating;
+                                                    $vendorTotalRating = $product->store->totalRating;
 
                                                 @endphp
                                             </h6>

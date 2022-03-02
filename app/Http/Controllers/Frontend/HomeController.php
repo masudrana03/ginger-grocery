@@ -99,13 +99,9 @@ class HomeController extends Controller
         $productsRating = ProductRating::all();
 
         $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
-        return view('frontend.product-details', compact('product', 'productsRating'));
+        
+       return view('frontend.product-details', compact('product', 'productsRating'));
     }
-
-    // public function productDetailsTH()
-    // {
-    //     return view('frontend.product-detailsth');
-    // }
 
     public function productRating(Request $request, $id)
     {

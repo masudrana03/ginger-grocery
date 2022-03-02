@@ -137,109 +137,6 @@
                                                 </figure>
                                             @endforeach
                                         </div>
-
-                                        <span class="font-small ml-5 text-muted"> ({{ $productRatingTotal }}
-                                            reviews)</span>
-                                    </div>
-                                </div>
-                                <div class="clearfix product-price-cover">
-                                    <div class="product-price primary-color float-left">
-                                        <span
-                                            class="current-price text-brand">{{ settings('currency') }}{{ $product->discount_price }}
-                                        </span>
-                                        @if ($product->discountable)
-                                            <span
-                                                class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}
-                                            </span>
-                                        @endif
-
-
-
-                                        {{-- <span --}}
-                                        {{-- class="current-price text-brand">{{ settings('currency') }}{{ $product->price }}</span> --}}
-                                        {{-- <span>
-                                        <span class="save-price font-md color3 ml-15">26% Off</span>
-                                        <span class="old-price font-md ml-15">$52</span>
-                                    </span> --}}
-                                    </div>
-                                </div>
-                                <div class="short-desc mb-30">
-                                    <p class="font-lg">{{ $product->excerpt }}</p>
-                                </div>
-                                {{-- <div class="attr-detail attr-size mb-30">
-                                <strong class="mr-10">Size / Weight: </strong>
-                                <ul class="list-filter size-filter font-small">
-                                    <li><a href="#">50g</a></li>
-                                    <li class="active"><a href="#">60g</a></li>
-                                    <li><a href="#">80g</a></li>
-                                    <li><a href="#">100g</a></li>
-                                    <li><a href="#">150g</a></li>
-                                </ul>
-                            </div> --}}
-                                <div class="detail-extralink mb-50">
-                                    {{-- <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span class="qty-val">1</span>
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div> --}}
-                                    <div class="product-extra-link2 add-cart">
-                                        {{-- <a class="action-btn hover-up cart"
-                                            href="{{ route('cartById', $product->id) }}">Add To Cart</a> --}}
-                                        <input type="hidden" id="product-id" name="product_id" value="{{ $product->id }}">
-                                        <a class="add action-btn hover-up cart" id="cart-btn" href="#" style=""><i
-                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                        <small class="product-id" style="display: none;">{{ $product->id }}</small>
-                                        <input style="display: none;" name="product_id" value="{{ $product->id }}">
-
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                            href="{{ route('wishlist', $product->id) }}"><i
-                                                class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" data-id="{{ $product->id }}"
-                                            class="action-btn compare-btn"
-                                            href="{{ route('compareProduct', $product->id) }}"><i
-                                                class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                </div>
-                                {{-- <div class="font-xs">
-                                <ul class="mr-50 float-start">
-                                    <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-                                    <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span></li>
-                                    <li>LIFE: <span class="text-brand">70 days</span></li>
-                                </ul>
-                                <ul class="float-start">
-                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                    <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
-                                    <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
-                                </ul>
-                            </div> --}}
-                            </div>
-                            <!-- Detail Info -->
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="tab-style3">
-                            <ul class="nav nav-tabs text-uppercase">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
-                                        href="#Description">Description</a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab"
-                                        href="#Additional-info">Additional info</a>
-                                </li> --}}
-                                <li class="nav-item">
-                                    <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab"
-                                        href="#Vendor-info">Vendor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews
-                                        ({{ $productRatingTotal }})</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content shop_info_tab entry-main-content">
-                                <div class="tab-pane fade show active" id="Description">
-                                    <div class="">
-                                        {{ $product->description }}
                                     </div>
                                     <!-- End Gallery -->
                                 </div>
@@ -248,7 +145,7 @@
 
                                         {{-- <span class="stock-status out-stock"> Sale Off </span> --}}
 
-                                        <h3 class="title-detail">{{ $product->name }}</h3>
+                                        <h3 class="title-detail" style="font-size:30px;">{{ $product->name }}</h3>
                                         <div class="product-detail-rating">
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
@@ -270,8 +167,8 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <span
-                                                    class="current-price text-brand">{{ settings('currency') }}{{ $product->price }}</span>
+                                                <span class="current-price text-brand"
+                                                    style="font-size:46px;">{{ settings('currency') }}{{ $product->price }}</span>
 
                                                 {{-- <span>
                                                     <span class="save-price font-md color3 ml-15">26% Off</span>
@@ -520,10 +417,10 @@
                                                     <div class="product-rate-cover text-end">
                                                         <div class="product-rate d-inline-block">
                                                             <div class="product-rating"
-                                                                style="width: {{ $vendorToralRating * 20 }}%"></div>
+                                                                style="width: {{ $vendorRating * 20 }}%"></div>
                                                         </div>
                                                         <span class="font-small ml-5 text-muted">
-                                                            ( {{ $productRatingTotal }} reviews )</span>
+                                                            ( {{ $vendorToralRating }} reviews )</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -728,7 +625,7 @@
                                                             <div class="rating-s">
                                                                 <input type="radio" name="rating" id="rating-5"
                                                                     onclick="addValue(5)">
-                                                                <label for="rating-5"></label>,
+                                                                <label for="rating-5"></label>
                                                                 <input type="radio" name="rating" id="rating-4"
                                                                     onclick="addValue(4)">
                                                                 <label for="rating-4"></label>
@@ -780,18 +677,18 @@
                                 <div class="col-12">
                                     <div class="row related-products">
 
-                                        @forelse ($product->category->products()->take(4)->get() as $product)
+                                        @forelse ($product->category->products()->take(4)->get() as $productData)
                                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                                 <div class="product-cart-wrap hover-up">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href="{{ route('products', $product->slug) }}"
+                                                            <a href="{{ route('products', $productData->slug) }}"
                                                                 tabindex="0">
                                                                 <img class="default-img"
-                                                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                                    src="{{ asset('assets/img/uploads/products/featured/' . $productData->featured_image) }}"
                                                                     alt="" />
                                                                 <img class="hover-img"
-                                                                    src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                                    src="{{ asset('assets/img/uploads/products/featured/' . $productData->featured_image) }}"
                                                                     alt="" />
                                                             </a>
                                                         </div>
@@ -803,11 +700,11 @@
 
                                                             <a aria-label="Add To Wishlist"
                                                                 class="action-btn small hover-up"
-                                                                href="{{ route('wishlist', $product->id) }}"
+                                                                href="{{ route('wishlist', $productData->id) }}"
                                                                 tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" data-id="{{ $product->id }}"
+                                                            <a aria-label="Compare" data-id="{{ $productData->id }}"
                                                                 class="action-btn small hover-up"
-                                                                href="{{ route('compareProduct', $product->id) }}"
+                                                                href="{{ route('compareProduct', $productData->id) }}"
                                                                 tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                                         </div>
 
@@ -818,34 +715,34 @@
 
                                                     </div>
                                                     <div class="product-content-wrap">
-                                                        <h2><a href="{{ route('products', $product->slug) }}"
-                                                                tabindex="0">{{ ucwords(strtolower(Str::limit($product->name, 20))) }}</a>
+                                                        <h2><a href="{{ route('products', $productData->slug) }}"
+                                                                tabindex="0">{{ ucwords(strtolower(Str::limit($productData->name, 20))) }}</a>
                                                         </h2>
 
                                                         <div class="product-rate d-inline-block">
                                                             <div class="product-rating"
-                                                                style="width: {{ $product->rating * 20 }}%"></div>
+                                                                style="width: {{ $productData->rating * 20 }}%"></div>
                                                         </div>
 
                                                         <div>
                                                             <span class="font-small text-muted">By <a
-                                                                    href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a></span>
+                                                                    href="{{ route('vendor.details', $productData->store->slug) }}">{{ $productData->store->name }}</a></span>
                                                         </div>
                                                         <div class="product-card-bottom">
                                                             <div class="product-price">
-                                                                <span>{{ settings('currency') }}{{ $product->price }}</span>
+                                                                <span>{{ settings('currency') }}{{ $productData->price }}</span>
                                                                 {{-- <span class="old-price">$32.8</span> --}}
                                                             </div>
                                                             <div class="add-cart">
                                                                 <input type="hidden" id="product-id" name="product_id"
-                                                                    value="{{ $product->id }}">
+                                                                    value="{{ $productData->id }}">
                                                                 <a class="add" id="cart-btn" href="#"
                                                                     style=""><i class="fi-rs-shopping-cart mr-5"></i>Add
                                                                 </a>
                                                                 <small class="product-id"
-                                                                    style="display: none;">{{ $product->id }}</small>
+                                                                    style="display: none;">{{ $productData->id }}</small>
                                                                 <input style="display: none;" name="product_id"
-                                                                    value="{{ $product->id }}">
+                                                                    value="{{ $productData->id }}">
 
                                                             </div>
 
@@ -1010,36 +907,49 @@
                                 </li>
                             </ul>
                         </div>
-
                         <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
                             <h5 class="section-title style-3 mb-20">Vendor</h5>
                             <div class="vendor-logo d-flex mb-30">
-                                <img src="assets/imgs/vendor/vendor-18.svg" alt="" />
+                                <img src="{{ asset('assets/img/uploads/stores/' . $product->store->image) }}" alt=""
+                                    style="max-width:56px;" />
                                 <div class="vendor-name ml-15">
                                     <h6>
-                                        <a href="vendor-details-2.html">Noodles Co.</a>
+                                        <a
+                                            href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a>
                                     </h6>
+
+                                    @php
+                                        $vendorRating = $product->store->rating;
+                                        $vendorTotalRating = $product->store->totalRating;
+
+                                    @endphp
+
                                     <div class="product-rate-cover text-end">
                                         <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-
+                                            <div class="product-rating" style="width: {{ $vendorRating * 20 }}%">
+                                            </div>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                        <span class="font-small ml-5 text-muted"> ( {{ $vendorTotalRating }}
+                                            reviews)</span>
                                     </div>
                                 </div>
                             </div>
                             <ul class="contact-infor">
-                                <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong>
-                                    <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span>
+                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}"
+                                        alt="" /><strong>Address: </strong>
+                                    <span>{{ $product->store->address }}
+                                        {{ $product->store->state }},{{ $product->store->city }},
+                                        {{ $product->store->zip }},{{ ucwords(strtolower(settings('country'))) }}</span>
                                 </li>
-                                <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Contact
-                                        Seller:</strong><span>(+91) - 540-025-553</span></li>
+                                <li><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}"
+                                        alt="" /><strong>Contact
+                                        Seller:</strong><span> {{ $product->store->phone }}</span></li>
                                 <li class="hr"><span></span></li>
                             </ul>
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <p class="text-brand font-xs">Rating</p>
-                                    <h4 class="mb-0">92%</h4>
+                                    <h4 class="mb-0">{{ round($vendorRating * 20) }}%</h4>
                                 </div>
                                 <div>
                                     <p class="text-brand font-xs">Ship on time</p>
@@ -1053,16 +963,20 @@
                             <ul>
                                 <li class="hr"><span></span></li>
                             </ul>
-                            <p>Become a Vendor? <a href="page-register.html"> Register now</a></p>
+                            <p>Become a Vendor? <a href="#"> Register now</a></p>
                         </div>
                         <div class="sidebar-widget widget-category-2 mb-30">
                             <h5 class="section-title style-1 mb-30">Category</h5>
                             <ul>
+
+                                @foreach ( $categories->random(5) as $category)
                                 <li>
-                                    <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-1.svg"
-                                            alt="" />Milks & Dairies</a><span class="count">30</span>
+                                    <a href="{{ route('categories', $category->slug) }}"> <img src="{{ asset('assets/img/uploads/categories/' . $category->image) }}"
+                                            alt="" />{{ ucwords(strtolower($category->name))  }}</a><span class="count">{{ count($category->products) }}</span>
                                 </li>
-                                <li>
+                                @endforeach
+
+                                {{-- <li>
                                     <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-2.svg"
                                             alt="" />Clothing</a><span class="count">35</span>
                                 </li>
@@ -1075,9 +989,11 @@
                                             alt="" />Baking material</a><span class="count">68</span>
                                 </li>
                                 <li>
+
                                     <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-5.svg"
                                             alt="" />Fresh Fruit</a><span class="count">87</span>
-                                </li>
+                                </li> --}}
+
                             </ul>
                         </div>
                     </div>
@@ -1089,7 +1005,6 @@
 
     <script>
         function addValue(value) {
-            alert(value);
             $('#rating').val(value);
         }
     </script>
