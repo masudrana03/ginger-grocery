@@ -59,10 +59,10 @@
                                 </thead>
                                 <tbody>
                                     @forelse ( $aboutsImage  as $items )
-                                    <tr>
-                                        <td>{{ $items->id }}</td>
+                                    <tr class="about-image">
+                                        <td class="about-image-id">{{ $items->id }}</td>
                                         <td><img src='{{ asset('assets/img/uploads/abouts/'.$items ->image) }}' width='120' height='120'></td>
-                                        <td><a href="#"><i class="fas fa-upload fa-2x" data-toggle="modal" onclick="getId({{ $items->id }})" data-target="#grid_modal"></i></a></td>
+                                        <td><a href="#"><i class="fas fa-upload fa-2x submit" data-toggle="modal" onclick="getId({{ $items->id }})" data-target="#grid_modal"></i></a></td>
                                     </tr>
                                     @empty
                                     <p class="text-center">About Image not found!</p>
@@ -98,7 +98,7 @@
                                     <div class="card shadow-sm w-100">
                                         <div class="card-header d-flex justify-content-start">
                                                 <h4>Upload Images</h4>
-
+                                                    <input type="hidden" class="modal-id" value="0" name="id">
                                                     <input type="file" name="image" id="image" accept="image/*" class="d-none " onchange="showImage(this)">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button" onclick="document.getElementById('image').click()">Select Image</button>
                                         </div>
@@ -115,7 +115,7 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary submit">Update</button>
                 </form>
             </div>
           </div>
@@ -155,11 +155,20 @@
                }
            }
 
-    // function getUrl()
-    // {
-    //     document.getElementById("myForm").action = "";
-    // }
+        $(document).ready(function() {
+        $(".submit ").on('click', function(event) {
+            event.preventDefault();
+            getIdForModal(event.target);
+        });
+
+        function getIdForModal(node){
+          
+        }
+    });
 </script>
+
+
+
 @endpush
 
 
