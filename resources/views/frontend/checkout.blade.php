@@ -501,9 +501,6 @@
 
         function submitForm() {
 
-
-
-
             //let fromSubmitBtn = document.getElementById('checkOutBtn');
             let addressHiddenId = document.getElementById('addressId');
 
@@ -532,6 +529,7 @@
                                     payHiddenId.value = payValue;
                                     billForm.submit();
                                 } else {
+                                    //alert("abcd");
                                     document.getElementById('error').style.display = "block";
                                 }
 
@@ -544,6 +542,7 @@
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
+
                             document.getElementById('error').style.display = "block";
                         }
                     }
