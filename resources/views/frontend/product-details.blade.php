@@ -205,11 +205,12 @@
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                    style="vertical-align: -4px;" href="{{ route('wishlist', $product->id) }}"><i
+                                                    style="vertical-align: -4px;"
+                                                    href="{{ route('wishlist', $product->id) }}"><i
                                                         class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up compare-btn" data-id="{{ $product->id }}"
-                                                    style="vertical-align: -4px;" href="#"><i
-                                                        class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up compare-btn"
+                                                    data-id="{{ $product->id }}" style="vertical-align: -4px;"
+                                                    href="#"><i class="fi-rs-shuffle"></i></a>
                                             </div>
                                         </div>
 
@@ -262,20 +263,30 @@
                                                 <p>{{ $product->description }}</p>
 
                                                 <ul class="product-more-infor mt-30">
-                                                    <li><span>Attributes</span> {{ $product->attributes }}</li>
+
+                                                    <li><span>Attributes</span> {{ $product->attributes ?? 'Not found' }}
+                                                    </li>
                                                     <li><span>Calories Per Serving</span>
-                                                        {{ $product->calories_per_serving }}</li>
+                                                        {{ $product->calories_per_serving ?? 'Not found' }} </li>
                                                     <li><span>Fat Calories Per Serving</span>
-                                                        {{ $product->fat_calories_per_serving }}</li>
-                                                    <li><span>Brand</span> {{ $product->brand->name }}</li>
-                                                    <li><span>Category</span> {{ $product->category->name }}</li>
+                                                        {{ $product->fat_calories_per_serving ?? 'Not found' }} </li>
+                                                    <li><span>Brand</span>
+                                                        {{ $product->brand->name ? $product->brand->name : 'Not found' }}
+                                                    </li>
+                                                    <li><span>Category</span>
+                                                        {{ $product->category->name ?? 'Not found' }} </li>
                                                     <li><span>Type</span>
-                                                        {{ $product->types->pluck('name')->implode(', ') }}</li>
-                                                    <li><span>Unit</span> {{ $product->unit->name }}</li>
+                                                        {{ count($product->types) > 0 ? $product->types->pluck('name')->implode(', ') : 'Not found' }}
+                                                    </li>
+                                                    <li><span>Unit</span> {{ $product->unit->name ?? 'Not found' }}
+                                                    </li>
                                                     <li><span>Nutrition</span>
-                                                        {{ $product->nutritions->pluck('name')->implode(', ') }}</li>
+                                                        {{ count($product->nutritions) > 0 ? $product->nutritions->pluck('name')->implode(', ') : 'Not found' }}
+                                                    </li>
+
                                                 </ul>
-                                                <hr class="wp-block-separator is-style-dots" />
+
+                                                {{-- <hr class="wp-block-separator is-style-dots" />
                                                 <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey
                                                     hello far meadowlark imitatively egregiously hugged that yikes minimally
                                                     unanimous pouted flirtatiously as beaver beheld above forward energetic
@@ -295,20 +306,23 @@
                                                     dalmatian in much less well jeering for the thanks blindly sentimental
                                                     whimpered less across objectively fanciful grimaced wildly some wow and
                                                     rose jeepers outgrew lugubrious luridly irrationally attractively
-                                                    dachshund.</p>
+                                                    dachshund.</p> --}}
+
                                                 <h4 class="mt-30">Suggested Use</h4>
                                                 <ul class="product-more-infor mt-30">
                                                     <li>Refrigeration not necessary.</li>
                                                     <li>Stir before serving</li>
                                                 </ul>
-                                                <h4 class="mt-30">Other Ingredients</h4>
+
+                                                {{-- <h4 class="mt-30">Other Ingredients</h4>
                                                 <ul class="product-more-infor mt-30">
                                                     <li>Organic raw pecans, organic raw cashews.</li>
                                                     <li>This butter was produced using a LTG (Low Temperature Grinding)
                                                         process</li>
                                                     <li>Made in machinery that processes tree nuts but does not process
                                                         peanuts, gluten, dairy or soy</li>
-                                                </ul>
+                                                </ul> --}}
+
                                                 <h4 class="mt-30">Warnings</h4>
                                                 <ul class="product-more-infor mt-30">
                                                     <li>Oil separation occurs naturally. May contain pieces of shell.</li>
@@ -815,84 +829,83 @@
         }
     </script>
 
-<script>
-    $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
+    <script>
+        $(document).ready(function() {
+            $(".add-cart .add").on('click', function(event) {
+                event.preventDefault();
 
-            addCart(event.target);
+                addCart(event.target);
+            });
         });
-    });
 
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
+        function addCart(node) {
+            var closest_div = $(node).closest('.add-cart');
+            var id = closest_div.find('.product-id').text();
+            addToCartById(id);
+        }
 
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-
-            },
-            success: function(result) {
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
-            },
-            error: function(error) {
-                if (error.status == 401) {
-                    window.location.href = "/login";
-                }
-            }
-        });
-    }
-</script>
-<script>
-    $(document).ready(function() {
-        $(".compare-btn-delete").click(function(event) {
-            event.preventDefault();
-
-        var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+        function addToCartById(id) {
+            var pid = id;
+            var url = "{!! route('cartById', ':id') !!}";
+            url = url.replace(':id', pid);
             $.ajax({
                 method: 'GET',
                 url: url,
                 data: {
-                    id: id,
+                    id: pid,
+
                 },
                 success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product removed from compare list.');
+                    $('#old-cart').empty();
+                    $('#new-cart').html(result);
+                    tata.success('Success!', 'Product added to your cart.');
                 },
                 error: function(error) {
-                    console.log(error);
+                    if (error.status == 401) {
+                        window.location.href = "/login";
+                    }
                 }
             });
-                $.ajax({
-                        method: 'GET',
-                        url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {
-                            console.log(result);
-                            $('#compareProductsOld').empty();
-                            $('#compareProductsNew').html(result);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".compare-btn-delete").click(function(event) {
+                event.preventDefault();
 
+                var id = $(this).attr("data-id");
+                var url = "{!! route('removeCompareProduct', ':id') !!}";
+                url = url.replace(':id', id);
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#compareProductOld').empty();
+                        $('#compareProductNew').html(result);
+                        tata.success('Success!', 'Product removed from compare list.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                $.ajax({
+                    method: 'GET',
+                    url: "{!! route('removeCompareProduct2') !!}",
+                    success: function(result) {
+                        console.log(result);
+                        $('#compareProductsOld').empty();
+                        $('#compareProductsNew').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+            });
         });
-    });
-</script>
+    </script>
 
 @endsection
-

@@ -26,12 +26,10 @@ class ViewComposer
         if (env('APP_NAME') != '') {
             $zones = Zone::get();
             $categories = Category::get();
-            $countrys = Country::get();
             $callToActions = CallToAction::get();
             $view->with([
                 'zones' => $zones,
                 'categories' => $categories,
-                'countrys' => $countrys,
                 'callToActions' => $callToActions,
             ]);
         }
