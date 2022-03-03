@@ -59,6 +59,9 @@ class OrderController extends Controller
             $query = Order::with('details', 'status');
         } else {
             $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
+            logger($query->get());
+
+            // $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
         }
 
         $query = Order::with('details', 'status');
