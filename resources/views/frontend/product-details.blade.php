@@ -803,7 +803,7 @@
                             <h5 class="section-title style-1 mb-30">Category</h5>
                             <ul>
 
-                                @foreach ($categories->random(5) as $category)
+                                @foreach ($loadCategories->random(5) as $category)
                                     <li>
                                         <a href="{{ route('categories', $category->slug) }}"> <img
                                                 src="{{ asset('assets/img/uploads/categories/' . $category->image) }}"
@@ -811,8 +811,6 @@
                                             class="count">{{ count($category->products) }}</span>
                                     </li>
                                 @endforeach
-
-
 
                             </ul>
                         </div>
