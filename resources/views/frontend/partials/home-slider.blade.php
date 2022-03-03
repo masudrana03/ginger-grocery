@@ -6,7 +6,7 @@
                     <div class="d-flex categori-dropdown-inner">
                         <ul>
 
-                            @forelse ( $categories->skip(0)->take(12) as $category )
+                            @forelse ( $categoryProducts->skip(0)->take(12) as $category )
                                 <li>
                                     <a href="{{ route('categories', $category->slug) }}">
 
@@ -74,7 +74,7 @@
                     <div class="more_slide_open" style="display: none">
                         <div class="d-flex categori-dropdown-inner">
                             <ul>
-                                @forelse ( $categories->skip(12) as $category )
+                                @forelse ( $categoryProducts->skip(12) as $category )
                                     <li>
                                         <a href="{{ route('categories', $category->slug) }}">
 

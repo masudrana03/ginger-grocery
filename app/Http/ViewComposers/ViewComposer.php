@@ -29,7 +29,7 @@ class ViewComposer
             $callToActions = CallToAction::get();
             $view->with([
                 'zones' => $zones,
-                'categories' => $categories,
+                'loadCategories' => $categories,
                 'callToActions' => $callToActions,
             ]);
         }

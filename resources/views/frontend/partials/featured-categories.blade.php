@@ -14,7 +14,7 @@
         </div>
         <div class="carausel-10-columns-cover position-relative">
             <div class="carausel-10-columns" id="carausel-10-columns">
-                @forelse ($categories as $category )
+                @forelse ($categoryProducts as $category )
                 <div class="card-2 bg-{{rand(9,15)}} wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                         @if ( $category->image )
                         <figure class="img-hover-scale overflow-hidden">

@@ -29,32 +29,28 @@ class HomeController extends Controller
             return view('start');
         }
 
-        $productIds = session('compare');
-        $compareProduct = Product::find($productIds) ?? [];
-
         if ($request->zone_id) {
             $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id');
 
-            $categoryProducts = Category::with(['products.store', 'products.currency', 'products.images', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
+            $categoryProducts = Category::with(['products.store', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
                 $query->whereIn('store_id', $vendor_ids);
             }
             ])->limit(10)->get();
 
             // return $categoryProducts;
         } else {
-            $categoryProducts = Category::with('products.store', 'products.currency', 'products.images', 'products.ratings')->limit(10)->get();
+            $categoryProducts = Category::with('products.store', 'products.ratings')->limit(10)->get();
         }
 
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
-        $zones = Zone::all() ?? [];
 
         if ($request->ajax()) {
             // return $request;
-            return view('frontend.ajax.popular-product', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
+            return view('frontend.ajax.popular-product', compact('categoryProducts', 'sliders', 'callToActions'));
         }
 
-        return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
+        return view('frontend.index', compact('categoryProducts', 'sliders', 'callToActions'));
     }
 
     public function ajax(Request $request)
@@ -99,7 +95,7 @@ class HomeController extends Controller
         $productsRating = ProductRating::all();
 
         $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
-        
+
        return view('frontend.product-details', compact('product', 'productsRating'));
     }
 
