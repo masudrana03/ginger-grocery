@@ -117,7 +117,7 @@
                                             </td>
                                             <td class="product-des product-name">
                                                 <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                                        href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 28))) }}</a>
+                                                        href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 28))) }}</a>
                                                 </h6>
                                                 <div class="product-rate-cover">
                                                     <div class="product-rate d-inline-block">
@@ -537,7 +537,7 @@
     }
 
     $(document).on('click', '.ajax-product-remove', function() {
-        alert('asdfsdf');
+        
         var pro_div = $(this).closest(".product-modifiers");
         var pro_id = pro_div.find(".pro-id").val();
         var pd = pro_id;

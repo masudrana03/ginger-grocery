@@ -1257,7 +1257,7 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.error('Success!', 'Product removed form your cart.');
+                tata.success('Success!', 'Product removed form your cart.');
             },
             error: function(error) {
                 console.log(error);
@@ -1266,3 +1266,35 @@
 
     }
 </script>
+
+<script>
+
+$(document).on('click', '.ajax-product-remove', function() {
+
+        var pro_div = $(this).closest(".product-modifiers");
+        var pro_id = pro_div.find(".pro-id").val();
+        var pd = pro_id;
+        var url = "{!! route('cart.remove.div', ':id') !!}";
+        url = url.replace(':id', pd);
+        deleteFromCartById(pd);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pd,
+            },
+            success: function(result) {
+                console.log(result);
+                //tata.error('Success!', 'Product removed form your cart.');
+                $('#old-div').empty();
+                $('#new-div').html(result);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+</script>
+

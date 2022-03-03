@@ -152,7 +152,7 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.error('Deleting!', 'Product Deleted Form your cart.');
+                tata.success('Deleting!', 'Product Deleted Form your cart.');
             },
             error: function(error) {
                 console.log(error);
