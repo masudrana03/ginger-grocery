@@ -644,7 +644,7 @@
                                                                     alt="" />
                                                             </a>
                                                         </div>
-                                                        <div class="product-action-1">
+                                                        <div class="product-action-1 ">
 
                                                             {{-- <a aria-label="Quick view" class="action-btn small hover-up"
                                                                 data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
@@ -655,8 +655,8 @@
                                                                 href="{{ route('wishlist', $productData->id) }}"
                                                                 tabindex="0"><i class="fi-rs-heart"></i></a>
                                                             <a aria-label="Compare" data-id="{{ $productData->id }}"
-                                                                class="action-btn small hover-up"
-                                                                href="{{ route('compareProduct', $productData->id) }}"
+                                                                class="action-btn small hover-up compare-btn"
+                                                                href="#"
                                                                 tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                                         </div>
 

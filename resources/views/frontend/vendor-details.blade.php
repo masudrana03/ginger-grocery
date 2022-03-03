@@ -365,7 +365,7 @@
                                     ->pluck('category_id')
                                     ->unique();
                                 // $categories = \App\Models\Category::find($categoryIds);
-                                $categories = $categories->whereIn('id', $categoryIds);
+                                $categories = $loadCategories->whereIn('id', $categoryIds);
                             @endphp
                             @forelse ($categories as $category)
                                 <li>
