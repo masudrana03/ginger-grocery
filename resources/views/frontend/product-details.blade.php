@@ -199,13 +199,15 @@
                                                 <span class="qty-val">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
-                                            <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart"><i
+                                            <div class="product-extra-link2 add-cart">
+                                                <button type="submit" class="button button-add-to-cart add"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                                <small class="product-id"
+                                                    style="display: none;">{{ $product->id }}</small>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                    style="vertical-align: -4px;" href="#"><i
+                                                    style="vertical-align: -4px;" href="{{ route('wishlist', $product->id) }}"><i
                                                         class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up"
+                                                <a aria-label="Compare" class="action-btn hover-up compare-btn" data-id="{{ $product->id }}"
                                                     style="vertical-align: -4px;" href="#"><i
                                                         class="fi-rs-shuffle"></i></a>
                                             </div>
@@ -260,11 +262,18 @@
                                                 <p>{{ $product->description }}</p>
 
                                                 <ul class="product-more-infor mt-30">
-                                                    <li><span>Type Of Packing</span> Bottle</li>
-                                                    <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                                    <li><span>Quantity Per Case</span> 100ml</li>
-                                                    <li><span>Ethyl Alcohol</span> 70%</li>
-                                                    <li><span>Piece In One</span> Carton</li>
+                                                    <li><span>Attributes</span> {{ $product->attributes }}</li>
+                                                    <li><span>Calories Per Serving</span>
+                                                        {{ $product->calories_per_serving }}</li>
+                                                    <li><span>Fat Calories Per Serving</span>
+                                                        {{ $product->fat_calories_per_serving }}</li>
+                                                    <li><span>Brand</span> {{ $product->brand->name }}</li>
+                                                    <li><span>Category</span> {{ $product->category->name }}</li>
+                                                    <li><span>Type</span>
+                                                        {{ $product->types->pluck('name')->implode(', ') }}</li>
+                                                    <li><span>Unit</span> {{ $product->unit->name }}</li>
+                                                    <li><span>Nutrition</span>
+                                                        {{ $product->nutritions->pluck('name')->implode(', ') }}</li>
                                                 </ul>
                                                 <hr class="wp-block-separator is-style-dots" />
                                                 <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey
@@ -437,20 +446,7 @@
                                                         {{ $product->store->phone }}</span></li>
                                             </ul>
 
-                                            {{-- <div class="d-flex mb-55">
-                                                <div class="mr-30">
-                                                    <p class="text-brand font-xs">Rating</p>
-                                                    <h4 class="mb-0">92%</h4>
-                                                </div>
-                                                <div class="mr-30">
-                                                    <p class="text-brand font-xs">Ship on time</p>
-                                                    <h4 class="mb-0">100%</h4>
-                                                </div>
-                                                <div>
-                                                    <p class="text-brand font-xs">Chat response</p>
-                                                    <h4 class="mb-0">89%</h4>
-                                                </div>
-                                            </div> --}}
+
 
                                             <p> {{ $product->store->description }} </p>
                                         </div>
@@ -494,64 +490,6 @@
 
                                                             @empty
                                                             @endforelse
-
-                                                            {{-- <div
-                                                                class="single-comment justify-content-between d-flex mb-30 ml-30">
-                                                                <div class="user justify-content-between d-flex">
-                                                                    <div class="thumb text-center">
-                                                                        <img src="assets/imgs/blog/author-3.png" alt="" />
-                                                                        <a href="#"
-                                                                            class="font-heading text-brand">Brenna</a>
-                                                                    </div>
-                                                                    <div class="desc">
-                                                                        <div class="d-flex justify-content-between mb-10">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <span class="font-xs text-muted">December
-                                                                                    4, 2021 at 3:12 pm </span>
-                                                                            </div>
-                                                                            <div class="product-rate d-inline-block">
-                                                                                <div class="product-rating"
-                                                                                    style="width: 80%"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <p class="mb-10">Lorem ipsum dolor sit
-                                                                            amet, consectetur adipisicing elit. Delectus,
-                                                                            suscipit exercitationem accusantium obcaecati
-                                                                            quos voluptate nesciunt facilis itaque modi
-                                                                            commodi dignissimos sequi repudiandae minus ab
-                                                                            deleniti totam officia id incidunt? <a href="#"
-                                                                                class="reply">Reply</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="single-comment justify-content-between d-flex">
-                                                                <div class="user justify-content-between d-flex">
-                                                                    <div class="thumb text-center">
-                                                                        <img src="assets/imgs/blog/author-4.png" alt="" />
-                                                                        <a href="#"
-                                                                            class="font-heading text-brand">Gemma</a>
-                                                                    </div>
-                                                                    <div class="desc">
-                                                                        <div class="d-flex justify-content-between mb-10">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <span class="font-xs text-muted">December
-                                                                                    4, 2021 at 3:12 pm </span>
-                                                                            </div>
-                                                                            <div class="product-rate d-inline-block">
-                                                                                <div class="product-rating"
-                                                                                    style="width: 80%"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <p class="mb-10">Lorem ipsum dolor sit
-                                                                            amet, consectetur adipisicing elit. Delectus,
-                                                                            suscipit exercitationem accusantium obcaecati
-                                                                            quos voluptate nesciunt facilis itaque modi
-                                                                            commodi dignissimos sequi repudiandae minus ab
-                                                                            deleniti totam officia id incidunt? <a href="#"
-                                                                                class="reply">Reply</a></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div> --}}
 
                                                         </div>
                                                     </div>
@@ -754,124 +692,6 @@
                                         @empty
                                         @endforelse
 
-                                        {{-- <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                            <div class="product-cart-wrap hover-up">
-                                                <div class="product-img-action-wrap">
-                                                    <div class="product-img product-img-zoom">
-                                                        <a href="shop-product-right.html" tabindex="0">
-                                                            <img class="default-img"
-                                                                src="assets/imgs/shop/product-3-1.jpg" alt="" />
-                                                            <img class="hover-img"
-                                                                src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-action-1">
-                                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                                            data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                                class="fi-rs-search"></i></a>
-                                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                            href="shop-wishlist.html" tabindex="0"><i
-                                                                class="fi-rs-heart"></i></a>
-                                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                                            href="shop-compare.html" tabindex="0"><i
-                                                                class="fi-rs-shuffle"></i></a>
-                                                    </div>
-                                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                                        <span class="sale">-12%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content-wrap">
-                                                    <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth
-                                                            Speaker</a></h2>
-                                                    <div class="rating-result" title="90%">
-                                                        <span> </span>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$138.85 </span>
-                                                        <span class="old-price">$145.8</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                            <div class="product-cart-wrap hover-up">
-                                                <div class="product-img-action-wrap">
-                                                    <div class="product-img product-img-zoom">
-                                                        <a href="shop-product-right.html" tabindex="0">
-                                                            <img class="default-img"
-                                                                src="assets/imgs/shop/product-4-1.jpg" alt="" />
-                                                            <img class="hover-img"
-                                                                src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-action-1">
-                                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                                            data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                                class="fi-rs-search"></i></a>
-                                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                            href="shop-wishlist.html" tabindex="0"><i
-                                                                class="fi-rs-heart"></i></a>
-                                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                                            href="shop-compare.html" tabindex="0"><i
-                                                                class="fi-rs-shuffle"></i></a>
-                                                    </div>
-                                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                                        <span class="new">New</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content-wrap">
-                                                    <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA
-                                                            Goole</a></h2>
-                                                    <div class="rating-result" title="90%">
-                                                        <span> </span>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$738.85 </span>
-                                                        <span class="old-price">$1245.8</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                            <div class="product-cart-wrap hover-up mb-0">
-                                                <div class="product-img-action-wrap">
-                                                    <div class="product-img product-img-zoom">
-                                                        <a href="shop-product-right.html" tabindex="0">
-                                                            <img class="default-img"
-                                                                src="assets/imgs/shop/product-5-1.jpg" alt="" />
-                                                            <img class="hover-img"
-                                                                src="assets/imgs/shop/product-3-2.jpg" alt="" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-action-1">
-                                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                                            data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                                class="fi-rs-search"></i></a>
-                                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                            href="shop-wishlist.html" tabindex="0"><i
-                                                                class="fi-rs-heart"></i></a>
-                                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                                            href="shop-compare.html" tabindex="0"><i
-                                                                class="fi-rs-shuffle"></i></a>
-                                                    </div>
-                                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                                        <span class="hot">Hot</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content-wrap">
-                                                    <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K
-                                                            2021EF</a></h2>
-                                                    <div class="rating-result" title="90%">
-                                                        <span> </span>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$89.8 </span>
-                                                        <span class="old-price">$98.8</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                     </div>
                                 </div>
                             </div>
@@ -969,30 +789,16 @@
                             <h5 class="section-title style-1 mb-30">Category</h5>
                             <ul>
 
-                                @foreach ( $categories->random(5) as $category)
-                                <li>
-                                    <a href="{{ route('categories', $category->slug) }}"> <img src="{{ asset('assets/img/uploads/categories/' . $category->image) }}"
-                                            alt="" />{{ ucwords(strtolower($category->name))  }}</a><span class="count">{{ count($category->products) }}</span>
-                                </li>
+                                @foreach ($categories->random(5) as $category)
+                                    <li>
+                                        <a href="{{ route('categories', $category->slug) }}"> <img
+                                                src="{{ asset('assets/img/uploads/categories/' . $category->image) }}"
+                                                alt="" />{{ ucwords(strtolower($category->name)) }}</a><span
+                                            class="count">{{ count($category->products) }}</span>
+                                    </li>
                                 @endforeach
 
-                                {{-- <li>
-                                    <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-2.svg"
-                                            alt="" />Clothing</a><span class="count">35</span>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-3.svg"
-                                            alt="" />Pet Foods </a><span class="count">42</span>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-4.svg"
-                                            alt="" />Baking material</a><span class="count">68</span>
-                                </li>
-                                <li>
 
-                                    <a href="shop-grid-right.html"> <img src="assets/imgs/theme/icons/category-5.svg"
-                                            alt="" />Fresh Fruit</a><span class="count">87</span>
-                                </li> --}}
 
                             </ul>
                         </div>
@@ -1009,4 +815,84 @@
         }
     </script>
 
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401) {
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $(".compare-btn-delete").click(function(event) {
+            event.preventDefault();
+
+        var id = $(this).attr("data-id");
+        var url = "{!! route('removeCompareProduct', ':id') !!}";
+        url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product removed from compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+                $.ajax({
+                        method: 'GET',
+                        url: "{!! route('removeCompareProduct2') !!}",
+                        success: function(result) {
+                            console.log(result);
+                            $('#compareProductsOld').empty();
+                            $('#compareProductsNew').html(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+
+        });
+    });
+</script>
+
 @endsection
+
