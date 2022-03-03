@@ -284,7 +284,7 @@
                             <form method="GET" action="#">
                                 <select class="select-active" name="category_id">
                                     <option>All Categories</option>
-                                    @forelse ($categories as $category)
+                                    @forelse ($loadCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty
                                     @endforelse
@@ -588,7 +588,7 @@
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
-                                        @forelse ( $categories->take(5) as $category )
+                                        @forelse ( $loadCategories->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->slug) }}">
 
@@ -638,7 +638,7 @@
                                         </li> --}}
                                     </ul>
                                     <ul>
-                                        @forelse ( $categories->skip(5)->take(5) as $category )
+                                        @forelse ( $loadCategories->skip(5)->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->slug) }}">
 
@@ -666,7 +666,7 @@
                                 <div class="more_slide_open" style="display: none" id="more-category">
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul class="lineup">
-                                            @forelse ( $categories->skip(10)->take(3) as $category )
+                                            @forelse ( $loadCategories->skip(10)->take(3) as $category )
                                             <li class="linelist">
                                                 <a href="{{ route('categories', $category->slug) }}" style="line-height: 1.1;">
 
@@ -706,7 +706,7 @@
                                             </li> --}}
                                         </ul>
                                         <ul class="lineup">
-                                            @forelse ( $categories->skip(13)->take(3) as $category )
+                                            @forelse ( $loadCategories->skip(13)->take(3) as $category )
                                             <li class="linelist2">
                                                 <a href="{{ route('categories', $category->slug) }}"  style="line-height: 1.1;">
 

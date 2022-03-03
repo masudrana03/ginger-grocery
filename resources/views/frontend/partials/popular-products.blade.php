@@ -44,7 +44,7 @@
 
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('vendor.details', $product->store->slug) }}">
-                                                    @if (count($product->images) > 0)
+                                                    @if ( $product->featured_image )
                                                         <img class="default-img"
                                                             src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                             alt="" />
@@ -128,7 +128,7 @@
                     <!--End product-grid-4-->
                 </div>
                 <!--En tab one-->
-                @forelse ($categories as $category )
+                @forelse ($categoryProducts as $category )
                     <div class="tab-pane fade" id="tab-{{ $category->id }}" role="tabpanel"
                         aria-labelledby="tab-{{ $category->id }}">
                         <div class="row product-grid-4">
@@ -138,7 +138,7 @@
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('products', $product->slug) }}">
-                                                    @if (count($product->images) > 0)
+                                                    @if ( $product->featured_image )
                                                         <img class="default-img"
                                                             src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                             alt="" />
