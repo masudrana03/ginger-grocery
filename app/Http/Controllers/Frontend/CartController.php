@@ -29,7 +29,10 @@ class CartController extends Controller
             return back()->with('error', 'Product not found');
         }
 
+        
+
         $cart = Cart::where('user_id', auth()->id())->first();
+
 
         if (!$cart) {
             $cart          = new Cart();
