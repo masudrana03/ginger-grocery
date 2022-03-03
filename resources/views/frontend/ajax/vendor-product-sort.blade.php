@@ -5,7 +5,7 @@
                 <div class="product-img-action-wrap">
                     <div class="product-img product-img-zoom">
                         <a href="{{ route('products', $product->id) }}">
-                            @if (count($product->images) > 0)
+                            @if ( $product->featured_image)
                                 <img class="default-img"
                                     src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                     alt="" />

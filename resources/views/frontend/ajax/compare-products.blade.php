@@ -11,7 +11,7 @@
 
                         @foreach ($compareProducts as $product)
                         <td class="row_img">
-                            @if (count($product->images) > 0)
+                            @if ( $product->featured_image )
                                 <img  src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}" alt="" />
                             @else
                                 <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />

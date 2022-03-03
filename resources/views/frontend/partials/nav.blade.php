@@ -317,7 +317,11 @@
                                 @php
                                     $productIds = cache('compareProducts');
                                     $compareProduct = App\Models\Product::find($productIds) ?? [];
+                                    // $compareProduct = $loadCategories->products->whereIn('id', $productIds)->get();
+                                    // return $compareProduct;
                                 @endphp
+
+                                {{-- {{ $compareProduct }} --}}
                                 <div class="header-action-icon-2" id="compareProductOld">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
@@ -331,9 +335,9 @@
                                                 <li>
                                                     <div class="shopping-cart-img">
 
-                                                        @if (count($product->images) > 0)
+                                                        @if ( $product->featured_image )
 
-                                                            <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                            <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image ) }}" alt="" />
 
                                                         @else
 
@@ -391,9 +395,9 @@
                                                 <li>
                                                     <div class="shopping-cart-img">
                                                         <a href="{{ route('products', $wishlistProduct->id) }}">
-                                                            @if (count($wishlistProduct->images) > 0)
+                                                            @if ( $wishlistProduct->featured_image )
 
-                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $wishlistProduct->images()->first()->image) }}" alt="" />
+                                                                <img src="{{ asset('assets/img/uploads/products/featured/' . $wishlistProduct->featured_image ) }}" alt="" />
 
                                                             @else
 
@@ -450,9 +454,9 @@
                                                     <div class="shopping-cart-img">
                                                         <a href="{{ route('products', $product->slug) }}">
 
-                                                            @if (count($product->images) > 0)
+                                                            @if ( $product->featured_image )
 
-                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                                <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image ) }}" alt="" />
 
                                                             @else
 

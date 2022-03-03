@@ -46,7 +46,7 @@
                                 <tr class="pt-30 product-modifiers " data-product-price="{{ $product->price }}">
                                     <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
 
-                                        @if (count($product->images) > 0)
+                                        @if ( $product->featured_image)
                                             <img class="default-img"
                                                 src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                                 alt="" />
