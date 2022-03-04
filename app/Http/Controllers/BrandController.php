@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -31,7 +32,15 @@ class BrandController extends Controller
             4 => 'id',
         ];
 
-        $totalData = Brand::count();
+        $brandId = Product::where('store_id', auth()->user()->store_id)->pluck('brand_id');
+
+        $brand = Brand::query();
+        if ( !isAdmin() ) {
+           $p = $brand->where('id', $brandId);
+        //    logger($p->get());
+        }
+
+        $totalData = $brand->count();
 
         $totalFiltered = $totalData;
 
@@ -41,21 +50,21 @@ class BrandController extends Controller
         $dir   = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $brands = Brand::offset($start)
+            $brands = $brand->offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
         } else {
             $search = $request->input('search.value');
 
-            $brands =  Brand::where('id','LIKE',"%{$search}%")
+            $brands =  $brand->where('id','LIKE',"%{$search}%")
                             ->orWhere('name', 'LIKE',"%{$search}%")
                             ->offset($start)
                             ->limit($limit)
                             ->orderBy($order,$dir)
                             ->get();
 
-            $totalFiltered = Brand::where('id','LIKE',"%{$search}%")
+            $totalFiltered = $brand->where('id','LIKE',"%{$search}%")
                                 ->orWhere('name', 'LIKE',"%{$search}%")
                                 ->count();
         }

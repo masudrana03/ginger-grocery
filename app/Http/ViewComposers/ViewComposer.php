@@ -3,7 +3,6 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Zone;
-use App\Models\Product;
 use App\Models\Category;
 use Illuminate\View\View;
 use App\Models\CallToAction;

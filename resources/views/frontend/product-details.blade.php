@@ -132,7 +132,7 @@
                                             @foreach ($product->images as $item)
                                                 <figure class="border-radius-10">
                                                     <div><img
-                                                            src="{{ asset('assets/img/uploads/products/thumbnail/' . $item->image) }}"
+                                                            src="{{ asset('assets/img/uploads/products/' . $item->image) }}"
                                                             alt="product image" /></div>
                                                 </figure>
                                             @endforeach

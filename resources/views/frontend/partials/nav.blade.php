@@ -314,14 +314,12 @@
                                          </select>
                                     </form>
                                 </div>
+
                                 @php
                                     $productIds = cache('compareProducts');
                                     $compareProduct = App\Models\Product::find($productIds) ?? [];
-                                    // $compareProduct = $loadCategories->products->whereIn('id', $productIds)->get();
-                                    // return $compareProduct;
                                 @endphp
 
-                                {{-- {{ $compareProduct }} --}}
                                 <div class="header-action-icon-2" id="compareProductOld">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"

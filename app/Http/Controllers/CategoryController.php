@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -26,12 +27,40 @@ class CategoryController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            1 => 'image',
+            2 => 'image',
             3 => 'created_at',
             4 => 'id',
         ];
 
-        $totalData = Category::count();
+        //  $product->types->pluck('name')->implode(', ') : 'Not found' }}
+
+        // $category = Product::query();
+        // $categoryId = Product::pluck('category_id')->unique();
+        $categoryId = Product::where('store_id', auth()->user()->store_id)->pluck('category_id');
+
+        $category = Category::query();
+        if ( !isAdmin() ) {
+           $p = $category->where('id', $categoryId);
+        }
+        // if( isAdmin() ) {
+        //    $s = $category->whereIn('id', $categoryId);
+        // }
+
+
+        // logger($p)->get();
+        // logger($p->get());
+
+        // if (!isAdmin()) {
+             // $product = $product->where('store_id', auth()->user()->store_id)->pluck('id')->first();
+        // }
+        // if ($request->store) {
+        //     $product = $product->where('store_id', $request->store);
+        //     logger($product)->get();
+        // }
+
+
+
+        $totalData = $category->count();
 
         $totalFiltered = $totalData;
 
@@ -41,21 +70,21 @@ class CategoryController extends Controller
         $dir   = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $categories = Category::offset($start)
+            $categories = $category->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
         } else {
             $search = $request->input('search.value');
 
-            $categories = Category::where('id', 'LIKE', "%{$search}%")
+            $categories = $category->where('id', 'LIKE', "%{$search}%")
                 ->orWhere('name', 'LIKE', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
 
-            $totalFiltered = Category::where('id', 'LIKE', "%{$search}%")
+            $totalFiltered = $category->where('id', 'LIKE', "%{$search}%")
                 ->orWhere('name', 'LIKE', "%{$search}%")
                 ->count();
         }
