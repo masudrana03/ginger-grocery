@@ -14,25 +14,21 @@ class CartController extends Controller
     /**
      * @param $request
      */
+
     public function addToCart(Request $request)
     {
         $request->validate([
-                'product_id' => 'required',
-                'quantity'   => 'required',
-            ]);
+            'product_id' => 'required',
+            'quantity'   => 'required',
+        ]);
 
         $product = Product::find($request->product_id);
-
-        //return $product;
 
         if (!$product) {
             return back()->with('error', 'Product not found');
         }
 
-        
-
         $cart = Cart::where('user_id', auth()->id())->first();
-
 
         if (!$cart) {
             $cart          = new Cart();
@@ -41,13 +37,13 @@ class CartController extends Controller
         }
 
         $cart->products()->sync([
-                $product->id => [
-                    'quantity' => $request->quantity,
-                    'options'  => $request->options ? json_encode($request->options) : null,
-                ],
-            ], false);
+            $product->id => [
+                'quantity' => $request->quantity,
+                'options'  => $request->options ? json_encode($request->options) : null,
+            ],
+        ], false);
 
-        return view('frontend.ajax.cart');
+        return view("frontend.ajax.cart");
     }
 
 
