@@ -827,7 +827,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(".add-cart .add").on('click', function(event) {
                 event.preventDefault();
@@ -865,7 +865,8 @@
                 }
             });
         }
-    </script>
+    </script> --}}
+
     <script>
         $(document).ready(function() {
             $(".compare-btn-delete").click(function(event) {
