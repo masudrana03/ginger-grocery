@@ -3,10 +3,10 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Zone;
-use App\Models\Country;
+use App\Models\Product;
 use App\Models\Category;
-use App\Models\CallToAction;
 use Illuminate\View\View;
+use App\Models\CallToAction;
 
 class ViewComposer
 {

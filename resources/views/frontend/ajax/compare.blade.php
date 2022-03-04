@@ -15,9 +15,9 @@
                 <li>
                     <div class="shopping-cart-img">
 
-                        @if (count($product->images) > 0)
+                        @if ( $product->featured_image )
 
-                            <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                            <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image ) }}" alt="" />
 
                         @else
 

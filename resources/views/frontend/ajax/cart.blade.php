@@ -70,7 +70,7 @@
                     <div class="shopping-cart-img">
                         <a href="{{ route('products', $product->id) }}">
 
-                            @if (count($product->images) > 0)
+                            @if ( $product->featured_image )
                                 <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                     alt="" />
 
