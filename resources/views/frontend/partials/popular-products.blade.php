@@ -23,7 +23,8 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="nav-tab-{{ $category->id }}" data-bs-toggle="tab"
                                     data-bs-target="#tab-{{ $category->id }}" type="button" role="tab"
-                                    style="padding-bottom: 8px; padding-left:5px;" aria-controls="tab-{{ $category->id }}"
+                                    style="padding-bottom: 8px; padding-left:5px;"
+                                    aria-controls="tab-{{ $category->id }}"
                                     aria-selected="false">{{ $category->name }}</button>
                             </li>
                         @empty
@@ -44,12 +45,12 @@
 
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('vendor.details', $product->store->slug) }}">
-                                                    @if ( $product->featured_image )
+                                                    @if ($product->featured_image)
                                                         <img class="default-img"
-                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                             alt="" />
                                                         <img class="hover-img"
-                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                             alt="" />
                                                     @else
                                                         <img class="default-img"
@@ -66,9 +67,10 @@
                                                 <a aria-label="Add To Wishlist" class="action-btn"
                                                     href="{{ route('wishlist', $product->id) }}"><i
                                                         class="fi-rs-heart"></i></a>
-                                                        <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
-                                                            href="{{ route('compareProduct', $product->id) }}"><i
-                                                                class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Compare" data-id="{{ $product->id }}"
+                                                    class="action-btn compare-btn"
+                                                    href="{{ route('compareProduct', $product->id) }}"><i
+                                                        class="fi-rs-shuffle"></i></a>
                                                 {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                     data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                             </div>
@@ -99,7 +101,8 @@
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
-                                                    <span class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                                    <span
+                                                        class="">{{ settings('currency') }}{{ $product->discount_price }}
                                                     </span>
                                                     @if ($product->discountable)
                                                         <span
@@ -107,8 +110,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="add-cart">
-                                                    <a class="add"
-                                                        href="#"><i
+                                                    <a class="add" href="#"><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                     <small class="product-id"
                                                         style="display: none;">{{ $product->id }}</small>
@@ -138,12 +140,12 @@
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('products', $product->slug) }}">
-                                                    @if ( $product->featured_image )
+                                                    @if ($product->featured_image)
                                                         <img class="default-img"
-                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                             alt="" />
                                                         <img class="hover-img"
-                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
+                                                            src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
                                                             alt="" />
                                                     @else
                                                         <img class="default-img"
@@ -159,9 +161,9 @@
                                                 <a aria-label="Add To Wishlist" class="action-btn"
                                                     href="{{ route('wishlist', $product->id) }}"><i
                                                         class="fi-rs-heart"></i></a>
-                                                        <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
-                                                            href="#"><i
-                                                                class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Compare" data-id="{{ $product->id }}"
+                                                    class="action-btn compare-btn" href="#"><i
+                                                        class="fi-rs-shuffle"></i></a>
                                                 {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                     data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                             </div>
@@ -192,7 +194,8 @@
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
-                                                    <span class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                                    <span
+                                                        class="">{{ settings('currency') }}{{ $product->discount_price }}
                                                     </span>
                                                     @if ($product->discountable)
                                                         <span
@@ -200,9 +203,9 @@
                                                     @endif
                                                 </div>
                                                 <div class="add-cart">
-                                                    <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
-                                                    <a class="add" id="cart-btn"
-                                                        href="#" style=""><i
+                                                    <input type="hidden" id="product-id" name="product_id"
+                                                        value="{{ $product->id }}">
+                                                    <a class="add" id="cart-btn" href="#" style=""><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                     <small class="product-id"
                                                         style="display: none;">{{ $product->id }}</small>
@@ -235,50 +238,11 @@
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
-
-            addCart(event.target);
-        });
-    });
-
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
-
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-
-            },
-            success: function(result) {
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
-            },
-            error: function(error) {
-                if (error.status == 401){
-                    window.location.href = "/login";
-                }
-            }
-        });
-    }
-</script>
-<script>
-    $(document).ready(function() {
         $(".compare-btn").click(function(event) {
             event.preventDefault();
-        var id = $(this).attr("data-id");
-        var url = "{!! route('compareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+            var id = $(this).attr("data-id");
+            var url = "{!! route('compareProduct', ':id') !!}";
+            url = url.replace(':id', id);
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -303,9 +267,9 @@
         $(".compare-btn-delete").click(function(event) {
             event.preventDefault();
 
-        var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+            var id = $(this).attr("data-id");
+            var url = "{!! route('removeCompareProduct', ':id') !!}";
+            url = url.replace(':id', id);
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -321,18 +285,18 @@
                     console.log(error);
                 }
             });
-                $.ajax({
-                        method: 'GET',
-                        url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {
-                            console.log(result);
-                            $('#compareProductsOld').empty();
-                            $('#compareProductsNew').html(result);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
+            $.ajax({
+                method: 'GET',
+                url: "{!! route('removeCompareProduct2') !!}",
+                success: function(result) {
+                    console.log(result);
+                    $('#compareProductsOld').empty();
+                    $('#compareProductsNew').html(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
 
         });
     });

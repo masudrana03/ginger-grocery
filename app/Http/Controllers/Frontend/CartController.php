@@ -14,40 +14,63 @@ class CartController extends Controller
     /**
      * @param $request
      */
+
     public function addToCart(Request $request)
     {
         $request->validate([
-                'product_id' => 'required',
-                'quantity'   => 'required',
-            ]);
-
+            'product_id' => 'required',
+            'quantity'   => 'required',
+        ]);
         $product = Product::find($request->product_id);
-
-        //return $product;
 
         if (!$product) {
             return back()->with('error', 'Product not found');
+        } else {
+            $cart = Cart::where('user_id', auth()->id())->first();;
+
+            if (!$cart) {
+                $cart          = new Cart();
+                $cart->user_id = auth()->id();
+                $cart->save();
+
+                $cart->products()->sync([
+                    $product->id => [
+                        'quantity' => $request->quantity,
+                        'options'  => $request->options ? json_encode($request->options) : null,
+                    ],
+                ], false);
+
+                return view("frontend.ajax.cart");
+            } else {
+
+                $cartId = auth()->user()->cart->id;
+                $product_id = $request->product_id;
+                $quantity = $request->quantity;
+
+                $searching_product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->first();
+
+                if ($searching_product) {
+                    $current_qty = $searching_product->quantity;
+                    $update_qty = $current_qty + $quantity;
+                    //return $current_qty;
+                    if ($current_qty <= 9) {
+                        $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
+                        return view("frontend.ajax.cart");
+                    } else {
+                        return view("frontend.ajax.cart");
+                    }
+                } else {
+                    $cart->products()->sync([
+                        $product->id => [
+                            'quantity' => $request->quantity,
+                            'options'  => $request->options ? json_encode($request->options) : null,
+                        ],
+                    ], false);
+
+                    return view("frontend.ajax.cart");
+                }
+            }
         }
-
-        
-
-        $cart = Cart::where('user_id', auth()->id())->first();
-
-
-        if (!$cart) {
-            $cart          = new Cart();
-            $cart->user_id = auth()->id();
-            $cart->save();
-        }
-
-        $cart->products()->sync([
-                $product->id => [
-                    'quantity' => $request->quantity,
-                    'options'  => $request->options ? json_encode($request->options) : null,
-                ],
-            ], false);
-
-        return view('frontend.ajax.cart');
     }
 
 
@@ -87,15 +110,14 @@ class CartController extends Controller
         $cartId = auth()->user()->cart->id;
         $product_id = request('id');
         $quantity = request('quantity');
-        if ($quantity <= 10 || $quantity >=1) {
+        if ($quantity <= 10 || $quantity >= 1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
-
     }
 
     /**
-    * @param $id
-    */
+     * @param $id
+     */
 
     public function ajaxUpdateCart($id)
     {
@@ -121,13 +143,14 @@ class CartController extends Controller
      */
 
 
-    public function removeItemFromDiv(Request $request ,$id){
+    public function removeItemFromDiv(Request $request, $id)
+    {
 
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
         $totalTax = 0;
 
         foreach ($carts as $cart) {
-           $totalTax += priceCalculator($cart)['tax'];
+            $totalTax += priceCalculator($cart)['tax'];
         }
 
         return view('frontend.ajax.update-cart-div', compact('totalTax'));

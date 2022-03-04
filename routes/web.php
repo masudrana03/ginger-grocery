@@ -223,7 +223,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
-    Route::get('shipping-fee-calculation',[CheckoutController::class,'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
+    Route::get('shipping-fee-calculation', [CheckoutController::class, 'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
 });
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
@@ -280,7 +280,7 @@ Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'face
 Route::get('c/{id}', function ($id) {
     $compareProducts = Cache::get('products');
 
-    if (! $compareProducts) {
+    if (!$compareProducts) {
         Cache::put('products', [$id], 30);
         return Cache::get('products');
     }

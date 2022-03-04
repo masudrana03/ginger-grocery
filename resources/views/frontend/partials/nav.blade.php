@@ -1092,7 +1092,7 @@
                                     <li><a href="#">Blog Category Grid</a></li>
                                     <li><a href="#">Blog Category List</a></li>
                                     <li><a href="#">Blog Category Big</a></li>
-                                 #   <li><a href="#">Blog Category Wide</a></li>
+                                    <li><a href="#">Blog Category Wide</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Single Product Layout</a>#
                                         <ul class="dropdown">
@@ -1191,45 +1191,7 @@
 
     </script>
 
-    <script>
-    $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
 
-            addCart(event.target);
-        });
-    });
-
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
-
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-
-            },
-            success: function(result) {
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
-            },
-            error: function(error) {
-                if (error.status == 401){
-                    window.location.href = "/login";
-                }
-            }
-        });
-    }
-</script>
 <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
@@ -1266,6 +1228,45 @@
             }
         });
 
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401) {
+                    window.location.href = "/login";
+                }
+            }
+        });
     }
 </script>
 
