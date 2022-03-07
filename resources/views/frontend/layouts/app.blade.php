@@ -250,7 +250,7 @@
                                 <li><a href="{{ route('cart') }} ">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }} ">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }} ">Compare products</a></li>
-                                <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                <li><a href="{{ route('user.track.orders') }}">My Order</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
                             @else
@@ -258,7 +258,7 @@
                                 <li><a href="{{ route('cart') }}">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }}">Compare products</a></li>
-                                <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                <li><a href="{{ route('login') }}">My Order</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
                             @endif
@@ -493,7 +493,7 @@
                     success: function(result) {
                         $('#compareProductOld').empty();
                         $('#compareProductNew').html(result);
-                        tata.success('Success!', 'Product added to compare list.');
+                        //tata.success('Success!', 'Product added to compare list.');
                     },
                     error: function(error) {
                         console.log(error);
@@ -520,7 +520,7 @@
                     success: function(result) {
                         $('#compareProductOld').empty();
                         $('#compareProductNew').html(result);
-                        tata.success('Success!', 'Product removed from compare list.');
+                        //tata.success('Success!', 'Product removed from compare list.');
                     },
                     error: function(error) {
                         console.log(error);

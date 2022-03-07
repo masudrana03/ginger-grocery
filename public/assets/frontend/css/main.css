@@ -3373,7 +3373,7 @@ table .product-thumbnail img {
 }
 
 .zoomContainer, .zoomWindow {
-  z-index: 9999;
+  /* z-index: 9999; */
 }
 
 .single-product .zoomContainer, .single-product .zoomWindow {

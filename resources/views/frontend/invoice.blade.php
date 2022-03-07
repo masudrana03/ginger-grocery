@@ -109,7 +109,7 @@
                                                     <td>
                                                         <div class="item-desc-1">
                                                             <span>{{ $product->product->name }} <small>Sold By: <a
-                                                                        href="{{ route('vendor.details', $product->product->store->id) }}">{{ $product->product->store->name }}</a></small></span>
+                                                                        href="{{ route('vendor.details', $product->product->store->slug) }}">{{ $product->product->store->name }}</a></small></span>
                                                             {{-- <small>SKU: FWM15VKT</small> --}}
                                                         </div>
                                                     </td>
