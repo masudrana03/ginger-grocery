@@ -19,8 +19,8 @@ class WishlistController extends Controller
             return redirect()->route('login');
         }
         $user->savedProducts()->syncWithoutDetaching([$productId]);
-
-        return back();
+        $this->removeToWishlistById();
+        return view('frontend.ajax.wishlist-product');
 
     }
 
@@ -36,7 +36,22 @@ class WishlistController extends Controller
         }
         $user->savedProducts()->detach($productId);
 
-        return back();
+        return view('frontend.ajax.wishlist-product');
+    }
+
+    /**
+     * @param $productId
+     */
+    public function removeToWishlistByDefaultId( $productId )
+    {
+        $user = auth()->user();
+
+        if( ! $user ){
+            return redirect()->route('login');
+        }
+        $user->savedProducts()->detach($productId);
+
+        return view('frontend.ajax.wishlist');
     }
 
     public function index()

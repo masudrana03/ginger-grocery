@@ -542,6 +542,84 @@
             });
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        // alert('test');
+        $(".wishlist-btn").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr("data-id");
+            var url = "{!! route('wishlist', ':id') !!}";
+            url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
+                    return;
+                    tata.success('Success!', 'Product added to compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".wishlist-btn-delete").click(function(event) {
+            event.preventDefault();
+
+        var id = $(this).attr("data-id");
+        var url = "{!! route('wishlist.remove', ':id') !!}";
+        var url2 = "{!! route('wishlistByDefaultId.remove', ':id') !!}";
+        url = url.replace(':id', id);
+        url2 = url.replace(':id', id);
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
+                    tata.success('Success!', 'Product removed from compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+            $.ajax({
+                    method: 'GET',
+                    url: "{!! route('wishlistByDefaultId.remove') !!}",
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        $('#oldWishlistProductTable').empty();
+                        $('#newWishlistProductTable').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+        });
+    });
+</script>
+
+
+
+
+
     @yield('script')
 </body>
 

@@ -55,9 +55,8 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn"
-                                            href="{{ route('wishlist', $product->id) }}"><i
-                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                            href="#"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" data-id="{{ $product->id }}"
                                             class="action-btn compare-btn"
                                             href="{{ route('compareProduct', $product->id) }}"><i
@@ -144,9 +143,8 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn"
-                                            href="{{ route('wishlist', $product->id) }}"><i
-                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                            href="#"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" data-id="{{ $product->id }}"
                                             class="action-btn compare-btn" href="#"><i class="fi-rs-shuffle"></i></a>
                                         {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
@@ -279,6 +277,36 @@
                 }
             });
 
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        alert('test');
+        $(".wishlist-btn").click(function(event) {
+            alert('good');
+            event.preventDefault();
+            var id = $(this).attr("data-id");
+            alert(id);
+            return ;
+            var url = "{!! route('wishlist', ':id') !!}";
+            url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#compareProductOld').empty();
+                    $('#compareProductNew').html(result);
+                    tata.success('Success!', 'Product added to compare list.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
 </script>
