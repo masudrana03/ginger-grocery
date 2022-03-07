@@ -231,7 +231,7 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product added to compare list.');
+                    //tata.success('Success!', 'Product added to compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -258,7 +258,7 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product removed from compare list.');
+                    //tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);

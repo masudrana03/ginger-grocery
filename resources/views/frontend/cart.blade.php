@@ -482,7 +482,7 @@
             success: function(result) {
                 //console.log(result);
 
-                tata.success('Success!!', 'Product updated successfully.');
+                //tata.success('Success!!', 'Product updated successfully.');
             },
             error: function(error) {
                 console.log(error);

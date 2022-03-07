@@ -194,15 +194,15 @@
                                 @if (auth()->user())
                                     <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                     <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                    <li><a href="{{ route('user.track.orders') }}">My Orders</a></li>
                                 @else
                                     <li><a href="{{ route('login') }}">My Account</a></li>
                                     <li><a href="{{ route('login') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                    <li><a href="{{ route('login') }}">My Orders</a></li>
                                 @endif
                                 {{-- <li><a href="#">My Account</a></li>
                                 <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Order Tracking</a></li> --}}
+                                <li><a href="#">My Orders</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -525,7 +525,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.track.orders') }}"><i
-                                                            class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                            class="fi fi-rs-location-alt mr-10"></i>My Orders</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.orders') }}"><i
@@ -737,9 +737,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="more_categories"><span class="icon"></span> <span
-                                        class="heading-sm-1">Show more...</span></div>
-                            </div>
+                                <div class="more_categories moreless"><span class="icon"></span> <span
+                                        class="heading-sm-1 more ">Show more...</span></div>
+                                </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
@@ -1224,7 +1224,7 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Success!', 'Product removed form your cart.');
+                //tata.success('Success!', 'Product removed form your cart.');
             },
             error: function(error) {
                 console.log(error);
@@ -1262,7 +1262,7 @@
             success: function(result) {
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
+                //tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {
@@ -1282,7 +1282,7 @@ $(document).on('click', '.ajax-product-remove', function() {
         var pd = pro_id;
         var url = "{!! route('cart.remove.div', ':id') !!}";
         url = url.replace(':id', pd);
-        deleteFromCartById(pd);
+        //deleteFromCartById(pd);
         $.ajax({
             method: 'GET',
             url: url,
@@ -1304,3 +1304,33 @@ $(document).on('click', '.ajax-product-remove', function() {
     });
 </script>
 
+<script>
+    $(document).on('click', '.moreless', function() {
+           let pre_text = $('.more').text(); 
+           if (pre_text == "Show more..."){
+            let new_text = "Show less...";
+            $('.more').text(new_text);
+           }
+           if (pre_text == "Show less..."){
+            let new_text = "Show more...";
+            $('.more').text(new_text);
+           }
+           
+    });
+</script>
+
+<script>
+    $(document).on('click', '.moreless2', function() {
+        //alert("sdgsdhsgds");
+           let pre_text = $('.more2').text(); 
+           if (pre_text == "Show more..."){
+            let new_text = "Show less...";
+            $('.more2').text(new_text);
+           }
+           if (pre_text == "Show less..."){
+            let new_text = "Show more...";
+            $('.more2').text(new_text);
+           }
+           
+    });
+</script>

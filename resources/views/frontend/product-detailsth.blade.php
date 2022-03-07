@@ -371,7 +371,7 @@
                                         <div class="vendor-name ml-15">
                                             <h6>
                                                 <a
-                                                    href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a>
+                                                    href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a>
                                                 @php
                                                     $vendorRating = $product->store->rating;
                                                     $vendorTotalRating = $product->store->totalRating;
@@ -636,7 +636,7 @@
 
                                                 <div>
                                                     <span class="font-small text-muted">By <a
-                                                            href="{{ route('vendor.details', $product->store->id) }}">{{ $product->store->name }}</a></span>
+                                                            href="{{ route('vendor.details', $product->store->slug) }}">{{ $product->store->name }}</a></span>
                                                 </div>
                                                 <div class="product-card-bottom">
                                                     <div class="product-price">
