@@ -253,6 +253,7 @@ Route::get('/remove-compare-product', [FrontendCompareController::class, 'remove
 Route::get('/wishlist', [FrontendWishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/wishlist-product/{id}', [FrontendWishlistController::class, 'addToWishlistById'])->name('wishlist');
 Route::get('/wishlist-product-remove/{id}', [FrontendWishlistController::class, 'removeToWishlistById'])->name('wishlist.remove');
+Route::get('/wishlist-default-remove', [FrontendWishlistController::class, 'removeToWishlistByDefaultId'])->name('wishlistByDefaultId.remove');
 
 Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 

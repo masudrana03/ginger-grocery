@@ -376,65 +376,68 @@
                                 <div id="compareProductNew">
 
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a href="#">
-                                        <img class="svgInject" alt="Nest"
-                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
-                                        <span
-                                            class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
-                                                ? auth()->user()->savedProducts->count()
-                                                : 0 }}</span>
-                                    </a>
-                                    <a href="{{ route('wishlist.index') }}"><span
-                                            class="lable">Wishlist</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $wishlistProduct->id) }}">
-                                                            @if ( $wishlistProduct->featured_image )
+                                <div id="wishlistProductOld">
 
-                                                                <img src="{{ asset('assets/img/uploads/products/featured/' . $wishlistProduct->featured_image ) }}" alt="" />
+                                    <div class="header-action-icon-2">
+                                        <a href="#">
+                                            <img class="svgInject" alt="Nest"
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
+                                            <span
+                                                class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
+                                                    ? auth()->user()->savedProducts->count()
+                                                    : 0 }}</span>
+                                        </a>
+                                        <a href="{{ route('wishlist.index') }}"><span
+                                                class="lable">Wishlist</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                            <ul>
+                                                @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
+                                                    <li>
+                                                        <div class="shopping-cart-img">
+                                                            <a href="{{ route('products', $wishlistProduct->id) }}">
+                                                                @if ( $wishlistProduct->featured_image )
 
-                                                            @else
+                                                                    <img src="{{ asset('assets/img/uploads/products/featured/' . $wishlistProduct->featured_image ) }}" alt="" />
 
-                                                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+                                                                @else
 
-                                                            @endif
-                                                        </a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a
-                                                                href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
-                                                        </h4>
-                                                        <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
-                                                        </h4>
-                                                    </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a
-                                                            href="{{ route('wishlist.remove', $wishlistProduct->id) }}"><i
-                                                                class="fi-rs-cross-small"></i></a>
-                                                    </div>
-                                                </li>
-                                            @empty
-                                                <li>
+                                                                    <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
 
-                                                    <div class="shopping-cart-title">
-                                                        <h4>No Items</h4>
-                                                    </div>
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="shopping-cart-title">
+                                                            <h4><a
+                                                                    href="{{ route('products', $wishlistProduct->slug) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
+                                                            </h4>
+                                                            <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="shopping-cart-delete">
+                                                            <a class="wishlist-btn-delete" href="#" data-id="{{ $wishlistProduct->id }}"><i class="fi-rs-cross-small"></i></a>
+                                                        </div>
+                                                    </li>
+                                                @empty
+                                                    <li>
 
-                                                </li>
-                                            @endforelse
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-button">
-                                                <a href="{{ route('wishlist.index') }}" class="outline">View
-                                                    Wishlist</a>
+                                                        <div class="shopping-cart-title">
+                                                            <h4>No Items</h4>
+                                                        </div>
+
+                                                    </li>
+                                                @endforelse
+                                            </ul>
+                                            <div class="shopping-cart-footer">
+                                                <div class="shopping-cart-button">
+                                                    <a href="{{ route('wishlist.index') }}" class="outline">View
+                                                        Wishlist</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                <div id="wishlistProductNew"></div>
                                 <div class="header-action-icon-2" id="old-cart">
                                     <a class="mini-cart-icon" href="{{route('cart')}}">
                                         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
