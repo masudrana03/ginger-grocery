@@ -12,25 +12,25 @@
     </div>
     <div class="container mb-30 mt-50">
         <div class="row">
-            <div class="col-xl-10 col-lg-12 m-auto">
-                <div class="mb-50">
-                    <h1 class="heading-2 mb-10">Your Wishlist</h1>
-                    <h6 class="text-body">There are <span class="text-brand">{{ count($wishlistProducts) }}</span>
-                        products in this list</h6>
-                </div>
-                <div class="table-responsive shopping-summery">
-                    <table class="table table-wishlist">
-                        <thead>
-                            <tr class="main-heading">
-                                <th class="custome-checkbox start pl-30">Image</th>
-                                <th scope="col" colspan="1">Product</th>
-                                <th scope="col" style="padding-left: 2%;">Price</th>
-                                <th scope="col">Stock Status</th>
-                                <th scope="col" style="padding-left: 2%;">Action</th>
-                                <th scope="col" class="end">Remove</th>
-                            </tr>
-                        </thead>
-                        <div id="oldWishlistProductTable">
+            <div id="oldWishlistProductTable">
+                <div class="col-xl-10 col-lg-12 m-auto">
+                    <div class="mb-50">
+                        <h1 class="heading-2 mb-10">Your Wishlist</h1>
+                        <h6 class="text-body">There are <span class="text-brand">{{ count($wishlistProducts) }}</span>
+                            products in this list</h6>
+                    </div>
+                    <div class="table-responsive shopping-summery">
+                        <table class="table table-wishlist">
+                            <thead>
+                                <tr class="main-heading">
+                                    <th class="custome-checkbox start pl-30">Image</th>
+                                    <th scope="col" colspan="1">Product</th>
+                                    <th scope="col" style="padding-left: 2%;">Price</th>
+                                    <th scope="col">Stock Status</th>
+                                    <th scope="col" style="padding-left: 2%;">Action</th>
+                                    <th scope="col" class="end">Remove</th>
+                                </tr>
+                            </thead>
                             <tbody>
 
                                 @forelse ($wishlistProducts as $item)
@@ -55,7 +55,7 @@
                                                 <span class="font-small ml-5 text-muted"> ({{ round($item->rating, 1) }})</span>
                                             </div>
                                         </td>
-                                        <td class="price" data-title="Price" style="padding-left: 15px;">
+                                        <td class="price" data-title="Price" style="padding-left: 1%;">
 
                                             @if ($item->discountable)
                                                 <h4 class="text-brand">
@@ -100,13 +100,14 @@
                                 @endforelse
 
                             </tbody>
-                        </div>
-                        <div id="newWishlistProductTable"></div>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <div id="newWishlistProductTable"></div>
         </div>
     </div>
+
 
 
 

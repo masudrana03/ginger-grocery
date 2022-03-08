@@ -578,9 +578,7 @@
 
         var id = $(this).attr("data-id");
         var url = "{!! route('wishlist.remove', ':id') !!}";
-        var url2 = "{!! route('wishlistByDefaultId.remove', ':id') !!}";
         url = url.replace(':id', id);
-        url2 = url.replace(':id', id);
 
             $.ajax({
                 method: 'GET',
@@ -599,10 +597,7 @@
             });
             $.ajax({
                     method: 'GET',
-                    url: "{!! route('wishlistByDefaultId.remove') !!}",
-                    data: {
-                        id: id,
-                    },
+                    url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
                         console.log(result);
                         $('#oldWishlistProductTable').empty();
