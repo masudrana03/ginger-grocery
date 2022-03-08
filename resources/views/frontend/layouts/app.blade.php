@@ -43,16 +43,17 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- datetime picker jquery --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <link src="{{ asset('assets/tata_toster/index.js') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/track-oder.css') }}" />
 
     <style>
         .tata-title,
