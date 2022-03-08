@@ -7,10 +7,12 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Point;
 use App\Models\Promo;
+use App\Models\Address;
 use App\Models\UserPoint;
 use App\Models\OrderStatus;
 use Illuminate\Support\Str;
 use App\Models\OrderDetails;
+use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +53,6 @@ class CheckoutController extends Controller
 
         // Accept payment
         return $this->acceptPayment($provider->provider, $invoiceId);
-
     }
 
     /**
@@ -98,14 +99,15 @@ class CheckoutController extends Controller
             $order->order_status_id = $orderStatus->id;
             $order->subtotal        = $calculatedPrice['subtotal'];
             $order->discount        = $calculatedPrice['discount'];
-            $order->adjust          = $calculatedPrice['adjust'];;
+            $order->adjust          = $calculatedPrice['adjust'];
+            ;
             $order->total           = $calculatedPrice['total'];
             $order->user_id         = auth()->id();
             $order->store_id        = $cart->products->first()->id;
             $order->billing_id      = $billingId;
             $order->shipping_id     = $shippingId;
             $order->payment_status  = false;
-            $order->delivery_otp    = rand(1000 , 3999);
+            $order->delivery_otp    = rand(1000, 3999);
 
             $order->save();
 
@@ -135,7 +137,7 @@ class CheckoutController extends Controller
      *
      * @param integer $promoId
      */
-    public function updatePromo( $promoId )
+    public function updatePromo($promoId)
     {
         $promo = Promo::find($promoId);
         $promo->update(['limit' => $promo->limit - 1, 'used' => $promo->limit + 1]);
@@ -146,7 +148,7 @@ class CheckoutController extends Controller
      *
      * @param string $invoiceId
      */
-    public function sendOrderConfirmationEmail( $invoiceId )
+    public function sendOrderConfirmationEmail($invoiceId)
     {
         $emailTemplate = EmailTemplate::whereType('Order')->first();
         $user = auth()->user();
@@ -168,7 +170,7 @@ class CheckoutController extends Controller
      *
      * @param Cart $cart
      */
-    public function givePointsToCustomer( $cart )
+    public function givePointsToCustomer($cart)
     {
         $totalPurchase = $cart->products->sum('price');
 
@@ -198,5 +200,17 @@ class CheckoutController extends Controller
     public function paymentFailed($invoiceId)
     {
         return view('api.payment-failed');
+    }
+
+    public function ajaxShippingCalculation(Request $request)
+    {
+        if (is_int($request->address)) {
+            $address = Address::find($request->address);
+            $shippingAddress = $address->address . ' ' . $address->state . ' ' . $address->city . ', ' . settings('country');
+        } else {
+            $shippingAddress = $request->address;
+        }
+        
+        return view('frontend.ajax.checkout', compact('shippingAddress'));
     }
 }

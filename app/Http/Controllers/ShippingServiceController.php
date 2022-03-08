@@ -24,7 +24,7 @@ class ShippingServiceController extends Controller
      */
     public function allShippingServices(Request $request)
     {
-        $storeId = auth()->user()->store_id;
+        //$storeId = auth()->user()->store_id;
 
         $columns = [
             0 => 'id',
@@ -35,7 +35,7 @@ class ShippingServiceController extends Controller
             5 => 'id',
         ];
 
-        $totalData = ShippingService::where('store_id', $storeId)->count();
+        $totalData = ShippingService::count();
 
         $totalFiltered = $totalData;
 
@@ -47,7 +47,6 @@ class ShippingServiceController extends Controller
         if (empty($request->input('search.value'))) {
             $shippingServices = ShippingService::offset($start)
                                                ->limit($limit)
-                                               ->where('store_id', $storeId)
                                                ->orderBy($order, $dir)
                                                ->get();
         } else {
@@ -55,7 +54,6 @@ class ShippingServiceController extends Controller
 
             $shippingServices =  ShippingService::where('id', 'LIKE', "%{$search}%")
                                                 ->orWhere('title', 'LIKE', "%{$search}%")
-                                                ->where('store_id', $storeId)
                                                 ->offset($start)
                                                 ->limit($limit)
                                                 ->orderBy($order, $dir)
@@ -63,7 +61,6 @@ class ShippingServiceController extends Controller
 
             $totalFiltered = ShippingService::where('id', 'LIKE', "%{$search}%")
                                             ->orWhere('title', 'LIKE', "%{$search}%")
-                                            ->where('store_id', $storeId)
                                             ->count();
         }
 
@@ -79,7 +76,7 @@ class ShippingServiceController extends Controller
 
                 $nestedData['id']         = $shippingService->id;
                 $nestedData['title']     = $shippingService->title;
-                $nestedData['price']      = $shippingService->price;
+                $nestedData['price']      = settings('currency') . $shippingService->price;
                 $nestedData['type']      = $shippingService->type;
                 $nestedData['from']      = $shippingService->from;
                 $nestedData['to']      = $shippingService->to;
@@ -125,11 +122,11 @@ class ShippingServiceController extends Controller
      */
     public function store(ShippingServiceRequest $request)
     {
-        $requestData = $request->all();
+        //$requestData = $request->all();
 
-        $requestData['store_id'] = auth()->user()->store_id;
+        //$requestData['store_id'] = auth()->user()->store_id;
 
-        ShippingService::create($requestData);
+        ShippingService::create($request->all());
 
         toast('Shipping service successfully created', 'success');
 
@@ -167,11 +164,11 @@ class ShippingServiceController extends Controller
      */
     public function update(ShippingServiceRequest $request, ShippingService $shippingService)
     {
-        $requestData = $request->all();
+        // $requestData = $request->all();
 
-        $requestData['store_id'] = auth()->user()->store_id;
+        // $requestData['store_id'] = auth()->user()->store_id;
 
-        $shippingService->update($requestData);
+        $shippingService->update($request->all());
 
         toast('Shipping service successfully updated', 'success');
 

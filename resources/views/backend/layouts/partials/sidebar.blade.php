@@ -100,6 +100,11 @@
         <li>
             <a href="{{ route('admin.stores.index') }}">Stores</a>
         </li>
+        @if (isAdmin())
+        <li>
+            <a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a>
+        </li>
+        @endif
     </ul>
 </li>
 {{-- <li class="">
@@ -138,21 +143,6 @@
         </div>
     </a>
 </li>
-@if (isShopManager(auth()->user()->store_id))
-    <li class="">
-        <a class="has-arrow" href="#" aria-expanded="false">
-            <div class="nav_icon_small">
-                <img src="{{ asset('assets/img/menu-icon/settings-svgrepo-com.svg') }}" alt="">
-            </div>
-            <div class="nav_title">
-                <span>Settings</span>
-            </div>
-        </a>
-        <ul>
-            <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
-        </ul>
-    </li>
-@endif
 @if (isAdmin())
 <h4 class="menu-text"><span>WEB & APP SETTINGS</span> <i class="fas fa-ellipsis-h"></i> </h4>
     <li class="">

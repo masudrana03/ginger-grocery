@@ -113,17 +113,17 @@ function settings($key)
  * @return mixed
  */
 function updateEnv($key, $value)
-    {
-        $path = app()->environmentFilePath();
+{
+    $path = app()->environmentFilePath();
 
-        $escaped = preg_quote('='.env($key), '/');
+    $escaped = preg_quote('='.env($key), '/');
 
-        file_put_contents($path, preg_replace(
-            "/^{$key}{$escaped}/m",
-           "{$key}={$value}",
-           file_get_contents($path)
-        ));
-    }
+    file_put_contents($path, preg_replace(
+        "/^{$key}{$escaped}/m",
+        "{$key}={$value}",
+        file_get_contents($path)
+    ));
+}
 
 /**
  * Give me discount of given promo
@@ -160,9 +160,9 @@ function getDiscountAmount($total, $type, $discount)
 /**
  * Give me tax amount
  */
-function taxCalculator($total, $storeId)
+function taxCalculator($total)
 {
-    $taxRate = Store::find($storeId)->tax;
+    $taxRate = settings('tax');
 
     return round(($taxRate / 100) * $total, 2) ;
 }
@@ -170,44 +170,77 @@ function taxCalculator($total, $storeId)
 /**
  * Give me tax amount
  */
-function shippingCalculator($total, $storeId, $shippingAddress = null)
+function shippingCalculator($total, $shippingAddress = null)
 {
     $shippingCharge = 0;
 
-    $shippingMethods = ShippingService::active()->whereStoreId($storeId)->get();
+    $query = ShippingService::active();
 
     if (empty($shippingMethods)) {
         return $shippingCharge;
     }
 
-    $store = Store::find($storeId);
+    $shippingMethods = $query->pluck('type');
 
-    foreach ($shippingMethods as $shippingMethod) {
-        switch ($shippingMethod->type) {
-            case 'Free':
-                return 0;
-            break;
-            case 'Flat rate':
-                return $shippingMethod->price;
-            break;
-            case 'Condition on purchase':
-                if ($total < $shippingMethod->to) {
-                    $shippingCharge += $shippingMethod->price;
-                }
-            break;
-            case 'Condition on distance':
-                if (! $shippingAddress) {
-                    return 0;
-                }
+    if (in_array('free', $shippingMethods)) {
+        return $shippingCharge = 0;
+    }
 
-                $storeAddress = "$store->address $store->state $store->city $store->country->name";
-                $distance = getDistance($storeAddress, $shippingAddress);
-                if ($distance > $shippingMethod->to) {
-                    $shippingCharge += $shippingMethod->price;
-                }
-            break;
+    if (in_array('Flat rate', $shippingMethods)) {
+        return $shippingCharge = $query->where('type', 'flat')->first()->price;
+    }
+
+    $shippingMethods = $query->where('type', 'Condition on purchase')->get();
+
+    if ($shippingMethods) {
+        foreach ($shippingMethods as $shippingMethod) {
+            if ($total <= $shippingMethod->to ?? 1000000 && $total >= $shippingMethod->from) {
+                $shippingCharge += $shippingMethod->price;
+            }
         }
     }
+
+    $shippingMethods = $query->where('type', 'Condition on distance')->get();
+
+    if ($shippingMethods) {
+        foreach ($shippingMethods as $shippingMethod) {
+            $companyAddress = settings('address') .' '. settings('state')  .' '. settings('city')  .' '. settings('country');
+            $distance = getDistance($companyAddress, $shippingAddress);
+
+            if ($distance <= $shippingMethod->to ?? 1000000 && $distance >= $shippingMethod->from) {
+                $shippingCharge += $shippingMethod->price;
+            }
+        }
+    }
+
+    // $store = Store::find($storeId);
+
+    // foreach ($shippingMethods as $shippingMethod) {
+    //     switch ($shippingMethod->type) {
+    //         case 'Free':
+    //             return 0;
+    //         break;
+    //         case 'Flat rate':
+    //             return $shippingMethod->price;
+    //         break;
+    //         case 'Condition on purchase':
+    //             if ($total < $shippingMethod->to) {
+    //                 $shippingCharge += $shippingMethod->price;
+    //             }
+    //         break;
+    //         case 'Condition on distance':
+    //             if (! $shippingAddress) {
+    //                 return 0;
+    //             }
+
+    //             $storeAddress = "$store->address $store->state $store->city $store->country->name";
+    //             $distance = getDistance($storeAddress, $shippingAddress);
+    //             if ($distance > $shippingMethod->to) {
+    //                 $shippingCharge += $shippingMethod->price;
+    //             }
+    //         break;
+    //     }
+    // }
 
     return $shippingCharge;
 }
@@ -240,7 +273,7 @@ function priceCalculator($cart, $shippingId = null)
         $shipping = shippingCalculator($subtotal, $storeId);
     }
 
-    $tax      = taxCalculator($subtotal, $storeId);
+    $tax      = taxCalculator($subtotal);
     $adjust   = 0;
 
     $total = $subtotal - $discount - $adjust + $shipping + $tax;

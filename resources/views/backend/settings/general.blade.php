@@ -150,17 +150,33 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="hot_number">Hot Number</label>
-                                    <input type="text" name="hot_number"
-                                        class="form-control @error('hot_number') is-invalid @enderror" id="hot_number"
-                                        aria-describedby="emailHelp" placeholder="Company hot_number"
-                                        value="{{ old('hot_number') ?? settings('hot_number') }}">
-                                    @error('hot_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="hot_number">Hot Number</label>
+                                        <input type="text" name="hot_number"
+                                            class="form-control @error('hot_number') is-invalid @enderror" id="hot_number"
+                                            aria-describedby="emailHelp" placeholder="Company hot_number"
+                                            value="{{ old('hot_number') ?? settings('hot_number') }}">
+                                        @error('hot_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="tax">Tax</label>
+                                        <input type="text" name="tax"
+                                            class="form-control @error('tax') is-invalid @enderror" id="tax"
+                                            aria-describedby="emailHelp" placeholder="Company tax"
+                                            value="{{ old('tax') ?? settings('tax') }}">
+                                        @error('tax')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
