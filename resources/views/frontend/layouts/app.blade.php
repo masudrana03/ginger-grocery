@@ -74,7 +74,7 @@
 
 <body onload="checkAddress()">
     @include('frontend.partials.nav')
-    <div id="app">
+    <div id="app" class="app">
         @yield('content')
     </div>
     <footer class="main">
