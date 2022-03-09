@@ -88,15 +88,14 @@
                                                         <h3 class="mb-0">Shipping Address</h3>
                                                         <div id="cre-icon">
                                                             <button class="btn add-billing-address p-1 "
-                                                            style="margin-left:40px; border-radius:35px; width:36px;"
-                                                            id="shipping" onclick="createModal('shipping')"><i
-                                                                class="fas fa-plus add-icon"></i></button>
+                                                                style="margin-left:40px; border-radius:35px; width:36px;"
+                                                                id="shipping" onclick="createModal('shipping')"><i
+                                                                    class="fas fa-plus add-icon"></i></button>
                                                         </div>
                                                     </div>
                                                     <div class="card-body p-4">
-
                                                         @forelse ($shippingAddresses ?? [] as $address)
-                                                            <p>{{ $address->name }}</p>
+                                                            <p class="address_name">{{ $address->name }}</p>
                                                             <p>{{ $address->country->phone_code }}{{ $address->phone }}
                                                             </p>
                                                             <p>{{ $address->email }}</p>
@@ -106,7 +105,8 @@
                                                             <p>{{ $address->state }}, {{ $address->city }},
                                                                 {{ $address->zip }} ,</p>
                                                             <p>{{ settings('country') }} .</p>
-                                                            <input type="hidden" id="hidden_id" value="{{ $address->id }}">
+                                                            <input type="hidden" id="hidden_id"
+                                                                value="{{ $address->id }}">
                                                             <div class="billing-button"
                                                                 style="margin-left: 60%; margin-top:-30px;">
                                                                 <button class="btn-success  edit-billing-address"
@@ -127,11 +127,10 @@
                                                             <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
-                                                            <div class="cre-btn-div">
-                                                                <button class="btn add-billing-address cre-btn" id="shipping"
+
+                                                            <button class="btn add-billing-address cre-btn" id="shipping"
                                                                 onclick="createModal('shipping')"
                                                                 style="color: white;">Create Shipping Address</button>
-                                                            </div>
                                                         @endforelse
 
                                                         {{-- modal --}}
@@ -898,12 +897,11 @@
 </script>
 
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    {{-- <script>
-        $(document).ready(function() {
-            var hid = $('#hidden_id').val();
-            if(hid != "string"){
-                $('#cre-icon').empty();
-            }
+<script>
+    $(document).ready(function() {
+        let address = $('.address_name').text();
+        if (address == "") {
+            $('#cre-icon').empty();
+        }
     });
-    </script> --}}
-
+</script>
