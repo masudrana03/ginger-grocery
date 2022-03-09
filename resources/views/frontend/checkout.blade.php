@@ -439,7 +439,7 @@
 
             </div>
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
-            
+
             </div>
         </div>
     </div>
@@ -458,31 +458,27 @@
         // onload function to check any address found or not
 
         function checkAddress() {
-            //let shipForm = document.getElementById('shipping-form');
+
             let noAdd = document.getElementById('noAddress');
             let check = document.getElementById('infoCheck');
+            let error = document.getElementsByName('error');
+            let radioBtn = document.getElementsByName('address1');
 
-            if (noAdd) {
-                //shipForm.style.display = "block";
+
+
+            if (noAdd || error) {
                 $('#shipping-form').show();
 
                 check.checked = true;
             } else {
+
                 check.checked = false;
                 $('#shipping-form').hide();
-
-                //shipForm.style.display = "none";
-
             }
         }
 
-
-
-
         function showDiv(check) {
 
-
-            //let shipForm = document.getElementById('shipping-form');
             let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
                 //shipForm.style.display = "block";
@@ -526,7 +522,6 @@
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
@@ -544,6 +539,7 @@
                     } else {
 
                         if (check.checked) {
+
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
@@ -584,7 +580,7 @@
                 var state = $('#state').val();
                 var city = $('#city').val();
 
-                if (address == ''  && city == '') {
+                if (address == '' && city == '') {
                     alert('Please enter address and city first');
                 }
 
@@ -611,5 +607,16 @@
                 }
             });
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.checkaddress').each(function() {
+                $(this).on('click', function() {
+                   $("#infoCheck").prop("checked", false);
+                    $('#shipping-form').hide();
+                });
+            });
+        });
     </script>
 @endpush

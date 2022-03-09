@@ -370,6 +370,11 @@
         var tax = "{{ $totalTax }}";
         var max = 10;
         var prev_val = parseInt($(this).prev().val());
+
+        if (prev_val == 10) {
+            tata.error('Reached Quantity 10 !!', 'Maximum product added in cart.');
+            return;
+        }
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
 
@@ -424,6 +429,11 @@
         var tax = "{{ $totalTax }}";
         var min = 1;
         var prev_val = $(this).next().val();
+
+        if (prev_val == 1) {
+            tata.error('Reached Quantity!!', 'Minimum product added in cart.');
+            return;
+        }
 
         var ctr = $(this).closest(".product-modifiers");
         var product_id = ctr.find(".product-id").val();
@@ -537,7 +547,7 @@
     }
 
     $(document).on('click', '.ajax-product-remove', function() {
-        
+
         var pro_div = $(this).closest(".product-modifiers");
         var pro_id = pro_div.find(".pro-id").val();
         var pd = pro_id;
@@ -563,5 +573,4 @@
         });
 
     });
-
 </script>
