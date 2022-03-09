@@ -6,6 +6,7 @@ use App\Models\Store;
 use App\Models\Social;
 use App\Models\Address;
 use App\Models\ShippingService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
@@ -113,17 +114,17 @@ function settings($key)
  * @return mixed
  */
 function updateEnv($key, $value)
-    {
-        $path = app()->environmentFilePath();
+{
+    $path = app()->environmentFilePath();
 
-        $escaped = preg_quote('='.env($key), '/');
+    $escaped = preg_quote('='.env($key), '/');
 
-        file_put_contents($path, preg_replace(
-            "/^{$key}{$escaped}/m",
-           "{$key}={$value}",
-           file_get_contents($path)
-        ));
-    }
+    file_put_contents($path, preg_replace(
+        "/^{$key}{$escaped}/m",
+        "{$key}={$value}",
+        file_get_contents($path)
+    ));
+}
 
 /**
  * Give me discount of given promo
@@ -160,52 +161,59 @@ function getDiscountAmount($total, $type, $discount)
 /**
  * Give me tax amount
  */
-function taxCalculator($total, $storeId)
+function taxCalculator($total)
 {
-    $taxRate = Store::find($storeId)->tax;
+    $taxRate = settings('tax');
 
     return round(($taxRate / 100) * $total, 2) ;
 }
 
 /**
- * Give me tax amount
+ * Give me shipping cost
  */
-function shippingCalculator($total, $storeId, $shippingAddress = null)
+function shippingCalculator($total, $shippingAddress = null)
 {
     $shippingCharge = 0;
 
-    $shippingMethods = ShippingService::active()->whereStoreId($storeId)->get();
+    $query = ShippingService::active();
 
-    if (empty($shippingMethods)) {
+    $shippingMethods = $query->pluck('type')->unique()->toArray();
+
+    if (! $shippingMethods) {
         return $shippingCharge;
     }
 
-    $store = Store::find($storeId);
+    if (in_array('Free', $shippingMethods)) {
+        return $shippingCharge = $query->where('type', 'Free')->first()->price;
+    }
 
-    foreach ($shippingMethods as $shippingMethod) {
-        switch ($shippingMethod->type) {
-            case 'Free':
-                return 0;
-            break;
-            case 'Flat rate':
-                return $shippingMethod->price;
-            break;
-            case 'Condition on purchase':
-                if ($total < $shippingMethod->to) {
+    if (in_array('Flat rate', $shippingMethods)) {
+        return $shippingCharge = $query->where('type', 'Flat rate')->first()->price;
+    }
+
+    $shippingMethods = $query->where('type', 'Condition on purchase')->get();
+
+    if (count($shippingMethods) > 0) {
+        foreach ($shippingMethods as $shippingMethod) {
+            if ($total <= $shippingMethod->to ?? 1000000 && $total >= $shippingMethod->from) {
+                $shippingCharge += $shippingMethod->price;
+            }
+        }
+    }
+
+    if (settings('map_api_key')) {
+        $query = ShippingService::active();
+        $shippingMethods = $query->where('type', 'Condition on distance')->get();
+
+        if (count($shippingMethods) > 0) {
+            foreach ($shippingMethods as $shippingMethod) {
+                $companyAddress = settings('company_address') .' '. settings('state')  .' '. settings('city')  .' '. settings('country');
+                $distance = getDistance($companyAddress, $shippingAddress);
+
+                if ($distance <= $shippingMethod->to ?? 1000000 && $distance >= $shippingMethod->from) {
                     $shippingCharge += $shippingMethod->price;
                 }
-            break;
-            case 'Condition on distance':
-                if (! $shippingAddress) {
-                    return 0;
-                }
-
-                $storeAddress = "$store->address $store->state $store->city $store->country->name";
-                $distance = getDistance($storeAddress, $shippingAddress);
-                if ($distance > $shippingMethod->to) {
-                    $shippingCharge += $shippingMethod->price;
-                }
-            break;
+            }
         }
     }
 
@@ -219,7 +227,6 @@ function priceCalculator($cart, $shippingId = null)
 {
     $shippingAddress = Address::find($shippingId);
     $subtotal = 0;
-    $storeId = '';
     $discount = 0;
     $shipping = 0;
 
@@ -230,17 +237,14 @@ function priceCalculator($cart, $shippingId = null)
 
     foreach ($cart as $item) {
         $subtotal += $item->price * $item->quantity;
-        $storeId = $item->store_id;
     }
 
     if ($shippingAddress) {
         $address = "$shippingAddress->address $shippingAddress->state $shippingAddress->city $shippingAddress->country";
-        $shipping = shippingCalculator($subtotal, $storeId, $address);
-    } else {
-        $shipping = shippingCalculator($subtotal, $storeId);
+        $shipping = shippingCalculator($subtotal, $address);
     }
 
-    $tax      = taxCalculator($subtotal, $storeId);
+    $tax      = taxCalculator($subtotal);
     $adjust   = 0;
 
     $total = $subtotal - $discount - $adjust + $shipping + $tax;
@@ -292,7 +296,8 @@ function formatCoordiantes($coordinates)
 function getDistance($addressFrom, $addressTo)
 {
     // Google API key
-    $apiKey = 'AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries';
+    $apiKey = settings('map_api_key');
+    // $apiKey = 'AIzaSyDzdRftDdoy-kMMgxnJTWIrnfOnkHLiJdA&libraries';
 
     // Change address format
     $formattedAddrFrom    = str_replace(' ', '+', $addressFrom);

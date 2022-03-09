@@ -32,7 +32,7 @@ class CreateStoresTable extends Migration
             $table->string('twitter_link')->nullable();
             $table->string('youtube_link')->nullable();
             $table->string('pinterest_link')->nullable();
-            $table->string('tax')->default(0);
+            // $table->string('tax')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

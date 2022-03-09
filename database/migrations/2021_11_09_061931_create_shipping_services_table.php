@@ -15,7 +15,7 @@ class CreateShippingServicesTable extends Migration
     {
         Schema::create('shipping_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id');
+            // $table->foreignId('store_id');
             $table->string('title');
             $table->double('price')->default(0);
             $table->string('type')->nullable();

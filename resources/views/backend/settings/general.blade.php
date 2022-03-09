@@ -150,17 +150,33 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="hot_number">Hot Number</label>
-                                    <input type="text" name="hot_number"
-                                        class="form-control @error('hot_number') is-invalid @enderror" id="hot_number"
-                                        aria-describedby="emailHelp" placeholder="Company hot_number"
-                                        value="{{ old('hot_number') ?? settings('hot_number') }}">
-                                    @error('hot_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="hot_number">Hot Number</label>
+                                        <input type="text" name="hot_number"
+                                            class="form-control @error('hot_number') is-invalid @enderror" id="hot_number"
+                                            aria-describedby="emailHelp" placeholder="Company hot_number"
+                                            value="{{ old('hot_number') ?? settings('hot_number') }}">
+                                        @error('hot_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="tax">Tax</label>
+                                        <input type="text" name="tax"
+                                            class="form-control @error('tax') is-invalid @enderror" id="tax"
+                                            aria-describedby="emailHelp" placeholder="Company tax"
+                                            value="{{ old('tax') ?? settings('tax') }}">
+                                        @error('tax')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -169,6 +185,18 @@
                                         aria-describedby="emailHelp" placeholder="Company Email"
                                         value="{{ old('email') ?? settings('email') }}">
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="map_api_key">Google Map Api Key</label>
+                                    <input type="text" name="map_api_key"
+                                        class="form-control @error('map_api_key') is-invalid @enderror" id="map_api_key"
+                                        aria-describedby="map_api_keyHelp" placeholder="Google map api key"
+                                        value="{{ old('map_api_key') ?? settings('map_api_key') }}">
+                                    @error('map_api_key')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

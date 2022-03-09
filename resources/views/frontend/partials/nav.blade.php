@@ -516,7 +516,7 @@
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
                                         </a>
                                         <a href="{{ route('user.dashboard') }}"><span
-                                                class="lable ml-0">Account</span></a>
+                                                class="lable ml-0">&nbsp;{{ auth()->user()->name }}</span></a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                             <ul>
                                                 <li>
