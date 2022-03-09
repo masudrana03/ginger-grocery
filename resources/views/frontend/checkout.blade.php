@@ -320,12 +320,7 @@
             {{-- Checkout new page added --}}
 
 
-<<<<<<< HEAD
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="oldCheckoutProducts">
-
-=======
-            <div class="col-lg-5 mb-100" style="margin-top:7%;">
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s)sss:</p>
                 </div>
@@ -389,28 +384,16 @@
                             <hr>
                             <div class="row checkout-total ">
                                 <div class="col-6 calculate-total">
-<<<<<<< HEAD
                                     <p class="">Total:</p>
                                     {{-- <p class="">Shipping Fee:</p> --}}
                                     {{-- <p class="">Tax:</p> --}}
                                     {{-- <h5 class="">Total:</h5> --}}
-=======
-                                    <p class="">Subtotal:</p>
-                                    <p class="">Shipping Fee:</p>
-                                    <p class="">Tax:</p>
-                                    <h5 class="">Total:</h5>
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                                 </div>
 
                                 <div class="col-6 calculate">
                                     <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
-<<<<<<< HEAD
                                     {{-- <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
                                     </p> --}}
-=======
-                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
-                                    </p>
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
                                     {{-- <p class="total-amount"> {{ $currency }}{{ $tax }} </p> --}}
                                     {{-- <h5 class="total-amount"> {{ $currency }}{{ $subtotal }} --}}
@@ -449,14 +432,14 @@
                         <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
-                        <h5 class="total-amount">{{ $currency }}{{ $shipping +  $tax + $grandSubtotal }}
+                        <h5 class="total-amount">{{ $currency }}{{ $shipping + $tax + $grandSubtotal }}
                         </h5>
                     </div>
                 </div>
 
             </div>
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
-                
+
             </div>
         </div>
     </div>
@@ -577,35 +560,22 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            alert('starting');
-            $('#shipping-form').hide();
+            //alert('starting');
+            //$('#shipping-form').hide();
 
-            var sessionErrors = '{{ session()->has('errors') }}';
+            // var sessionErrors = '{{ session()->has('errors') }}';
 
-            if (sessionErrors) {
-                alert(sessionErrors)
-                $('#shipping-form').show();
-            }
+            // if (sessionErrors) {
+            //     alert(sessionErrors)
+            //     $('#shipping-form').show();
+            // }
 
             $('.checkaddress').each(function() {
                 var $this = $(this);
                 $this.on('click', function() {
-<<<<<<< HEAD
                     var addressId = $this.val();
-                    alert(addressId);
+                    //alert(addressId);
                     fireAjax(addressId, 1)
-=======
-
-                    //var addName = $('.addName');
-                    // var address = $this.children(".addName").html();
-
-                    var address_id = $this.val();
-
-                    ajaxLoadingStoreId(address_id);
-
-
-
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 });
             });
 
@@ -613,38 +583,31 @@
                 var address = $('#address').val();
                 var state = $('#state').val();
                 var city = $('#city').val();
+
+                if (address == ''  && city == '') {
+                    alert('Please enter address and city first');
+                }
+
                 addressInfo = address + ' ' + state + ' ' + city;
-                alert(addressInfo);
+                //alert(addressInfo);
                 fireAjax(addressInfo)
             });
         });
 
-<<<<<<< HEAD
         function fireAjax(address, id = 0) {
-=======
-        function ajaxLoadingStoreId(address_id) {
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
             $.ajax({
                 method: 'GET',
                 url: "{!! route('ajax.shipping.calculation') !!}",
                 type: 'get',
                 data: {
-<<<<<<< HEAD
                     address: address,
                     id: id,
                 },
                 success: function(response) {
-                    console.log(response);
-                    $('#oldCheckoutProducts').hide();
+                    // console.log(response);
+                    $('#oldCheckoutProducts').empty();
                     $('#newCheckoutProducts').html(response);
                     //$('#app').html(response);
-=======
-                    address_id: address_id,
-                },
-                success: function(response) {
-                    //console.log(response);
-                    $('#app').html(response);
->>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 }
             });
         }
