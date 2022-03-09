@@ -461,12 +461,17 @@
 
             let noAdd = document.getElementById('noAddress');
             let check = document.getElementById('infoCheck');
+            let error = document.getElementsByName('error');
+            let radioBtn = document.getElementsByName('address1');
 
-            if (noAdd) {
+
+
+            if (noAdd || error) {
                 $('#shipping-form').show();
 
                 check.checked = true;
             } else {
+
                 check.checked = false;
                 $('#shipping-form').hide();
             }
@@ -517,7 +522,6 @@
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
@@ -535,6 +539,7 @@
                     } else {
 
                         if (check.checked) {
+
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
@@ -602,5 +607,16 @@
                 }
             });
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.checkaddress').each(function() {
+                $(this).on('click', function() {
+                   $("#infoCheck").prop("checked", false);
+                    $('#shipping-form').hide();
+                });
+            });
+        });
     </script>
 @endpush
