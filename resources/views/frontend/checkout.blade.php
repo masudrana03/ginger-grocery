@@ -439,7 +439,7 @@
 
             </div>
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
-
+            
             </div>
         </div>
     </div>
@@ -605,7 +605,7 @@
                 },
                 success: function(response) {
                     // console.log(response);
-                    $('#oldCheckoutProducts').empty();
+                    $('#oldCheckoutProducts').hide();
                     $('#newCheckoutProducts').html(response);
                     //$('#app').html(response);
                 }
