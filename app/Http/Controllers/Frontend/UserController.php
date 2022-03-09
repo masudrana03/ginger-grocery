@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Address;
 use App\Models\Country;
+use App\Models\OrderTrack;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -150,12 +152,48 @@ class UserController extends Controller
     }
 
 
-    public function getTrackOrders()
+    public function getTrackOrders(Request $request)
     {
-        $user  = auth()->user();
-        $orders = Order::with('status')->where('user_id', $user->id)->get();
+        if ( $request->has('invoice_id')) {
+            // return $request;
+            $request->validate([
+            'invoice_id' => 'required',
+            'email'    => 'required',
+        ]);
+        //  return "test done";
+            $order = '';
+            $email  = auth()->user()->email ;
+            if ( $email == $request->email ){
 
-        return view('frontend.users.track-order', compact('user', 'orders'));
+                $order = Order::where('invoice_id', $request->invoice_id)->first();
+
+            }
+
+            if ( $order == ''){
+                return '0';
+            }
+
+            $orderStatusIds = OrderTrack::where('order_id', $order->id)->pluck('order_status_id')->unique()->toArray();
+            $currentStatus = $order->status->name;
+
+            $orderStatus = OrderStatus::find($orderStatusIds)->pluck('name')->toArray();
+
+
+
+
+            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus'));
+            // return [$orderStatus, $currentStatus];
+
+
+
+            // $orderStatusId = OrderTrack::where('order_id', $orderId);
+
+
+        }
+        // $user  = auth()->user();
+        // $orders = Order::with('status')->where('user_id', $user->id)->get();
+
+        return view('frontend.users.track-order');
     }
 
     public function getProfile()

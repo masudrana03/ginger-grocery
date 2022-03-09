@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\OrderDetails;
+use App\Models\OrderTrack;
 use App\Models\OrderStatus;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -217,6 +218,11 @@ class OrderController extends Controller
     public function updateStatus(Order $order, OrderStatus $orderStatus)
     {
         $order->update(['order_status_id' => $orderStatus->id]);
+
+        $orderTracking = new OrderTrack();
+        $orderTracking->order_id        = $order->id;
+        $orderTracking->order_status_id = $orderStatus->id;
+        $orderTracking->save();
 
         toast('Status successfully updated', 'success');
 

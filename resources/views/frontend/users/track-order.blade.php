@@ -3,6 +3,27 @@
 
 
 @section('content')
+    <style>
+        @import url({{ asset('assets/frontend/css/track-oder.css') }});
+
+        .alert-danger {
+            width: 90%;
+            border-radius: 10px;
+            border-color: #ffd170 !important;
+            background-color: #fff1d3;
+            text-align: center;
+            font-size: 20px;
+            color: #7c7c7c;
+            position: relative;
+            padding: 1rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            font-weight: 700;
+        }
+
+    </style>
+
+
     <main class="main pages">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -50,7 +71,8 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                                                        document.getElementById('logout-form').submit();"><i class=" fi-rs-sign-out mr-10"></i>Logout</a>
+                                                                                        document.getElementById('logout-form').submit();"><i
+                                                    class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -68,25 +90,42 @@
                                                 <h3 class="mb-20">Order tracking</h3>
                                                 <p>Tracking your order status</p>
                                             </div>
-                                            <form method="GET" action="https://nest.botble.com/orders/tracking">
-                                                <div class="form-group"><label for="txt-order-id">Order
-                                                        ID<sup>*</sup></label> <input name="order_id" id="txt-order-id"
-                                                        type="text" value="" placeholder="Order ID" class="form-control">
+                                            <form>
+                                                @csrf
+                                                <div class="form-group"><label for="txt-invoice-id">Invoice
+                                                        ID<sup>*</sup></label>
+                                                    <input name="invoice_id" id="txt-invoice-id" type="text"
+                                                        value="{{ old('invoice_id') }}" placeholder="Invoice ID"
+                                                        class="form-control @error('invoice_id') is-invalid @enderror">
+                                                    @error('invoice_id')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group"><label for="txt-email">Email
                                                         Address<sup>*</sup></label> <input name="email" id="txt-email"
-                                                        type="email" value="" placeholder="Your Email"
-                                                        class="form-control"></div>
-                                                <button type="submit" class="btn btn-fill-out submit font-weight-bold"
-                                                    name="submit" value="Submit">Find</button>
+                                                        type="email" value="{{ old('email') }}" placeholder="Your Email"
+                                                        class="form-control @error('email') is-invalid @enderror">
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <button id="tracking" type="submit"
+                                                    class="btn btn-fill-out submit font-weight-bold">Find</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    {{-- <div class="login_wrap widget-taber-content p-30 background-white border-radius-10"> --}}
-                                        <div class="content" style="width:100%; border-radius: 15px;">
+                                <div id="trackOrderNew"> </div>
+                                <div id="trackOrderAlertNew" style="padding-left: 9%;"></div>
+
+                                {{-- <div class="col-md-12"> --}}
+                                {{-- <div class="login_wrap widget-taber-content p-30 background-white border-radius-10"> --}}
+                                {{-- <div class="content" style="width:100%; border-radius: 15px;">
                                             <div class="content1" style="background-color: #3bb77e; padding: 13px; border-radius: 10px;">
                                               <h4 style="font-size: 28px; padding: 10px; color: #fff; text-transform: uppercase;">Order Tracking : Order No</h4>
                                             </div>
@@ -123,31 +162,31 @@
                                                     <img src="{{ asset('assets/frontend/imgs/theme/quality.png') }}" alt="quality check">
                                                   </div>
                                                   <span class="line"></span>
-                                                  <p>Quality Check</p>
+                                                  <p>On The Way</p>
                                                 </div>
                                                 <div class="dispatch">
                                                   <div class="imgcircle">
                                                     <img src="{{ asset('assets/frontend/imgs/theme/dispatch.png') }}" alt="dispatch product">
-                                                  </div>
+                                                  </div> --}}
 
-                                                  {{-- <span class="line"></span> --}}
+                                {{-- <span class="line"></span> --}}
 
-                                                  <p>Dispatched Item</p>
-                                                </div>
+                                {{-- <p>Delivered</p>
+                                                </div> --}}
 
-                                                {{-- <div class="delivery">
+                                {{-- <div class="delivery">
                                                   <div class="imgcircle">
                                                     <img src="{{ asset('assets/frontend/imgs/theme/delivery.png') }}" alt="delivery">
                                                   </div>
                                                   <p>Product Delivered</p>
                                                 </div> --}}
 
-                                                <div class="clear"></div>
+                                {{-- <div class="clear"></div>
                                               </div>
                                             </div>
-                                          </div>
-                                    {{-- </div> --}}
-                                </div>
+                                          </div> --}}
+                                {{-- </div> --}}
+                                {{-- </div> --}}
 
 
 
@@ -197,6 +236,38 @@
             </div>
         </div>
     </main>
+
+    <script>
+        $(document).ready(function() {
+            // alert('hello');
+            // method="GET" action="{{ route('user.track.orders') }}"
+            $("#tracking").click(function(event) {
+                event.preventDefault();
+                var invoiceId = $('#txt-invoice-id').val();
+                var email = $('#txt-email').val();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('user.track.orders') }}",
+                    type: 'get',
+                    data: {
+                        invoice_id: invoiceId,
+                        email: email,
+                    },
+                    success: function(response) {
+                        if (response == '0') {
+                            $('#trackOrderAlertNew').html(
+                                '<div class="alert alert-danger">No Order Found</div>');
+                        } else {
+                            $('#trackOrderNew').html(response);
+                        }
+                        console.log(response);
+                        //$('#trackOrderNew').html(response);
+                    }
+                });
+            });
+
+        });
+    </script>
 
 
 @endsection
