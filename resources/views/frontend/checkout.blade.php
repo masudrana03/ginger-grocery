@@ -439,7 +439,7 @@
 
             </div>
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
-            
+
             </div>
         </div>
     </div>
@@ -458,31 +458,22 @@
         // onload function to check any address found or not
 
         function checkAddress() {
-            //let shipForm = document.getElementById('shipping-form');
+
             let noAdd = document.getElementById('noAddress');
             let check = document.getElementById('infoCheck');
 
             if (noAdd) {
-                //shipForm.style.display = "block";
                 $('#shipping-form').show();
 
                 check.checked = true;
             } else {
                 check.checked = false;
                 $('#shipping-form').hide();
-
-                //shipForm.style.display = "none";
-
             }
         }
 
-
-
-
         function showDiv(check) {
 
-
-            //let shipForm = document.getElementById('shipping-form');
             let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
                 //shipForm.style.display = "block";
@@ -584,7 +575,7 @@
                 var state = $('#state').val();
                 var city = $('#city').val();
 
-                if (address == ''  && city == '') {
+                if (address == '' && city == '') {
                     alert('Please enter address and city first');
                 }
 
