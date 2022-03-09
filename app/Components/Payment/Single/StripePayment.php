@@ -157,6 +157,7 @@ class StripePayment implements PayableInterface
             view('frontend.order-placed');
         }
 
-        return view('frontend.order-placed');
+        //return view('frontend.order-placed');
+        return redirect()->route('checkout')->with('success', 'Order Placed Successfully!');
     }
 }
