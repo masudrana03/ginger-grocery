@@ -319,7 +319,7 @@
 
             {{-- Checkout new page added --}}
 
-
+            
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="oldCheckoutProducts">
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s):</p>
