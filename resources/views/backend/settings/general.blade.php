@@ -190,6 +190,18 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="map_api_key">Google Map Api Key</label>
+                                    <input type="text" name="map_api_key"
+                                        class="form-control @error('map_api_key') is-invalid @enderror" id="map_api_key"
+                                        aria-describedby="map_api_keyHelp" placeholder="Google map api key"
+                                        value="{{ old('map_api_key') ?? settings('map_api_key') }}">
+                                    @error('map_api_key')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">

@@ -204,7 +204,7 @@ class CheckoutController extends Controller
 
     public function ajaxShippingCalculation(Request $request)
     {
-        if (is_int($request->address)) {
+        if ($request->id == '1') {
             $address = Address::find($request->address);
             $shippingAddress = $address->address . ' ' . $address->state . ' ' . $address->city . ', ' . settings('country');
         } else {

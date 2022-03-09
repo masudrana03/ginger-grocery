@@ -1,5 +1,5 @@
 <div class=" p-2 bg-light">
-    <p class="font-weight-bold mb-0">Product(s)sss:</p>
+    <p class="font-weight-bold mb-0">Product(s):</p>
 </div>
 @php
 $grandSubtotal = 0;
@@ -95,15 +95,15 @@ $currency = settings('currency');
     </div>
 
     @php
-        $shipping = shippingCalculator($subtotal, $shippingAddress) ?? 0;
+        $shipping = shippingCalculator($grandSubtotal, $shippingAddress);
         $tax = taxCalculator($grandSubtotal) ?? 0;
     @endphp
 
     <div class="col-6 calculate">
         <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
-        <p class="total-amount"> {{ $currency }} {{ $shipping }}
+        <p class="total-amount"> {{ $currency }}{{ $shipping }}
         </p>
-        <p class="total-amount"> {{ $currency }}{{ taxCalculator($grandSubtotal) ?? 0 }} </p>
+        <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
         <h5 class="total-amount">{{ $currency }}{{ $shipping + $tax + $grandSubtotal }}
         </h5>
     </div>

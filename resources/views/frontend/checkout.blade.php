@@ -438,7 +438,7 @@
 
             </div>
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
-                <h1>Coming</h1>
+                
             </div>
         </div>
     </div>
@@ -575,7 +575,7 @@
                 $this.on('click', function() {
                     var addressId = $this.val();
                     alert(addressId);
-                    fireAjax(addressId)
+                    fireAjax(addressId, 1)
                 });
             });
 
@@ -589,13 +589,14 @@
             });
         });
 
-        function fireAjax(address) {
+        function fireAjax(address, id = 0) {
             $.ajax({
                 method: 'GET',
                 url: "{!! route('ajax.shipping.calculation') !!}",
                 type: 'get',
                 data: {
                     address: address,
+                    id: id,
                 },
                 success: function(response) {
                     console.log(response);

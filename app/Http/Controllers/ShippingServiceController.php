@@ -84,7 +84,7 @@ class ShippingServiceController extends Controller
                 $nestedData['created_at'] = $shippingService->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
-                    &emsp;<a href='#' onclick='deleteBrand({$shippingService->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    &emsp;<a href='#' onclick='deleteShipping({$shippingService->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$shippingService->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>
                     <input type='hidden' name='_method' value='DELETE'>
@@ -125,6 +125,14 @@ class ShippingServiceController extends Controller
         //$requestData = $request->all();
 
         //$requestData['store_id'] = auth()->user()->store_id;
+
+        if ($request->type == 'Condition on distance') {
+            if (! settings('map_api_key')) {
+                alert()->error('Failed!','Please set your google map api from settings.');
+
+                return redirect()->route('admin.shipping_services.index');
+            }
+        }
 
         ShippingService::create($request->all());
 
