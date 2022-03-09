@@ -114,6 +114,38 @@
                                         </span>
                                     @enderror
                                 </div>
+
+
+                                {{-- Discount Price type --}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Type</label>
+                                    <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
+                                            <option {{$product->discount_type =="1" ? 'selected' : '' }}value="1">Percentage(%)</option>
+                                            <option {{$product->discount_type =="2" ? 'selected' : '' }} value="2">Fixed Amount</option>
+                                    </select>
+                                    @error('types')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                {{-- Discount Price amount --}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Price</label>
+                                    <input type="number" name="discount_amount"
+                                        class="form-control @error('price') is-invalid @enderror" id="price"
+                                        aria-describedby="emailHelp" placeholder=" Discount Price"
+                                        value="{{ old('discount_price') ?? $product->discount_amount }}">
+                                    @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="calories_per_serving">Calories Per Serving</label>
                                     <input type="number" name="calories_per_serving"
@@ -174,7 +206,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Type</label>
-                                    <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror"
+                                    <select name="types[]"
+                                        class="single2 form-control @error('types') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($types as $type)
                                             <option
@@ -237,38 +270,80 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <label>Product Image</label>
-                                <div id="inputFormRow">
-                                    <div class="form-group row">
-                                        <div class="col-sm-12">
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Featured Product Image</label>
+                                            <small><strong> ( image size must be upto 1100px X 1100px )</strong></small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 100%; border-radius: 5px;">
+                                                    {{ $errors->first() }}</h6>
+                                            @endif
                                             <div class="card shadow-sm w-100">
                                                 <div class="card-header d-flex justify-content-start">
-                                                    <h4>Upload Product Images</h4>
-                                                    <input type="file"  id="image" name="files[]" accept="image/*"   multiple
-                                                        class="d-none @error('files') is-invalid @enderror"" onchange="image_select()">
+                                                    <h4>Upload Featured Product Images</h4>
+
+                                                    <input type="file" name="featured_image" id="featured_image"
+                                                        accept="image/*" class="d-none " onchange="showImage(this)">
                                                     <button class="btn btn-sm btn-primary ml-4" type="button"
-                                                        onclick="document.getElementById('image').click()">Select
-                                                        Images</button>
-
-                                                    {{-- <input type="file" name="images[]" id="images"
-                                                        placeholder="Choose images" multiple> --}}
+                                                        onclick="document.getElementById('featured_image').click()">Select
+                                                        Image</button>
                                                 </div>
-                                                <div class="card-body d-flex flex-wrap justify-content-start images-preview-div"
-                                                    id="container">
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="banner-image"
+                                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                                        id="thumbnil" style="width: 90%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                    @foreach ($product->images as $productImg)
-                                                    <div class="image_container d-flex justify-content-center position-relative">
-                                                        <img src="{{ asset('assets/img/uploads/products/' .$productImg->image) }}" alt="Image">
-                                                        
-                                                        <span class="position-absolute" onclick="delete_image(this)">&times;</span>
+
+                                    <div class="col-md-8">
+                                        <label>Product Image</label>
+                                        <div id="inputFormRow">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <div class="card shadow-sm w-100">
+                                                        <div class="card-header d-flex justify-content-start">
+                                                            <h4>Upload Product Images</h4>
+                                                            <input type="file" id="image" name="files[]" accept="image/*"
+                                                                multiple
+                                                                class="d-none @error('files') is-invalid @enderror"" onchange="
+                                                                image_select()">
+                                                            <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                                onclick="document.getElementById('image').click()">Select
+                                                                Images</button>
+
+                                                            {{-- <input type="file" name="images[]" id="images"
+                                                        placeholder="Choose images" multiple> --}}
+                                                        </div>
+                                                        <div class="card-body d-flex flex-wrap justify-content-start images-preview-div"
+                                                            id="container">
+
+                                                            @foreach ($product->images as $productImg)
+                                                                <div
+                                                                    class="image_container d-flex justify-content-center position-relative">
+                                                                    <img src="{{ asset('assets/img/uploads/products/' . $productImg->image) }}"
+                                                                        alt="Image">
+
+                                                                    <span class="position-absolute"
+                                                                        onclick="delete_image(this)">&times;</span>
+                                                                </div>
+                                                            @endforeach
+                                                            <!-- Image will be show here-->
+                                                        </div>
                                                     </div>
-                                                    @endforeach
-                                                    <!-- Image will be show here-->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>
@@ -329,7 +404,7 @@
             });
         });
 
-      
+
         var images = [];
 
         function image_select() {
@@ -341,7 +416,7 @@
                         "url": URL.createObjectURL(image[i]),
                         "file": image[i],
                     })
-                  //setValueToImageNameAttr(image[i].name);
+                    //setValueToImageNameAttr(image[i].name);
                 } else {
                     alert(image[i].name + " is already added to the list");
                 }
@@ -365,7 +440,7 @@
             return image;
         }
 
-       
+
 
         function delete_image(e) {
             images.splice(e, 1);
@@ -383,6 +458,29 @@
                 }
             }
             return image;
+        }
+    </script>
+
+    <script type="text/javascript">
+        // image upload js code
+        function showImage(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById('thumbnil');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 @endpush

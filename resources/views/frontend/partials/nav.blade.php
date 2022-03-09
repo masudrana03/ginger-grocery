@@ -194,15 +194,15 @@
                                 @if (auth()->user())
                                     <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                     <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                    <li><a href="{{ route('user.track.orders') }}">My Orders</a></li>
                                 @else
                                     <li><a href="{{ route('login') }}">My Account</a></li>
                                     <li><a href="{{ route('login') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                    <li><a href="{{ route('login') }}">My Orders</a></li>
                                 @endif
                                 {{-- <li><a href="#">My Account</a></li>
                                 <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Order Tracking</a></li> --}}
+                                <li><a href="#">My Orders</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -281,10 +281,10 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form method="GET" action="{{ route('search') }}">
+                            <form method="GET" action="#">
                                 <select class="select-active" name="category_id">
                                     <option>All Categories</option>
-                                    @forelse ($categories as $category)
+                                    @forelse ($loadCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option> )
                                     @empty
                                     @endforelse
@@ -292,27 +292,34 @@
                                 <input name="search" id="search-input" type="text" placeholder="Search for items..." />
                             </form>
                         </div>
+                        <style>
+                           .select2-selection__rendered {
+                               padding-left: 0px!important;
+                            }
+                        </style>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                {{-- <div class="search-location">
-                                    <form action="{{ route('index') }}" id="zoneForm" method="get">
-                                        <select name="zone_id" class="select-active" onchange="getval(this);">
+                                <div class="search-location">
+                                    <form action="#" id="zoneForm" method="get">
+                                        <select name="zone_id" class="select-active zone-id">
                                             <option>Your Location</option>
 
                                             @foreach ($zones as $zone)
-                                                <option value="{{ $zone->id }}">{{ $zone->name }}
+                                                <option class="zoneId" value="{{ $zone->id }}">{{ $zone->name }}
                                                 </option>
                                             @endforeach
 
                                             {{-- <option> {{$zones->name}}</option> --}}
 
-                                        {{-- </select>
+                                         </select>
                                     </form>
-                                </div> --}}
+                                </div>
+
                                 @php
                                     $productIds = cache('compareProducts');
                                     $compareProduct = App\Models\Product::find($productIds) ?? [];
                                 @endphp
+
                                 <div class="header-action-icon-2" id="compareProductOld">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
@@ -326,9 +333,9 @@
                                                 <li>
                                                     <div class="shopping-cart-img">
 
-                                                        @if (count($product->images) > 0)
+                                                        @if ( $product->featured_image )
 
-                                                            <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                            <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image ) }}" alt="" />
 
                                                         @else
 
@@ -339,7 +346,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4>{{ settings('currency') }}{{ $product->price }}
                                                         </h4>
@@ -369,65 +376,68 @@
                                 <div id="compareProductNew">
 
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a href="#">
-                                        <img class="svgInject" alt="Nest"
-                                            src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
-                                        <span
-                                            class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
-                                                ? auth()->user()->savedProducts->count()
-                                                : 0 }}</span>
-                                    </a>
-                                    <a href="{{ route('wishlist.index') }}"><span
-                                            class="lable">Wishlist</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $wishlistProduct->id) }}">
-                                                            @if (count($wishlistProduct->images) > 0)
+                                <div id="wishlistProductOld">
 
-                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $wishlistProduct->images()->first()->image) }}" alt="" />
+                                    <div class="header-action-icon-2">
+                                        <a href="#">
+                                            <img class="svgInject" alt="Nest"
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
+                                            <span
+                                                class="pro-count blue">{{ auth()->user() && auth()->user()->savedProducts
+                                                    ? auth()->user()->savedProducts->count()
+                                                    : 0 }}</span>
+                                        </a>
+                                        <a href="{{ route('wishlist.index') }}"><span
+                                                class="lable">Wishlist</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                            <ul>
+                                                @forelse( auth()->user()->savedProducts ?? [] as $wishlistProduct )
+                                                    <li>
+                                                        <div class="shopping-cart-img">
+                                                            <a href="{{ route('products', $wishlistProduct->id) }}">
+                                                                @if ( $wishlistProduct->featured_image )
 
-                                                            @else
+                                                                    <img src="{{ asset('assets/img/uploads/products/featured/' . $wishlistProduct->featured_image ) }}" alt="" />
 
-                                                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
+                                                                @else
 
-                                                            @endif
-                                                        </a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a
-                                                                href="{{ route('products', $wishlistProduct->id) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
-                                                        </h4>
-                                                        <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
-                                                        </h4>
-                                                    </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a
-                                                            href="{{ route('wishlist.remove', $wishlistProduct->id) }}"><i
-                                                                class="fi-rs-cross-small"></i></a>
-                                                    </div>
-                                                </li>
-                                            @empty
-                                                <li>
+                                                                    <img alt="Nest" src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" />
 
-                                                    <div class="shopping-cart-title">
-                                                        <h4>No Items</h4>
-                                                    </div>
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="shopping-cart-title">
+                                                            <h4><a
+                                                                    href="{{ route('products', $wishlistProduct->slug) }}">{{ ucwords(strtolower(Str::limit($wishlistProduct->name, 18 ))) }}</a>
+                                                            </h4>
+                                                            <h4>{{ settings('currency') }} {{ $wishlistProduct->price }}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="shopping-cart-delete">
+                                                            <a class="wishlist-btn-delete" href="#" data-id="{{ $wishlistProduct->id }}"><i class="fi-rs-cross-small"></i></a>
+                                                        </div>
+                                                    </li>
+                                                @empty
+                                                    <li>
 
-                                                </li>
-                                            @endforelse
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-button">
-                                                <a href="{{ route('wishlist.index') }}" class="outline">View
-                                                    Wishlist</a>
+                                                        <div class="shopping-cart-title">
+                                                            <h4>No Items</h4>
+                                                        </div>
+
+                                                    </li>
+                                                @endforelse
+                                            </ul>
+                                            <div class="shopping-cart-footer">
+                                                <div class="shopping-cart-button">
+                                                    <a href="{{ route('wishlist.index') }}" class="outline">View
+                                                        Wishlist</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                <div id="wishlistProductNew"></div>
                                 <div class="header-action-icon-2" id="old-cart">
                                     <a class="mini-cart-icon" href="{{route('cart')}}">
                                         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -443,11 +453,11 @@
                                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                                 <li>
                                                     <div class="shopping-cart-img">
-                                                        <a href="{{ route('products', $product->id) }}">
+                                                        <a href="{{ route('products', $product->slug) }}">
 
-                                                            @if (count($product->images) > 0)
+                                                            @if ( $product->featured_image )
 
-                                                                <img src="{{ asset( 'assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                                                <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image ) }}" alt="" />
 
                                                             @else
 
@@ -459,7 +469,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a
-                                                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
+                                                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18 ))) }}</a>
                                                         </h4>
                                                         <h4><span>{{ $product->quantity }} ×
                                                             </span>{{ settings('currency') }}{{ $product->price }}
@@ -515,7 +525,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.track.orders') }}"><i
-                                                            class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                            class="fi fi-rs-location-alt mr-10"></i>My Orders</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.orders') }}"><i
@@ -583,7 +593,7 @@
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
-                                        @forelse ( $categories->take(5) as $category )
+                                        @forelse ( $loadCategories->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->slug) }}">
 
@@ -633,7 +643,7 @@
                                         </li> --}}
                                     </ul>
                                     <ul>
-                                        @forelse ( $categories->skip(5)->take(5) as $category )
+                                        @forelse ( $loadCategories->skip(5)->take(5) as $category )
                                             <li>
                                                 <a href="{{ route('categories', $category->slug) }}">
 
@@ -661,7 +671,7 @@
                                 <div class="more_slide_open" style="display: none" id="more-category">
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul class="lineup">
-                                            @forelse ( $categories->skip(10)->take(3) as $category )
+                                            @forelse ( $loadCategories->skip(10)->take(3) as $category )
                                             <li class="linelist">
                                                 <a href="{{ route('categories', $category->slug) }}" style="line-height: 1.1;">
 
@@ -701,7 +711,7 @@
                                             </li> --}}
                                         </ul>
                                         <ul class="lineup">
-                                            @forelse ( $categories->skip(13)->take(3) as $category )
+                                            @forelse ( $loadCategories->skip(13)->take(3) as $category )
                                             <li class="linelist2">
                                                 <a href="{{ route('categories', $category->slug) }}"  style="line-height: 1.1;">
 
@@ -727,9 +737,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="more_categories"><span class="icon"></span> <span
-                                        class="heading-sm-1">Show more...</span></div>
-                            </div>
+                                <div class="more_categories moreless"><span class="icon"></span> <span
+                                        class="heading-sm-1 more ">Show more...</span></div>
+                                </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
@@ -1085,7 +1095,7 @@
                                     <li><a href="#">Blog Category Grid</a></li>
                                     <li><a href="#">Blog Category List</a></li>
                                     <li><a href="#">Blog Category Big</a></li>
-                                 #   <li><a href="#">Blog Category Wide</a></li>
+                                    <li><a href="#">Blog Category Wide</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Single Product Layout</a>#
                                         <ul class="dropdown">
@@ -1156,51 +1166,35 @@
     <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
     <script>
-        function getval(sel) {
-            // alert(sel.value);
-            $('#zoneForm').submit();
-        }
-    </script>
+        $(document).ready(function () {
 
-    <script>
-    $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
+            $( ".zone-id" ).change(function() {
+                var zoneId = this.value;
+                var url = "{!! route('zone.filter', ':zoneId') !!}";
+                url = url.replace(':zoneId', zoneId);
 
-            addCart(event.target);
-        });
-    });
-
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
-
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
         $.ajax({
             method: 'GET',
             url: url,
             data: {
-                id: pid,
+                zone_id: zoneId,
 
             },
             success: function(result) {
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
+                // console.log(result);
+                $('#oldZoneWiseProduct').empty();
+                $('#newZoneWiseProduct').html(result);
             },
             error: function(error) {
-                if (error.status == 401){
-                    window.location.href = "/login";
-                }
+                console.log(error);
             }
         });
-    }
-</script>
+            });
+        });
+
+    </script>
+
+
 <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
@@ -1230,11 +1224,114 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.error('Success!', 'Product removed form your cart.');
+                //tata.success('Success!', 'Product removed form your cart.');
             },
             error: function(error) {
                 console.log(error);
             }
         });
+
     }
 </script>
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                //tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401) {
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>
+
+<script>
+
+$(document).on('click', '.ajax-product-remove', function() {
+
+        var pro_div = $(this).closest(".product-modifiers");
+        var pro_id = pro_div.find(".pro-id").val();
+        var pd = pro_id;
+        var url = "{!! route('cart.remove.div', ':id') !!}";
+        url = url.replace(':id', pd);
+        //deleteFromCartById(pd);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pd,
+            },
+            success: function(result) {
+                console.log(result);
+                //tata.error('Success!', 'Product removed form your cart.');
+                $('#old-div').empty();
+                $('#new-div').html(result);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+</script>
+
+<script>
+    $(document).on('click', '.moreless', function() {
+           let pre_text = $('.more').text(); 
+           if (pre_text == "Show more..."){
+            let new_text = "Show less...";
+            $('.more').text(new_text);
+           }
+           if (pre_text == "Show less..."){
+            let new_text = "Show more...";
+            $('.more').text(new_text);
+           }
+           
+    });
+</script>
+
+<script>
+    $(document).on('click', '.moreless2', function() {
+        //alert("sdgsdhsgds");
+           let pre_text = $('.more2').text(); 
+           if (pre_text == "Show more..."){
+            let new_text = "Show less...";
+            $('.more2').text(new_text);
+           }
+           if (pre_text == "Show less..."){
+            let new_text = "Show more...";
+            $('.more2').text(new_text);
+           }
+           
+    });
+</script>
+

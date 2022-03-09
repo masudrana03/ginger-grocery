@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -23,9 +24,21 @@ class TypeController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            3 => 'created_at',
-            4 => 'id',
+            2 => 'created_at',
+            3 => 'id',
         ];
+
+        // $productId = Product::with('types')->where('store_id', auth()->user()->store_id)->pluck('types.id' ,'product_id')->all();
+        // $productId = Type::with('type.products')->get();
+        // $typeId = Type::where('product_id', $productId)->get();
+        // $typeId = Type::with('type.products')->whereIn('store_id', auth()->user()->store_id);
+        // logger($productId);
+
+        // $type = Type::query();
+        // if ( !isAdmin() ) {
+        //    $p = $type->where('id', $typeId);
+        //    logger($p->get());
+        // }
 
         $totalData = Type::count();
 

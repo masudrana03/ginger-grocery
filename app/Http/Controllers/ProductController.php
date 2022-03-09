@@ -49,6 +49,20 @@ class ProductController extends Controller
         if (!isAdmin()) {
             $product = $product->where('store_id', auth()->user()->store_id);
         }
+        if ($request->store) {
+            $product = $product->where('store_id', $request->store);
+            // logger($product)->get();
+        }
+
+
+        // if (isAdmin()) {
+        //     $query = Order::with('details', 'status');
+        // } else {
+        //     $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id, auth()->user()->type);
+        //     logger($query->get());
+
+        //     // $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
+        // }
 
         $totalData = $product->count();
 
@@ -144,10 +158,28 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $product            = $request->except('files', 'types', 'nutritions');
-        $product['user_id'] = auth()->id();
-        $product['slug']    = Str::slug($request->name);
+        // dd($request->);
+        $filename = '';
 
+        $discount_type   = $request->discount_type;
+        $discount_amount = $request->discount_amount;
+
+
+        if ($request->hasFile('featured_image')) {
+            $image             = $request->file('featured_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/products/featured/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $product                    = $request->except('files', 'types', 'nutritions');
+        $product['user_id']         = auth()->id();
+        $product['slug']            = Str::slug($request->name);
+        $product['featured_image']  = $filename;
+        $product['discount_type']   = $discount_type;
+        $product['discount_amount'] = $discount_amount;
         $product = Product::create($product);
 
         if ($request->hasFile('files')) {
@@ -189,8 +221,8 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-        
-        
+
+
         //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
     }
@@ -204,11 +236,35 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-       // return [$request->files[0]->getClientOriginalExtension()];
-        $productData        = $request->except('files', 'types', 'nutritions');
-        $product['user_id'] = auth()->id();
+        // return dd($request->all());
+        // return [$request->files[0]->getClientOriginalExtension()];
+        $filename = $product->featured_image;
 
-        $productData['slug']    = Str::slug($request->name);
+        $discount_type   = $request->discount_type;
+        $discount_amount = $request->discount_amount;
+
+        if ($request->hasFile('featured_image')) {
+            $imageDirectory = 'assets/img/uploads/products/featured/';
+
+            deleteImage($product->featured_image, $imageDirectory);
+
+            $image             = $request->file('featured_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/products/featured/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/products/featured/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+
+            $product->featured_image = $filename;
+        }
+
+        $productData                   = $request->except('files', 'types', 'nutritions');
+        $product['user_id']            = auth()->id();
+        $productData['slug']           = Str::slug($request->name);
+        $productData['featured_image'] = $filename;
+        $product['discount_type']   = $discount_type;
+        $product['discount_amount'] = $discount_amount;
+
         $product->update($productData);
 
         if ($request->hasFile('files')) {

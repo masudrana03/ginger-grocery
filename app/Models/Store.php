@@ -17,6 +17,7 @@ class Store extends Model {
     protected $fillable = [
         'name',
         'type',
+        'slug',
         'image',
         'phone',
         'established_at',
@@ -143,4 +144,8 @@ class Store extends Model {
         return $this->hasManyThrough(ProductRating::class, Product::class);
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class)->whereType(4);
+    }
 }

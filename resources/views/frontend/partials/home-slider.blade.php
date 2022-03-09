@@ -6,7 +6,7 @@
                     <div class="d-flex categori-dropdown-inner">
                         <ul>
 
-                            @forelse ( $categories->skip(0)->take(12) as $category )
+                            @forelse ( $categoryProducts->skip(0)->take(12) as $category )
                                 <li>
                                     <a href="{{ route('categories', $category->slug) }}">
 
@@ -74,7 +74,7 @@
                     <div class="more_slide_open" style="display: none">
                         <div class="d-flex categori-dropdown-inner">
                             <ul>
-                                @forelse ( $categories->skip(12) as $category )
+                                @forelse ( $categoryProducts->skip(12) as $category )
                                     <li>
                                         <a href="{{ route('categories', $category->slug) }}">
 
@@ -103,8 +103,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show
-                            more...</span></div>
+                    <div class="more_categories moreless2"><span class="icon"></span> 
+                        <span class="heading-sm-1 more2 ">Show more...</span>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -159,7 +160,7 @@
                                 <h4 class="mb-30">
                                     {{ $actonRightOne->action_tittle }}
                                 </h4>
-                                <a href="{{ route('vendor.details', $actonRightOne->store_id) }}"
+                                <a href="{{ route('vendor.details', $actonRightOne->store->slug) }}"
                                     class="btn btn-xs mb-50">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
@@ -171,7 +172,7 @@
                                 <h5 class="mb-20">
                                     {{ $actonRightTwo->action_tittle }}
                                 </h5>
-                                <a href="{{ route('vendor.details', $actonRightTwo->store_id) }}"
+                                <a href="{{ route('vendor.details', $actonRightTwo->store->slug) }}"
                                     class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
@@ -182,3 +183,5 @@
     </div>
 </section>
 <!--End hero slider-->
+
+

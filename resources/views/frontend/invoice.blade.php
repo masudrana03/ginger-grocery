@@ -69,7 +69,7 @@
                                             <h4 class="invoice-title-1 mb-10">Customer Information</h4>
                                             <p class="text-sm text-mutted">
                                                 <strong>{{ $order->user->name }}</strong>
-                                                <br>{{ $order->user->country->phone_code }}{{ $order->user->phone }}<br>
+                                                <br>{{ $order->user->phone_code }}{{ $order->user->phone }}<br>
                                                 {{ settings('country') }}
                                             </p>
                                         </div>
@@ -109,7 +109,7 @@
                                                     <td>
                                                         <div class="item-desc-1">
                                                             <span>{{ $product->product->name }} <small>Sold By: <a
-                                                                        href="{{ route('vendor.details', $product->product->store->id) }}">{{ $product->product->store->name }}</a></small></span>
+                                                                        href="{{ route('vendor.details', $product->product->store->slug) }}">{{ $product->product->store->name }}</a></small></span>
                                                             {{-- <small>SKU: FWM15VKT</small> --}}
                                                         </div>
                                                     </td>

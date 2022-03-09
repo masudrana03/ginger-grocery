@@ -12,9 +12,9 @@
         border-radius: 13px;
     }
 
-    .add-icon{
+    .add-icon {
         font-size: 18px;
-        
+
     }
 
 </style>
@@ -66,9 +66,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                                                        document.getElementById('logout-form').submit();"><i
+                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
+
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -82,63 +82,23 @@
                                     <div class="tab-pane fade active show" id="address" role="tabpanel"
                                         aria-labelledby="address-tab">
                                         <div class="row">
-                                            {{-- <div class="col-lg-6">
-                                                <div class="card mb-3 mb-lg-0">
-                                                    <div class="card-header">
-                                                        <h3 class="mb-0">Billing Address</h3>
-                                                    </div>
-                                                    <div class="card-body p-4">
-                                                        @forelse ($billingAddresses ?? [] as $address)
-                                                            <p>{{ $address->name }}</p>
-                                                            <p>{{ $address->phone }}</p>
-                                                            <p>{{ $address->email }}</p>
-                                                            <address>
-                                                                {{ $address->address }},
-                                                            </address>
-                                                            <p>{{ $address->state }}, {{ $address->city }},
-                                                                {{ $address->zip }} ,</p>
-                                                            <p>{{ $address->country->name }} .</p>
-                                                            <div class="billing-button"
-                                                                style="margin-left: 60%; margin-top:-30px;">
-                                                                <button class="btn-success  edit-billing-address"
-                                                                    onclick="openEditBillingModal({{ $address->id }})"
-                                                                    style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white"
-                                                                    data-toggle="modal"
-                                                                    data-target="#editCategoryModal">Edit</button>
-                                                                    <button class="btn-danger"
-                                                                    style="color: black; background-color:#fdc040; border-radius: 5px ; border:white; margin-left: 2%;"
-                                                                    onclick="deleteAddress({{ $address->id }})">Delete</button>
-                                                            </div>
-
-                                                            <form id="delete-form-{{ $address->id }}"
-                                                                action="{{ route('user.delete.address', $address->id) }}" method="POST"
-                                                                style="display: none;">
-                                                                @csrf
-                                                            </form>
-                                                            <hr>
-                                                        @empty
-                                                            <p>No Billing address address found!</p>
-                                                            <button class="btn add-billing-address" id="billing"
-                                                                onclick="createModal('billing')"
-                                                                style="color: white;">Create Billing Address</button>
-                                                        @endforelse
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                             <div class="col-lg-6 ">
                                                 <div class="card">
                                                     <div class="card-header d-flex">
                                                         <h3 class="mb-0">Shipping Address</h3>
-                                                        <button class="btn add-billing-address p-1 " style="margin-left:40px; border-radius:35px; width:36px;" id="shipping"
-                                                                onclick="createModal('shipping')"
-                                                                ><i  class="fas fa-plus add-icon"></i></button>
-                                                        
+                                                        <div id="cre-icon">
+                                                            <button class="btn add-billing-address p-1 "
+                                                            style="margin-left:40px; border-radius:35px; width:36px;"
+                                                            id="shipping" onclick="createModal('shipping')"><i
+                                                                class="fas fa-plus add-icon"></i></button>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body p-4">
 
                                                         @forelse ($shippingAddresses ?? [] as $address)
                                                             <p>{{ $address->name }}</p>
-                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}</p>
+                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}
+                                                            </p>
                                                             <p>{{ $address->email }}</p>
                                                             <address>
                                                                 {{ $address->address }},
@@ -146,7 +106,7 @@
                                                             <p>{{ $address->state }}, {{ $address->city }},
                                                                 {{ $address->zip }} ,</p>
                                                             <p>{{ settings('country') }} .</p>
-
+                                                            <input type="hidden" id="hidden_id" value="{{ $address->id }}">
                                                             <div class="billing-button"
                                                                 style="margin-left: 60%; margin-top:-30px;">
                                                                 <button class="btn-success  edit-billing-address"
@@ -167,9 +127,11 @@
                                                             <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
-                                                            <button class="btn add-billing-address" id="shipping"
+                                                            <div class="cre-btn-div">
+                                                                <button class="btn add-billing-address cre-btn" id="shipping"
                                                                 onclick="createModal('shipping')"
                                                                 style="color: white;">Create Shipping Address</button>
+                                                            </div>
                                                         @endforelse
 
                                                         {{-- modal --}}
@@ -393,7 +355,7 @@
                                                                         <h5 class="modal-title"
                                                                             id="exampleModalLongTitle">Edit Shipping Address
                                                                         </h5>
-                                                                        
+
                                                                         <button type="button" class="close modal-button"
                                                                             onclick="closeModal()" data-dismiss="modal"
                                                                             style="color: black; background-color:#fdc040;"
@@ -934,3 +896,14 @@
 
     }
 </script>
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            var hid = $('#hidden_id').val();
+            if(hid != "string"){
+                $('#cre-icon').empty();
+            }
+    });
+    </script> --}}
+

@@ -63,7 +63,7 @@ class CallToActionSeeder extends Seeder
             'store_id'        => '2',
             'action_location' => 'Footer image',
             'action_tittle'   => 'The best Organic Products Online',
-            'image'           => '2022-02-09-6203909b6076c.png',
+            'image'           => 'footer-image.png',
             'status'          => false,
             'created_at'      => now(),
         ] );

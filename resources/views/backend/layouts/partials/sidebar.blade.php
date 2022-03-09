@@ -160,6 +160,8 @@
             <li><a href="{{ route('admin.email_templates.index') }}">Email Templates</a></li>
             <li><a href="{{ route('admin.settings.payment_gateway') }}">Payment Gateway</a></li>
             <li><a href="{{ route('admin.settings.social.index') }}">Social Login</a></li>
+            <li><a href="{{ route('admin.settings.social.media.index') }}">Social Media Link</a></li>
+            {{-- <li><a href="#">Social Media Link</a></li> --}}
             {{-- <li><a href="{{ route('admin.shipping_services.index') }}">Shipping Service</a></li>
             <li><a href="{{ route('admin.taxes.index') }}">Tax</a></li> --}}
         </ul>

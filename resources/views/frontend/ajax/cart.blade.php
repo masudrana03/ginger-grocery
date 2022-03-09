@@ -1,3 +1,57 @@
+
+
+<style>
+    .btn-cart {
+        background-color: #3BB77E;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        color: #fff;
+        border-radius: 5px;
+
+
+    }
+
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
+
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
+    }
+
+    #td-padding-top {
+        padding-top: 4%;
+        padding-left: 1.5%;
+
+    }
+
+    .product-name a:hover {
+        text-decoration: none;
+
+    }
+
+    .btn-cart:hover {
+        background-color: #fdc040;
+    }
+
+    .qty {
+        height: 40px;
+        width: 100%;
+        border: 1px #3BB77E solid;
+        text-align: center;
+        font-size: 13px;
+        background-color: transparent;
+
+    }
+
+</style>
+
 <div class="header-action-icon-2">
     <a class="mini-cart-icon" href="{{ route('cart') }}">
         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -16,8 +70,8 @@
                     <div class="shopping-cart-img">
                         <a href="{{ route('products', $product->id) }}">
 
-                            @if (count($product->images) > 0)
-                                <img src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}"
+                            @if ( $product->featured_image )
+                                <img src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}"
                                     alt="" />
 
                             @else
@@ -29,7 +83,7 @@
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a
-                                href="{{ route('products', $product->id) }}">{{ ucwords(strtolower(Str::limit($product->name, 18))) }}</a>
+                                href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18))) }}</a>
                         </h4>
                         <h4><span>{{ $product->quantity }} ×
                             </span>{{ settings('currency') }}{{ $product->price }}
@@ -67,6 +121,8 @@
         </div>
     </div>
 </div>
+
+
 <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
@@ -96,11 +152,35 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.error('Deleting!', 'Product Deleted Form your cart.');
+                //tata.success('Deleting!', 'Product Deleted Form your cart.');
             },
             error: function(error) {
                 console.log(error);
             }
         });
+
+        var url2 = "{!! route('cart.remove.div', ':id') !!}";
+        url2 = url2.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url2,
+            data: {
+                id: pid,
+
+            },
+            success: function(result) {
+                //console.log(result);
+                //tata.error('Success!', 'Product removed form your cart.');
+                $('#old-div').empty();
+                $('#new-div').html(result);
+
+            },
+            error: function(error) {
+              console.log(error);
+            }
+        });
     }
+
+
+
 </script>

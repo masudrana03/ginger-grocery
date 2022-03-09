@@ -149,6 +149,8 @@ class StripePayment implements PayableInterface
             $stripeCustomerCard->save();
         }
 
+        
+
         $route = Route::current()->uri;
 
         if (strpos($route, 'api') !== false) {

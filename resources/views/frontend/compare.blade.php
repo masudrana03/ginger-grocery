@@ -14,8 +14,8 @@
     <div class="row" id="compareProductsOld">
         <div class="col-xl-10 col-lg-12 m-auto">
             <h1 class="heading-2 mb-10">Products Compare</h1>
-            <h6 class="text-body mb-40">There are <span class="text-brand">{{ $compareProducts->count() }}</span> products to compare</h6>
-            @if($compareProducts->count() > 0)
+            <h6 class="text-body mb-40">There are <span class="text-brand">{{ count($compareProducts) }}</span> products to compare</h6>
+            @if(count($compareProducts) > 0)
             <div class="table-responsive">
                 <table class="table text-center table-compare">
                     <tbody>
@@ -25,7 +25,7 @@
                             @foreach ($compareProducts as $product)
                             <td class="row_img">
                                 @if (count($product->images) > 0)
-                                    <img  src="{{ asset('assets/img/uploads/products/' . $product->images()->first()->image) }}" alt="" />
+                                    <img  src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image)  }}" alt="" />
                                 @else
                                     <img src="{{ asset('assets/frontend/imgs/shop/product-2-1.jpg') }}" alt="" />
                                 @endif
@@ -107,7 +107,7 @@
                             <td class="row_remove">
                                 <a href="#" data-id="{{ $product->id }}" class="text-muted compare-btn-delete"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
                             </td>
-                            @endforeach 
+                            @endforeach
                             {{-- <td class="row_remove">
                                 <a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
                             </td>

@@ -11,7 +11,7 @@
         color: #212527!important;
     }
     table tbody tr td a {
-        color: #884FFB;
+        color: #3BB77E;
         font-size: 18px;
     }
 </style>

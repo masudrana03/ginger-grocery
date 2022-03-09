@@ -43,16 +43,17 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=3.2') }}" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- datetime picker jquery --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <link src="{{ asset('assets/tata_toster/index.js') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/track-oder.css') }}" />
 
     <style>
         .tata-title,
@@ -74,7 +75,7 @@
 
 <body onload="checkAddress()">
     @include('frontend.partials.nav')
-    <div id="app">
+    <div id="app" class="app">
         @yield('content')
     </div>
     <footer class="main">
@@ -250,16 +251,15 @@
                                 <li><a href="{{ route('cart') }} ">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }} ">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }} ">Compare products</a></li>
-                                <li><a href="{{ route('user.track.orders') }}">Order Tracking</a></li>
+                                <li><a href="{{ route('user.track.orders') }}">My Order</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
-
                             @else
                                 <li><a href="{{ route('login') }}">Sign In</a></li>
                                 <li><a href="{{ route('cart') }}">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }}">Compare products</a></li>
-                                <li><a href="{{ route('login') }}">Order Tracking</a></li>
+                                <li><a href="{{ route('login') }}">My Order</a></li>
                                 <li><a href="#">Help Ticket</a></li>
                                 <li><a href="#">Shipping Details</a></li>
                             @endif
@@ -432,6 +432,7 @@
             });
 
             $('#search-input').on('keyup', function() {
+                event.preventDefault();
                 let search = $('#search-input').val();
                 if (search.length > 2) {
                     category_id = $('#search-category-id').val();
@@ -477,13 +478,80 @@
         }
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $(".compare-btn").click(function(event) {
+                event.preventDefault();
+                var id = $(this).attr("data-id");
+                var url = "{!! route('compareProduct', ':id') !!}";
+                url = url.replace(':id', id);
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#compareProductOld').empty();
+                        $('#compareProductNew').html(result);
+                        //tata.success('Success!', 'Product added to compare list.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".compare-btn-delete").click(function(event) {
+                event.preventDefault();
+
+                var id = $(this).attr("data-id");
+                var url = "{!! route('removeCompareProduct', ':id') !!}";
+                url = url.replace(':id', id);
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $('#compareProductOld').empty();
+                        $('#compareProductNew').html(result);
+                        //tata.success('Success!', 'Product removed from compare list.');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                $.ajax({
+                    method: 'GET',
+                    url: "{!! route('removeCompareProduct2') !!}",
+                    success: function(result) {
+                        console.log(result);
+                        $('#compareProductsOld').empty();
+                        $('#compareProductsNew').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+        });
+    </script>
+
 <script>
     $(document).ready(function() {
-        $(".compare-btn").click(function(event) {
+        // alert('test');
+        $(".wishlist-btn").click(function(event) {
             event.preventDefault();
-        var id = $(this).attr("data-id");
-        var url = "{!! route('compareProduct', ':id') !!}";
-        url = url.replace(':id', id);
+            var id = $(this).attr("data-id");
+            var url = "{!! route('wishlist', ':id') !!}";
+            url = url.replace(':id', id);
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -491,8 +559,9 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
+                    return;
                     tata.success('Success!', 'Product added to compare list.');
                 },
                 error: function(error) {
@@ -505,12 +574,13 @@
 
 <script>
     $(document).ready(function() {
-        $(".compare-btn-delete").click(function(event) {
+        $(".wishlist-btn-delete").click(function(event) {
             event.preventDefault();
-    
+
         var id = $(this).attr("data-id");
-        var url = "{!! route('removeCompareProduct', ':id') !!}";
+        var url = "{!! route('wishlist.remove', ':id') !!}";
         url = url.replace(':id', id);
+
             $.ajax({
                 method: 'GET',
                 url: url,
@@ -518,30 +588,34 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
                     tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);
                 }
             });
-                $.ajax({
-                        method: 'GET',
-                        url: "{!! route('removeCompareProduct2') !!}",
-                        success: function(result) {
-                            console.log(result);
-                            $('#compareProductsOld').empty();
-                            $('#compareProductsNew').html(result);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-            
+            $.ajax({
+                    method: 'GET',
+                    url: "{{ route('wishlistByDefaultId.remove') }}",
+                    success: function(result) {
+                        console.log(result);
+                        $('#oldWishlistProductTable').empty();
+                        $('#newWishlistProductTable').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
         });
     });
 </script>
+
+
+
+
+
     @yield('script')
 </body>
 

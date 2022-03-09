@@ -320,8 +320,12 @@
             {{-- Checkout new page added --}}
 
 
+<<<<<<< HEAD
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="oldCheckoutProducts">
 
+=======
+            <div class="col-lg-5 mb-100" style="margin-top:7%;">
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s)sss:</p>
                 </div>
@@ -355,7 +359,8 @@
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
-                                            <div class="checkout-product-img-wrapper product-details">
+                                            <div class="checkout-product-img-wrapper product-details"
+                                                style="padding-top: 5px;">
                                                 @if (count($item->images) > 0)
                                                     <img class="item-thumb img-thumbnail img-rounded"
                                                         src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
@@ -384,16 +389,28 @@
                             <hr>
                             <div class="row checkout-total ">
                                 <div class="col-6 calculate-total">
+<<<<<<< HEAD
                                     <p class="">Total:</p>
                                     {{-- <p class="">Shipping Fee:</p> --}}
                                     {{-- <p class="">Tax:</p> --}}
                                     {{-- <h5 class="">Total:</h5> --}}
+=======
+                                    <p class="">Subtotal:</p>
+                                    <p class="">Shipping Fee:</p>
+                                    <p class="">Tax:</p>
+                                    <h5 class="">Total:</h5>
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                                 </div>
 
                                 <div class="col-6 calculate">
                                     <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
+<<<<<<< HEAD
                                     {{-- <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
                                     </p> --}}
+=======
+                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
+                                    </p>
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
                                     {{-- <p class="total-amount"> {{ $currency }}{{ $tax }} </p> --}}
                                     {{-- <h5 class="total-amount"> {{ $currency }}{{ $subtotal }} --}}
@@ -405,7 +422,8 @@
                         </div>
                     </div>
                 @empty
-                    <p>No product in your cart!</p>
+                    <p style="text-align: center; padding-top: 10px; padding-bottom: 10px; color: #fdc040; border: 20px;">No
+                        product in your cart!</p>
                 @endforelse
 
 
@@ -454,7 +472,7 @@
         //     document.getElementById('BillingForm').submit();
         // }
 
-        // onload function to check any address found or not 
+        // onload function to check any address found or not
 
         function checkAddress() {
             //let shipForm = document.getElementById('shipping-form');
@@ -504,9 +522,6 @@
 
 
         function submitForm() {
-            //alert("Hello");
-
-
 
             //let fromSubmitBtn = document.getElementById('checkOutBtn');
             let addressHiddenId = document.getElementById('addressId');
@@ -528,7 +543,7 @@
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-                                //alert(payHiddenId.value);
+
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
@@ -536,6 +551,7 @@
                                     payHiddenId.value = payValue;
                                     billForm.submit();
                                 } else {
+                                    //alert("abcd");
                                     document.getElementById('error').style.display = "block";
                                 }
 
@@ -548,6 +564,7 @@
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
+
                             document.getElementById('error').style.display = "block";
                         }
                     }
@@ -573,9 +590,22 @@
             $('.checkaddress').each(function() {
                 var $this = $(this);
                 $this.on('click', function() {
+<<<<<<< HEAD
                     var addressId = $this.val();
                     alert(addressId);
                     fireAjax(addressId, 1)
+=======
+
+                    //var addName = $('.addName');
+                    // var address = $this.children(".addName").html();
+
+                    var address_id = $this.val();
+
+                    ajaxLoadingStoreId(address_id);
+
+
+
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 });
             });
 
@@ -589,12 +619,17 @@
             });
         });
 
+<<<<<<< HEAD
         function fireAjax(address, id = 0) {
+=======
+        function ajaxLoadingStoreId(address_id) {
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
             $.ajax({
                 method: 'GET',
                 url: "{!! route('ajax.shipping.calculation') !!}",
                 type: 'get',
                 data: {
+<<<<<<< HEAD
                     address: address,
                     id: id,
                 },
@@ -603,6 +638,13 @@
                     $('#oldCheckoutProducts').hide();
                     $('#newCheckoutProducts').html(response);
                     //$('#app').html(response);
+=======
+                    address_id: address_id,
+                },
+                success: function(response) {
+                    //console.log(response);
+                    $('#app').html(response);
+>>>>>>> 7ebbc14d6c48a2b42ff49592dc9eb23fb0755bed
                 }
             });
         }

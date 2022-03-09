@@ -111,6 +111,39 @@
                                         </span>
                                     @enderror
                                 </div>
+
+                               {{--Discount Price type--}}
+
+
+                                <div class="form-group">
+                                    <label for="price">Discount Type</label>
+                                    <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
+                                            <option value="1" checked>Percentage(%)</option>
+                                            <option value="2">Fixed Amount</option>
+                                    </select>
+                                    @error('types')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                {{--Discount Price amount--}}
+
+                                <div class="form-group">
+                                    <label for="price">Discount Price</label>
+                                    <input type="number" name="discount_amount"
+                                        class="form-control @error('price') is-invalid @enderror" id="price"
+                                        aria-describedby="emailHelp" placeholder=" Discount Price" value="{{ old('price') }}">
+                                    @error('price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+
+
                                 <div class="form-group">
                                     <label for="calories_per_serving">Calories Per Serving</label>
                                     <input type="number" name="calories_per_serving"
@@ -223,25 +256,59 @@
                                 </div>
 
                                 {{-- new code for image upload --}}
-                                <label>Product Image</label>
-                                <div class="form-group">
-                                    @if ($errors->all())
-                                        <h6 class="modal-header justify-content-start"
-                                            style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
-                                            {{ $errors->first('image') }}</h6>
-                                    @endif
-                                    <div class="card shadow-sm w-100">
-                                        <div class="card-header d-flex justify-content-start">
-                                            <h4>Upload Product Images</h4>
-                                            <input type="file" name="files[]" id="image" multiple class="d-none" accept="image/*"
-                                                onchange="image_select()">
-                                            <button class="btn btn-sm btn-primary ml-4" type="button"
-                                                onclick="document.getElementById('image').click()">Select Images</button>
-                                        </div>
-                                        <div class="card-body d-flex flex-wrap justify-content-start" id="container">
-                                            <!-- Image will be show here-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Featured Product Image</label>
+                                            <small><strong> ( image size must be upto 1100px X 1100px )</strong></small>
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 100%; border-radius: 5px;">
+                                                    {{ $errors->first() }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload Featured Product Images</h4>
+
+                                                    <input type="file" name="featured_image" id="featured_image"
+                                                        accept="image/*" class="d-none " onchange="showImage(this)">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('featured_image').click()">Select
+                                                        Image</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="image-container">
+                                                    <img class="category-image" id="thumbnil" style="width: 90%;">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-8">
+                                        <label>Product Image</label>
+                                        <div class="form-group">
+                                            @if ($errors->all())
+                                                <h6 class="modal-header justify-content-start"
+                                                    style="font-weight: 800; color: #FFFFFF; background-color: #FDC040; padding-top: 8px;  padding-bottom: 8px; font-size: 12px; max-width: 35%; border-radius: 5px;">
+                                                    {{ $errors->first('image') }}</h6>
+                                            @endif
+                                            <div class="card shadow-sm w-100">
+                                                <div class="card-header d-flex justify-content-start">
+                                                    <h4>Upload Product Images</h4>
+                                                    <input type="file" name="files[]" id="image" multiple
+                                                        class="d-none" accept="image/*" onchange="image_select()">
+                                                    <button class="btn btn-sm btn-primary ml-4" type="button"
+                                                        onclick="document.getElementById('image').click()">Select
+                                                        Images</button>
+                                                </div>
+                                                <div class="card-body d-flex flex-wrap justify-content-start"
+                                                    id="container">
+                                                    <!-- Image will be show here-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group">
@@ -249,9 +316,9 @@
                                 </div>
                             </form>
 
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                            {{-- @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach --}}
 
                         </div>
                     </div>
@@ -298,7 +365,7 @@
                 }
             });
         });
-
+1
         // image upload js code
         var images = [];
 
@@ -347,6 +414,29 @@
                 }
             }
             return image;
+        }
+    </script>
+
+    <script type="text/javascript">
+        // image upload js code
+        function showImage(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById('thumbnil');
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 @endpush

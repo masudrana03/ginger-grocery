@@ -257,4 +257,34 @@ class SettingController extends Controller
 
         return back();
     }
+
+    public function socialMediaLink(){
+
+        return view('backend.settings.social-media');
+    }
+
+    public function socialMediaLinkUpdate(Request $request){
+
+    $this->validate($request, [
+        'facebook_link' => 'required',
+        'youtube_link'  => 'required',
+        'linkedin_link' => 'required',
+        'instagram_link'=> 'required',
+        'twitter_link'  => 'required',
+    ]);
+
+    $request = $request->all();
+
+    foreach ($request as $key => $value) {
+        Setting::where('key', $key)->update(['value' => $value]);
+    }
+
+    toast('Social Media Link  successfully updated', 'success');
+
+    Artisan::call('cache:clear');
+
+    return back();
+
+    }
+
 }

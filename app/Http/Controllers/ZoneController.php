@@ -30,10 +30,11 @@ class ZoneController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            1 => 'coordinates',
-            1 => 'status',
-            3 => 'created_at',
-            4 => 'id'
+            2 => 'coordinates',
+            // 3 => 'delivery_man',
+            4  => 'status',
+            5 => 'created_at',
+            6 => 'id'
         ];
 
         $totalData = Zone::count();
@@ -73,11 +74,12 @@ class ZoneController extends Controller
                 $edit         = route('admin.zones.edit', $zone->id);
                 $delete       = route('admin.zones.destroy', $zone->id);
                 $token        = csrf_token();
-                $class        = $zone->status == 'Online' ? 'status_btn_b' : 'status_btn_danger_b';
+                $class        = $zone->status == 'Active' ? 'status_btn_b' : 'status_btn_danger_b';
 
                 $nestedData['id']            = $zone->id;
                 $nestedData['name']          = $zone->name;
-                $nestedData['coordinates']   = $zone->coordinates;
+                $nestedData['coordinates']   = $zone->store->count();
+                // $nestedData['delivery_man']   = $zone->store->users->count();
                 $nestedData['status']        = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangeZoneStatus({$zone->id})' id='zoneStatus-{$zone->id}'>$zone->status</a>";
                 $nestedData['created_at']    = $zone->created_at->format('d-m-Y');
                 $nestedData['actions']       = "
@@ -212,7 +214,7 @@ class ZoneController extends Controller
     public function updateStatus(Zone $zone)
     {
         $zone->update([
-            'status' => $zone->status == 'Online' ? 'Offline' : 'Online'
+            'status' => $zone->status == 'Active' ? 'Inactive' : 'Active'
         ]);
 
         toast('Zone successfully updated', 'success');

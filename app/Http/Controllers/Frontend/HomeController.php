@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Zone;
+use App\Models\Store;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Setting;
@@ -22,30 +23,34 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // return $request;
 
         if (env('APP_NAME') == '') {
             return view('start');
         }
 
-        $productIds = session('compare');
-        $compareProduct = Product::find($productIds) ?? [];
-
         if ($request->zone_id) {
-            $categoryProducts = Category::with(['products.currency', 'products.store' => function ($q) use ($request) {
-                $q->find($request->zone_id);
-            }])->limit(10)->get();
-        } else {
-            $categoryProducts = Category::with('products.store', 'products.currency')->limit(10)->get();
-        }
+            $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id');
 
+            $categoryProducts = Category::with(['products.store', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
+                $query->whereIn('store_id', $vendor_ids);
+            }
+            ])->limit(10)->get();
+
+            // return $categoryProducts;
+        } else {
+            $categoryProducts = Category::with('products.store', 'products.ratings')->limit(10)->get();
+        }
 
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
-        $zones = Zone::all() ?? [];
 
+        if ($request->ajax()) {
+            // return $request;
+            return view('frontend.ajax.popular-product', compact('categoryProducts', 'sliders', 'callToActions'));
+        }
 
-
-        return view('frontend.index', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones',));
+        return view('frontend.index', compact('categoryProducts', 'sliders', 'callToActions'));
     }
 
     public function ajax(Request $request)
@@ -73,7 +78,6 @@ class HomeController extends Controller
             })
             ->limit(10)->get();
 
-
         $sliders = Banner::where('status', 1)->get() ?? [];
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
@@ -82,7 +86,7 @@ class HomeController extends Controller
     }
 
     /**
-     *
+     * Product Details BY SLUG
      *
      * @param $slug
      */
@@ -90,8 +94,9 @@ class HomeController extends Controller
     {
         $productsRating = ProductRating::all();
 
-        $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit')->whereSlug($slug)->firstOrFail();
-        return view('frontend.product-details', compact('product', 'productsRating'));
+        $product = Product::with('store', 'currency', 'category.products', 'brand', 'unit','ratings')->whereSlug($slug)->firstOrFail();
+
+       return view('frontend.product-details', compact('product', 'productsRating'));
     }
 
     public function productRating(Request $request, $id)

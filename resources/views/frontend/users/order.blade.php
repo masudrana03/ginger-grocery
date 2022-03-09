@@ -74,7 +74,7 @@
                                                                 <th>Order</th>
                                                                 <th>Date</th>
                                                                 <th>Status</th>
-                                                                <th>Total</th>
+                                                                <th>Total Price</th>
                                                                 <th>Invoice</th>
                                                             </tr>
                                                         </thead>

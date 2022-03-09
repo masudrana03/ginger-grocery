@@ -117,9 +117,15 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
     Route::post('/email-settings', [SettingController::class, 'emailSettingsUpdate'])->name('settings.email.update');
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('settings.payment.update');
     Route::post('/send-test-email', [SettingController::class, 'sendTestMail'])->name('send_test_email');
+    Route::get('/social-media-setting-index', [SettingController::class, 'socialMediaLink'])->name('settings.social.media.index');
+    Route::post('/social-media-setting-update', [SettingController::class, 'socialMediaLinkUpdate'])->name('settings.social.link.update');
+
 
     Route::get('/social-setting-index', [SocialLoginController::class, 'socialIndex'])->name('settings.social.index');
     Route::post('/update/social-setting-update', [SocialLoginController::class, 'socialUpdate'])->name('settings.social.update');
+
+
+
 
     Route::get('/allpromos', [PromoController::class, 'allPromos'])->name('allpromos');
     Route::get('/promos/{promo}/update_status', [PromoController::class, 'updateStatus'])->name('promos.update_status');
@@ -199,10 +205,13 @@ Route::get('/terms', function () {
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/', [HomeController::class, 'ajax'])->name('index.part.ajax');
 Route::get('/products/{id}', [HomeController::class, 'productDetails'])->name('products');
+
+// Route::get('/product-details', [HomeController::class, 'productDetailsTH']);
+
 Route::post('/products-rating/{id}', [HomeController::class, 'productRating'])->name('product.rating');
 Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name('categories');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
-Route::post('/location', [HomeController::class, 'getZone'])->name('location');
+Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
@@ -210,10 +219,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
+    Route::get('/cart-product-remove-div/{id}', [FrontendCartController::class, 'removeItemFromDiv'])->name('cart.remove.div');
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
-    Route::get('shipping-fee-calculation',[CheckoutController::class,'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
+    Route::get('shipping-fee-calculation', [CheckoutController::class, 'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
 });
 
 Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
@@ -243,6 +253,7 @@ Route::get('/remove-compare-product', [FrontendCompareController::class, 'remove
 Route::get('/wishlist', [FrontendWishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/wishlist-product/{id}', [FrontendWishlistController::class, 'addToWishlistById'])->name('wishlist');
 Route::get('/wishlist-product-remove/{id}', [FrontendWishlistController::class, 'removeToWishlistById'])->name('wishlist.remove');
+Route::get('/wishlist-default-remove', [FrontendWishlistController::class, 'removeToWishlistByDefaultId'])->name('wishlistByDefaultId.remove');
 
 Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 
@@ -270,7 +281,7 @@ Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'face
 Route::get('c/{id}', function ($id) {
     $compareProducts = Cache::get('products');
 
-    if (! $compareProducts) {
+    if (!$compareProducts) {
         Cache::put('products', [$id], 30);
         return Cache::get('products');
     }
@@ -278,7 +289,7 @@ Route::get('c/{id}', function ($id) {
     if (in_array($id, $compareProducts)) {
         return Cache::get('products');
     }
-    
+
     if (count($compareProducts) >= 3) {
         array_shift($compareProducts);
         array_push($compareProducts, $id);
