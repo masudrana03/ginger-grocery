@@ -12,7 +12,9 @@
             <h1 class="heading-2 mb-10">Your Cart</h1>
             <div class="d-flex justify-content-between">
                 <h6 class="text-body">There are <span
-                        class="text-brand">{{ auth()->user()->cart->products->count() }}</span> products in
+                        class="text-brand">{{ auth()->user()->cart
+                            ? auth()->user()->cart->products->count()
+                            : 0 }}</span> products in
                     your
                     cart</h6>
                 {{-- <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear
@@ -270,5 +272,4 @@
         </div>
     </div>
 </div>
-
 

@@ -20,6 +20,6 @@ class CashPayment implements PayableInterface
             return back()->with('success', 'Order Placed Successfully!');
         }
 
-        return back()->with('success', 'Order Placed Successfully!');
+        return back()->with('paymentSuccess', 'Order Placed Successfully!');
     }
 }

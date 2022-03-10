@@ -32,16 +32,19 @@ class CartController extends Controller
                 $cart          = new Cart();
                 $cart->user_id = auth()->id();
                 $cart->save();
-
+            
                 $cart->products()->sync([
                     $product->id => [
-                        'quantity' => request('quantity'),
+                        'quantity' => 1,
                         'options'  => $request->options ? json_encode($request->options) : null,
                     ],
                 ], false);
 
                 return view("frontend.ajax.cart");
-            } else {
+            } 
+
+            
+            else {
 
                 $cartId = auth()->user()->cart->id;
                 $product_id = $request->product_id;
@@ -111,7 +114,9 @@ class CartController extends Controller
         return view('frontend.cart', compact('compareProduct', 'totalTax'));
     }
 
+    
 
+    
 
 
     public function cartUpdate(Request $request)
