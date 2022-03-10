@@ -131,6 +131,7 @@
             url: url,
             data: {
                 id: pid,
+                quantity:1,
 
             },
             success: function(result) {

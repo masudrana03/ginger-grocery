@@ -32,7 +32,7 @@ class CartController extends Controller
                 $cart          = new Cart();
                 $cart->user_id = auth()->id();
                 $cart->save();
-            
+
                 $cart->products()->sync([
                     $product->id => [
                         'quantity' => 1,
@@ -41,10 +41,7 @@ class CartController extends Controller
                 ], false);
 
                 return view("frontend.ajax.cart");
-            } 
-
-            
-            else {
+            } else {
 
                 $cartId = auth()->user()->cart->id;
                 $product_id = $request->product_id;
@@ -88,12 +85,13 @@ class CartController extends Controller
                 'product_id' => $id,
                 'quantity'   => request('quantity'),
             ]);
-        } else {
-            $request = new Request([
-                'product_id' => $id,
-                'quantity'   => 1,
-            ]);
         }
+        //else {
+        //     $request = new Request([
+        //         'product_id' => $id,
+        //         'quantity'   => 1,
+        //     ]);
+        // }
 
 
         return $this->addToCart($request);
@@ -113,11 +111,6 @@ class CartController extends Controller
         $compareProduct = Product::find($productIds) ?? [];
         return view('frontend.cart', compact('compareProduct', 'totalTax'));
     }
-
-    
-
-    
-
 
     public function cartUpdate(Request $request)
     {

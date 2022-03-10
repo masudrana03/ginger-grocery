@@ -67,8 +67,8 @@
                 <div class="col-lg-8 mb-40">
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-body">There are <span
-                                class="text-brand">{{ auth()->user()->cart
+                        <h6 class="text-body">There are <span class="text-brand"
+                                id="quantitys">{{ auth()->user()->cart
                                     ? auth()->user()->cart->products->count()
                                     : 0 }}</span>
                             products in
@@ -343,31 +343,31 @@
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        var products = $(".product-modifiers");
-        var subtotal = 0;
-        var tax = "{{ $totalTax }}";
+    // $(document).ready(function() {
+    //     var products = $(".product-modifiers");
+    //     var subtotal = 0;
+    //     var tax = "{{ $totalTax }}";
 
-        for (var i = 0; i < products.length; i += 1) {
-            subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
-        }
+    //     for (var i = 0; i < products.length; i += 1) {
+    //         subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
+    //     }
 
-        var symbol = "{{ settings('currency') }}";
-        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
+    //     var symbol = "{{ settings('currency') }}";
+    //     $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
-        var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
-        var discountAmount = '{{ Session::get('discountAmount') }}';
+    //     var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
+    //     var discountAmount = '{{ Session::get('discountAmount') }}';
 
-        if (totalAfterDiscount) {
-            subtotal = subtotal - parseFloat(discountAmount);
-        }
+    //     if (totalAfterDiscount) {
+    //         subtotal = subtotal - parseFloat(discountAmount);
+    //     }
 
-        subtotal += parseFloat(tax);
+    //     subtotal += parseFloat(tax);
 
-        $('.tax').text(symbol + tax);
-        $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
+    //     $('.tax').text(symbol + tax);
+    //     $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
 
-    });
+    // });
 
 
 
@@ -497,7 +497,7 @@
             },
             success: function(result) {
                 //console.log(result);
-                
+
 
                 //tata.success('Success!!', 'Product updated successfully.');
             },
@@ -563,6 +563,7 @@
         var url = "{!! route('cart.remove.div', ':id') !!}";
         url = url.replace(':id', pd);
         deleteFromCartById(pd);
+
         $.ajax({
             method: 'GET',
             url: url,
@@ -574,6 +575,7 @@
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
+                retriveUpdateProduct();
             },
             error: function(error) {
                 console.log(error);
@@ -581,5 +583,3 @@
         });
     });
 </script>
-
-
