@@ -193,7 +193,7 @@ class StripePayment implements PayableInterface
         }
 
         //return view('frontend.order-placed');
-        return redirect()->route('checkout')->with('success', 'Order Placed Successfully!');
+        return redirect()->route('checkout')->with('paymentSuccess', 'Order Placed Successfully!');
     }
 
     public function paymentFailed($orderReference)
@@ -220,6 +220,6 @@ class StripePayment implements PayableInterface
         }
 
         //return view('frontend.order-placed');
-        return redirect()->route('checkout')->with('error', 'Payment Failed!');
+        return redirect()->route('checkout')->with('paymentFailed', 'Payment Failed!');
     }
 }

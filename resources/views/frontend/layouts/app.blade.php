@@ -417,13 +417,39 @@
                     title: "<h2 style='color:#2bac6b'>" +
                         "Success !" +
                         "</h2>",
-                    text: "Your order has been place successfully.Please Check your invoices",
+                    text: "Your order has been placed successfully",
                     imageUrl: "{{ asset('assets/frontend/imgs/swal-image/icon03.png') }}",
                     imageWidth: 200,
                     imageHeight: 220,
                     imageAlt: "Custom image",
                     confirmButtonText: "Continue Shopping",
                     confirmButtonColor: "#2bac6b",
+                    width: 340,
+                    padding: 40,
+                }).then((result) => {
+                    if (result.value) {
+                        window.location =
+                            "{{ route('index') }}";
+                    }
+                });
+            })
+        </script>
+    @endif
+
+    @if (session()->has('paymentFailed'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: "<h2 style='color:#E74141'>" +
+                        "Failed !" +
+                        "</h2>",
+                    text: "Payment Failed",
+                    imageUrl: "{{ asset('assets/frontend/imgs/swal-image/icon04.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 220,
+                    imageAlt: "Custom image",
+                    confirmButtonText: "Continue Shopping",
+                    confirmButtonColor: "#E74141",
                     width: 340,
                     padding: 40,
                 }).then((result) => {
@@ -461,6 +487,14 @@
             })
         </script>
     @endif
+    @if (session()->has('success'))
+        <script>
+            $(document).ready(function() {
+                swal("Ops!", "{{ session('error') }}", "success");
+            })
+        </script>
+    @endif
+
     @if (session()->has('error'))
         <script>
             $(document).ready(function() {
