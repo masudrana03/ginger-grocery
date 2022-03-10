@@ -223,7 +223,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
     Route::get('/cart-product-remove-div/{id}', [FrontendCartController::class, 'removeItemFromDiv'])->name('cart.remove.div');
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
-    Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
+    Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo'])->name('promo.code');
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
     Route::get('shipping-fee-calculation', [CheckoutController::class, 'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
 });
@@ -260,7 +260,9 @@ Route::get('/wishlist-default-remove', [FrontendWishlistController::class, 'remo
 Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 
 Route::get('/payment_from_card/{invoice_id}', [StripePayment::class, 'paymentFromCard'])->name('payment_from_card');
-Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+// Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+Route::get('payment-success/{invoice_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+Route::get('payment-failed/{invoice_id}', [StripePayment::class, 'paymentFailed'])->name('payment_failed');
 Route::get('payment-from-saved-card/{order_id}/{payment_method_id}', [StripePayment::class, 'paymentFromSavedCard'])->name('payment_from_saved_card');
 
 Route::get('/contact', [FrontendContactController::class, 'contact'])->name('contact');

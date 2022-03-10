@@ -93,7 +93,7 @@
                                                 style="padding-left: 0px; padding-right: 0px; margin-right: 4px; background-color: #3BB77E;">
                                             <input type="text" name="qty[]" readonly type="number"
                                                 value="{{ $product->quantity }}" max="10" min="1"
-                                                class="qty update-qty" style="width: 70%;">
+                                                class="qty update-qty" style="width: 60%; padding-left: 0px;">
                                                 <input type="button" value="+" class="qty-plus btn-cart"
                                                 style="padding-left: 0px; padding-right: 0px; margin-left: 4px; background-color: #3BB77E;">
                                         </div>

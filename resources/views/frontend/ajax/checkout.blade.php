@@ -29,10 +29,10 @@ $currency = settings('currency');
                     @endphp
                     <div class="row cart-item mb-3">
                         <div class="col-3" style="width: 14%">
-                            <div class="checkout-product-img-wrapper product-details">
-                                @if (count($item->images) > 0)
+                            <div class="checkout-product-img-wrapper product-details" style="padding-top: 5px;">
+                                @if ($item->featured_image)
                                     <img class="item-thumb img-thumbnail img-rounded"
-                                        src="{{ asset('assets/img/uploads/products/' . $item->images()->first()->image) }}"
+                                        src="{{ asset('assets/img/uploads/products/featured/' . $item->featured_image) }}"
                                         alt="Angie’s Boomchickapop Sweet &amp; Salty Kettle Corn">
                                 @else
                                     <img src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" alt="" />

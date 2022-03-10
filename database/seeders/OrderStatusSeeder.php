@@ -14,10 +14,10 @@ class OrderStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_statuses')->insert([
-            'name'       => 'Accepted',
-            'created_at' => now(),
-        ]);
+        // DB::table('order_statuses')->insert([
+        //     'name'       => 'Accepted',
+        //     'created_at' => now(),
+        // ]);
         DB::table('order_statuses')->insert([
             'name'       => 'Pending',
             'created_at' => now(),
@@ -26,10 +26,10 @@ class OrderStatusSeeder extends Seeder
             'name'       => 'Processing',
             'created_at' => now(),
         ]);
-        DB::table('order_statuses')->insert([
-            'name'       => 'Picked up',
-            'created_at' => now(),
-        ]);
+        // DB::table('order_statuses')->insert([
+        //     'name'       => 'Picked up',
+        //     'created_at' => now(),
+        // ]);
         DB::table('order_statuses')->insert([
             'name'       => 'Product On The Way',
             'created_at' => now(),
@@ -38,13 +38,13 @@ class OrderStatusSeeder extends Seeder
             'name'       => 'Delivered',
             'created_at' => now(),
         ]);
-        DB::table('order_statuses')->insert([
-            'name'       => 'Canceled',
-            'created_at' => now(),
-        ]);
-        DB::table('order_statuses')->insert([
-            'name'       => 'Payment Failed',
-            'created_at' => now(),
-        ]);
+        // DB::table('order_statuses')->insert([
+        //     'name'       => 'Canceled',
+        //     'created_at' => now(),
+        // ]);
+        // DB::table('order_statuses')->insert([
+        //     'name'       => 'Payment Failed',
+        //     'created_at' => now(),
+        // ]);
     }
 }

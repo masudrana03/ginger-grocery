@@ -28,14 +28,14 @@ class StripePayment implements PayableInterface
      *
      * @param string $invoiceId
      */
-    public function acceptPayment($invoiceId)
+    public function acceptPayment($orderReference)
     {
         if (! $this->client_key && $this->client_secret) {
             return back()->with('Payment failed!');
         }
 
         if (!auth()->user()->stripe_customer_id) {
-            return redirect()->route('payment_from_card', $invoiceId);
+            return redirect()->route('payment_from_card', $orderReference);
         }
 
         //$stripe = new \Stripe\StripeClient($this->client_secret);
@@ -51,7 +51,7 @@ class StripePayment implements PayableInterface
         }
 
         if (!$paymentMethods) {
-            return redirect()->route('payment_from_card', $invoiceId);
+            return redirect()->route('payment_from_card', $orderReference);
         }
 
         $route = Route::current()->uri;
@@ -99,56 +99,91 @@ class StripePayment implements PayableInterface
         //}
     }
 
-    public function paymentFromCard($invoiceId)
+    public function paymentFromCard($orderReference)
     {
-        $amount = Order::whereOrderReference($invoiceId)->first()->total;
+        // return "https://checkout.stripe.com/pay/cs_test_a1oi8Ky5Yk6IHQOLm3e3VGqxvr3IozILP3IpCovVNXyInE6NLWKMn9TgoF#fidkdWxOYHwnPyd1blpxYHZxWjA0T3JnRmROVUNwUVNrSk1pbVc0Vk5qMWlwN0BGN2lgfWhyQ3VAbVBsbU50XXxhUjBsXzdHTmF1ck5qQ0EyRDRnQkJEUDxHdXVycE5fTTNdXXVnZjV%2FMU5hNTVoYzQzdU1zQicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl";
+        // $amount = Order::whereOrderReference($invoiceId)->first()->total;
 
-        $user = auth()->user();
+        // $user = auth()->user();
 
-        if (!$user->stripe_customer_id) {
-            $stripe = new \Stripe\StripeClient($this->client_secret);
+        // if (!$user->stripe_customer_id) {
+        //     $stripe = new \Stripe\StripeClient($this->client_secret);
 
-            $stripeCustomer = $stripe->customers->create([
-                'description' => 'A new customer created',
-            ]);
+        //     $stripeCustomer = $stripe->customers->create([
+        //         'description' => 'A new customer created',
+        //     ]);
 
-            $user->stripe_customer_id = $stripeCustomer->id;
-            $user->save();
-        }
+        //     $user->stripe_customer_id = $stripeCustomer->id;
+        //     $user->save();
+        // }
 
         \Stripe\Stripe::setApiKey($this->client_secret);
 
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $amount * 100,
-            'currency' => 'usd',
-            'customer' => $user->stripe_customer_id,
-        ]);
+        // $intent = \Stripe\PaymentIntent::create([
+        //     'amount' => $amount * 100,
+        //     'currency' => 'usd',
+        //     'customer' => $user->stripe_customer_id,
+        // ]);
+        //header('Content-Type: application/json');
 
-        $clientSecret = $intent->client_secret;
-        $publishKey   = $this->client_key;
+        $orders = Order::whereOrderReference($orderReference)->get();
+        $line_items = [];
 
-        $route = Route::current()->uri;
+        foreach ($orders as $order) {
+            foreach ($order->details as $item) {
+                $temp_items = [
+                  'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                      'name' => $item->product->name,
+                    //   'images' => [asset('assets/img/uploads/products/featured/' . $item->product->featured_image)],
+                    ],
+                    'unit_amount' => $item->product->price * 100,
+                  ],
+                  'quantity' => $item->quantity,
+                ];
 
-        if (strpos($route, 'api') !== false) {
-            return view('api.stripe', compact('clientSecret', 'publishKey', 'invoiceId'));
+                $line_items[] = $temp_items;
+            }
         }
 
-        return view('frontend.stripe', compact('clientSecret', 'publishKey', 'invoiceId'));
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $line_items,
+            'mode' => 'payment',
+            'success_url' => route('payment_success', $orderReference),
+            'cancel_url' => route('payment_failed', $orderReference),
+          ]);
+ 
+        return redirect($session->url);
+
+        // $clientSecret = $intent->client_secret;
+       //  $publishKey   = $this->client_key;
+
+        //$route = Route::current()->uri;
+
+        // if (strpos($route, 'api') !== false) {
+        //     return view('api.stripe', compact('clientSecret', 'publishKey', 'invoiceId'));
+        // }
+
+       // return view('frontend.stripe', compact('clientSecret', 'publishKey', 'invoiceId'));
     }
 
-    public function paymentSuccess($invoiceId, $paymentMethodId)
+    public function paymentSuccess($orderReference)
     {
-        $order = Order::whereOrderReference($invoiceId)->first();
-        $order->payment_status = true;
-        $order->save();
+        $orders = Order::whereOrderReference($orderReference)->get();
 
-        if ($paymentMethodId != 'No') {
-            $stripeCustomerCard = new StripeCustomerCard();
-            $stripeCustomerCard->user_id = $order->user_id;
-            $stripeCustomerCard->payment_method_id = $paymentMethodId;
-            $stripeCustomerCard->save();
+        foreach ($orders as $order) {
+            $order->payment_status = true;
+            $order->save();
         }
 
+        // if ($paymentMethodId != 'No') {
+        //     $stripeCustomerCard = new StripeCustomerCard();
+        //     $stripeCustomerCard->user_id = $order->user_id;
+        //     $stripeCustomerCard->payment_method_id = $paymentMethodId;
+        //     $stripeCustomerCard->save();
+        // }
         
 
         $route = Route::current()->uri;
@@ -157,6 +192,34 @@ class StripePayment implements PayableInterface
             view('frontend.order-placed');
         }
 
-        return view('frontend.order-placed');
+        //return view('frontend.order-placed');
+        return redirect()->route('checkout')->with('paymentSuccess', 'Order Placed Successfully!');
+    }
+
+    public function paymentFailed($orderReference)
+    {
+        $orders = Order::whereOrderReference($orderReference)->get();
+
+        foreach ($orders as $order) {
+            $order->payment_status = false;
+            $order->save();
+        }
+
+        // if ($paymentMethodId != 'No') {
+        //     $stripeCustomerCard = new StripeCustomerCard();
+        //     $stripeCustomerCard->user_id = $order->user_id;
+        //     $stripeCustomerCard->payment_method_id = $paymentMethodId;
+        //     $stripeCustomerCard->save();
+        // }
+        
+
+        $route = Route::current()->uri;
+
+        if (strpos($route, 'api') !== false) {
+            view('frontend.order-placed');
+        }
+
+        //return view('frontend.order-placed');
+        return redirect()->route('checkout')->with('paymentFailed', 'Payment Failed!');
     }
 }

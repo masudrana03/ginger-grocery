@@ -10,6 +10,7 @@ use App\Models\Promo;
 use App\Models\Address;
 use App\Models\Country;
 use App\Models\UserPoint;
+use App\Models\OrderTrack;
 use App\Models\OrderStatus;
 use Illuminate\Support\Str;
 use App\Models\OrderDetails;
@@ -41,22 +42,21 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-        $request->validate([
-            'code' => 'required'
-        ], [
-            'code.required' => 'Coupon code is required',
-        ]);
 
+        $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
+        // return count($cartProducts);
 
-        if (!$cart) {
-            return back()->with('error', 'Your card is empty');
+        if ( count($cartProducts) == 0 ) {
+            return '0';
+            // return back()->with('error', 'Your card is empty');
         }
 
         $promo = Promo::whereCode($request->code)->where('limit', '>', 0)->first();
 
         if (!$promo) {
-            return back()->with('error', 'Invalid coupon code');
+            return '1';
+            // return back()->with('error', 'Invalid coupon code');
         }
 
         $cart->update(['promo_id' => $promo->id]);
@@ -84,7 +84,7 @@ class CheckoutController extends Controller
     public function placeOrder(Request $request)
     {
         $cart = Cart::with('products')->whereUserId(auth()->id())->first();
-        
+
 
         if (!$cart) {
             return back()->with('noProduct', 'Your cart is empty, please add product in your cart');
@@ -94,16 +94,16 @@ class CheckoutController extends Controller
 
         if (! $userAddress) {
             $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required',
-                'address' => 'required',
-                'city' => 'required',
-                'zip' => 'required',
+                'name'       => 'required',
+                'email'      => 'required',
+                'address'    => 'required',
+                'city'       => 'required',
+                'zip'        => 'required',
                 'phone_code' => 'required',
-                'phone' => 'required',
+                'phone'      => 'required',
             ]);
         }
-            
+
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
         } else {
@@ -201,7 +201,7 @@ class CheckoutController extends Controller
         $address->user_id = auth()->id();
         $address->type = 2;
         $address->save();
-        
+
         return $address->id;
     }
 
@@ -221,7 +221,7 @@ class CheckoutController extends Controller
         $address->user_id = auth()->id();
         $address->type = 2;
         $address->where('id', $userAddress->id)->update();
-        
+
         return $address->id;
     }
 
@@ -289,6 +289,11 @@ class CheckoutController extends Controller
 
         $order->save();
 
+        $orderTracking = new OrderTrack();
+        $orderTracking->order_id        = $order->id;
+        $orderTracking->order_status_id = $orderStatus->id;
+        $orderTracking->save();
+
         foreach ($cart as $item) {
             $orderDetails             = new OrderDetails();
             $orderDetails->order_id   = $order->id;
@@ -345,9 +350,9 @@ class CheckoutController extends Controller
 
     public function ajaxShippingCalculation(Request $request){
         $address_id = request('address_id');
-        
-        
 
-        
+
+
+
     }
 }
