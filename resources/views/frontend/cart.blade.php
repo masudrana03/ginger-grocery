@@ -575,7 +575,6 @@
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-                retriveUpdateProduct();
             },
             error: function(error) {
                 console.log(error);

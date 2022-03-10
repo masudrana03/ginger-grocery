@@ -161,4 +161,5 @@ class CartController extends Controller
 
         return view('frontend.ajax.update-cart-div', compact('totalTax'));
     }
+
 }
