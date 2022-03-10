@@ -146,6 +146,7 @@
                                         {{-- <span class="stock-status out-stock"> Sale Off </span> --}}
 
                                         <h3 class="title-detail" style="font-size:30px;">{{ $product->name }}</h3>
+                                        <input type="hidden" value="{{ $item->id }}" id="pid">
                                         <div class="product-detail-rating">
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
@@ -169,6 +170,7 @@
                                             <div class="product-price primary-color float-left">
                                                 <span class="current-price text-brand"
                                                     style="font-size:46px;">{{ settings('currency') }}{{ $product->price }}</span>
+
 
                                                 {{-- <span>
                                                     <span class="save-price font-md color3 ml-15">26% Off</span>
@@ -194,13 +196,15 @@
 
                                         <div class="detail-extralink mb-50">
                                             <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i
-                                                        class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                                <input type="hidden" name=qty[] id="qty" class="update-qty">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"
+                                                        id="down"></i></a>
+                                                <span class="qty-val" id="qty-value">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"
+                                                        id="up"></i></a>
                                             </div>
-                                            <div class="product-extra-link2 add-cart">
-                                                <button type="submit" class="button button-add-to-cart add"><i
+                                            <div class="product-extra-link2 ">
+                                                <button type="submit" class="button button-add-to-cart adding"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -434,7 +438,7 @@
                                                     @php
                                                         $vendorRating = $product->store->rating;
                                                         $vendorToralRating = $product->store->totalRating;
-
+                                                        
                                                     @endphp
 
                                                     <div class="product-rate-cover text-end">
@@ -655,8 +659,7 @@
                                                                 href="{{ route('wishlist', $productData->id) }}"
                                                                 tabindex="0"><i class="fi-rs-heart"></i></a>
                                                             <a aria-label="Compare" data-id="{{ $productData->id }}"
-                                                                class="action-btn small hover-up compare-btn"
-                                                                href="#"
+                                                                class="action-btn small hover-up compare-btn" href="#"
                                                                 tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                                         </div>
 
@@ -755,7 +758,7 @@
                                     @php
                                         $vendorRating = $product->store->rating;
                                         $vendorTotalRating = $product->store->totalRating;
-
+                                        
                                     @endphp
 
                                     <div class="product-rate-cover text-end">
@@ -827,45 +830,6 @@
         }
     </script>
 
-    {{-- <script>
-        $(document).ready(function() {
-            $(".add-cart .add").on('click', function(event) {
-                event.preventDefault();
-
-                addCart(event.target);
-            });
-        });
-
-        function addCart(node) {
-            var closest_div = $(node).closest('.add-cart');
-            var id = closest_div.find('.product-id').text();
-            addToCartById(id);
-        }
-
-        function addToCartById(id) {
-            var pid = id;
-            var url = "{!! route('cartById', ':id') !!}";
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-
-                },
-                success: function(result) {
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                    tata.success('Success!', 'Product added to your cart.');
-                },
-                error: function(error) {
-                    if (error.status == 401) {
-                        window.location.href = "/login";
-                    }
-                }
-            });
-        }
-    </script> --}}
 
     <script>
         $(document).ready(function() {
@@ -906,5 +870,79 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
 
+        });
+
+        $("#up").click(function(event) {
+            event.preventDefault();
+            //alert("ugfsgfhsfhsfgshf");
+
+            let value = $('#qty-value').text();
+
+            // let price = $('.price').val();
+            //alert(price);
+
+            let currentValue = parseInt(value);
+            //alert(currentValue);
+            if (currentValue < 10) {
+                currentValue = currentValue + 1;
+                $('#qty-value').text(currentValue);
+                $('.qty').val(currentValue);
+
+                // let new_price = price * currentValue;
+                // $('.current-price').text(new_price);
+
+            }
+
+        });
+
+        $("#down").click(function(event) {
+            event.preventDefault();
+            //alert("ugfsgfhsfhsfgshf");
+
+            let value = $('#qty-value').text();
+            let currentValue = parseInt(value);
+            //alert(currentValue);
+            if (currentValue > 1) {
+                currentValue = currentValue - 1;
+                $('#qty-value').text(currentValue);
+                $('.qty').val(currentValue);
+            }
+        });
+
+
+        $(".adding").click(function(event) {
+            var x =$('#qty-value').text();
+            let quantity = parseInt(x); 
+            var pid = $('#pid').val();
+
+            var url2 = "{!! route('cartById', ':id') !!}";
+            url2 = url2.replace(':id', pid);
+
+            $.ajax({
+                method: 'GET',
+                url: url2,
+                data: {
+                    id: pid,
+                    quantity: quantity,
+
+                },
+                success: function(result) {
+                    $('#old-cart').empty();
+                    $('#new-cart').html(result);
+                    console.log(result);
+                    tata.success('Success!', 'Product added to your cart.');
+                },
+                error: function(error) {
+                    if (error.status == 401) {
+                        window.location.href = "/login";
+                    }
+                }
+            });
+
+        
+        });
+    </script>
 @endsection

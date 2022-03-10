@@ -12,7 +12,7 @@
         border-radius: 13px;
     }
 
-    .add-icon{
+    .add-icon {
         font-size: 18px;
 
     }
@@ -66,9 +66,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                                                        document.getElementById('logout-form').submit();"><i
+                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
+
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf
@@ -86,16 +86,18 @@
                                                 <div class="card">
                                                     <div class="card-header d-flex">
                                                         <h3 class="mb-0">Shipping Address</h3>
-                                                        <button class="btn add-billing-address p-1 " style="margin-left:40px; border-radius:35px; width:36px;" id="shipping"
-                                                                onclick="createModal('shipping')"
-                                                                ><i  class="fas fa-plus add-icon"></i></button>
-
+                                                        <div id="cre-icon">
+                                                            <button class="btn add-billing-address p-1 "
+                                                                style="margin-left:40px; border-radius:35px; width:36px;"
+                                                                id="shipping" onclick="createModal('shipping')"><i
+                                                                    class="fas fa-plus add-icon"></i></button>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body p-4">
-
                                                         @forelse ($shippingAddresses ?? [] as $address)
-                                                            <p>{{ $address->name }}</p>
-                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}</p>
+                                                            <p class="address_name">{{ $address->name }}</p>
+                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}
+                                                            </p>
                                                             <p>{{ $address->email }}</p>
                                                             <address>
                                                                 {{ $address->address }},
@@ -103,7 +105,8 @@
                                                             <p>{{ $address->state }}, {{ $address->city }},
                                                                 {{ $address->zip }} ,</p>
                                                             <p>{{ settings('country') }} .</p>
-
+                                                            <input type="hidden" id="hidden_id"
+                                                                value="{{ $address->id }}">
                                                             <div class="billing-button"
                                                                 style="margin-left: 60%; margin-top:-30px;">
                                                                 <button class="btn-success  edit-billing-address"
@@ -124,7 +127,8 @@
                                                             <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
-                                                            <button class="btn add-billing-address" id="shipping"
+
+                                                            <button class="btn add-billing-address cre-btn" id="shipping"
                                                                 onclick="createModal('shipping')"
                                                                 style="color: white;">Create Shipping Address</button>
                                                         @endforelse
@@ -890,4 +894,14 @@
         }
 
     }
+</script>
+
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        let address = $('.address_name').text();
+        if (address == "") {
+            $('#cre-icon').empty();
+        }
+    });
 </script>

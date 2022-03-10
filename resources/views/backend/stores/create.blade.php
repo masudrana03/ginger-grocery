@@ -301,11 +301,11 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="longitude">Tax</label>
                                             <input type="text" name="tax" id="longitude" class="form-control"
                                                 id="longitude" aria-describedby="emailHelp" placeholder="">
-                                        </div>
+                                        </div> --}}
 
                                         <div class="">
                                             <label for="longitude">Currency</label>

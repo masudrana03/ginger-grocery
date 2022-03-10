@@ -35,7 +35,7 @@ class CartController extends Controller
 
                 $cart->products()->sync([
                     $product->id => [
-                        'quantity' => $request->quantity,
+                        'quantity' => request('quantity'),
                         'options'  => $request->options ? json_encode($request->options) : null,
                     ],
                 ], false);
@@ -45,15 +45,16 @@ class CartController extends Controller
 
                 $cartId = auth()->user()->cart->id;
                 $product_id = $request->product_id;
-                $quantity = $request->quantity;
+                $quantity = request('quantity');
 
                 $searching_product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->first();
 
                 if ($searching_product) {
+                    $quantity = request('quantity');
                     $current_qty = $searching_product->quantity;
                     $update_qty = $current_qty + $quantity;
                     //return $current_qty;
-                    if ($current_qty <= 9) {
+                    if ($update_qty <= 10) {
                         $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
                         return view("frontend.ajax.cart");
                     } else {
@@ -79,10 +80,18 @@ class CartController extends Controller
      */
     public function addToCartById($id)
     {
-        $request = new Request([
-            'product_id' => $id,
-            'quantity'   => 1,
-        ]);
+        if (request('quantity')) {
+            $request = new Request([
+                'product_id' => $id,
+                'quantity'   => request('quantity'),
+            ]);
+        } else {
+            $request = new Request([
+                'product_id' => $id,
+                'quantity'   => 1,
+            ]);
+        }
+
 
         return $this->addToCart($request);
     }
@@ -121,7 +130,6 @@ class CartController extends Controller
 
     public function ajaxUpdateCart($id)
     {
-        //$product = Product::find($id);
         return view('frontend.ajax.cart');
     }
 

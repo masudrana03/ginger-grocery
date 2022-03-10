@@ -12,9 +12,11 @@
                                 <div class="main-title">
                                     <h3 class="m-0">Stores</h3>
                                 </div>
+                                @if (isAdmin())
                                 <div class="add_button ml-10">
                                     <a href="{{ route('admin.stores.create') }}" class="btn_1">Add New</a>
                                 </div>
+                                @endif
                             </div>
 
                         </div>

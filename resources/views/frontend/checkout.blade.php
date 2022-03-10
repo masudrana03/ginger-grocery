@@ -163,7 +163,7 @@
                 </div>
 
 
-                <div class="row mb-10 mt-20" id="shipping-form" style="display: none;">
+                <div class="row mb-10 mt-20" id="shipping-form">
                     <h4 class="mb-10">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
                         @csrf
@@ -221,7 +221,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-3">
-                                <input required="" type="text" name="zip" placeholder="Postcode / ZIP *"
+                                <input required="" id="zip-code" type="text" name="zip" placeholder="Postcode / ZIP *"
                                     class="@error('zip') is-invalid @enderror">
                                 @error('zip')
                                     <span class="invalid-feedback" role="alert">
@@ -319,16 +319,15 @@
 
             {{-- Checkout new page added --}}
 
-
-            <div class="col-lg-5 mb-100" style="margin-top:7%;">
+            
+            <div class="col-lg-5 mb-100" style="margin-top:7%;" id="oldCheckoutProducts">
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s):</p>
                 </div>
                 @php
                     $grandSubtotal = 0;
                     $grandTotal = 0;
-                    $grandTax = 0;
-                    $grandShipping = 0;
+                    $shipping = 0;
                     $currency = settings('currency');
                 @endphp
                 @forelse (auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [] as $key => $product)
@@ -346,8 +345,6 @@
                             @php
                                 $subtotal = 0;
                                 $total = 0;
-                                $tax = priceCalculator($product)['tax'] ?? 0;
-                                $shipping = 0;
                             @endphp
                             <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
@@ -385,26 +382,21 @@
                                 @endforeach
                             </div>
                             <hr>
-                            @php
-                                $shipping = shippingCalculator($subtotal, $store->id);
-                                $grandShipping += $shipping;
-                                $grandTax += $tax;
-                            @endphp
                             <div class="row checkout-total ">
                                 <div class="col-6 calculate-total">
-                                    <p class="">Subtotal:</p>
-                                    <p class="">Shipping Fee:</p>
-                                    <p class="">Tax:</p>
-                                    <h5 class="">Total:</h5>
+                                    <p class="">Total:</p>
+                                    {{-- <p class="">Shipping Fee:</p> --}}
+                                    {{-- <p class="">Tax:</p> --}}
+                                    {{-- <h5 class="">Total:</h5> --}}
                                 </div>
 
                                 <div class="col-6 calculate">
                                     <p class="total-amount"> {{ $currency }}{{ $subtotal }} </p>
-                                    <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
-                                    </p>
+                                    {{-- <p class="store-shipping total-amount" id="{{ $store->id }}"> {{ $currency }}0
+                                    </p> --}}
                                     {{-- <p class="store-shipping" id=""> {{ $currency }}{{ $shipping }} </p> --}}
-                                    <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
-                                    <h5 class="total-amount"> {{ $currency }}{{ $subtotal + $shipping + $tax }}
+                                    {{-- <p class="total-amount"> {{ $currency }}{{ $tax }} </p> --}}
+                                    {{-- <h5 class="total-amount"> {{ $currency }}{{ $subtotal }} --}}
                                     </h5>
                                 </div>
                             </div>
@@ -432,14 +424,21 @@
                         <h5 class="">Total:</h5>
                     </div>
 
+                    @php
+                        $tax = taxCalculator($grandSubtotal) ?? 0;
+                    @endphp
+
                     <div class="col-6 calculate">
                         <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
-                        <p class="total-amount"> {{ $currency }}{{ $grandShipping }} </p>
-                        <p class="total-amount"> {{ $currency }}{{ $grandTax }} </p>
-                        <h5 class="total-amount">{{ $currency }}{{ $grandShipping + $grandTax + $grandSubtotal }}
+                        <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
+                        <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
+                        <h5 class="total-amount">{{ $currency }}{{ $shipping + $tax + $grandSubtotal }}
                         </h5>
                     </div>
                 </div>
+
+            </div>
+            <div class="col-lg-5 mb-100" style="margin-top:7%;" id="newCheckoutProducts">
 
             </div>
         </div>
@@ -459,37 +458,39 @@
         // onload function to check any address found or not
 
         function checkAddress() {
-            let shipForm = document.getElementById('shipping-form');
+
             let noAdd = document.getElementById('noAddress');
             let check = document.getElementById('infoCheck');
+            let error = document.getElementsByName('error');
+            let radioBtn = document.getElementsByName('address1');
 
-            if (noAdd) {
-                shipForm.style.display = "block";
+
+
+            if (noAdd || error) {
+                $('#shipping-form').show();
+
                 check.checked = true;
             } else {
-                check.checked = false;
-                shipForm.style.display = "none";
 
+                check.checked = false;
+                $('#shipping-form').hide();
             }
         }
 
-
-
-
         function showDiv(check) {
 
-
-            let shipForm = document.getElementById('shipping-form');
             let radioBtn = document.getElementsByName('address1');
             if (check.checked) {
-                shipForm.style.display = "block";
+                //shipForm.style.display = "block";
+                $('#shipping-form').show();
                 for (i = 0; i <= radioBtn.length; i++) {
 
                     radioBtn[i].checked = false;
                 }
 
             } else {
-                document.getElementById('shipping-form').style.display = "none";
+                $('#shipping-form').hide();
+                //document.getElementById('shipping-form').style.display = "none";
                 for (i = 0; i <= radioBtn.length; i++) {
 
                     radioBtn[i].checked = false;
@@ -521,7 +522,6 @@
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
                                 payHiddenId.value = payValue;
-
                                 billForm.submit();
                             } else {
                                 if (check.checked) {
@@ -539,6 +539,7 @@
                     } else {
 
                         if (check.checked) {
+
                             payHiddenId.value = payValue;
                             billForm.submit();
                         } else {
@@ -555,42 +556,67 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            //alert('starting');
+            //$('#shipping-form').hide();
 
-        });
+            // var sessionErrors = '{{ session()->has('errors') }}';
 
-        $(function() {
+            // if (sessionErrors) {
+            //     alert(sessionErrors)
+            //     $('#shipping-form').show();
+            // }
 
             $('.checkaddress').each(function() {
                 var $this = $(this);
                 $this.on('click', function() {
-
-                    //var addName = $('.addName');
-                    // var address = $this.children(".addName").html();
-
-                    var address_id = $this.val();
-
-                    ajaxLoadingStoreId(address_id);
-
-
-
+                    var addressId = $this.val();
+                    //alert(addressId);
+                    fireAjax(addressId, 1)
                 });
             });
 
+            $('#zip-code').on('keyup', function() {
+                var address = $('#address').val();
+                var state = $('#state').val();
+                var city = $('#city').val();
+
+                if (address == '' && city == '') {
+                    alert('Please enter address and city first');
+                }
+
+                addressInfo = address + ' ' + state + ' ' + city;
+                //alert(addressInfo);
+                fireAjax(addressInfo)
+            });
         });
 
-        function ajaxLoadingStoreId(address_id) {
+        function fireAjax(address, id = 0) {
             $.ajax({
                 method: 'GET',
                 url: "{!! route('ajax.shipping.calculation') !!}",
                 type: 'get',
                 data: {
-                    address_id: address_id,
+                    address: address,
+                    id: id,
                 },
                 success: function(response) {
-                    //console.log(response);
-                    $('#app').html(response);
+                    // console.log(response);
+                    $('#oldCheckoutProducts').hide();
+                    $('#newCheckoutProducts').html(response);
+                    //$('#app').html(response);
                 }
             });
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.checkaddress').each(function() {
+                $(this).on('click', function() {
+                   $("#infoCheck").prop("checked", false);
+                    $('#shipping-form').hide();
+                });
+            });
+        });
     </script>
 @endpush

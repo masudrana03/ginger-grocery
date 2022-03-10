@@ -38,15 +38,16 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'country', 'value' => 'United States'] );
         Setting::create( ['key' => 'state', 'value' => 'CA'] );
         Setting::create( ['key' => 'currency', 'value' => '$'] );
+        Setting::create( ['key' => 'tax', 'value' => 10] );
         Setting::create( ['key' => 'hot_number', 'value' => '123456'] );
         Setting::create( ['key' => 'news_flash_one', 'value' => 'Welcome to Groce-Fusion'] );
         Setting::create( ['key' => 'news_flash_two', 'value' => 'Get 30% discount on your first order'] );
         Setting::create( ['key' => 'news_flash_three', 'value' => 'We are giving 10% discount on online payment'] );
+        Setting::create( ['key' => 'map_api_key', 'value' => ''] );
         Setting::create( ['key' => 'facebook_link', 'value' => '#'] );
         Setting::create( ['key' => 'twitter_link', 'value' => '#'] );
         Setting::create( ['key' => 'instagram_link', 'value' => '#'] );
         Setting::create( ['key' => 'linkedin_link', 'value' => '#'] );
         Setting::create( ['key' => 'youtube_link', 'value' => '#'] );
-
     }
 }

@@ -275,12 +275,12 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="tax">Tax</label>
                                             <input type="text" name="tax" id="tax" class="form-control" id="tax"
                                                 aria-describedby="emailHelp" placeholder="10"
                                                 value="{{ old('tax') ?? $store->tax }}">
-                                        </div>
+                                        </div> --}}
 
                                         <div class="">
                                             <label for="longitude">Currency</label>

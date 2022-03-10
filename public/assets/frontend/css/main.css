@@ -5113,7 +5113,7 @@ table .product-thumbnail img {
   color: #3BB77E;
   border-radius: 5px;
   padding: 11px 20px 11px 30px;
-  max-width: 90px;
+  max-width: 50px;
 }
 
 .stock-status {

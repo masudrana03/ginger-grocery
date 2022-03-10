@@ -42,9 +42,9 @@
                                             <option
                                                 {{ $shippingService->type == 'Condition on purchase' ? 'selected' : '' }}
                                                 value="Condition on purchase">Condition on purchase</option>
-                                            {{-- <option
+                                            <option
                                                 {{ $shippingService->type == 'Condition on distance' ? 'selected' : '' }}
-                                                value="Condition on distance">Condition on distance (km)</option> --}}
+                                                value="Condition on distance">Condition on distance (km)</option>
                                         </select>
                                     </div>
                                     <div class="col-3">
