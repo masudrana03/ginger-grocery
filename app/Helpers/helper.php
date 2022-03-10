@@ -163,6 +163,7 @@ function getDiscountAmount($total, $type, $discount)
  */
 function taxCalculator($total)
 {
+    logger($total);
     $taxRate = settings('tax');
 
     return round(($taxRate / 100) * $total, 2) ;

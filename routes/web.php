@@ -221,7 +221,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
     Route::get('/cart-product-remove-div/{id}', [FrontendCartController::class, 'removeItemFromDiv'])->name('cart.remove.div');
     Route::get('/checkout', [FrontendCheckoutController::class, 'checkout'])->name('checkout');
-    Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo']);
+    Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo'])->name('promo.code');
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
     Route::get('shipping-fee-calculation', [CheckoutController::class, 'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
 });

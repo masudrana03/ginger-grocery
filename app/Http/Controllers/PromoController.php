@@ -27,13 +27,14 @@ class PromoController extends Controller
         $columns = [
             0 => 'id',
             1 => 'title',
-            1 => 'type',
-            1 => 'code',
-            1 => 'used',
-            1 => 'limit',
-            1 => 'status',
-            3 => 'created_at',
-            4 => 'id',
+            2 => 'type',
+            3 => 'code',
+            4 => 'used',
+            5 => 'discount',
+            6 => 'limit',
+            7 => 'status',
+            8 => 'created_at',
+            9 => 'id',
         ];
 
         $totalData = Promo::count();
@@ -80,6 +81,7 @@ class PromoController extends Controller
                 $nestedData['type']       = $promo->type;
                 $nestedData['code']       = $promo->code;
                 $nestedData['used']       = $promo->used;
+                $nestedData['discount']   = $promo->discount;
                 $nestedData['limit']      = $promo->limit;
                 $nestedData['status']     = "<a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePromoStatus({$promo->id})' id='promoStatus-{$promo->id}'>$promo->status</a>";
                 $nestedData['created_at'] = $promo->created_at->format('d-m-Y');

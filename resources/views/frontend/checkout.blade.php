@@ -163,6 +163,8 @@
                 </div>
 
 
+
+
                 <div class="row mb-10 mt-20" id="shipping-form">
                     <h4 class="mb-10">Shipping Details</h4>
                     <form id="BillingForm" method="post" action="/place-order">
@@ -315,11 +317,43 @@
                     </div>
                 </div>
 
+                <div class="form-group" style="position: relative; left: 50%; width: 50%; top: -62px;">
+                    <form class="apply-coupon">
+                        @csrf
+                        {{-- <input type="text" placeholder="Enter Coupon Code..."> --}}
+                        <input class="@error('code') is-invalid @enderror " name="code" id="promoId"
+                                placeholder="Enter Your Code...">
+                            @error('code')
+                                <span class="invalid-feedback" role="alert" style="position: absolute; top: 90%; left: 2%;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        <button class="btn  btn-md" id="promoCode" >Apply Coupon</button>
+                    </form>
+
+                    {{-- <form method="post" action="/apply-promo">
+                        @csrf
+                        <div class="d-flex justify-content-between">
+                            <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code"
+                                placeholder="Enter Your Code...">
+                            @error('code')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <button class="btn"><i class="fi-rs-label mr-10"></i>Apply</button>
+                        </div>
+                    </form> --}}
+
+                    <div id="promoError"></div>
+                    <div id="noCartError"></div>
+                </div>
+
             </div>
 
             {{-- Checkout new page added --}}
 
-            
+
             <div class="col-lg-5 mb-100" style="margin-top:7%;" id="oldCheckoutProducts">
                 <div class=" p-2 bg-light">
                     <p class="font-weight-bold mb-0">Product(s):</p>
@@ -349,8 +383,7 @@
                             <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
                                     @php
-                                        $subtotal += $item->price;
-                                        $grandSubtotal += $item->price;
+                                        $subtotal += $item->price * $item->quantity;
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
@@ -376,10 +409,14 @@
                                         </div>
 
                                         <div class="col">
-                                            <p class="pri">{{ $currency }} {{ $item->price }}</p>
+                                            <p class="pri">{{ $currency }} {{ $item->price * $item->quantity }}</p>
                                         </div>
                                     </div>
                                 @endforeach
+
+                                @php
+                                    $grandSubtotal += $subtotal;
+                                @endphp
                             </div>
                             <hr>
                             <div class="row checkout-total ">
@@ -446,6 +483,52 @@
 @endsection
 
 @push('script')
+
+<script>
+    $(document).ready(function() {
+        // alert('hello');
+        // method="GET" action="{{ route('user.track.orders') }}"
+        $("#promoCode").click(function(event) {
+            event.preventDefault();
+            var promoId = $('#promoId').val();
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('promo.code') }}",
+                type: 'post',
+                data: {
+                    code: promoId,
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response == '1') {
+                        $('#promoError').html(
+                            '<div class="alert alert-danger">Invalid Promo Code !</div>');
+                            return;
+                    }
+                    if (response == '0') {
+                        $('#noCartError').html(
+                            '<div class="alert alert-danger">No Cart Found</div>');
+                            return;
+                    }else{
+                        $('#noCartError').html(
+                            '<div class="alert alert-danger">No Cart Found</div>');
+                            return;
+                    }
+                    console.log(response);
+                    $('#trackOrderNew').html(response);
+                }
+            });
+        });
+
+    });
+</script>
+
+
     <script>
         // function doit(id) {
         //     document.getElementById("paymentMethod").value = id;

@@ -100,6 +100,7 @@
                 { "data": "title" },
                 { "data": "type" },
                 { "data": "code" },
+                { "data": "discount" },
                 { "data": "used" },
                 { "data": "limit" },
                 { "data": "status" },

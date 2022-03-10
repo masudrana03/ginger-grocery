@@ -42,22 +42,21 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-        $request->validate([
-            'code' => 'required'
-        ], [
-            'code.required' => 'Coupon code is required',
-        ]);
 
+        $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
+        // return count($cartProducts);
 
-        if (!$cart) {
-            return back()->with('error', 'Your card is empty');
+        if ( count($cartProducts) == 0 ) {
+            return '0';
+            // return back()->with('error', 'Your card is empty');
         }
 
         $promo = Promo::whereCode($request->code)->where('limit', '>', 0)->first();
 
         if (!$promo) {
-            return back()->with('error', 'Invalid coupon code');
+            return '1';
+            // return back()->with('error', 'Invalid coupon code');
         }
 
         $cart->update(['promo_id' => $promo->id]);
