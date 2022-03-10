@@ -283,7 +283,7 @@
 
 <script>
     $(document).ready(function() {
-        alert('test');
+        //alert('test');
         $(".wishlist-btn").click(function(event) {
             alert('good');
             event.preventDefault();
@@ -310,4 +310,6 @@
         });
     });
 </script>
+
+
 

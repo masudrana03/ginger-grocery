@@ -137,7 +137,7 @@
             success: function(result) {
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                //tata.success('Success!', 'Product added to your cart.');
+                tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {

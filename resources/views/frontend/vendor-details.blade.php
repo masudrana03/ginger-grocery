@@ -552,8 +552,7 @@
                             }
                         });
                     }, 1500);
-                    // loadHome(search);
-                    // $('#app').html(loading);
+                    
                 } else {
                     $('#newSortDiv').empty();
                     $('#newProductSearch').empty();
@@ -564,4 +563,5 @@
 
         });
     </script>
+    
 @endpush
