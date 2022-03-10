@@ -88,7 +88,7 @@ class CheckoutController extends Controller
 
 
         if (!$cart) {
-            return back()->with('error', 'Your cart is empty, please add product in your cart');
+            return back()->with('noProduct', 'Your cart is empty, please add product in your cart');
         }
 
         $userAddress = Address::where('id', $request->address_id)->first();

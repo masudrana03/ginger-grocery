@@ -216,6 +216,8 @@ Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter'
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
+    
+    
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
