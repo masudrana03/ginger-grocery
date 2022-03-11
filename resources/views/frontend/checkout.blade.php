@@ -105,6 +105,34 @@
     .total-amount {
         padding-right: 8%;
     }
+    .alert-danger {
+            width: 100%!important;
+            border-radius: 10px!important;
+            border-color: #ffd170 !important;
+            background-color: #fff1d3!important;
+            text-align: center;
+            font-size: 20px!important;
+            color: #7c7c7c!important;
+            position: relative!important;
+            padding: 0.8rem!important;
+            margin-bottom: 1rem!important;
+            border: 1px solid transparent!important;
+            font-weight: 700!important;
+        }
+        .alert-success {
+            width: 100%!important;
+            border-radius: 10px!important;
+            border-color: #3BB77E !important;
+            background-color: #CDF0E0!important;
+            text-align: center;
+            font-size: 20px!important;
+            color: #7c7c7c!important;
+            position: relative!important;
+            padding: 0.8rem!important;
+            margin-bottom: 1rem!important;
+            border: 1px solid transparent!important;
+            font-weight: 700!important;
+        }
 
 </style>
 
@@ -345,8 +373,8 @@
                         </div>
                     </form> --}}
 
-                    <div id="promoError"></div>
-                    <div id="noCartError"></div>
+                    <div id="promoError" style="padding-top: 10px;"></div>
+                    <div id="noCartError" style="padding-top: 10px;"></div>
                 </div>
 
             </div>
@@ -452,12 +480,16 @@
                 <div>
                     <h5 class="mb-30 pl-2">Total Amount:</h5>
                 </div>
+
                 <div class="row checkout-total ">
 
                     <div class="col-6 calculate-total">
                         <p class="">Subtotal:</p>
                         <p class="">Shipping Fee:</p>
                         <p class="">Tax:</p>
+                        @if (session('totalAfterDiscount'))
+                        <p>Promo Discount</p>
+                        @endif
                         <h5 class="">Total:</h5>
                     </div>
 
@@ -469,8 +501,13 @@
                         <p class="total-amount"> {{ $currency }}{{ $grandSubtotal }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
-                        <h5 class="total-amount">{{ $currency }}{{ $shipping + $tax + $grandSubtotal }}
-                        </h5>
+                        @if (session('totalAfterDiscount'))
+                        <p class="total-amount discount">{{ session('discountAmount') }}</p>
+                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                        @else
+                        <p class="total-amount discount">{{ session('discountAmount') }}</p>
+                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                        @endif
                     </div>
                 </div>
 
@@ -504,23 +541,32 @@
                     code: promoId,
                 },
                 success: function(response) {
-                    console.log(response);
                     if (response == '1') {
                         $('#promoError').html(
-                            '<div class="alert alert-danger">Invalid Promo Code !</div>');
+                            '<div class="alert alert-danger">Invalid promo code !</div>');
+                            return;
+                    }
+                    if (response == '4') {
+                        $('#promoError').html(
+                            '<div class="alert alert-danger">Please enter your promo code</div>');
                             return;
                     }
                     if (response == '0') {
                         $('#noCartError').html(
-                            '<div class="alert alert-danger">No Cart Found</div>');
+                            '<div class="alert alert-danger">No cart found</div>');
                             return;
-                    }else{
+                    }if(response == '2'){
                         $('#noCartError').html(
-                            '<div class="alert alert-danger">No Cart Found</div>');
+                            '<div class="alert alert-danger">Buy more mroducts to get discount</div>');
                             return;
                     }
-                    console.log(response);
-                    $('#trackOrderNew').html(response);
+                    else {
+                        $('#promoError').html(
+                            '<div class="alert alert-success">Promo code applied successfully</div>');
+                        $('#oldCheckoutProducts').hide();
+                        $('#newCheckoutProducts').html(response);
+                    }
+
                 }
             });
         });
