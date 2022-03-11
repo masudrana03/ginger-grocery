@@ -216,6 +216,8 @@ Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter'
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
+    
+    
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
@@ -258,7 +260,9 @@ Route::get('/wishlist-default-remove', [FrontendWishlistController::class, 'remo
 Route::get('/shop-product/{id}', [FrontendStoreController::class, 'storeById'])->name('shop.product');
 
 Route::get('/payment_from_card/{invoice_id}', [StripePayment::class, 'paymentFromCard'])->name('payment_from_card');
-Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+// Route::get('payment-success/{invoice_id}/{payment_method_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+Route::get('payment-success/{invoice_id}', [StripePayment::class, 'paymentSuccess'])->name('payment_success');
+Route::get('payment-failed/{invoice_id}', [StripePayment::class, 'paymentFailed'])->name('payment_failed');
 Route::get('payment-from-saved-card/{order_id}/{payment_method_id}', [StripePayment::class, 'paymentFromSavedCard'])->name('payment_from_saved_card');
 
 Route::get('/contact', [FrontendContactController::class, 'contact'])->name('contact');

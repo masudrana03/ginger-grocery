@@ -391,6 +391,15 @@
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
 
+
+    {{-- sweetalert --}}
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    {{-- sweetalert --}}
+
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <script src="{{ asset('assets/tata_toster/tata.js') }}"></script>
 
@@ -401,13 +410,91 @@
         });
     </script>
 
-    @if (session()->has('success'))
+    @if (session()->has('paymentSuccess'))
         <script>
             $(document).ready(function() {
-                swal("Success!", "{{ session('success') }}", "success");
+                swal({
+                    title: "<h2 style='color:#2bac6b'>" +
+                        "Success !" +
+                        "</h2>",
+                    text: "Your order has been placed successfully",
+                    imageUrl: "{{ asset('assets/frontend/imgs/swal-image/icon03.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 220,
+                    imageAlt: "Custom image",
+                    confirmButtonText: "Continue Shopping",
+                    confirmButtonColor: "#2bac6b",
+                    width: 340,
+                    padding: 40,
+                }).then((result) => {
+                    if (result.value) {
+                        window.location =
+                            "{{ route('index') }}";
+                    }
+                });
             })
         </script>
     @endif
+
+    @if (session()->has('paymentFailed'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: "<h2 style='color:#E74141'>" +
+                        "Failed !" +
+                        "</h2>",
+                    text: "Payment Failed",
+                    imageUrl: "{{ asset('assets/frontend/imgs/swal-image/icon04.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 220,
+                    imageAlt: "Custom image",
+                    confirmButtonText: "Continue Shopping",
+                    confirmButtonColor: "#E74141",
+                    width: 340,
+                    padding: 40,
+                }).then((result) => {
+                    if (result.value) {
+                        window.location =
+                            "{{ route('index') }}";
+                    }
+                });
+            })
+        </script>
+    @endif
+
+    @if (session()->has('noProduct'))
+        <script>
+            $(document).ready(function() {
+                swal({
+                    title: "<h2 style='color:#E74141'>" +
+                        "Failed !" +
+                        "</h2>",
+                    text: "Your cart is empty, please add product in your cart",
+                    imageUrl: "{{ asset('assets/frontend/imgs/swal-image/icon04.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 220,
+                    imageAlt: "Custom image",
+                    confirmButtonText: "Continue Shopping",
+                    confirmButtonColor: "#E74141",
+                    width: 340,
+                    padding: 40,
+                }).then((result) => {
+                    if (result.value) {
+                        window.location =
+                            "{{ route('index') }}";
+                    }
+                });
+            })
+        </script>
+    @endif
+    @if (session()->has('success'))
+        <script>
+            $(document).ready(function() {
+                swal("Ops!", "{{ session('error') }}", "success");
+            })
+        </script>
+    @endif
+
     @if (session()->has('error'))
         <script>
             $(document).ready(function() {
@@ -613,7 +700,45 @@
     </script>
 
 
+    <script>
+        $(document).ready(function() {
+            $(".add-cart .add").on('click', function(event) {
+                event.preventDefault();
 
+                addCart(event.target);
+            });
+        });
+
+        function addCart(node) {
+            var closest_div = $(node).closest('.add-cart');
+            var id = closest_div.find('.product-id').text();
+            addToCartById(id);
+        }
+
+        function addToCartById(id) {
+            var pid = id;
+            var url = "{!! route('cartById', ':id') !!}";
+            url = url.replace(':id', pid);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: pid,
+
+                },
+                success: function(result) {
+                    $('#old-cart').empty();
+                    $('#new-cart').html(result);
+                    tata.success('Success!', 'Product added to your cart.');
+                },
+                error: function(error) {
+                    if (error.status == 401) {
+                        window.location.href = "/login";
+                    }
+                }
+            });
+        }
+    </script>
 
 
     @yield('script')
