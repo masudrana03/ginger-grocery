@@ -648,8 +648,7 @@
                     success: function(result) {
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
-                        return;
-                        tata.success('Success!', 'Product added to compare list.');
+                        tata.success('Success!', 'Product added to wishlist.');
                     },
                     error: function(error) {
                         console.log(error);
@@ -677,7 +676,7 @@
                     success: function(result) {
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
-                        tata.success('Success!', 'Product removed from compare list.');
+                        tata.success('Success!', 'Product removed from wishlist.');
                     },
                     error: function(error) {
                         console.log(error);

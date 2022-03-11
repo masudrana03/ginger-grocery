@@ -64,7 +64,7 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                                <a aria-label="Add To Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
                                                     href="#"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" data-id="{{ $product->id }}"
                                                     class="action-btn compare-btn"
@@ -157,7 +157,7 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                                <a aria-label="Add To Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
                                                     href="#"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" data-id="{{ $product->id }}"
                                                     class="action-btn compare-btn" href="#"><i
@@ -339,4 +339,31 @@
             }
         });
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        // alert('test');
+        $(".wishlist-btn").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr("data-id");
+            var url = "{!! route('wishlist', ':id') !!}";
+            url = url.replace(':id', id);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(result) {
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
+                    tata.success('Success!', 'Product added to wishlist.');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>
