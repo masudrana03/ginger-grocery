@@ -68,7 +68,9 @@
                     <h1 class="heading-2 mb-10">Your Cart</h1>
                     <div class="d-flex justify-content-between">
                         <h6 class="text-body">There are <span
-                                class="text-brand">{{ auth()->user()->cart &&auth()->user()->cart->products->count() }}</span>
+                                class="text-brand">{{ auth()->user()->cart
+                                    ? auth()->user()->cart->products->count()
+                                    : 0 }}</span>
                             products in
                             your
                             cart</h6>
@@ -201,7 +203,7 @@
 
                 <div class="col-lg-4">
 
-                    <div class="row">
+                    <div class="row" id="old-div-sub">
 
                         <div class="border p-md-4 cart-totals ">
                             <div class="table-responsive">
@@ -300,6 +302,10 @@
 
                     </div>
 
+                    <div class="row" id="new-div-sub">
+
+                    </div>
+
                     <div class="row">
 
                         <div class="border p-md-4 cart-totals  mt-4">
@@ -309,8 +315,8 @@
                             <form method="post" action="/apply-promo">
                                 @csrf
                                 <div class="d-flex justify-content-between">
-                                    <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code"
-                                        placeholder="Enter Your Code...">
+                                    <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror "
+                                        name="code" placeholder="Enter Your Code...">
                                     @error('code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -491,6 +497,7 @@
             },
             success: function(result) {
                 //console.log(result);
+                
 
                 //tata.success('Success!!', 'Product updated successfully.');
             },
@@ -512,8 +519,10 @@
                 id: pid,
             },
             success: function(result) {
+
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
+
             },
             error: function(error) {
                 if (error.status == 401) {
@@ -561,16 +570,16 @@
                 id: pd,
             },
             success: function(result) {
-                console.log(result);
+                //console.log(result);
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-
             },
             error: function(error) {
                 console.log(error);
             }
         });
-
     });
 </script>
+
+
