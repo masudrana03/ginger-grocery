@@ -86,7 +86,7 @@
                                 href="{{ route('products', $product->slug) }}">{{ ucwords(strtolower(Str::limit($product->name, 18))) }}</a>
                         </h4>
                         <h4><span>{{ $product->quantity }} ×
-                            </span>{{ settings('currency') }}{{ $product->price }}
+                            </span>{{ settings('currency') }}{{ $product->discount_price }}
                         </h4>
                     </div>
                     <div class="shopping-cart-delete del-cart">
