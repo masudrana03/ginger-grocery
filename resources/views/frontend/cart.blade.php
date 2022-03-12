@@ -409,9 +409,10 @@
 
         $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));'
         '
-        tax = "{{ taxCalculator(subtotal) }}"
+        var taxRate = "{{ settings('tax') }}"
+        var newtax = ((taxRate / 100) * subtotal).toFixed(2);
 
-        $('.tax').text(symbol + tax);
+        $('.tax').text(symbol + newtax);
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
         var discountAmount = '{{ Session::get('discountAmount') }}';
@@ -477,9 +478,11 @@
 
         subtotal += parseFloat(tax);
         // subtotal.toFixed(2);
-        tax = "{{ taxCalculator(subtotal) }}"
-        
-        $('.tax').text(symbol + tax);
+
+        var taxRate = "{{ settings('tax') }}"
+        var newtax = ((taxRate / 100) * subtotal).toFixed(2);
+
+        $('.tax').text(symbol + newtax);
         $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
 
