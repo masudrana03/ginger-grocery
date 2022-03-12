@@ -124,7 +124,6 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-                        console.log(result);
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },

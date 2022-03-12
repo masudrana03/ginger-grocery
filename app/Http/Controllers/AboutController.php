@@ -49,12 +49,6 @@ class AboutController extends Controller
 
         $aboutService = AboutService::first();
 
-        // return $request;
-
-        $request->validate([
-
-        ]);
-
         $request = $request->all();
 
         $aboutService->update($request);
@@ -189,7 +183,7 @@ class AboutController extends Controller
          return back();
 
         }
-        
+
         if ($filename2 != '') {
             $request = $request->all();
             $request['section2_image1'] = $filename2;

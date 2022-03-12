@@ -303,7 +303,6 @@
 
 <script>
     $(document).ready(function() {
-        // alert('test');
         $(".wishlist-btn").click(function(event) {
             event.preventDefault();
             var id = $(this).attr("data-id");
@@ -316,9 +315,13 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#wishlistProductOld').empty();
-                    $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product added to wishlist.');
+                    if (result == '401') {
+                            window.location.href = "/login";
+                        }else{
+                            $('#wishlistProductOld').empty();
+                            $('#wishlistProductNew').html(result);
+                            tata.success('Success!', 'Product added to wishlist.');
+                        }
                 },
                 error: function(error) {
                     console.log(error);

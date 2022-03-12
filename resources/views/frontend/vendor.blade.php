@@ -238,7 +238,6 @@
                     url: url,
                     type: 'get',
                     success: function(response) {
-                        console.log(response);
                         $('#oldSortDiv').empty();
                         $('#newSortDiv').html(response);
                     }

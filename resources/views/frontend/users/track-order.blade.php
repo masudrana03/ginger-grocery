@@ -239,8 +239,6 @@
 
     <script>
         $(document).ready(function() {
-            // alert('hello');
-            // method="GET" action="{{ route('user.track.orders') }}"
             $("#tracking").click(function(event) {
                 event.preventDefault();
                 var invoiceId = $('#txt-invoice-id').val();
@@ -260,8 +258,9 @@
                         } else {
                             $('#trackOrderNew').html(response);
                         }
-                        console.log(response);
-                        //$('#trackOrderNew').html(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
                 });
             });

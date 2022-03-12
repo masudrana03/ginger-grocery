@@ -896,22 +896,15 @@
 
         $("#up").click(function(event) {
             event.preventDefault();
-            //alert("ugfsgfhsfhsfgshf");
 
             let value = $('#qty-value').text();
 
-            // let price = $('.price').val();
-            //alert(price);
-
             let currentValue = parseInt(value);
-            //alert(currentValue);
             if (currentValue < 10) {
                 currentValue = currentValue + 1;
                 $('#qty-value').text(currentValue);
                 $('.qty').val(currentValue);
 
-                // let new_price = price * currentValue;
-                // $('.current-price').text(new_price);
 
             }
 
@@ -919,11 +912,9 @@
 
         $("#down").click(function(event) {
             event.preventDefault();
-            //alert("ugfsgfhsfhsfgshf");
 
             let value = $('#qty-value').text();
             let currentValue = parseInt(value);
-            //alert(currentValue);
             if (currentValue > 1) {
                 currentValue = currentValue - 1;
                 $('#qty-value').text(currentValue);
@@ -960,7 +951,6 @@
                     }
                 }
             });
-
 
         });
     </script>

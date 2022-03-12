@@ -117,10 +117,7 @@ class VendorController extends Controller
 
         if ($request->query('name')) {
             $vendorWise = $store->products()->where('name', 'like', '%' . $request->query('name') . '%');
-
         }
-
-
 
         if ($request->query('sort') == 'low_to_high') {
             $vendorWise = $store->products()->orderBy('price');
@@ -143,10 +140,8 @@ class VendorController extends Controller
         }
 
         $vendorWise = $vendorWise->paginate($defaultPaginate);
-        // return $vendorWise;
 
         if ($request->ajax()) {
-            // return $request->name;
             return view('frontend.ajax.vendor-product-sort', compact('store', 'vendorWise', 'brands', 'nutritions'));
         }
 

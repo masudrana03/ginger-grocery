@@ -582,7 +582,6 @@
                     success: function(result) {
                         $('#compareProductOld').empty();
                         $('#compareProductNew').html(result);
-                        //tata.success('Success!', 'Product added to compare list.');
                     },
                     error: function(error) {
                         console.log(error);
@@ -619,7 +618,6 @@
                     method: 'GET',
                     url: "{!! route('removeCompareProduct2') !!}",
                     success: function(result) {
-                        console.log(result);
                         $('#compareProductsOld').empty();
                         $('#compareProductsNew').html(result);
                     },
@@ -634,7 +632,6 @@
 
     <script>
         $(document).ready(function() {
-            // alert('test');
             $(".wishlist-btn").click(function(event) {
                 event.preventDefault();
                 var id = $(this).attr("data-id");
@@ -647,10 +644,13 @@
                         id: id,
                     },
                     success: function(result) {
-                        alert("1");
-                        $('#wishlistProductOld').empty();
-                        $('#wishlistProductNew').html(result);
-                        tata.success('Success!', 'Product added to wishlist.');
+                        if (result == '401') {
+                            window.location.href = "/login";
+                        }else{
+                            $('#wishlistProductOld').empty();
+                            $('#wishlistProductNew').html(result);
+                            tata.success('Success!', 'Product added to wishlist.');
+                        }
                     },
                     error: function(error) {
                         console.log(error);
@@ -676,7 +676,6 @@
                         id: id,
                     },
                     success: function(result) {
-                        alert("2");
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
                         tata.success('Success!', 'Product removed from wishlist.');
@@ -690,7 +689,6 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },

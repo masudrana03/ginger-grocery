@@ -495,7 +495,6 @@
 
     <script>
         $(document).ready(function() {
-            // alert('hello Masud');
 
             $(document).on('click', '.page-item a', function(event) {
                 event.preventDefault();
@@ -541,7 +540,6 @@
                         $.ajax({
                             url: url,
                             success: function(response) {
-                                console.log(response);
                                 $('#oldProductSearch').empty();
                                 $('#newSortDiv').empty();
                                 $('#newProductSearch').html(response);
@@ -551,7 +549,7 @@
                             }
                         });
                     }, 1500);
-                    
+
                 } else {
                     $('#newSortDiv').empty();
                     $('#newProductSearch').empty();
@@ -562,5 +560,5 @@
 
         });
     </script>
-    
+
 @endpush

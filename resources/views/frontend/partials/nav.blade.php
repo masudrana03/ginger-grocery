@@ -21,8 +21,8 @@
         width: 172px !important;
         max-height:100%;
     }
-    
-   
+
+
 
 
 
@@ -1174,22 +1174,22 @@
                 var url = "{!! route('zone.filter', ':zoneId') !!}";
                 url = url.replace(':zoneId', zoneId);
 
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                zone_id: zoneId,
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        zone_id: zoneId,
 
-            },
-            success: function(result) {
-                // console.log(result);
-                $('#oldZoneWiseProduct').empty();
-                $('#newZoneWiseProduct').html(result);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+                    },
+                    success: function(result) {
+                        // console.log(result);
+                        $('#oldZoneWiseProduct').empty();
+                        $('#newZoneWiseProduct').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             });
         });
 
@@ -1253,11 +1253,10 @@ $(document).on('click', '.ajax-product-remove', function() {
                 id: pd,
             },
             success: function(result) {
-                console.log(result);
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-                
+
 
             },
             error: function(error) {
@@ -1267,12 +1266,12 @@ $(document).on('click', '.ajax-product-remove', function() {
 
     });
 
-    
+
 </script>
 
 <script>
     $(document).on('click', '.moreless', function() {
-           let pre_text = $('.more').text(); 
+           let pre_text = $('.more').text();
            if (pre_text == "Show more..."){
             let new_text = "Show less...";
             $('.more').text(new_text);
@@ -1281,14 +1280,13 @@ $(document).on('click', '.ajax-product-remove', function() {
             let new_text = "Show more...";
             $('.more').text(new_text);
            }
-           
+
     });
 </script>
 
 <script>
     $(document).on('click', '.moreless2', function() {
-        //alert("sdgsdhsgds");
-           let pre_text = $('.more2').text(); 
+           let pre_text = $('.more2').text();
            if (pre_text == "Show more..."){
             let new_text = "Show less...";
             $('.more2').text(new_text);
@@ -1297,7 +1295,7 @@ $(document).on('click', '.ajax-product-remove', function() {
             let new_text = "Show more...";
             $('.more2').text(new_text);
            }
-           
+
     });
 </script>
 <script>

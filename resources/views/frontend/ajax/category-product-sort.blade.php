@@ -181,7 +181,6 @@
                 method: 'GET',
                 url: "{!! route('removeCompareProduct2') !!}",
                 success: function(result) {
-                    console.log(result);
                     $('#compareProductsOld').empty();
                     $('#compareProductsNew').html(result);
                 },
