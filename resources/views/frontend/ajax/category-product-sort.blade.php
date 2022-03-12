@@ -21,8 +21,8 @@
                         </a>
                     </div>
                     <div class="product-action-1">
-                        <a aria-label="Add To Wishlist" class="action-btn"
-                            href="{{ route('wishlist', $product->id) }}"><i class="fi-rs-heart"></i></a>
+                        <a aria-label="Add To Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                            href="#"><i class="fi-rs-heart"></i></a>
                         <a aria-label="Compare" data-id="{{ $product->id }}" class="action-btn compare-btn"
                             href="{{ route('compareProduct', $product->id) }}"><i class="fi-rs-shuffle"></i></a>
                         {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
@@ -112,6 +112,7 @@
             url: url,
             data: {
                 id: pid,
+                quantity:1,
 
             },
             success: function(result) {

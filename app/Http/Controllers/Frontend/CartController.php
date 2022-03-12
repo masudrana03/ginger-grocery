@@ -32,7 +32,7 @@ class CartController extends Controller
                 $cart          = new Cart();
                 $cart->user_id = auth()->id();
                 $cart->save();
-            
+
                 $cart->products()->sync([
                     $product->id => [
                         'quantity' => 1,
@@ -41,10 +41,7 @@ class CartController extends Controller
                 ], false);
 
                 return view("frontend.ajax.cart");
-            } 
-
-            
-            else {
+            } else {
 
                 $cartId = auth()->user()->cart->id;
                 $product_id = $request->product_id;
@@ -88,12 +85,13 @@ class CartController extends Controller
                 'product_id' => $id,
                 'quantity'   => request('quantity'),
             ]);
-        } else {
-            $request = new Request([
-                'product_id' => $id,
-                'quantity'   => 1,
-            ]);
         }
+        //else {
+        //     $request = new Request([
+        //         'product_id' => $id,
+        //         'quantity'   => 1,
+        //     ]);
+        // }
 
 
         return $this->addToCart($request);
@@ -103,21 +101,16 @@ class CartController extends Controller
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
-        $totalTax = 0;
+        $subtotal = 0;
 
         foreach ($carts as $cart) {
-            $totalTax += priceCalculator($cart)['tax'];
+            $subtotal += priceCalculator($cart)['subtotal'];
         }
 
-        $productIds = session('compare');
-        $compareProduct = Product::find($productIds) ?? [];
-        return view('frontend.cart', compact('compareProduct', 'totalTax'));
+        $tax = taxCalculator($subtotal);
+
+        return view('frontend.cart', compact('subtotal', 'tax'));
     }
-
-    
-
-    
-
 
     public function cartUpdate(Request $request)
     {
@@ -160,12 +153,15 @@ class CartController extends Controller
     {
 
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
-        $totalTax = 0;
+        $subtotal = 0;
 
         foreach ($carts as $cart) {
-            $totalTax += priceCalculator($cart)['tax'];
+            $subtotal += priceCalculator($cart)['subtotal'];
         }
 
-        return view('frontend.ajax.update-cart-div', compact('totalTax'));
+        $tax = taxCalculator($subtotal);
+
+
+        return view('frontend.ajax.update-cart-div', compact('subtotal', 'tax'));
     }
 }

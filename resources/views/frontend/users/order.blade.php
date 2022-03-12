@@ -7,7 +7,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Orders
                 </div>
             </div>
@@ -49,7 +49,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();"><i
+                                                                document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -71,7 +71,7 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Order</th>
+                                                                <th>Invoice ID</th>
                                                                 <th>Date</th>
                                                                 <th>Status</th>
                                                                 <th>Total Price</th>
@@ -81,13 +81,17 @@
                                                         <tbody>
                                                             @foreach ($orders as $item)
                                                                 <tr>
-                                                                    <td>#{{ $item->invoice_id }}</td>
+                                                                    <td>{{ $item->invoice_id }}</td>
                                                                     <td>{{ $item->created_at->format('F j, Y') }}</td>
                                                                     <td>{{ $item->status->name }}</td>
-                                                                    <td>${{ $item->total }}</td>
-                                                                    <td><a href="{{ route('user.invoice',$item->id )}}" class="btn-small d-block">View</a></td>
+                                                                    <td>{{ settings('currency') }}{{ $item->total }}
+                                                                    </td>
+                                                                    <td><a href="{{ route('user.invoice', $item->id) }}"
+                                                                            class="btn-small d-block">View</a></td>
+
                                                                 </tr>
                                                             @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>

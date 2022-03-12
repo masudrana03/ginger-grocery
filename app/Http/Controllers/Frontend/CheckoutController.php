@@ -42,7 +42,9 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-
+        if( $request->code == null ) {
+            return '4';
+        }
         $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
         // return count($cartProducts);
@@ -70,10 +72,19 @@ class CheckoutController extends Controller
         $discountAmount = getDiscountAmount($total, $promo->type, $promo->discount);
         $totalAfterDiscount = getAmountAfterDiscount($total, $promo->type, $promo->discount);
 
+        // return [$discountAmount  ,$totalAfterDiscount];
+
+        if( $discountAmount >= $totalAfterDiscount ){
+            return '2';
+        }
+
         session()->put('totalAfterDiscount', $totalAfterDiscount);
         session()->put('discountAmount', $discountAmount);
 
-        return back()->with('success', 'Coupon applied');
+        // return back()->with('success', 'Coupon applied');
+        // return ['status' => 'success', 'total' => $totalAfterDiscount, 'discount' => $discountAmount];
+
+        return view('frontend.ajax.checkout');
     }
 
     /**
