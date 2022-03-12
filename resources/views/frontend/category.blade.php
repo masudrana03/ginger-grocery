@@ -275,8 +275,6 @@
 
     <script>
         $(document).ready(function() {
-            // alert('hello Masud');
-
             $(document).on('click', '.page-item a', function(event) {
                 event.preventDefault();
                 var page = $(this).attr('href').split('page=')[1];

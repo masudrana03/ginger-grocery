@@ -231,7 +231,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    //tata.success('Success!', 'Product added to compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -258,7 +257,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    //tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -295,9 +293,13 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#wishlistProductOld').empty();
-                    $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product added to wishlist.');
+                    if (result == '401') {
+                            window.location.href = "/login";
+                        }else{
+                            $('#wishlistProductOld').empty();
+                            $('#wishlistProductNew').html(result);
+                            tata.success('Success!', 'Product added to wishlist.');
+                        }
                 },
                 error: function(error) {
                     console.log(error);

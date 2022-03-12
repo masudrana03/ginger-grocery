@@ -327,7 +327,7 @@
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}" alt="">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-master.svg') }}" alt="">
-                        
+
                     </div>
                 </div>
 
@@ -523,8 +523,6 @@
 
 <script>
     $(document).ready(function() {
-        // alert('hello');
-        // method="GET" action="{{ route('user.track.orders') }}"
         $("#promoCode").click(function(event) {
             event.preventDefault();
             var promoId = $('#promoId').val();

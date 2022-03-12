@@ -89,9 +89,6 @@
                     console.log(error);
                 }
             });
-
-
-
         });
     });
 </script>
