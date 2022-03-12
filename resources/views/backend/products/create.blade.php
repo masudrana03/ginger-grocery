@@ -66,9 +66,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="excerpt">Excerpt</label>
+                                    <label for="excerpt">Short Description</label>
                                     <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror"
-                                        id="excerpt" aria-describedby="emailHelp" placeholder="Excerpt"
+                                        id="excerpt" aria-describedby="emailHelp" placeholder="Short Description"
                                         value="{{ old('excerpt') }}"></textarea>
                                     @error('excerpt')
                                         <span class="invalid-feedback" role="alert">
@@ -112,14 +112,14 @@
                                     @enderror
                                 </div>
 
-                               {{--Discount Price type--}}
+                                {{-- Discount Price type --}}
 
 
                                 <div class="form-group">
                                     <label for="price">Discount Type</label>
                                     <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
-                                            <option value="1" checked>Percentage(%)</option>
-                                            <option value="2">Fixed Amount</option>
+                                        <option value="1" checked>Percentage(%)</option>
+                                        <option value="0">Fixed Amount</option>
                                     </select>
                                     @error('types')
                                         <span class="invalid-feedback" role="alert">
@@ -128,13 +128,14 @@
                                     @enderror
                                 </div>
 
-                                {{--Discount Price amount--}}
+                                {{-- Discount Price amount --}}
 
                                 <div class="form-group">
                                     <label for="price">Discount Price</label>
                                     <input type="number" name="discount_amount"
                                         class="form-control @error('price') is-invalid @enderror" id="price"
-                                        aria-describedby="emailHelp" placeholder=" Discount Price" value="{{ old('price') }}">
+                                        aria-describedby="emailHelp" placeholder=" Discount Price"
+                                        value="{{ old('price') }}">
                                     @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -199,7 +200,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Type</label>
-                                    <select name="types[]" class="single2 form-control @error('types') is-invalid @enderror"
+                                    <select name="types[]"
+                                        class="single2 form-control @error('types') is-invalid @enderror"
                                         multiple="multiple">
                                         @foreach ($types as $type)
                                             <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -365,7 +367,7 @@
                 }
             });
         });
-1
+        1
         // image upload js code
         var images = [];
 

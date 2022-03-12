@@ -128,6 +128,19 @@ class StripePayment implements PayableInterface
 
         $orders = Order::whereOrderReference($orderReference)->get();
         $line_items = [];
+        $discount = 0;
+
+        $stripe = new \Stripe\StripeClient($this->client_secret);
+
+        // if (settings('tax')) {
+        //     $tax = $stripe->taxRates->create(
+        //         [
+        //           'display_name' => 'Tax',
+        //           'inclusive' => false,
+        //           'percentage' => settings('tax'),
+        //         ]
+        //     );
+        // }
 
         foreach ($orders as $order) {
             foreach ($order->details as $item) {
@@ -138,22 +151,42 @@ class StripePayment implements PayableInterface
                       'name' => $item->product->name,
                     //   'images' => [asset('assets/img/uploads/products/featured/' . $item->product->featured_image)],
                     ],
-                    'unit_amount' => $item->product->price * 100,
+                    'unit_amount' => $item->product->discount_price * 100,
                   ],
                   'quantity' => $item->quantity,
                 ];
-
                 $line_items[] = $temp_items;
             }
+            
+            $discount = $order->discount;
+        }
+
+        if ($discount > 0) {
+            $coupon = $stripe->coupons->create(['amount_off' => $discount * 100, 'duration' => 'once', 'currency' => 'usd']);
         }
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => $line_items,
+            'shipping_options' => [
+                [
+                  'shipping_rate_data' => [
+                    'type' => 'fixed_amount',
+                    'fixed_amount' => [
+                      'amount' => $order->shipping_cost * 100 ?? null,
+                      'currency' => 'usd',
+                    ],
+                    'display_name' => 'Shipping',
+                  ]
+              ],
+          ],
+          'discounts' => [[
+                'coupon' => isset($coupon) ? $coupon->id : null,
+         ]],
             'mode' => 'payment',
             'success_url' => route('payment_success', $orderReference),
             'cancel_url' => route('payment_failed', $orderReference),
-          ]);
+        ]);
  
         return redirect($session->url);
 

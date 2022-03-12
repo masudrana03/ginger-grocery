@@ -46,7 +46,7 @@
                                 $currency_symbol = settings('currency');
                             @endphp
                             @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                <tr class="pt-30 product-modifiers " data-product-price="{{ $product->price }}">
+                                <tr class="pt-30 product-modifiers " data-product-price="{{ $product->discount_price }}">
                                     <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
 
                                         @if ($product->featured_image)
@@ -83,7 +83,7 @@
 
                                     <td class="price" data-title="Price" id="td-padding-top">
                                         <h6 class="text-body">
-                                            {{ settings('currency') }}{{ $product->price }}
+                                            {{ settings('currency') }}{{ $product->discount_price }}
                                         </h6>
                                     </td>
 
@@ -103,9 +103,9 @@
                                     <td class="price" data-title="Price" id="td-padding-top">
                                         <h6 class="text-brand">
                                             {{ settings('currency') }}<span
-                                                class="cart-subtotal">{{ $product->quantity * $product->price }}</span>
+                                                class="cart-subtotal">{{ $product->quantity * $product->discount_price }}</span>
                                         </h6>
-                                        <input class="d-none unit-price" value="{{ $product->price }}">
+                                        <input class="d-none unit-price" value="{{ $product->discount_price }}">
                                     </td>
                                     <td class="action text-center ajax-product-remove " data-title="Remove"
                                         id="td-padding-top"><i class="fi-rs-trash ajax-product-remove "></i>
@@ -113,7 +113,7 @@
                                     </td>
                                 </tr>
                                 @php
-                                    $total += $product->quantity * $product->price;
+                                    $total += $product->quantity * $product->discount_price;
                                     $currency_symbol = settings('currency');
                                 @endphp
                             @empty

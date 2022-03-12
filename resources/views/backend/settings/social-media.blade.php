@@ -91,7 +91,7 @@
                                     <div class="col-md-3">
 
                                         <div class="form-group">
-                                            <label for="company_name">Linkedin Link</label>
+                                            <label for="company_name">Pinterest Link</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-7">

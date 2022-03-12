@@ -739,7 +739,7 @@
                                     </div>
                                 </div>
                                 <div class="more_categories moreless"><span class="icon"></span> <span
-                                        class="heading-sm-1 more ">Show more...</span></div>
+                                        class="heading-sm-1 more "style="cursor: pointer">Show more...</span></div>
                                 </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">

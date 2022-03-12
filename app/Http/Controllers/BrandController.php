@@ -32,13 +32,13 @@ class BrandController extends Controller
             4 => 'id',
         ];
 
-        $brandId = Product::where('store_id', auth()->user()->store_id)->pluck('brand_id');
+        //$brandId = Product::where('store_id', auth()->user()->store_id)->pluck('brand_id');
 
         $brand = Brand::query();
-        if ( !isAdmin() ) {
-           $p = $brand->where('id', $brandId);
-        //    logger($p->get());
-        }
+        // if ( !isAdmin() ) {
+        //    $p = $brand->where('id', $brandId);
+        // //    logger($p->get());
+        // }
 
         $totalData = $brand->count();
 

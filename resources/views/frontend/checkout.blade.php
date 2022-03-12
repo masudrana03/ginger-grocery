@@ -105,34 +105,36 @@
     .total-amount {
         padding-right: 8%;
     }
+
     .alert-danger {
-            width: 100%!important;
-            border-radius: 10px!important;
-            border-color: #ffd170 !important;
-            background-color: #fff1d3!important;
-            text-align: center;
-            font-size: 20px!important;
-            color: #7c7c7c!important;
-            position: relative!important;
-            padding: 0.8rem!important;
-            margin-bottom: 1rem!important;
-            border: 1px solid transparent!important;
-            font-weight: 700!important;
-        }
-        .alert-success {
-            width: 100%!important;
-            border-radius: 10px!important;
-            border-color: #3BB77E !important;
-            background-color: #CDF0E0!important;
-            text-align: center;
-            font-size: 20px!important;
-            color: #7c7c7c!important;
-            position: relative!important;
-            padding: 0.8rem!important;
-            margin-bottom: 1rem!important;
-            border: 1px solid transparent!important;
-            font-weight: 700!important;
-        }
+        width: 100% !important;
+        border-radius: 10px !important;
+        border-color: #ffd170 !important;
+        background-color: #fff1d3 !important;
+        text-align: center;
+        font-size: 20px !important;
+        color: #7c7c7c !important;
+        position: relative !important;
+        padding: 0.8rem !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid transparent !important;
+        font-weight: 700 !important;
+    }
+
+    .alert-success {
+        width: 100% !important;
+        border-radius: 10px !important;
+        border-color: #3BB77E !important;
+        background-color: #CDF0E0 !important;
+        text-align: center;
+        font-size: 20px !important;
+        color: #7c7c7c !important;
+        position: relative !important;
+        padding: 0.8rem !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid transparent !important;
+        font-weight: 700 !important;
+    }
 
 </style>
 
@@ -350,13 +352,13 @@
                         @csrf
                         {{-- <input type="text" placeholder="Enter Coupon Code..."> --}}
                         <input class="@error('code') is-invalid @enderror " name="code" id="promoId"
-                                placeholder="Enter Your Code...">
-                            @error('code')
-                                <span class="invalid-feedback" role="alert" style="position: absolute; top: 90%; left: 2%;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        <button class="btn  btn-md" id="promoCode" >Apply Coupon</button>
+                            placeholder="Enter Your Code...">
+                        @error('code')
+                            <span class="invalid-feedback" role="alert" style="position: absolute; top: 90%; left: 2%;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <button class="btn  btn-md" id="promoCode">Apply Coupon</button>
                     </form>
 
                     {{-- <form method="post" action="/apply-promo">
@@ -411,7 +413,7 @@
                             <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
                                     @php
-                                        $subtotal += $item->price * $item->quantity;
+                                        $subtotal += $item->discount_price * $item->quantity;
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
@@ -437,7 +439,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <p class="pri">{{ $currency }} {{ $item->price * $item->quantity }}</p>
+                                            <p class="pri">{{ $currency }} {{ $item->discount_price * $item->quantity }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -488,7 +490,7 @@
                         <p class="">Shipping Fee:</p>
                         <p class="">Tax:</p>
                         @if (session('totalAfterDiscount'))
-                        <p>Promo Discount</p>
+                            <p>Promo Discount</p>
                         @endif
                         <h5 class="">Total:</h5>
                     </div>
@@ -502,10 +504,10 @@
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
                         @if (session('totalAfterDiscount'))
-                        <p class="total-amount discount">{{ session('discountAmount') }}</p>
+                        <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
                         <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
                         @else
-                        <p class="total-amount discount">{{ session('discountAmount') }}</p>
+                        {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
                         <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
                         @endif
                     </div>
@@ -520,7 +522,6 @@
 @endsection
 
 @push('script')
-
 <script>
     $(document).ready(function() {
         $("#promoCode").click(function(event) {
@@ -531,46 +532,50 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-            $.ajax({
-                method: 'POST',
-                url: "{{ route('promo.code') }}",
-                type: 'post',
-                data: {
-                    code: promoId,
-                },
-                success: function(response) {
-                    if (response == '1') {
-                        $('#promoError').html(
-                            '<div class="alert alert-danger">Invalid promo code !</div>');
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('promo.code') }}",
+                    type: 'post',
+                    data: {
+                        code: promoId,
+                    },
+                    success: function(response) {
+                        if (response == '1') {
+                            $('#promoError').html(
+                                '<div class="alert alert-danger">Invalid promo code !</div>'
+                                );
                             return;
-                    }
-                    if (response == '4') {
-                        $('#promoError').html(
-                            '<div class="alert alert-danger">Please enter your promo code</div>');
+                        }
+                        if (response == '4') {
+                            $('#promoError').html(
+                                '<div class="alert alert-danger">Please enter your promo code</div>'
+                                );
                             return;
-                    }
-                    if (response == '0') {
-                        $('#noCartError').html(
-                            '<div class="alert alert-danger">No cart found</div>');
+                        }
+                        if (response == '0') {
+                            $('#noCartError').html(
+                                '<div class="alert alert-danger">No cart found</div>');
                             return;
-                    }if(response == '2'){
-                        $('#noCartError').html(
-                            '<div class="alert alert-danger">Buy more mroducts to get discount</div>');
+                        }
+                        if (response == '2') {
+                            $('#noCartError').html(
+                                '<div class="alert alert-danger">Buy more mroducts to get discount</div>'
+                                );
                             return;
-                    }
-                    else {
-                        $('#promoError').html(
-                            '<div class="alert alert-success">Promo code applied successfully</div>');
-                        $('#oldCheckoutProducts').hide();
-                        $('#newCheckoutProducts').html(response);
-                    }
+                        } else {
+                            $('#promoError').html(
+                                '<div class="alert alert-success">Promo code applied successfully</div>'
+                                );
+                            $('#oldCheckoutProducts').hide();
+                            $('#newCheckoutProducts').html(response);
+                        }
 
-                }
+                    }
+                });
             });
-        });
 
-    });
-</script>
+        });
+    </script>
 
 
     <script>
@@ -595,11 +600,10 @@
 
             if (noAdd || error) {
                 $('#shipping-form').show();
-
                 check.checked = true;
             } else {
 
-                check.checked = false;
+                check.checked = true;
                 $('#shipping-form').hide();
             }
         }
@@ -645,6 +649,7 @@
                 if (valueFromPayMethod[i].checked) {
                     let payValue = valueFromPayMethod[i].value;
                     if (radioDiv) {
+
                         for (j = 0; j <= radioBtn.length; j++) {
                             if (radioBtn[j].checked) {
                                 addressHiddenId.value = radioBtn[j].value;
@@ -738,9 +743,10 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#infoCheck").prop("checked", true);
             $('.checkaddress').each(function() {
                 $(this).on('click', function() {
-                   $("#infoCheck").prop("checked", false);
+                    $("#infoCheck").prop("checked", false);
                     $('#shipping-form').hide();
                 });
             });

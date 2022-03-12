@@ -36,12 +36,12 @@ class CategoryController extends Controller
 
         // $category = Product::query();
         // $categoryId = Product::pluck('category_id')->unique();
-        $categoryId = Product::where('store_id', auth()->user()->store_id)->pluck('category_id');
+        //$categoryId = Product::where('store_id', auth()->user()->store_id)->pluck('category_id');
 
         $category = Category::query();
-        if ( !isAdmin() ) {
-           $p = $category->where('id', $categoryId);
-        }
+        // if ( !isAdmin() ) {
+        //    $p = $category->where('id', $categoryId);
+        // }
         // if( isAdmin() ) {
         //    $s = $category->whereIn('id', $categoryId);
         // }

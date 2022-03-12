@@ -91,14 +91,24 @@
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                            {{-- <span class="old-price">$32.8</span> --}}
+                                            <span
+                                                class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                            </span>
+                                            @if ($product->discountable)
+                                                <span
+                                                    class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                                            @endif
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="#"><i
+                                            <input type="hidden" id="product-id" name="product_id"
+                                                value="{{ $product->id }}">
+                                            <a class="add" id="cart-btn" href="#" style=""><i
                                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                             <small class="product-id"
                                                 style="display: none;">{{ $product->id }}</small>
+                                            <input style="display: none;" name="product_id"
+                                                value="{{ $product->id }}">
+
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +187,13 @@
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>{{ settings('currency') }}{{ $product->price }}</span>
-                                            {{-- <span class="old-price">$32.8</span> --}}
+                                            <span
+                                                class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                            </span>
+                                            @if ($product->discountable)
+                                                <span
+                                                    class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                                            @endif
                                         </div>
                                         <div class="add-cart">
                                             <input type="hidden" id="product-id" name="product_id"

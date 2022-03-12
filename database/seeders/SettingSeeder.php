@@ -12,7 +12,7 @@ class SettingSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        Setting::create( ['key' => 'company_name', 'value' => 'Grocery Binary-fusion.com'] );
+        Setting::create( ['key' => 'company_name', 'value' => 'Metrocery'] );
         Setting::create( ['key' => 'company_address', 'value' => '205 North Michigan Avenue, Suite 810'] );
         Setting::create( ['key' => 'email', 'value' => 'admin@gmail.com'] );
         Setting::create( ['key' => 'phone_code', 'value' => '+1'] );
@@ -28,7 +28,7 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'mail_user_name', 'value' => 'mohasin2911@gmail.com'] );
         Setting::create( ['key' => 'mail_password', 'value' => 'gmlfywasvjmjwwes'] );
         Setting::create( ['key' => 'mail_from', 'value' => 'mohasin2911@gmail.com'] );
-        Setting::create( ['key' => 'mail_from_name', 'value' => 'GroceFusion'] );
+        Setting::create( ['key' => 'mail_from_name', 'value' => 'Metrocery'] );
         Setting::create( ['key' => 'encryption', 'value' => 'tls'] );
         Setting::create( ['key' => 'loyalty_cart_status', 'value' => 'No'] );
         Setting::create( ['key' => 'loyalty_points', 'value' => 100] );
@@ -39,8 +39,8 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'state', 'value' => 'CA'] );
         Setting::create( ['key' => 'currency', 'value' => '$'] );
         Setting::create( ['key' => 'tax', 'value' => 10] );
-        Setting::create( ['key' => 'hot_number', 'value' => '123456'] );
-        Setting::create( ['key' => 'news_flash_one', 'value' => 'Welcome to Groce-Fusion'] );
+        Setting::create( ['key' => 'hot_number', 'value' => '1660001'] );
+        Setting::create( ['key' => 'news_flash_one', 'value' => 'Welcome to Metrocery'] );
         Setting::create( ['key' => 'news_flash_two', 'value' => 'Get 30% discount on your first order'] );
         Setting::create( ['key' => 'news_flash_three', 'value' => 'We are giving 10% discount on online payment'] );
         Setting::create( ['key' => 'map_api_key', 'value' => ''] );
