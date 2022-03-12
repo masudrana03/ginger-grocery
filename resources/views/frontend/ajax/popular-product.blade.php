@@ -283,7 +283,6 @@
 
 <script>
     $(document).ready(function() {
-        // alert('test');
         $(".wishlist-btn").click(function(event) {
             event.preventDefault();
             var id = $(this).attr("data-id");
@@ -307,4 +306,6 @@
         });
     });
 </script>
+
+
 

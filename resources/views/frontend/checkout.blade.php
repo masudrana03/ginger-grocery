@@ -311,7 +311,7 @@
                                             value="{{ $paymentMethod->id }}" name="payment_method" id="flexRadioDefault1"
                                             checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
-                                            {{ $paymentMethod->provider == 'stripe' ? 'Bank Transfer' : 'Cash on Delivery (COD)' }}
+                                            {{ $paymentMethod->provider == 'stripe' ? 'Online Payment' : 'Cash on Delivery' }}
                                         </label>
                                     </div>
                                 </li>
@@ -327,7 +327,7 @@
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-visa.svg') }}" alt="">
                         <img class="mr-15"
                             src="{{ asset('assets/frontend/imgs/theme/icons/payment-master.svg') }}" alt="">
-                        <img src="{{ asset('assets/frontend/imgs/theme/icons/payment-zapper.svg') }}" alt="">
+                        
                     </div>
                 </div>
 

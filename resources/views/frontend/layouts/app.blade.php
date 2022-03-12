@@ -73,7 +73,7 @@
 
 </head>
 
-<body >
+<body>
     @include('frontend.partials.nav')
     <div id="app" class="app">
         @yield('content')
@@ -392,6 +392,7 @@
     <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
 
 
+
     {{-- sweetalert --}}
 
     <link rel="stylesheet"
@@ -646,6 +647,7 @@
                         id: id,
                     },
                     success: function(result) {
+                        alert("1");
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
                         tata.success('Success!', 'Product added to wishlist.');
@@ -674,9 +676,11 @@
                         id: id,
                     },
                     success: function(result) {
+                        alert("2");
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
                         tata.success('Success!', 'Product removed from wishlist.');
+
                     },
                     error: function(error) {
                         console.log(error);
@@ -686,7 +690,7 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-                        console.log(result);
+
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },
@@ -697,51 +701,6 @@
             });
         });
     </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $(".add-cart .add").on('click', function(event) {
-                event.preventDefault();
-
-                addCart(event.target);
-            });
-        });
-
-        function addCart(node) {
-            var closest_div = $(node).closest('.add-cart');
-            var id = closest_div.find('.product-id').text();
-            addToCartById(id);
-        }
-
-        function addToCartById(id) {
-            var pid = id;
-            var url = "{!! route('cartById', ':id') !!}";
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-                    quantity: 1,
-
-                },
-                success: function(result) {
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                    tata.success('Success!', 'Product added to your cart.');
-                },
-                error: function(error) {
-                    if (error.status == 401) {
-                        window.location.href = "/login";
-                    }
-                }
-            });
-        }
-    </script>
-
-
     @yield('script')
 </body>
-
 </html>

@@ -21,7 +21,8 @@
         width: 172px !important;
         max-height:100%;
     }
-
+    
+   
 
 
 
@@ -275,7 +276,7 @@
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
-                    <div class="logo logo-width-1">
+                    <div class="logo logo-width-1" >
                         <a href="{{ url('/') }}"><img src="{{ asset('assets/img/uploads/settings/logo/'.settings('logo')) }}"
                                 alt="logo" /></a>
                     </div>
@@ -525,11 +526,11 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.track.orders') }}"><i
-                                                            class="fi fi-rs-location-alt mr-10"></i>My Orders</a>
+                                                            class="fi fi-rs-location-alt mr-10"></i>Track Order</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('user.orders') }}"><i
-                                                            class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                                            class="fi fi-rs-label mr-10"></i>My Orders</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('wishlist.index') }}"><i
@@ -1299,5 +1300,44 @@ $(document).on('click', '.ajax-product-remove', function() {
            
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $(".add-cart .add").on('click', function(event) {
+            event.preventDefault();
 
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+                quantity:1,
+
+            },
+            success: function(result) {
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+                tata.success('Success!', 'Product added to your cart.');
+            },
+            error: function(error) {
+                if (error.status == 401) {
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>
 

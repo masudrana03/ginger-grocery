@@ -4,7 +4,7 @@
 <style>
     .btn-cart {
         background-color: #3BB77E;
-        width: 65%!important;
+        width: 65% !important;
         height: 40px;
         text-align: center;
         color: #fff;
@@ -215,7 +215,8 @@
                                                     <h6 class="text-muted">Subtotal</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h6 class="text-brand text-end subtotal">0</h6>
+                                                    <h6 class="text-brand text-end subtotal">
+                                                        {{ settings('currency') }}{{ $subtotal }}</h6>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -229,7 +230,7 @@
                                                 </td>
                                                 <td class="cart_total_amount">
                                                     <h6 class="text-heading text-end tax">
-                                                        {{ settings('currency') }}{{ $totalTax }}</h6>
+                                                        {{ settings('currency') }}{{ $tax }}</h6>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -243,7 +244,8 @@
                                                     <small>(Shipping fees not included)</small>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h6 class="text-brand text-end total">$12.31</h6>
+                                                    <h6 class="text-brand text-end total">
+                                                        {{ settings('currency') }}{{ $subtotal + $tax }}</h6>
                                                 </td>
                                             </tr>
                                         @else
@@ -252,7 +254,8 @@
                                                     <h6 class="text-muted">Subtotal</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h6 class="text-brand text-end subtotal">$12.31</h6>
+                                                    <h6 class="text-brand text-end subtotal">
+                                                        {{ settings('currency') }}{{ $subtotal }}</h6>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -265,7 +268,7 @@
                                                     <h6 class="text-muted">Tax</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h5 class="text-heading text-end tax">{{ $totalTax }}</h5>
+                                                    <h5 class="text-heading text-end tax">{{ $tax }}</h5>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -346,7 +349,7 @@
     // $(document).ready(function() {
     //     var products = $(".product-modifiers");
     //     var subtotal = 0;
-    //     var tax = "{{ $totalTax }}";
+    //     var tax = "{{ $tax }}";
 
     //     for (var i = 0; i < products.length; i += 1) {
     //         subtotal += parseFloat($(products[i]).find(".cart-subtotal").text());
@@ -373,7 +376,7 @@
 
     $(document).on('click', '.qty-plus', function() {
 
-        var tax = "{{ $totalTax }}";
+        var tax = "{{ $tax }}";
         var max = 10;
         var prev_val = parseInt($(this).prev().val());
 
@@ -393,7 +396,7 @@
         }
 
         var subtotalPrice = quantity * productPrice;
-        subtotalCtr.text(subtotalPrice);
+        subtotalCtr.text(subtotalPrice.toFixed(2));
 
         var products = $(".product-modifiers"),
             subtotal = 0;
@@ -432,7 +435,7 @@
     });
 
     $(document).on('click', '.qty-minus', function() {
-        var tax = "{{ $totalTax }}";
+        var tax = "{{ $tax }}";
         var min = 1;
         var prev_val = $(this).next().val();
 
@@ -575,7 +578,6 @@
                 //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-                retriveUpdateProduct();
             },
             error: function(error) {
                 console.log(error);
