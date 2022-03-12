@@ -213,12 +213,12 @@
                                             <h6 class="text-muted">Tax</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h5 class="text-heading text-end tax">{{ $tax }}</h5>
+                                            <h6 class="text-heading text-end tax">{{ settings('currency') }}{{ $tax }}</h6>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="cart_total_label">
-                                            <h6 class="text-muted">Discount</h6>
+                                            <h6 class="text-muted">Promo Discount</h6>
                                         </td>
                                         <td class="cart_total_amount">
                                             <h6 class="text-brand text-end">{{ settings('currency') }}
@@ -250,13 +250,13 @@
 
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
 
                 <div class="border p-md-4 cart-totals  mt-4">
 
                     <h4 class="mb-10">Apply Coupon</h4>
                     <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
-                    <form method="post" action="/apply-promo">
+                    <form >
                         @csrf
                         <div class="d-flex justify-content-between">
                             <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code"
@@ -272,7 +272,9 @@
 
                 </div>
 
-            </div>
+            </div> --}}
+
+
         </div>
     </div>
 </div>
