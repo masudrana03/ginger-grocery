@@ -647,10 +647,8 @@
                         id: id,
                     },
                     success: function(result) {
-                        alert("1");
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
-                        return;
                         tata.success('Success!', 'Product added to wishlist.');
                     },
                     error: function(error) {
@@ -680,7 +678,9 @@
                         alert("2");
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
+
                         tata.success('Success!', 'Product removed from  wishlist.');
+
                     },
                     error: function(error) {
                         console.log(error);
@@ -690,7 +690,7 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-                        
+
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },
@@ -703,4 +703,5 @@
     </script>
     @yield('script')
 </body>
+
 </html>

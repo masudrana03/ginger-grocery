@@ -55,7 +55,7 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                        <a aria-label="Add To Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
                                             href="#"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" data-id="{{ $product->id }}"
                                             class="action-btn compare-btn"
@@ -153,7 +153,7 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
+                                        <a aria-label="Add To Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
                                             href="#"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" data-id="{{ $product->id }}"
                                             class="action-btn compare-btn" href="#"><i class="fi-rs-shuffle"></i></a>
@@ -298,13 +298,9 @@
 
 <script>
     $(document).ready(function() {
-        //alert('test');
         $(".wishlist-btn").click(function(event) {
-            alert('good');
             event.preventDefault();
             var id = $(this).attr("data-id");
-            alert(id);
-            return ;
             var url = "{!! route('wishlist', ':id') !!}";
             url = url.replace(':id', id);
             $.ajax({
@@ -314,9 +310,9 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#compareProductOld').empty();
-                    $('#compareProductNew').html(result);
-                    tata.success('Success!', 'Product added to compare list.');
+                    $('#wishlistProductOld').empty();
+                    $('#wishlistProductNew').html(result);
+                    tata.success('Success!', 'Product added to wishlist.');
                 },
                 error: function(error) {
                     console.log(error);

@@ -114,7 +114,7 @@
                 success: function(result) {
                     $('#wishlistProductOld').empty();
                     $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product removed from compare list.');
+                    tata.success('Success!', 'Product removed from  wishlist.');
                 },
                 error: function(error) {
                     console.log(error);

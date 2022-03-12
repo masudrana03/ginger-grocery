@@ -213,10 +213,8 @@
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                    style="vertical-align: -4px;"
-                                                    href="{{ route('wishlist', $product->id) }}"><i
-                                                        class="fi-rs-heart"></i></a>
+                                                        <a aria-label="Add To Wishlist" class="action-btn hover-up wishlist-btn" data-id="{{ $product->id }}" style="vertical-align: -4px;"
+                                                            href="#"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up compare-btn"
                                                     data-id="{{ $product->id }}" style="vertical-align: -4px;"
                                                     href="#"><i class="fi-rs-shuffle"></i></a>
@@ -317,11 +315,11 @@
                                                     rose jeepers outgrew lugubrious luridly irrationally attractively
                                                     dachshund.</p> --}}
 
-                                                <h4 class="mt-30">Suggested Use</h4>
+                                                {{-- <h4 class="mt-30">Suggested Use</h4>
                                                 <ul class="product-more-infor mt-30">
                                                     <li>Refrigeration not necessary.</li>
                                                     <li>Stir before serving</li>
-                                                </ul>
+                                                </ul> --}}
 
                                                 {{-- <h4 class="mt-30">Other Ingredients</h4>
                                                 <ul class="product-more-infor mt-30">
@@ -332,10 +330,11 @@
                                                         peanuts, gluten, dairy or soy</li>
                                                 </ul> --}}
 
-                                                <h4 class="mt-30">Warnings</h4>
+                                                {{-- <h4 class="mt-30">Warnings</h4>
                                                 <ul class="product-more-infor mt-30">
                                                     <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                                                </ul>
+                                                </ul> --}}
+
                                             </div>
                                         </div>
 
@@ -443,7 +442,7 @@
                                                     @php
                                                         $vendorRating = $product->store->rating;
                                                         $vendorToralRating = $product->store->totalRating;
-                                                        
+
                                                     @endphp
 
                                                     <div class="product-rate-cover text-end">
@@ -659,10 +658,8 @@
                                                                 data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                                                                     class="fi-rs-search"></i></a> --}}
 
-                                                            <a aria-label="Add To Wishlist"
-                                                                class="action-btn small hover-up"
-                                                                href="{{ route('wishlist', $productData->id) }}"
-                                                                tabindex="0"><i class="fi-rs-heart"></i></a>
+                                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up wishlist-btn" data-id="{{ $productData->id }}"
+                                                                    tabindex="0" href="#"><i class="fi-rs-heart"></i></a>
                                                             <a aria-label="Compare" data-id="{{ $productData->id }}"
                                                                 class="action-btn small hover-up compare-btn" href="#"
                                                                 tabindex="0"><i class="fi-rs-shuffle"></i></a>
@@ -728,17 +725,36 @@
                         <div class="sidebar-widget widget-delivery mb-30 bg-grey-9 box-shadow-none">
                             <h5 class="section-title style-3 mb-20">Delivery</h5>
                             <ul>
+                                @php
+                                    $address = auth()->user() && auth()->user()->shippingAddress()->first();
+                                @endphp
+                                @if ($address)
                                 <li>
                                     <i class="fi fi-rs-marker mr-10 text-brand"></i>
                                     <span>
-                                        5171 W Campbell Ave <br />
-                                        undefined Kent, Utah 53127 <br />United States
+                                        {{ $address->address }} <br />
+                                        {{ $address->state }}, {{ $address->city }}<br />{{ settings('country') }}
                                     </span>
-                                    <a href="#" class="change float-end">Change</a>
+
+                                    {{-- <a href="#" class="change float-end">Change</a> --}}
+
                                 </li>
+                                @else
+                                    <li>
+                                        <i class="fi fi-rs-marker mr-10 text-brand"></i>
+                                        <span>
+                                            No address available..<br />
+
+                                        </span>
+
+                                        <a href="{{ route('login') }}" class="change float-end">Create address</a><br>
+
+                                    </li>
+                                @endif
                                 <li class="hr"><span></span></li>
                             </ul>
-                            <h5 class="section-title style-3 mb-20">Return & Warranty</h5>
+
+                            {{-- <h5 class="section-title style-3 mb-20">Return & Warranty</h5>
                             <ul>
                                 <li>
                                     <i class="fi fi-rs-shield-check mr-10 text-brand"></i>
@@ -752,7 +768,8 @@
                                     <i class="fi fi-rs-diploma mr-10 text-brand"></i>
                                     <span> 12 Months Warranty </span>
                                 </li>
-                            </ul>
+                            </ul> --}}
+
                         </div>
                         <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
                             <h5 class="section-title style-3 mb-20">Vendor</h5>
@@ -768,7 +785,7 @@
                                     @php
                                         $vendorRating = $product->store->rating;
                                         $vendorTotalRating = $product->store->totalRating;
-                                        
+
                                     @endphp
 
                                     <div class="product-rate-cover text-end">
@@ -810,7 +827,9 @@
                             <ul>
                                 <li class="hr"><span></span></li>
                             </ul>
-                            <p>Become a Vendor? <a href="#"> Register now</a></p>
+
+                            {{-- <p>Become a Vendor? <a href="#"> Register now</a></p> --}}
+
                         </div>
                         <div class="sidebar-widget widget-category-2 mb-30">
                             <h5 class="section-title style-1 mb-30">Category</h5>
@@ -924,7 +943,9 @@
 
 
         $(".adding").click(function(event) {
+
             var x = $('#qty-value').text();
+
             let quantity = parseInt(x);
             var pid = $('#pid').val();
 

@@ -40,7 +40,7 @@
                             <td class="text-muted font-sm fw-600 font-heading">Name</td>
                             @foreach ($compareProducts as $product)
                             <td class="product_name">
-                                <h6><a href="{{route('products', $product->id)}}" class="text-heading">{{$product->name}} - {{$product->store->name}}</a></h6>
+                                <h6><a href="{{route('products', $product->slug)}}" class="text-heading">{{$product->name}} - {{$product->store->name}}</a></h6>
                             </td>
                             @endforeach
                         </tr>
