@@ -407,9 +407,9 @@
         }
         var symbol = "{{ settings('currency') }}"
 
-        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));'
-        '
-        var taxRate = "{{ settings('tax') }}"
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
+
+        var taxRate = "{{ settings('tax') }}";
         var newtax = ((taxRate / 100) * subtotal).toFixed(2);
 
         $('.tax').text(symbol + newtax);
