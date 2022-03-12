@@ -265,7 +265,7 @@ class CheckoutController extends Controller
         $checkPromo = Cart::whereUserId(auth()->id())->first();
 
         if ($checkPromo && $checkPromo->promo_id) {
-            $this->updatePromo($cart->promo_id);
+            $this->updatePromo($checkPromo->promo_id);
         }
 
         $order                  = new Order();
