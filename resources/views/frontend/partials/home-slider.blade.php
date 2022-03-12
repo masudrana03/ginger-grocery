@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="more_categories moreless2"><span class="icon"></span> 
-                        <span class="heading-sm-1 more2 ">Show more...</span>
+                        <span class="heading-sm-1 more2 " style="cursor: pointer">Show more...</span>
                     </div>
                 </div>
             </div>

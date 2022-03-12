@@ -12,6 +12,7 @@ use App\Models\Currency;
 use App\Models\Nutrition;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 
@@ -35,24 +36,24 @@ class ProductController extends Controller
         $columns = [
             0 => 'id',
             1 => 'title',
-            2 => 'brand',
-            3 => 'category',
-            4 => 'unit',
+            2 => 'brand_id',
+            3 => 'category_id',
+            4 => 'unit_id',
             5 => 'price',
-            6 => 'store',
+            6 => 'store_id',
             7 => 'image',
             8 => 'created_at',
             9 => 'id',
         ];
 
-        $product = Product::query();
-        if (!isAdmin()) {
-            $product = $product->where('store_id', auth()->user()->store_id);
-        }
-        if ($request->store) {
-            $product = $product->where('store_id', $request->store);
-            // logger($product)->get();
-        }
+        $totalData = Product::count();
+
+        $totalFiltered = $totalData;
+
+        // if ($request->store) {
+        //     $product = $product->where('store_id', $request->store);
+        //     // logger($product)->get();
+        // }
 
 
         // if (isAdmin()) {
@@ -64,9 +65,15 @@ class ProductController extends Controller
         //     // $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
         // }
 
-        $totalData = $product->count();
+        // $totalData = $query->count();
 
-        $totalFiltered = $totalData;
+        // $totalFiltered = $totalData;
+
+        $query = Product::with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions');
+
+        if (!isAdmin()) {
+            $query->where('store_id', auth()->user()->store_id);
+        }
 
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -74,23 +81,24 @@ class ProductController extends Controller
         $dir   = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->offset($start)
+            $products = $query->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
         } else {
             $search = $request->input('search.value');
 
-            $products = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where('id', 'LIKE', "%{$search}%")
+            $products = $query->where('id', 'LIKE', "%{$search}%")
                 ->orWhere('name', 'LIKE', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
 
-            $totalFiltered = $product->with('category', 'user', 'brand', 'unit', 'store', 'currency', 'types', 'nutritions')->where('id', 'LIKE', "%{$search}%")
-                ->orWhere('name', 'LIKE', "%{$search}%")
-                ->count();
+            // $totalFiltered = $query->where('id', 'LIKE', "%{$search}%")
+            //     ->orWhere('name', 'LIKE', "%{$search}%")
+            //     ->count();
+                $totalFiltered = $query->count();
         }
 
         $data = [];
@@ -100,15 +108,16 @@ class ProductController extends Controller
                 $edit   = route('admin.products.edit', $product->id);
                 $delete = route('admin.products.destroy', $product->id);
                 $token  = csrf_token();
-                // $img    = asset( 'assets/img/uploads/products/thumbnail/' . $product->image );
+                $img    = asset('assets/img/uploads/products/thumbnail/' . $product->featured_image);
 
                 $nestedData['id']         = $product->id;
                 $nestedData['title']      = $product->name;
-                $nestedData['brand']      = $product->brand->name;
-                $nestedData['category']   = $product->category->name;
-                $nestedData['unit']       = $product->unit->name;
-                $nestedData['price']      = $product->price;
-                $nestedData['store']      = $product->store->name;
+                $nestedData['brand_id']      = $product->brand->name;
+                $nestedData['category_id']   = $product->category->name;
+                $nestedData['unit_id']       = $product->unit->name;
+                $nestedData['price']      = settings('currency').$product->price;
+                $nestedData['store_id']      = $product->store->name;
+                $nestedData['image']      = "<img src='{$img}' width='100'>";
                 $nestedData['created_at'] = $product->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
@@ -288,7 +297,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
         if (!isShopManager($product->store_id) && !isAdmin()) {
             return abort(403);
         }

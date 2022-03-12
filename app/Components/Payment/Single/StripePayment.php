@@ -151,7 +151,7 @@ class StripePayment implements PayableInterface
                       'name' => $item->product->name,
                     //   'images' => [asset('assets/img/uploads/products/featured/' . $item->product->featured_image)],
                     ],
-                    'unit_amount' => $item->product->price * 100,
+                    'unit_amount' => $item->product->discount_price * 100,
                   ],
                   'quantity' => $item->quantity,
                 ];

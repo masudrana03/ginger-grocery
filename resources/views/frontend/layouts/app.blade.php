@@ -100,7 +100,7 @@
                                 </div>
 
                                 <p class="mb-45">Start You'r Daily Shopping with <span
-                                        class="text-brand">Binary Fusion</span></p>
+                                        class="text-brand">{{ settings('company_name') }}</span></p>
                                 <form class="form-subcriber d-flex">
                                     <input type="email" placeholder="Your emaill address" />
                                     <button class="btn" type="submit">Subscribe</button>
@@ -284,17 +284,12 @@
                      </div>
 
                     -->
-
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                        <h4 class="widget-title">Popular</h4>
+                        <h4 class="widget-title">Popular Categories</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Milk & Flavoured Milk</a></li>
-                            <li><a href="#">Butter and Margarine</a></li>
-                            <li><a href="#">Eggs Substitutes</a></li>
-                            <li><a href="#">Marmalades</a></li>
-                            <li><a href="#">Sour Cream and Dips</a></li>
-                            <li><a href="#">Tea & Kombucha</a></li>
-                            <li><a href="#">Cheese</a></li>
+                            @foreach ($loadCategories->random(7) as $category)
+                                <li><a href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="footer-link-widget widget-install-app col wow animate__animated animate__fadeInUp"
@@ -319,8 +314,8 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy;<?php echo date('Y'); ?> <strong class="text-brand">Binary
-                            Fusion</strong> - All rights reserved</p>
+                    <p class="font-sm mb-0">&copy;<?php echo date('Y'); ?> <strong
+                            class="text-brand">{{ settings('company_name') }}</strong> - All rights reserved</p>
                 </div>
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
@@ -335,18 +330,20 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
                     <div class="mobile-social-icon">
                         <h6>Follow Us</h6>
-                        <a href="https://www.facebook.com/binaryfusion"><img
+                        <a href="{{ settings('facebook_link') }}"><img
                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-facebook-white.svg') }}"
                                 alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}"
+                        <a href="{{ settings('twitter_link') }}"><img
+                                src="{{ asset('assets/frontend/imgs/theme/icons/icon-twitter-white.svg') }}"
                                 alt="" /></a>
-                        <a href="#"><img
+                        <a href="{{ settings('instagram_link') }}"><img
                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-instagram-white.svg') }}"
                                 alt="" /></a>
-                        <a href="#"><img
+                        <a href="{{ settings('linkedin_link') }}"><img
                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-pinterest-white.svg') }}"
                                 alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/frontend/imgs/theme/icons/icon-youtube-white.svg') }}"
+                        <a href="{{ settings('youtube_link') }}"><img
+                                src="{{ asset('assets/frontend/imgs/theme/icons/icon-youtube-white.svg') }}"
                                 alt="" /></a>
                     </div>
                     <p class="font-sm">Up to 15% discount on your first subscribe</p>
@@ -703,4 +700,5 @@
     </script>
     @yield('script')
 </body>
+
 </html>

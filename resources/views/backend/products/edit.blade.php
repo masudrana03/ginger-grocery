@@ -67,7 +67,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="excerpt">Excerpt</label>
+                                    <label for="excerpt">Short Description</label>
                                     <textarea type="text" name="excerpt"
                                         class="form-control @error('excerpt') is-invalid @enderror" id="excerpt"
                                         aria-describedby="emailHelp"

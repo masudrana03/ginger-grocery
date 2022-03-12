@@ -145,7 +145,7 @@
 
                                         {{-- <span class="stock-status out-stock"> Sale Off </span> --}}
 
-                                        <h3 class="title-detail" style="font-size:30px;">{{ $product->name }}</h3>
+                                        <h3 class="title-detail" style="font-size:26px;">{{ $product->name }}</h3>
                                         <input type="hidden" value="{{ $item->id }}" id="pid">
                                         <div class="product-detail-rating">
                                             <div class="product-rate-cover text-end">
@@ -169,7 +169,7 @@
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
                                                 <span class="current-price text-brand"
-                                                    style="font-size:46px;">{{ settings('currency') }}{{ $product->price }}</span>
+                                                    style="font-size:36px;">{{ settings('currency') }}{{ $product->price }}</span>
 
 
                                                 {{-- <span>

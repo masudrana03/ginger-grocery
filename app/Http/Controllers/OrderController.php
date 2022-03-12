@@ -56,16 +56,15 @@ class OrderController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir   = $request->input('order.0.dir');
 
-        if (isAdmin()) {
-            $query = Order::with('details', 'status');
-        } else {
+        $query = Order::with('details', 'status');
+
+        if (!isAdmin()) {
+           // $query = Order::with('details', 'status');
             // $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id, auth()->user()->type);
             // logger($query->get());
 
-            $query = Order::with('details', 'status')->whereStoreId(auth()->user()->store_id);
+            $query->whereStoreId(auth()->user()->store_id);
         }
-
-        $query = Order::with('details', 'status');
 
         $orderStatus = $request->status;
 
