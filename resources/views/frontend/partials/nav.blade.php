@@ -1225,7 +1225,6 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                //tata.success('Success!', 'Product removed form your cart.');
             },
             error: function(error) {
                 console.log(error);
@@ -1253,7 +1252,6 @@ $(document).on('click', '.ajax-product-remove', function() {
                 id: pd,
             },
             success: function(result) {
-                //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
 
@@ -1326,9 +1324,9 @@ $(document).on('click', '.ajax-product-remove', function() {
 
             },
             success: function(result) {
+                tata.success('Success!', 'Product added to your cart.');
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {

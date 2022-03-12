@@ -407,7 +407,10 @@
         }
         var symbol = "{{ settings('currency') }}"
 
-        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));'
+        '
+        tax = "{{ taxCalculator(subtotal) }}"
+
         $('.tax').text(symbol + tax);
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
@@ -474,7 +477,8 @@
 
         subtotal += parseFloat(tax);
         // subtotal.toFixed(2);
-
+        tax = "{{ taxCalculator(subtotal) }}"
+        
         $('.tax').text(symbol + tax);
         $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
@@ -499,10 +503,7 @@
                 quantity: quantity,
             },
             success: function(result) {
-                //console.log(result);
-
-
-                //tata.success('Success!!', 'Product updated successfully.');
+                //
             },
             error: function(error) {
                 console.log(error);

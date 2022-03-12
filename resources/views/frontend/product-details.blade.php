@@ -950,10 +950,9 @@
 
                 },
                 success: function(result) {
+                    tata.success('Success!', 'Product added to your cart.');
                     $('#old-cart').empty();
                     $('#new-cart').html(result);
-                    console.log(result);
-                    tata.success('Success!', 'Product added to your cart.');
                 },
                 error: function(error) {
                     if (error.status == 401) {
