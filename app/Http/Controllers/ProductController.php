@@ -230,7 +230,7 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-
+        
 
         //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));
@@ -267,7 +267,7 @@ class ProductController extends Controller
             $product->featured_image = $filename;
         }
 
-        $productData                   = $request->except('files', 'types', 'nutritions');
+        $productData                   = $request->except( 'types', 'nutritions');
         $product['user_id']            = auth()->id();
         $productData['slug']           = Str::slug($request->name);
         $productData['featured_image'] = $filename;

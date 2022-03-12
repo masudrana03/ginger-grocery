@@ -170,7 +170,10 @@
                                             <div class="product-price primary-color float-left">
                                                 <span class="current-price text-brand"
                                                     style="font-size:36px;">{{ settings('currency') }}{{ $product->price }}</span>
-
+                                                @if ($product->discountable)
+                                                    <span
+                                                        class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}</span>
+                                                @endif
 
                                                 {{-- <span>
                                                     <span class="save-price font-md color3 ml-15">26% Off</span>
@@ -199,7 +202,8 @@
                                                 <input type="hidden" name=qty[] id="qty" class="update-qty">
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"
                                                         id="down"></i></a>
-                                                <span class="qty-val" id="qty-value">1</span>
+                                                <span style="margin-right:20px;" class="qty-val"
+                                                    id="qty-value">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"
                                                         id="up"></i></a>
                                             </div>
@@ -682,8 +686,13 @@
                                                         </div>
                                                         <div class="product-card-bottom">
                                                             <div class="product-price">
-                                                                <span>{{ settings('currency') }}{{ $productData->price }}</span>
-                                                                {{-- <span class="old-price">$32.8</span> --}}
+                                                                <span
+                                                                    class="">{{ settings('currency') }}{{ $product->discount_price }}
+                                                                </span>
+                                                                @if ($product->discountable)
+                                                                    <span
+                                                                        class="old-price">{{ settings('currency') }}{{ $product->price }}</span>
+                                                                @endif
                                                             </div>
                                                             <div class="add-cart">
                                                                 <input type="hidden" id="product-id" name="product_id"
@@ -925,6 +934,7 @@
 
         $(".adding").click(function(event) {
             var x =$('#qty-value').text();
+
             let quantity = parseInt(x);
             var pid = $('#pid').val();
 
@@ -951,7 +961,6 @@
                     }
                 }
             });
-
         });
     </script>
 @endsection

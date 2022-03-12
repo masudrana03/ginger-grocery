@@ -121,8 +121,10 @@
                                 <div class="form-group">
                                     <label for="price">Discount Type</label>
                                     <select name="discount_type" class="form-control @error('types') is-invalid @enderror">
-                                            <option {{$product->discount_type =="1" ? 'selected' : '' }}value="1">Percentage(%)</option>
-                                            <option {{$product->discount_type =="2" ? 'selected' : '' }} value="2">Fixed Amount</option>
+                                        <option {{ $product->discount_type == '1' ? 'selected' : '' }} value="1">
+                                            Percentage(%)</option>
+                                        <option {{ $product->discount_type == '0' ? 'selected' : '' }} value="0">Fixed
+                                            Amount</option>
                                     </select>
                                     @error('types')
                                         <span class="invalid-feedback" role="alert">

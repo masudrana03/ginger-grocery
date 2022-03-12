@@ -10,7 +10,6 @@
             <div class="section-title style-2 wow animate__animated animate__fadeIn">
                 @if (($search ?? false) == false)
                     <h3>Popular Products</h3>
-
                 @else
                     <h3>Search Result</h3>
                 @endif
