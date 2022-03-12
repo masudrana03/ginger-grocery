@@ -309,7 +309,7 @@
 
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
 
                         <div class="border p-md-4 cart-totals  mt-4">
 
@@ -331,7 +331,7 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
