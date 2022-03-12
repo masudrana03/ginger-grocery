@@ -458,7 +458,7 @@
         }
 
         var subtotalPrice = quantity * productPrice;
-        subtotalCtr.text(subtotalPrice);
+        subtotalCtr.text(subtotalPrice.toFixed(2));
 
         var products = $(".product-modifiers"),
             subtotal = 0;
