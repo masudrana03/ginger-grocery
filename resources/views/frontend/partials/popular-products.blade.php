@@ -10,7 +10,6 @@
             <div class="section-title style-2 wow animate__animated animate__fadeIn">
                 @if (($search ?? false) == false)
                     <h3>Popular Products</h3>
-                    
                 @else
                     <h3>Search Result</h3>
                 @endif
@@ -65,8 +64,9 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
-                                                    href="#"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Wishlist" class="action-btn wishlist-btn"
+                                                    data-id="{{ $product->id }}" href="#"><i
+                                                        class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" data-id="{{ $product->id }}"
                                                     class="action-btn compare-btn"
                                                     href="{{ route('compareProduct', $product->id) }}"><i
@@ -158,8 +158,9 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Wishlist" class="action-btn wishlist-btn" data-id="{{ $product->id }}"
-                                                    href="#"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Wishlist" class="action-btn wishlist-btn"
+                                                    data-id="{{ $product->id }}" href="#"><i
+                                                        class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" data-id="{{ $product->id }}"
                                                     class="action-btn compare-btn" href="#"><i
                                                         class="fi-rs-shuffle"></i></a>
@@ -300,5 +301,3 @@
         });
     });
 </script>
-
-
