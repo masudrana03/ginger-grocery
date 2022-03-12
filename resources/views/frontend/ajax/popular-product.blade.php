@@ -125,7 +125,7 @@
             <!--End product-grid-4-->
         </div>
         <!--En tab one-->
-        @forelse ($categories as $category )
+        @forelse ($categoryProducts as $category )
             <div class="tab-pane fade" id="tab-{{ $category->id }}" role="tabpanel"
                 aria-labelledby="tab-{{ $category->id }}">
                 <div class="row product-grid-4">
