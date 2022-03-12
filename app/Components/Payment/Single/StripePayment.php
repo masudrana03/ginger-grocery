@@ -132,6 +132,16 @@ class StripePayment implements PayableInterface
 
         $stripe = new \Stripe\StripeClient($this->client_secret);
 
+        // if (settings('tax')) {
+        //     $tax = $stripe->taxRates->create(
+        //         [
+        //           'display_name' => 'Tax',
+        //           'inclusive' => false,
+        //           'percentage' => settings('tax'),
+        //         ]
+        //     );
+        // }
+
         foreach ($orders as $order) {
             foreach ($order->details as $item) {
                 $temp_items = [
@@ -147,23 +157,9 @@ class StripePayment implements PayableInterface
                 ];
                 $line_items[] = $temp_items;
             }
+            
             $discount = $order->discount;
         }
-
-        if ($order->tax > 0) {
-            $tax = $stripe->taxRates->create(
-                [
-                  'display_name' => 'Tax',
-                  'inclusive' => false,
-                  'percentage' => $order->tax * 100,
-                ]
-            );
-        }
-
-        logger('aaaaaaaaaaaa');
-        logger($tax);
-        logger('bbbbbbbbbbbbbbb');
-
 
         if ($discount > 0) {
             $coupon = $stripe->coupons->create(['amount_off' => $discount * 100, 'duration' => 'once', 'currency' => 'usd']);
@@ -171,10 +167,6 @@ class StripePayment implements PayableInterface
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
-            'metadata'              => [
-                'vat_id'        => $tax->id,
-                'taxrate'       =>  $tax->id,
-            ],
             'line_items' => $line_items,
             'shipping_options' => [
                 [
