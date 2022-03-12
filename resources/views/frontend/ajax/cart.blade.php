@@ -149,10 +149,8 @@
 
             },
             success: function(result) {
-                
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                //tata.success('Deleting!', 'Product Deleted Form your cart.');
             },
             error: function(error) {
                 console.log(error);
@@ -169,8 +167,6 @@
 
             },
             success: function(result) {
-                
-                //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
 

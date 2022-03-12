@@ -121,7 +121,7 @@
                                         </td>
 
                                         <td class="px-0 text-right">
-                                            {{ settings('currency') }}{{ $item->product->price }}
+                                            {{ settings('currency') }}{{ $item->product->discount_price }}
                                         </td>
                                     </tr>
                                 @endforeach

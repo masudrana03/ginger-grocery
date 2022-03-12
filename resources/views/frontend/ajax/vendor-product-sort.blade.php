@@ -135,9 +135,9 @@
 
             },
             success: function(result) {
+                tata.success('Success!', 'Product added to your cart.');
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {
@@ -164,7 +164,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                   // tata.success('Success!', 'Product added to compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -191,7 +190,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                   // tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -215,7 +213,6 @@
 </script>
 <script>
     $(document).ready(function() {
-        // alert('test');
         $(".wishlist-btn").click(function(event) {
             event.preventDefault();
             var id = $(this).attr("data-id");
@@ -228,9 +225,13 @@
                     id: id,
                 },
                 success: function(result) {
-                    $('#wishlistProductOld').empty();
-                    $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product added to wishlist.');
+                    if (result == '401') {
+                            window.location.href = "/login";
+                        }else{
+                            $('#wishlistProductOld').empty();
+                            $('#wishlistProductNew').html(result);
+                            tata.success('Success!', 'Product added to wishlist.');
+                        }
                 },
                 error: function(error) {
                     console.log(error);

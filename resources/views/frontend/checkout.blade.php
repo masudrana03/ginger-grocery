@@ -413,7 +413,7 @@
                             <div style="padding-left:3%;  padding-right:4%;">
                                 @foreach ($product as $item)
                                     @php
-                                        $subtotal += $item->price * $item->quantity;
+                                        $subtotal += $item->discount_price * $item->quantity;
                                     @endphp
                                     <div class="row cart-item mb-3">
                                         <div class="col-3" style="width: 14%">
@@ -439,8 +439,7 @@
                                         </div>
 
                                         <div class="col">
-                                            <p class="pri">{{ $currency }}
-                                                {{ $item->price * $item->quantity }}</p>
+                                            <p class="pri">{{ $currency }} {{ $item->discount_price * $item->quantity }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -505,15 +504,11 @@
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
                         @if (session('totalAfterDiscount'))
-                            <p class="total-amount discount">{{ session('discountAmount') }}</p>
-                            <h5 class="total-amount grandTotal">
-                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
-                            </h5>
+                        <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
+                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
                         @else
-                            <p class="total-amount discount">{{ session('discountAmount') }}</p>
-                            <h5 class="total-amount grandTotal">
-                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
-                            </h5>
+                        {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
+                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
                         @endif
                     </div>
                 </div>
@@ -527,14 +522,12 @@
 @endsection
 
 @push('script')
-    <script>
-        $(document).ready(function() {
-            // alert('hello');
-            // method="GET" action="{{ route('user.track.orders') }}"
-            $("#promoCode").click(function(event) {
-                event.preventDefault();
-                var promoId = $('#promoId').val();
-                $.ajaxSetup({
+<script>
+    $(document).ready(function() {
+        $("#promoCode").click(function(event) {
+            event.preventDefault();
+            var promoId = $('#promoId').val();
+            $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }

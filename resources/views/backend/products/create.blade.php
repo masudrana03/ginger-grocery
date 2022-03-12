@@ -66,9 +66,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="excerpt">Excerpt</label>
+                                    <label for="excerpt">Short Description</label>
                                     <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror"
-                                        id="excerpt" aria-describedby="emailHelp" placeholder="Excerpt"
+                                        id="excerpt" aria-describedby="emailHelp" placeholder="Short Description"
                                         value="{{ old('excerpt') }}"></textarea>
                                     @error('excerpt')
                                         <span class="invalid-feedback" role="alert">

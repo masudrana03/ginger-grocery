@@ -30,6 +30,7 @@
                                             <th>Unit</th>
                                             <th>Price</th>
                                             <th>Store</th>
+                                            <th>Featured Image</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -79,11 +80,12 @@
             "columns": [
                 { "data": "id" },
                 { "data": "title" },
-                { "data": "brand" },
-                { "data": "category" },
-                { "data": "unit" },
+                { "data": "brand_id" },
+                { "data": "category_id" },
+                { "data": "unit_id" },
                 { "data": "price" },
-                { "data": "store" },
+                { "data": "store_id" },
+                { "data": "image" },
                 { "data": "created_at" },
                 { "data": "actions" }
             ]

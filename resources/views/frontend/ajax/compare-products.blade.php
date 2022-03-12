@@ -146,7 +146,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                   // tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -156,7 +155,6 @@
                         method: 'GET',
                         url: "{!! route('removeCompareProduct2') !!}",
                         success: function(result) {
-                            console.log(result);
                             $('#compareProductsOld').empty();
                             $('#compareProductsNew').html(result);
                         },

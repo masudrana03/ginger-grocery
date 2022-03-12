@@ -145,7 +145,7 @@
 
                                         {{-- <span class="stock-status out-stock"> Sale Off </span> --}}
 
-                                        <h3 class="title-detail" style="font-size:30px;">{{ $product->name }}</h3>
+                                        <h3 class="title-detail" style="font-size:26px;">{{ $product->name }}</h3>
                                         <input type="hidden" value="{{ $item->id }}" id="pid">
                                         <div class="product-detail-rating">
                                             <div class="product-rate-cover text-end">
@@ -169,8 +169,7 @@
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
                                                 <span class="current-price text-brand"
-                                                    style="font-size:46px;">{{ settings('currency') }}{{ $product->discount_price }}</span>
-
+                                                    style="font-size:36px;">{{ settings('currency') }}{{ $product->price }}</span>
                                                 @if ($product->discountable)
                                                     <span
                                                         class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}</span>
@@ -906,22 +905,15 @@
 
         $("#up").click(function(event) {
             event.preventDefault();
-            //alert("ugfsgfhsfhsfgshf");
 
             let value = $('#qty-value').text();
 
-            // let price = $('.price').val();
-            //alert(price);
-
             let currentValue = parseInt(value);
-            //alert(currentValue);
             if (currentValue < 10) {
                 currentValue = currentValue + 1;
                 $('#qty-value').text(currentValue);
                 $('.qty').val(currentValue);
 
-                // let new_price = price * currentValue;
-                // $('.current-price').text(new_price);
 
             }
 
@@ -929,11 +921,9 @@
 
         $("#down").click(function(event) {
             event.preventDefault();
-            //alert("ugfsgfhsfhsfgshf");
 
             let value = $('#qty-value').text();
             let currentValue = parseInt(value);
-            //alert(currentValue);
             if (currentValue > 1) {
                 currentValue = currentValue - 1;
                 $('#qty-value').text(currentValue);
@@ -944,7 +934,9 @@
 
         $(".adding").click(function(event) {
 
+
             var x = $('#qty-value').text();
+
 
             let quantity = parseInt(x);
             var pid = $('#pid').val();
@@ -961,10 +953,9 @@
 
                 },
                 success: function(result) {
+                    tata.success('Success!', 'Product added to your cart.');
                     $('#old-cart').empty();
                     $('#new-cart').html(result);
-                    console.log(result);
-                    tata.success('Success!', 'Product added to your cart.');
                 },
                 error: function(error) {
                     if (error.status == 401) {
@@ -972,8 +963,6 @@
                     }
                 }
             });
-
-
         });
     </script>
 @endsection

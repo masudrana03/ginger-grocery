@@ -21,8 +21,8 @@
         width: 172px !important;
         max-height:100%;
     }
-    
-   
+
+
 
 
 
@@ -739,7 +739,7 @@
                                     </div>
                                 </div>
                                 <div class="more_categories moreless"><span class="icon"></span> <span
-                                        class="heading-sm-1 more ">Show more...</span></div>
+                                        class="heading-sm-1 more "style="cursor: pointer">Show more...</span></div>
                                 </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
@@ -1174,22 +1174,22 @@
                 var url = "{!! route('zone.filter', ':zoneId') !!}";
                 url = url.replace(':zoneId', zoneId);
 
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                zone_id: zoneId,
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        zone_id: zoneId,
 
-            },
-            success: function(result) {
-                // console.log(result);
-                $('#oldZoneWiseProduct').empty();
-                $('#newZoneWiseProduct').html(result);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+                    },
+                    success: function(result) {
+                        // console.log(result);
+                        $('#oldZoneWiseProduct').empty();
+                        $('#newZoneWiseProduct').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
             });
         });
 
@@ -1225,7 +1225,6 @@
                 //console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                //tata.success('Success!', 'Product removed form your cart.');
             },
             error: function(error) {
                 console.log(error);
@@ -1253,11 +1252,9 @@ $(document).on('click', '.ajax-product-remove', function() {
                 id: pd,
             },
             success: function(result) {
-                console.log(result);
-                //tata.error('Success!', 'Product removed form your cart.');
                 $('#old-div').empty();
                 $('#new-div').html(result);
-                
+
 
             },
             error: function(error) {
@@ -1267,12 +1264,12 @@ $(document).on('click', '.ajax-product-remove', function() {
 
     });
 
-    
+
 </script>
 
 <script>
     $(document).on('click', '.moreless', function() {
-           let pre_text = $('.more').text(); 
+           let pre_text = $('.more').text();
            if (pre_text == "Show more..."){
             let new_text = "Show less...";
             $('.more').text(new_text);
@@ -1281,14 +1278,13 @@ $(document).on('click', '.ajax-product-remove', function() {
             let new_text = "Show more...";
             $('.more').text(new_text);
            }
-           
+
     });
 </script>
 
 <script>
     $(document).on('click', '.moreless2', function() {
-        //alert("sdgsdhsgds");
-           let pre_text = $('.more2').text(); 
+           let pre_text = $('.more2').text();
            if (pre_text == "Show more..."){
             let new_text = "Show less...";
             $('.more2').text(new_text);
@@ -1297,7 +1293,7 @@ $(document).on('click', '.ajax-product-remove', function() {
             let new_text = "Show more...";
             $('.more2').text(new_text);
            }
-           
+
     });
 </script>
 <script>
@@ -1328,9 +1324,9 @@ $(document).on('click', '.ajax-product-remove', function() {
 
             },
             success: function(result) {
+                tata.success('Success!', 'Product added to your cart.');
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {

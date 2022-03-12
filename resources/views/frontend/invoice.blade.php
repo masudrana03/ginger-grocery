@@ -103,7 +103,7 @@
                                         <tbody>
                                             @forelse ( $order->details as $product )
                                                 @php
-                                                    $total = $product->product->price * $product->quantity;
+                                                    $total = $product->product->discount_price * $product->quantity;
                                                 @endphp
                                                 <tr>
                                                     <td>
@@ -114,7 +114,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ settings('currency') }}{{ $product->product->price }}
+                                                        {{ settings('currency') }}{{ $product->product->discount_price }}
                                                     </td>
                                                     <td class="text-center">{{ $product->quantity }}</td>
                                                     <td class="text-right">
@@ -163,9 +163,9 @@
                                             </tr>
                                             @endif
                                             <tr>
-                                                <td colspan="3" class="text-end f-w-600">Grand Total</td>
+                                                <td colspan="3" class="text-end f-w-600"><h6>Grand Total</h6></td>
                                                 <td class="text-right f-w-600">
-                                                    {{ settings('currency') }}{{ $order->total }}</td>
+                                                    <h6>{{ settings('currency') }}{{ $order->total }}</h6></td>
                                             </tr>
                                         </tbody>
                                     </table>

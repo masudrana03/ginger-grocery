@@ -163,7 +163,6 @@ function getDiscountAmount($total, $type, $discount)
  */
 function taxCalculator($total)
 {
-    logger($total);
     $taxRate = settings('tax');
 
     return round(($taxRate / 100) * $total, 2) ;
@@ -237,7 +236,7 @@ function priceCalculator($cart, $shippingId = null)
     }
 
     foreach ($cart as $item) {
-        $subtotal += $item->price * $item->quantity;
+        $subtotal += $item->discount_price * $item->quantity;
     }
 
     if ($shippingAddress) {

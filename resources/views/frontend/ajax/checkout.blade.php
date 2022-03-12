@@ -24,7 +24,7 @@ $currency = settings('currency');
             <div style="padding-left:3%;  padding-right:4%;">
                 @foreach ($product as $item)
                     @php
-                        $subtotal += $item->price * $item->quantity;
+                        $subtotal += $item->discount_price * $item->quantity;
                     @endphp
                     <div class="row cart-item mb-3">
                         <div class="col-3" style="width: 14%">
@@ -48,7 +48,7 @@ $currency = settings('currency');
                         </div>
 
                         <div class="col">
-                            <p class="pri">{{ $currency }} {{ $item->price }}</p>
+                            <p class="pri">{{ $currency }} {{ $item->discount_price }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -112,10 +112,10 @@ $currency = settings('currency');
         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
         {{-- <h5 class="total-amount">{{ $currency }}{{ $shipping + $tax + $grandSubtotal }} --}}
         @if (session('totalAfterDiscount'))
-            <p class="total-amount discount">{{ session('discountAmount') }}</p>
+            <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
             <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
         @else
-            <p class="total-amount discount">{{ session('discountAmount') }}</p>
+            {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
             <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
         @endif
         </h5>

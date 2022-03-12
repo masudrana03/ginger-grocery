@@ -16,7 +16,8 @@ class WishlistController extends Controller
         $user = auth()->user();
 
         if( ! $user ){
-            return redirect()->route('login');
+            return '401';
+            // return redirect()->route('login');
         }
         $user->savedProducts()->syncWithoutDetaching([$productId]);
 
