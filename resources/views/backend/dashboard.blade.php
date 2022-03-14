@@ -41,7 +41,7 @@
                                 <div class="media_card_list">
                                     <div class="single_media_card">
                                         <h4>Total Sale</h4>
-                                        <h3>{{ $sales }}</h3>
+                                        <h3>{{ settings('currency') }}{{ $sales }}</h3>
                                     </div>
                                     <div class="single_media_card">
                                         <h4>Total Order</h4>
@@ -90,7 +90,7 @@
                                 <div class="media_card_list">
                                     <div class="single_media_card">
                                         <h4>Total Sale</h4>
-                                        <h3>{{ $sales }}</h3>
+                                        <h3>{{ settings('currency') }}{{ $sales }}</h3>
                                     </div>
                                     <div class="single_media_card">
                                         <h4>Total Orders</h4>

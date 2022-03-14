@@ -309,7 +309,7 @@
 
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
 
                         <div class="border p-md-4 cart-totals  mt-4">
 
@@ -331,7 +331,7 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -407,11 +407,12 @@
         }
         var symbol = "{{ settings('currency') }}"
 
-        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));'
-        '
-        tax = "{{ taxCalculator(subtotal) }}"
+        $('.subtotal').text(symbol + parseFloat(subtotal).toFixed(2));
 
-        $('.tax').text(symbol + tax);
+        var taxRate = "{{ settings('tax') }}";
+        var newtax = ((taxRate / 100) * subtotal).toFixed(2);
+
+        $('.tax').text(symbol + newtax);
 
         var totalAfterDiscount = '{{ Session::get('totalAfterDiscount') }}';
         var discountAmount = '{{ Session::get('discountAmount') }}';
@@ -457,7 +458,7 @@
         }
 
         var subtotalPrice = quantity * productPrice;
-        subtotalCtr.text(subtotalPrice);
+        subtotalCtr.text(subtotalPrice.toFixed(2));
 
         var products = $(".product-modifiers"),
             subtotal = 0;
@@ -477,9 +478,11 @@
 
         subtotal += parseFloat(tax);
         // subtotal.toFixed(2);
-        tax = "{{ taxCalculator(subtotal) }}"
-        
-        $('.tax').text(symbol + tax);
+
+        var taxRate = "{{ settings('tax') }}"
+        var newtax = ((taxRate / 100) * subtotal).toFixed(2);
+
+        $('.tax').text(symbol + newtax);
         $('.total').text(symbol + parseFloat(subtotal).toFixed(2));
         // -----------------------------------------
 
