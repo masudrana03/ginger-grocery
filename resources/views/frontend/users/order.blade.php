@@ -72,6 +72,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Invoice ID</th>
+                                                                <th>Vendor Name</th>
                                                                 <th>Date</th>
                                                                 <th>Status</th>
                                                                 <th>Total Price</th>
@@ -82,6 +83,7 @@
                                                             @foreach ($orders as $item)
                                                                 <tr>
                                                                     <td>{{ $item->invoice_id }}</td>
+                                                                    <td>{{ $item->store->name }}</td>
                                                                     <td>{{ $item->created_at->format('F j, Y') }}</td>
                                                                     <td>{{ $item->status->name }}</td>
                                                                     <td>{{ settings('currency') }}{{ $item->total }}

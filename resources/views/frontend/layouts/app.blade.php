@@ -79,7 +79,10 @@
         @yield('content')
     </div>
     <footer class="main">
-        <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
+        @if ( $cart ?? '')
+        <p></p>
+        @else
+        <section class="newsletter mb-15 wow animate__animated animate__fadeIn" id="newsletterSection">
             <div class="container">
                 @php
                     $actonFooter = $callToActions->find(6);
@@ -116,6 +119,7 @@
 
             </div>
         </section>
+        @endif
         <section class="featured section-padding">
             <div class="container">
                 <div class="row">

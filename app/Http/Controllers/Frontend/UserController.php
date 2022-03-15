@@ -158,12 +158,15 @@ class UserController extends Controller
             // return $request;
             $request->validate([
             'invoice_id' => 'required',
-            'email'    => 'required',
         ]);
         //  return "test done";
             $order = '';
-            $email  = auth()->user()->email ;
-            if ( $email == $request->email ){
+            $userId  = auth()->user()->id ;
+
+            $checkUserId = Order::where('user_id' ,$userId)->get();
+            
+
+            if ( !$checkUserId = '' ){
 
                 $order = Order::where('invoice_id', $request->invoice_id)->first();
 
@@ -181,7 +184,7 @@ class UserController extends Controller
 
 
 
-            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus'));
+            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus','order'));
             // return [$orderStatus, $currentStatus];
 
 
@@ -209,6 +212,7 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
+        // return $request;
         $this->validate($request, [
             $request->name => 'required',
             $request->email => 'required',
@@ -216,7 +220,8 @@ class UserController extends Controller
             $request->date_of_birth => 'required',
         ]);
 
-        auth()->user()->update($request->all());
+        $user = auth()->user();
+        $user->update($request->all());
 
         return back();
     }

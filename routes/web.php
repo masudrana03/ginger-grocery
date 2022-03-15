@@ -216,8 +216,8 @@ Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter'
 Route::middleware(['auth'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
-    
-    
+
+
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
     Route::get('/cart-product-remove/{id}', [FrontendCartController::class, 'removeToCartById'])->name('cart.remove');
@@ -233,7 +233,7 @@ Route::get('/user/orders', [FrontendUserController::class, 'getOrders'])->name('
 Route::get('/user/track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
 Route::get('/user/address', [FrontendUserController::class, 'getAddress'])->name('user.address');
 Route::get('/user/profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
-Route::post('/user/profile-update', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
+Route::post('/user/update-profile', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
 Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
 Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
 Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');

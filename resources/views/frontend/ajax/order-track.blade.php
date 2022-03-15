@@ -4,17 +4,17 @@
     {{-- <div class="login_wrap widget-taber-content p-30 background-white border-radius-10"> --}}
         <div class="content" style="width:100%; border-radius: 15px;">
             <div class="content1" style="background-color: #3bb77e; padding: 13px; border-radius: 10px;">
-              <h4 style="font-size: 28px; padding: 10px; color: #fff; text-transform: uppercase;">Order Tracking : Order No</h4>
+              <h4 style="font-size: 28px; padding: 10px; color: #fff; text-transform: uppercase;">Order Tracking : Order No. {{ $order->invoice_id }}</h4>
             </div>
             <div class="content2" style="background-color: #79d1a9; border-radius: 10px;" >
               <div class="content2-header1">
-                <p>Shipped Via : <span>Ipsum Dolor</span></p>
+                <p>Sold By : <span> {{ $order->store->name }} </span></p>
               </div>
               <div class="content2-header1">
-                <p>Status : <span>Checking Quality</span></p>
+                <p>Status : <span>{{ $currentStatus }}</span></p>
               </div>
               <div class="content2-header1">
-                <p>Expected Date : <span style="">7-NOV-2015</span></p>
+                <p>Created Date : <span style="">{{ $order->created_at->format('F j, Y') }}</span></p>
               </div>
               <div class="clear"></div>
             </div>

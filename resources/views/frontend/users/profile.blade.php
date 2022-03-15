@@ -125,6 +125,7 @@
                                                                 </span>
                                                             @enderror
                                                         </div>
+
                                                         <div class="form-group col-md-12">
                                                             {{-- <p>Date: <input type="text" id="datepicker"></p> --}}
 
@@ -142,7 +143,7 @@
                                                         <div class="col-md-12">
                                                             <button type="submit"
                                                                 class="btn btn-fill-out submit font-weight-bold"
-                                                                name="submit" value="Submit">Save Change</button>
+                                                                >Save Change</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -166,6 +167,7 @@
         $(function() {
 
             $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "1971:2012"
