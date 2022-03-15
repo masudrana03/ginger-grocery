@@ -118,7 +118,6 @@
             success: function(result) {
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
-                //tata.success('Success!', 'Product added to your cart.');
             },
             error: function(error) {
                 if (error.status == 401) {
@@ -144,7 +143,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    //tata.success('Success!', 'Product added to compare list.');
                 },
                 error: function(error) {
                     console.log(error);
@@ -171,7 +169,6 @@
                 success: function(result) {
                     $('#compareProductOld').empty();
                     $('#compareProductNew').html(result);
-                    //tata.success('Success!', 'Product removed from compare list.');
                 },
                 error: function(error) {
                     console.log(error);
