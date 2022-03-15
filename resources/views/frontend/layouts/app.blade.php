@@ -5,7 +5,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
+    {{-- <title>  @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title> --}}
+    <title>  @yield('title',  '') {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -544,6 +545,7 @@
                     page: page,
                 },
                 success: function(html) {
+                    console.log(html);
                     $('#app').html(html);
 
                     paginationClickEvent(search);

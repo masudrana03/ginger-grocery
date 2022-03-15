@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Address')
+@section('title', 'Address |')
 
 <style>
     .modal-border {

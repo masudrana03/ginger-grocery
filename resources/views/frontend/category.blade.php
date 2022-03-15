@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', $category->name)
+@section('title', $category->name . ' | ')
 
 @section('content')
 

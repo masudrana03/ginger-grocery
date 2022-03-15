@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Product Wishlist')
+@section('title', 'Product Wishlist |')
 
 @section('content')
     <div class="page-header breadcrumb-wrap">

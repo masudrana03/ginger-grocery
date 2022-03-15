@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', $query)
+@section('title', $query .' | ')
 
 @section('content')
 

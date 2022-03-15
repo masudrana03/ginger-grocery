@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'User Account')
+@section('title', 'User Account |')
 
 
 @section('content')

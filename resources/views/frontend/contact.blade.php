@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Contact')
+@section('title', 'Contact |')
 <style>
     /* .select2-container .select2-selection--single {
   box-sizing: border-box;

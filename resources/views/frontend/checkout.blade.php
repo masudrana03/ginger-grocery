@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Checkout')
+@section('title', 'Checkout |')
 
 <style>
     span.checkout-quantity {

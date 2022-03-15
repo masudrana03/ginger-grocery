@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Order Placed')
+@section('title', 'Order Placed |')
 
 @section('content')
     <div class="page-header breadcrumb-wrap">

@@ -164,7 +164,7 @@ class UserController extends Controller
             $userId  = auth()->user()->id ;
 
             $checkUserId = Order::where('user_id' ,$userId)->get();
-            
+
 
             if ( !$checkUserId = '' ){
 
@@ -214,14 +214,13 @@ class UserController extends Controller
     {
         // return $request;
         $this->validate($request, [
-            $request->name => 'required',
-            $request->email => 'required',
-            $request->phone => 'required',
-            $request->date_of_birth => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'date_of_birth' => 'required',
         ]);
 
-        $user = auth()->user();
-        $user->update($request->all());
+        auth()->user()->update($request->all());
 
         return back();
     }

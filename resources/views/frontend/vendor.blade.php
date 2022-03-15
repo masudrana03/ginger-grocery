@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Vendor List')
+@section('title', 'Vendor List |')
 
 @section('content')
 
