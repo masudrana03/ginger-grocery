@@ -181,7 +181,7 @@ class SettingController extends Controller
      */
     public function emailSettingsUpdate(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         $request = $request->except('_token');
 
         foreach ($request as $key => $value) {
