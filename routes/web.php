@@ -83,7 +83,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/register', [LoginController::class, 'register'])->name('register');
 });
 
-Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Datatables routes
@@ -213,10 +213,9 @@ Route::get('/categories/{id}', [HomeController::class, 'categoryDetails'])->name
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
-
 
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
     Route::get('/ajax-update-cart/{id}', [FrontendCartController::class, 'ajaxUpdateCart'])->name('updateCartAjax');
@@ -226,26 +225,26 @@ Route::middleware(['auth'])->group(function () {
     Route::post('apply-promo', [FrontendCheckoutController::class, 'applyPromo'])->name('promo.code');
     Route::post('place-order', [FrontendCheckoutController::class, 'placeOrder']);
     Route::get('shipping-fee-calculation', [CheckoutController::class, 'ajaxShippingCalculation'])->name('ajax.shipping.calculation');
+
+    Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
+    Route::get('/user/orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
+    Route::get('/user/track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
+    Route::get('/user/address', [FrontendUserController::class, 'getAddress'])->name('user.address');
+    Route::get('/user/profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
+    Route::post('/user/update-profile', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
+    Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
+    Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
+    Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
+    Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
+    Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
+    Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
+
+    Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
+    Route::get('/user/reset-password-view', [FrontendForgotPasswordController::class, 'resetPasswordView'])->name('user.reset.view');
+    Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
+    Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
+    Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 });
-
-Route::get('/user', [FrontendUserController::class, 'index'])->name('user.dashboard');
-Route::get('/user/orders', [FrontendUserController::class, 'getOrders'])->name('user.orders');
-Route::get('/user/track-orders', [FrontendUserController::class, 'getTrackOrders'])->name('user.track.orders');
-Route::get('/user/address', [FrontendUserController::class, 'getAddress'])->name('user.address');
-Route::get('/user/profile', [FrontendUserController::class, 'getProfile'])->name('user.profile');
-Route::post('/user/update-profile', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
-Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
-Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
-Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
-Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
-Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
-Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
-
-Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
-Route::get('/user/reset-password-view', [FrontendForgotPasswordController::class, 'resetPasswordView'])->name('user.reset.view');
-Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
-Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
-Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
@@ -304,4 +303,4 @@ Route::get('c/{id}', function ($id) {
     Cache::put('products', $compareProducts, 30);
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);

@@ -71,6 +71,7 @@
         } */
 
     </style>
+    @stack('css')
 
 </head>
 
