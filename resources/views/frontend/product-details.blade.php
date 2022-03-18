@@ -725,14 +725,14 @@
                             <h5 class="section-title style-3 mb-20">Delivery</h5>
                             <ul>
                                 @php
-                                    $address = auth()->user() && auth()->user()->shippingAddress()->first();
+                                    $shippingAddress = auth()->user() ? auth()->user()->shippingAddress()->first() : '';
                                 @endphp
-                                @if ($address)
+                                @if ($shippingAddress)
                                 <li>
                                     <i class="fi fi-rs-marker mr-10 text-brand"></i>
                                     <span>
-                                        {{ $address->address }} <br />
-                                        {{ $address->state }}, {{ $address->city }}<br />{{ settings('country') }}
+                                        {{ $shippingAddress->address }} </br>
+                                        {{ $shippingAddress->state }}, {{ $shippingAddress->city }}<br />{{ settings('country') }}
                                     </span>
 
                                     {{-- <a href="#" class="change float-end">Change</a> --}}
