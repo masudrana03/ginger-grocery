@@ -112,9 +112,9 @@
                     id: id,
                 },
                 success: function(result) {
+                    tata.success('Success!', 'Product removed from  wishlist.');
                     $('#wishlistProductOld').empty();
                     $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product removed from  wishlist.');
                 },
                 error: function(error) {
                     console.log(error);

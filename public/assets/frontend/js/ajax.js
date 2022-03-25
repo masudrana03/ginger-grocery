@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     // wishlist ajax function start
     // wishlist add button start
 
@@ -18,9 +19,9 @@ $(document).ready(function () {
                 if (result == '401') {
                     window.location.href = "/login";
                 } else {
+                    tata.success('Success!', 'Product added to wishlist.');
                     $('#wishlistProductOld').empty();
                     $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product added to wishlist.');
                 }
             },
             error: function (error) {
@@ -35,11 +36,13 @@ $(document).ready(function () {
     // wishlist remove button start
 
     $(".wishlist-btn-delete").click(function (event) {
+
         event.preventDefault();
 
         var id = $(this).attr("data-id");
-        var url = "{!! route('wishlist.remove', ':id') !!}";
+        var url = "{{  route('wishlist.remove', ':id')  }}";
         url = url.replace(':id', id);
+        $.trim(url);
 
         $.ajax({
             method: 'GET',
@@ -48,9 +51,10 @@ $(document).ready(function () {
                 id: id,
             },
             success: function (result) {
+                console.log(result);
+                tata.success('Success!', 'Product removed from wishlist.');
                 $('#wishlistProductOld').empty();
                 $('#wishlistProductNew').html(result);
-                tata.success('Success!', 'Product removed from wishlist.');
 
             },
             error: function (error) {
