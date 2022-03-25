@@ -239,12 +239,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
     Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
 
-    Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
-    Route::get('/user/reset-password-view', [FrontendForgotPasswordController::class, 'resetPasswordView'])->name('user.reset.view');
-    Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
-    Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
-    Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 });
+
+Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');
+Route::get('/user/reset-password-view', [FrontendForgotPasswordController::class, 'resetPasswordView'])->name('user.reset.view');
+Route::post('/user/forgot-password-otp', [FrontendForgotPasswordController::class, 'sendOtp'])->name('user.forget.otp');
+Route::post('/user/forgot-password-submit', [FrontendForgotPasswordController::class, 'resetPasswordOtp'])->name('user.forget');
+Route::post('reset-password-submit', [FrontendForgotPasswordController::class, 'resetPassword'])->name('user.password.reset');
 
 Route::get('/compare', [FrontendCompareController::class, 'compare'])->name('compare');
 Route::get('/compare-product/{id}', [FrontendCompareController::class, 'compareProduct'])->name('compareProduct');
