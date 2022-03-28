@@ -52,26 +52,26 @@ class UserController extends Controller
      *
      * @param $request
      */
-    public function addAddress( Request $request )
+    public function addAddress(Request $request)
     {
-    //    return $request;
+        //    return $request;
 
-       $this->validate($request, [
-        'name'       => 'required',
-        'phone'      => 'required',
-        'email'      => 'required',
-        'address'    => 'required',
-        'city'       => 'required',
-        'zip'        => 'required',
-    ]);
+        $this->validate($request, [
+            'name'       => 'required',
+            'phone'      => 'required',
+            'email'      => 'required',
+            'address'    => 'required',
+            'city'       => 'required',
+            'zip'        => 'required',
+        ]);
 
         $requestInfo = $request->all();
 
         $requestInfo['user_id'] = auth()->id();
 
-        if ( $request->type == 'billing' ) {
+        if ($request->type == 'billing') {
             $requestInfo['type'] = 1;
-        }else{
+        } else {
             $requestInfo['type'] = 2;
         }
 
@@ -85,7 +85,7 @@ class UserController extends Controller
      *
      * @param $request
      */
-    public function updateAddress( Request $request, $id )
+    public function updateAddress(Request $request, $id)
     {
         // return $request;
 
@@ -102,9 +102,9 @@ class UserController extends Controller
 
         $requestInfo = $request->all();
 
-        if ( $request->type == 'billing' ) {
+        if ($request->type == 'billing') {
             $requestInfo['type'] = 1;
-        }else{
+        } else {
             $requestInfo['type'] = 2;
         }
 
@@ -123,18 +123,18 @@ class UserController extends Controller
     {
         $address = Address::find($Id);
 
-        if( count($address->shippingOrders) > 0 ) {
+        if (count($address->shippingOrders) > 0) {
             // can't delete
-            return back()->with( 'error', 'This address have placed order');
+            return back()->with('error', 'This address have placed order');
         }
-        if( count($address->billingOrders) > 0 ) {
+        if (count($address->billingOrders) > 0) {
             // can't delete
-            return back()->with( 'error', 'This address have placed order');
+            return back()->with('error', 'This address have placed order');
         }
 
         $address->delete();
 
-        return back()->with( 'success', 'Address successfully deleted');
+        return back()->with('success', 'Address successfully deleted');
     }
 
 
@@ -143,7 +143,7 @@ class UserController extends Controller
      *
      * @param $id
      */
-    public function getInvoice( $OrderId )
+    public function getInvoice($OrderId)
     {
         $order = Order::with('details.product', 'user', 'store')->find($OrderId);
 
@@ -154,25 +154,24 @@ class UserController extends Controller
 
     public function getTrackOrders(Request $request)
     {
-        if ( $request->has('invoice_id')) {
+        if ($request->has('invoice_id')) {
             // return $request;
             $request->validate([
-            'invoice_id' => 'required',
-        ]);
-        //  return "test done";
+                'invoice_id' => 'required',
+            ]);
+            //  return "test done";
             $order = '';
-            $userId  = auth()->user()->id ;
+            $userId  = auth()->user()->id;
 
-            $checkUserId = Order::where('user_id' ,$userId)->get();
+            $checkUserId = Order::where('user_id', $userId)->get();
 
 
-            if ( !$checkUserId = '' ){
+            if (!$checkUserId = '') {
 
                 $order = Order::where('invoice_id', $request->invoice_id)->first();
-
             }
 
-            if ( $order == ''){
+            if ($order == '') {
                 return '0';
             }
 
@@ -184,7 +183,7 @@ class UserController extends Controller
 
 
 
-            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus','order'));
+            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus', 'order'));
             // return [$orderStatus, $currentStatus];
 
 
@@ -225,7 +224,8 @@ class UserController extends Controller
         return back();
     }
 
-    public function changePassword(){
+    public function changePassword()
+    {
 
         $user = auth()->user();
 
@@ -235,7 +235,8 @@ class UserController extends Controller
     /**
      * @param $request
      */
-    public function updatePassword(Request $request){
+    public function updatePassword(Request $request)
+    {
 
         //return $request->all();
         $this->validate($request, [
