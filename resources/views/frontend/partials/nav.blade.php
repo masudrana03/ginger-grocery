@@ -452,7 +452,8 @@
                                     <ul>
                                         @php
                                             $total = 0;
-                                        $currency_symbol = '@endphp'; ?>
+                                            $currency_symbol = settings('currency');
+                                        @endphp
                                         @forelse ((auth()->user()->cart->products) ?? [] as $product)
                                             <li>
                                                 <div class="shopping-cart-img">
