@@ -181,6 +181,7 @@ class SettingController extends Controller
      */
     public function emailSettingsUpdate(Request $request)
     {
+        // return $request->all();
         $request = $request->except('_token');
 
         foreach ($request as $key => $value) {
@@ -193,6 +194,29 @@ class SettingController extends Controller
 
         return back();
     }
+
+
+    /**
+     * @param $provider
+     */
+    // public function setEnv($provider)
+    // {
+    //     if ($provider->provider == 'google') {
+
+    //         updateEnv('GOOGLE_CLIENT_ID', $provider->client_id);
+    //         updateEnv('GOOGLE_CLIENT_SECRET', $provider->client_secret);
+    //         updateEnv('GOOGLE_CALLBACK_ENDPOINT', $provider->redirect_url);
+
+    //     }
+
+    //     if ($provider->provider == 'facebook') {
+
+    //         updateEnv('FACEBOOK_CLIENT_ID', $provider->client_id);
+    //         updateEnv('FACEBOOK_CLIENT_SECRET', $provider->client_secret);
+    //         updateEnv('FACEBOOK_CALLBACK_ENDPOINT', $provider->redirect_url);
+
+    //     }
+    // }
 
     /**
      * Send email for testing

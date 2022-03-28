@@ -5,7 +5,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
+    {{-- <title>  @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title> --}}
+    <title>  @yield('title',  '') {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -70,6 +71,7 @@
         } */
 
     </style>
+    @stack('css')
 
 </head>
 
@@ -79,7 +81,10 @@
         @yield('content')
     </div>
     <footer class="main">
-        <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
+        @if ( $cart ?? '')
+        <p></p>
+        @else
+        <section class="newsletter mb-15 wow animate__animated animate__fadeIn" id="newsletterSection">
             <div class="container">
                 @php
                     $actonFooter = $callToActions->find(6);
@@ -116,6 +121,7 @@
 
             </div>
         </section>
+        @endif
         <section class="featured section-padding">
             <div class="container">
                 <div class="row">
@@ -541,6 +547,7 @@
                     page: page,
                 },
                 success: function(html) {
+                    console.log(html);
                     $('#app').html(html);
 
                     paginationClickEvent(search);
@@ -645,10 +652,14 @@
 
                         if (result == '401') {
                             window.location.href = "/login";
-                        } else {
+
+                       
+
+                        }else{
+                            tata.success('Success!', 'Product added to wishlist.');
+
                             $('#wishlistProductOld').empty();
                             $('#wishlistProductNew').html(result);
-                            tata.success('Success!', 'Product added to wishlist.');
                         }
                     },
                     error: function(error) {
@@ -675,11 +686,9 @@
                         id: id,
                     },
                     success: function(result) {
+                        tata.success('Success!', 'Product removed from wishlist.');
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
-
-
-                        tata.success('Success!', 'Product removed from  wishlist.');
 
                     },
                     error: function(error) {

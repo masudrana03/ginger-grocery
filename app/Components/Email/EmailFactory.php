@@ -3,6 +3,7 @@
 namespace App\Components\Email;
 
 use App\Components\Email\Single\Smtp;
+use App\Components\Email\EmailInterface;
 
 class EmailFactory
 {

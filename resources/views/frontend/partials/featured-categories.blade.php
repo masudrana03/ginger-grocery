@@ -17,15 +17,15 @@
                 @forelse ( $categoryProducts as $category )
                 <div class="card-2 bg-{{rand(9,15)}} wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                         @if ( $category->image )
-                        <figure class="img-hover-scale overflow-hidden">
+                        <figure class="img-hover-scale overflow-hidden" >
                             <a href="{{ route('categories', $category->slug) }}">
-                                <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" />
+                                <img src="{{ asset( 'assets/img/uploads/categories/' . $category->image ) }}" alt="" style="width: 60px; padding-top: 15px;"/>
                             </a>
                         </figure>
                         @else
                         <figure class="img-hover-scale overflow-hidden">
                             <a href="{{ route('categories', $category->slug) }}">
-                                <img src="{{ asset('assets/frontend/imgs/shop/cat-13.png') }}" alt="" />
+                                <img src="{{ asset('assets/frontend/imgs/shop/cat-13.png') }}" alt="" style="width: 60px; padding-top: 15px;" />
                             </a>
                         </figure>
                         @endif

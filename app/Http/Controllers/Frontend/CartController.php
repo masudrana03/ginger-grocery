@@ -97,7 +97,7 @@ class CartController extends Controller
         return $this->addToCart($request);
     }
 
-    public function cart()
+    public function cart(Request $request)
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
@@ -109,7 +109,11 @@ class CartController extends Controller
 
         $tax = taxCalculator($subtotal);
 
-        return view('frontend.cart', compact('subtotal', 'tax'));
+        $cart = request()->segment(1);
+        // dd($cart);
+
+        // $cart = request()->segment(1);
+        return view('frontend.cart', compact('subtotal', 'tax','cart'));
     }
 
     public function cartUpdate(Request $request)

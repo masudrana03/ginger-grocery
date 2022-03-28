@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Product Compare')
+@section('title', 'Product Compare |')
 
 @section('content')
 <div class="page-header breadcrumb-wrap">

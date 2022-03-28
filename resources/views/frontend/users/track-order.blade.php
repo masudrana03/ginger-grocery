@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Track Order')
+@section('title', 'Track Order |')
 
 
 @section('content')
@@ -103,7 +103,8 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group"><label for="txt-email">Email
+
+                                                {{-- <div class="form-group"><label for="txt-email">Email
                                                         Address<sup>*</sup></label> <input name="email" id="txt-email"
                                                         type="email" value="{{ old('email') }}" placeholder="Your Email"
                                                         class="form-control @error('email') is-invalid @enderror">
@@ -112,7 +113,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                </div>
+                                                </div> --}}
+
                                                 <button id="tracking" type="submit"
                                                     class="btn btn-fill-out submit font-weight-bold">Find</button>
                                             </form>
@@ -242,20 +244,19 @@
             $("#tracking").click(function(event) {
                 event.preventDefault();
                 var invoiceId = $('#txt-invoice-id').val();
-                var email = $('#txt-email').val();
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('user.track.orders') }}",
                     type: 'get',
                     data: {
                         invoice_id: invoiceId,
-                        email: email,
                     },
                     success: function(response) {
                         if (response == '0') {
                             $('#trackOrderAlertNew').html(
                                 '<div class="alert alert-danger">No Order Found</div>');
                         } else {
+                            $('#trackOrderAlertNew').empty();
                             $('#trackOrderNew').html(response);
                         }
                     },

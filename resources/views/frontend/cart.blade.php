@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Home')
+@section('title', 'Cart |')
 
 <style>
     .btn-cart {

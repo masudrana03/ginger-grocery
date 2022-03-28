@@ -25,9 +25,9 @@ class SettingSeeder extends Seeder {
         Setting::create( ['key' => 'mail_driver', 'value' => 'smtp'] );
         Setting::create( ['key' => 'mail_host', 'value' => 'smtp.gmail.com'] );
         Setting::create( ['key' => 'mail_port', 'value' => '587'] );
-        Setting::create( ['key' => 'mail_user_name', 'value' => 'mohasin2911@gmail.com'] );
-        Setting::create( ['key' => 'mail_password', 'value' => 'gmlfywasvjmjwwes'] );
-        Setting::create( ['key' => 'mail_from', 'value' => 'mohasin2911@gmail.com'] );
+        Setting::create( ['key' => 'mail_user_name', 'value' => 'gingergrocery2022@gmail.com'] );
+        Setting::create( ['key' => 'mail_password', 'value' => 'htlkblqmkpyslqri'] );
+        Setting::create( ['key' => 'mail_from', 'value' => 'gingergrocery2022@gmail.com'] );
         Setting::create( ['key' => 'mail_from_name', 'value' => 'Metrocery'] );
         Setting::create( ['key' => 'encryption', 'value' => 'tls'] );
         Setting::create( ['key' => 'loyalty_cart_status', 'value' => 'No'] );

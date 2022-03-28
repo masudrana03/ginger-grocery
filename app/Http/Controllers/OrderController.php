@@ -115,10 +115,10 @@ class OrderController extends Controller
                 $nestedData['invoice_id']      = $order->invoice_id;
                 $nestedData['user_id']         = $order->user->name;
                 $nestedData['store_id']        = $order->store->name;
-                $nestedData['subtotal']        = $order->subtotal;
-                $nestedData['discount']        = $order->discount;
-                $nestedData['adjust']          = $order->adjust;
-                $nestedData['total']           = $order->total;
+                $nestedData['subtotal']        = settings('currency').$order->subtotal;
+                $nestedData['discount']        = settings('currency').$order->discount;
+                // $nestedData['adjust']          = $order->adjust;
+                $nestedData['total']           = settings('currency').$order->total;
                 $class                         = $order->payment_status == 'Paid' ? 'status_btn_b' : 'status_btn_danger_b';
                 $nestedData['payment_status']  = "<a href='javascript:void(0)' data-href='{$updatePaymentStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePaymentStatus({$order->id})' id='paymentStatus-{$order->id}'>$order->payment_status</a>";
 

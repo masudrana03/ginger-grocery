@@ -35,7 +35,7 @@
                                             <th>Store</th>
                                             <th>Subtotal</th>
                                             <th>Discount</th>
-                                            <th>Adjust</th>
+                                            {{-- <th>Adjust</th> --}}
                                             <th>Total</th>
                                             <th>Payment Status</th>
                                             <th>Status</th>
@@ -141,9 +141,9 @@
                     {
                         "data": "discount"
                     },
-                    {
-                        "data": "adjust"
-                    },
+                    // {
+                    //     "data": "adjust"
+                    // },
                     {
                         "data": "total"
                     },

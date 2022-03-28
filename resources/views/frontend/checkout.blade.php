@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Checkout')
+@section('title', 'Checkout |')
 
 <style>
     span.checkout-quantity {
@@ -524,6 +524,13 @@
 @push('script')
 <script>
     $(document).ready(function() {
+        var currentUrl = window.location.href;
+        var checkUrl = "{{ url('/checkout') }}";
+
+        if (currentUrl == checkUrl) {
+            $('#newsletterSection').empty();
+        }
+
         $("#promoCode").click(function(event) {
             event.preventDefault();
             var promoId = $('#promoId').val();

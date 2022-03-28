@@ -116,6 +116,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         $request['password'] = Hash::make($request->password);
+        $request['email_verified_at'] = now()->format('Y-m-d H:i:s');
 
         User::create($request->all());
 
