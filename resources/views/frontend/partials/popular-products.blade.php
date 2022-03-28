@@ -160,23 +160,15 @@ a<style>
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <<<<<<< HEAD <<<<<<< HEAD <a aria-label="Wishlist"
-                                                    class="action-btn wishlist-btn" data-id="{{ $product->id }}"
-                                                    href="#"><i class="fi-rs-heart"></i></a>
-                                                    =======
-                                                    <a aria-label="Add To Wishlist" class="action-btn wishlist-btn"
-                                                        data-id="{{ $product->id }}" href="#"><i
-                                                            class="fi-rs-heart"></i></a>
-                                                    >>>>>>> 358c9626f15221305fb78cbebab7f558906081b1
-                                                    =======
-                                                    <a aria-label="Add To Wishlist" class="action-btn wishlist-btn"
-                                                        data-id="{{ $product->id }}" href="#"><i
-                                                            class="fi-rs-heart"></i></a>
-                                                    >>>>>>> 7bbcedbdd7fccb663362cde6ad0ac1025bed56e9
-                                                    <a aria-label="Compare" data-id="{{ $product->id }}"
-                                                        class="action-btn compare-btn" href="#"><i
-                                                            class="fi-rs-shuffle"></i></a>
-                                                    {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+
+                                                <a aria-label="Add To Wishlist" class="action-btn wishlist-btn"
+                                                    data-id="{{ $product->id }}" href="#"><i
+                                                        class="fi-rs-heart"></i></a>
+
+                                                <a aria-label="Compare" data-id="{{ $product->id }}"
+                                                    class="action-btn compare-btn" href="#"><i
+                                                        class="fi-rs-shuffle"></i></a>
+                                                {{-- <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                     data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
                                             </div>
                                             {{-- <div class="product-badges product-badges-position product-badges-mrg">
@@ -316,12 +308,7 @@ a<style>
 
 <script>
     $(document).ready(function() {
-        <<
-        << << < HEAD
 
-            ===
-            === = >>>
-            >>> > 7 bbcedbdd7fccb663362cde6ad0ac1025bed56e9
         $(".wishlist-btn").click(function(event) {
             event.preventDefault();
             var id = $(this).attr("data-id");
