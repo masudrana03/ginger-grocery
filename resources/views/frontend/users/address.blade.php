@@ -39,7 +39,7 @@
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.dashboard') }}"
-                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Dashboard</a>
+                                                aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.orders') }}"
@@ -47,21 +47,21 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.track.orders') }}"
-                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Order
+                                                aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Order
                                                 Tracking</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="{{ route('user.address') }}"
-                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>My Address</a>
+                                                aria-selected="false"><i class="fi-rs-marker mr-10"></i>My Address</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.profile') }}"
-                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Account
+                                                aria-selected="false"><i class="fi-rs-user mr-10"></i>Account
                                                 Details</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.change.password') }}"
-                                                aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Change
+                                                aria-selected="false"><i class="fi-rs-key mr-10"></i>Change
                                                 Password</a>
                                         </li>
                                         <li class="nav-item">

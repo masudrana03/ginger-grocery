@@ -49,6 +49,35 @@
 
     }
 
+    .alert-danger {
+        width: 100%!important;
+        border-radius: 10px!important;
+        border-color: #ffd170 !important;
+        background-color: #fff1d3!important;
+        text-align: center;
+        font-size: 20px!important;
+        color: #7c7c7c!important;
+        position: relative!important;
+        padding: 0.8rem!important;
+        margin-bottom: 1rem!important;
+        border: 1px solid transparent!important;
+        font-weight: 700!important;
+    }
+    .alert-success {
+        width: 100%!important;
+        border-radius: 10px!important;
+        border-color: #3BB77E !important;
+        background-color: #CDF0E0!important;
+        text-align: center;
+        font-size: 20px!important;
+        color: #7c7c7c!important;
+        position: relative!important;
+        padding: 0.8rem!important;
+        margin-bottom: 1rem!important;
+        border: 1px solid transparent!important;
+        font-weight: 700!important;
+    }
+
 </style>
 
 @section('content')
@@ -269,12 +298,12 @@
                                                     <h6 class="text-muted">Tax</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
-                                                    <h5 class="text-heading text-end tax">{{ $tax }}</h5>
+                                                    <h6 class="text-heading text-end tax">{{ settings('currency') }}{{ $tax }}</h6>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">
-                                                    <h6 class="text-muted">Discount</h6>
+                                                    <h6 class="text-muted">Promo Discount</h6>
                                                 </td>
                                                 <td class="cart_total_amount">
                                                     <h6 class="text-brand text-end">{{ settings('currency') }}
@@ -316,23 +345,28 @@
 
                             <h4 class="mb-10">Apply Coupon</h4>
                             <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</p>
-                            <form method="post" action="/apply-promo">
+                            <form >
                                 @csrf
                                 <div class="d-flex justify-content-between">
-                                    <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror "
+                                    <input class="font-medium mr-15 coupon @error('code') is-invalid @enderror " name="code" id="promoId"
                                         name="code" placeholder="Enter Your Code...">
+                                    <input type="numaric" name="cupon" id="cuponId" value="1" hidden>
                                     @error('code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <button class="btn"><i class="fi-rs-label mr-10"></i>Apply</button>
+                                    <button class="btn" id="promoCode" ><i class="fi-rs-label mr-10"></i>Apply</button>
                                 </div>
                             </form>
 
+
+                            <div id="promoError" style="padding-top: 10px;"></div>
+                            <div id="noCartError" style="padding-top: 10px;"></div>
                         </div>
 
                     </div> --}}
+                    
                 </div>
             </div>
         </div>
@@ -586,6 +620,61 @@
                 console.log(error);
             }
         });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#promoCode").click(function(event) {
+            event.preventDefault();
+            var promoId = $('#promoId').val();
+            var cuponId = $('#cuponId').val();
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('promo.code') }}",
+                type: 'post',
+                data: {
+                    code: promoId,
+                    cupon: cuponId,
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response == '1') {
+                        $('#promoError').html(
+                            '<div class="alert alert-danger">Invalid promo code !</div>');
+                            return;
+                    }
+                    if (response == '4') {
+                        $('#promoError').html(
+                            '<div class="alert alert-danger">Please enter your promo code</div>');
+                            return;
+                    }
+                    if (response == '0') {
+                        $('#noCartError').html(
+                            '<div class="alert alert-danger">No cart found</div>');
+                            return;
+                    }if(response == '2'){
+                        $('#noCartError').html(
+                            '<div class="alert alert-danger">Buy more mroducts to get discount</div>');
+                            return;
+                    }
+                    else {
+                        $('#promoError').html(
+                            '<div class="alert alert-success">Promo code applied successfully</div>');
+                        $('#oldCheckoutProducts').hide();
+                        $('#newCheckoutProducts').html(response);
+                    }
+
+                }
+            });
+        });
+
     });
 </script>
 
