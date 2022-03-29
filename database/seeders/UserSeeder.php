@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000000',
             'type'               => 1, // 1: admin, 2: store manager, 3: customer
             'store_id'           => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -33,7 +34,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000002',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -45,7 +46,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000003',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -57,7 +58,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000004',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -69,7 +70,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000005',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -81,7 +82,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000006',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -93,7 +94,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000007',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -105,7 +106,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000008',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -117,7 +118,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000009',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -129,7 +130,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000010',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -141,7 +142,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000012',
             'type'       => 3, // 1: admin, 2: store manager, 3: customer
             'store_id'   => null,
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -153,7 +154,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000001',
             'type'       => 2, // 1: admin, 2: store manager, 3: customer
             'store_id'   => 1, // store id (optional) only for store manager
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -165,7 +166,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000011',
             'type'       => 2, // 1: admin, 2: store manager, 3: customer
             'store_id'   => 2, // store id (optional) only for store manager
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
 
@@ -177,7 +178,7 @@ class UserSeeder extends Seeder {
             'phone'      => '1718000021',
             'type'       => 2, // 1: admin, 2: store manager, 3: customer
             'store_id'   => 6, // store id (optional) only for store manager
-            'email_verified_at'  => now()->format('Y-m-d H:i:s'),
+            'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
         ] );
     }

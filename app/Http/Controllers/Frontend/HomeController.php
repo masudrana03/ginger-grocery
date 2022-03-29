@@ -32,18 +32,18 @@ class HomeController extends Controller
         if ($request->zone_id) {
             $vendor_ids = Store::where('zone_id', $request->zone_id)->pluck('id');
 
-            $categoryProducts = Category::with(['products.store', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
+            $categoryProducts = Category::with(['products', 'products.store', 'products.ratings', 'products' => function ($query) use ($vendor_ids) {
                 $query->whereIn('store_id', $vendor_ids);
             }
             ])->limit(10)->get();
 
             // return $categoryProducts;
         } else {
-            $categoryProducts = Category::with('products.store', 'products.ratings')->limit(10)->get();
+            $categoryProducts = Category::with('products', 'products.store', 'products.ratings')->limit(10)->get();
         }
 
         $sliders = Banner::where('status', 1)->get() ?? [];
-        $callToActions = CallToAction::all();
+        $callToActions = CallToAction::find([1, 2, 3]) ?? [];
 
         if ($request->ajax()) {
             // return $request;

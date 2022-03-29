@@ -26,7 +26,7 @@ class CartController extends Controller
         if (!$product) {
             return back()->with('error', 'Product not found');
         } else {
-            $cart = Cart::where('user_id', auth()->id())->first();;
+            $cart = Cart::where('user_id', auth()->id())->first();
 
             if (!$cart) {
                 $cart          = new Cart();
