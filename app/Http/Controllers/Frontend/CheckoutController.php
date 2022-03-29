@@ -42,14 +42,15 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-        if( $request->code == null ) {
+        // return $request->all();
+        if ($request->code == null) {
             return '4';
         }
         $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
         // return count($cartProducts);
 
-        if ( count($cartProducts) == 0 ) {
+        if (count($cartProducts) == 0) {
             return '0';
             // return back()->with('error', 'Your card is empty');
         }
@@ -74,7 +75,7 @@ class CheckoutController extends Controller
 
         // return [$discountAmount  ,$totalAfterDiscount];
 
-        if( $discountAmount >= $totalAfterDiscount ){
+        if ($discountAmount >= $totalAfterDiscount) {
             return '2';
         }
 
@@ -83,6 +84,19 @@ class CheckoutController extends Controller
 
         // return back()->with('success', 'Coupon applied');
         // return ['status' => 'success', 'total' => $totalAfterDiscount, 'discount' => $discountAmount];
+        if ($request->cupon) {
+            // return 'hello';
+            $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
+            $subtotal = 0;
+
+            foreach ($carts as $cart) {
+                $subtotal += priceCalculator($cart)['subtotal'];
+            }
+
+            $tax = taxCalculator($subtotal);
+
+            return view('frontend.ajax.update-cart-div',compact('subtotal', 'tax'));
+        }
 
         return view('frontend.ajax.checkout');
     }
@@ -103,7 +117,7 @@ class CheckoutController extends Controller
 
         $userAddress = Address::where('id', $request->address_id)->first();
 
-        if (! $userAddress) {
+        if (!$userAddress) {
             $this->validate($request, [
                 'name'       => 'required',
                 'email'      => 'required',
@@ -127,7 +141,7 @@ class CheckoutController extends Controller
 
         $shippingId = $request->address_id;
 
-        if (! $userAddress) {
+        if (!$userAddress) {
             $shippingId = $this->createShippingAddress($request);
         }
 
@@ -320,9 +334,9 @@ class CheckoutController extends Controller
 
         return $order->invoice_id;
         //} catch (Exception $e) {
-           // DB::rollback();
-            //logger($e->getMessage());
-            //return api()->error('Something went wrong');
+        // DB::rollback();
+        //logger($e->getMessage());
+        //return api()->error('Something went wrong');
         //}
     }
 
@@ -359,11 +373,8 @@ class CheckoutController extends Controller
         (new EmailFactory())->initializeEmail($emailDetails);
     }
 
-    public function ajaxShippingCalculation(Request $request){
+    public function ajaxShippingCalculation(Request $request)
+    {
         $address_id = request('address_id');
-
-
-
-
     }
 }
