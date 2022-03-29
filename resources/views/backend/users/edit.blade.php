@@ -37,7 +37,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Password</label>
+                                    <label for="phone">Phone</label>
                                     <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" aria-describedby="phoneHelp" placeholder="phone" value="{{ old('phone') ?? $user->phone }}">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">

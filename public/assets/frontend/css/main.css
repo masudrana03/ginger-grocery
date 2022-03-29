@@ -5646,6 +5646,7 @@ table.no-border td, table.no-border th, table.no-border thead {
 .zoomWindow {
   border-radius: 15px;
   overflow: hidden;
+  
 }
 
 .table-wishlist {

@@ -77,7 +77,7 @@
         .detail-extralink>div {
             display: initial !important;
             vertical-align: text-top !important;
-            top: 12px !important;
+            /* top: 12px !important; */
 
 
         }
