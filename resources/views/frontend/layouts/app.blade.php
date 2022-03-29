@@ -81,46 +81,11 @@
         @yield('content')
     </div>
     <footer class="main">
-        @if ($cart ?? '')
-            <p></p>
+
+        @if (url()->current() == url('/'))
+            @include('frontend.partials.footer-newsletter')
         @else
-            <section class="newsletter mb-15 wow animate__animated animate__fadeIn" id="newsletterSection">
-                <div class="container">
-                    @php
-                        $actonFooter = $callToActions->find(6);
-                    @endphp
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="position-relative newsletter-inner">
-                                <div class="newsletter-content">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <h2 class="mb-20">
-
-                                                {{ $actonFooter->action_tittle }}
-
-
-                                            </h2>
-                                        </div>
-                                    </div>
-
-                                    <p class="mb-45">Start You'r Daily Shopping with <span
-                                            class="text-brand">{{ settings('company_name') }}</span></p>
-                                    <form class="form-subcriber d-flex">
-                                        <input type="email" placeholder="Your emaill address" />
-                                        <button class="btn" type="submit">Subscribe</button>
-                                    </form>
-                                </div>
-                                {{-- <img src="{{ asset('assets/frontend/imgs/banner/banner-9.png') }}" alt="newsletter" /> --}}
-                                <img src="{{ asset('assets/img/uploads/actions/' . $actonFooter->image) }}"
-                                    alt="newsletter" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </section>
+            <p></p>
         @endif
         <section class="featured section-padding">
             <div class="container">
@@ -637,7 +602,8 @@
 
     <script>
         $(document).ready(function() {
-            $(".wishlist-btn").click(function(event) {
+            // $(".wishlist-btn").on('click', function(event) {
+            $(document).on("click", ".wishlist-btn", function() {
                 event.preventDefault();
                 var id = $(this).attr("data-id");
                 var url = "{!! route('wishlist', ':id') !!}";
@@ -651,10 +617,14 @@
                     success: function(result) {
 
                         if (result == '401') {
-                            window.location.href = "/login";
+                            window.location.href = "/login"; <<
+                            << << < HEAD
 
 
 
+                                ===
+                                === = >>>
+                                >>> > f28b24b5c21aff58a2f88c6c1da17ba0d7eef8a6
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
 
@@ -672,7 +642,7 @@
 
     <script>
         $(document).ready(function() {
-            $(".wishlist-btn-delete").click(function(event) {
+            $(document).on("click", ".wishlist-btn-delete", function() {
                 event.preventDefault();
 
                 var id = $(this).attr("data-id");
@@ -770,6 +740,8 @@
 
 
     @yield('script')
+
+    {{-- <script src="{{ asset('assets/frontend/js/all-ajax.js') }}"></script> --}}
 </body>
 
 </html>

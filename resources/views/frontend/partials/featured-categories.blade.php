@@ -30,7 +30,7 @@
                         </figure>
                         @endif
                     <h6><a href="{{ route('categories', $category->slug) }}">{{ Str::limit($category->name, 12 ) }}</a></h6>
-                    <span>{{$category->products()->count()}} items</span>
+                    <span>{{count($category->products)}} items</span>
                 </div>
                 @empty
                 @endforelse
