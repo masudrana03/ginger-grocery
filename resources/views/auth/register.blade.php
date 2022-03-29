@@ -192,29 +192,30 @@
                             </div>
                         </div>
                         @if ($google->status == 'Active' || $facebook->status == 'Active')
-                        <div class="col-lg-6 pr-30 d-none d-lg-block">
-                            <div class="card-login mt-115">
+                            <div class="col-lg-6 pr-30 d-none d-lg-block">
+                                <div class="card-login mt-115">
 
-                                @if ($google->status == 'Active')
-                                    <a href="{{ url('login/google') }}" class="social-login google-login">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-google.svg') }}"
+                                    @if ($google->status == 'Active')
+                                        <a href="{{ url('login/google') }}" class="social-login google-login">
+                                            <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-google.svg') }}"
+                                                alt="" />
+                                            <span>Continue with Google</span>
+                                        </a>
+                                    @endif
+                                    @if ($facebook->status == 'Active')
+                                        <a href="{{ url('login/facebook') }}" class="social-login facebook-login">
+                                            <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-facebook.svg') }}"
+                                                alt="" />
+                                            <span>Continue with Facebook</span>
+                                        </a>
+                                    @endif
+                                    <a href="#" class="social-login apple-login">
+                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-apple.svg') }}"
                                             alt="" />
-                                        <span>Continue with Google</span>
+                                        <span>Apple comming soon</span>
                                     </a>
-                                @endif
-                                @if ($facebook->status == 'Active')
-                                    <a href="{{ url('login/facebook') }}" class="social-login facebook-login">
-                                        <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-facebook.svg') }}"
-                                            alt="" />
-                                        <span>Continue with Facebook</span>
-                                    </a>
-                                @endif
-                                <a href="#" class="social-login apple-login">
-                                    <img src="{{ asset('assets/frontend/imgs/theme/icons/logo-apple.svg') }}" alt="" />
-                                    <span>Apple comming soon</span>
-                                </a>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </div>
@@ -246,8 +247,15 @@
     <script>
         $(document).ready(function() {
             $('#exampleCheckbox12').click(function() {
-                $('#exampleCheckbox12').val('checked');
-            })
+                let checked = $('#exampleCheckbox12').val();
+
+                if (checked == 'checked') {
+                    $('#exampleCheckbox12').val('');
+
+                } else {
+                    $('#exampleCheckbox12').val('checked');
+                }
+            });
             $('#reg').on('submit', function() {
                 let hasChecked = $('#exampleCheckbox12').val();
                 if (hasChecked != 'checked') {
@@ -257,31 +265,47 @@
                     return false;
                 }
             })
-            $('#password').on('keyup change', function() {
+            $('#password, #repassword').on('keyup change', function() {
+
                 let password = $('#password').val();
+                let repassword = $('#repassword').val();
+
                 if (validatePassword(password)) {
                     $('#pass_available').html(
                         `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password acceptable</span>`
                     )
+
+                    if (password != repassword || password == '') {
+                        if (repassword.length > 0) {
+                            $('#repass_available').html(
+                                `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`
+                            )
+                        }
+                    } else {
+                        $('#repass_available').html(
+                            `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`
+                        )
+                    }
                 } else {
                     $('#pass_available').html(
                         `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
                     )
                 }
             })
-            $('#repassword').on('keyup change', function() {
-                let password = $('#password').val();
-                let repassword = $('#repassword').val();
-                if (password != repassword || password == '') {
-                    $('#repass_available').html(
-                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`
-                    )
-                } else {
-                    $('#repass_available').html(
-                        `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`
-                    )
-                }
-            })
+
+            // $('#repassword').on('keyup change', function() {
+            //     let password = $('#password').val();
+            //     let repassword = $('#repassword').val();
+            //     if (password != repassword || password == '') {
+            //         $('#repass_available').html(
+            //             `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password not matched</span>`
+            //         )
+            //     } else {
+            //         $('#repass_available').html(
+            //             `<span class="badge badge-success" style="color: #fff; font-size: 0.92em; background-color: #3bb77e;" >Password matched</span>`
+            //         )
+            //     }
+            // })
 
             function validatePassword(password) {
                 const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,}/
