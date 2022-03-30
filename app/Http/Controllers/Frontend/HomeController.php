@@ -16,7 +16,6 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
 
-
     /**
      *
      * @param $request
@@ -68,7 +67,7 @@ class HomeController extends Controller
             $categoryProducts = Category::with('products.store', 'products.currency');
         }
 
-        $categoryProducts = $categoryProducts->whereHas('products', function ($q) use ($query, $category_id) {
+        $categoryProducts = $categoryProducts->with('products', function ($q) use ($query, $category_id) {
             $q->where('name', 'like', '%' . $query . '%')
                 ->orWhere('description', 'like', '%' . $query . '%')
                 ->orWhere('excerpt', 'like', '%' . $query . '%');
