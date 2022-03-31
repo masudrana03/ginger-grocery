@@ -67,8 +67,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="excerpt">Short Description</label>
-                                    <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror"
-                                        id="excerpt" aria-describedby="emailHelp" placeholder="Short Description"
+                                    <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" id="excerpt"
+                                        aria-describedby="emailHelp" placeholder="Short Description"
                                         value="{{ old('excerpt') }}"></textarea>
                                     @error('excerpt')
                                         <span class="invalid-feedback" role="alert">
@@ -78,8 +78,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea rows="5" name="description"
-                                        class="form-control @error('description') is-invalid @enderror" id="summernote"
+                                    <textarea rows="5" name="description" class="form-control @error('description') is-invalid @enderror" id="summernote"
                                         aria-describedby="emailHelp"
                                         placeholder="Description">{{ old('description') }}</textarea>
                                     @error('description')
@@ -90,8 +89,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="attributes">Attributes</label>
-                                    <textarea rows="3" name="attributes"
-                                        class="form-control @error('attributes') is-invalid @enderror" id="attributes"
+                                    <textarea rows="3" name="attributes" class="form-control @error('attributes') is-invalid @enderror" id="attributes"
                                         aria-describedby="emailHelp"
                                         placeholder="Attributes">{{ old('attributes') }}</textarea>
                                     @error('attributes')

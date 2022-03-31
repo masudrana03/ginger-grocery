@@ -618,13 +618,16 @@
 
                         if (result == '401') {
                             window.location.href = "/login"; <<
-                            << << < HEAD
+                            <<
+                            << < HEAD
 
 
 
                                 ===
-                                === = >>>
-                                >>> > f28b24b5c21aff58a2f88c6c1da17ba0d7eef8a6
+                                ===
+                                = >>>
+                                >>>
+                                > f28b24b5c21aff58a2f88c6c1da17ba0d7eef8a6
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
 

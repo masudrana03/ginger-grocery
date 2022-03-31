@@ -16,6 +16,17 @@
   border-radius: 8px;
 } */
 
+.select2-container--default .select2-selection--single{
+    width: 180px !important;
+    height: 46px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 43px !important;
+    text-align: center !important;
+
+}
+
 </style>
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -218,6 +229,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

@@ -1365,8 +1365,8 @@ textarea:focus {
 .select2-dropdown {
   border: 1px solid #ececec;
   border-radius: 0 0 4px 4px;
-  padding: 15px;
-  min-width: 220px;
+  padding: 10px;
+  min-width: 160px;
 }
 
 .select2-dropdown .select2-search--dropdown {
