@@ -305,7 +305,7 @@
                                         <select name="zone_id" class="select-active zone-id">
                                             <option>Your Location</option>
 
-                                            @foreach ($zones as $zone)
+                                            @foreach ($loadZones as $zone)
                                                 <option class="zoneId" value="{{ $zone->id }}">{{ $zone->name }}
                                                 </option>
                                             @endforeach
@@ -1198,7 +1198,50 @@
 
 <script>
     $(document).ready(function() {
-        $(".del-cart .d-cart").on('click', function(event) {
+        $(document).on("click", ".add-cart .add", function(event) {
+            event.preventDefault();
+
+            addCart(event.target);
+        });
+    });
+
+    function addCart(node) {
+        var closest_div = $(node).closest('.add-cart');
+        var id = closest_div.find('.product-id').text();
+        addToCartById(id);
+    }
+
+    function addToCartById(id) {
+        var pid = id;
+        var url = "{!! route('cartById', ':id') !!}";
+        url = url.replace(':id', pid);
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: pid,
+                quantity:1,
+
+            },
+            success: function(result) {
+                tata.success('Success!', 'Product added to your cart.');
+                $('#old-cart').empty();
+                $('#new-cart').html(result);
+            },
+            error: function(error) {
+                if (error.status == 401) {
+                    window.location.href = "/login";
+                }
+            }
+        });
+    }
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        // $(".del-cart .d-cart").on('click', function(event) {
+            $(document).on("click", ".del-cart .d-cart", function(event) {
             event.preventDefault();
             deleteCart(event.target);
         });
@@ -1295,45 +1338,5 @@ $(document).on('click', '.ajax-product-remove', function() {
            }
 
     });
-</script>
-<script>
-    $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
-
-            addCart(event.target);
-        });
-    });
-
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
-
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-                quantity:1,
-
-            },
-            success: function(result) {
-                tata.success('Success!', 'Product added to your cart.');
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-            },
-            error: function(error) {
-                if (error.status == 401) {
-                    window.location.href = "/login";
-                }
-            }
-        });
-    }
 </script>
 

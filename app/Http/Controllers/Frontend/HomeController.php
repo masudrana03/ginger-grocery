@@ -42,7 +42,7 @@ class HomeController extends Controller
         }
 
         $sliders = Banner::where('status', 1)->get() ?? [];
-        $callToActions = CallToAction::find([1, 2, 3]) ?? [];
+        $callToActions = CallToAction::find([1, 2, 3, 4, 5, 6]) ?? [];
 
         if ($request->ajax()) {
             // return $request;
