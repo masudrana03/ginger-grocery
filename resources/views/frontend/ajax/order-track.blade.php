@@ -1,96 +1,66 @@
-
-
- <div class="col-md-12">
+<div class="col-md-12">
     {{-- <div class="login_wrap widget-taber-content p-30 background-white border-radius-10"> --}}
-        <div class="content" style="width:100%; border-radius: 15px;">
-            <div class="content1" style="background-color: #3bb77e; padding: 13px; border-radius: 10px;">
-              <h4 style="font-size: 28px; padding: 10px; color: #fff; text-transform: uppercase;">Order Tracking : Order No. {{ $order->invoice_id }}</h4>
-            </div>
-            <div class="content2" style="background-color: #79d1a9; border-radius: 10px;" >
-              <div class="content2-header1">
+    <div class="content" style="width:100%; border-radius: 15px;">
+        <div class="content1" style="background-color: #3bb77e; padding: 13px; border-radius: 10px;">
+            <h4 style="font-size: 28px; padding: 10px; color: #fff; text-transform: uppercase;">Order Tracking : Order
+                No. {{ $order->invoice_id }}</h4>
+        </div>
+        <div class="content2" style="background-color: #79d1a9; border-radius: 10px;">
+            <div class="content2-header1">
                 <p>Sold By : <span> {{ $order->store->name }} </span></p>
-              </div>
-              <div class="content2-header1">
-                <p>Status : <span>{{ $currentStatus }}</span></p>
-              </div>
-              <div class="content2-header1">
-                <p>Created Date : <span style="">{{ $order->created_at->format('F j, Y') }}</span></p>
-              </div>
-              <div class="clear"></div>
             </div>
+            <div class="content2-header1">
+                <p>Status : <span>{{ $currentStatus }}</span></p>
+            </div>
+            <div class="content2-header1">
+                <p>Created Date : <span style="">{{ $order->created_at->format('F j, Y') }}</span></p>
+            </div>
+            <div class="clear"></div>
+        </div>
 
-            @php
-                $status = ['Pending', 'Processing', 'Product On The Way', 'Delivered'];
-                $complete = [];
-                foreach ($status as $key => $s) {
-                    if ($currentStatus == 'Pending') {
-                        $complete = [];
-                    } elseif ($currentStatus == 'Processing') {
-                        $complete = ['Pending'];
-                    } elseif ($currentStatus == 'Product On The Way') {
-                        $complete = ['Pending', 'Processing'];
-                    } elseif ($currentStatus == 'Delivered') {
-                        $complete = ['Pending', 'Processing', 'Product On The Way', 'Delivered'];
+        {{--
+          if any order option added,
+          please added also hear with the order option name.
+        --}}
+
+        @php
+            $status = ['Order Placed', 'Processing', 'Product On The Way', 'Delivered'];
+            $img = ['confirm.png', 'process.png', 'quality.png', 'dispatch.png'];
+            $class = ['confirm', 'process', 'quality', 'dispatch'];
+            $complete = 1;
+            $total = count($status) - 1;
+        @endphp
+
+        <div class="content3">
+            <div class="shipment">
+
+                @foreach ($status as $key => $status)
+
+                @php
+                    if ($currentStatus ==  $status) {
+                        $complete = 0;
                     }
-                }
+                @endphp
 
-            @endphp
+                    <div class="{{ $class[$key] }}">
+                        @if($status == $currentStatus)
+                        <div class="imgcircle {{ $key == $total ? 'active-step' : 'process-step'}}">
+                            <img src="{{ asset('assets/frontend/imgs/theme/' . $img[$key]) }}" alt="confirm order">
+                        </div>
+                        <span class="line process-step {{ $key  == $total ? 'd-none' : '' }}"></span>
+                        @else
+                        <div class="imgcircle {{ $complete ==  1 ? 'active-step' : '' }}">
+                            <img src="{{ asset('assets/frontend/imgs/theme/' . $img[$key]) }}" alt="confirm order">
+                        </div>
+                        <span class="line {{ $complete ==  1 ? 'active-step' : '' }} {{ $key  == $total ? 'd-none' : '' }}"></span>
+                        @endif
 
-            <div class="content3">
-              <div class="shipment">
-                <div class="confirm">
-                  <div class="imgcircle active-step">
-                    <img src="{{ asset('assets/frontend/imgs/theme/confirm.png') }}" alt="confirm order">
-                  </div>
-                  @if (in_array('Pending', $complete))
-
-                  <span class="line active-step"></span>
-                  @else
-                  <span class="line {{ $currentStatus == 'Pending' ? 'process-step' : '' }}"></span>
-                  @endif
-                  <p>Confirmed Order</p>
-                </div>
-                <div class="process">
-                  <div class="imgcircle {{ in_array('Processing', $complete) ? 'active-step' : '' }}">
-                    <img src="{{ asset('assets/frontend/imgs/theme/process.png') }}" alt="process order">
-                  </div>
-                  @if (in_array('Processing', $complete))
-
-                  <span class="line active-step"></span>
-                  @else
-                  <span class="line {{ $currentStatus == 'Processing' ? 'process-step' : '' }}"></span>
-                  @endif
-                  {{-- <span class="line {{ $currentStatus != 'Processing' ? 'active-step' : 'process-step' }}"></span> --}}
-
-                  <p>Processing Order</p>
-                </div>
-                <div class="quality">
-                  <div class="imgcircle {{ in_array('Product On The Way', $complete) ? 'active-step' : '' }}">
-                    <img src="{{ asset('assets/frontend/imgs/theme/quality.png') }}" alt="quality check">
-                  </div>
-                  <span class="line {{ $currentStatus != 'Product On The Way' ? 'active-step' : 'process-step' }}"></span>
-                  <p>On The Way</p>
-                </div>
-                <div class="dispatch">
-                  <div class="imgcircle {{ in_array('Delivered', $complete) ? 'active-step' : '' }}">
-                    <img src="{{ asset('assets/frontend/imgs/theme/dispatch.png') }}" alt="dispatch product">
-                  </div>
-
-                  {{-- <span class="line "></span> --}}
-
-                  <p>Delivered</p>
-                </div>
-
-                {{-- <div class="delivery">
-                  <div class="imgcircle">
-                    <img src="{{ asset('assets/frontend/imgs/theme/delivery.png') }}" alt="delivery">
-                  </div>
-                  <p>Product Delivered</p>
-                </div> --}}
+                        <p>{{ $status }}</p>
+                    </div>
+                @endforeach
 
                 <div class="clear"></div>
-              </div>
             </div>
-          </div>
-    {{-- </div> --}}
+        </div>
+    </div>
 </div>
