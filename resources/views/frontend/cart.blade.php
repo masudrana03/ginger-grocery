@@ -131,7 +131,8 @@
                                         $currency_symbol = settings('currency');
                                     @endphp
                                     @forelse ((auth()->user()->cart->products) ?? [] as $product)
-                                        <tr class="pt-30 product-modifiers " data-product-price="{{ $product->discount_price }}">
+                                        <tr class="pt-30 product-modifiers "
+                                            data-product-price="{{ $product->discount_price }}">
                                             <td class="image product-thumbnail pt-10" style="padding-left: 1%;">
 
                                                 @if (count($product->images) > 0)
@@ -619,8 +620,9 @@
                 console.log(error);
             }
         });
-    });
+     });
 </script>
+
 
 <script>
     $(document).ready(function() {
@@ -675,3 +677,4 @@
 
     });
 </script>
+

@@ -76,7 +76,8 @@
 	position:absolute;
 	left:-100000px;
 	width:100%;
-	z-index:1051;
+	/* z-index:1051; */
+	z-index: 2;
    }
    .select2-results {
 	display:block
@@ -157,10 +158,18 @@
 	border-radius:8px;
 	height: 47px;;
    } */
-   .select2-container--default .select2-selection--single .select2-selection__rendered {
+   /* .select2-container--default .select2-selection--single .select2-selection__rendered {
 	color:#444;
 	line-height: 40px;
-   }
+   } */
+
+
+	 .select2-container--default .select2-selection--single .select2-selection__rendered {
+		color: rgb(134, 131, 131);
+		line-height: 38px;
+		
+		
+	}
    .select2-container--default .select2-selection--single .select2-selection__clear {
 	cursor:pointer;
 	float:right;

@@ -1,6 +1,26 @@
 @extends('backend.layouts.app')
 @section('title', 'General Settings')
 
+@push('styles')
+    <style>
+        .password_with_eye {
+            width: 100%;
+            display: inline-flex;
+            overflow: hidden;
+
+        }
+
+        .eye-icon {
+
+            position: absolute;
+            margin-left: -44px;
+            margin-top: 13px;
+
+        }
+
+    </style>
+@endpush
+
 @section('content')
     <div class="main_content_iner ">
         <div class="container-fluid p-0 sm_padding_15px">
@@ -74,9 +94,13 @@
                                 <div class="form-group" id="mail_password">
                                     <label for="mail_password">Password</label>
                                     <input type="password" name="mail_password"
-                                        class="form-control @error('mail_password') is-invalid @enderror"
+                                        class="form-control password_with_eye @error('mail_password') is-invalid @enderror"
                                         aria-describedby="emailHelp" placeholder="Passwod"
                                         value="{{ old('mail_password') ?? settings('mail_password') }}">
+
+
+                                    <i class="fa fa-eye-slash eye-icon" aria-hidden="true"></i>
+
                                     @error('mail_password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -112,8 +136,10 @@
                                     <select name="encryption" class="form-control @error('encryption') is-invalid @enderror"
                                         aria-describedby="emailHelp" placeholder="Encryption"
                                         value="{{ old('encryption') ?? settings('encryption') }}">
-                                        <option value="TLS" {{ settings('encryption') == 'tls' ? 'selected' : ''  }}>TLS</option>
-                                        <option value="SSL" {{ settings('encryption') == 'ssl' ? 'selected' : ''  }}>SSL</option>
+                                        <option value="TLS" {{ settings('encryption') == 'tls' ? 'selected' : '' }}>TLS
+                                        </option>
+                                        <option value="SSL" {{ settings('encryption') == 'ssl' ? 'selected' : '' }}>SSL
+                                        </option>
                                     </select>
                                     @error('encryption')
                                         <span class="invalid-feedback" role="alert">
@@ -179,5 +205,23 @@
         //         $("#encryption").show();
         //     }
         // }
+    </script>
+@endpush
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $(".eye-icon").on('click', function(event) {
+                event.preventDefault();
+                if ($('.password_with_eye').attr("type") == "text") {
+                    $('.password_with_eye').attr('type', 'password');
+                    $('.eye-icon').addClass("fa-eye-slash");
+                    $('.eye-icon').removeClass("fa-eye");
+                } else if ($('.password_with_eye').attr("type") == "password") {
+                    $('.password_with_eye').attr('type', 'text');
+                    $('.eye-icon').removeClass("fa-eye-slash");
+                    $('.eye-icon').addClass("fa-eye");
+                }
+            });
+        });
     </script>
 @endpush

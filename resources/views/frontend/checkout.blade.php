@@ -136,6 +136,18 @@
         font-weight: 700 !important;
     }
 
+    .select2-container--default .select2-selection--single {
+
+        height: 48px !important;
+        width: 125px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 47px !important;
+        text-align: center !important;
+
+    }
+
 </style>
 
 @section('content')
@@ -439,7 +451,8 @@
                                         </div>
 
                                         <div class="col">
-                                            <p class="pri">{{ $currency }} {{ $item->discount_price * $item->quantity }}</p>
+                                            <p class="pri">{{ $currency }}
+                                                {{ $item->discount_price * $item->quantity }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -504,11 +517,15 @@
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
                         @if (session('totalAfterDiscount'))
-                        <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
-                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                            <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
+                            <h5 class="total-amount grandTotal">
+                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
+                            </h5>
                         @else
-                        {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
-                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                            {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
+                            <h5 class="total-amount grandTotal">
+                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
+                            </h5>
                         @endif
                     </div>
                 </div>
@@ -522,19 +539,19 @@
 @endsection
 
 @push('script')
-<script>
-    $(document).ready(function() {
-        var currentUrl = window.location.href;
-        var checkUrl = "{{ url('/checkout') }}";
+    <script>
+        $(document).ready(function() {
+            var currentUrl = window.location.href;
+            var checkUrl = "{{ url('/checkout') }}";
 
-        if (currentUrl == checkUrl) {
-            $('#newsletterSection').empty();
-        }
+            if (currentUrl == checkUrl) {
+                $('#newsletterSection').empty();
+            }
 
-        $("#promoCode").click(function(event) {
-            event.preventDefault();
-            var promoId = $('#promoId').val();
-            $.ajaxSetup({
+            $("#promoCode").click(function(event) {
+                event.preventDefault();
+                var promoId = $('#promoId').val();
+                $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
@@ -550,13 +567,13 @@
                         if (response == '1') {
                             $('#promoError').html(
                                 '<div class="alert alert-danger">Invalid promo code !</div>'
-                                );
+                            );
                             return;
                         }
                         if (response == '4') {
                             $('#promoError').html(
                                 '<div class="alert alert-danger">Please enter your promo code</div>'
-                                );
+                            );
                             return;
                         }
                         if (response == '0') {
@@ -567,12 +584,12 @@
                         if (response == '2') {
                             $('#noCartError').html(
                                 '<div class="alert alert-danger">Buy more mroducts to get discount</div>'
-                                );
+                            );
                             return;
                         } else {
                             $('#promoError').html(
                                 '<div class="alert alert-success">Promo code applied successfully</div>'
-                                );
+                            );
                             $('#oldCheckoutProducts').hide();
                             $('#newCheckoutProducts').html(response);
                         }

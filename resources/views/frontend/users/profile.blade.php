@@ -1,6 +1,20 @@
 @extends('frontend.layouts.app')
 @section('title', 'User Account |')
 
+<style>
+    .select2-container .select2-selection--single{
+        height: 62px !important;
+        width: 180px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+		color: rgb(134, 131, 131);
+		line-height: 58px !important;
+        text-align: center;
+		
+	}
+</style>
+
 
 @section('content')
     <main class="main pages">

@@ -77,7 +77,7 @@
         .detail-extralink>div {
             display: initial !important;
             vertical-align: text-top !important;
-            top: 12px !important;
+            /* top: 12px !important; */
 
 
         }
@@ -933,7 +933,10 @@
 
 
         $(".adding").click(function(event) {
-            var x =$('#qty-value').text();
+
+
+            var x = $('#qty-value').text();
+
 
             let quantity = parseInt(x);
             var pid = $('#pid').val();

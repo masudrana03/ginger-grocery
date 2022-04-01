@@ -17,6 +17,17 @@
 
     }
 
+    .select2-container .select2-selection--single{
+        height: 62px !important;
+        width: 142px !important;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+		color: rgb(134, 131, 131);
+		line-height: 58px !important;
+        text-align: center;
+		
+	}
 </style>
 
 @section('content')
@@ -39,7 +50,8 @@
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.dashboard') }}"
-                                                aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                                aria-selected="false"><i
+                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.orders') }}"
@@ -186,11 +198,12 @@
                                                                                             <span
                                                                                                 class="required">*</span></label>
                                                                                         <select name="phone_code"
-                                                                                            class="select-two form-control @error('') is-invalid @enderror"
+                                                                                            class="select-country phone-code form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
+                                                                                                    class="phone-code"
                                                                                                     value="{{ $countryName->id }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
@@ -398,15 +411,15 @@
                                                                                                 class="required">*</span></label>
                                                                                         <select id="phoneCode"
                                                                                             name="phone_code"
-                                                                                            class="select-two form-control @error('') is-invalid @enderror"
+                                                                                            class="select-country-code phone-code form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
-                                                                                            {{-- @foreach ($countries as $countryName)
+                                                                                            @foreach ($countries as $countryName)
                                                                                                 <option
                                                                                                     value="{{ $countryName->phone_code }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
                                                                                                 </option>
-                                                                                            @endforeach --}}
+                                                                                            @endforeach
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -617,13 +630,16 @@
                                                                                             class="pd-10">Country
                                                                                             Code
                                                                                             <span
-                                                                                                class="required">*</span></label>
+                                                                                                class="required">*</span>
+                                                                                        </label>
+
                                                                                         <select name="phone_code"
-                                                                                            class="select-two form-control @error('') is-invalid @enderror"
+                                                                                            class="select-country form-control @error('') is-invalid @enderror"
                                                                                             style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                             {{-- <option value="">Seclect Country</option> --}}
                                                                                             @foreach ($countries as $countryName)
                                                                                                 <option
+                                                                                                    class="phone-code"
                                                                                                     value="{{ $countryName->id }}">
                                                                                                     {{ $countryName->phone_code }}
                                                                                                     {{ $countryName->iso2 }}
@@ -751,7 +767,6 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary"
@@ -759,8 +774,8 @@
                                                                                 style="color: black; background-color:#fdc040;"
                                                                                 data-dismiss="modal">Close</button>
                                                                             <button type="submit" class="btn"
-                                                                                style="font-size: 14px;font-weight: 700; padding: 12px 30px; border-radius: 4px;">Save
-                                                                                changes</button>
+                                                                                style="font-size: 14px;font-weight: 700; padding: 12px 30px; border-radius: 4px;">Create
+                                                                            </button>
                                                                         </div>
                                                                     </form>
                                                                     {{-- <div class="modal-footer">
@@ -794,114 +809,131 @@
     }
 
 </style>
+<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+@push('script')
+    <script>
+        // Billing address modal
 
-<script>
-    // Billing address modal
+        let billAdd = @json($billingAddresses);
+        let countries = @json($countries);
+        // let countries = @json($countries);
+        // function del(id) {
+        //     alert('dscdcsd')
+        //     $('#billingDeleteForm').attr('href',  '/user/address-delete/' + billingAddress.id);
+        // }
 
-    let billAdd = @json($billingAddresses);
-    let countries = @json($countries);
-    // let countries = @json($countries);
-    // function del(id) {
-    //     alert('dscdcsd')
-    //     $('#billingDeleteForm').attr('href',  '/user/address-delete/' + billingAddress.id);
-    // }
+        function deleteAddress(id) {
+            document.getElementById('delete-form-' + id).submit();
+        }
 
-    function deleteAddress(id) {
-        document.getElementById('delete-form-' + id).submit();
-    }
+        function openEditBillingModal(id) {
 
-    function openEditBillingModal(id) {
-
-        $('#addressTypeBill').val('billing')
-
-
-        let billingAddress = billAdd.find(x => x.id == id);
-
-        // Set edit form action url
-        $('#billingEditForm').attr('action', '/user/address-update/' + billingAddress.id);
-
-        // Set update row value
-        $('#edit-bill-name').val(billingAddress.name);
-        $('#edit-bill-phone').val(billingAddress.phone);
-        $('#edit-bill-email').val(billingAddress.email);
-        $('#edit-bill-address').val(billingAddress.address);
-        $('#edit-bill-city').val(billingAddress.city);
-        $('#edit-bill-state').val(billingAddress.state);
-        $('#edit-bill-country').val(billingAddress.country.name);
-        $('#edit-bill-zip').val(billingAddress.zip);
-
-        // Open modal
-        $('#editBillingModal').modal('show');
-
-    }
+            $('#addressTypeBill').val('billing')
 
 
-    function closeModal() {
-        $('#editBillingModal').modal('hide');
-        $('#editShippingModal').modal('hide');
-        $('#createModal').modal('hide');
-    }
+            let billingAddress = billAdd.find(x => x.id == id);
 
-    //Shipping address modal
+            // Set edit form action url
+            $('#billingEditForm').attr('action', '/user/address-update/' + billingAddress.id);
 
-    let shippingAdd = @json($shippingAddresses);
+            // Set update row value
+            $('#edit-bill-name').val(billingAddress.name);
+            $('#edit-bill-phone').val(billingAddress.phone);
+            $('#edit-bill-email').val(billingAddress.email);
+            $('#edit-bill-address').val(billingAddress.address);
+            $('#edit-bill-city').val(billingAddress.city);
+            $('#edit-bill-state').val(billingAddress.state);
+            $('#edit-bill-country').val(billingAddress.country.name);
+            $('#edit-bill-zip').val(billingAddress.zip);
 
-    function openEditShippingModal(id) {
+            // Open modal
+            $('#editBillingModal').modal('show');
 
-        $('#addressTypeShip').val('shipping')
+        }
 
-        let shippingAddress = shippingAdd.find(x => x.id == id);
 
-        $('#phoneCode').empty();
-        $.each(countries, function(index, country) {
-            $('#phoneCode').append('<option value="' + country.id + '">' + country.phone_code + country
-                .iso2 + '</option>');
+        function closeModal() {
+            $('#editBillingModal').modal('hide');
+            $('#editShippingModal').modal('hide');
+            $('#createModal').modal('hide');
+        }
+
+        //Shipping address modal
+
+        let shippingAdd = @json($shippingAddresses);
+
+        function openEditShippingModal(id) {
+
+            $('#addressTypeShip').val('shipping')
+
+            let shippingAddress = shippingAdd.find(x => x.id == id);
+
+            $('#phoneCode').empty();
+            $.each(countries, function(index, country) {
+                $('#phoneCode').append('<option value="' + country.id + '">' + country.phone_code + country
+                    .iso2 + '</option>');
+            });
+
+            $("#phoneCode option[value='" + shippingAddress.phone_code + "']").attr('selected', true);
+
+            // Set edit form action url
+            $('#shippingEditForm').attr('action', '/user/address-update/' + shippingAddress.id);
+
+            // Set update row value
+            $('#edit-ship-name').val(shippingAddress.name);
+            $('#edit-ship-phone').val(shippingAddress.phone);
+            $('#edit-ship-email').val(shippingAddress.email);
+            $('#edit-ship-address').val(shippingAddress.address);
+            $('#edit-ship-city').val(shippingAddress.city);
+            $('#edit-ship-state').val(shippingAddress.state);
+            // $('#edit-ship-country').val(shippingAddress.country.name);
+            $('#edit-ship-zip').val(shippingAddress.zip);
+
+            // Open modal
+            $('#editShippingModal').modal('show');
+
+        }
+
+
+        function createModal(type) {
+
+            if (type == "billing") {
+                $('#addressType').val('billing')
+                $('#ModalTitle').text("Create Billing Address")
+                $('#createModal').modal('show');
+            }
+
+            if (type == "shipping") {
+                $('#addressType').val('shipping')
+                $('#ModalTitle').text("Create Shipping Address")
+                $('#createModal').modal('show');
+            }
+
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            let address = $('.address_name').text();
+            if (address == "") {
+                $('#cre-icon').empty();
+            }
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select-country').select2({
+                dropdownParent: $('#createModal')
+            });
         });
 
-        $("#phoneCode option[value='" + shippingAddress.phone_code + "']").attr('selected', true);
-
-        // Set edit form action url
-        $('#shippingEditForm').attr('action', '/user/address-update/' + shippingAddress.id);
-
-        // Set update row value
-        $('#edit-ship-name').val(shippingAddress.name);
-        $('#edit-ship-phone').val(shippingAddress.phone);
-        $('#edit-ship-email').val(shippingAddress.email);
-        $('#edit-ship-address').val(shippingAddress.address);
-        $('#edit-ship-city').val(shippingAddress.city);
-        $('#edit-ship-state').val(shippingAddress.state);
-        // $('#edit-ship-country').val(shippingAddress.country.name);
-        $('#edit-ship-zip').val(shippingAddress.zip);
-
-        // Open modal
-        $('#editShippingModal').modal('show');
-
-    }
-
-
-    function createModal(type) {
-
-        if (type == "billing") {
-            $('#addressType').val('billing')
-            $('#ModalTitle').text("Create Billing Address")
-            $('#createModal').modal('show');
-        }
-
-        if (type == "shipping") {
-            $('#addressType').val('shipping')
-            $('#ModalTitle').text("Create Shipping Address")
-            $('#createModal').modal('show');
-        }
-
-    }
-</script>
-
-<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        let address = $('.address_name').text();
-        if (address == "") {
-            $('#cre-icon').empty();
-        }
-    });
-</script>
+        $(document).ready(function() {
+            $('.select-country-code').select2({
+                dropdownParent: $('#editShippingModal')
+            });
+        });
+    </script>
+@endpush

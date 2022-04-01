@@ -13,6 +13,17 @@
         margin-top: 24px;
     }
 
+    .select2-container--default .select2-selection--single {
+        
+        height: 61px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 47px !important;
+        text-align: center !important;
+
+    }
+
 </style>
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -153,7 +164,7 @@
                                             <b class="text-best">5</b>
                                         </span>
                                         </div> --}}
-                                            {{-- <div class="payment_option mb-50">
+                                        {{-- <div class="payment_option mb-50">
                                             <div class="custome-radio">
                                                 <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="" />
                                                 <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">I am a customer</label>
@@ -331,8 +342,8 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            
+        $(document).ready(function() {
+
         });
     </script>
 @endpush

@@ -100,6 +100,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'verified'])->group(fu
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/change-password', [UserController::class, 'changePassword'])->name('user.change_password');
     Route::post('/user/update-password', [UserController::class, 'passwordUpdate'])->name('user.update_password');
+    Route::get('/user/change-image', [UserController::class, 'changeImage'])->name('user.change_image');
     Route::get('/allproducts', [ProductController::class, 'allProducts'])->name('allproducts');
     Route::get('/allbanners', [BannerController::class, 'allBanners'])->name('allbanners');
     Route::get('/banners/{banner}/update_status', [BannerController::class, 'updateStatus'])->name('banners.update_status');
@@ -234,6 +235,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/update-profile', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
     Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
     Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
+    
     Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
     Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
     Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');

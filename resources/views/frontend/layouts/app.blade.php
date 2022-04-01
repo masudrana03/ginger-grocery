@@ -81,10 +81,11 @@
         @yield('content')
     </div>
     <footer class="main">
-        @if ( url()->current() == url('/') )
+
+        @if (url()->current() == url('/'))
             @include('frontend.partials.footer-newsletter')
         @else
-           <p></p>
+            <p></p>
         @endif
         <section class="featured section-padding">
             <div class="container">
@@ -459,7 +460,7 @@
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
-                swal("Ops!", "{{ session('error') }}", "success");
+                swal("Success!", "{{ session('success') }}", "success");
             })
         </script>
     @endif
@@ -614,10 +615,22 @@
                         id: id,
                     },
                     success: function(result) {
+
                         if (result == '401') {
-                            window.location.href = "/login";
+                            window.location.href = "/login"; <<
+                            <<
+                            << < HEAD
+
+
+
+                                ===
+                                ===
+                                = >>>
+                                >>>
+                                > f28b24b5c21aff58a2f88c6c1da17ba0d7eef8a6
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
+
                             $('#wishlistProductOld').empty();
                             $('#wishlistProductNew').html(result);
                         }
@@ -659,6 +672,7 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
+
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },
@@ -669,6 +683,65 @@
             });
         });
     </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $(".del-cart .d-cart").on('click', function(event) {
+                event.preventDefault();
+                deleteCart(event.target);
+            });
+        });
+
+        function deleteCart(node) {
+            var closest_div = $(node).closest('.del-cart');
+            var id = closest_div.find('.del-product-id').text();
+            deleteFromCartById(id);
+        }
+
+        function deleteFromCartById(id) {
+            var pid = id;
+            var url = "{!! route('cart.remove', ':id') !!}";
+            url = url.replace(':id', pid);
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: {
+                    id: pid,
+
+                },
+                success: function(result) {
+                    $('#old-cart').empty();
+                    $('#new-cart').html(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+            var url2 = "{!! route('cart.remove.div', ':id') !!}";
+            url2 = url2.replace(':id', pid);
+            $.ajax({
+                method: 'GET',
+                url: url2,
+                data: {
+                    id: pid,
+
+                },
+                success: function(result) {
+                    $('#old-div').empty();
+                    $('#new-div').html(result);
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+
+
     @yield('script')
 
     {{-- <script src="{{ asset('assets/frontend/js/all-ajax.js') }}"></script> --}}
