@@ -94,45 +94,4 @@
 <div id="newWishlistProductTable"></div>
 
 
-<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-
-<script>
-    $(document).ready(function() {
-        $(".wishlist-btn-delete").click(function(event) {
-            event.preventDefault();
-
-        var id = $(this).attr("data-id");
-        var url = "{!! route('wishlist.remove', ':id') !!}";
-        url = url.replace(':id', id);
-
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    tata.success('Success!', 'Product removed from  wishlist.');
-                    $('#wishlistProductOld').empty();
-                    $('#wishlistProductNew').html(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-            $.ajax({
-                    method: 'GET',
-                    url: "{{ route('wishlistByDefaultId.remove') }}",
-                    success: function(result) {
-                        $('#oldWishlistProductTable').empty();
-                        $('#newWishlistProductTable').html(result);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-        });
-    });
-</script>
-
 

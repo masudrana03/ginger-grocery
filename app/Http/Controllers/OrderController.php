@@ -225,6 +225,7 @@ class OrderController extends Controller
 
         toast('Status successfully updated', 'success');
 
+
         return redirect()->back();
     }
 

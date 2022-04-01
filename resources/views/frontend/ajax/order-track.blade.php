@@ -18,31 +18,61 @@
               </div>
               <div class="clear"></div>
             </div>
+
+            @php
+                $status = ['Pending', 'Processing', 'Product On The Way', 'Delivered'];
+                $complete = [];
+                foreach ($status as $key => $s) {
+                    if ($currentStatus == 'Pending') {
+                        $complete = [];
+                    } elseif ($currentStatus == 'Processing') {
+                        $complete = ['Pending'];
+                    } elseif ($currentStatus == 'Product On The Way') {
+                        $complete = ['Pending', 'Processing'];
+                    } elseif ($currentStatus == 'Delivered') {
+                        $complete = ['Pending', 'Processing', 'Product On The Way', 'Delivered'];
+                    }
+                }
+
+            @endphp
+
             <div class="content3">
               <div class="shipment">
                 <div class="confirm">
-                  <div class="imgcircle {{ in_array('Pending', $orderStatus) ? 'active' : '' }}">
+                  <div class="imgcircle active-step">
                     <img src="{{ asset('assets/frontend/imgs/theme/confirm.png') }}" alt="confirm order">
                   </div>
-                  <span class="line {{ $currentStatus != 'Pending' ? 'active' : 'deactivate' }}"></span>
+                  @if (in_array('Pending', $complete))
+
+                  <span class="line active-step"></span>
+                  @else
+                  <span class="line {{ $currentStatus == 'Pending' ? 'process-step' : '' }}"></span>
+                  @endif
                   <p>Confirmed Order</p>
                 </div>
                 <div class="process">
-                  <div class="imgcircle {{ in_array('Processing', $orderStatus) ? 'active' : '' }}">
+                  <div class="imgcircle {{ in_array('Processing', $complete) ? 'active-step' : '' }}">
                     <img src="{{ asset('assets/frontend/imgs/theme/process.png') }}" alt="process order">
                   </div>
-                  <span class="line {{ $currentStatus != 'Processing' ? 'active' : 'deactivate' }}"></span>
+                  @if (in_array('Processing', $complete))
+
+                  <span class="line active-step"></span>
+                  @else
+                  <span class="line {{ $currentStatus == 'Processing' ? 'process-step' : '' }}"></span>
+                  @endif
+                  {{-- <span class="line {{ $currentStatus != 'Processing' ? 'active-step' : 'process-step' }}"></span> --}}
+
                   <p>Processing Order</p>
                 </div>
                 <div class="quality">
-                  <div class="imgcircle {{ in_array('Product On The Way', $orderStatus) ? 'active' : '' }}">
+                  <div class="imgcircle {{ in_array('Product On The Way', $complete) ? 'active-step' : '' }}">
                     <img src="{{ asset('assets/frontend/imgs/theme/quality.png') }}" alt="quality check">
                   </div>
-                  <span class="line {{ $currentStatus != 'Product On The Way' ? 'active' : 'deactivate' }}"></span>
+                  <span class="line {{ $currentStatus != 'Product On The Way' ? 'active-step' : 'process-step' }}"></span>
                   <p>On The Way</p>
                 </div>
                 <div class="dispatch">
-                  <div class="imgcircle {{ in_array('Delivered', $orderStatus) ? 'active' : '' }}">
+                  <div class="imgcircle {{ in_array('Delivered', $complete) ? 'active-step' : '' }}">
                     <img src="{{ asset('assets/frontend/imgs/theme/dispatch.png') }}" alt="dispatch product">
                   </div>
 
