@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div id="oldDetails">
     <style>
         .rating-s {
             top: -12px;
@@ -965,4 +966,5 @@
             });
         });
     </script>
+</div>
 @endsection

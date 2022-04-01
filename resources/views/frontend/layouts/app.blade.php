@@ -81,11 +81,10 @@
         @yield('content')
     </div>
     <footer class="main">
-
-        @if (url()->current() == url('/'))
+        @if ( url()->current() == url('/') )
             @include('frontend.partials.footer-newsletter')
         @else
-            <p></p>
+           <p></p>
         @endif
         <section class="featured section-padding">
             <div class="container">
@@ -460,7 +459,7 @@
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
-                swal("Success!", "{{ session('success') }}", "success");
+                swal("Ops!", "{{ session('error') }}", "success");
             })
         </script>
     @endif
@@ -496,6 +495,7 @@
                     loadHome(search);
                     $('#app').html(loading);
                 } else {
+                    alert('Please enter at least 3 characters');
                     $('#app').html(old_data);
                 }
             });
@@ -535,6 +535,47 @@
             });
         }
     </script>
+
+<script>
+    $(document).ready(function() {
+
+        var currentUrl = window.location.href;
+        var checkUrl = currentUrl.search("/products/");
+        var productId = '';
+
+        if (checkUrl != -1) {
+            // alert('ok');
+            currentUrlCheck();
+            // alert('found');
+            }else{
+                $('#app').html(old_data);
+                // alert('not found');
+            }
+
+        function currentUrlCheck() {
+            var productId = "{{ $product->slug ?? '' }}";
+            var url = "{!! route('products', ':id') !!}";
+            url = url.replace(':id', productId);
+            alert(url);
+
+            $.ajax({
+            method: 'GET',
+            url: url,
+            data: {
+                id: productId,
+            },
+            success: function(result) {
+                // $('#oldDetails').empty();
+                // $('#oldDetails').html(result);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+        }
+    });
+</script>
 
     <script>
         $(document).ready(function() {
@@ -615,22 +656,10 @@
                         id: id,
                     },
                     success: function(result) {
-
                         if (result == '401') {
-                            window.location.href = "/login"; <<
-                            <<
-                            << < HEAD
-
-
-
-                                ===
-                                ===
-                                = >>>
-                                >>>
-                                > f28b24b5c21aff58a2f88c6c1da17ba0d7eef8a6
+                            window.location.href = "/login";
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
-
                             $('#wishlistProductOld').empty();
                             $('#wishlistProductNew').html(result);
                         }
@@ -672,7 +701,6 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },
@@ -683,65 +711,6 @@
             });
         });
     </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $(".del-cart .d-cart").on('click', function(event) {
-                event.preventDefault();
-                deleteCart(event.target);
-            });
-        });
-
-        function deleteCart(node) {
-            var closest_div = $(node).closest('.del-cart');
-            var id = closest_div.find('.del-product-id').text();
-            deleteFromCartById(id);
-        }
-
-        function deleteFromCartById(id) {
-            var pid = id;
-            var url = "{!! route('cart.remove', ':id') !!}";
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-
-                },
-                success: function(result) {
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-
-            var url2 = "{!! route('cart.remove.div', ':id') !!}";
-            url2 = url2.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url2,
-                data: {
-                    id: pid,
-
-                },
-                success: function(result) {
-                    $('#old-div').empty();
-                    $('#new-div').html(result);
-
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-    </script>
-
-
-
     @yield('script')
 
     {{-- <script src="{{ asset('assets/frontend/js/all-ajax.js') }}"></script> --}}
