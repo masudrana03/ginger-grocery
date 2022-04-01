@@ -22,6 +22,7 @@ class AddressSeeder extends Seeder {
             'city'       => 'Dhaka',
             'zip'        => '1234',
             'type'       => 1,
+            'is_primary' => 1,
             'created_at' => now(),
         ] );
 
@@ -34,6 +35,7 @@ class AddressSeeder extends Seeder {
             'city'        => 'Dhaka',
             'zip'         => '1234',
             'type'        => 2,
+            'is_primary'  => 0,
             'created_at' => now(),
         ] );
     }

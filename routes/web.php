@@ -235,6 +235,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/update-profile', [FrontendUserController::class, 'updateProfile'])->name('user.profile.update');
     Route::get('/user/change-password', [FrontendUserController::class, 'changePassword'])->name('user.change.password');
     Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
+    Route::post('/user/update-profile-image', [FrontendUserController::class, 'updateProfileImage'])->name('user.update.profile.image');
+
     
     Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
     Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');

@@ -23,13 +23,35 @@
     }
 
     .profile-img {
-        height: 25px;
+        height: 40px;
+        border-radius: 50%;
 
     }
 
+    .header-action-2 .header-action-icon-2>a img {
+        width: 100%;
+        max-width: 40px !important;
+    }
 
-   span.lable{
-        margin-top: 10px !important;}
+    .header-action-2 .header-action-icon-2 .user-name {
+
+
+        line-height: 1.5;
+        display: inline-block;
+        position: relative;
+        margin-left: 0px !important;
+    }
+
+
+    /* span.lable {
+        margin-top: 10px !important;
+    } */
+
+    .user-name {
+        margin-top: 10px !important;
+        font-size: 16px !important;
+    }
+
 </style>
 
 <!-- Modal -->
@@ -284,7 +306,8 @@
             <div class="header-wrap">
                 <div class="logo logo-width-1">
                     <a href="{{ url('/') }}"><img
-                            src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}" alt="logo" /></a>
+                            src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}"
+                            alt="logo" /></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
@@ -530,15 +553,18 @@
                                 @auth
                                     <div class="header-action-icon-2">
                                         <a href="{{ route('user.dashboard') }}">
-                                            {{-- <img class="svgInject" alt="Nest"
+                                            {{-- <img alt="Nest"
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" /> --}}
-
-                                            <img class="profile-img" src="{{ asset('assets/img/client_img.png') }}"
-                                                alt="#">
-
+                                            @if (auth()->user()->image)
+                                                <img src="{{ asset('assets/img/uploads/users/' . auth()->user()->image) }}"
+                                                    alt="" />
+                                            @else
+                                                <img src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
+                                                    alt="Metrocery" />
+                                            @endif
                                         </a>
                                         <a href="{{ route('user.dashboard') }}"><span
-                                                class="lable ml-0">&nbsp;{{ auth()->user()->name }}</span></a>
+                                                class="lable user-name ">&nbsp;{{ auth()->user()->name }}</span></a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                             <ul>
                                                 <li>
@@ -558,8 +584,9 @@
                                                             class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();"><i
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();"><i
                                                             class="fi fi-rs-sign-out mr-10"></i>{{ __('Logout') }}</a>
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                         class="d-none">
@@ -598,7 +625,8 @@
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1 d-block d-lg-none">
                     <a href="{{ url('/') }}"><img
-                            src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}" alt="logo" /></a>
+                            src="{{ asset('assets/img/uploads/settings/logo/' . settings('logo')) }}"
+                            alt="logo" /></a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap  d-none d-lg-block" style=" ">

@@ -256,4 +256,35 @@ class UserController extends Controller
         return back()->with('success', 'Password changed successfully');
     }
 
+    public function updateProfileImage(Request $request)
+    {
+        $user = auth()->user();
+
+        $filename = '';
+
+        if ($request->hasFile('profile_image')) {
+            $imageDirectory = 'assets/img/uploads/users/';
+
+            deleteImage($user->image, $imageDirectory);
+
+            $image             = $request->file('profile_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/users/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/users/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $user->update($request);
+
+        toast('Profile Image successfully updated', 'success');
+
+        return redirect()->route('user.dashboard');
+    }
 }

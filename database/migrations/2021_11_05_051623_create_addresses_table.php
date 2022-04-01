@@ -26,6 +26,7 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('zip');
             $table->tinyInteger('type')->comment('1 for billing, 2 for shipping');
+            $table->tinyInteger('is_primary')->nullable()->comment('0 for secondary , 1 for primary');
             $table->timestamps();
         });
     }

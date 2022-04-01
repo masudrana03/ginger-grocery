@@ -24,6 +24,7 @@ class UserSeeder extends Seeder {
             'store_id'           => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -36,6 +37,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -48,6 +50,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+           
         ] );
 
         DB::table( 'users' )->insert( [
@@ -60,6 +63,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -72,6 +76,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -84,6 +89,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -96,6 +102,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -108,6 +115,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -120,6 +128,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [
@@ -132,6 +141,7 @@ class UserSeeder extends Seeder {
             'store_id'   => null,
             'email_verified_at'  =>Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => now(),
+            
         ] );
 
         DB::table( 'users' )->insert( [

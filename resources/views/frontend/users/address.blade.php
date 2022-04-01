@@ -17,17 +17,36 @@
 
     }
 
-    .select2-container .select2-selection--single{
+    .select2-container .select2-selection--single {
         height: 62px !important;
         width: 142px !important;
     }
-    
+
     .select2-container--default .select2-selection--single .select2-selection__rendered {
-		color: rgb(134, 131, 131);
-		line-height: 58px !important;
+        color: rgb(134, 131, 131);
+        line-height: 58px !important;
         text-align: center;
-		
-	}
+
+    }
+
+    .address-section{
+        display: inline;
+        top: 10px;
+    }
+
+    input.primary-address {
+      height: 15px !important;
+      width: 15px !important;
+    }
+
+    .address-item{
+        background-color: #a2ecca;
+        color: black;
+        border-radius: 10px;
+
+        
+    }
+
 </style>
 
 @section('content')
@@ -97,46 +116,27 @@
                                             <div class="col-lg-6 ">
                                                 <div class="card">
                                                     <div class="card-header d-flex">
-                                                        <h3 class="mb-0">Shipping Address</h3>
-                                                        <div id="cre-icon">
-                                                            <button class="btn add-billing-address p-1 "
-                                                                style="margin-left:40px; border-radius:35px; width:36px;"
-                                                                id="shipping" onclick="createModal('shipping')"><i
-                                                                    class="fas fa-plus add-icon"></i></button>
-                                                        </div>
+                                                        <h3 class="mb-0">Shipping Address</h3>      
                                                     </div>
                                                     <div class="card-body p-4">
                                                         @forelse ($shippingAddresses ?? [] as $address)
-                                                            <p class="address_name">{{ $address->name }}</p>
-                                                            <p>{{ $address->country->phone_code }}{{ $address->phone }}
-                                                            </p>
-                                                            <p>{{ $address->email }}</p>
-                                                            <address>
-                                                                {{ $address->address }},
-                                                            </address>
-                                                            <p>{{ $address->state }}, {{ $address->city }},
-                                                                {{ $address->zip }} ,</p>
-                                                            <p>{{ settings('country') }} .</p>
-                                                            <input type="hidden" id="hidden_id"
-                                                                value="{{ $address->id }}">
-                                                            <div class="billing-button"
-                                                                style="margin-left: 60%; margin-top:-30px;">
-                                                                <button class="btn-success  edit-billing-address"
-                                                                    onclick="openEditShippingModal({{ $address->id }})"
-                                                                    style="color: white; background-color:#3BB77E; border-radius: 5px ; border:white"
-                                                                    data-toggle="modal">Edit</button>
-                                                                <button class="btn-danger"
-                                                                    style="color: black; background-color:#fdc040; border-radius: 5px ; border:white; margin-left: 2%;"
-                                                                    onclick="deleteAddress({{ $address->id }})">Delete</button>
+
+                                                            <div class="address-lists d-inline-flex">
+                                                                <div class="address-item row">
+                                                                    <div class="col-lg-8">
+                                                                        <p>{{ $address->address }},{{ $address->state }}, {{ $address->city }},
+                                                                            {{ $address->zip }} {{ settings('country') }}</p>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <input type="checkbox" class="primary-address" name="" id="">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="action-list d-inline-flex">
+                                                                    <p>Edit</p>
+                                                                </div>
+
                                                             </div>
-
-                                                            <form id="delete-form-{{ $address->id }}"
-                                                                action="{{ route('user.delete.address', $address->id) }}"
-                                                                method="POST" style="display: none;">
-                                                                @csrf
-                                                            </form>
-
-                                                            <hr>
                                                         @empty
                                                             <p>No shipping address found!</p>
 
