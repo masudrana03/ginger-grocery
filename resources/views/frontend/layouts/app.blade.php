@@ -25,9 +25,7 @@
     {{-- bootstrap cdn link --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
@@ -357,7 +355,8 @@
     <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
-    <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
+
+    <script src="{{ asset('assets/frontend/js/shop.js?v=8.4') }}"></script>
 
 
 
@@ -495,8 +494,15 @@
                     loadHome(search);
                     $('#app').html(loading);
                 } else {
-                    alert('Please enter at least 3 characters');
-                    $('#app').html(old_data);
+                    // Check the url, If prodiuct page, reload the page
+                    // location.reload();
+                    var currentUrl = window.location.href;
+                    var checkUrl = currentUrl.search("/products/");
+                    if (checkUrl != -1 && search.length == 0 ) {
+                        location.reload();
+                    }else{
+                        $('#app').html(old_data);
+                        }
                 }
             });
 
@@ -512,7 +518,6 @@
                     page: page,
                 },
                 success: function(html) {
-                    console.log(html);
                     $('#app').html(html);
 
                     paginationClickEvent(search);
@@ -536,46 +541,7 @@
         }
     </script>
 
-<script>
-    $(document).ready(function() {
 
-        var currentUrl = window.location.href;
-        var checkUrl = currentUrl.search("/products/");
-        var productId = '';
-
-        if (checkUrl != -1) {
-            // alert('ok');
-            currentUrlCheck();
-            // alert('found');
-            }else{
-                $('#app').html(old_data);
-                // alert('not found');
-            }
-
-        function currentUrlCheck() {
-            var productId = "{{ $product->slug ?? '' }}";
-            var url = "{!! route('products', ':id') !!}";
-            url = url.replace(':id', productId);
-            alert(url);
-
-            $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: productId,
-            },
-            success: function(result) {
-                // $('#oldDetails').empty();
-                // $('#oldDetails').html(result);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-
-        }
-    });
-</script>
 
     <script>
         $(document).ready(function() {
