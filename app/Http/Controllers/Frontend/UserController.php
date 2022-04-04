@@ -312,6 +312,7 @@ class UserController extends Controller
             $primaryAddress->is_primary = 1;
             $primaryAddress->save();
         }
+        
         return view("frontend.ajax.primary-address",compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
     }
 }

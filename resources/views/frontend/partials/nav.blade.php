@@ -28,15 +28,15 @@
 
     }
 
-    .header-action-2 .header-action-icon-2>a img {
+    /* .header-action-2 .header-action-icon-2>a img {
         width: 100%;
         max-width: 40px !important;
-    }
+    } */
 
     .header-action-2 .header-action-icon-2 .user-name {
 
 
-        line-height: 1.5;
+        line-height: .5;
         display: inline-block;
         position: relative;
         margin-left: 0px !important;
@@ -556,7 +556,7 @@
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" /> --}}
                                             @if (auth()->user()->image)
                                                 <img src="{{ asset('assets/img/uploads/users/' . auth()->user()->image) }}"
-                                                    alt="" />
+                                                    alt="" height="30" width="60"  style="border-radius: 50%"/>
                                             @else
                                                 <img src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
                                                     alt="Metrocery" />
