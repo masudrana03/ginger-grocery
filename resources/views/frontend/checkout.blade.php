@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('title', 'Checkout |')
 
+@push('css')
 <style>
     span.checkout-quantity {
         position: absolute;
@@ -136,6 +137,7 @@
         font-weight: 700 !important;
     }
 
+
     #custom .select2-container--default .select2-selection--single {
 
         height: 48px !important;
@@ -145,14 +147,15 @@
     #custom .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 47px !important;
         text-align: center !important;
-
     }
 
     #custom .select2-container--default .select2-selection--single .select2-selection__arrow{
         right: 30px;
     }
 
+
 </style>
+@endpush
 
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -287,7 +290,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6"  id="phone_code">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')

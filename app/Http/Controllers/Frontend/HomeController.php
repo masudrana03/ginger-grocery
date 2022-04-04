@@ -81,7 +81,7 @@ class HomeController extends Controller
         $callToActions = CallToAction::all();
         $zones = Zone::all() ?? [];
         $search = true;
-        return view('frontend.home.home', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones', 'search'));
+        return view('frontend.ajax.home', compact('categoryProducts', 'compareProduct', 'sliders', 'callToActions', 'zones', 'search'));
     }
 
     /**
