@@ -25,9 +25,7 @@
     {{-- bootstrap cdn link --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
@@ -81,11 +79,10 @@
         @yield('content')
     </div>
     <footer class="main">
-
-        @if (url()->current() == url('/'))
+        @if ( url()->current() == url('/') )
             @include('frontend.partials.footer-newsletter')
         @else
-            <p></p>
+           <p></p>
         @endif
         <section class="featured section-padding">
             <div class="container">
@@ -218,7 +215,7 @@
                             {{-- code from safin --}}
 
                             @if (auth()->user())
-                                <li><a href="{{ route('user.dashboard') }} ">My Account</a></li>
+                                <li><a href="{{ route('user.dashboard') }} ">My Account</a></li>55
                                 <li><a href="{{ route('cart') }} ">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }} ">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }} ">Compare products</a></li>
@@ -358,7 +355,8 @@
     <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
-    <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
+
+    <script src="{{ asset('assets/frontend/js/shop.js?v=8.4') }}"></script>
 
 
 
@@ -460,7 +458,7 @@
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
-                swal("Success!", "{{ session('success') }}", "success");
+                swal("Ops!", "{{ session('error') }}", "success");
             })
         </script>
     @endif
@@ -496,7 +494,15 @@
                     loadHome(search);
                     $('#app').html(loading);
                 } else {
-                    $('#app').html(old_data);
+                    // Check the url, If prodiuct page, reload the page
+                    // location.reload();
+                    var currentUrl = window.location.href;
+                    var checkUrl = currentUrl.search("/products/");
+                    if (checkUrl != -1 && search.length == 0 ) {
+                        location.reload();
+                    }else{
+                        $('#app').html(old_data);
+                        }
                 }
             });
 
@@ -512,7 +518,6 @@
                     page: page,
                 },
                 success: function(html) {
-                    console.log(html);
                     $('#app').html(html);
 
                     paginationClickEvent(search);
@@ -535,6 +540,8 @@
             });
         }
     </script>
+
+
 
     <script>
         $(document).ready(function() {
@@ -615,12 +622,12 @@
                         id: id,
                     },
                     success: function(result) {
-
                         if (result == '401') {
+
                             window.location.href = "/login"; 
+
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
-
                             $('#wishlistProductOld').empty();
                             $('#wishlistProductNew').html(result);
                         }
@@ -662,7 +669,6 @@
                     method: 'GET',
                     url: "{{ route('wishlistByDefaultId.remove') }}",
                     success: function(result) {
-
                         $('#oldWishlistProductTable').empty();
                         $('#newWishlistProductTable').html(result);
                     },
@@ -673,65 +679,6 @@
             });
         });
     </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $(".del-cart .d-cart").on('click', function(event) {
-                event.preventDefault();
-                deleteCart(event.target);
-            });
-        });
-
-        function deleteCart(node) {
-            var closest_div = $(node).closest('.del-cart');
-            var id = closest_div.find('.del-product-id').text();
-            deleteFromCartById(id);
-        }
-
-        function deleteFromCartById(id) {
-            var pid = id;
-            var url = "{!! route('cart.remove', ':id') !!}";
-            url = url.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: pid,
-
-                },
-                success: function(result) {
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-
-            var url2 = "{!! route('cart.remove.div', ':id') !!}";
-            url2 = url2.replace(':id', pid);
-            $.ajax({
-                method: 'GET',
-                url: url2,
-                data: {
-                    id: pid,
-
-                },
-                success: function(result) {
-                    $('#old-div').empty();
-                    $('#new-div').html(result);
-
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-    </script>
-
-
-
     @yield('script')
 
     {{-- <script src="{{ asset('assets/frontend/js/all-ajax.js') }}"></script> --}}

@@ -345,7 +345,7 @@
                                             alt="" /><strong>Address: <strong>Address: </strong>
                                             <span>{{ $store->address }},
                                                 {{ $store->city }} {{ $store->zip }},
-                                                {{ $store->country->name }}</span></li>
+                                                {{ settings('country') }}</span></li>
                                     <li><img class="mr-5"
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}"
                                             alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>

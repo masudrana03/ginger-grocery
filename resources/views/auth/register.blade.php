@@ -14,7 +14,7 @@
     }
 
     .select2-container--default .select2-selection--single {
-        
+
         height: 61px !important;
     }
 
@@ -298,9 +298,34 @@
                         )
                     }
                 } else {
-                    $('#pass_available').html(
-                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
+                    var lowerCaseLetters = /[a-z]/g;
+                    var upperCaseLetters = /[A-Z]/g;
+                    var numbers = /[0-9]/g;
+
+                    if (password.match(upperCaseLetters)){
+                        $('#pass_available').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 lowercase letter | 1 number  1 special character</span>`
                     )
+
+                    }
+
+                    if (password.match(lowerCaseLetters)){
+                        $('#pass_available').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 number  1 special character</span>`
+                    )
+
+                    }
+
+                    if (password.length > 0){
+                        $('#pass_available').html(
+                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 number  1 special character</span>`
+                    )
+
+                    }
+
+                    // $('#pass_available').html(
+                    //     `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
+                    // )
                 }
             })
 
@@ -341,9 +366,4 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-
-        });
-    </script>
 @endpush
