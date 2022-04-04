@@ -11,6 +11,7 @@ use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -163,6 +164,7 @@ class UserController extends Controller
             $order = '';
             $userId  = auth()->user()->id;
 
+
             $checkUserId = Order::where('user_id', $userId)->get();
 
 
@@ -192,10 +194,10 @@ class UserController extends Controller
 
 
         }
-        // $user  = auth()->user();
+        $user  = auth()->user();
         // $orders = Order::with('status')->where('user_id', $user->id)->get();
 
-        return view('frontend.users.track-order');
+        return view('frontend.users.track-order', compact('user'));
     }
 
     public function getProfile()
@@ -286,5 +288,30 @@ class UserController extends Controller
         toast('Profile Image successfully updated', 'success');
 
         return redirect()->route('user.dashboard');
+    }
+
+    public function setPrimaryAddress(Request $request, $id)
+   {
+        $user = auth()->user();
+        $billingAddresses = auth()->user()->billingAddresses;
+        $shippingAddresses = auth()->user()->shippingAddress;
+        $countries = Country::all();
+        $request_info = $request->all();
+
+        // $request_info['is_primary'] = 1;
+
+        $primaryAddress = Address::find($id);
+        $addresses = Address::all();
+
+        foreach ($addresses as $address) {
+            if ($address->id != $id) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+
+            $primaryAddress->is_primary = 1;
+            $primaryAddress->save();
+        }
+        return view("frontend.ajax.primary-address",compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
     }
 }

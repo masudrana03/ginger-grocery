@@ -243,6 +243,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
     Route::post('/user/address-delete/{id}', [FrontendUserController::class, 'destroyAddress'])->name('user.delete.address');
 
+    Route::get('/user/primary-address/{id}', [FrontendUserController::class, 'setPrimaryAddress'])->name('set.primary.address');
+
+
 });
 
 Route::get('/user/forgot-password', [FrontendForgotPasswordController::class, 'index'])->name('user.forget.index');

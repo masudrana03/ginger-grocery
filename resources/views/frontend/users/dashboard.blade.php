@@ -256,13 +256,19 @@
                                         </div>
                                         <div class="card-body d-flex flex-wrap mx-auto" id="image-container">
                                             @if (auth()->user()->image)
-                                                <img class="profile-image"
-                                                    src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
-                                                    id="login_images">
+                                            <div class="image-space w-100">
+                                                <img class="profile-image" width="500" height="500"
+                                                src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
+                                                id="login_images">
+                                            </div>
+                                                
                                             @else
-                                                <img class="profile-image"
+                                            <div class="image-space w-100">
+                                                
+                                                <img class="profile-image" width="500" height="500"
                                                     src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
                                                     alt="Metrocery" id="login_images" />
+                                            </div>
                                             @endif
                                         </div>
                                     </div>
@@ -277,6 +283,7 @@
                     </form>
                 </div>
             </div>
+        </div>
     </main>
 
 

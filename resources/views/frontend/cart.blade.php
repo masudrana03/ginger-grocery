@@ -373,7 +373,6 @@
     </div>
 
     <div id="new-div">
-
     </div>
 
 @endsection
