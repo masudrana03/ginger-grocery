@@ -136,16 +136,20 @@
         font-weight: 700 !important;
     }
 
-    .select2-container--default .select2-selection--single {
+    #custom .select2-container--default .select2-selection--single {
 
         height: 48px !important;
         width: 125px !important;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
+    #custom .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 47px !important;
         text-align: center !important;
 
+    }
+
+    #custom .select2-container--default .select2-selection--single .select2-selection__arrow{
+        right: 30px;
     }
 
 </style>
@@ -273,7 +277,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group  col-lg-2 ">
+                            <div class="form-group  col-lg-2 " id="custom">
                                 <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
                                     @foreach ($countries as $countryName)
                                         <option value="{{ $countryName->id }}">

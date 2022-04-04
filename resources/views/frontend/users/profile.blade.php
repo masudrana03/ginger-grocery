@@ -2,12 +2,12 @@
 @section('title', 'User Account |')
 
 <style>
-    .select2-container .select2-selection--single{
+    #custom .select2-container .select2-selection--single{
         height: 62px !important;
         width: 180px !important;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
+    #custom .select2-container--default .select2-selection--single .select2-selection__rendered {
 		color: rgb(134, 131, 131);
 		line-height: 58px !important;
         text-align: center;
@@ -254,7 +254,8 @@
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label>Phone Code<span class="required">*</span></label>
-                                                            <select name="phone_code"
+                                                            <div id="custom">
+                                                                <select name="phone_code"
                                                                 class="select-two form-control @error('phone_code') is-invalid @enderror"
                                                                 style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                 @foreach ($countries as $country)
@@ -266,6 +267,8 @@
                                                                     </option>
                                                                 @endforeach
                                                             </select>
+                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="form-group col-md-9">
                                                             <label>Phone <span class="required">*</span></label>
