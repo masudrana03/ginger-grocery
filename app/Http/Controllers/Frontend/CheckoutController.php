@@ -279,7 +279,7 @@ class CheckoutController extends Controller
         // DB::beginTransaction();
 
         //try {
-        $orderStatus = OrderStatus::whereName('Pending')->first();
+        $orderStatus = OrderStatus::whereName('Order Placed')->first();
 
         if (!$orderStatus) {
             return back()->with('error', 'Order status not found');
