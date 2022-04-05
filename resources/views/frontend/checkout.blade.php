@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('title', 'Checkout |')
 
+@push('css')
 <style>
     span.checkout-quantity {
         position: absolute;
@@ -135,20 +136,32 @@
         border: 1px solid transparent !important;
         font-weight: 700 !important;
     }
-
-    .select2-container--default .select2-selection--single {
-
-        height: 48px !important;
-        width: 125px !important;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 47px !important;
+    #phone_code .select2-selection .select2-selection--single{
+        line-height: 48px !important;
         text-align: center !important;
+    }
+
+    #phone_code .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 48px !important;
+        text-align: center !important;
+    }
+
+    #phone_code .select2-container--default .select2-selection--single {
+        height: 48px !important;
 
     }
+
+    #phone_code .select2 .select2-container .select2-container--default{
+        width: 101px !important;
+    }
+
+    #phone_code .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 18px;
+    }
+
 
 </style>
+@endpush
 
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -283,7 +296,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6"  id="phone_code">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')
