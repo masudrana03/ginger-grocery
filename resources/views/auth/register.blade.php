@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
 @section('title', 'Register')
+
+@push('css')
 <style>
     .form-group .password_with_eye {
         width: 100%;
@@ -13,18 +15,58 @@
         margin-top: 24px;
     }
 
-    .select2-container--default .select2-selection--single {
-
+    #phone_code .select2-container--default .select2-selection--single {
         height: 61px !important;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 47px !important;
+    #phone_code .select2 .select2-container .select2-container--default{
+        width: 101px !important;
+    }
+
+    #phone_code .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 61px !important;
         text-align: center !important;
 
     }
 
+    #phone_code .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 18px;
+    }
+
+
+
+     .badge {
+        white-space: normal !important;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.25em 0.4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .in-active{
+       color: #fff !important;
+       text-align: center !important;
+       font-size: 0.92em !important;
+       background-color: #fdc040 !important;
+   }
+    .active{
+       color: #fff !important;
+       text-align: center !important;
+       font-size: 0.92em !important;
+       background-color: #3bb77e !important;
+   }
+
 </style>
+@endpush
 @section('content')
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -84,7 +126,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <div class="form-group">
+                                                <div class="form-group" id="phone_code">
 
                                                     {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                     {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
@@ -234,25 +276,7 @@
         </div>
     </div>
 @endsection
-<style>
-    .badge {
-        white-space: normal !important;
-    }
 
-    .badge {
-        display: inline-block;
-        padding: 0.25em 0.4em;
-        font-size: 75%;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        border-radius: 0.25rem;
-        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    }
-
-</style>
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
 @push('script')
     <script>
@@ -276,6 +300,7 @@
                     return false;
                 }
             })
+
             $('#password, #repassword').on('keyup change', function() {
 
                 let password = $('#password').val();
@@ -298,34 +323,64 @@
                         )
                     }
                 } else {
-                    var lowerCaseLetters = /[a-z]/g;
-                    var upperCaseLetters = /[A-Z]/g;
-                    var numbers = /[0-9]/g;
 
-                    if (password.match(upperCaseLetters)){
-                        $('#pass_available').html(
-                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 lowercase letter | 1 number  1 special character</span>`
+                    $('#pass_available').html(
+                      `<span id="characters" class="badge badge-danger in-active"> Password must contain at least 8 characters:</span>\
+                      <span id="uppercase" class="badge badge-danger in-active" > including at least 1 Uppercase letter </span>\
+                      <span id="lowercase" class="badge badge-danger in-active" > 1 Lowercase letter </span>\
+                      <span id="number" class="badge badge-danger in-active" > 1 Number  </span>\
+                      <span id="special" class="badge badge-danger in-active"> 1 Special character</span>`
                     )
 
+                    var upperCaseLetters = /[A-Z]/g;
+                    var lowerCaseLetters = /[a-z]/g;
+                    var numbers = /[0-9]/g;
+                    var characters = $("#characters");
+                    var uppercase = $("#uppercase");
+                    var lowercase = $("#lowercase");
+                    var number = $("#number");
+                    var special = $("#special");
+
+                    if (password.length > 8) {
+                        characters.removeClass('in-active');
+                        characters.addClass('active');
+                    }
+
+                    if (password.match(upperCaseLetters)){
+                        uppercase.removeClass('in-active');
+                        uppercase.addClass('active');
                     }
 
                     if (password.match(lowerCaseLetters)){
-                        $('#pass_available').html(
-                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 number  1 special character</span>`
-                    )
-
+                        lowercase.removeClass('in-active');
+                        lowercase.addClass('active');
                     }
 
-                    if (password.length > 0){
-                        $('#pass_available').html(
-                        `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 number  1 special character</span>`
-                    )
-
+                    if (password.match(numbers)){
+                        number.removeClass('in-active');
+                        number.addClass('active');
                     }
 
-                    // $('#pass_available').html(
-                    //     `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 lowercase letter | 1 number  1 special character</span>`
+                    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)){
+                        special.removeClass('in-active');
+                        special.addClass('active');
+                    }
+
+                    // if (password.match(lowerCaseLetters)){
+                    //     $('#pass_available').html(
+                    //     `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040; margin-left: 120px;" >1 Lowercase letter </span>`
                     // )
+
+                    // }
+
+                    // if (password.length > 0){
+                    //     $('#pass_available').html(
+                    //     `<span class="badge badge-danger" style="color: #fff; text-align: center; font-size: 0.92em; background-color: #fdc040;" >Password must contain at least 8 characters: <br> including at least 1 uppercase letter | 1 number  1 special character</span>`
+                    // )
+
+                    // }
+
+
                 }
             })
 
