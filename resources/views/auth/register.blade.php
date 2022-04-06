@@ -135,7 +135,8 @@
                                                         class="select-two form-control @error('phone_code') is-invalid @enderror"
                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                         @foreach ($countries as $country)
-                                                            <option value="{{ $country->id }}">
+                                                            <option {{settings('country') == $country->name ? 'selected' : '' }}
+                                                                 value="{{ $country->id }}">
                                                                 {{ $country->phone_code }} {{ $country->iso2 }}
                                                             </option>
                                                         @endforeach

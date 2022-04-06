@@ -23,9 +23,9 @@
         }
 
         /* .checkout-total{
-                   display: flex;
-                   justify-content: flex-end;
-               } */
+                       display: flex;
+                       justify-content: flex-end;
+                   } */
 
 
         .calculate {
@@ -45,9 +45,9 @@
         }
 
         /* .form-group{
-                  height: 2%;
-                  padding-bottom:60px;
-              } */
+                      height: 2%;
+                      padding-bottom:60px;
+                  } */
 
         .form-group input {
             background: #fff;
@@ -282,7 +282,8 @@
                             <div class="form-group  col-lg-2 " id="custom">
                                 <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
                                     @foreach ($countries as $countryName)
-                                        <option value="{{ $countryName->id }}">
+                                        <option value="{{ $countryName->id }}"
+                                            {{ settings('country') == $countryName->name ? 'selected' : '' }}>
                                             {{ $countryName->phone_code }}
                                             {{ $countryName->iso2 }}
                                         </option>
@@ -315,7 +316,8 @@
                         <div class="row">
 
                             <div class="form-check">
-                                <input class="form-check-input" name="is_primary" type="checkbox" value="1" id="primary-address">
+                                <input class="form-check-input" name="is_primary" type="checkbox" value="1"
+                                    id="primary-address">
                                 <label class="form-check-label" for="primary-address">
                                     Set as primary address
                                 </label>
@@ -799,5 +801,4 @@
             });
         });
     </script>
-
 @endpush

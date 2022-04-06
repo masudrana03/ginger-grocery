@@ -7,6 +7,11 @@
         border-radius: 3%;
     }
 
+    #custom .select2-selection__rendered {
+        padding-left: 47px !important;
+        padding-top: 10px;
+    }
+
     .modal-button {
         border-radius: 13px;
     }
@@ -24,6 +29,11 @@
         color: rgb(134, 131, 131);
         line-height: 58px !important;
         text-align: center;
+    }
+
+    #custom .select2-container--default .select2-selection--single .select2-selection__arrow{
+        top: 15px !important;
+        margin-right: 10px !important;
     }
 
     .address-section {
@@ -595,7 +605,7 @@
                                                         <!-- Modal -->
 
                                                         {{-- modal for edit shipping address --}}
-                                                        
+
                                                         <div class="modal fade" id="editShippingModal" tabindex="-1"
                                                             role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                             aria-hidden="true">
@@ -655,11 +665,13 @@
                                                                                                 class="select-country-code phone-code form-control @error('') is-invalid @enderror"
                                                                                                 style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                                 @foreach ($countries as $countryName)
-                                                                                                    <option
+                                                                                                
+                                                                                                    <option {{ settings('country') == $countryName->name ? 'selected' : '' }}
                                                                                                         value="{{ $countryName->phone_code }}">
                                                                                                         {{ $countryName->phone_code }}
                                                                                                         {{ $countryName->iso2 }}
                                                                                                     </option>
+
                                                                                                 @endforeach
                                                                                             </select>
                                                                                         </div>
@@ -822,7 +834,7 @@
                                                             </div>
                                                         </div>
 
-                                                        
+
 
                                                         @if (Session::has('errors'))
                                                             <script>
@@ -896,7 +908,7 @@
                                                                                                 style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                                 {{-- <option value="">Seclect Country</option> --}}
                                                                                                 @foreach ($countries as $countryName)
-                                                                                                    <option
+                                                                                                    <option {{ settings('country') == $countryName->name ? 'selected' : '' }}
                                                                                                         class="phone-code"
                                                                                                         value="{{ $countryName->id }}">
                                                                                                         {{ $countryName->phone_code }}

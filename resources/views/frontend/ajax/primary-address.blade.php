@@ -468,7 +468,7 @@
                                                                                         class="select-country-code phone-code form-control @error('') is-invalid @enderror"
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                         @foreach ($countries as $countryName)
-                                                                                            <option
+                                                                                            <option {{ settings('country') == $countryName->name ? 'selected' : '' }}
                                                                                                 value="{{ $countryName->phone_code }}">
                                                                                                 {{ $countryName->phone_code }}
                                                                                                 {{ $countryName->iso2 }}
@@ -703,7 +703,7 @@
                                                                                         style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                         {{-- <option value="">Seclect Country</option> --}}
                                                                                         @foreach ($countries as $countryName)
-                                                                                            <option
+                                                                                            <option {{ settings('country') == $countryName->name ? 'selected' : '' }}
                                                                                                 class="phone-code"
                                                                                                 value="{{ $countryName->id }}">
                                                                                                 {{ $countryName->phone_code }}
