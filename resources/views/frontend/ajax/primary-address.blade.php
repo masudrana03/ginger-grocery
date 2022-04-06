@@ -54,8 +54,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('user.track.orders') }}"
-                                            aria-selected="false"><i
-                                                class="fi-rs-shopping-cart-check mr-10"></i>Order
+                                            aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Order
                                             Tracking</a>
                                     </li>
                                     <li class="nav-item">
@@ -106,8 +105,7 @@
                                                                 <div class="address-item row mt-2"
                                                                     style="background-color:#2ab272;  border-radius:10px; ">
                                                                     <div class="col-lg-10 p-add">
-                                                                        <p class="address-name"
-                                                                            style="color: white">
+                                                                        <p class="address-name" style="color: white">
                                                                             {{ $address->address }},{{ $address->state }},
                                                                             {{ $address->city }},
                                                                             {{ $address->zip }}
@@ -115,11 +113,9 @@
                                                                     </div>
                                                                     <div class="col-lg-2">
 
-                                                                        <input
-                                                                            class="form-check-input primary-address"
-                                                                            data-id="{{ $address->id }}"
-                                                                            type="radio" checked
-                                                                            name="flexRadioDefault  "
+                                                                        <input class="form-check-input primary-address"
+                                                                            data-id="{{ $address->id }}" type="radio"
+                                                                            checked name="flexRadioDefault  "
                                                                             id="{{ $address->id }}">
                                                                         <label class="form-check-label"
                                                                             style="display:none"
@@ -214,8 +210,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content modal-border">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title"
-                                                                    id="exampleModalLongTitle">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">
                                                                     Edit Billing Address
                                                                 </h5>
                                                                 <button type="button" class="close modal-button"
@@ -238,13 +233,12 @@
                                                                                 class="form-control @error('name') is-invalid @enderror"
                                                                                 name="name" type="text" />
                                                                             @error('name')
-                                                                                <span class="invalid-feedback"
-                                                                                    role="alert">
+                                                                                <span class="invalid-feedback" role="alert">
                                                                                     <strong>{{ $message }}</strong>
                                                                                 </span>
                                                                             @enderror
-                                                                            <input type="hidden"
-                                                                                id="addressTypeBill" name="type">
+                                                                            <input type="hidden" id="addressTypeBill"
+                                                                                name="type">
 
                                                                         </div>
                                                                     </div>
@@ -254,8 +248,7 @@
                                                                             <div class="form-group">
                                                                                 {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                 {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                <label
-                                                                                    class="pd-10">Country
+                                                                                <label class="pd-10">Country
                                                                                     Code
                                                                                     <span
                                                                                         class="required">*</span></label>
@@ -282,8 +275,7 @@
                                                                                 <label class="pd-10">Phone
                                                                                     <span
                                                                                         class="required">*</span></label>
-                                                                                <input id="edit-bill-phone"
-                                                                                    type="text"
+                                                                                <input id="edit-bill-phone" type="text"
                                                                                     class="form-control @error('phone') is-invalid @enderror"
                                                                                     name="phone"
                                                                                     value="{{ old('phone') }}"
@@ -340,8 +332,7 @@
                                                                             <label class="pd-10">Address
                                                                                 <span
                                                                                     class="required">*</span></label>
-                                                                            <input required=""
-                                                                                id="edit-bill-address"
+                                                                            <input required="" id="edit-bill-address"
                                                                                 class="form-control @error('address') is-invalid @enderror"
                                                                                 name="address" type="text" />
                                                                             @error('address')
@@ -355,8 +346,7 @@
 
                                                                     <div class="row">
                                                                         <div class="form-group col-md-12">
-                                                                            <label
-                                                                                class="pd-10">State<span
+                                                                            <label class="pd-10">State<span
                                                                                     class="required"></span></label>
                                                                             <input required="" id="edit-bill-state"
                                                                                 class="form-control @error('state') is-invalid @enderror"
@@ -425,12 +415,10 @@
                                                 <div class="modal fade" id="editShippingModal" tabindex="-1"
                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered "
-                                                        role="document">
+                                                    <div class="modal-dialog modal-dialog-centered " role="document">
                                                         <div class="modal-content modal-border">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title"
-                                                                    id="exampleModalLongTitle">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">
                                                                     Edit Shipping Address
                                                                 </h5>
 
@@ -459,8 +447,8 @@
                                                                                     <strong>{{ $message }}</strong>
                                                                                 </span>
                                                                             @enderror
-                                                                            <input type="hidden"
-                                                                                id="addressTypeShip" name="type">
+                                                                            <input type="hidden" id="addressTypeShip"
+                                                                                name="type">
 
                                                                         </div>
                                                                     </div>
@@ -470,8 +458,7 @@
                                                                             <div class="form-group">
                                                                                 {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                 {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                <label
-                                                                                    class="pd-10">Country
+                                                                                <label class="pd-10">Country
                                                                                     Code
                                                                                     <span
                                                                                         class="required">*</span></label>
@@ -497,8 +484,7 @@
                                                                                 <label class="pd-10">Phone
                                                                                     <span
                                                                                         class="required">*</span></label>
-                                                                                <input id="edit-ship-phone"
-                                                                                    type="text"
+                                                                                <input id="edit-ship-phone" type="text"
                                                                                     class="form-control @error('phone') is-invalid @enderror"
                                                                                     name="phone"
                                                                                     value="{{ old('phone') }}"
@@ -555,8 +541,7 @@
                                                                             <label class="pd-10">Address
                                                                                 <span
                                                                                     class="required">*</span></label>
-                                                                            <input required=""
-                                                                                id="edit-ship-address"
+                                                                            <input required="" id="edit-ship-address"
                                                                                 class="form-control @error('address') is-invalid @enderror"
                                                                                 name="address" type="text" />
                                                                             @error('address')
@@ -570,8 +555,7 @@
 
                                                                     <div class="row">
                                                                         <div class="form-group col-md-12">
-                                                                            <label
-                                                                                class="pd-10">State<span
+                                                                            <label class="pd-10">State<span
                                                                                     class="required"></span></label>
                                                                             <input required="" id="edit-ship-state"
                                                                                 class="form-control @error('state') is-invalid @enderror"
@@ -617,6 +601,20 @@
                                                                         </div>
                                                                     </div>
 
+                                                                    <div class="row mx-auto">
+
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input"
+                                                                                name="is_primary" type="checkbox"
+                                                                                value="1" id="primary-address">
+                                                                            <label class="form-check-label"
+                                                                                for="primary-address">
+                                                                                Set as primary address
+                                                                            </label>
+                                                                        </div>
+
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -653,8 +651,7 @@
                                                 <div class="modal fade" id="createModal" tabindex="-1"
                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered"
-                                                        role="document">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content modal-border rounded-3">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="ModalTitle"></h5>
@@ -694,8 +691,7 @@
                                                                             <div class="form-group">
                                                                                 {{-- <input required="" type="password" name="password" placeholder="Confirm password" /> --}}
                                                                                 {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Phone Number" autofocus> --}}
-                                                                                <label
-                                                                                    class="pd-10">Country
+                                                                                <label class="pd-10">Country
                                                                                     Code
                                                                                     <span
                                                                                         class="required">*</span>
@@ -793,8 +789,7 @@
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="form-group col-md-12">
-                                                                            <label
-                                                                                class="pd-10">State<span
+                                                                            <label class="pd-10">State<span
                                                                                     class="required"></span></label>
                                                                             <input required=""
                                                                                 class="form-control @error('state') is-invalid @enderror"
@@ -838,6 +833,21 @@
                                                                             @enderror
                                                                         </div>
                                                                     </div>
+
+                                                                    <div class="row mx-auto">
+
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input"
+                                                                                name="is_primary" type="checkbox"
+                                                                                value="1" id="primary-address">
+                                                                            <label class="form-check-label"
+                                                                                for="primary-address">
+                                                                                Set as primary address
+                                                                            </label>
+                                                                        </div>
+
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -939,7 +949,8 @@
 
 
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 <script>

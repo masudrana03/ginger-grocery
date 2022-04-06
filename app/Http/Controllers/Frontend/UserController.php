@@ -76,6 +76,11 @@ class UserController extends Controller
             $requestInfo['type'] = 2;
         }
 
+        // $is_primary = 0;
+
+        // if ($request->has('is_primary')) {
+        //     $is_primary  = 1;
+        // }
         Address::create($requestInfo);
 
         return back();
@@ -291,7 +296,7 @@ class UserController extends Controller
     }
 
     public function setPrimaryAddress(Request $request, $id)
-   {
+    {
         $user = auth()->user();
         $billingAddresses = auth()->user()->billingAddresses;
         $shippingAddresses = auth()->user()->shippingAddress;
@@ -312,7 +317,7 @@ class UserController extends Controller
             $primaryAddress->is_primary = 1;
             $primaryAddress->save();
         }
-        
-        return view("frontend.ajax.primary-address",compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
+
+        return view("frontend.ajax.primary-address", compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
     }
 }

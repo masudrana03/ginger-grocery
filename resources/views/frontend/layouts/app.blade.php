@@ -458,7 +458,7 @@
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
-                swal("Ops!", "{{ session('error') }}", "success");
+                swal("Success!", "{{ session('success') }}", "success");
             })
         </script>
     @endif

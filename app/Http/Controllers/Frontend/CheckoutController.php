@@ -95,7 +95,7 @@ class CheckoutController extends Controller
 
             $tax = taxCalculator($subtotal);
 
-            return view('frontend.ajax.update-cart-div',compact('subtotal', 'tax'));
+            return view('frontend.ajax.update-cart-div', compact('subtotal', 'tax'));
         }
 
         return view('frontend.ajax.checkout');
@@ -129,6 +129,14 @@ class CheckoutController extends Controller
             ]);
         }
 
+        $is_primary = 0;
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+        }
+
+
+
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
         } else {
@@ -142,7 +150,7 @@ class CheckoutController extends Controller
         $shippingId = $request->address_id;
 
         if (!$userAddress) {
-            $shippingId = $this->createShippingAddress($request);
+            $shippingId = $this->createShippingAddress($request, $is_primary);
         }
 
         // $invoiceId = $this->createOrder($cart, $shippingId, $shippingId);
@@ -211,8 +219,17 @@ class CheckoutController extends Controller
      * @param Request $request
      * @return void
      */
-    public function createShippingAddress(Request $request)
+    public function createShippingAddress(Request $request, $is_primary)
     {
+        if ($is_primary == 1) {
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        }
+
         $address = new Address();
         $address->name = $request->name;
         $address->email = $request->email;
@@ -225,12 +242,11 @@ class CheckoutController extends Controller
         $address->zip = $request->zip;
         $address->user_id = auth()->id();
         $address->type = 2;
+        $address->is_primary = $is_primary ?? 0;
         $address->save();
 
         return $address->id;
     }
-
-
     public function updateSavedShippingAddress(Request $request)
     {
         $userAddress = Address::where('id', $request->address_id);

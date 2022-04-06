@@ -594,6 +594,7 @@
                                                         <!-- Modal -->
 
                                                         {{-- modal for edit shipping address --}}
+                                                        
                                                         <div class="modal fade" id="editShippingModal" tabindex="-1"
                                                             role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                             aria-hidden="true">
@@ -789,6 +790,20 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            <div class="row m-auto">
+
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input"
+                                                                                        name="is_primary" type="checkbox"
+                                                                                        value="1" id="primary-address">
+                                                                                    <label class="form-check-label"
+                                                                                        for="primary-address">
+                                                                                        Set as primary address
+                                                                                    </label>
+                                                                                </div>
+
+                                                                            </div>
+
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary"
@@ -806,7 +821,7 @@
                                                             </div>
                                                         </div>
 
-                                                        {{-- modal for create shipping address --}}
+                                                        
 
                                                         @if (Session::has('errors'))
                                                             <script>
@@ -821,6 +836,8 @@
                                                         @foreach ($errors->all() as $error)
                                                             <li>{{ $error }}</li>
                                                         @endforeach
+
+                                                        {{-- modal for create shipping address --}}
 
                                                         <div class="modal fade" id="createModal" tabindex="-1"
                                                             role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -874,7 +891,6 @@
                                                                                         </label>
                                                                                         <div id="custom">
                                                                                             <select name="phone_code"
-                                                                                                
                                                                                                 class="select-country form-control @error('') is-invalid @enderror"
                                                                                                 style="height: 64px; font-size: 14px; font-weight: 600; color: #777777; padding-left: 25%;">
                                                                                                 {{-- <option value="">Seclect Country</option> --}}
@@ -1010,6 +1026,21 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
+
+                                                                            <div class="row m-auto">
+
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input"
+                                                                                        name="is_primary" type="checkbox"
+                                                                                        value="1" id="primary-address">
+                                                                                    <label class="form-check-label"
+                                                                                        for="primary-address">
+                                                                                        Set as primary address
+                                                                                    </label>
+                                                                                </div>
+
+                                                                            </div>
+
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary"
