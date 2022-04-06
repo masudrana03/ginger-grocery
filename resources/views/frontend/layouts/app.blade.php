@@ -631,7 +631,9 @@
                     },
                     success: function(result) {
                         if (result == '401') {
-                            window.location.href = "/login";
+
+                            window.location.href = "/login"; 
+
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
                             $('#wishlistProductOld').empty();

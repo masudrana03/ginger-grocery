@@ -128,9 +128,15 @@
                         <div class="row hover-div">
                             <div class="col-md-3 avatar-section">
                                 <div class="profilepic">
-                                    <img class="profilepic__image"
-                                        src="{{ asset('assets/frontend/imgs/shop/product-2-2.jpg') }}" width="160"
-                                        height="160" alt="Profibild" />
+                                    @if (auth()->user()->image)
+                                        <img class="profilepic__image"
+                                            src="{{ asset('assets/img/uploads/users/' . $user->image) }}" width="160"
+                                            height="160" alt="Profibild" />
+                                    @else
+                                        <img class="profilepic__image"
+                                            src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}" width="160"
+                                            height="160" alt="Profibild" />
+                                    @endif
                                     <div class="profilepic__content">
                                         <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
                                         <span class="profilepic__text">Edit Profile</span>
@@ -150,7 +156,8 @@
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="{{ route('user.dashboard') }}"
-                                                aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                                aria-selected="false"><i
+                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.orders') }}"
@@ -178,9 +185,8 @@
                                                 Password</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                                                                                            document.getElementById('logout-form').submit();"><i
+                                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -222,7 +228,9 @@
         <div class="modal fade" id="avatar-modal" tabindex="-1" aria-labelledby="avatar-modal-label" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form class="avatar-form" method="post" action="#" enctype="multipart/form-data">
+                    <form class="avatar-form" method="post" action="{{ route('user.update.profile.image') }}"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-header">
                             <h4 class="modal-title" id="avatar-modal-label"><i class="til_img"></i><strong>Profile
                                     Image</strong></h4>
@@ -240,16 +248,28 @@
                                         <div class="card-header d-flex justify-content-start">
 
 
-                                            <input type="file" name="login_image" id="login_image" accept="image/*"
+                                            <input type="file" name="profile_image" id="login_image" accept="image/*"
                                                 class="d-none " onchange="showLoginImage(this)">
                                             <button class="btn btn-sm btn-primary ml-4" type="button"
                                                 onclick="document.getElementById('login_image').click()">Select
                                                 Image</button>
                                         </div>
                                         <div class="card-body d-flex flex-wrap mx-auto" id="image-container">
-                                            <img class="profile-image"
-                                                src="{{ asset('assets/img/uploads/settings/loginImage/' . settings('login_image')) }}"
+                                            @if (auth()->user()->image)
+                                            <div class="image-space w-100">
+                                                <img class="profile-image" width="500" height="500"
+                                                src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
                                                 id="login_images">
+                                            </div>
+                                                
+                                            @else
+                                            <div class="image-space w-100">
+                                                
+                                                <img class="profile-image" width="500" height="500"
+                                                    src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
+                                                    alt="Metrocery" id="login_images" />
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -263,6 +283,7 @@
                     </form>
                 </div>
             </div>
+        </div>
     </main>
 
 
@@ -271,7 +292,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('.profilepic__text').on('click', function() {
+            $('.profilepic__content').on('click', function() {
 
                 $('#avatar-modal').modal('toggle');
             });
