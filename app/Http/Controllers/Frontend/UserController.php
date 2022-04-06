@@ -76,11 +76,23 @@ class UserController extends Controller
             $requestInfo['type'] = 2;
         }
 
-        // $is_primary = 0;
 
-        // if ($request->has('is_primary')) {
-        //     $is_primary  = 1;
-        // }
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+            $request_info['is_primary'] = $is_primary;
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        } else {
+            $is_primary = 0;
+            $request_info['is_primary'] = $is_primary;
+        }
+
+
         Address::create($requestInfo);
 
         return back();
@@ -112,6 +124,20 @@ class UserController extends Controller
             $requestInfo['type'] = 1;
         } else {
             $requestInfo['type'] = 2;
+        }
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+            $request_info['is_primary'] = $is_primary;
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        } else {
+            $is_primary = 0;
+            $request_info['is_primary'] = $is_primary;
         }
 
         $addressId->update($requestInfo);

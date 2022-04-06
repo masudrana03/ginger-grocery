@@ -40,6 +40,7 @@
         background-color: #cafce5;
         color: black;
         border-radius: 10px;
+        max-width: 400px !important;
     }
 
     .add-btn {
