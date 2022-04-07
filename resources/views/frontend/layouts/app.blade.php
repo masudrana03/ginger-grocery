@@ -223,7 +223,7 @@
                             {{-- code from safin --}}
 
                             @if (auth()->user())
-                                <li><a href="{{ route('user.dashboard') }} ">My Account</a></li>55
+                                <li><a href="{{ route('user.dashboard') }} ">My Account</a></li>
                                 <li><a href="{{ route('cart') }} ">View Cart</a></li>
                                 <li><a href="{{ route('wishlist.index') }} ">Wishlist</a></li>
                                 <li><a href="{{ route('compare') }} ">Compare products</a></li>
@@ -632,7 +632,7 @@
                     success: function(result) {
                         if (result == '401') {
 
-                            window.location.href = "/login"; 
+                            window.location.href = "/login";
 
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
