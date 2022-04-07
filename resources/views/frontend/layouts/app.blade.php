@@ -363,7 +363,6 @@
     <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
-
     <script src="{{ asset('assets/frontend/js/shop.js?v=8.4') }}"></script>
 
 
@@ -463,6 +462,7 @@
             })
         </script>
     @endif
+
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
@@ -478,6 +478,7 @@
             })
         </script>
     @endif
+
     <script>
         let old_data = $('#app').html();
         let loading = `<section class="product-tabs section-padding position-relative">

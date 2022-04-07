@@ -35,6 +35,14 @@ class CheckoutController extends Controller
         return view('frontend.checkout', compact('paymentMethods', 'countries', 'savedAddress'));
     }
 
+
+    public function checkoutSlip(){
+        $order = Order::with('details.product', 'user', 'store')->find(2);
+        return view('frontend.post-checkout', compact('order'));
+    }
+
+
+
     /**
      * Apply promo
      *
@@ -348,7 +356,8 @@ class CheckoutController extends Controller
         session()->forget('totalAfterDiscount');
         session()->forget('discountAmount');
 
-        return $order->invoice_id;
+        return $order->invoice_id;   
+
         //} catch (Exception $e) {
         // DB::rollback();
         //logger($e->getMessage());
