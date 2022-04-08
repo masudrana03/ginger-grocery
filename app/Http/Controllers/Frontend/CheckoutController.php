@@ -172,8 +172,9 @@ class CheckoutController extends Controller
             // $this->sendOrderConfirmationEmail($invoiceId);
         }
 
-        $cart->products()->detach();
-        $cart->delete();
+        // $cart->products()->detach();
+        // $cart->delete();
+        
 
         // give points if match any condition
         //  $this->givePointsToCustomer($cart);

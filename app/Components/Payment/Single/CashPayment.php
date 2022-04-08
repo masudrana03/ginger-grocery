@@ -21,7 +21,10 @@ class CashPayment implements PayableInterface
         if (strpos($route, 'api') !== false){
             return back()->with('success', 'Order Placed Successfully!');
         }
-        $order = Order::where('order_reference', $referenceId)->get();
-        return view('frontend.post-checkout', compact('order'))->with('success', 'Your Order Placed Successfully!');
+        $orders = Order::where('order_reference', $referenceId)->get();
+
+        
+        $shipping_info = Order::where('order_reference', $referenceId)->first();
+        return view('frontend.post-checkout', compact('orders','shipping_info'))->with('success', 'Your Order Placed Successfully!');
     }
 }
