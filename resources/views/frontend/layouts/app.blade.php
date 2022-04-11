@@ -544,6 +544,7 @@
             })
         </script>
     @endif
+
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
@@ -559,6 +560,7 @@
             })
         </script>
     @endif
+
     <script>
         let old_data = $('#app').html();
         let loading = `<section class="product-tabs section-padding position-relative">
