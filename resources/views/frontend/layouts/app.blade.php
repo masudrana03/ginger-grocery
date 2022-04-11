@@ -52,6 +52,7 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <link src="{{ asset('assets/tata_toster/index.js') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/chaldal-cart.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/frontend/css/track-oder.css') }}" /> --}}
 
     <style>
@@ -64,18 +65,6 @@
             background: #29A56C !important;
         }
 
-        /* .material-icons{
-            color: #FDC040!important;
-        } */
-
-        /* .app{
-            width: 85%;
-        }
-        .main{
-            width: 85%;
-        } */
-
-
     </style>
     @stack('css')
 
@@ -84,13 +73,105 @@
 <body>
     @include('frontend.partials.nav')
     <div id="app" class="app">
-        @yield('content')
+        <main id="width-add" class="main">
+            @yield('content')
+        </main>
     </div>
-    <footer class="main">
-        @if ( url()->current() == url('/') )
+
+    <!-- Chaldal Card system -->
+    <div class="col-lg-2 primary-sidebar chaldal" id="chaldal-cart">
+
+        <div class="card-widget price_range range mb-30">
+            <button type="button" class="btn-close close-cross" id="cross-close"
+                aria-label="Close"></button>
+            <h5 class="section-title style-1 mb-30">Cart</h5>
+            <div>
+                <div class="row mb-3">
+                    <a class="cart-cross" href="#"><i class="fi-rs-cross-small"></i></a>
+                    <div class="col-md-5 col-xs-5"><a href="#" class="d-block text-center" data-bs-toggle="modal"
+                            data-bs-target="#productmodal"><img
+                                src="https://grocery.binary-fusion.com/assets/img/uploads/products/featured/CHEEZA%20CHEESE%20CRACKERS.png"
+                                alt="product-image" class="cart-product-image"></a></div>
+                    <div class="col-md-7 col-xs-7 ps-0">
+                        <span class="product-subtitle">500gm</span>
+                        <a href="#" class="product-name">Blue Diamond Almonds Lightly Salted</a>
+                        <h6 class="price-title"><span class="price-font">$</span>29 </h6>
+                        <div class="cart-count">
+                            <div class="number">
+                                <span class="minus">-</span>
+                                <input type="text" class="open-font" value="1">
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <a class="cart-cross" href="#"><i class="fi-rs-cross-small"></i></a>
+                    <div class="col-md-5 col-xs-5"><a href="#" class="d-block text-center" data-bs-toggle="modal"
+                            data-bs-target="#productmodal"><img
+                                src="https://grocery.binary-fusion.com/assets/img/uploads/products/featured/CHEEZA%20CHEESE%20CRACKERS.png"
+                                alt="product-image" class="cart-product-image"></a></div>
+                    <div class="col-md-7 col-xs-7 ps-0">
+                        <span class="product-subtitle">500gm</span>
+                        <a href="#" class="product-name">Blue Diamond Almonds Lightly Salted</a>
+                        <h6 class="price-title"><span class="price-font">$</span>29 </h6>
+                        <div class="cart-count">
+                            <div class="number">
+                                <span class="minus">-</span>
+                                <input type="text" class="open-font" value="1">
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <a class="cart-cross" href="#"><i class="fi-rs-cross-small"></i></a>
+                    <div class="col-md-5 col-xs-5"><a href="#" class="d-block text-center" data-bs-toggle="modal"
+                            data-bs-target="#productmodal"><img
+                                src="https://grocery.binary-fusion.com/assets/img/uploads/products/featured/CHEEZA%20CHEESE%20CRACKERS.png"
+                                alt="product-image" class="cart-product-image"></a></div>
+                    <div class="col-md-7 col-xs-7 ps-0">
+                        <span class="product-subtitle">500gm</span>
+                        <a href="#" class="product-name">Blue Diamond Almonds Lightly Salted</a>
+                        <h6 class="price-title"><span class="price-font">$</span>29 </h6>
+                        <div class="cart-count">
+                            <div class="number">
+                                <span class="minus">-</span>
+                                <input type="text" class="open-font" value="1">
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-details card-page">
+                <!-- <hr /> -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="card-sub">Subtotal <span class="card-value">$ 59.99</span></h4>
+                        <h4 class="card-tax">Tax <span class="card-value">$ 0.99</span></h4>
+                        <h4 class="card-total">Total <span class="ms-auto">$ 60.99</span></h4>
+                        <!-- <h5 class="bg-greylight p-4 rounded-6 mt-3 mb-3 w-100 fw-600 text-grey-500 font-xssss d-flex">Apply Promo Code : <span class="ms-auto fw-700 text-grey-900">2 Promos</span></h5> -->
+                    </div>
+                </div>
+
+                <!-- <a href="#" class="w-100 bg-current text-white rounded-6 text-center btn" id="checkout">Checkout</a> -->
+                <a href="shop-grid-right.html" class="btn btn-sm btn-default">Checkout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-bar" id="side-bar">
+        <a href="#" class="facebook"><img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"></a>
+        <span>1 items</span>
+        <h6 style="color:#000">$ 36</h6>
+
+    </div>
+    <footer  id="width-add"  class="main">
+        @if (url()->current() == url('/'))
             @include('frontend.partials.footer-newsletter')
         @else
-           <p></p>
+            <p></p>
         @endif
         <section class="featured section-padding">
             <div class="container">
@@ -363,8 +444,8 @@
     <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
-
     <script src="{{ asset('assets/frontend/js/shop.js?v=8.4') }}"></script>
+    <script src="{{ asset('assets/frontend/js/chalda.js?v=8') }}"></script>
 
 
 
@@ -506,11 +587,11 @@
                     // location.reload();
                     var currentUrl = window.location.href;
                     var checkUrl = currentUrl.search("/products/");
-                    if (checkUrl != -1 && search.length == 0 ) {
+                    if (checkUrl != -1 && search.length == 0) {
                         location.reload();
-                    }else{
+                    } else {
                         $('#app').html(old_data);
-                        }
+                    }
                 }
             });
 

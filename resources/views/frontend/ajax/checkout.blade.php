@@ -84,7 +84,6 @@ $currency = settings('currency');
 @endforelse
 
 
-
 {{-- Total calculation for All shopping --}}
 <div>
     <h5 class="mb-30 pl-2">Total Amount:</h5>

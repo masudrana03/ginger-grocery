@@ -112,7 +112,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="add-cart">
-                                                    <a class="add" href="#"><i
+                                                    <a class="add chaldal-add-card" href="#"><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                     <small class="product-id"
                                                         style="display: none;">{{ $product->id }}</small>
