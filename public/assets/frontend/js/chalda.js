@@ -2,12 +2,13 @@
     ("use strict");
 
 
-  //Chal-Dal JS all will be here for cart.
+    //Chal-Dal JS all will be here for cart.
 
     $("#chaldal-cart").hide();
     $("#side-bar").hide();
 
     var widthAdd = $("#width-add");
+    
 
     $('.minus').click(function () {
         var $input = $(this).parent().find('input');
@@ -25,12 +26,42 @@
     });
 
 
-    $(document).on('click', '.chaldal-add-card', function () {
-        var $data = $(this).attr('data-id');
-        $("#chaldal-cart").show();
-        widthAdd.addClass('width-84');
-        $("#side-bar").hide();
-    });
+    // $(document).on('click', '.chaldal-add-card', function (event) {
+    //     event.preventDefault();
+    //     $("#chaldal-cart").show();
+    //     widthAdd.addClass('width-84');
+    //     $("#side-bar").hide();
+
+    //     var id = $(this).attr("data-id");
+    //     var url = "{!! route('cartById', ':id') !!}";
+    //     url = url.replace(':id', id);
+    //     console.log(url);
+
+    //     var url = "{!! url('/add-to-cart/', ':id') !!}";
+    //             url = url.replace(':id', id);
+    //             console.log(url);
+
+    //     $.ajax({
+    //         method: 'GET',
+    //         url: url,
+    //         data: {
+    //             id: id,
+    //             quantity: 1,
+    //         },
+    //         success: function (result) {
+    //             tata.success('Success!', 'Product added to your cart.');
+    //             // $('#old-cart').empty();
+    //             // $('#new-cart').html(result);
+    //         },
+    //         error: function (error) {
+    //             if (error.status == 401) {
+    //                 window.location.href = "/login";
+    //             }
+    //         }
+    //     });
+
+
+    // });
 
     $(document).on('click', '#cross-close', function () {
         var $data = $(this).attr('data-id');

@@ -40,7 +40,7 @@ class CartController extends Controller
                     ],
                 ], false);
 
-                return view("frontend.ajax.cart");
+                return view("frontend.ajax.chaldal-cart");
             } else {
 
                 $cartId = auth()->user()->cart->id;
@@ -56,9 +56,9 @@ class CartController extends Controller
                     //return $current_qty;
                     if ($update_qty <= 10) {
                         $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
-                        return view("frontend.ajax.cart");
+                        return view("frontend.ajax.chaldal-cart");
                     } else {
-                        return view("frontend.ajax.cart");
+                        return view("frontend.ajax.chaldal-cart");
                     }
                 } else {
                     $cart->products()->sync([
@@ -68,7 +68,7 @@ class CartController extends Controller
                         ],
                     ], false);
 
-                    return view("frontend.ajax.cart");
+                    return view("frontend.ajax.chaldal-cart");
                 }
             }
         }
