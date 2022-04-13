@@ -1239,7 +1239,7 @@
 </script>
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(document).on("click", ".add-cart .add", function(event) {
             event.preventDefault();
@@ -1268,6 +1268,8 @@
             },
             success: function(result) {
                 tata.success('Success!', 'Product added to your cart.');
+                alert('product added to cart');
+                console.log(result);
                 $('#old-cart').empty();
                 $('#new-cart').html(result);
             },
@@ -1278,10 +1280,10 @@
             }
         });
     }
-</script>
+</script> --}}
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         // $(".del-cart .d-cart").on('click', function(event) {
             $(document).on("click", ".del-cart .d-cart", function(event) {
@@ -1348,7 +1350,7 @@
         });
 
     });
-</script>
+</script> --}}
 
 <script>
     $(document).on('click', '.moreless', function() {

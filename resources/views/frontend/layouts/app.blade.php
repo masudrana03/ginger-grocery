@@ -87,7 +87,7 @@
                     aria-label="Close"></button>
                 <h5 class="section-title style-1 mb-30">Cart</h5>
                 <div>
-                    @foreach ((auth()->user()->cart->products) ?? [] as $product)
+                    @foreach (auth()->user()->cart->products ?? [] as $product)
                         <div class="row mb-3 margin-minus20">
                             <a class="cart-cross" href="#"><i class="fi-rs-cross-small"></i></a>
                             <div class="col-md-5 col-xs-5 "><a href="#" class="d-block text-center"><img
@@ -132,12 +132,7 @@
             <h6 style="color:#000">$ 36</h6>
         </div>
     </div> --}}
-    <div class="icon-bar" id="side-bar">
-        <a href="#" class="facebook"><img alt="Nest"
-                src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"></a>
-        <span>{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products->count(): 0 }} items</span>
-        <h6 style="color:#000">$ 36</h6>
-    </div>
+
     <div id="newChaldalCart"> </div>
 
     <!-- Chaldal Card system  End-->
@@ -748,9 +743,30 @@
     </script>
     <script>
         $(document).ready(function() {
+            var cart_count =
+                "{{ auth()->user() && auth()->user()->cart && auth()->user()->cart->products ?? 0 }}";
+            var widthAdd = $("#width-add");
+
+            // this code is dufult cart count when cart not null
+            if (cart_count > 0) {
+                widthAdd.addClass('width-84');
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart') }}",
+                    success: function(result) {
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            };
+
+
             $(document).on('click', '.chaldal-add-card', function(event) {
                 event.preventDefault();
-                var widthAdd = $("#width-add");
                 $("#chaldal-cart").show();
                 widthAdd.addClass('width-84');
                 $("#side-bar").hide();
@@ -780,8 +796,118 @@
                     }
                 });
 
-
             });
+
+
+            $(document).on('click', '#cross-close', function() {
+                $("#chaldal-cart").hide();
+                widthAdd.removeClass('width-84');
+                $("#side-bar").show();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cartSidebar') }}",
+                    success: function(result) {
+                        console.log(result);
+                        $('#newSidebar').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            });
+
+            // For Cart item delete code.
+            $(document).on('click', '.cart-cross', function() {
+                var id = $(this).attr("data-id");
+                var url = "{!! route('cart.remove', ':id') !!}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+
+                    },
+                    success: function(result) {
+                        if (result == '1') {
+                            $('#oldChaldalCart').empty();
+                            widthAdd.removeClass('width-84');
+                            return;
+                        }
+                        $('#oldChaldalCart').empty();
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $(document).on('click', '.minus', function() {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+                var quantity = $input.val();
+                var id = $(this).attr("data-id");
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart.update') }}",
+                    data: {
+                        id: id,
+                        quantity: quantity,
+                    },
+                    success: function(result) {
+                        $('#oldChaldalCart').empty();
+                        console.log(result);
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+                return false;
+            });
+
+            $(document).on('click', '.plus', function() {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+                var quantity = $input.val();
+                var id = $(this).attr("data-id");
+
+                alert(quantity);
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart.update') }}",
+                    data: {
+                        id: id,
+                        quantity: quantity,
+                    },
+                    success: function(result) {
+                        $('#oldChaldalCart').empty();
+                        console.log(result);
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+                return false;
+            });
+
+
+
         });
     </script>
 

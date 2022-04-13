@@ -123,7 +123,7 @@
 </div>
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
             event.preventDefault();
@@ -179,4 +179,4 @@
 
 
 
-</script>
+</script> --}}

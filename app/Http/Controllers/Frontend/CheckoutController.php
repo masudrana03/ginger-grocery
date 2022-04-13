@@ -172,15 +172,15 @@ class CheckoutController extends Controller
             // $this->sendOrderConfirmationEmail($invoiceId);
         }
 
-        // $cart->products()->detach();
-        // $cart->delete();
-        
+        $cart->products()->detach();
+        $cart->delete();
+
 
         // give points if match any condition
         //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
-        //  $this->sendOrderConfirmationEmail($invoiceId);
+         $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
         return $this->acceptPayment($provider->provider, $orderReference);
@@ -357,7 +357,7 @@ class CheckoutController extends Controller
         session()->forget('totalAfterDiscount');
         session()->forget('discountAmount');
 
-        return $order->invoice_id;   
+        return $order->invoice_id;
 
         //} catch (Exception $e) {
         // DB::rollback();

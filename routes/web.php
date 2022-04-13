@@ -216,6 +216,7 @@ Route::get('/zone-filter', [HomeController::class, 'index'])->name('zone.filter'
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/add-to-cart/{id}', [FrontendCartController::class, 'addToCartById'])->name('cartById');
+    Route::get('/cart-sidebar', [FrontendCartController::class, 'cartSidebar'])->name('cartSidebar');
     Route::get('/cart', [FrontendCartController::class, 'cart'])->name('cart');
 
     Route::get('/cart-update', [FrontendCartController::class, 'cartUpdate'])->name('cart.update');
@@ -238,7 +239,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/update-password', [FrontendUserController::class, 'updatePassword'])->name('user.update.password');
     Route::post('/user/update-profile-image', [FrontendUserController::class, 'updateProfileImage'])->name('user.update.profile.image');
 
-    
+
     Route::get('/user/order-invoice/{id}', [FrontendUserController::class, 'getInvoice'])->name('user.invoice');
     Route::post('/user/address-create', [FrontendUserController::class, 'addAddress'])->name('user.add.address');
     Route::post('/user/address-update/{id}', [FrontendUserController::class, 'updateAddress'])->name('user.update.address');
