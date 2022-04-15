@@ -676,7 +676,7 @@
                 var id = $(this).attr("data-id");
                 var url = "{!! route('wishlist', ':id') !!}";
                 url = url.replace(':id', id);
-                console.log(url);
+
                 $.ajax({
                     method: 'GET',
                     url: url,
@@ -685,9 +685,7 @@
                     },
                     success: function(result) {
                         if (result == '401') {
-
                             window.location.href = "/login";
-
                         } else {
                             tata.success('Success!', 'Product added to wishlist.');
                             $('#wishlistProductOld').empty();
@@ -774,7 +772,6 @@
                 var id = $(this).attr("data-id");
                 var url = "{!! route('cartById', ':id') !!}";
                 url = url.replace(':id', id);
-                console.log(url);
 
                 $.ajax({
                     method: 'GET',
@@ -786,13 +783,13 @@
                     success: function(result) {
                         tata.success('Success!', 'Product added to your cart.');
                         $('#oldChaldalCart').empty();
-                        console.log(result);
                         $('#newChaldalCart').html(result);
                     },
                     error: function(error) {
                         if (error.status == 401) {
                             window.location.href = "/login";
                         }
+                        console.log(error);
                     }
                 });
 
@@ -807,7 +804,6 @@
                     method: 'GET',
                     url: "{{ route('cartSidebar') }}",
                     success: function(result) {
-                        console.log(result);
                         $('#newSidebar').html(result);
                     },
                     error: function(error) {
@@ -829,7 +825,6 @@
                     url: url,
                     data: {
                         id: id,
-
                     },
                     success: function(result) {
                         if (result == '1') {
@@ -856,37 +851,22 @@
                 $input.change();
                 var quantity = $input.val();
                 var id = $(this).attr("data-id");
-
-                $.ajax({
-                    method: 'GET',
-                    url: "{{ route('cart.update') }}",
-                    data: {
-                        id: id,
-                        quantity: quantity,
-                    },
-                    success: function(result) {
-                        $('#oldChaldalCart').empty();
-                        console.log(result);
-                        $('#newChaldalCart').html(result);
-                    },
-                    error: function(error) {
-                        if (error.status == 401) {
-                            window.location.href = "/login";
-                        }
-                    }
-                });
+                cartQuantityUpdate(id, quantity);
                 return false;
             });
 
-             // this code is For Cart item value increase code.
+            // this code is For Cart item value increase code.
             $(document).on('click', '.plus', function() {
                 var $input = $(this).parent().find('input');
                 $input.val(parseInt($input.val()) + 1);
                 $input.change();
                 var quantity = $input.val();
                 var id = $(this).attr("data-id");
+                cartQuantityUpdate(id, quantity);
+                return false;
+            });
 
-
+            function cartQuantityUpdate(id, quantity) {
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('cart.update') }}",
@@ -896,7 +876,6 @@
                     },
                     success: function(result) {
                         $('#oldChaldalCart').empty();
-                        console.log(result);
                         $('#newChaldalCart').html(result);
                     },
                     error: function(error) {
@@ -905,8 +884,7 @@
                         }
                     }
                 });
-                return false;
-            });
+            };
 
 
         });
