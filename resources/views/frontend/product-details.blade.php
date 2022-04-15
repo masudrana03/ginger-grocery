@@ -199,7 +199,7 @@
                                         </div> --}}
 
                                         <div class="detail-extralink mb-50">
-                                            <div class="detail-qty border radius">
+                                            {{-- <div class="detail-qty border radius">
                                                 <input type="hidden" name=qty[] id="qty" class="update-qty">
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"
                                                         id="down"></i></a>
@@ -207,7 +207,7 @@
                                                     id="qty-value">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"
                                                         id="up"></i></a>
-                                            </div>
+                                            </div> --}}
                                             <div class="product-extra-link2 ">
                                                 <button type="submit" class="button button-add-to-cart adding chaldal-add-card" data-id="{{ $product->id }}"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
@@ -933,37 +933,37 @@
         });
 
 
-        $(".adding").click(function(event) {
+        // $(".adding").click(function(event) {
 
 
-            var x = $('#qty-value').text();
+        //     var x = $('#qty-value').text();
 
 
-            let quantity = parseInt(x);
-            var pid = $('#pid').val();
+        //     let quantity = parseInt(x);
+        //     var pid = $('#pid').val();
 
-            var url2 = "{!! route('cartById', ':id') !!}";
-            url2 = url2.replace(':id', pid);
+        //     var url2 = "{!! route('cartById', ':id') !!}";
+        //     url2 = url2.replace(':id', pid);
 
-            $.ajax({
-                method: 'GET',
-                url: url2,
-                data: {
-                    id: pid,
-                    quantity: quantity,
+        //     $.ajax({
+        //         method: 'GET',
+        //         url: url2,
+        //         data: {
+        //             id: pid,
+        //             quantity: quantity,
 
-                },
-                success: function(result) {
-                    tata.success('Success!', 'Product added to your cart.');
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                },
-                error: function(error) {
-                    if (error.status == 401) {
-                        window.location.href = "/login";
-                    }
-                }
-            });
-        });
+        //         },
+        //         success: function(result) {
+        //             tata.success('Success!', 'Product added to your cart.');
+        //             $('#old-cart').empty();
+        //             $('#new-cart').html(result);
+        //         },
+        //         error: function(error) {
+        //             if (error.status == 401) {
+        //                 window.location.href = "/login";
+        //             }
+        //         }
+        //     });
+        // });
     </script>
 @endsection
