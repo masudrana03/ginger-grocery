@@ -196,7 +196,7 @@
                                             </div>
                                             <div class="add-cart">
                                                 <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
-                                                <a class="add" id="cart-btn"
+                                                <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn"
                                                     href="#" style=""><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 <small class="product-id"

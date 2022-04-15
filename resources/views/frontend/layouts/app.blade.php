@@ -747,7 +747,7 @@
                 "{{ auth()->user() && auth()->user()->cart && auth()->user()->cart->products ?? 0 }}";
             var widthAdd = $("#width-add");
 
-            // this code is dufult cart count when cart not null
+            // this code is dufult cart count when cart not null.
             if (cart_count > 0) {
                 widthAdd.addClass('width-84');
                 $.ajax({
@@ -764,7 +764,7 @@
                 });
             };
 
-
+            // this code is add product in cart.
             $(document).on('click', '.chaldal-add-card', function(event) {
                 event.preventDefault();
                 $("#chaldal-cart").show();
@@ -798,7 +798,7 @@
 
             });
 
-
+            // this code is hide cart & show the side bar cart info.
             $(document).on('click', '#cross-close', function() {
                 $("#chaldal-cart").hide();
                 widthAdd.removeClass('width-84');
@@ -846,6 +846,8 @@
                 });
             });
 
+
+            // this code is For Cart item value decreased code.
             $(document).on('click', '.minus', function() {
                 var $input = $(this).parent().find('input');
                 var count = parseInt($input.val()) - 1;
@@ -876,6 +878,7 @@
                 return false;
             });
 
+             // this code is For Cart item value increase code.
             $(document).on('click', '.plus', function() {
                 var $input = $(this).parent().find('input');
                 $input.val(parseInt($input.val()) + 1);
@@ -883,7 +886,6 @@
                 var quantity = $input.val();
                 var id = $(this).attr("data-id");
 
-                alert(quantity);
 
                 $.ajax({
                     method: 'GET',
@@ -905,7 +907,6 @@
                 });
                 return false;
             });
-
 
 
         });

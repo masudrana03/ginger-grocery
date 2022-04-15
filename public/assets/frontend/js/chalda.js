@@ -18,12 +18,12 @@
     //     alert($input.val());
     //     return false;
     // });
-    $(document).on('click', '.plus', function () {
-        var $input = $(this).parent().find('input');
-        $input.val(parseInt($input.val()) + 1);
-        $input.change();
-        return false;
-    });
+    // $(document).on('click', '.plus', function () {
+    //     var $input = $(this).parent().find('input');
+    //     $input.val(parseInt($input.val()) + 1);
+    //     $input.change();
+    //     return false;
+    // });
 
     $(document).on('click', '.icon-bar', function () {
         widthAdd.addClass('width-84');

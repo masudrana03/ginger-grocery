@@ -25,7 +25,7 @@
                                 <div class="cart-count">
                                     <div class="number">
                                         <span class="minus" data-id="{{ $product->id }}">-</span>
-                                        <input type="text" class="open-font" value="{{ $product->quantity }}">
+                                        <input type="text" readonly class="open-font" value="{{ $product->quantity }}">
                                         <span class="plus" data-id="{{ $product->id }}">+</span>
                                     </div>
                                 </div>

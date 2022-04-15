@@ -474,13 +474,13 @@
                             </div>
 
                             <div class="header-action-icon-2" id="old-cart">
-                                <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                <a class="mini-cart-icon" href="#">
                                     <img alt="Nest"
                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                     <span
                                         class="pro-count blue">{{ auth()->user() && auth()->user()->cart? auth()->user()->cart->products()->count(): 0 }}</span>
                                 </a>
-                                <a href="{{ route('cart') }}"><span class="lable">Cart</span></a>
+                                <a href="#"><span class="lable">Cart</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         @php
@@ -511,9 +511,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="shopping-cart-delete del-cart">
-                                                    <a class="d-cart"
-                                                        href="{{ route('cart.remove', $product->id) }}"><i
-                                                            class="fi-rs-cross-small"></i></a>
+                                                    <a class="cart-cross" data-id="{{ $product->id }}"><i class="fi-rs-cross-small"></i></a>
                                                     <small class="del-product-id"
                                                         style="display: none;">{{ $product->id }}</small>
                                                 </div>
@@ -538,7 +536,7 @@
                                             </h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="{{ route('cart') }}" class="outline">View cart</a>
+                                            {{-- <a href="{{ route('cart') }}" class="outline">View cart</a> --}}
                                             <a href="{{ route('checkout') }}">Checkout</a>
                                         </div>
                                     </div>

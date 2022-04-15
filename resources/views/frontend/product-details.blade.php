@@ -209,7 +209,7 @@
                                                         id="up"></i></a>
                                             </div>
                                             <div class="product-extra-link2 ">
-                                                <button type="submit" class="button button-add-to-cart adding"><i
+                                                <button type="submit" class="button button-add-to-cart adding chaldal-add-card" data-id="{{ $product->id }}"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -698,7 +698,7 @@
                                                             <div class="add-cart">
                                                                 <input type="hidden" id="product-id" name="product_id"
                                                                     value="{{ $productData->id }}">
-                                                                <a class="add" id="cart-btn" href="#"
+                                                                <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn" href="#"
                                                                     style=""><i class="fi-rs-shopping-cart mr-5"></i>Add
                                                                 </a>
                                                                 <small class="product-id"
