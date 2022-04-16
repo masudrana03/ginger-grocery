@@ -742,7 +742,7 @@
     <script>
         $(document).ready(function() {
             var cart_count =
-                "{{ auth()->user() && auth()->user()->cart && auth()->user()->cart->products ?? 0 }}";
+                "{{ auth()->user() &&auth()->user()->cart &&auth()->user()->cart->products->count() ?? 0 }}";
             var widthAdd = $("#width-add");
 
             // this code is dufult cart count when cart not null.
@@ -784,6 +784,9 @@
                         tata.success('Success!', 'Product added to your cart.');
                         $('#oldChaldalCart').empty();
                         $('#newChaldalCart').html(result);
+                        var cartT = $("#cart-total").text();
+                        $("#cart-count").text(cartT);
+
                     },
                     error: function(error) {
                         if (error.status == 401) {
@@ -795,24 +798,6 @@
 
             });
 
-            // this code is hide cart & show the side bar cart info.
-            $(document).on('click', '#cross-close', function() {
-                $("#chaldal-cart").hide();
-                widthAdd.removeClass('width-84');
-                $("#side-bar").show();
-                $.ajax({
-                    method: 'GET',
-                    url: "{{ route('cartSidebar') }}",
-                    success: function(result) {
-                        $('#newSidebar').html(result);
-                    },
-                    error: function(error) {
-                        if (error.status == 401) {
-                            window.location.href = "/login";
-                        }
-                    }
-                });
-            });
 
             // For Cart item delete code.
             $(document).on('click', '.cart-cross', function() {
@@ -834,6 +819,12 @@
                         }
                         $('#oldChaldalCart').empty();
                         $('#newChaldalCart').html(result);
+                        var cartT = $("#cart-total").text();
+                        if (cartT == 1) {
+                            $("#cart-count").text(0);
+                        } else {
+                            $("#cart-count").text(cartT);
+                        }
                     },
                     error: function(error) {
                         console.log(error);
@@ -841,6 +832,24 @@
                 });
             });
 
+            // this code is hide cart & show the side bar cart info.
+            $(document).on('click', '#cross-close', function() {
+                $("#chaldal-cart").hide();
+                widthAdd.removeClass('width-84');
+                $("#side-bar").show();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cartSidebar') }}",
+                    success: function(result) {
+                        $('#newSidebar').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            });
 
             // this code is For Cart item value decreased code.
             $(document).on('click', '.minus', function() {
@@ -866,6 +875,7 @@
                 return false;
             });
 
+            // this code is For Cart item value change code.
             function cartQuantityUpdate(id, quantity) {
                 $.ajax({
                     method: 'GET',

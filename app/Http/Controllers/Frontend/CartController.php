@@ -163,7 +163,6 @@ class CartController extends Controller
 
     public function cartUpdate(Request $request)
     {
-        logger('dcbdhcbbh');
         $cartId = auth()->user()->cart->id;
         $product_id = request('id');
         $quantity = request('quantity');

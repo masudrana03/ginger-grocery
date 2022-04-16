@@ -23,7 +23,7 @@ class ViewComposer
     public function compose(View $view)
     {
         if (env('APP_NAME') != '') {
-            $zones = Zone::get();
+            $zones = Zone::where('status', 1)->get();
             $categories = Category::get();
             $view->with([
                 'loadZones' => $zones,
