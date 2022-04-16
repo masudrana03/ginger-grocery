@@ -25,6 +25,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>User Role</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Created At</th>
@@ -76,6 +77,7 @@
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
+                { "data": "type" },
                 { "data": "email" },
                 { "data": "phone" },
                 { "data": "created_at" },

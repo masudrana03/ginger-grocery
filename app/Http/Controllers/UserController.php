@@ -26,10 +26,11 @@ class UserController extends Controller
         $columns = [
             0 => 'id',
             1 => 'name',
-            2 => 'email',
-            3 => 'phone',
-            4 => 'created_at',
-            5 => 'id',
+            2 => 'type',
+            3 => 'email',
+            4 => 'phone',
+            5 => 'created_at',
+            6 => 'id',
         ];
 
         $totalData = User::count();
@@ -68,9 +69,17 @@ class UserController extends Controller
                 $edit   = route('admin.users.edit',$user->id);
                 $delete = route('admin.users.destroy', $user->id);
                 $token  = csrf_token();
+                if ($user->type == 1) {
+                    $type = "Admin";
+                } elseif ($user->type == 2) {
+                    $type = "Store";
+                } elseif ($user->type == 3) {
+                    $type = "Customer";
+                }
 
                 $nestedData['id']         = $user->id;
                 $nestedData['name']       = $user->name;
+                $nestedData['type']       = $type;
                 $nestedData['email']      = $user->email;
                 $nestedData['phone']      = $user->phone;
                 $nestedData['created_at'] = $user->created_at->format('d-m-Y');
@@ -227,5 +236,5 @@ class UserController extends Controller
     }
 
 
-  
+
 }
