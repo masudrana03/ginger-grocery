@@ -102,7 +102,7 @@
                                         <div class="add-cart">
                                             <input type="hidden" id="product-id" name="product_id"
                                                 value="{{ $product->id }}">
-                                            <a class="add" id="cart-btn" href="#" style=""><i
+                                            <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn" href="#" style=""><i
                                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                             <small class="product-id"
                                                 style="display: none;">{{ $product->id }}</small>
@@ -198,7 +198,7 @@
                                         <div class="add-cart">
                                             <input type="hidden" id="product-id" name="product_id"
                                                 value="{{ $product->id }}">
-                                            <a class="add" id="cart-btn" href="#" style=""><i
+                                            <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn" href="#" style=""><i
                                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                             <small class="product-id"
                                                 style="display: none;">{{ $product->id }}</small>
@@ -294,35 +294,7 @@
     });
 </script>
 
-<script>
-    $(document).ready(function() {
-        $(".wishlist-btn").click(function(event) {
-            event.preventDefault();
-            var id = $(this).attr("data-id");
-            var url = "{!! route('wishlist', ':id') !!}";
-            url = url.replace(':id', id);
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    if (result == '401') {
-                            window.location.href = "/login";
-                        }else{
-                            $('#wishlistProductOld').empty();
-                            $('#wishlistProductNew').html(result);
-                            tata.success('Success!', 'Product added to wishlist.');
-                        }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
+
 
 
 

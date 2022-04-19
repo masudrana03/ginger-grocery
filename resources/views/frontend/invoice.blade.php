@@ -61,7 +61,7 @@
                                                 <strong>Order status: {{ $order->status->name }}</strong> <br />
                                                 <strong>Payment status: {{ $order->paymentStatus }}</strong> <br />
                                                 <strong>Payment Method:
-                                                    {{ $order->paymentMethod->provider == 'cash' ? 'Cash In Delivery' : 'Bank Transfet' }}</strong>
+                                                    {{ $order->paymentMethod->provider == 'cash' ? 'Cash In Delivery' : 'Bank Transfer' }}</strong>
                                                 <br />
                                             </p>
                                         </div>
@@ -74,7 +74,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2" style="width:50%; text-align:left;>
+                                    <div class="col-sm-2" style="width:50%; text-align:left;">
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Shipping Information</h4>
                                             <p class="invoice-addr-1">

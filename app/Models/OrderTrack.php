@@ -18,4 +18,22 @@ class OrderTrack extends Model
         'order_id',
         'order_status_id',
     ];
+
+    /**
+     * Get the store associated with the product.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+    
+    /**
+     * Get the store associated with the product.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

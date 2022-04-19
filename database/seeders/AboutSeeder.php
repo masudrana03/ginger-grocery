@@ -14,8 +14,8 @@ class AboutSeeder extends Seeder
      */
     public function run()
     {
-        About::create( [
-            'main_section_tittle'      => 'Welcome to GroceFusion',
+        About::create([
+            'main_section_tittle'      => 'Welcome to Metrocery',
             'main_section_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate id est laborum. ',
             'main_section_image'       => 'About-main.png',
             'section2_tittle'          => 'Your Partner for e-commerce grocery solution',
@@ -25,6 +25,6 @@ class AboutSeeder extends Seeder
             'our_description'          => 'Volutpat diam ut venenatis tellus in metus. Nec dui nunc mattis enim ut tellus eros donec ac odio orci ultrices in. ellus eros donec ac odio orci ultrices in.',
             'mission_description'      => 'Volutpat diam ut venenatis tellus in metus. Nec dui nunc mattis enim ut tellus eros donec ac odio orci ultrices in. ellus eros donec ac odio orci ultrices in.',
             'created_at' => now(),
-        ] );
+        ]);
     }
 }

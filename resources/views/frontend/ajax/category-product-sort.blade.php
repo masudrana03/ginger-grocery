@@ -65,7 +65,7 @@
                         </div>
                         <div class="add-cart">
                             <input type="hidden" id="product-id" name="product_id" value="{{ $product->id }}">
-                            <a class="add" id="cart-btn" href="#" style=""><i
+                            <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn" href="#" style=""><i
                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
                             <small class="product-id" style="display: none;">{{ $product->id }}</small>
                             <input style="display: none;" name="product_id" value="{{ $product->id }}">
@@ -88,45 +88,7 @@
 
 
 <script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $(".add-cart .add").on('click', function(event) {
-            event.preventDefault();
 
-            addCart(event.target);
-        });
-    });
-
-    function addCart(node) {
-        var closest_div = $(node).closest('.add-cart');
-        var id = closest_div.find('.product-id').text();
-        addToCartById(id);
-    }
-
-    function addToCartById(id) {
-        var pid = id;
-        var url = "{!! route('cartById', ':id') !!}";
-        url = url.replace(':id', pid);
-        $.ajax({
-            method: 'GET',
-            url: url,
-            data: {
-                id: pid,
-                quantity:1,
-
-            },
-            success: function(result) {
-                $('#old-cart').empty();
-                $('#new-cart').html(result);
-            },
-            error: function(error) {
-                if (error.status == 401) {
-                    window.location.href = "/login";
-                }
-            }
-        });
-    }
-</script>
 <script>
     $(document).ready(function() {
         $(".compare-btn").click(function(event) {

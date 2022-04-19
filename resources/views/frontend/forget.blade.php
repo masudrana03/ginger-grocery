@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Forget Password')
+@section('title', 'Forget Password |')
 
 @section('content')
 

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Vendor Details')
+@section('title', 'Vendor Details |')
 
 @section('content')
 
@@ -191,7 +191,7 @@
                                                 </div>
                                                 <div class="add-cart">
                                                     <input type="hidden" id="product-id" name="product_id" value="{{$product->id}}" >
-                                                    <a class="add" id="cart-btn"
+                                                    <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn"
                                                         href="#" style=""><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                     <small class="product-id"
@@ -255,7 +255,7 @@
                                                 @endif
                                                 </div>
                                                 <div class="add-cart">
-                                                    <a class="add" href="#"><i
+                                                    <a class="add chaldal-add-card" data-id="{{ $product->id }}" href="#"><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add
                                                     </a>
                                                 </div>
@@ -345,7 +345,7 @@
                                             alt="" /><strong>Address: <strong>Address: </strong>
                                             <span>{{ $store->address }},
                                                 {{ $store->city }} {{ $store->zip }},
-                                                {{ $store->country->name }}</span></li>
+                                                {{ settings('country') }}</span></li>
                                     <li><img class="mr-5"
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-contact.svg') }}"
                                             alt="" /><strong>Call Us:</strong><span> {{ $store->phone }}</span></li>

@@ -1,142 +1,160 @@
 @extends('frontend.layouts.app')
-@section('title', 'Checkout')
+@section('title', 'Checkout |')
 
-<style>
-    span.checkout-quantity {
-        position: absolute;
-        background-color: #3BB77E;
-        width: 25px;
-        border-radius: 15px;
-        text-align: center;
-        color: white;
-        top: 1px;
-        right: 4px;
-    }
+@push('css')
+    <style>
+        span.checkout-quantity {
+            position: absolute;
+            background-color: #3BB77E;
+            width: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            top: 1px;
+            right: 4px;
+        }
 
-    .calculate-total {
-        left: 20px;
-    }
+        .calculate-total {
+            left: 20px;
+        }
 
-    .calculate-total p {
-        padding-bottom: 3px;
-    }
+        .calculate-total p {
+            padding-bottom: 3px;
+        }
 
-    /* .checkout-total{
-       display: flex;
-       justify-content: flex-end;
-   } */
-
-
-    .calculate {
-        text-align: right;
-        padding-left: 50px;
-    }
+        /* .checkout-total{
+                       display: flex;
+                       justify-content: flex-end;
+                   } */
 
 
+        .calculate {
+            text-align: right;
+            padding-left: 50px;
+        }
 
-    .calculate p {
-        padding-bottom: 3px;
-    }
 
-    .product-name p {
-        font-size: 1em;
 
-    }
+        .calculate p {
+            padding-bottom: 3px;
+        }
 
-    /* .form-group{
-      height: 2%;
-      padding-bottom:60px;
-  } */
+        .product-name p {
+            font-size: 1em;
 
-    .form-group input {
-        background: #fff;
-        border: 1px solid #ececec;
-        height: 50px !important;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        padding-left: 10px;
-        font-size: 13px !important;
-        width: 100%;
-    }
+        }
 
-    .custom-select {
-        font-size: 13px !important;
-    }
+        /* .form-group{
+                      height: 2%;
+                      padding-bottom:60px;
+                  } */
 
-    .form-group textarea {
-        font-size: 13px !important;
-    }
+        .form-group input {
+            background: #fff;
+            border: 1px solid #ececec;
+            height: 50px !important;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            padding-left: 10px;
+            font-size: 13px !important;
+            width: 100%;
+        }
 
-    .checkout-button {
-        padding-bottom: 20px;
-    }
+        .custom-select {
+            font-size: 13px !important;
+        }
 
-    .form-check {
-        margin-left: 30px;
+        .form-group textarea {
+            font-size: 13px !important;
+        }
 
-    }
+        .checkout-button {
+            padding-bottom: 20px;
+        }
 
-    .checkout-products-marketplace {
-        margin-bottom: -2.2%;
-    }
+        .form-check {
+            margin-left: 30px;
 
-    textarea {
-        min-height: 80px !important;
-    }
+        }
 
-    li.list-group-item {
-        padding: 2px;
-    }
+        .checkout-products-marketplace {
+            margin-bottom: -2.2%;
+        }
 
-    .pri {
-        text-align: right;
-        margin-top: 19px;
+        textarea {
+            min-height: 80px !important;
+        }
 
-    }
+        li.list-group-item {
+            padding: 2px;
+        }
 
-    .address-checklist {
-        padding-top: 10px;
-    }
+        .pri {
+            text-align: right;
+            margin-top: 19px;
 
-    .check-link {
-        border-radius: 10px !important;
-    }
+        }
 
-    .total-amount {
-        padding-right: 8%;
-    }
+        .address-checklist {
+            padding-top: 10px;
+        }
 
-    .alert-danger {
-        width: 100% !important;
-        border-radius: 10px !important;
-        border-color: #ffd170 !important;
-        background-color: #fff1d3 !important;
-        text-align: center;
-        font-size: 20px !important;
-        color: #7c7c7c !important;
-        position: relative !important;
-        padding: 0.8rem !important;
-        margin-bottom: 1rem !important;
-        border: 1px solid transparent !important;
-        font-weight: 700 !important;
-    }
+        .check-link {
+            border-radius: 10px !important;
+        }
 
-    .alert-success {
-        width: 100% !important;
-        border-radius: 10px !important;
-        border-color: #3BB77E !important;
-        background-color: #CDF0E0 !important;
-        text-align: center;
-        font-size: 20px !important;
-        color: #7c7c7c !important;
-        position: relative !important;
-        padding: 0.8rem !important;
-        margin-bottom: 1rem !important;
-        border: 1px solid transparent !important;
-        font-weight: 700 !important;
-    }
+        .total-amount {
+            padding-right: 8%;
+        }
 
-</style>
+        .alert-danger {
+            width: 100% !important;
+            border-radius: 10px !important;
+            border-color: #ffd170 !important;
+            background-color: #fff1d3 !important;
+            text-align: center;
+            font-size: 20px !important;
+            color: #7c7c7c !important;
+            position: relative !important;
+            padding: 0.8rem !important;
+            margin-bottom: 1rem !important;
+            border: 1px solid transparent !important;
+            font-weight: 700 !important;
+        }
+
+        .alert-success {
+            width: 100% !important;
+            border-radius: 10px !important;
+            border-color: #3BB77E !important;
+            background-color: #CDF0E0 !important;
+            text-align: center;
+            font-size: 20px !important;
+            color: #7c7c7c !important;
+            position: relative !important;
+            padding: 0.8rem !important;
+            margin-bottom: 1rem !important;
+            border: 1px solid transparent !important;
+            font-weight: 700 !important;
+        }
+
+
+        #custom .select2-container--default .select2-selection--single {
+
+            height: 48px !important;
+            width: 125px !important;
+        }
+
+        #custom .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 47px !important;
+            text-align: center !important;
+        }
+
+        #custom .select2-container--default .select2-selection--single .select2-selection__arrow {
+            right: 30px;
+        }
+
+    </style>
+@endpush
 
 @section('content')
     <div class="page-header breadcrumb-wrap">
@@ -261,17 +279,18 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group  col-lg-2 ">
+                            <div class="form-group  col-lg-2 " id="custom">
                                 <select name="phone_code" class="select-two form-control @error('') is-invalid @enderror">
                                     @foreach ($countries as $countryName)
-                                        <option value="{{ $countryName->id }}">
+                                        <option value="{{ $countryName->id }}"
+                                            {{ settings('country') == $countryName->name ? 'selected' : '' }}>
                                             {{ $countryName->phone_code }}
                                             {{ $countryName->iso2 }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6" id="phone_code">
                                 <input required="" type="text" name="phone" placeholder="Phone *"
                                     class="@error('phone') is-invalid @enderror">
                                 @error('phone')
@@ -291,6 +310,24 @@
                                 </span>
                             @enderror
                         </div>
+
+                        {{-- set primary address --}}
+
+                        <div class="row">
+
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_primary" type="checkbox" value="1"
+                                    id="primary-address">
+                                <label class="form-check-label" for="primary-address">
+                                    Set as primary address
+                                </label>
+                            </div>
+
+                        </div>
+
+                        {{-- set primary address --}}
+
+
                     </form>
                 </div>
 
@@ -439,7 +476,8 @@
                                         </div>
 
                                         <div class="col">
-                                            <p class="pri">{{ $currency }} {{ $item->discount_price * $item->quantity }}</p>
+                                            <p class="pri">{{ $currency }}
+                                                {{ $item->discount_price * $item->quantity }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -504,11 +542,15 @@
                         <p class="total-amount"> {{ $currency }}{{ $shipping }} </p>
                         <p class="total-amount"> {{ $currency }}{{ $tax }} </p>
                         @if (session('totalAfterDiscount'))
-                        <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
-                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                            <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p>
+                            <h5 class="total-amount grandTotal">
+                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
+                            </h5>
                         @else
-                        {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
-                        <h5 class="total-amount grandTotal">{{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}</h5>
+                            {{-- <p class="total-amount discount">{{ $currency }}{{ session('discountAmount') }}</p> --}}
+                            <h5 class="total-amount grandTotal">
+                                {{ $currency }}{{ $shipping + $tax + $grandSubtotal - session('discountAmount') }}
+                            </h5>
                         @endif
                     </div>
                 </div>
@@ -522,12 +564,19 @@
 @endsection
 
 @push('script')
-<script>
-    $(document).ready(function() {
-        $("#promoCode").click(function(event) {
-            event.preventDefault();
-            var promoId = $('#promoId').val();
-            $.ajaxSetup({
+    <script>
+        $(document).ready(function() {
+            var currentUrl = window.location.href;
+            var checkUrl = "{{ url('/checkout') }}";
+
+            if (currentUrl == checkUrl) {
+                $('#newsletterSection').empty();
+            }
+
+            $("#promoCode").click(function(event) {
+                event.preventDefault();
+                var promoId = $('#promoId').val();
+                $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
@@ -543,13 +592,13 @@
                         if (response == '1') {
                             $('#promoError').html(
                                 '<div class="alert alert-danger">Invalid promo code !</div>'
-                                );
+                            );
                             return;
                         }
                         if (response == '4') {
                             $('#promoError').html(
                                 '<div class="alert alert-danger">Please enter your promo code</div>'
-                                );
+                            );
                             return;
                         }
                         if (response == '0') {
@@ -560,12 +609,12 @@
                         if (response == '2') {
                             $('#noCartError').html(
                                 '<div class="alert alert-danger">Buy more mroducts to get discount</div>'
-                                );
+                            );
                             return;
                         } else {
                             $('#promoError').html(
                                 '<div class="alert alert-success">Promo code applied successfully</div>'
-                                );
+                            );
                             $('#oldCheckoutProducts').hide();
                             $('#newCheckoutProducts').html(response);
                         }

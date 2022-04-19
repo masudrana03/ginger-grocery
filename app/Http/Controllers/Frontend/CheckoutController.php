@@ -35,6 +35,14 @@ class CheckoutController extends Controller
         return view('frontend.checkout', compact('paymentMethods', 'countries', 'savedAddress'));
     }
 
+
+    public function checkoutSlip(){
+        $order = Order::with('details.product', 'user', 'store')->find(2);
+        return view('frontend.post-checkout', compact('order'));
+    }
+
+
+
     /**
      * Apply promo
      *
@@ -42,14 +50,15 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-        if( $request->code == null ) {
+        // return $request->all();
+        if ($request->code == null) {
             return '4';
         }
         $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
         // return count($cartProducts);
 
-        if ( count($cartProducts) == 0 ) {
+        if (count($cartProducts) == 0) {
             return '0';
             // return back()->with('error', 'Your card is empty');
         }
@@ -74,7 +83,7 @@ class CheckoutController extends Controller
 
         // return [$discountAmount  ,$totalAfterDiscount];
 
-        if( $discountAmount >= $totalAfterDiscount ){
+        if ($discountAmount >= $totalAfterDiscount) {
             return '2';
         }
 
@@ -83,6 +92,19 @@ class CheckoutController extends Controller
 
         // return back()->with('success', 'Coupon applied');
         // return ['status' => 'success', 'total' => $totalAfterDiscount, 'discount' => $discountAmount];
+        if ($request->cupon) {
+            // return 'hello';
+            $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
+            $subtotal = 0;
+
+            foreach ($carts as $cart) {
+                $subtotal += priceCalculator($cart)['subtotal'];
+            }
+
+            $tax = taxCalculator($subtotal);
+
+            return view('frontend.ajax.update-cart-div', compact('subtotal', 'tax'));
+        }
 
         return view('frontend.ajax.checkout');
     }
@@ -103,7 +125,7 @@ class CheckoutController extends Controller
 
         $userAddress = Address::where('id', $request->address_id)->first();
 
-        if (! $userAddress) {
+        if (!$userAddress) {
             $this->validate($request, [
                 'name'       => 'required',
                 'email'      => 'required',
@@ -114,6 +136,14 @@ class CheckoutController extends Controller
                 'phone'      => 'required',
             ]);
         }
+
+        $is_primary = 0;
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+        }
+
+
 
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
@@ -127,8 +157,8 @@ class CheckoutController extends Controller
 
         $shippingId = $request->address_id;
 
-        if (! $userAddress) {
-            $shippingId = $this->createShippingAddress($request);
+        if (!$userAddress) {
+            $shippingId = $this->createShippingAddress($request, $is_primary);
         }
 
         // $invoiceId = $this->createOrder($cart, $shippingId, $shippingId);
@@ -145,11 +175,12 @@ class CheckoutController extends Controller
         $cart->products()->detach();
         $cart->delete();
 
+
         // give points if match any condition
         //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
-        //  $this->sendOrderConfirmationEmail($invoiceId);
+         $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
         return $this->acceptPayment($provider->provider, $orderReference);
@@ -197,8 +228,17 @@ class CheckoutController extends Controller
      * @param Request $request
      * @return void
      */
-    public function createShippingAddress(Request $request)
+    public function createShippingAddress(Request $request, $is_primary)
     {
+        if ($is_primary == 1) {
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        }
+
         $address = new Address();
         $address->name = $request->name;
         $address->email = $request->email;
@@ -211,12 +251,11 @@ class CheckoutController extends Controller
         $address->zip = $request->zip;
         $address->user_id = auth()->id();
         $address->type = 2;
+        $address->is_primary = $is_primary ?? 0;
         $address->save();
 
         return $address->id;
     }
-
-
     public function updateSavedShippingAddress(Request $request)
     {
         $userAddress = Address::where('id', $request->address_id);
@@ -265,7 +304,7 @@ class CheckoutController extends Controller
         // DB::beginTransaction();
 
         //try {
-        $orderStatus = OrderStatus::whereName('Pending')->first();
+        $orderStatus = OrderStatus::whereName('Order Placed')->first();
 
         if (!$orderStatus) {
             return back()->with('error', 'Order status not found');
@@ -319,10 +358,11 @@ class CheckoutController extends Controller
         session()->forget('discountAmount');
 
         return $order->invoice_id;
+
         //} catch (Exception $e) {
-           // DB::rollback();
-            //logger($e->getMessage());
-            //return api()->error('Something went wrong');
+        // DB::rollback();
+        //logger($e->getMessage());
+        //return api()->error('Something went wrong');
         //}
     }
 
@@ -359,11 +399,8 @@ class CheckoutController extends Controller
         (new EmailFactory())->initializeEmail($emailDetails);
     }
 
-    public function ajaxShippingCalculation(Request $request){
+    public function ajaxShippingCalculation(Request $request)
+    {
         $address_id = request('address_id');
-
-
-
-
     }
 }

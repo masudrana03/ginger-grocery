@@ -9,11 +9,14 @@ class LoginController extends Controller
 {
     public function login()
     {
-      return view('backend.auth.login');
+        if (auth()->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return view('backend.auth.login');
     }
 
     public function register()
     {
-      return view('backend.auth.register');
+        return view('backend.auth.register');
     }
 }

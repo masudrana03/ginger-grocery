@@ -52,7 +52,7 @@
 
 </style>
 
-<div class="header-action-icon-2">
+<div class="header-action-icon-2" >
     <a class="mini-cart-icon" href="{{ route('cart') }}">
         <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
         <span
@@ -123,7 +123,7 @@
 </div>
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(".del-cart .d-cart").on('click', function(event) {
             event.preventDefault();
@@ -179,4 +179,4 @@
 
 
 
-</script>
+</script> --}}

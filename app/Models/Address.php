@@ -26,6 +26,7 @@ class Address extends Model
         'city',
         'zip',
         'type',
+        'is_primary',
     ];
 
     public function scopeBilling($query)

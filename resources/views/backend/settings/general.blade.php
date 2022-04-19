@@ -101,7 +101,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input type="hidden" name="currency" id="currency">
+                                <input type="text" hidden name="currency" id="currency" value="{{ old('currency') ?? settings('currency') }}">
                                 <div class="form-group">
                                     <label for="country">Country</label>
                                     <select name="country"
@@ -176,7 +176,6 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -253,9 +252,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-
-                              
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -416,6 +412,7 @@
         $(".country").change(function() {
             var symbol = $(this).find(':selected').attr('data-id');
             $("#currency").val(symbol);
+
         });
         // image upload js code
         function showLogo(fileInput) {

@@ -61,7 +61,7 @@
                                 <div class="add-cart">
                                     <input type="hidden" id="product-id" name="product_id"
                                         value="{{ $item->id }}">
-                                    <a class="add btn btn-sm" id="cart-btn" href="#" style=""><i
+                                    <a class="add btn btn-sm chaldal-add-card" data-id="{{ $item->id }}" id="cart-btn" href="#" style=""><i
                                             class="fi-rs-shopping-cart mr-5"></i>Add to cart </a>
                                     <small class="product-id"
                                         style="display: none;">{{ $item->id }}</small>
@@ -93,46 +93,5 @@
 </div>
 <div id="newWishlistProductTable"></div>
 
-
-<script src="{{ asset('assets/frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
-
-<script>
-    $(document).ready(function() {
-        $(".wishlist-btn-delete").click(function(event) {
-            event.preventDefault();
-
-        var id = $(this).attr("data-id");
-        var url = "{!! route('wishlist.remove', ':id') !!}";
-        url = url.replace(':id', id);
-
-            $.ajax({
-                method: 'GET',
-                url: url,
-                data: {
-                    id: id,
-                },
-                success: function(result) {
-                    $('#wishlistProductOld').empty();
-                    $('#wishlistProductNew').html(result);
-                    tata.success('Success!', 'Product removed from  wishlist.');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-            $.ajax({
-                    method: 'GET',
-                    url: "{{ route('wishlistByDefaultId.remove') }}",
-                    success: function(result) {
-                        $('#oldWishlistProductTable').empty();
-                        $('#newWishlistProductTable').html(result);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-        });
-    });
-</script>
 
 

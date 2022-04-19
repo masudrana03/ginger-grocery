@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Contact')
+@section('title', 'Contact |')
 <style>
     /* .select2-container .select2-selection--single {
   box-sizing: border-box;
@@ -15,6 +15,17 @@
   border: 1px solid #d6dcdf8a;
   border-radius: 8px;
 } */
+
+.select2-container--default .select2-selection--single{
+    width: 180px !important;
+    height: 46px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 43px !important;
+    text-align: center !important;
+
+}
 
 </style>
 @section('content')
@@ -218,6 +229,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

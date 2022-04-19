@@ -21,57 +21,63 @@ class CartController extends Controller
             'product_id' => 'required',
             'quantity'   => 'required',
         ]);
+
         $product = Product::find($request->product_id);
 
         if (!$product) {
             return back()->with('error', 'Product not found');
-        } else {
-            $cart = Cart::where('user_id', auth()->id())->first();;
+        }
 
-            if (!$cart) {
-                $cart          = new Cart();
-                $cart->user_id = auth()->id();
-                $cart->save();
+        $cart = Cart::where('user_id', auth()->id())->first();
 
-                $cart->products()->sync([
-                    $product->id => [
-                        'quantity' => 1,
-                        'options'  => $request->options ? json_encode($request->options) : null,
-                    ],
-                ], false);
+        if (!$cart) {
+            $cart          = new Cart();
+            $cart->user_id = auth()->id();
+            $cart->save();
 
-                return view("frontend.ajax.cart");
+            $cart->products()->sync([
+                $product->id => [
+                    'quantity' => 1,
+                    'options'  => $request->options ? json_encode($request->options) : null,
+                ],
+            ], false);
+
+            return view("frontend.ajax.chaldal-cart");
+        }
+
+        $cartId = auth()->user()->cart->id;
+        $product_id = $request->product_id;
+        $quantity = request('quantity');
+
+        $searching_product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->first();
+
+        if ($searching_product) {
+            $current_qty = $searching_product->quantity;
+            $update_qty = $current_qty + $quantity;
+
+            if ($update_qty <= 10) {
+                $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
+                return view("frontend.ajax.chaldal-cart");
             } else {
-
-                $cartId = auth()->user()->cart->id;
-                $product_id = $request->product_id;
-                $quantity = request('quantity');
-
-                $searching_product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->first();
-
-                if ($searching_product) {
-                    $quantity = request('quantity');
-                    $current_qty = $searching_product->quantity;
-                    $update_qty = $current_qty + $quantity;
-                    //return $current_qty;
-                    if ($update_qty <= 10) {
-                        $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
-                        return view("frontend.ajax.cart");
-                    } else {
-                        return view("frontend.ajax.cart");
-                    }
-                } else {
-                    $cart->products()->sync([
-                        $product->id => [
-                            'quantity' => $request->quantity,
-                            'options'  => $request->options ? json_encode($request->options) : null,
-                        ],
-                    ], false);
-
-                    return view("frontend.ajax.cart");
-                }
+                return view("frontend.ajax.chaldal-cart");
             }
         }
+
+        $cart->products()->sync([
+            $product->id => [
+                'quantity' => $request->quantity,
+                'options'  => $request->options ? json_encode($request->options) : null,
+            ],
+        ], false);
+
+        return view("frontend.ajax.chaldal-cart");
+    }
+
+
+
+
+    public function productQuantityUpdate(Request $request)
+    {
     }
 
 
@@ -97,7 +103,28 @@ class CartController extends Controller
         return $this->addToCart($request);
     }
 
-    public function cart()
+    /**
+     * this function is used to remove cart & show the cart sidebar
+     */
+    public function cartSidebar()
+    {
+        $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
+
+        $subtotal = 0;
+        $total = auth()->user()->cart->products()->count();
+
+        foreach ($carts as $cart) {
+            $subtotal += priceCalculator($cart)['subtotal'];
+        }
+
+        $tax = taxCalculator($subtotal);
+
+        return view("frontend.ajax.chaldal-sidebar", compact('total', 'subtotal', 'tax'));
+    }
+
+
+
+    public function cart(Request $request)
     {
         $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
 
@@ -109,8 +136,30 @@ class CartController extends Controller
 
         $tax = taxCalculator($subtotal);
 
-        return view('frontend.cart', compact('subtotal', 'tax'));
+        $cart = request()->segment(1);
+
+        return view('frontend.ajax.chaldal-cart', compact('subtotal', 'tax', 'cart'));
     }
+
+
+    // public function cart(Request $request)
+    // {
+    //     $carts = auth()->user()->cart ? auth()->user()->cart->products->groupBy('store_id') : [];
+
+    //     $subtotal = 0;
+
+    //     foreach ($carts as $cart) {
+    //         $subtotal += priceCalculator($cart)['subtotal'];
+    //     }
+
+    //     $tax = taxCalculator($subtotal);
+
+    //     $cart = request()->segment(1);
+    //     // dd($cart);
+
+    //     // $cart = request()->segment(1);
+    //     return view('frontend.cart', compact('subtotal', 'tax', 'cart'));
+    // }
 
     public function cartUpdate(Request $request)
     {
@@ -120,6 +169,7 @@ class CartController extends Controller
         if ($quantity <= 10 || $quantity >= 1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
+        return view("frontend.ajax.chaldal-cart");
     }
 
     /**
@@ -140,15 +190,16 @@ class CartController extends Controller
         $pro_id = $id;
         $product = Product::find($pro_id);
         $product->carts()->detach();
-
-        return view('frontend.ajax.cart');
+        if (auth()->user()->cart->products->count() == 0) {
+            auth()->user()->cart->delete();
+            return '1';
+        }
+        return view('frontend.ajax.chaldal-cart');
     }
 
     /**
      * @param $id
      */
-
-
     public function removeItemFromDiv(Request $request, $id)
     {
 
@@ -165,3 +216,63 @@ class CartController extends Controller
         return view('frontend.ajax.update-cart-div', compact('subtotal', 'tax'));
     }
 }
+
+
+// public function addToCart(Request $request)
+//     {
+//         $request->validate([
+//             'product_id' => 'required',
+//             'quantity'   => 'required',
+//         ]);
+//         $product = Product::find($request->product_id);
+
+//         if (!$product) {
+//             return back()->with('error', 'Product not found');
+//         } else {
+//             $cart = Cart::where('user_id', auth()->id())->first();
+
+//             if (!$cart) {
+//                 $cart          = new Cart();
+//                 $cart->user_id = auth()->id();
+//                 $cart->save();
+
+//                 $cart->products()->sync([
+//                     $product->id => [
+//                         'quantity' => 1,
+//                         'options'  => $request->options ? json_encode($request->options) : null,
+//                     ],
+//                 ], false);
+
+//                 return view("frontend.ajax.chaldal-cart");
+//             } else {
+
+//                 $cartId = auth()->user()->cart->id;
+//                 $product_id = $request->product_id;
+//                 $quantity = request('quantity');
+
+//                 $searching_product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->first();
+
+//                 if ($searching_product) {
+//                     $quantity = request('quantity');
+//                     $current_qty = $searching_product->quantity;
+//                     $update_qty = $current_qty + $quantity;
+//                     //return $current_qty;
+//                     if ($update_qty <= 10) {
+//                         $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
+//                         return view("frontend.ajax.chaldal-cart");
+//                     } else {
+//                         return view("frontend.ajax.chaldal-cart");
+//                     }
+//                 } else {
+//                     $cart->products()->sync([
+//                         $product->id => [
+//                             'quantity' => $request->quantity,
+//                             'options'  => $request->options ? json_encode($request->options) : null,
+//                         ],
+//                     ], false);
+
+//                     return view("frontend.ajax.chaldal-cart");
+//                 }
+//             }
+//         }
+//     }

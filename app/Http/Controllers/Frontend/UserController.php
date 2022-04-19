@@ -11,6 +11,7 @@ use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -52,28 +53,45 @@ class UserController extends Controller
      *
      * @param $request
      */
-    public function addAddress( Request $request )
+    public function addAddress(Request $request)
     {
-    //    return $request;
+        //    return $request;
 
-       $this->validate($request, [
-        'name'       => 'required',
-        'phone'      => 'required',
-        'email'      => 'required',
-        'address'    => 'required',
-        'city'       => 'required',
-        'zip'        => 'required',
-    ]);
+        $this->validate($request, [
+            'name'       => 'required',
+            'phone'      => 'required',
+            'email'      => 'required',
+            'address'    => 'required',
+            'city'       => 'required',
+            'zip'        => 'required',
+        ]);
 
         $requestInfo = $request->all();
 
         $requestInfo['user_id'] = auth()->id();
 
-        if ( $request->type == 'billing' ) {
+        if ($request->type == 'billing') {
             $requestInfo['type'] = 1;
-        }else{
+        } else {
             $requestInfo['type'] = 2;
         }
+
+
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+            $request_info['is_primary'] = $is_primary;
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        } else {
+            $is_primary = 0;
+            $request_info['is_primary'] = $is_primary;
+        }
+
 
         Address::create($requestInfo);
 
@@ -85,7 +103,7 @@ class UserController extends Controller
      *
      * @param $request
      */
-    public function updateAddress( Request $request, $id )
+    public function updateAddress(Request $request, $id)
     {
         // return $request;
 
@@ -102,10 +120,24 @@ class UserController extends Controller
 
         $requestInfo = $request->all();
 
-        if ( $request->type == 'billing' ) {
+        if ($request->type == 'billing') {
             $requestInfo['type'] = 1;
-        }else{
+        } else {
             $requestInfo['type'] = 2;
+        }
+
+        if ($request->has('is_primary')) {
+            $is_primary  = 1;
+            $request_info['is_primary'] = $is_primary;
+            $all_address = Address::where('user_id', auth()->id())->get();
+
+            foreach ($all_address as $address) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+        } else {
+            $is_primary = 0;
+            $request_info['is_primary'] = $is_primary;
         }
 
         $addressId->update($requestInfo);
@@ -123,18 +155,18 @@ class UserController extends Controller
     {
         $address = Address::find($Id);
 
-        if( count($address->shippingOrders) > 0 ) {
+        if (count($address->shippingOrders) > 0) {
             // can't delete
-            return back()->with( 'error', 'This address have placed order');
+            return back()->with('error', 'This address have placed order');
         }
-        if( count($address->billingOrders) > 0 ) {
+        if (count($address->billingOrders) > 0) {
             // can't delete
-            return back()->with( 'error', 'This address have placed order');
+            return back()->with('error', 'This address have placed order');
         }
 
         $address->delete();
 
-        return back()->with( 'success', 'Address successfully deleted');
+        return back()->with('success', 'Address successfully deleted');
     }
 
 
@@ -143,7 +175,7 @@ class UserController extends Controller
      *
      * @param $id
      */
-    public function getInvoice( $OrderId )
+    public function getInvoice($OrderId)
     {
         $order = Order::with('details.product', 'user', 'store')->find($OrderId);
 
@@ -154,22 +186,25 @@ class UserController extends Controller
 
     public function getTrackOrders(Request $request)
     {
-        if ( $request->has('invoice_id')) {
+        if ($request->has('invoice_id')) {
             // return $request;
             $request->validate([
-            'invoice_id' => 'required',
-            'email'    => 'required',
-        ]);
-        //  return "test done";
+                'invoice_id' => 'required',
+            ]);
+            //  return "test done";
             $order = '';
-            $email  = auth()->user()->email ;
-            if ( $email == $request->email ){
+            $userId  = auth()->user()->id;
+
+
+            $checkUserId = Order::where('user_id', $userId)->get();
+
+
+            if (!$checkUserId = '') {
 
                 $order = Order::where('invoice_id', $request->invoice_id)->first();
-
             }
 
-            if ( $order == ''){
+            if ($order == '') {
                 return '0';
             }
 
@@ -181,7 +216,7 @@ class UserController extends Controller
 
 
 
-            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus'));
+            return view('frontend.ajax.order-track', compact('orderStatus', 'currentStatus', 'order'));
             // return [$orderStatus, $currentStatus];
 
 
@@ -190,10 +225,10 @@ class UserController extends Controller
 
 
         }
-        // $user  = auth()->user();
+        $user  = auth()->user();
         // $orders = Order::with('status')->where('user_id', $user->id)->get();
 
-        return view('frontend.users.track-order');
+        return view('frontend.users.track-order', compact('user'));
     }
 
     public function getProfile()
@@ -209,11 +244,12 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
+        // return $request;
         $this->validate($request, [
-            $request->name => 'required',
-            $request->email => 'required',
-            $request->phone => 'required',
-            $request->date_of_birth => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'date_of_birth' => 'required',
         ]);
 
         auth()->user()->update($request->all());
@@ -221,7 +257,8 @@ class UserController extends Controller
         return back();
     }
 
-    public function changePassword(){
+    public function changePassword()
+    {
 
         $user = auth()->user();
 
@@ -231,7 +268,8 @@ class UserController extends Controller
     /**
      * @param $request
      */
-    public function updatePassword(Request $request){
+    public function updatePassword(Request $request)
+    {
 
         //return $request->all();
         $this->validate($request, [
@@ -251,4 +289,61 @@ class UserController extends Controller
         return back()->with('success', 'Password changed successfully');
     }
 
+    public function updateProfileImage(Request $request)
+    {
+        $user = auth()->user();
+
+        $filename = '';
+
+        if ($request->hasFile('profile_image')) {
+            $imageDirectory = 'assets/img/uploads/users/';
+
+            deleteImage($user->image, $imageDirectory);
+
+            $image             = $request->file('profile_image');
+            $filename          = generateUniqueFileName($image->getClientOriginalExtension());
+            $location          = public_path('assets/img/uploads/users/' . $filename);
+            $thumbnailLocation = public_path('assets/img/uploads/users/thumbnail/' . $filename);
+
+            saveImageWithThumbnail($image, $location, $thumbnailLocation);
+        }
+
+        $request = $request->all();
+
+        if ($filename != '') {
+            $request['image'] = $filename;
+        }
+
+        $user->update($request);
+
+        toast('Profile Image successfully updated', 'success');
+
+        return redirect()->route('user.dashboard');
+    }
+
+    public function setPrimaryAddress(Request $request, $id)
+    {
+        $user = auth()->user();
+        $billingAddresses = auth()->user()->billingAddresses;
+        $shippingAddresses = auth()->user()->shippingAddress;
+        $countries = Country::all();
+        $request_info = $request->all();
+
+        // $request_info['is_primary'] = 1;
+
+        $primaryAddress = Address::find($id);
+        $addresses = Address::all();
+
+        foreach ($addresses as $address) {
+            if ($address->id != $id) {
+                $address->is_primary = 0;
+                $address->save();
+            }
+
+            $primaryAddress->is_primary = 1;
+            $primaryAddress->save();
+        }
+
+        return view("frontend.ajax.primary-address", compact('user', 'billingAddresses', 'shippingAddresses', 'countries'));
+    }
 }

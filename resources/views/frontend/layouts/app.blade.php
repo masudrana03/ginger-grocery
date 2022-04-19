@@ -5,7 +5,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
+    {{-- <title>  @yield('title') | {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title> --}}
+    <title> @yield('title', '') {{ settings('company_name') ?? config('app.name', 'Metrocery') }}</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -24,9 +25,7 @@
     {{-- bootstrap cdn link --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
@@ -53,6 +52,7 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <link src="{{ asset('assets/tata_toster/index.js') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/chaldal-cart.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/frontend/css/track-oder.css') }}" /> --}}
 
     <style>
@@ -65,57 +65,84 @@
             background: #29A56C !important;
         }
 
-        /* .material-icons{
-            color: #FDC040!important;
-        } */
-
     </style>
+    @stack('css')
 
 </head>
 
 <body>
     @include('frontend.partials.nav')
     <div id="app" class="app">
-        @yield('content')
+        <main id="width-add" class="main">
+            @yield('content')
+        </main>
     </div>
-    <footer class="main">
-        <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
-            <div class="container">
-                @php
-                    $actonFooter = $callToActions->find(6);
-                @endphp
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="position-relative newsletter-inner">
-                            <div class="newsletter-content">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <h2 class="mb-20">
 
-                                            {{ $actonFooter->action_tittle }}
+    <!-- Chaldal Card system  Start-->
+    {{-- <div id="oldChaldalCart">
+        <div class="col-lg-2 primary-sidebar chaldal" id="chaldal-cart">
 
-
-                                        </h2>
+            <div class="card-widget range mb-30">
+                <button type="button" class="btn-close close-cross" id="cross-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <h5 class="section-title style-1 mb-30">Cart</h5>
+                <div>
+                    @foreach (auth()->user()->cart->products ?? [] as $product)
+                        <div class="row mb-3 margin-minus20">
+                            <a class="cart-cross" href="#"><i class="fi-rs-cross-small"></i></a>
+                            <div class="col-md-5 col-xs-5 "><a href="#" class="d-block text-center"><img
+                                        src="{{ asset('assets/img/uploads/products/featured/' . $product->featured_image) }}"
+                                        alt="product-image" class="cart-product-image"></a></div>
+                            <div class="col-md-7 col-xs-7 ps-0 margin-minus">
+                                <span class="product-subtitle">Each units {{ settings('currency') }}{{ $product->price}} x {{ $product->quantity }}</span>
+                                <a href="{{ route('products', $product->slug) }}" class="product-name">{{ ucwords(strtolower($product->name))}}</a>
+                                <h6 class="price-title"><span class="price-font">{{ settings('currency') }}</span>{{ $product->price }} </h6>
+                                <div class="cart-count">
+                                    <div class="number">
+                                        <span class="minus">-</span>
+                                        <input type="text" class="open-font" value="1">
+                                        <span class="plus">+</span>
                                     </div>
                                 </div>
-
-                                <p class="mb-45">Start You'r Daily Shopping with <span
-                                        class="text-brand">{{ settings('company_name') }}</span></p>
-                                <form class="form-subcriber d-flex">
-                                    <input type="email" placeholder="Your emaill address" />
-                                    <button class="btn" type="submit">Subscribe</button>
-                                </form>
                             </div>
-                            {{-- <img src="{{ asset('assets/frontend/imgs/banner/banner-9.png') }}" alt="newsletter" /> --}}
-                            <img src="{{ asset('assets/img/uploads/actions/' . $actonFooter->image) }}"
-                                alt="newsletter" />
+                        </div>
+                    @endforeach
+                </div>
+                <div class="card-details card-page">
+                    <!-- <hr /> -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="card-sub">Subtotal <span class="card-value">$ 59.99</span></h4>
+                            <h4 class="card-tax">Tax <span class="card-value">$ 0.99</span></h4>
+                            <h4 class="card-total">Total <span class="ms-auto">$ 60.99</span></h4>
+                            <!-- <h5 class="bg-greylight p-4 rounded-6 mt-3 mb-3 w-100 fw-600 text-grey-500 font-xssss d-flex">Apply Promo Code : <span class="ms-auto fw-700 text-grey-900">2 Promos</span></h5> -->
                         </div>
                     </div>
+
+                    <!-- <a href="#" class="w-100 bg-current text-white rounded-6 text-center btn" id="checkout">Checkout</a> -->
+                    <a href="{{ route('checkout') }}" class="btn btn-sm btn-default">Checkout</a>
                 </div>
-
-
             </div>
-        </section>
+        </div>
+
+        <div class="icon-bar" id="side-bar">
+            <a href="#" class="facebook"><img alt="Nest"
+                    src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"></a>
+            <span>{{ auth()->user() && auth()->user()->cart ? auth()->user()->cart->products->count(): 0 }} items</span>
+            <h6 style="color:#000">$ 36</h6>
+        </div>
+    </div> --}}
+
+    <div id="newChaldalCart"> </div>
+
+    <!-- Chaldal Card system  End-->
+
+    <footer id="width-add" class="main">
+        @if (url()->current() == url('/'))
+            @include('frontend.partials.footer-newsletter')
+        @else
+            <p></p>
+        @endif
         <section class="featured section-padding">
             <div class="container">
                 <div class="row">
@@ -288,7 +315,8 @@
                         <h4 class="widget-title">Popular Categories</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             @foreach ($loadCategories->random(7) as $category)
-                                <li><a href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a></li>
+                                <li><a href="{{ route('categories', $category->slug) }}">{{ $category->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -386,7 +414,8 @@
     <script src="{{ asset('assets/frontend/js/plugins/leaflet.js') }}"></script>
     <!-- Template  JS -->
     <script src="{{ asset('assets/frontend/js/main.js?v=3.21') }}"></script>
-    <script src="{{ asset('assets/frontend/js/shop.js?v=3.2') }}"></script>
+    <script src="{{ asset('assets/frontend/js/shop.js?v=8.4') }}"></script>
+    <script src="{{ asset('assets/frontend/js/chalda.js?v=8') }}"></script>
 
 
 
@@ -485,10 +514,11 @@
             })
         </script>
     @endif
+
     @if (session()->has('success'))
         <script>
             $(document).ready(function() {
-                swal("Ops!", "{{ session('error') }}", "success");
+                swal("Success!", "{{ session('success') }}", "success");
             })
         </script>
     @endif
@@ -500,6 +530,7 @@
             })
         </script>
     @endif
+
     <script>
         let old_data = $('#app').html();
         let loading = `<section class="product-tabs section-padding position-relative">
@@ -524,7 +555,15 @@
                     loadHome(search);
                     $('#app').html(loading);
                 } else {
-                    $('#app').html(old_data);
+                    // Check the url, If prodiuct page, reload the page
+                    // location.reload();
+                    var currentUrl = window.location.href;
+                    var checkUrl = currentUrl.search("/products/");
+                    if (checkUrl != -1 && search.length == 0) {
+                        location.reload();
+                    } else {
+                        $('#app').html(old_data);
+                    }
                 }
             });
 
@@ -562,6 +601,8 @@
             });
         }
     </script>
+
+
 
     <script>
         $(document).ready(function() {
@@ -629,11 +670,13 @@
 
     <script>
         $(document).ready(function() {
-            $(".wishlist-btn").click(function(event) {
+            // $(".wishlist-btn").on('click', function(event) {
+            $(document).on("click", ".wishlist-btn", function() {
                 event.preventDefault();
                 var id = $(this).attr("data-id");
                 var url = "{!! route('wishlist', ':id') !!}";
                 url = url.replace(':id', id);
+
                 $.ajax({
                     method: 'GET',
                     url: url,
@@ -643,10 +686,10 @@
                     success: function(result) {
                         if (result == '401') {
                             window.location.href = "/login";
-                        }else{
+                        } else {
+                            tata.success('Success!', 'Product added to wishlist.');
                             $('#wishlistProductOld').empty();
                             $('#wishlistProductNew').html(result);
-                            tata.success('Success!', 'Product added to wishlist.');
                         }
                     },
                     error: function(error) {
@@ -659,7 +702,7 @@
 
     <script>
         $(document).ready(function() {
-            $(".wishlist-btn-delete").click(function(event) {
+            $(document).on("click", ".wishlist-btn-delete", function() {
                 event.preventDefault();
 
                 var id = $(this).attr("data-id");
@@ -673,9 +716,9 @@
                         id: id,
                     },
                     success: function(result) {
+                        tata.success('Success!', 'Product removed from wishlist.');
                         $('#wishlistProductOld').empty();
                         $('#wishlistProductNew').html(result);
-                        tata.success('Success!', 'Product removed from wishlist.');
 
                     },
                     error: function(error) {
@@ -696,7 +739,188 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            var cart_count =
+                "{{ auth()->user() &&auth()->user()->cart &&auth()->user()->cart->products->count() ?? 0 }}";
+            var widthAdd = $("#width-add");
+
+            // this code is dufult cart count when cart not null.
+            if (cart_count > 0) {
+                widthAdd.addClass('width-84');
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart') }}",
+                    success: function(result) {
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            };
+
+            // this code is add product in cart.
+            $(document).on('click', '.chaldal-add-card', function(event) {
+                event.preventDefault();
+                $("#chaldal-cart").show();
+                widthAdd.addClass('width-84');
+                $("#side-bar").hide();
+
+                var id = $(this).attr("data-id");
+                var url = "{!! route('cartById', ':id') !!}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                        quantity: 1,
+                    },
+                    success: function(result) {
+                        tata.success('Success!', 'Product added to your cart.');
+                        $('#oldChaldalCart').empty();
+                        $('#newChaldalCart').html(result);
+                        var cartT = $("#cart-total").text();
+                        $("#cart-count").text(cartT);
+
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                        console.log(error);
+                    }
+                });
+
+            });
+
+
+            // For Cart item delete code.
+            $(document).on('click', '.cart-cross', function() {
+                var id = $(this).attr("data-id");
+                var url = "{!! route('cart.remove', ':id') !!}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        if (result == '1') {
+                            $('#oldChaldalCart').empty();
+                            widthAdd.removeClass('width-84');
+                            return;
+                        }
+                        $('#oldChaldalCart').empty();
+                        $('#newChaldalCart').html(result);
+                        var cartT = $("#cart-total").text();
+                        if (cartT == 1) {
+                            $("#cart-count").text(0);
+                        } else {
+                            $("#cart-count").text(cartT);
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            // this code is hide cart & show the side bar cart info.
+            $(document).on('click', '#cross-close', function() {
+                $("#chaldal-cart").hide();
+                widthAdd.removeClass('width-84');
+                $("#side-bar").show();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cartSidebar') }}",
+                    success: function(result) {
+                        $('#newSidebar').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            });
+
+            // this code is For Cart item value decreased code.
+            $(document).on('click', '.minus', function() {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+                var quantity = $input.val();
+                var id = $(this).attr("data-id");
+                cartQuantityUpdate(id, quantity);
+                return false;
+            });
+
+            // this code is For Cart item value increase code.
+            $(document).on('click', '.plus', function() {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+                var quantity = $input.val();
+                var id = $(this).attr("data-id");
+                cartQuantityUpdate(id, quantity);
+                return false;
+            });
+
+            // this code is For Cart item value change code.
+            function cartQuantityUpdate(id, quantity) {
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart.update') }}",
+                    data: {
+                        id: id,
+                        quantity: quantity,
+                    },
+                    success: function(result) {
+                        $('#oldChaldalCart').empty();
+                        $('#newChaldalCart').html(result);
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            window.location.href = "/login";
+                        }
+                    }
+                });
+            };
+
+
+        });
+    </script>
+
+
+
+
+
     @yield('script')
+
+    <!--Start of Tawk.to Script-->
+    {{-- <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/624c02672abe5b455fc4e2f2/1fvseiplj';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script> --}}
+    <!--End of Tawk.to Script-->
+
+    {{-- <script src="{{ asset('assets/frontend/js/all-ajax.js') }}"></script> --}}
 </body>
 
 </html>

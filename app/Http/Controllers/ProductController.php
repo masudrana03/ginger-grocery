@@ -108,18 +108,18 @@ class ProductController extends Controller
                 $edit   = route('admin.products.edit', $product->id);
                 $delete = route('admin.products.destroy', $product->id);
                 $token  = csrf_token();
-                $img    = asset('assets/img/uploads/products/thumbnail/' . $product->featured_image);
+                $img    = asset('assets/img/uploads/products/featured/' . $product->featured_image);
 
-                $nestedData['id']         = $product->id;
-                $nestedData['title']      = $product->name;
-                $nestedData['brand_id']      = $product->brand->name;
-                $nestedData['category_id']   = $product->category->name;
-                $nestedData['unit_id']       = $product->unit->name;
-                $nestedData['price']      = settings('currency').$product->price;
-                $nestedData['store_id']      = $product->store->name;
-                $nestedData['image']      = "<img src='{$img}' width='100'>";
-                $nestedData['created_at'] = $product->created_at->format('d-m-Y');
-                $nestedData['actions']    = "
+                $nestedData['id']           = $product->id;
+                $nestedData['title']        = $product->name;
+                $nestedData['brand_id']     = $product->brand->name;
+                $nestedData['category_id']  = $product->category->name;
+                $nestedData['unit_id']      = $product->unit->name;
+                $nestedData['price']        = settings('currency').$product->price;
+                $nestedData['store_id']     = $product->store->name;
+                $nestedData['image']        = "<img src='{$img}' width='100'>";
+                $nestedData['created_at']   = $product->created_at->format('d-m-Y');
+                $nestedData['actions']      = "
                     &emsp;<a href='{$edit}' title='EDIT' ><span class='far fa-edit'></span></a>
                     &emsp;<a href='#' onclick='deleteProduct({$product->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$product->id}' action='{$delete}' method='POST' style='display: none;'>
@@ -230,7 +230,7 @@ class ProductController extends Controller
         $types      = Type::all();
         $nutritions = Nutrition::all();
         $product    = $product->load('types', 'nutritions');
-        
+
 
         //return $product->images;
         return view('backend.products.edit', compact('product', 'brands', 'categories', 'units', 'stores', 'currencies', 'types', 'nutritions'));

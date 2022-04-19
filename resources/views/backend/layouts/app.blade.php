@@ -270,7 +270,7 @@
                         <div class="footer_iner text-center">
                             <p>{{ now()->format('Y') }} © Influence - Designed by <a href="#"> <i
                                         class="ti-heart"></i> </a><a
-                                    href="https://binary-fusion.com/">binary-fusion</a></p>
+                                    href="{{ env('APP_URL').'/admin/dashboard' }}">{{ settings('company_name') }}</a></p>
                         </div>
                     </div>
                 </div>

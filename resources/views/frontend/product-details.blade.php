@@ -1,97 +1,98 @@
 @extends('frontend.layouts.app')
-@section('title', $product->name)
+@section('title', $product->name .' |')
 
+@push('css')
+<style>
+    .rating-s {
+        top: -12px;
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        ;
+        overflow: hidden;
+        flex-direction: row-reverse;
+        height: 40px;
+        position: relative;
+    }
+
+    .rating-0 {
+        filter: grayscale(100%);
+    }
+
+    .rating-s>input {
+        display: none;
+    }
+
+    .rating-s>label {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        margin-top: auto;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 76%;
+        transition: .3s;
+    }
+
+    .rating-s>input:checked~label,
+    .rating-s>input:checked~label~label {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+    }
+
+
+    #rating-1:checked~.emoji-wrapper>.emoji {
+        transform: translateY(-100px);
+    }
+
+    #rating-2:checked~.emoji-wrapper>.emoji {
+        transform: translateY(-200px);
+    }
+
+    #rating-3:checked~.emoji-wrapper>.emoji {
+        transform: translateY(-300px);
+    }
+
+    #rating-4:checked~.emoji-wrapper>.emoji {
+        transform: translateY(-400px);
+    }
+
+    #rating-5:checked~.emoji-wrapper>.emoji {
+        transform: translateY(-500px);
+    }
+
+
+    .comments-area .comment-list .single-comment:hover {
+        transform: translateY(-0px);
+        transition: 0s;
+    }
+
+    .cart {
+        width: 20% !important;
+
+    }
+
+    .detail-extralink>div {
+        display: initial !important;
+        vertical-align: text-top !important;
+        top: 12px !important;
+
+
+    }
+
+    a.cart {
+        background-color: #3BB77e !important;
+        color: white;
+        font-weight: 700;
+        /* vertical-align: text-top !important; */
+
+    }
+
+</style>
+@endpush
 
 @section('content')
-
-    <style>
-        .rating-s {
-            top: -12px;
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
-            ;
-            overflow: hidden;
-            flex-direction: row-reverse;
-            height: 40px;
-            position: relative;
-        }
-
-        .rating-0 {
-            filter: grayscale(100%);
-        }
-
-        .rating-s>input {
-            display: none;
-        }
-
-        .rating-s>label {
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            margin-top: auto;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 76%;
-            transition: .3s;
-        }
-
-        .rating-s>input:checked~label,
-        .rating-s>input:checked~label~label {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
-        }
-
-
-        #rating-1:checked~.emoji-wrapper>.emoji {
-            transform: translateY(-100px);
-        }
-
-        #rating-2:checked~.emoji-wrapper>.emoji {
-            transform: translateY(-200px);
-        }
-
-        #rating-3:checked~.emoji-wrapper>.emoji {
-            transform: translateY(-300px);
-        }
-
-        #rating-4:checked~.emoji-wrapper>.emoji {
-            transform: translateY(-400px);
-        }
-
-        #rating-5:checked~.emoji-wrapper>.emoji {
-            transform: translateY(-500px);
-        }
-
-
-        .comments-area .comment-list .single-comment:hover {
-            transform: translateY(-0px);
-            transition: 0s;
-        }
-
-        .cart {
-            width: 20% !important;
-
-        }
-
-        .detail-extralink>div {
-            display: initial !important;
-            vertical-align: text-top !important;
-            top: 12px !important;
-
-
-        }
-
-        a.cart {
-            background-color: #3BB77e !important;
-            color: white;
-            font-weight: 700;
-            /* vertical-align: text-top !important; */
-
-        }
-
-    </style>
-
+<!--================Home Banner Area =================-->
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -198,7 +199,7 @@
                                         </div> --}}
 
                                         <div class="detail-extralink mb-50">
-                                            <div class="detail-qty border radius">
+                                            {{-- <div class="detail-qty border radius">
                                                 <input type="hidden" name=qty[] id="qty" class="update-qty">
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"
                                                         id="down"></i></a>
@@ -206,9 +207,9 @@
                                                     id="qty-value">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"
                                                         id="up"></i></a>
-                                            </div>
+                                            </div> --}}
                                             <div class="product-extra-link2 ">
-                                                <button type="submit" class="button button-add-to-cart adding"><i
+                                                <button type="submit" class="button button-add-to-cart adding chaldal-add-card" data-id="{{ $product->id }}"><i
                                                         class="fi-rs-shopping-cart"></i>Add to cart</button>
                                                 <small class="product-id"
                                                     style="display: none;">{{ $product->id }}</small>
@@ -697,7 +698,7 @@
                                                             <div class="add-cart">
                                                                 <input type="hidden" id="product-id" name="product_id"
                                                                     value="{{ $productData->id }}">
-                                                                <a class="add" id="cart-btn" href="#"
+                                                                <a class="add chaldal-add-card" data-id="{{ $product->id }}" id="cart-btn" href="#"
                                                                     style=""><i class="fi-rs-shopping-cart mr-5"></i>Add
                                                                 </a>
                                                                 <small class="product-id"
@@ -725,14 +726,14 @@
                             <h5 class="section-title style-3 mb-20">Delivery</h5>
                             <ul>
                                 @php
-                                    $address = auth()->user() && auth()->user()->shippingAddress()->first();
+                                    $shippingAddress = auth()->user() ? auth()->user()->shippingAddress()->first() : '';
                                 @endphp
-                                @if ($address)
+                                @if ($shippingAddress)
                                 <li>
                                     <i class="fi fi-rs-marker mr-10 text-brand"></i>
                                     <span>
-                                        {{ $address->address }} <br />
-                                        {{ $address->state }}, {{ $address->city }}<br />{{ settings('country') }}
+                                        {{ $shippingAddress->address }} </br>
+                                        {{ $shippingAddress->state }}, {{ $shippingAddress->city }}<br />{{ settings('country') }}
                                     </span>
 
                                     {{-- <a href="#" class="change float-end">Change</a> --}}
@@ -932,34 +933,37 @@
         });
 
 
-        $(".adding").click(function(event) {
-            var x =$('#qty-value').text();
+        // $(".adding").click(function(event) {
 
-            let quantity = parseInt(x);
-            var pid = $('#pid').val();
 
-            var url2 = "{!! route('cartById', ':id') !!}";
-            url2 = url2.replace(':id', pid);
+        //     var x = $('#qty-value').text();
 
-            $.ajax({
-                method: 'GET',
-                url: url2,
-                data: {
-                    id: pid,
-                    quantity: quantity,
 
-                },
-                success: function(result) {
-                    tata.success('Success!', 'Product added to your cart.');
-                    $('#old-cart').empty();
-                    $('#new-cart').html(result);
-                },
-                error: function(error) {
-                    if (error.status == 401) {
-                        window.location.href = "/login";
-                    }
-                }
-            });
-        });
+        //     let quantity = parseInt(x);
+        //     var pid = $('#pid').val();
+
+        //     var url2 = "{!! route('cartById', ':id') !!}";
+        //     url2 = url2.replace(':id', pid);
+
+        //     $.ajax({
+        //         method: 'GET',
+        //         url: url2,
+        //         data: {
+        //             id: pid,
+        //             quantity: quantity,
+
+        //         },
+        //         success: function(result) {
+        //             tata.success('Success!', 'Product added to your cart.');
+        //             $('#old-cart').empty();
+        //             $('#new-cart').html(result);
+        //         },
+        //         error: function(error) {
+        //             if (error.status == 401) {
+        //                 window.location.href = "/login";
+        //             }
+        //         }
+        //     });
+        // });
     </script>
 @endsection
