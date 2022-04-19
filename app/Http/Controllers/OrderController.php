@@ -67,7 +67,6 @@ class OrderController extends Controller
         }
 
         $orderStatus = $request->status;
-        logger($orderStatus);
 
         if ($orderStatus) {
             //$orderStatus = OrderStatus::whereName($orderStatus)->firstOrFail();
@@ -84,6 +83,8 @@ class OrderController extends Controller
 
             $query = $query->where('id', 'LIKE', "%{$search}%")->orWhere('invoice_id', 'LIKE', "%{$search}%")
                         ->orWhereHas('user', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%{$search}%");
+                        })->orWhereHas('store', function ($query) use ($search) {
                             $query->where('name', 'LIKE', "%{$search}%");
                         });
 
