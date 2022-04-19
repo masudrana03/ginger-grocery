@@ -108,7 +108,7 @@ class OrderController extends Controller
 
                 foreach ($orderStatuses as $orderStatus) {
                     $updateStatus = route('admin.orders.update_status', [$order->id, $orderStatus->id]);
-                    $status .= "<a class='dropdown-item' <a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' onclick='ChangeOrderStatus({$orderStatus->id})' id='orderStatus-{$orderStatus->id}'>$orderStatus->name</a>";
+                    $status .= "<a class='dropdown-item' <a href='javascript:void(0)' data-href='{$updateStatus}' data-toggle='tooltip' title='Change status' onclick='ChangeOrderStatus({$order->id}{$orderStatus->id})' id='orderStatus-{$order->id}{$orderStatus->id}'>$orderStatus->name</a>";
                 }
 
                 $nestedData['id']              = $order->id;
