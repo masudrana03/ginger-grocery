@@ -84,6 +84,8 @@ class OrderController extends Controller
             $query = $query->where('id', 'LIKE', "%{$search}%")->orWhere('invoice_id', 'LIKE', "%{$search}%")
                         ->orWhereHas('user', function ($query) use ($search) {
                             $query->where('name', 'LIKE', "%{$search}%");
+                        })->orWhereHas('store', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%{$search}%");
                         });
 
             $orders =  $query->offset($start)
@@ -121,8 +123,6 @@ class OrderController extends Controller
                 $nestedData['total']           = settings('currency').$order->total;
                 $class                         = $order->payment_status == 'Paid' ? 'status_btn_b' : 'status_btn_danger_b';
                 $nestedData['payment_status']  = "<a href='javascript:void(0)' data-href='{$updatePaymentStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePaymentStatus({$order->id})' id='paymentStatus-{$order->id}'>$order->payment_status</a>";
-
-                // $nestedData['status']      = $order->status->name;
 
                 $nestedData['status']      = "
                     <div class='dropdown'>
