@@ -169,11 +169,11 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <span class="current-price text-brand"
-                                                    style="font-size:36px;">{{ settings('currency') }}{{ $product->price }}</span>
                                                 @if ($product->discountable)
-                                                    <span
-                                                        class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}</span>
+                                                    <span class="current-price text-brand" style="font-size:36px;">{{ settings('currency') }}{{ $product->discount_price }}</span>
+                                                    <span class="old-price font-md ml-15">{{ settings('currency') }}{{ $product->price }}</span>
+                                                @else
+                                                    <span class="current-price text-brand" style="font-size:36px;">{{ settings('currency') }}{{ $product->price }}</span>
                                                 @endif
 
                                                 {{-- <span>

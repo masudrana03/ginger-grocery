@@ -90,6 +90,9 @@ class ProductController extends Controller
 
             $products = $query->where('id', 'LIKE', "%{$search}%")
                 ->orWhere('name', 'LIKE', "%{$search}%")
+                ->orWhereHas('store', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%");
+                })
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
