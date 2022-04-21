@@ -125,8 +125,6 @@ class OrderController extends Controller
                 $class                         = $order->payment_status == 'Paid' ? 'status_btn_b' : 'status_btn_danger_b';
                 $nestedData['payment_status']  = "<a href='javascript:void(0)' data-href='{$updatePaymentStatus}' data-toggle='tooltip' title='Change status' class='{$class}' onclick='ChangePaymentStatus({$order->id})' id='paymentStatus-{$order->id}'>$order->payment_status</a>";
 
-                // $nestedData['status']      = $order->status->name;
-
                 $nestedData['status']      = "
                     <div class='dropdown'>
                     <button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
