@@ -62,10 +62,10 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Delivery Men Details</h3>
+                                    <h3 class="m-0">Customer Contact Message</h3>
                                 </div>
                                 <div class="add_button ml-10">
-                                    <a href="{{ route('admin.contacts.index') }}" class="btn_1">Back</a>
+                                    <a href="{{ route('admin.contact.massage') }}" class="btn_1">Back</a>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                                 <td class="text-style">{{ $contact->subject }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="payment-title"><strong>Massage :</strong></td>
+                                                <td class="payment-title"><strong>Message :</strong></td>
                                                 <td class="text-style">{{ $contact->massage }}</td>
                                             </tr>
                                         </tbody>

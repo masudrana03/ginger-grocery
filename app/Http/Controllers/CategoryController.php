@@ -235,8 +235,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        // return $category->products == [];
 
-        if ($category->products) {
+        if ( $category->products->count() > 0 ) {
             toast('Category could not deleted as it already used', 'error');
 
             return back();

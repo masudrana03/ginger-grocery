@@ -178,7 +178,7 @@ class NutritionController extends Controller
      */
     public function destroy(Nutrition $nutrition)
     {
-        if ($nutrition->products) {
+        if ($nutrition->products->count() > 0 ) {
             toast('Nutrition could not deleted as it already used', 'error');
 
             return back();

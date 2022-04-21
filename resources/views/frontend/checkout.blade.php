@@ -608,7 +608,7 @@
                         }
                         if (response == '2') {
                             $('#noCartError').html(
-                                '<div class="alert alert-danger">Buy more mroducts to get discount</div>'
+                                '<div class="alert alert-danger">Buy more products to get discount</div>'
                             );
                             return;
                         } else {

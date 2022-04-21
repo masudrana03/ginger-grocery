@@ -175,7 +175,7 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        if ($unit->products) {
+        if ($unit->products->count() > 0 ) {
             toast('Unit could not deleted as it already used', 'error');
 
             return back();

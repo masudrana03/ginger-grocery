@@ -184,7 +184,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        if ($brand->products->count()) {
+        if ($brand->products->count() > 0 ) {
             toast('Brand could not deleted as it already used', 'error');
 
             return back();

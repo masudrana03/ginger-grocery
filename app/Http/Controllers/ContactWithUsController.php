@@ -84,6 +84,7 @@ class ContactWithUsController extends Controller
                 $show   =  route('admin.contacts.show', $contact->id);
                 $delete =  route('admin.contacts.destroy', $contact->id);
                 $token  =  csrf_token();
+                $contactEye = $contact->status == 0 ? 'eye-slash' : 'eye';
 
                 $nestedData['id']         = $contact->id;
                 $nestedData['name']       = $contact->name;
@@ -93,7 +94,7 @@ class ContactWithUsController extends Controller
                 $nestedData['massage']    = Str::limit($contact->massage, 20);
                 $nestedData['created_at'] = $contact->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
-                    &emsp;<a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
+                    &emsp;<a href='{$show}' title='DETAILS' ><span class='far fa-{$contactEye}'></span></a>
                     &emsp;<a href='#' onclick='deletePromo({$contact->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
                     <form id='delete-form-{$contact->id}' action='{$delete}' method='POST' style='display: none;'>
                     <input type='hidden' name='_token' value='{$token}'>

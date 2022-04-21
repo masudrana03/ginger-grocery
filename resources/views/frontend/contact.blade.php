@@ -27,6 +27,10 @@
 
 }
 
+.cart-dropdown-wrap.account-dropdown {
+    z-index: 500;
+}
+
 </style>
 @section('content')
     <div class="page-header breadcrumb-wrap">

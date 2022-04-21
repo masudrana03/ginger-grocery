@@ -342,7 +342,7 @@
                                 <ul class="font-sm mb-20">
                                     <li><img class="mr-5"
                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-location.svg') }}"
-                                            alt="" /><strong>Address: <strong>Address: </strong>
+                                            alt="" /><strong>Address: </strong>
                                             <span>{{ $store->address }},
                                                 {{ $store->city }} {{ $store->zip }},
                                                 {{ settings('country') }}</span></li>

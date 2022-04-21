@@ -53,7 +53,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="code">Discount Amount</label>
+                                    <label for="code">Discount <small>( Amount or Percentage )</small></label>
                                     <input type="number" name="discount"
                                         class="form-control @error('discount') is-invalid @enderror" id="code"
                                         aria-describedby="emailHelp" placeholder="Discount" value="{{ old('code') }}">

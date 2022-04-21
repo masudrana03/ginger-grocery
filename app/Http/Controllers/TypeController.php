@@ -184,7 +184,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        if ($type->products) {
+        if ($type->products->count() > 0 ) {
             toast('Type could not deleted as it already used', 'error');
 
             return back();
