@@ -98,12 +98,13 @@ class OrderController extends Controller
 
         $data = [];
         $orderStatuses = OrderStatus::all();
+        // logger($orderStatuses);
 
         if (!empty($orders)) {
             foreach ($orders as $order) {
                 $updatePaymentStatus = route('admin.orders.updatePaymentStatus', $order->id);
                 $show                = route('admin.orders.show', $order->id);
-                $edit                = route('admin.orders.edit', $order->id);
+                // $edit                = route('admin.orders.edit', $order->id);
                 $delete              = route('admin.orders.destroy', $order->id);
                 $token               = csrf_token();
                 $status              = '';
@@ -137,12 +138,17 @@ class OrderController extends Controller
                 $nestedData['created_at'] = $order->created_at->format('d-m-Y');
                 $nestedData['actions']    = "
                     <a href='{$show}' title='DETAILS' ><span class='far fa-eye'></span></a>
-                    &emsp;<a href='#' onclick='deleteorder({$order->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
-                    <form id='delete-form-{$order->id}' action='{$delete}' method='POST' style='display: none;'>
-                    <input type='hidden' name='_token' value='{$token}'>
-                    <input type='hidden' name='_method' value='DELETE'>
-                    </form>
+
                     ";
+                    // &emsp;<a href='#' onclick='deleteorder({$order->id})' title='DELETE' ><span class='fas fa-trash'></span></a>
+                    // <form id='delete-form-{$order->id}' action='{$delete}' method='POST' style='display: none;'>
+                    // <input type='hidden' name='_token' value='{$token}'>
+                    // <input type='hidden' name='_method' value='DELETE'>
+                    // </form>
+
+
+
+
                 $data[] = $nestedData;
             }
         }
@@ -200,7 +206,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->status()->delete();
-        $order->delete();
+        $order->refresh()->delete();
 
         toast('Order successfully deleted', 'success');
 

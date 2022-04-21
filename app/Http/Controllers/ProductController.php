@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         $columns = [
             0 => 'id',
-            1 => 'title',
+            1 => 'name',
             2 => 'brand_id',
             3 => 'category_id',
             4 => 'unit_id',
@@ -90,6 +90,9 @@ class ProductController extends Controller
 
             $products = $query->where('id', 'LIKE', "%{$search}%")
                 ->orWhere('name', 'LIKE', "%{$search}%")
+                ->orWhereHas('store', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%");
+                })
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
@@ -111,7 +114,7 @@ class ProductController extends Controller
                 $img    = asset('assets/img/uploads/products/featured/' . $product->featured_image);
 
                 $nestedData['id']           = $product->id;
-                $nestedData['title']        = $product->name;
+                $nestedData['name']        = $product->name;
                 $nestedData['brand_id']     = $product->brand->name;
                 $nestedData['category_id']  = $product->category->name;
                 $nestedData['unit_id']      = $product->unit->name;

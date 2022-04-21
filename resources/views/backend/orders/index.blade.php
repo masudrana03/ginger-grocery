@@ -56,7 +56,7 @@
 
 @push('script')
     <script type="text/javascript">
-        function deleteBrand(id) {
+        function deleteorder(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -86,7 +86,8 @@
                 confirmButtonText: 'Yes, update it!'
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = $('#orderStatus-' + id).data('href');
+                  var g =  window.location.href = $('#orderStatus-' + id).data('href');
+                  alert(g);
                 }
             });
         }

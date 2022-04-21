@@ -24,7 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Title</th>
+                                            <th>Product Name</th>
                                             <th>Brand</th>
                                             <th>Category</th>
                                             <th>Unit</th>
@@ -79,7 +79,7 @@
                    },
             "columns": [
                 { "data": "id" },
-                { "data": "title" },
+                { "data": "name" },
                 { "data": "brand_id" },
                 { "data": "category_id" },
                 { "data": "unit_id" },
