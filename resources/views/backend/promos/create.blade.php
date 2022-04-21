@@ -53,7 +53,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="code">Discount</label>
+                                    <label for="code">Discount Amount</label>
                                     <input type="number" name="discount"
                                         class="form-control @error('discount') is-invalid @enderror" id="code"
                                         aria-describedby="emailHelp" placeholder="Discount" value="{{ old('code') }}">
@@ -64,7 +64,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="limit">Limit</label>
+                                    <label for="limit">Limit <small>( Number of time ) </small></label>
                                     <input type="number" name="limit"
                                         class="form-control @error('limit') is-invalid @enderror" id="limit"
                                         aria-describedby="emailHelp" placeholder="Limit" value="{{ old('limit') }}">

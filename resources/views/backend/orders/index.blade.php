@@ -1,8 +1,8 @@
 @extends('backend.layouts.app')
 @section('title', 'Orders')
 <style>
-    .dataTables_wrapper{
-         height: 100vh !important;
+    .dataTables_wrapper {
+        height: 100vh !important;
     }
 
 </style>
@@ -86,8 +86,8 @@
                 confirmButtonText: 'Yes, update it!'
             }).then((result) => {
                 if (result.value) {
-                  var g =  window.location.href = $('#orderStatus-' + id).data('href');
-                  alert(g);
+                    window.location.href = $('#orderStatus-' + id).data('href');
+
                 }
             });
         }
