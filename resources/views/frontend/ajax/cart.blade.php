@@ -26,8 +26,16 @@
                                     {{ $product->quantity }}</span>
                                 <a href="{{ route('products', $product->slug) }}"
                                     class="product-name">{{ ucwords(strtolower($product->name)) }}</a>
-                                <h6 class="price-title"><span
-                                        class="price-font">{{ settings('currency') }}</span>{{ $product->price * $product->quantity }}
+                                <h6 class="price-title">
+                                    @if ($product->discountable)
+                                        <span
+                                            class="old-price">{{ settings('currency') }}{{ $product->discount_price * $product->quantity }}</span>
+                                        <span
+                                            class="price-font">{{ settings('currency') }}{{ $product->price * $product->quantity }}</span>
+                                    @else
+                                        <span
+                                            class="old-price">{{ settings('currency') }}{{ $product->price * $product->quantity }}</span>
+                                    @endif
                                 </h6>
                                 <div class="cart-count">
                                     <div class="number">
@@ -40,7 +48,8 @@
                             </div>
                         </div>
                         @php
-                            $subtotal += $product->quantity * $product->price;
+                            $productPrice = $product->discountable ? $product->discount_price : $product->price;
+                            $subtotal += $product->quantity * $productPrice;
                         @endphp
                     @endforeach
 
@@ -50,7 +59,8 @@
                     $tax = taxCalculator($subtotal);
                     $total = $subtotal + $tax;
                 @endphp
-                <sapn hidden id="cart-total">{{ auth()->user() && auth()->user()->cart? auth()->user()->cart->products()->count(): 0 }}</sapn>
+                <sapn hidden id="cart-total">
+                    {{ auth()->user() && auth()->user()->cart? auth()->user()->cart->products()->count(): 0 }}</sapn>
                 <div class="card-details card-page">
                     <!-- <hr /> -->
                     <div class="row">

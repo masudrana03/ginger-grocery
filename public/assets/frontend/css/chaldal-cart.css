@@ -51,7 +51,8 @@
 
 .price-font {
     color: #adb5bd !important;
-    font-size: 10px !important;
+    font-size: 12px !important;
+    text-decoration: line-through;
 }
 
 .cart-count {

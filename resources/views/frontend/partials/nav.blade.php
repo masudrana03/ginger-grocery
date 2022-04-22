@@ -473,7 +473,7 @@
 
                             </div>
 
-                            <div class="header-action-icon-2" >
+                            {{-- <div class="header-action-icon-2" >
                                 <a class="mini-cart-icon" href="#">
                                     <img alt="Nest"
                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
@@ -482,7 +482,7 @@
                                 </a>
                                 <a href="#"><span class="lable">Cart</span></a>
 
-                            </div>
+                            </div> --}}
 
                             <div id="new-cart">
 

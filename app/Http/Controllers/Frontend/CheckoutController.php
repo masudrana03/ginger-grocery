@@ -50,24 +50,20 @@ class CheckoutController extends Controller
      */
     public function applyPromo(Request $request)
     {
-        // return $request->all();
         if ($request->code == null) {
             return '4';
         }
         $cartProducts = auth()->user()->cart->products;
         $cart = auth()->user()->cart;
-        // return count($cartProducts);
 
         if (count($cartProducts) == 0) {
             return '0';
-            // return back()->with('error', 'Your card is empty');
         }
 
         $promo = Promo::whereCode($request->code)->where('limit', '>', 0)->first();
 
         if (!$promo) {
             return '1';
-            // return back()->with('error', 'Invalid coupon code');
         }
 
         $cart->update(['promo_id' => $promo->id]);
@@ -143,8 +139,6 @@ class CheckoutController extends Controller
             $is_primary  = 1;
         }
 
-
-
         if (!$request->payment_method_id) {
             $provider = PaymentMethod::whereProvider('cash')->first();
         } else {
@@ -169,7 +163,6 @@ class CheckoutController extends Controller
 
         foreach ($carts as $storeWiseitems) {
             $invoiceId = $this->createOrder($storeWiseitems, $shippingId, $shippingId, $orderReference, $request->payment_method_id, $request->note);
-            // $this->sendOrderConfirmationEmail($invoiceId);
         }
 
         $cart->products()->detach();
@@ -180,6 +173,7 @@ class CheckoutController extends Controller
         //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
+        logger('sending email');
          $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
@@ -395,7 +389,7 @@ class CheckoutController extends Controller
             'subject' => $emailTemplate->subject,
             'body'    => $body
         ];
-
+        logger("okay");
         (new EmailFactory())->initializeEmail($emailDetails);
     }
 

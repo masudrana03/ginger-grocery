@@ -42,7 +42,7 @@ class CartController extends Controller
                 ],
             ], false);
 
-            return view("frontend.ajax.chaldal-cart");
+            return view("frontend.ajax.cart");
         }
 
         $cartId = auth()->user()->cart->id;
@@ -57,9 +57,9 @@ class CartController extends Controller
 
             if ($update_qty <= 10) {
                 $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
-                return view("frontend.ajax.chaldal-cart");
+                return view("frontend.ajax.cart");
             } else {
-                return view("frontend.ajax.chaldal-cart");
+                return view("frontend.ajax.cart");
             }
         }
 
@@ -70,7 +70,7 @@ class CartController extends Controller
             ],
         ], false);
 
-        return view("frontend.ajax.chaldal-cart");
+        return view("frontend.ajax.cart");
     }
 
 
@@ -138,7 +138,7 @@ class CartController extends Controller
 
         $cart = request()->segment(1);
 
-        return view('frontend.ajax.chaldal-cart', compact('subtotal', 'tax', 'cart'));
+        return view('frontend.ajax.cart', compact('subtotal', 'tax', 'cart'));
     }
 
 
@@ -169,7 +169,7 @@ class CartController extends Controller
         if ($quantity <= 10 || $quantity >= 1) {
             $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $quantity]);
         }
-        return view("frontend.ajax.chaldal-cart");
+        return view("frontend.ajax.cart");
     }
 
     /**
@@ -194,7 +194,7 @@ class CartController extends Controller
             auth()->user()->cart->delete();
             return '1';
         }
-        return view('frontend.ajax.chaldal-cart');
+        return view('frontend.ajax.cart');
     }
 
     /**
@@ -243,7 +243,7 @@ class CartController extends Controller
 //                     ],
 //                 ], false);
 
-//                 return view("frontend.ajax.chaldal-cart");
+//                 return view("frontend.ajax.cart");
 //             } else {
 
 //                 $cartId = auth()->user()->cart->id;
@@ -259,9 +259,9 @@ class CartController extends Controller
 //                     //return $current_qty;
 //                     if ($update_qty <= 10) {
 //                         $product = DB::table('cart_product')->whereCartId($cartId)->whereProductId($product_id)->update(['quantity' => $update_qty]);
-//                         return view("frontend.ajax.chaldal-cart");
+//                         return view("frontend.ajax.cart");
 //                     } else {
-//                         return view("frontend.ajax.chaldal-cart");
+//                         return view("frontend.ajax.cart");
 //                     }
 //                 } else {
 //                     $cart->products()->sync([
@@ -271,7 +271,7 @@ class CartController extends Controller
 //                         ],
 //                     ], false);
 
-//                     return view("frontend.ajax.chaldal-cart");
+//                     return view("frontend.ajax.cart");
 //                 }
 //             }
 //         }

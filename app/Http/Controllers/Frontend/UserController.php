@@ -273,8 +273,9 @@ class UserController extends Controller
 
         //return $request->all();
         $this->validate($request, [
-            'old_password' => 'required',
-            'new_password' => 'required|min:8',
+            'old_password'          => 'required',
+            'new_password'          => 'required|min:8',
+            'password_confirmation' => 'required|same:new_password',
         ]);
 
         $user = Auth()->user();

@@ -116,7 +116,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="{{url('/')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Change Password
                 </div>
             </div>
@@ -161,7 +161,8 @@
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.dashboard') }}"
-                                                aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                                aria-selected="false"><i
+                                                    class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('user.orders') }}"
@@ -188,7 +189,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();"><i
+                                                                    document.getElementById('logout-form').submit();"><i
                                                     class=" fi-rs-sign-out mr-10"></i>Logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -213,7 +214,7 @@
                                                         <div class="form-group col-md-12">
                                                             <label>Current Password <span
                                                                     class="required">*</span></label>
-                                                            <input required=""
+                                                            <input required
                                                                 class="form-control @error('old_password') is-invalid @enderror"
                                                                 name="old_password" type="password" />
                                                             @error('old_password')
@@ -225,7 +226,7 @@
                                                         <div class="form-group col-md-12">
                                                             <label>New Password <span
                                                                     class="required">*</span></label>
-                                                            <input required=""
+                                                            <input required
                                                                 class="form-control @error('new_password') is-invalid @enderror"
                                                                 name="new_password" type="password" />
                                                             @error('new_password')
@@ -237,8 +238,13 @@
                                                         <div class="form-group col-md-12">
                                                             <label>Confirm Password <span
                                                                     class="required">*</span></label>
-                                                            <input required="" class="form-control"
+                                                            <input required class="form-control @error('password_confirmation') is-invalid @enderror"
                                                                 name="password_confirmation" type="password" />
+                                                            @error('password_confirmation')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-12">
                                                             <button type="submit"
@@ -288,20 +294,18 @@
                                         </div>
                                         <div class="card-body d-flex flex-wrap mx-auto" id="image-container">
                                             @if (auth()->user()->image)
-                                            <div class="image-space w-100">
-                                                <img class="profile-image" width="500" height="500"
-                                                src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
-                                                id="login_images">
-                                            </div>
-                                                
+                                                <div class="image-space w-100">
+                                                    <img class="profile-image" width="500" height="500"
+                                                        src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
+                                                        id="login_images">
+                                                </div>
                                             @else
-                                            <div class="image-space w-100">
-                                                
-                                                <img class="profile-image" width="500" height="500"
-                                                    src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
-                                                    alt="Metrocery" id="login_images" />
-                                            </div>
+                                                <div class="image-space w-100">
 
+                                                    <img class="profile-image" width="500" height="500"
+                                                        src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
+                                                        alt="Metrocery" id="login_images" />
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
