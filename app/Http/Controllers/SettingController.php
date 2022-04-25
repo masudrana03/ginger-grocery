@@ -60,7 +60,7 @@ class SettingController extends Controller
         $faviconName = '';
         $miniLogo    = '';
         $loginImage  = '';
-        $contactImage= '';
+        $contactImage = '';
 
 
         if ($request->hasFile('logo')) {
@@ -129,7 +129,7 @@ class SettingController extends Controller
             saveImageWithThumbnail($image, $location, $thumbnailLocation);
         }
 
-        $request = $request->except('_token', 'logo', 'favicon','mini_logo','login_image','contact_image');
+        $request = $request->except('_token', 'logo', 'favicon', 'mini_logo', 'login_image', 'contact_image');
 
         if ($logoName != '') {
             $request['logo'] = $logoName;
@@ -226,16 +226,16 @@ class SettingController extends Controller
     public function sendTestMail(Request $request)
     {
         $subject = 'Testing Email';
-        $message = 'This is a test email, please ignore if you are not meant to be get this email.';
+        $message = 'This is a test email, <br> please ignore if you are not meant to be get this email.';
 
         try {
             $emailDetails = [
-                'to'      => $request->email,
+                'email'   => $request->email,
                 'subject' => $subject,
                 'body'    => $message,
             ];
 
-            new EmailFactory($emailDetails);
+            (new EmailFactory())->initializeEmail($emailDetails);
 
             toast('You will receive a test email soon', 'success');
 
@@ -282,33 +282,33 @@ class SettingController extends Controller
         return back();
     }
 
-    public function socialMediaLink(){
+    public function socialMediaLink()
+    {
 
         return view('backend.settings.social-media');
     }
 
-    public function socialMediaLinkUpdate(Request $request){
+    public function socialMediaLinkUpdate(Request $request)
+    {
 
-    $this->validate($request, [
-        'facebook_link' => 'required',
-        'youtube_link'  => 'required',
-        'linkedin_link' => 'required',
-        'instagram_link'=> 'required',
-        'twitter_link'  => 'required',
-    ]);
+        $this->validate($request, [
+            'facebook_link' => 'required',
+            'youtube_link'  => 'required',
+            'linkedin_link' => 'required',
+            'instagram_link' => 'required',
+            'twitter_link'  => 'required',
+        ]);
 
-    $request = $request->all();
+        $request = $request->all();
 
-    foreach ($request as $key => $value) {
-        Setting::where('key', $key)->update(['value' => $value]);
+        foreach ($request as $key => $value) {
+            Setting::where('key', $key)->update(['value' => $value]);
+        }
+
+        toast('Social Media Link  successfully updated', 'success');
+
+        Artisan::call('cache:clear');
+
+        return back();
     }
-
-    toast('Social Media Link  successfully updated', 'success');
-
-    Artisan::call('cache:clear');
-
-    return back();
-
-    }
-
 }

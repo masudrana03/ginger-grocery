@@ -79,7 +79,9 @@ class CheckoutController extends Controller
 
         // return [$discountAmount  ,$totalAfterDiscount];
 
-        if ($discountAmount >= $totalAfterDiscount) {
+        logger($discountAmount);
+        logger($total);
+        if ($discountAmount > $total) {
             return '2';
         }
 
@@ -173,7 +175,6 @@ class CheckoutController extends Controller
         //  $this->givePointsToCustomer($cart);
 
         // Send order confirmation email
-        logger('sending email');
          $this->sendOrderConfirmationEmail($invoiceId);
 
         // Accept payment
@@ -381,15 +382,21 @@ class CheckoutController extends Controller
         $emailTemplate = EmailTemplate::whereType('Order')->first();
         $user = auth()->user();
 
-        $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
-        $body .= preg_replace("/{invoice_number}/", $invoiceId, $body);
+        // $body = preg_replace("/{user_name}/", $user->name, $emailTemplate->body);
+        // $body .= preg_replace("/{invoice_number}/", $invoiceId, $emailTemplate->body);
+
+        $body = preg_replace(
+            array('/{user_name}/', '/{invoice_number}/'),
+            array($user->name, $invoiceId),
+            $emailTemplate->body
+        );
 
         $emailDetails = [
             'email'   => auth()->user()->email,
             'subject' => $emailTemplate->subject,
             'body'    => $body
         ];
-        logger("okay");
+
         (new EmailFactory())->initializeEmail($emailDetails);
     }
 

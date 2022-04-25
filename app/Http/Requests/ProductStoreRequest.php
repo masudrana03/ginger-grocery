@@ -36,7 +36,6 @@ class ProductStoreRequest extends FormRequest
             'category_id'     => 'required',
             'unit_id'         => 'required',
             'types'           => 'required',
-            'nutritions'      => 'required',
             'store_id'        => 'required',
             'files'           => 'required',
             'featured_image'  => 'required',

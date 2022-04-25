@@ -12,7 +12,6 @@ use App\Models\Currency;
 use App\Models\Nutrition;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 
@@ -46,7 +45,11 @@ class ProductController extends Controller
             9 => 'id',
         ];
 
-        $totalData = Product::count();
+        if (isAdmin()) {
+            $totalData = Product::count();
+        } else {
+            $totalData = Product::where('store_id', auth()->user()->store->id)->get()->count();
+        }
 
         $totalFiltered = $totalData;
 
@@ -101,7 +104,7 @@ class ProductController extends Controller
             // $totalFiltered = $query->where('id', 'LIKE', "%{$search}%")
             //     ->orWhere('name', 'LIKE', "%{$search}%")
             //     ->count();
-                $totalFiltered = $query->count();
+            $totalFiltered = $query->count();
         }
 
         $data = [];
@@ -118,7 +121,7 @@ class ProductController extends Controller
                 $nestedData['brand_id']     = $product->brand->name;
                 $nestedData['category_id']  = $product->category->name;
                 $nestedData['unit_id']      = $product->unit->name;
-                $nestedData['price']        = settings('currency').$product->price;
+                $nestedData['price']        = settings('currency') . $product->price;
                 $nestedData['store_id']     = $product->store->name;
                 $nestedData['image']        = "<img src='{$img}' width='100'>";
                 $nestedData['created_at']   = $product->created_at->format('d-m-Y');
@@ -270,7 +273,7 @@ class ProductController extends Controller
             $product->featured_image = $filename;
         }
 
-        $productData                   = $request->except( 'types', 'nutritions');
+        $productData                   = $request->except('types', 'nutritions');
         $product['user_id']            = auth()->id();
         $productData['slug']           = Str::slug($request->name);
         $productData['featured_image'] = $filename;

@@ -94,9 +94,11 @@
         </div>
     </a>
     <ul>
+        @if (isAdmin())
         <li>
             <a href="{{ route('admin.zones.index') }}">Zone</a>
         </li>
+        @endif
         <li>
             <a href="{{ route('admin.stores.index') }}">Stores</a>
         </li>

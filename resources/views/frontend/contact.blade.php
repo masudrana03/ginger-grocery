@@ -1,37 +1,56 @@
 @extends('frontend.layouts.app')
 @section('title', 'Contact |')
-<style>
-    /* .select2-container .select2-selection--single {
-  box-sizing: border-box;
-  cursor: pointer;
-  display: block;
-  height: 46px;
-  user-select: none;
-  -webkit-user-select: none;
-}
 
-.select2-container--default .select2-selection--single {
-  background-color: #fff;
-  border: 1px solid #d6dcdf8a;
-  border-radius: 8px;
-} */
+@push('css')
+    <style>
+        /* .select2-container .select2-selection--single {
+              box-sizing: border-box;
+              cursor: pointer;
+              display: block;
+              height: 46px;
+              user-select: none;
+              -webkit-user-select: none;
+            }
 
-.select2-container--default .select2-selection--single{
-    width: 180px !important;
-    height: 46px !important;
-}
+            .select2-container--default .select2-selection--single {
+              background-color: #fff;
+              border: 1px solid #d6dcdf8a;
+              border-radius: 8px;
+            } */
+        .leaflet-pane {
+            z-index: 10;
+        }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered{
-    line-height: 43px !important;
-    text-align: center !important;
+        .select2-dropdown {
+            z-index: 20;
+        }
 
-}
+        .leaflet-top {
+            z-index: 60;
+        }
 
-.cart-dropdown-wrap.account-dropdown {
-    z-index: 500;
-}
+        #custom .select2-container--default .select2-selection--single .select2-selection__rendered {
+            margin-left: 40px;
+            margin-top: 3px;
+        }
 
-</style>
+        #custom .select2-container--default .select2-selection--single {
+            height: 46px !important;
+            z-index: 555;
+        }
+
+        /* .select2-container--default .select2-selection--single .select2-selection__rendered{
+                line-height: 43px !important;
+                text-align: center !important;
+
+            } */
+        .cart-dropdown-wrap.account-dropdown {
+            z-index: 500;
+        }
+
+    </style>
+@endpush
+
 @section('content')
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -86,7 +105,7 @@
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <section class="mb-50">
                         <div class="row mb-60">
-                            @forelse ( $contacts as $contacts )
+                            @forelse ($contacts as $contacts)
                                 <div class="col-md-4 mb-4 mb-md-0">
                                     <h4 class="mb-15 text-brand">{{ $contacts->name }}</h4>
                                     {{ $contacts->address }}<br />
@@ -178,13 +197,11 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3 " id="custom">
                                                 <select name="phone_code"
-                                                    class="select-two phone-code  @error('phone_code') is-invalid @enderror"
-                                                   >
+                                                    class="select-two phone-code  @error('phone_code') is-invalid @enderror">
                                                     @foreach ($countries as $country)
-                                                        <option class="phone-code"
-                                                            value="{{ $country->id }}">
+                                                        <option class="phone-code" value="{{ $country->id }}">
                                                             {{ $country->phone_code }}
                                                             {{ $country->iso2 }}
                                                         </option>
@@ -212,8 +229,7 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="textarea-style mb-30">
-                                                    <textarea name="massage" placeholder="Message"
-                                                        value="{{ old('massage') }}"></textarea>
+                                                    <textarea name="massage" placeholder="Message" value="{{ old('massage') }}"></textarea>
                                                 </div>
                                                 <button class="submit submit-auto-width" type="submit">Send message</button>
                                             </div>

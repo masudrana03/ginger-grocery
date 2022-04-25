@@ -23,9 +23,9 @@
         }
 
         /* .checkout-total{
-                       display: flex;
-                       justify-content: flex-end;
-                   } */
+                           display: flex;
+                           justify-content: flex-end;
+                       } */
 
 
         .calculate {
@@ -45,9 +45,9 @@
         }
 
         /* .form-group{
-                      height: 2%;
-                      padding-bottom:60px;
-                  } */
+                          height: 2%;
+                          padding-bottom:60px;
+                      } */
 
         .form-group input {
             background: #fff;
@@ -566,12 +566,6 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            var currentUrl = window.location.href;
-            var checkUrl = "{{ url('/checkout') }}";
-
-            if (currentUrl == checkUrl) {
-                $('#newsletterSection').empty();
-            }
 
             $("#promoCode").click(function(event) {
                 event.preventDefault();

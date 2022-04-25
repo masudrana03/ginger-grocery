@@ -291,26 +291,4 @@ Route::get('login/google/callback', [FrontendSocialiteController::class, 'google
 Route::get('login/facebook', [FrontendSocialiteController::class, 'facebookRedirectToProvider'])->name('login.facebook');
 Route::get('login/facebook/callback', [FrontendSocialiteController::class, 'facebookHandleProviderCallback'])->name('login.facebook_callback');
 
-Route::get('c/{id}', function ($id) {
-    $compareProducts = Cache::get('products');
-
-    if (!$compareProducts) {
-        Cache::put('products', [$id], 30);
-        return Cache::get('products');
-    }
-
-    if (in_array($id, $compareProducts)) {
-        return Cache::get('products');
-    }
-
-    if (count($compareProducts) >= 3) {
-        array_shift($compareProducts);
-        array_push($compareProducts, $id);
-        Cache::put('products', $compareProducts, 30);
-    }
-
-    array_push($compareProducts, $id);
-    Cache::put('products', $compareProducts, 30);
-});
-
 Auth::routes(['verify' => true]);

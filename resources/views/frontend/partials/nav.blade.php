@@ -489,7 +489,7 @@
                             </div>
                             @if (auth()->user())
                                 @auth
-                                    <div class="header-action-icon-2">
+                                    <div class="header-action-icon-2" style="padding-left: 20px;">
                                         <a href="{{ route('user.dashboard') }}">
                                             {{-- <img alt="Nest"
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" /> --}}
