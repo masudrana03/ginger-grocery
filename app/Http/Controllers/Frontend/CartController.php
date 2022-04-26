@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Cart;
+use App\Models\Promo;
 use App\Models\Store;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -119,7 +120,7 @@ class CartController extends Controller
 
         $tax = taxCalculator($subtotal);
 
-        return view("frontend.ajax.chaldal-sidebar", compact('total', 'subtotal', 'tax'));
+        return view("frontend.ajax.cart-sidebar", compact('total', 'subtotal', 'tax'));
     }
 
 
@@ -191,9 +192,29 @@ class CartController extends Controller
         $product = Product::find($pro_id);
         $product->carts()->detach();
         if (auth()->user()->cart->products->count() == 0) {
+            session()->forget('totalAfterDiscount');
+            session()->forget('discountAmount');
             auth()->user()->cart->delete();
             return '1';
         }
+        $cart = auth()->user()->cart;
+        $promo = Promo::find($cart->promo_id);
+        $total = 0;
+
+        foreach ($cart->products as $product) {
+            $total += $product->price * $product->quantity;
+        }
+
+        $discountAmount = getDiscountAmount($total, $promo->type ?? 0, $promo->discount ?? 0);
+        $totalAfterDiscount = getAmountAfterDiscount($total, $promo->type ?? 0, $promo->discount ?? 0);
+
+        // return [$discountAmount  ,$totalAfterDiscount];
+
+        if ($discountAmount > $total) {
+            session()->forget('totalAfterDiscount');
+            session()->forget('discountAmount');
+        }
+
         return view('frontend.ajax.cart');
     }
 

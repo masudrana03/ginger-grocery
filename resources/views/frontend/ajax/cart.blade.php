@@ -14,7 +14,7 @@
                     @endphp
                     @foreach (auth()->user()->cart->products ?? [] as $product)
                         <div class="row mb-3 margin-minus20">
-                            <a class="cart-cross" data-id="{{ $product->id }}" href="#"><i
+                            <a class="cart-cross" data-id="{{ $product->id }}"><i
                                     class="fi-rs-cross-small"></i></a>
                             <div class="col-md-5 col-xs-5 "><a href="{{ route('products', $product->slug) }}"
                                     class="d-block text-center"><img

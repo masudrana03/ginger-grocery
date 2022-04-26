@@ -801,6 +801,22 @@
 
             // For Cart item delete code.
             $(document).on('click', '.cart-cross', function() {
+                var checkoutUrl = "{{ route('checkout') }}";
+                if ( window.location.href == checkoutUrl )  {
+                    $.ajax({
+                        method: 'GET',
+                        url: checkoutUrl,
+                        success: function(result) {
+                            $('#oldCheckoutdiv').empty();
+                            $('#newCheckoutdiv').html(result);
+                            console.log(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                };
+
                 var id = $(this).attr("data-id");
                 var url = "{!! route('cart.remove', ':id') !!}";
                 url = url.replace(':id', id);
@@ -853,12 +869,12 @@
 
             // this code is For Cart item value decreased code.
             $(document).on('click', '.minus', function() {
-                var $input = $(this).parent().find('input');
-                var count = parseInt($input.val()) - 1;
+                var input = $(this).parent().find('input');
+                var count = parseInt(input.val()) - 1;
                 count = count < 1 ? 1 : count;
-                $input.val(count);
-                $input.change();
-                var quantity = $input.val();
+                input.val(count);
+                input.change();
+                var quantity = input.val();
                 var id = $(this).attr("data-id");
                 cartQuantityUpdate(id, quantity);
                 return false;
@@ -866,10 +882,10 @@
 
             // this code is For Cart item value increase code.
             $(document).on('click', '.plus', function() {
-                var $input = $(this).parent().find('input');
-                $input.val(parseInt($input.val()) + 1);
-                $input.change();
-                var quantity = $input.val();
+                var input = $(this).parent().find('input');
+                input.val(parseInt(input.val()) + 1);
+                input.change();
+                var quantity = input.val();
                 var id = $(this).attr("data-id");
                 cartQuantityUpdate(id, quantity);
                 return false;
@@ -877,6 +893,7 @@
 
             // this code is For Cart item value change code.
             function cartQuantityUpdate(id, quantity) {
+                checkoutRender();
                 $.ajax({
                     method: 'GET',
                     url: "{{ route('cart.update') }}",
@@ -894,6 +911,25 @@
                         }
                     }
                 });
+            };
+
+            // this code is For Cart price rendering.
+            function checkoutRender() {
+                var checkoutUrl = "{{ route('checkout') }}";
+                if (window.location.href == checkoutUrl) {
+                    $.ajax({
+                        method: 'GET',
+                        url: checkoutUrl,
+                        success: function(result) {
+                            $('#oldCheckoutdiv').empty();
+                            $('#newCheckoutdiv').html(result);
+                            console.log(result);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                };
             };
 
 

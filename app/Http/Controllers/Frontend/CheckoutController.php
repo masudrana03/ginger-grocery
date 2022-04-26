@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Exception;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Point;
@@ -17,20 +16,23 @@ use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\Models\PaymentMethod;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Components\Email\EmailFactory;
 use App\Components\Payment\PaymentFactory;
 
 class CheckoutController extends Controller
 {
-    public function checkout()
+    public function checkout(Request $request)
     {
         $user  = auth()->user();
 
         $countries = Country::all();
         $paymentMethods = PaymentMethod::active()->get();
         $savedAddress = Address::where('user_id', $user->id)->get();
+
+        if($request->ajax()){
+            return view('frontend.ajax.cart-checkout', compact('paymentMethods', 'countries', 'savedAddress'));
+        }
 
         return view('frontend.checkout', compact('paymentMethods', 'countries', 'savedAddress'));
     }
@@ -79,8 +81,6 @@ class CheckoutController extends Controller
 
         // return [$discountAmount  ,$totalAfterDiscount];
 
-        logger($discountAmount);
-        logger($total);
         if ($discountAmount > $total) {
             return '2';
         }
