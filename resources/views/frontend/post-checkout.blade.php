@@ -79,58 +79,78 @@
 
                             <div class="order-customer-info">
                                 <h3>Customer information</h3>
-                                <p>
-                                    <span class="d-inline-block">Full name:</span>
-                                    <span class="order-customer-info-meta">{{ $shipping_info->shipping->name }}</span>
-                                </p>
-                                <p>
-                                    <span class="d-inline-block">Phone:</span>
-                                    <span
-                                        class="order-customer-info-meta">{{ $shipping_info->shipping->country->phone_code }}{{ $shipping_info->shipping->phone }}</span>
-                                </p>
-                                <p>
-                                    <span class="d-inline-block">Email:</span>
-                                    <span class="order-customer-info-meta">
-                                        <a href="#" class="__cf_email__">
-                                            {{ $shipping_info->shipping->email }}
-                                        </a>
-                                    </span>
-                                </p>
-                                <p>
-                                    <span class="d-inline-block">Address:</span>
-                                    <span class="order-customer-info-meta">
-                                        {{ $shipping_info->shipping->address }},{{ $shipping_info->shipping->city }},
-                                        {{ $shipping_info->shipping->zip }},{{ settings('country') }}
-                                    </span>
-                                </p>
+                                <div class="" style="float :left;">
+                                    <p>
+                                        <span class="d-inline-block">Full name:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Phone:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Email:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Address:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Payment method:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Payment status:</span>
+                                    </p>
+                                    <p>
+                                        <span class="d-inline-block">Order status:</span>
+                                    </p>
+                                </div>
 
-                                {{-- <p>
-                                    <span class="d-inline-block">Shipping method:</span>
-                                    <span class="order-customer-info-meta">
-                                        By Air
-                                    </span>
-                                </p> --}}
+                                <div class="">
+                                    <p>
+                                        <span class="order-customer-info-meta">{{ $shipping_info->shipping->name }}</span>
+                                    </p>
+                                    <p>
+                                        <span
+                                            class="order-customer-info-meta">{{ $shipping_info->shipping->country->phone_code }}{{ $shipping_info->shipping->phone }}</span>
+                                    </p>
+                                    <p>
+                                        <span class="order-customer-info-meta">
+                                            <a href="#" class="__cf_email__">
+                                                {{ $shipping_info->shipping->email }}
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="order-customer-info-meta">
+                                            {{ $shipping_info->shipping->address }},{{ $shipping_info->shipping->city }},
+                                            {{ $shipping_info->shipping->zip }},{{ settings('country') }}
+                                        </span>
+                                    </p>
 
-                                <p>
-                                    <span class="d-inline-block">Payment method:</span>
-                                    <span class="order-customer-info-meta">
-                                        {{ $shipping_info->paymentMethod->provider == 'cash' ? 'Cash In Delivery' : 'Bank Transfer' }}
-                                    </span>
-                                </p>
-                                <p>
-                                    <span class="d-inline-block">Payment status:</span>
-                                    <span class="order-customer-info-meta" style="text-transform: uppercase;">
-                                        <span class="label-warning status-label">
-                                            {{ $shipping_info->paymentStatus }}</span>
-                                    </span>
-                                </p>
-                                <p>
-                                    <span class="d-inline-block">Order status:</span>
-                                    <span class="order-customer-info-meta" style="text-transform: uppercase;">
-                                        <span class="label-warning status-label">
-                                            {{ $shipping_info->status->name }}</span>
-                                    </span>
-                                </p>
+                                    {{-- <p>
+                                        <span class="d-inline-block">Shipping method:</span>
+                                        <span class="order-customer-info-meta">
+                                            By Air
+                                        </span>
+                                    </p> --}}
+
+                                    <p>
+                                        <span class="order-customer-info-meta">
+                                            {{ $shipping_info->paymentMethod->provider == 'cash' ? 'Cash In Delivery' : 'Bank Transfer' }}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="order-customer-info-meta" style="text-transform: uppercase;">
+                                            <span class="label-warning status-label">
+                                                {{ $shipping_info->paymentStatus }}</span>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="order-customer-info-meta" style="text-transform: uppercase;">
+                                            <span class="label-warning status-label">
+                                                {{ $shipping_info->status->name }}</span>
+                                        </span>
+                                    </p>
+
+                                </div>
                             </div>
 
                             <a href="{{ url('/') }}" class="btn payment-checkout-btn">
@@ -152,18 +172,16 @@
                                 $discount = 0;
                                 $tax = 0;
 
-
                                 foreach ($orders as $order) {
                                     $subTotal += $order->subtotal;
                                     $total += $order->total;
-                                    $shipping += $order->shipping_cost;
                                     $discount += $order->discount;
                                     $tax += $order->tax;
                                 }
 
                                 $grandSubtotal = 0 + $subTotal;
                                 $grandTotal = 0 + $total;
-                                $grandShipping = 0 + $shipping;
+                                $grandShipping = 0 + $order->shipping_cost;
                                 $grandDiscount = 0 + $discount;
                                 $grandTax = 0 + $tax;
 
@@ -236,7 +254,7 @@
 
 
                                             </div>
-                                            <div class="row">
+                                            {{-- <div class="row">
                                                 <div class="col-6">
                                                     <p>Shipping fee:</p>
                                                 </div>
@@ -244,7 +262,7 @@
                                                     <p class="price-text text-end">
                                                         {{ settings('currency') }}{{ $order->shipping_cost }}</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="row">
                                                 <div class="col-6">
                                                     <p>Discount:</p>
@@ -297,7 +315,8 @@
                                         <p>Shipping fee:</p>
                                     </div>
                                     <div class="col-6">
-                                        <p class="text-end">{{ settings('currency') }}{{ $grandShipping }}  </p>
+                                        <p class="text-end">{{ settings('currency') }}{{ $grandShipping }}
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="row total-price">
@@ -313,7 +332,8 @@
                                         <p>Total amount:</p>
                                     </div>
                                     <div class="col-6">
-                                        <p class="total-text raw-total-text text-end">{{ settings('currency') }}{{ $grandTotal }}</p>
+                                        <p class="total-text raw-total-text text-end">
+                                            {{ settings('currency') }}{{ $grandTotal }}</p>
                                     </div>
                                 </div>
                             </div>

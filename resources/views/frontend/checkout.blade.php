@@ -23,9 +23,9 @@
         }
 
         /* .checkout-total{
-                                   display: flex;
-                                   justify-content: flex-end;
-                               } */
+                                       display: flex;
+                                       justify-content: flex-end;
+                                   } */
 
 
         .calculate {
@@ -45,9 +45,9 @@
         }
 
         /* .form-group{
-                                  height: 2%;
-                                  padding-bottom:60px;
-                              } */
+                                      height: 2%;
+                                      padding-bottom:60px;
+                                  } */
 
         .form-group input {
             background: #fff;
@@ -801,7 +801,7 @@
                 });
             });
 
-
+            // this code is For Cart price rendering.
             $(document).on('click', '.cart-cross', function() {
                 checkoutRender();
             });

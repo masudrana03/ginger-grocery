@@ -400,8 +400,8 @@ class CheckoutController extends Controller
         (new EmailFactory())->initializeEmail($emailDetails);
     }
 
-    public function ajaxShippingCalculation(Request $request)
-    {
-        $address_id = request('address_id');
-    }
+    // public function ajaxShippingCalculation(Request $request)
+    // {
+    //     $address_id = request('address_id');
+    // }
 }

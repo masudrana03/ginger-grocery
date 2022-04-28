@@ -122,8 +122,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-md-3">
-                                        <label>Country
-                                            Code
+                                        <label>Country Code
                                             <span class="required"></span></label>
                                         <select name="phone_code"
                                             class="select-two form-control @error('') is-invalid @enderror">

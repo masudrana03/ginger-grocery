@@ -11,7 +11,7 @@
 		color: rgb(134, 131, 131);
 		line-height: 58px !important;
         text-align: center;
-		
+
 	}
 </style>
 
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                         {{-- profile image --}}
-                        
+
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="dashboard-menu">
@@ -260,7 +260,7 @@
                                                                 style="height: 64px; font-size: 14px; font-weight: 600; color: #777777;">
                                                                 @foreach ($countries as $country)
                                                                     <option
-                                                                        {{ $country->phone_code == $user->phone_code ? 'selected' : '' }}
+                                                                        {{ $country->id == settings('phone_code') ? 'selected' : '' }}
                                                                         value="{{ $country->id }}">
                                                                         {{ $country->phone_code }}
                                                                         {{ $country->iso2 }}
@@ -268,7 +268,7 @@
                                                                 @endforeach
                                                             </select>
                                                             </div>
-                                                            
+
                                                         </div>
                                                         <div class="form-group col-md-9">
                                                             <label>Phone <span class="required">*</span></label>
@@ -351,10 +351,10 @@
                                                 src="{{ asset('assets/img/uploads/users/' . $user->image) }}"
                                                 id="login_images">
                                             </div>
-                                                
+
                                             @else
                                             <div class="image-space w-100">
-                                                
+
                                                 <img class="profile-image" width="500" height="500"
                                                     src="{{ asset('assets/frontend/imgs/avatar/avatar1.jpg') }}"
                                                     alt="Metrocery" id="login_images" />
